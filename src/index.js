@@ -3,6 +3,7 @@ import UnbxdSearch from 'unbxdsdk';
 
 import { AppContextProvider } from './AppContext';
 import searchConfigurations from './config';
+import '../src/common/styles/index.scss';
 
 class App extends Component {
 
@@ -17,7 +18,6 @@ class App extends Component {
         }
     }
 
-
     componentDidMount() {
         const { siteName, siteKey } = this.props;
         const searchObj = new UnbxdSearch({ ...searchConfigurations, siteName, siteKey }, this.unbxdCallBack);
@@ -25,7 +25,7 @@ class App extends Component {
     }
 
     render() {
-        
+
         const { unbxdCore } = this.state
         return (
             <AppContextProvider value={unbxdCore}>
