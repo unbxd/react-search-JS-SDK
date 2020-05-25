@@ -1,3 +1,5 @@
+const custom = require('../webpack/webpack.dev');
+
 module.exports = {
   stories: ['../stories/**/*.stories.js'],
   addons: ['@storybook/addon-actions', '@storybook/addon-links'],
@@ -6,16 +8,13 @@ module.exports = {
     // You can change the configuration based on that.
     // 'PRODUCTION' is used when building the static version of storybook.
 
-    // Make whatever fine-grained changes you need
-    config.module.rules.push({
-      test: /\.scss$/,
-      use: ['style-loader', 'css-loader', 'sass-loader'],
-    });
+    return {
+      ...config,
+      module: {
+        ...config.module, rules: custom.module.rules
+      },
+      plugins: [...config.plugins, ...custom.plugins]
+    };
 
-    config.watch = true;
-
-    // Return the altered config
-    return config;
-
-  },
+  }
 };

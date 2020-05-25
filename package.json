@@ -7,15 +7,16 @@
     "start": "webpack-dev-server --open --config ./webpack/webpack.dev.js",
     "build": "webpack --config ./webpack/webpack.prod.js",
     "server": "http-server ./public",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "yarn build:tailwind && start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build:tailwind": "postcss src/common/styles/base.scss -o src/common/styles/index.scss",
+    "build:tailwind": "postcss public/css/base.scss -o public/css/index.scss",
     "deploy-storybook": "storybook-to-ghpages"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/node": "^7.8.4",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-private-methods": "^7.8.3",
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
     "@storybook/addon-actions": "^5.0.18",
@@ -70,7 +71,7 @@
     "babel-runtime": "^6.26.0",
     "react": "16.7.0",
     "react-dom": "16.7.0",
-    "unbxdsdk": "../search-JS-core/"
+    "unbxd-search-core": "../search-JS-core"
   },
   "keywords": [
     "searchmodule"

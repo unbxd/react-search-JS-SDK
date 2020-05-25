@@ -1,5 +1,7 @@
 const Path = require('path');
 const webpack = require('webpack');
+const TerserJSPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const glob = require('glob');
@@ -69,7 +71,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: ['@babel/plugin-proposal-class-properties']
+            plugins: ['@babel/plugin-proposal-private-methods', '@babel/plugin-proposal-class-properties']
           }
         }
         ]
@@ -81,11 +83,8 @@ module.exports = {
       {
         test: /\.s?css$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
+          'style-loader',
           'css-loader',
-          'sass-loader',
           {
             loader: 'postcss-loader',
             options: {
@@ -95,6 +94,14 @@ module.exports = {
                 require('autoprefixer'),
               ],
             },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                includePaths: ['public/css']
+              },
+            }
           },
         ]
       }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import UnbxdSearch from 'unbxdsdk';
+import UnbxdSearchCore from 'unbxd-search-core';
 
-import { AppContextProvider } from './AppContext';
+import { AppContextProvider } from './common/context';
 import searchConfigurations from './config';
-import '../src/common/styles/index.scss';
+import '../public/css/index.scss';
 
 class App extends Component {
 
@@ -20,7 +20,7 @@ class App extends Component {
 
     componentDidMount() {
         const { siteName, siteKey } = this.props;
-        const searchObj = new UnbxdSearch({ ...searchConfigurations, siteName, siteKey }, this.unbxdCallBack);
+        const searchObj = new UnbxdSearchCore({ ...searchConfigurations, siteName, siteKey }, this.unbxdCallBack);
         searchObj.getResults('shoes');
     }
 

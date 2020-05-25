@@ -19042,7 +19042,7 @@ video {
   transition-delay: 1000ms;
 }
 
-@import './component.scss';
+@import './modules.scss';
 
 @media (min-width: 640px) {
   .sm\:space-y-0 > :not(template) ~ :not(template) {

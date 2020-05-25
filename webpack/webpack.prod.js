@@ -59,7 +59,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: ['@babel/plugin-proposal-class-properties']
+            plugins: ['@babel/plugin-proposal-private-methods', '@babel/plugin-proposal-class-properties']
           }
         }
         ]
@@ -75,7 +75,6 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
           },
           'css-loader',
-          'sass-loader',
           {
             loader: 'postcss-loader',
             options: {
@@ -85,6 +84,14 @@ module.exports = {
                 require('autoprefixer'),
               ],
             },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                includePaths: ['public/css']
+              },
+            }
           },
         ]
       }
