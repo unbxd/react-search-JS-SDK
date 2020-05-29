@@ -1,6 +1,6 @@
 import React from 'react';
 import AppContext, { AppContextConsumer } from '../../common/context'
-import { ProductContextProvider } from './Context'
+import { ProductContextProvider } from './context'
 
 import PropTypes from 'prop-types';
 

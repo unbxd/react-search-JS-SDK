@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ProductContextConsumer } from './Context'
+import { ProductContextConsumer } from './context'
 
 import NoProducts from './NoProducts';
 import ProductsWrapper from './ProductsWrapper';

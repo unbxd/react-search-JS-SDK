@@ -33,7 +33,6 @@ class App extends Component {
     }
 
     unbxdCallBack = (unbxdSearchObj, eventName) => {
-        console.log("hello ", eventName)
         if (eventName === 'AFTER_API_CALL') {
             this.setState({ unbxdCore: unbxdSearchObj })
         }
