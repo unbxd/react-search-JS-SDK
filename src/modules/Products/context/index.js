@@ -1,9 +1,3 @@
-import { createContext } from 'react';
+import ProductContext, { ProductContextProvider, ProductContextConsumer } from './ProductContext';
 
-const ProductContext = createContext();
-
-const ProductContextProvider = ProductContext.Provider;
-const ProductContextConsumer = ProductContext.Consumer;
-
-export { ProductContextProvider, ProductContextConsumer }
-export default ProductContext;
+export { ProductContext, ProductContextProvider, ProductContextConsumer };

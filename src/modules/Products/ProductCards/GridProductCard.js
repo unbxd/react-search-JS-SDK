@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { productFieldsMapper } from '../utils';
+import { getProductFields } from '../utils';
 
-const GridProductCard = ({ product, fieldMap, variantMap, unbxdProductCardClickHandler }) => {
+const GridProductCard = ({ product, productMap, productVariantMap }) => {
 
-    //Get the datas from the product bases on fieldMap and create the card
-    const productValues = productFieldsMapper(product, fieldMap, variantMap);
+    //Get the datas from the product bases on productMap and create the card
+    const productValues = getProductFields(product, productMap, productVariantMap);
 
     const {
         productName,
@@ -15,12 +15,12 @@ const GridProductCard = ({ product, fieldMap, variantMap, unbxdProductCardClickH
         sellingPrice } = productValues;
 
     //Add support for router as a config
-    return (<div className='Unbx-product-card-container'>
-        <a href={product.productUrl} className={`Unbx-product-card Unbx-grid-card`} onClick={unbxdProductCardClickHandler}>
-            <img className='Unbx-product-card Unbx-image' src={imageUrl[0]} />
-            <p className='Unbx-product-card Unbx-product-name'>{productName}</p>
-            <p className='Unbx-product-card Unbx-price'>{price}</p>
-            <p className='Unbx-product-card Unbx-selling-price'>{sellingPrice}</p>
+    return (<div className='UNX-product-card-container' data-uniqueid={product.uniqueId}>
+        <a href={product.productUrl} className={`UNX-product-card UNX-grid-card`} data-uniqueid={product.uniqueId}>
+            <img className='UNX-image' src={imageUrl} data-uniqueid={product.uniqueId} />
+            <p className='UNX-product-name' data-uniqueid={product.uniqueId}>{productName}</p>
+            <p className='UNX-price' data-uniqueid={product.uniqueId}>{price}</p>
+            <p className='UNX-selling-price' data-uniqueid={product.uniqueId}>{sellingPrice}</p>
         </a>
         {/* swatch content */}
     </div>)
@@ -28,10 +28,8 @@ const GridProductCard = ({ product, fieldMap, variantMap, unbxdProductCardClickH
 
 GridProductCard.propTypes = {
     product: PropTypes.object.isRequired,
-    fieldMap: PropTypes.object.isRequired,
-    isVariant: PropTypes.bool.isRequired,
-    variantMap: PropTypes.object.isRequired,
-    unbxdProductCardClickHandler: PropTypes.func.isRequired
+    productMap: PropTypes.object.isRequired,
+    productVariantMap: PropTypes.object.isRequired
 }
 
 export default GridProductCard;

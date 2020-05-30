@@ -1,17 +1,28 @@
 import React from 'react';
 
-import { ProductContextConsumer } from './context'
+import { ProductContextConsumer } from './context';
+import { productViewTypes as productViewTypesOptions } from './utils'
+import { getProductViewType } from './utils'
 
 const ViewTypes = () => {
-    return (<ProductContextConsumer>{({ isGrid, onViewToggle }) => {
+    return (<ProductContextConsumer>{({ productViewTypes, productViewType, onViewToggle }) => {
 
-        return (<div className='Unbx-view-types'>
-            <div className={`Unbx-view-types grid ${isGrid ? 'active' : ''}`} id='Unbx-grid' onClick={onViewToggle}>
+        const validViewTypes = getProductViewType(productViewTypes);
+
+        if (validViewTypes.length < 2) {
+            return null;
+        }
+
+        //Render options if more than 1 viewtypes are valid
+        return (<div className='UNX-view-types'>
+            {validViewTypes.indexOf(productViewTypesOptions.GRID) > -1 && <div className={`UNX-view-types grid ${productViewType === productViewTypesOptions.GRID ? 'active' : ''}`}
+                data-viewtype={productViewTypesOptions.GRID} onClick={onViewToggle}>
                 Grid
-        </div>
-            <div className={`Unbx-view-types list ${isGrid ? '' : 'active'}`} id='Unbx-list' onClick={onViewToggle}>
+        </div>}
+            {validViewTypes.indexOf(productViewTypesOptions.LIST) > -1 && <div className={`UNX-view-types list ${productViewType === productViewTypesOptions.LIST ? '' : 'active'}`}
+                data-viewtype={productViewTypesOptions.LIST} onClick={onViewToggle}>
                 List
-        </div>
+        </div>}
         </div>)
     }}
     </ProductContextConsumer>)

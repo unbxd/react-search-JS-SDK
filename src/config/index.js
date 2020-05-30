@@ -14,7 +14,7 @@ const searchConfiguration = {
     facetMultiSelectionMode: true,
     searchQueryParam: null,
     updateUrls: true,
-    variants: false,
+    showVariants: false,
     variantMapping: {},
     variantConfig: {
         count: 1
