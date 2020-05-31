@@ -48,8 +48,8 @@ class ProductsWrapper extends React.PureComponent {
         }
     }
 
-    componentDidUpdate(prevProps, state) {
-        debugger
+    componentDidUpdate() {
+
         const { paginationType } = this.props;
 
         if (this.props.products.length === 0 && paginationType === paginationTypes.INFINITE_SCROLL) {
@@ -82,6 +82,11 @@ class ProductsWrapper extends React.PureComponent {
             (paginationType === paginationTypes.INFINITE_SCROLL || paginationType === paginationTypes.CLICK_N_SCROLL)) {
 
             return { products: [...state.products, ...props.products] }
+        }
+
+        if (state.products !== props.products && paginationType === paginationTypes.FIXED_PAGINATION) {
+
+            return { products: props.products }
         }
 
         return null;

@@ -1,7 +1,7 @@
 import React from 'react';
-import UnbxdSearchWrapper from '../src/App';
 
-import Products from '../src/modules/Products';
+import UnbxdSearchWrapper from '../src/App';
+import Products from '../src/modules/products';
 
 export default {
     title: 'UnbxdSearchWrapper'
@@ -30,9 +30,9 @@ const productVariantMap = {
     sellingPrice: "v_unbxd_price"
 }
 
-export const UnbxdSearchWrapperComponent = () => (<UnbxdSearchWrapper
-    siteName='wildearthclone-neto-com-au808941566310465'
-    siteKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+export const UnbxdSearchWrapperProductComponent = () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
     <Products
         paginationType={'INFINITE_SCROLL'}

@@ -50,15 +50,16 @@ class Products extends React.PureComponent {
         const { helpers: { setProductConfiguration } } = this.context;
 
         const { pageSize, productMap, showVariants,
-            variantsCount, productVariantMap } = this.props
+            variantsCount, productVariantMap, paginationType } = this.props
 
         //generate required fields here based on productMap and productVariantMap
         const requiredFields = Object.values(productMap);
         const variantRequiredFields = Object.values(productVariantMap);
 
         //Set the main config
+        //Do not set pageSize if pagination type is FIXED_SCROLLING
         setProductConfiguration({
-            pageSize, requiredFields, showVariants, variantsCount, variantRequiredFields
+            pageSize, requiredFields, showVariants, variantsCount, variantRequiredFields, paginationType
         });
     }
 

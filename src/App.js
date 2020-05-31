@@ -3,30 +3,36 @@ import UnbxdSearch from 'unbxd-search-core';
 
 import { AppContextProvider } from './common/context';
 import searchConfigurations from './config';
+import { paginationTypes } from '../src/modules/products/utils';
 import '../public/css/index.scss';
 
 class App extends Component {
 
     setProductConfiguration = (config) => {
         const { pageSize, requiredFields, showVariants,
-            variantsCount, variantRequiredFields, groupBy } = config;
-        this.state.unbxdCore.setNumberOfProducts(pageSize);
-        this.state.unbxdCore.setFields(requiredFields);
-        this.state.unbxdCore.setIsVariants(showVariants);
+            variantsCount, variantRequiredFields, groupBy, paginationType } = config;
+
+        this.state.unbxdCore.setProductAttributes(requiredFields);
+        this.state.unbxdCore.setShowVariants(showVariants);
         this.state.unbxdCore.setVariantsCount(variantsCount);
-        this.state.unbxdCore.setVariantFields(variantRequiredFields);
+        this.state.unbxdCore.setVariantAttributes(variantRequiredFields);
         this.state.unbxdCore.setVariantsGroupBy(groupBy);
+
+        if (paginationType === paginationTypes.INFINITE_SCROLL ||
+            paginationType === paginationTypes.CLICK_N_SCROLL) {
+            this.state.unbxdCore.setPageSize(pageSize);
+        }
     }
 
     helpers = { setProductConfiguration: this.setProductConfiguration }
 
     constructor(props) {
         super(props)
-        const { siteName, siteKey } = this.props;
+        const { siteKey, apiKey } = this.props;
 
         this.state = {
             unbxdCore:
-                new UnbxdSearch({ ...searchConfigurations, siteName, siteKey, callBackFn: this.unbxdCallBack }),
+                new UnbxdSearch({ ...searchConfigurations, siteKey, apiKey, callBackFn: this.unbxdCallBack }),
 
         };
 
