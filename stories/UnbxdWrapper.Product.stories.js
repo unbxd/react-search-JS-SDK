@@ -35,7 +35,7 @@ export const UnbxdSearchWrapperProductComponent = () => (<UnbxdSearchWrapper
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
     <Products
-        paginationType={'INFINITE_SCROLL'}
+        paginationType={'FIXED_PAGINATION'}
         heightDiffToTriggerNextPage={50}
         perRow={5}
         pageSize={20}
