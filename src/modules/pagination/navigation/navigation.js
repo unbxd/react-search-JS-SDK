@@ -7,7 +7,11 @@ import { getPageNavigationOptions } from '../utils'
 
 const Navigation = () => {
     return (<PaginationContextConsumer>
-        {({ currentPage, isNext, isPrev, noOfPages, onNextPageClick, onPreviousPageClick, onPageClick }) => {
+        {({ data, helpers }) => {
+
+            const { currentPage, isNext, isPrev, noOfPages } = data;
+            const { onNextPageClick, onPreviousPageClick, onPageClick } = helpers;
+
 
             if (noOfPages === 0) {
                 return null;

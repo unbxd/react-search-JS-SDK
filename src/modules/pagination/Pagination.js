@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import AppContext, { AppContextConsumer } from '../../common/context'
+import AppContext from '../../common/context'
 import { PaginationContextProvider } from './context'
 import Navigation from './navigation';
 import NumberOfProducts from './numberOfProducts';
@@ -19,11 +19,9 @@ class Pagination extends React.PureComponent {
     constructor(props) {
         super(props);
 
-        const { pageSize, pageSizeOptions, pageSizeDisplayType } = this.props;
+        const { pageSize } = this.props;
         this.state = {
             pageSize,
-            pageSizeOptions,
-            pageSizeDisplayType
         }
     }
 
@@ -38,17 +36,30 @@ class Pagination extends React.PureComponent {
         });
     }
 
-    getNavigationMethods() {
-        const { unbxdCore } = this.context;
+    getPaginationProps() {
+
+        const { unbxdCore, helpers: { setPaginationConfiguration } } = this.context;
         const getPaginationInfo = unbxdCore.getPaginationInfo.bind(unbxdCore);
         const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
         const getResults = unbxdCore.getResults.bind(unbxdCore);
+
+        const { PageSizeListComponent, pageSizeOptions, pageSizeDisplayType } = this.props;
 
         const { currentPage = 0,
             isNext = false,
             isPrev = false,
             noOfPages = 0,
             rows = 0 } = getPaginationInfo() || {};
+
+        const onPageSizeClick = (event) => {
+
+            const newPageSize = parseInt(event.target.dataset.unxpagesize) || parseInt(event.target.value);
+            this.setState({ pageSize: newPageSize })
+            setPaginationConfiguration({
+                pageSize: newPageSize
+            }, true);
+
+        }
 
         const onNextPageClick = () => {
             const newPageNumber = rows * currentPage;
@@ -69,59 +80,42 @@ class Pagination extends React.PureComponent {
             setPageStart(newPageNumber);
             getResults();
         }
-        return {
-            onNextPageClick,
-            onPreviousPageClick,
-            onPageClick,
+
+
+        const data = {
             isNext,
             isPrev,
             noOfPages,
-            currentPage
+            currentPage,
+            pageSizeOptions,
+            pageSizeDisplayType,
+            ...this.state
+        };
+
+        const helpers = {
+            PageSizeListComponent,
+            onPageSizeClick,
+            onNextPageClick,
+            onPreviousPageClick,
+            onPageClick,
+        };
+
+        return {
+            data, helpers
         }
 
     }
 
     render() {
 
-        const { PageSizeListComponent } = this.props;
-
-        const onPageSizeClick = (event) => {
-
-            const { helpers: { setPaginationConfiguration } } = this.context;
-
-            const newPageSize = parseInt(event.target.dataset.unxpagesize) || parseInt(event.target.value);
-            this.setState({ pageSize: newPageSize })
-            setPaginationConfiguration({
-                pageSize: newPageSize
-            }, true);
-
-        }
-
-
         const DefaultRender = <React.Fragment>
             <NumberOfProducts />
             <Navigation />
         </React.Fragment>
 
-        return (<AppContextConsumer>
-            {() => {
-
-                const getProps = () => {
-                    return {
-                        ...this.state,
-                        onPageSizeClick,
-                        PageSizeListComponent,
-                        ...this.getNavigationMethods()
-
-                    }
-                }
-
-                //Pass data and helpers to render props
-                return (<PaginationContextProvider value={getProps()}>
-                    {conditionalRenderer(this.props.children, getProps(), DefaultRender)}
-                </PaginationContextProvider>)
-            }}
-        </AppContextConsumer>)
+        return (<PaginationContextProvider value={this.getPaginationProps()}>
+            {conditionalRenderer(this.props.children, this.getPaginationProps(), DefaultRender)}
+        </PaginationContextProvider>)
     }
 
 }

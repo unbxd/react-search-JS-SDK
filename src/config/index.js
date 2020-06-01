@@ -18,7 +18,7 @@ const searchConfiguration = {
     variantConfig: {
         variantsCount: 1,
         variantAttributes: [],
-        variantMapping:{}
+        variantMapping: {},
         variantsGroupBy: ''
     },
     extraParams: '',

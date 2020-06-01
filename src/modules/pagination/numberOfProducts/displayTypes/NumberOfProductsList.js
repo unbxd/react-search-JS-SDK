@@ -20,7 +20,8 @@ NumberOfProductsList.propTypes = {
     pageSizeOptions: PropTypes.arrayOf(
         PropTypes.shape({ id: PropTypes.number, value: PropTypes.string }))
         .isRequired,
-    onPageSizeClick: PropTypes.func.isRequired
+    onPageSizeClick: PropTypes.func.isRequired,
+    PageSizeListComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired
 }
 
 export default NumberOfProductsList;

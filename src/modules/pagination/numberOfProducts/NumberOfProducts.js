@@ -7,7 +7,10 @@ import { pageSizeDisplayTypes } from '../utils';
 const NumberOfProducts = () => {
 
     return (<PaginationContextConsumer>
-        {({ pageSizeDisplayType, noOfPages, ...props }) => {
+        {({ data, helpers }) => {
+
+            const { pageSizeDisplayType, noOfPages, pageSize, pageSizeOptions } = data;
+            const { onPageSizeClick, PageSizeListComponent } = helpers;
 
             if (noOfPages === 0) {
                 return null;
@@ -18,12 +21,21 @@ const NumberOfProducts = () => {
                 <div className='UNX-pagesize-container'>
                     {
                         pageSizeDisplayType === pageSizeDisplayTypes.DROPDOWN &&
-                        <NumberOfProductsDropdown {...props} />
+                        <NumberOfProductsDropdown
+                            pageSize={pageSize}
+                            pageSizeOptions={pageSizeOptions}
+                            onPageSizeClick={onPageSizeClick}
+                        />
                     }
 
                     {
                         pageSizeDisplayType === pageSizeDisplayTypes.LIST &&
-                        <NumberOfProductsList {...props} />
+                        <NumberOfProductsList
+                            pageSize={pageSize}
+                            pageSizeOptions={pageSizeOptions}
+                            onPageSizeClick={onPageSizeClick}
+                            PageSizeListComponent={PageSizeListComponent}
+                        />
                     }
                 </div>)
         }}
