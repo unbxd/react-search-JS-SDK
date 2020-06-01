@@ -1,11 +1,11 @@
 const searchConfiguration = {
-    siteName: '',
     siteKey: '',
+    apiKey: '',
     isFlag: true,
     sdkHostName: 'https://search.unbxd.io/',
     queryString: '/search?q=',
     searchQueryParam: 'q',
-    fields: ['title'],
+    productAttributes: ['title'],
     defaultFilters: null,
     spellCheck: false,
     pageSize: 5,
@@ -18,6 +18,7 @@ const searchConfiguration = {
     variantConfig: {
         variantsCount: 1,
         variantAttributes: [],
+        variantMapping:{}
         variantsGroupBy: ''
     },
     extraParams: '',

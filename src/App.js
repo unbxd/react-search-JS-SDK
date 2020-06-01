@@ -9,6 +9,7 @@ import '../public/css/index.scss';
 class App extends Component {
 
     setProductConfiguration = (config) => {
+
         const { pageSize, requiredFields, showVariants,
             variantsCount, variantRequiredFields, groupBy, paginationType } = config;
 
@@ -59,8 +60,8 @@ class App extends Component {
     }
 
     componentDidMount() {
-        //this.state.unbxdCore.getResults('boots');
-        this.state.unbxdCore.getResults('cooking stoves');
+        this.state.unbxdCore.getResults('boots');
+        //this.state.unbxdCore.getResults('cooking stoves');
         //this.state.unbxdCore.getResults('red shirt');
         //this.state.unbxdCore.getResults('xxxxxxxxxxxxxxx');
     }
