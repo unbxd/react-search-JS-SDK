@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UnbxdSearch from 'unbxd-search-core';
+import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
 
 import { AppContextProvider } from './common/context';
 import searchConfigurations from './config';

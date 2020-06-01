@@ -71,8 +71,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "react": "16.7.0",
-    "react-dom": "16.7.0",
-    "unbxd-search-core": "../search-JS-core"
+    "react-dom": "16.7.0"
   },
   "keywords": [
     "searchmodule"
