@@ -5,10 +5,7 @@ import { productViewTypes as productViewTypesOptions } from './utils'
 import { getProductViewType } from './utils'
 
 const ViewTypes = () => {
-    return (<ProductContextConsumer>{({ data, helpers }) => {
-
-        const { productViewTypes, productViewType } = data;
-        const { onViewToggle } = helpers;
+    return (<ProductContextConsumer>{({ productViewTypes, productViewType, onViewToggle }) => {
 
         const validViewTypes = getProductViewType(productViewTypes);
 
