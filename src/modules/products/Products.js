@@ -18,10 +18,6 @@ class Products extends React.PureComponent {
     static ViewTypes = ViewTypes;
     static ProductsView = ProductsView;
 
-    onViewToggle = (event) => {
-        this.setState({ productViewType: event.target.dataset.viewtype })
-    }
-
     constructor(props) {
         super(props);
 
@@ -55,7 +51,7 @@ class Products extends React.PureComponent {
 
     getProductProps() {
 
-        const { unbxdCore } = this.context;
+        const { unbxdCore, helpers: { trackActions } } = this.context;
         const { ZeroResultsComponent,
             perRow,
             pageSize,
@@ -70,18 +66,28 @@ class Products extends React.PureComponent {
         const getPaginationInfo = unbxdCore.getPaginationInfo.bind(unbxdCore);
         const getResults = unbxdCore.getResults.bind(unbxdCore);
 
+
+        const onViewToggle = (event) => {
+            const productViewType = event.target.dataset.viewtype;
+
+            trackActions({ type: 'PRODUCT_VIEW_TYPE', data: { productViewType } });
+            this.setState({ productViewType })
+
+        }
+
         //Get next page method
         const getNextPage = () => {
 
             const { currentPage } = getPaginationInfo();
             const newStart = currentPage === 0 ? pageSize : (currentPage * pageSize);
+
             setPageStart(newStart);
             getResults();
-            console.log("called getNextPage")
+            trackActions({ type: 'NEXT_PAGE', data: { paginationType } });
         }
 
         const onProductClick = (event) => {
-            console.log("Click event on product ", event.target.dataset.uniqueid)
+            trackActions({ type: 'PRODUCT_CLICK', data: { uniqueId: event.target.dataset.uniqueid } });
         }
 
         //onClick for products
@@ -102,7 +108,7 @@ class Products extends React.PureComponent {
         };
         const helpers = {
             ZeroResultsComponent,
-            onViewToggle: this.onViewToggle,
+            onViewToggle: onViewToggle,
             getProductsProp,
             getNextPage,
             onProductClick,

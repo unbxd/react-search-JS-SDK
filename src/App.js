@@ -24,7 +24,15 @@ class App extends Component {
         }
     }
 
-    helpers = { setProductConfiguration: this.setProductConfiguration }
+    trackActions = ({ type = 'unbxdAction', data = {} }) => {
+
+        this.unbxdCallBack(null, type, data);
+    }
+
+    helpers = {
+        setProductConfiguration: this.setProductConfiguration,
+        trackActions: this.trackActions
+    }
 
     constructor(props) {
         super(props)
@@ -38,10 +46,12 @@ class App extends Component {
 
     }
 
-    unbxdCallBack = (unbxdSearchObj, eventName) => {
+    unbxdCallBack = (unbxdSearchObj, eventName, data) => {
         if (eventName === 'AFTER_API_CALL') {
             this.setState({ unbxdCore: unbxdSearchObj })
         }
+
+        console.log("unbxdCallBack ", eventName, data)
     }
 
     getProps = () => {
