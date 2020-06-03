@@ -38,7 +38,7 @@ class Pagination extends React.PureComponent {
 
     getPaginationProps() {
 
-        const { unbxdCore, helpers: { setPaginationConfiguration } } = this.context;
+        const { unbxdCore, helpers: { setPaginationConfiguration, trackActions } } = this.context;
         const getPaginationInfo = unbxdCore.getPaginationInfo.bind(unbxdCore);
         const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
         const getResults = unbxdCore.getResults.bind(unbxdCore);
@@ -53,10 +53,12 @@ class Pagination extends React.PureComponent {
 
         const onPageSizeClick = (event) => {
 
-            const newPageSize = parseInt(event.target.dataset.unxpagesize) || parseInt(event.target.value);
-            this.setState({ pageSize: newPageSize })
+            const pageSize = parseInt(event.target.dataset.unxpagesize) || parseInt(event.target.value);
+
+            trackActions({ type: 'PAGE_SIZE', data: { pageSize } });
+            this.setState({ pageSize })
             setPaginationConfiguration({
-                pageSize: newPageSize
+                pageSize
             }, true);
 
         }

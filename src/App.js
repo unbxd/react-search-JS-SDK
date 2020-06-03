@@ -25,6 +25,19 @@ class App extends Component {
         }
     }
 
+    setPaginationConfiguration = (config, triggerResults = false) => {
+
+        const { pageSize } = config;
+
+        this.state.unbxdCore.setPageSize(pageSize);
+        this.state.unbxdCore.setPageStart(0);
+
+        if (triggerResults) {
+            this.state.unbxdCore.getResults();
+        }
+
+    }
+
     trackActions = ({ type = 'unbxdAction', data = {} }) => {
 
         this.unbxdCallBack(null, type, data);
@@ -32,6 +45,7 @@ class App extends Component {
 
     helpers = {
         setProductConfiguration: this.setProductConfiguration,
+        setPaginationConfiguration: this.setPaginationConfiguration,
         trackActions: this.trackActions
     }
 
