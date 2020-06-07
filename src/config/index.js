@@ -8,7 +8,7 @@ const searchConfiguration = {
     productAttributes: ['title'],
     defaultFilters: null,
     spellCheck: false,
-    pageSize: 5,
+    pageSize: 10,
     startPageNo: 0,
     facetMultiSelect: true,
     facetMultiSelectionMode: true,

@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
 
 import { AppContextProvider } from './common/context';
 import searchConfigurations from './config';
-import { paginationTypes } from '../src/modules/products/utils';
+import { paginationTypes } from './modules/products/utils';
 import '../public/css/index.scss';
 
-class App extends Component {
 
-    setProductConfiguration = (config) => {
+/**
+ * Component to initialize Unbxd Search. UnbxdSearchWrapper also acts as a root component for modules such as Products, Pagination and facets. 
+ */
+class UnbxdSearchWrapper extends Component {
 
+    setProductConfiguration(config) {
         const { pageSize, requiredFields, showVariants,
             variantsCount, variantRequiredFields, groupBy, paginationType } = config;
 
@@ -62,8 +66,13 @@ class App extends Component {
     }
 
     constructor(props) {
-        super(props)
+        super(props);
+
         const { siteKey, apiKey } = this.props;
+
+        this.unbxdCallBack = this.unbxdCallBack.bind(this);
+        this.setProductConfiguration = this.setProductConfiguration.bind(this);
+        this.trackActions = this.trackActions.bind(this);
 
         this.state = {
             unbxdCore:
@@ -73,16 +82,30 @@ class App extends Component {
 
     }
 
-    unbxdCallBack = (unbxdSearchObj, eventName, data) => {
+    trackActions({ type = 'unbxdAction', data = {} }) {
+
+        this.unbxdCallBack(null, type, data);
+    }
+
+
+    unbxdCallBack(unbxdSearchObj, eventName, data) {
         if (eventName === 'AFTER_API_CALL') {
             this.setState({ unbxdCore: unbxdSearchObj })
         }
 
-        console.log("unbxdCallBack ", eventName, data)
+        console.log("unbxdCallBack ", eventName, data);
     }
 
-    getProps = () => {
-        return { ...this.state, helpers: this.helpers }
+
+    getProps() {
+        const helpers = {
+            setProductConfiguration: this.setProductConfiguration,
+            trackActions: this.trackActions
+        }
+
+        return {
+            ...this.state, helpers
+        }
     }
 
     componentDidMount() {
@@ -101,4 +124,15 @@ class App extends Component {
     }
 }
 
-export default App;
+UnbxdSearchWrapper.propTypes = {
+    /**
+    * Site key of the site.
+    */
+    siteKey: PropTypes.string.isRequired,
+    /**
+    * API key of the site.
+    */
+    apiKey: PropTypes.string.isRequired,
+}
+
+export default UnbxdSearchWrapper;
