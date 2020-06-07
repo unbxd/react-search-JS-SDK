@@ -57,9 +57,14 @@
     "postcss-cli": "^7.1.1",
     "postcss-loader": "^3.0.0",
     "purgecss-webpack-plugin": "^2.2.0",
+<<<<<<< HEAD
     "react": "16.7.0",
     "react-dom": "16.7.0",
     "remove-files-webpack-plugin": "^1.4.3",
+||||||| merged common ancestors
+=======
+    "react-is": "^16.13.1",
+>>>>>>> setting up storybook with component description and prop table.
     "sass-loader": "^8.0.2",
     "storybook-addon-react-docgen": "^1.2.34",
     "tailwindcss": "^1.4.6",
