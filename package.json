@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --open --config ./webpack/webpack.dev.js",
     "build": "webpack --config ./webpack/webpack.prod.js",
     "server": "http-server ./public",
-    "storybook": "yarn build:tailwind && start-storybook -p 6006",
+    "storybook": "yarn build:tailwind && start-storybook -p 6006 --ci",
     "build-storybook": "build-storybook",
     "build:tailwind": "postcss public/css/base.scss -o public/css/index.scss",
     "deploy-storybook": "storybook-to-ghpages"
@@ -67,11 +67,11 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "@unbxd-ui/unbxd-search-core": "../search-JS-core",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "react": "16.7.0",
-    "react-dom": "16.7.0",
-    "unbxd-search-core": "../search-JS-core"
+    "react-dom": "16.7.0"
   },
   "keywords": [
     "searchmodule"
