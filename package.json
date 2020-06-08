@@ -1,7 +1,7 @@
 {
-  "name": "react-search-js-sdk",
-  "version": "1.0.0",
-  "description": "React Search JS SDK",
+  "name": "@unbxd-ui/react-search-sdk",
+  "version": "0.0.1",
+  "description": "Unbxd React Search JS SDK",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --open --config ./webpack/webpack.dev.js",
@@ -67,20 +67,21 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
-    "@unbxd-ui/unbxd-search-core": "../search-JS-core",
+    "@unbxd-ui/unbxd-search-core": "0.0.1",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "react": "16.7.0",
     "react-dom": "16.7.0"
   },
   "keywords": [
-    "searchmodule"
+    "React Search",
+    "Unbxd React Search"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/unbxd/react-search-JS-SDK.git"
   },
-  "author": "",
+  "author": "Unbxd",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/unbxd/react-search-JS-SDK/issues"
