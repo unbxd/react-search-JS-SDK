@@ -23,25 +23,20 @@ function recursiveIssuer(m) {
 
 module.exports = {
   entry: {
-    //app: Path.resolve(__dirname, '../demo/index.js'),
     "core": Path.resolve(__dirname, '../public/css/core/index.scss'),
     "theme": Path.resolve(__dirname, '../public/css/theme/index.scss'),
-    "unbxd-react-search-sdk": Path.resolve(__dirname, '../src/UnbxdSearchWrapper.js'),
+    "react-search-sdk": Path.resolve(__dirname, '../src/index.js'),
   },
   mode: 'production',
   output: {
     path: Path.join(__dirname, '../public/dist'),
     filename: 'js/[name].js',
-    sourceMapFilename: '[file].map'
+    sourceMapFilename: '[file].map',
+    libraryTarget: 'commonjs2'
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "common",
-          chunks: "all"
-        },
         coreStyles: {
           name: 'core',
           test: (m, c, entry = 'core') =>
@@ -70,10 +65,11 @@ module.exports = {
     }),
     new RemovePlugin({
       after: {
-        root: './public/dist/js',
+        root: './public/dist',
         include: [
-          'core.js',
-          'theme.js'
+          'js/core.js',
+          'js/theme.js',
+          'css/unbxd-react-search-sdk.css'
         ],
       }
     })
@@ -123,5 +119,8 @@ module.exports = {
       }
 
     ]
+  },
+  externals: {
+    'react': 'commonjs react'
   }
 };
