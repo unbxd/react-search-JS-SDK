@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
 
 import { AppContextProvider } from './common/context';
-import searchConfigurations from './config';
+import {searchConfigurations} from './config';
 import { paginationTypes } from './modules/products/utils';
-import '../public/css/index.scss';
+import '../public/css/core/index.scss';
 
 
 /**

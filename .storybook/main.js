@@ -36,22 +36,6 @@ module.exports = {
 
     return {
       ...config,
-<<<<<<< HEAD
-||||||| merged common ancestors
-      module: {
-        ...config.module, rules: custom.module.rules
-      },
-      plugins: [...config.plugins, ...custom.plugins]
-=======
-      module: {
-        ...config.module, rules: [...custom.module.rules, {
-          test: /\.stories\.js?$/,
-          loaders: [require.resolve('@storybook/source-loader')],
-          enforce: 'pre'
-        }]
-      },
-      plugins: [...config.plugins, ...custom.plugins]
->>>>>>> setting up storybook with component description and prop table.
     };
 
   }
