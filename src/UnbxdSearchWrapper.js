@@ -64,7 +64,7 @@ class UnbxdSearchWrapper extends Component {
     getProps() {
         const helpers = {
             setProductConfiguration: this.setProductConfiguration,
-            trackActions: this.trackActions
+            trackActions: this.trackActions,
         }
 
         return {
