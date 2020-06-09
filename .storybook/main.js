@@ -1,4 +1,4 @@
-const custom = require('../webpack/webpack.dev');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   stories: ['../stories/**/*.stories.js'],
@@ -11,16 +11,31 @@ module.exports = {
     // You can change the configuration based on that.
     // 'PRODUCTION' is used when building the static version of storybook.
 
+    config.module.rules.push({
+      test: /\.s?css$/,
+      loaders: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+        },
+        { loader: 'css-loader', options: { importLoaders: 1 } },
+        {
+          loader: 'postcss-loader',
+          options: {
+            ident: 'postcss',
+            plugins: [
+              require('tailwindcss'),
+              require('autoprefixer'),
+            ],
+          },
+        },
+        require.resolve('sass-loader')
+      ]
+    });
+
+    config.plugins.push(new MiniCssExtractPlugin());
+
     return {
       ...config,
-      module: {
-        ...config.module, rules: [...custom.module.rules, {
-          test: /\.stories\.js?$/,
-          loaders: [require.resolve('@storybook/source-loader')],
-          enforce: 'pre'
-        }]
-      },
-      plugins: [...config.plugins, ...custom.plugins]
     };
 
   }
