@@ -12,6 +12,7 @@ const searchConfigurations = {
     startPageNo: 0,
     facetMultiSelect: true,
     facetMultiSelectionMode: true,
+    searchQueryParam: null,
     updateUrls: true,
     showVariants: false,
     variantConfig: {
