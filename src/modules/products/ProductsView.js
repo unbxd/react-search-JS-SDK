@@ -11,7 +11,7 @@ const ProductsView = () => {
     return (<ProductContextConsumer>{({ data, helpers }) => {
 
         const { productViewType, productMap, perRow, productVariantMap, paginationType, heightDiffToTriggerNextPage, showVariants } = data;
-        const { getSearchResults, ZeroResultsComponent, onProductClick, getNextPage } = helpers;
+        const { getSearchResults, ZeroResultsComponent, onProductClick, getNextPage, ProductCardComponent } = helpers;
 
         const { numberOfProducts = 0, products = [] } = getSearchResults() || {};
 
@@ -37,6 +37,7 @@ const ProductsView = () => {
             heightDiffToTriggerNextPage={heightDiffToTriggerNextPage}
             showVariants={showVariants}
             onProductClick={onProductClick}
+            ProductCardComponent={ProductCardComponent}
         />)
 
     }}

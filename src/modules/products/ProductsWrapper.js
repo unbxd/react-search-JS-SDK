@@ -6,6 +6,7 @@ import ListView from './views/ListView';
 import { paginationTypes } from './utils';
 import { debounce } from '../../common/utils';
 import { productViewTypes as productViewTypesOptions, DEBOUNCE_TIME } from './utils'
+import { List } from '../../components/index';
 
 class ProductsWrapper extends React.PureComponent {
 
@@ -94,26 +95,41 @@ class ProductsWrapper extends React.PureComponent {
 
     render() {
 
-        const { productViewType, onProductClick, perRow, productMap, productVariantMap, paginationType, showVariants } = this.props;
+        const { productViewType,
+            onProductClick,
+            perRow,
+            productMap,
+            productVariantMap,
+            paginationType,
+            showVariants,
+            ProductCardComponent } = this.props;
         const { products, hasMoreResults } = this.state;
 
-        return (<React.Fragment>
+        const customProductRender = <List
+            idAttribute={'uniqueId'}
+            items={products}
+            ListItem={ProductCardComponent}
+            onClick={onProductClick}
+            productViewType={productViewType} />
 
-            {productViewType === productViewTypesOptions.GRID &&
-                <GridView perRow={perRow}
-                    productMap={productMap}
-                    products={products}
-                    onProductClick={onProductClick}
-                    showVariants={showVariants}
-                    productVariantMap={productVariantMap} />}
+        const productViewsRender = <React.Fragment>{productViewType === productViewTypesOptions.GRID &&
+            <GridView perRow={perRow}
+                productMap={productMap}
+                products={products}
+                onProductClick={onProductClick}
+                showVariants={showVariants}
+                productVariantMap={productVariantMap} />}
 
             {productViewType === productViewTypesOptions.LIST &&
                 <ListView productMap={productMap}
                     products={products}
                     onProductClick={onProductClick}
                     showVariants={showVariants}
-                    productVariantMap={productVariantMap} />}
+                    productVariantMap={productVariantMap} />}</React.Fragment>
 
+        return (<React.Fragment>
+
+            {ProductCardComponent ? customProductRender : productViewsRender}
             {paginationType === paginationTypes.CLICK_N_SCROLL &&
                 hasMoreResults &&
                 <div className='UNX-product-load-more' onClick={this.loadMoreHandler}>
@@ -133,7 +149,8 @@ ProductsWrapper.propTypes = {
     productVariantMap: PropTypes.object.isRequired,
     paginationType: PropTypes.string,
     heightDiffToTriggerNextPage: PropTypes.number,
-    showVariants: PropTypes.bool.isRequired
+    showVariants: PropTypes.bool.isRequired,
+    ProductCardComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 }
 
 export default ProductsWrapper;

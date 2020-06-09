@@ -1,7 +1,7 @@
 import React from 'react';
 
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
-import {Products} from '../src/modules/products/Products';
+import { Products } from '../src/modules/products/Products';
 
 export default {
     title: 'Products',
@@ -12,6 +12,11 @@ class NoProductsComponent extends React.Component {
     render() {
         return (<p>No products found!!!</p>);
     }
+}
+
+const CustomProductCardComponent = (props) => {
+    console.log("Props ", props);
+    return (<p>Hello product card</p>)
 }
 
 const productMap = {
@@ -34,11 +39,11 @@ const productVariantMap = {
 export const Product = () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
-    
+
     <Products
         paginationType={'INFINITE_SCROLL'}
         heightDiffToTriggerNextPage={50}
-        perRow={5}
+        perRow={3}
         pageSize={20}
         productViewTypes={["LIST", "GRID"]}
         ZeroResultsComponent={NoProductsComponent}
@@ -187,4 +192,18 @@ export const ConfigureVariants = () => (<UnbxdSearchWrapper
         variantsCount={2}
         productVariantMap={productVariantMap} />
 
-</UnbxdSearchWrapper >)  
+</UnbxdSearchWrapper >)
+
+export const CustomProductCard = () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Products
+        paginationType={'FIXED_PAGINATION'}
+        productMap={productMap}
+        showVariants={true}
+        variantsCount={2}
+        productVariantMap={productVariantMap}
+        ProductCardComponent={CustomProductCardComponent} />
+
+</UnbxdSearchWrapper >)

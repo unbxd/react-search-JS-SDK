@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import ViewTypes from './ViewTypes';
 import ProductsView from './ProductsView';
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer, isContext } from '../../common/utils';
 import { getProductViewType } from './utils'
 
 
@@ -16,7 +16,7 @@ import { getProductViewType } from './utils'
  * Products also manages the pagination options for the search results here.
  */
 export class Products extends React.PureComponent {
-
+    
     constructor(props) {
         super(props);
 
@@ -31,6 +31,10 @@ export class Products extends React.PureComponent {
     }
 
     componentDidMount() {
+
+        if (this.context === undefined) {
+            isContext(Products.displayName);
+        }
 
         const { helpers: { setProductConfiguration } } = this.context;
 
@@ -50,6 +54,10 @@ export class Products extends React.PureComponent {
 
     getProductProps() {
 
+        if (this.context === undefined) {
+            isContext(Products.displayName);
+        }
+        
         const { unbxdCore, helpers: { trackActions } } = this.context;
         const { ZeroResultsComponent,
             perRow,
@@ -59,7 +67,8 @@ export class Products extends React.PureComponent {
             productVariantMap,
             productViewTypes,
             heightDiffToTriggerNextPage,
-            showVariants } = this.props
+            showVariants,
+            ProductCardComponent } = this.props;
 
         const getSearchResults = unbxdCore.getSearchResults.bind(unbxdCore);
         const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
@@ -71,7 +80,7 @@ export class Products extends React.PureComponent {
             const productViewType = event.target.dataset.viewtype;
 
             trackActions({ type: 'PRODUCT_VIEW_TYPE', data: { productViewType } });
-            this.setState({ productViewType })
+            this.setState({ productViewType });
 
         }
 
@@ -118,7 +127,8 @@ export class Products extends React.PureComponent {
             getNextPage,
             onProductClick,
             getSearchResults,
-            getNextPage
+            getNextPage,
+            ProductCardComponent
         }
         return { data, helpers }
 
@@ -139,6 +149,7 @@ export class Products extends React.PureComponent {
 Products.contextType = AppContext;
 Products.ViewTypes = ViewTypes;
 Products.ProductsView = ProductsView;
+Products.displayName = "Products";
 
 Products.defaultProps = {
     perRow: 5,
@@ -193,6 +204,10 @@ Products.propTypes = {
     * Mapping of catalog Product variant fields to SDK Product variant fields.
     */
     productVariantMap: PropTypes.object,
+    /**
+    * Custom Product card component
+    */
+    ProductCardComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 }
 
 export default Products;
