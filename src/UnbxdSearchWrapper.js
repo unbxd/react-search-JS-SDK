@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
+import UnbxdSearch from '@unbxd-ui/unbxd-search-core/src/index';
 
 import { AppContextProvider } from './common/context';
 import { searchConfigurations } from './config';
@@ -15,7 +15,7 @@ import '../public/css/core/index.scss';
 class UnbxdSearchWrapper extends Component {
 
     setProductConfiguration(config) {
-        const { pageSize, requiredFields, showVariants,
+         const { pageSize, requiredFields, showVariants,
             variantsCount, variantRequiredFields, groupBy, paginationType } = config;
 
         this.state.unbxdCore.setProductAttributes(requiredFields);
@@ -38,7 +38,7 @@ class UnbxdSearchWrapper extends Component {
         this.unbxdCallBack = this.unbxdCallBack.bind(this);
         this.setProductConfiguration = this.setProductConfiguration.bind(this);
         this.trackActions = this.trackActions.bind(this);
-
+        
         this.state = {
             unbxdCore:
                 new UnbxdSearch({ ...searchConfigurations, siteKey, apiKey, callBackFn: this.unbxdCallBack }),
