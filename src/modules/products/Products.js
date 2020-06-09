@@ -17,7 +17,7 @@ import { getProductViewType } from './utils'
  * Products also manages the pagination options for the search results here.
  */
 export class Products extends React.PureComponent {
-
+    
     constructor(props) {
         super(props);
 
