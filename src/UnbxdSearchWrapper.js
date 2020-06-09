@@ -73,6 +73,7 @@ class UnbxdSearchWrapper extends Component {
             setProductConfiguration: this.setProductConfiguration,
             trackActions: this.trackActions,
             setSearchBoxConfiguration: this.setSearchBoxConfiguration,
+            
         }
 
         return {
