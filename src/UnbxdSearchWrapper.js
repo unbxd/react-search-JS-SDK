@@ -3,9 +3,22 @@ import PropTypes from 'prop-types';
 import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
 
 import { AppContextProvider } from './common/context';
+<<<<<<< HEAD
 import {searchConfigurations} from './config';
+||||||| merged common ancestors
+import searchConfigurations from './config';
+=======
+import { searchConfigurations } from './config';
+>>>>>>> add purgecss. single point to whitelist classes.
 import { paginationTypes } from './modules/products/utils';
+<<<<<<< HEAD
 import '../public/css/core/index.scss';
+||||||| merged common ancestors
+import '../public/css/index.scss';
+=======
+
+import '../public/css/core/index.scss';
+>>>>>>> add purgecss. single point to whitelist classes.
 
 
 /**
