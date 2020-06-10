@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
-
+import UnbxdSearch from '@unbxd-ui/unbxd-search-core/src/index';
 import { AppContextProvider } from './common/context';
 import { searchConfigurations } from './config';
 import { paginationTypes } from './modules/products/utils';
@@ -30,6 +29,18 @@ class UnbxdSearchWrapper extends Component {
         }
     }
 
+    trackActions = ({ type = 'unbxdAction', data = {} }) => {
+
+        this.unbxdCallBack(null, type, data);
+    }
+
+    setFacetConfiguration = (config, triggerResults = false) => {
+
+        const { defaultFilters } = config;
+
+        this.state.unbxdCore.options.defaultFilters = defaultFilters;
+    }
+
     constructor(props) {
         super(props);
 
@@ -47,12 +58,6 @@ class UnbxdSearchWrapper extends Component {
 
     }
 
-    trackActions({ type = 'unbxdAction', data = {} }) {
-
-        this.unbxdCallBack(null, type, data);
-    }
-
-
     unbxdCallBack(unbxdSearchObj, eventName, data) {
         if (eventName === 'AFTER_API_CALL') {
             this.setState({ unbxdCore: unbxdSearchObj })
@@ -65,7 +70,8 @@ class UnbxdSearchWrapper extends Component {
     getProps() {
         const helpers = {
             setProductConfiguration: this.setProductConfiguration,
-            trackActions: this.trackActions,
+            setFacetConfiguration: this.setFacetConfiguration,
+            trackActions: this.trackActions
         }
 
         return {
