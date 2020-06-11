@@ -20,7 +20,7 @@ class GenerateFacets extends React.Component {
     }
 
     render() {
-        const { textFacets, selectedFacets, onFacetClick, onFacetObjectReset } = this.props;
+        const { textFacets, selectedFacets, onFacetClick, onFacetObjectReset, FacetItemComponent } = this.props;
         return (<div>{textFacets.map(({ displayName, facetName, values }) => {
 
             //decide whether to show clear or not
@@ -43,7 +43,7 @@ class GenerateFacets extends React.Component {
                 <div className='UNX-facet-list-container'>
                     <List items={values}
                         idAttribute={'dataId'}
-                        ListItem={FacetItem}
+                        ListItem={FacetItemComponent || FacetItem}
                         onClick={onFacetClick}
                         facetName={facetName}
                         className={'UNX-facet-item-container'}

@@ -40,7 +40,11 @@ class Facets extends React.Component {
     getFacetProps() {
 
         const { unbxdCore, helpers: { trackActions } } = this.context;
-        const { isApplyFilters, isClearFilters, moveFacetsOnSelect } = this.props;
+        const { isApplyFilters,
+            isClearFilters,
+            moveFacetsOnSelect,
+            FacetItemComponent,
+            ActiveFacetItemComponent } = this.props;
 
         const updateFacets = unbxdCore.updateFacets.bind(unbxdCore);
         const deleteAFacet = unbxdCore.deleteAFacet.bind(unbxdCore);
@@ -187,7 +191,9 @@ class Facets extends React.Component {
             onFacetObjectReset,
             applyFilters,
             clearFilters,
-            setSelectedFacets
+            setSelectedFacets,
+            FacetItemComponent,
+            ActiveFacetItemComponent
         };
 
         return { data, helpers }
@@ -241,7 +247,15 @@ Facets.propTypes = {
     /**
     * Move selected facets to a separate block
     */
-    moveFacetsOnSelect: PropTypes.bool
+    moveFacetsOnSelect: PropTypes.bool,
+    /**
+    * Custom Facet item component
+    */
+    FacetItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
+    * Custom active Facet item component
+    */
+    ActiveFacetItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 }
 
 export default Facets;

@@ -9,7 +9,7 @@ const SelectedFacets = () => {
         {({ data, helpers }) => {
 
             const { selectedFacets, moveFacetsOnSelect } = data;
-            const { onFacetClick } = helpers;
+            const { onFacetClick, ActiveFacetItemComponent } = helpers;
 
 
             if (!moveFacetsOnSelect) {
@@ -23,7 +23,7 @@ const SelectedFacets = () => {
 
                     return <List items={selectedValues}
                         idAttribute={'dataId'}
-                        ListItem={ActiveFacetItem}
+                        ListItem={ActiveFacetItemComponent || ActiveFacetItem}
                         onClick={onFacetClick}
                         facetName={facetName}
                         className={'UNX-active-facet-container'}

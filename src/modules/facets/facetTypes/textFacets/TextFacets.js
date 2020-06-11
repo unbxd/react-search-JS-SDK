@@ -10,7 +10,10 @@ const TextFacets = () => {
         {({ data, helpers }) => {
 
             const { textFacets, selectedFacets, isApplyFilters, selectedFacetsAPI } = data;
-            const { onFacetClick, onFacetObjectReset, setSelectedFacets } = helpers;
+            const { onFacetClick,
+                onFacetObjectReset,
+                setSelectedFacets,
+                FacetItemComponent } = helpers;
 
             return (<GenerateFacets
                 textFacets={textFacets}
@@ -19,7 +22,8 @@ const TextFacets = () => {
                 onFacetObjectReset={onFacetObjectReset}
                 selectedFacetsAPI={selectedFacetsAPI}
                 setSelectedFacets={setSelectedFacets}
-                isApplyFilters={isApplyFilters} />)
+                isApplyFilters={isApplyFilters}
+                FacetItemComponent={FacetItemComponent} />)
         }}
     </FacetsContextConsumer>)
 }
