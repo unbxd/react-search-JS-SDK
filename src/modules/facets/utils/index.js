@@ -1,4 +1,4 @@
-import { getFacetRow, isFacetSelected } from './utils';
+import { getFacetRow, isFacetSelected, getSelectedRangeFacets, getMinMax } from './utils';
 import { facetTypes, manageStateTypes } from './constants';
 
-export { facetTypes, getFacetRow, isFacetSelected, manageStateTypes };
+export { facetTypes, getFacetRow, isFacetSelected, manageStateTypes, getSelectedRangeFacets, getMinMax };

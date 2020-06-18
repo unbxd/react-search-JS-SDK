@@ -91,3 +91,17 @@ export const FacetWithCustomActiveFacetItemComponent = () => (<UnbxdSearchWrappe
     />
 
 </UnbxdSearchWrapper >);
+
+export const RangeFacets = () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Facets
+        isApplyFilters={true}
+        isClearFilters={true}
+        moveFacetsOnSelect={true}
+    >
+        <Facets.RangeFacets />
+    </Facets>
+
+</UnbxdSearchWrapper >);

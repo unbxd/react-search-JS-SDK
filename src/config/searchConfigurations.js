@@ -20,7 +20,10 @@ const searchConfigurations = {
         variantsGroupBy: '',
         variantMapping: {}
     },
-    extraParams: '',
+    extraParams: {
+        "version": "V2",
+        "f.categoryPath.facet.version": "V2",
+    },
     facetMultilevel: true,
     facetDepth: 6,
     productId: 'uniqueId',
