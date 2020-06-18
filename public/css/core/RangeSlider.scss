@@ -1,0 +1,29 @@
+.UNX-slider-container{
+    @apply w-6/12 m-4;
+
+    .UNX-slider-track-container{
+        @apply bg-gray-400 h-1 my-3;
+        position: relative;
+        display:flex;
+        align-items:center;
+    }
+    
+    .UNX-slider-thumb-min,.UNX-slider-thumb-max{
+        @apply bg-green-500 h-3;
+        width:12px ;
+        position: absolute;
+        display:flex;
+        align-items:center;
+        border-radius:10px;
+    }
+    
+    .UNX-slider-active-track{
+        @apply bg-green-700 h-2;
+        position: absolute;
+    }
+    
+    .UNX-slider-ranges-text-container{
+        display: flex;
+        justify-content: space-between;
+    }
+}
