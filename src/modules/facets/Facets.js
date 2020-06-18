@@ -314,6 +314,22 @@ Facets.propTypes = {
     * Custom active Facet item component
     */
     ActiveFacetItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
+    * Display name of the category
+    */
+    categoryDisplayName: PropTypes.string.isRequired,
+    /**  
+    * Category field in the feed
+    */
+    categoryField: PropTypes.string.isRequired,
+    /**  
+    * Custom Multilevel facet component
+    */
+    MultilevelFacetItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**  
+    * Custom BreadCrumb component
+    */
+    BreadcrumbItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 }
 
 export default Facets;
