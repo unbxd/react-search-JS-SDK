@@ -30,11 +30,37 @@ const ActiveFacetItemComponent = ({ itemData, facetName }) => {
     </p>)
 }
 
+const MultilevelFacetItemComponent = ({ itemData, multiLevelField, level, }) => {
+    const { name, count } = itemData;
+    return (<div
+        data-unx_categoryname={name}
+        data-unx_multilevelfield={multiLevelField}
+        data-unx_level={level}
+        className='UNX-bucketed-facet-list-item'
+    >
+        {name}---{count}
+    </div>)
+}
+
+const BreadcrumbItemComponent = ({ itemData }) => {
+    const { value, filterField, level } = itemData;
+    return (<div
+        data-unx_categoryname={value}
+        data-unx_multilevelfield={filterField}
+        data-unx_level={level}
+        className={'UNX-breadcrumbs-list-item'}
+    >
+        {value}X
+    </div>)
+}
+
 export const Facet = () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
-    <Facets />
+    <Facets>
+        <Facets.TextFacets />
+    </Facets>
 
 </UnbxdSearchWrapper >);
 
@@ -45,7 +71,9 @@ export const FacetsWithApplyAndClear = () => (<UnbxdSearchWrapper
     <Facets
         isApplyFilters={true}
         isClearFilters={true}
-    />
+    >
+        <Facets.TextFacets />
+    </Facets>
 
 </UnbxdSearchWrapper >);
 
@@ -56,8 +84,9 @@ export const FacetsWithMoveFacetsOnSelect = () => (<UnbxdSearchWrapper
     <Facets
         isApplyFilters={true}
         isClearFilters={true}
-        moveFacetsOnSelect={true}
-    />
+        moveFacetsOnSelect={true}>
+        <Facets.TextFacets />
+    </Facets>
 
 </UnbxdSearchWrapper >);
 
@@ -66,8 +95,9 @@ export const FacetsWithDefaultFilters = () => (<UnbxdSearchWrapper
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
     <Facets
-        defaultFilters={defaultFilters}
-    />
+        defaultFilters={defaultFilters}>
+        <Facets.TextFacets />
+    </Facets>
 
 </UnbxdSearchWrapper >);
 
@@ -102,6 +132,35 @@ export const RangeFacets = () => (<UnbxdSearchWrapper
         moveFacetsOnSelect={true}
     >
         <Facets.RangeFacets />
+    </Facets>
+
+
+</UnbxdSearchWrapper >);
+
+export const MultilevelFacets = () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Facets
+        categoryDisplayName={'category'}
+        categoryField={'categoryPath'}
+    >
+        <Facets.MultilevelFacets />
+    </Facets>
+
+</UnbxdSearchWrapper >);
+
+export const MultilevelFacetsWithCustomComponents = () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Facets
+        categoryDisplayName={'category'}
+        categoryField={'categoryPath'}
+        MultilevelFacetItemComponent={MultilevelFacetItemComponent}
+        BreadcrumbItemComponent={BreadcrumbItemComponent}
+    >
+        <Facets.MultilevelFacets />
     </Facets>
 
 </UnbxdSearchWrapper >);

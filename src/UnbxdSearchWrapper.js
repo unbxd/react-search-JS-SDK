@@ -36,9 +36,16 @@ class UnbxdSearchWrapper extends Component {
 
     setFacetConfiguration = (config, triggerResults = false) => {
 
-        const { defaultFilters } = config;
+        const { defaultFilters, categoryDisplayName, categoryField } = config;
 
         this.state.unbxdCore.options.defaultFilters = defaultFilters;
+        if (categoryDisplayName.length > 0) {
+            this.state.unbxdCore.options.extraParams['f.categoryPath.displayName'] = categoryDisplayName;
+        }
+
+        if (categoryField.length > 0) {
+            this.state.unbxdCore.options.extraParams['facet.multilevel'] = categoryField;
+        }
     }
 
     constructor(props) {
