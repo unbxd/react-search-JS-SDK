@@ -29,6 +29,11 @@ class UnbxdSearchWrapper extends Component {
         }
     }
 
+    setSearchBoxConfiguration(config) {
+        const { query = '*' } = config;
+        this.state.unbxdCore.getResults(query);
+    }
+
     constructor(props) {
         super(props);
 
@@ -37,6 +42,7 @@ class UnbxdSearchWrapper extends Component {
         this.unbxdCallBack = this.unbxdCallBack.bind(this);
         this.setProductConfiguration = this.setProductConfiguration.bind(this);
         this.trackActions = this.trackActions.bind(this);
+        this.setSearchBoxConfiguration = this.setSearchBoxConfiguration.bind(this);
 
         this.state = {
             unbxdCore:
@@ -65,6 +71,7 @@ class UnbxdSearchWrapper extends Component {
         const helpers = {
             setProductConfiguration: this.setProductConfiguration,
             trackActions: this.trackActions,
+            setSearchBoxConfiguration: this.setSearchBoxConfiguration,
         }
 
         return {
@@ -73,7 +80,7 @@ class UnbxdSearchWrapper extends Component {
     }
 
     componentDidMount() {
-        this.state.unbxdCore.getResults('boots');
+        //this.state.unbxdCore.getResults('boots');
         //this.state.unbxdCore.getResults('cooking stoves');
         //this.state.unbxdCore.getResults('red shirt');
         //this.state.unbxdCore.getResults('xxxxxxxxxxxxxxx');
