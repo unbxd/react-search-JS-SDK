@@ -1,0 +1,29 @@
+.UNX-searchbox-container{
+
+    .UNX-searchbox{
+
+        &.query{
+
+            @apply border border-gray-600;
+        }
+
+        &.submit{
+            @apply p-1 m-2;
+        }
+    } 
+
+    .UNX-input-container{
+        display: inline-block;
+        position: relative;
+
+        .UNX-input{
+
+            &.clear-icon{
+
+                position: absolute;
+                right:0.1rem;
+                top: 1px;
+            }
+        } 
+    }
+}
