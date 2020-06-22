@@ -207,3 +207,19 @@ export const CustomProductCard = () => (<UnbxdSearchWrapper
         ProductCardComponent={CustomProductCardComponent} />
 
 </UnbxdSearchWrapper >)
+
+export const ProductsWithALoader = () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Products
+        paginationType={'FIXED_PAGINATION'}
+        productMap={productMap}
+        showVariants={true}
+        variantsCount={2}
+        productVariantMap={productVariantMap}
+        ProductCardComponent={CustomProductCardComponent}
+        LoaderComponent={LoaderComponent}
+        showLoader={true} />
+
+</UnbxdSearchWrapper >)

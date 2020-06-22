@@ -1,5 +1,5 @@
 import List from './List';
 import Button from './Button';
-import RangeSlider from './RangeSlider';
+import Loader from './Loader';
 
-export { List, Button, RangeSlider };
+export { List, Input, Button, Loader };

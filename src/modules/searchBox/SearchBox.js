@@ -6,6 +6,7 @@ import { SearchBoxContextProvider } from './context'
 import SearchInput from './searchInput';
 import SearchButton from './searchButton';
 import { conditionalRenderer, isContext } from '../../common/utils';
+import { Loader as defaultLoader } from '../../components'
 
 /**
  * Component to set or update the search query.
@@ -78,13 +79,17 @@ class SearchBox extends React.Component {
 
     getSearchBoxProps() {
 
+        const { unbxdCoreStatus } = this.context;
         const {
             isAutoFocus,
-            isClear, } = this.props;
+            isClear,
+            showLoader } = this.props;
 
         const data = {
+            unbxdCoreStatus,
             isAutoFocus,
             isClear,
+            showLoader,
             ...this.state
         };
         const helpers = {
@@ -100,13 +105,16 @@ class SearchBox extends React.Component {
 
     render() {
 
+        const { LoaderComponent } = this.props;
+
         const DefaultRender = <form onSubmit={this.handleQuerySubmit} className='UNX-searchbox-container'>
             <SearchInput />
             <SearchButton />
-        </form>
+        </form>;
+        const LoaderRender = <LoaderComponent />;
 
         return (<SearchBoxContextProvider value={this.getSearchBoxProps()}>
-            {conditionalRenderer(this.props.children, this.getSearchBoxProps(), DefaultRender)}
+            {conditionalRenderer(this.props.children, this.getSearchBoxProps(), DefaultRender, LoaderRender)}
         </SearchBoxContextProvider>)
     }
 }
@@ -123,6 +131,8 @@ SearchBox.defaultProps = {
     isClear: false,
     onSubmit: null,
     onClear: null,
+    LoaderComponent: defaultLoader,
+    showLoader: false
 }
 
 SearchBox.propTypes = {
@@ -142,6 +152,15 @@ SearchBox.propTypes = {
     * Hook for clearing the search query. The function should return `true` if the searchbox is to be cleared, false otherwise.
     */
     onClear: PropTypes.func,
+    /**
+    * Custom loader component
+    */
+    LoaderComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
+    * Should loader be shown
+    */
+    showLoader: PropTypes.bool
+
 }
 
 export default SearchBox;

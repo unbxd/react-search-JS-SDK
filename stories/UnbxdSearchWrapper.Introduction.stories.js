@@ -26,6 +26,10 @@ const productVariantMap = {
     sellingPrice: "v_unbxd_price"
 }
 
+const LoaderComponent = () => {
+    return (<p>loading...</p>)
+}
+
 export const Introduction = () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
@@ -36,7 +40,7 @@ export const Introduction = () => (<UnbxdSearchWrapper
         paginationType={'FIXED_PAGINATION'}
         perRow={3}
         pageSize={20}
-        productViewTypes={["LIST", "GRID"]}
+        productViewTypes={["GRID", "LIST"]}
         productMap={productMap}
         showVariants={true}
         variantsCount={2}
