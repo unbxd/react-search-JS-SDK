@@ -71,7 +71,9 @@ export class Products extends React.PureComponent {
             showVariants,
             ProductCardComponent,
             LoaderComponent,
-            showLoader } = this.props;
+            showLoader,
+            onProductClick: onProductClickCB,
+            onZeroResults } = this.props;
 
         const getSearchResults = unbxdCore.getSearchResults.bind(unbxdCore);
         const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
@@ -99,6 +101,7 @@ export class Products extends React.PureComponent {
         }
 
         const onProductClick = (event) => {
+            this.props.onProductClick && this.props.onProductClick();
             trackActions({ type: 'PRODUCT_CLICK', data: { uniqueId: event.target.dataset.uniqueid } });
         }
 
@@ -134,7 +137,9 @@ export class Products extends React.PureComponent {
             getSearchResults,
             getNextPage,
             ProductCardComponent,
-            LoaderComponent
+            LoaderComponent,
+            onProductClickCB,
+            onZeroResults
         }
         return { data, helpers }
 
@@ -226,7 +231,15 @@ Products.propTypes = {
     /**
     * Should loader be shown
     */
-    showLoader: PropTypes.bool
+    showLoader: PropTypes.bool,
+    /**
+    * Callback function triggered on click of a product.
+    */
+    onProductClick: PropTypes.func,
+    /**
+    * Callback function triggered on zero results.
+    */
+    onZeroResults: PropTypes.func
 }
 
 export default Products;
