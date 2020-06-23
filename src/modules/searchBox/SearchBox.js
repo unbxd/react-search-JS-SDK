@@ -19,6 +19,7 @@ class SearchBox extends React.Component {
         this.onQueryChange = this.onQueryChange.bind(this);
         this.onClearQuery = this.onClearQuery.bind(this);
         this.handleQuerySubmit = this.handleQuerySubmit.bind(this);
+        this.setSearchQuery = this.setSearchQuery.bind(this);
 
         this.state = { query: '' };
     }
@@ -27,6 +28,10 @@ class SearchBox extends React.Component {
     onQueryChange(event) {
         const query = event.target.value;
         this.setState({ query });
+    }
+
+    setSearchQuery(query) {
+        this.setState({ query })
     }
 
     onClearQuery() {
@@ -85,23 +90,27 @@ class SearchBox extends React.Component {
             isClear,
             showLoader } = this.props;
 
+        const { unbxdCore } = this.context;
+        const queryAPI = unbxdCore.getSearchQuery() || "";
+
         const data = {
             unbxdCoreStatus,
             isAutoFocus,
             isClear,
             showLoader,
+            queryAPI,
             ...this.state
         };
         const helpers = {
             onQueryChange: this.onQueryChange,
             handleQuerySubmit: this.handleQuerySubmit,
             onClearQuery: this.onClearQuery,
+            setSearchQuery: this.setSearchQuery,
 
         };
 
         return { data, helpers };
     }
-
 
     render() {
 
