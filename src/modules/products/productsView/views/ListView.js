@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { ListProductCard } from '../productCards';
-import { List } from '../../../components/index';
+import { List } from '../../../../components/index';
 
 const ListView = (props) => {
 
@@ -10,13 +10,14 @@ const ListView = (props) => {
         productMap,
         showVariants,
         productVariantMap,
-        onProductClick } = props;
+        onProductClick,
+        ProductItemComponent } = props;
 
     return (<div className='UNX-product-container'>{
         <List
             idAttribute={'uniqueId'}
             items={products}
-            ListItem={ListProductCard}
+            ListItem={ProductItemComponent || ListProductCard}
             onClick={onProductClick}
             productMap={productMap}
             showVariants={showVariants}

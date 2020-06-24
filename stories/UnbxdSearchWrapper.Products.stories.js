@@ -14,9 +14,17 @@ class NoProductsComponent extends React.Component {
     }
 }
 
-const CustomProductCardComponent = (props) => {
-    console.log("Props ", props);
-    return (<p>Hello product card</p>)
+const ProductItemComponent = ({ itemData }) => {
+    console.log("", itemData);
+    const { imageUrl, title } = itemData;
+    return (<div className='myproduct'>
+        <img src={imageUrl[0]} />
+        <p>{title}</p>
+    </div>)
+}
+
+const ProductsViewListItemComponent = ({ itemData, }) => {
+    return (<p data-viewtype={itemData}>{itemData}</p>)
 }
 
 const LoaderComponent = () => {
@@ -119,6 +127,26 @@ export const StylingViewtypesAndProductview = () => (<UnbxdSearchWrapper
 
 </UnbxdSearchWrapper >)
 
+export const ViewtypesDisplayTypes = () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Products
+        paginationType={'INFINITE_SCROLL'}
+        heightDiffToTriggerNextPage={50}
+        perRow={5}
+        pageSize={20}
+        productViewTypes={["LIST", "GRID"]}
+        ZeroResultsComponent={NoProductsComponent}
+        productMap={productMap}
+        showVariants={true}
+        variantsCount={2}
+        productVariantMap={productVariantMap}
+        productViewDisplayType={'DROPDOWN'}
+        ProductsViewListItemComponent={ProductsViewListItemComponent} />
+
+</UnbxdSearchWrapper >)
+
 export const InfiniteScrollPagination = () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
@@ -218,7 +246,7 @@ export const CustomProductCard = () => (<UnbxdSearchWrapper
         showVariants={true}
         variantsCount={2}
         productVariantMap={productVariantMap}
-        ProductCardComponent={CustomProductCardComponent} />
+        ProductItemComponent={ProductItemComponent} />
 
 </UnbxdSearchWrapper >)
 
