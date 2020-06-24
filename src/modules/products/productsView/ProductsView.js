@@ -10,44 +10,25 @@ import ProductsWrapper from './ProductsWrapper';
 const ProductsView = () => {
     return (<ProductContextConsumer>{({ data, helpers }) => {
 
-        const { productViewType,
-            productMap,
-            perRow,
-            productVariantMap,
-            paginationType,
-            heightDiffToTriggerNextPage,
-            showVariants } = data;
+        const { productViewType, productMap, perRow, productVariantMap, paginationType, heightDiffToTriggerNextPage, showVariants } = data;
+        const { getSearchResults, ZeroResultsComponent, onProductClick, getNextPage, ProductItemComponent } = helpers;
 
-        const { getSearchResults,
-            ZeroResultsComponent,
-            onProductClick,
-            getNextPage,
-            ProductCardComponent,
-            onZeroResults } = helpers;
+        const { numberOfProducts = 0, products = [] } = getSearchResults() || {};
 
-        const { numberOfProducts = 0, products = [], start } = getSearchResults() || {};
+        //return the prop based Zero results template
+        if (numberOfProducts === 0 && ZeroResultsComponent) {
+            return !ZeroResultsComponent.prototype.render
+                ? ZeroResultsComponent() : <ZeroResultsComponent />;
+        }
 
+        //return the default Zero results template
         if (numberOfProducts === 0) {
-
-            onZeroResults && onZeroResults();
-
-            //return the prop based Zero results template
-            if (ZeroResultsComponent) {
-                return !ZeroResultsComponent.prototype.render
-                    ? ZeroResultsComponent() : <ZeroResultsComponent />;
-            } else {
-
-                //return the default Zero results template
-                return <NoProducts />;
-            }
-
-
+            return <NoProducts />;
         }
 
         return (<ProductsWrapper
             productViewType={productViewType}
             perRow={perRow}
-            start={start}
             products={products}
             productMap={productMap}
             productVariantMap={productVariantMap}
