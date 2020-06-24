@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ViewTypesDropdown = ({ productViewType, productViewTypes, onProductViewClick, ProductViewListComponent }) => {
+const ViewTypesDropdown = ({
+    productViewType,
+    productViewTypes,
+    onProductViewClick }) => {
     return (<div className='UNX-productsview-list'>
         <select name="productsview"
             className="UBX-productsview-dropdown"
@@ -16,7 +19,9 @@ const ViewTypesDropdown = ({ productViewType, productViewTypes, onProductViewCli
 }
 
 ViewTypesDropdown.propTypes = {
-
+    productViewType: PropTypes.string,
+    productViewTypes: PropTypes.arrayOf(PropTypes.string),
+    onProductViewClick: PropTypes.func.isRequired,
 }
 
 export default ViewTypesDropdown;

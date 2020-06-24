@@ -15,7 +15,6 @@ class NoProductsComponent extends React.Component {
 }
 
 const ProductItemComponent = ({ itemData }) => {
-    console.log("", itemData);
     const { imageUrl, title } = itemData;
     return (<div className='myproduct'>
         <img src={imageUrl[0]} />
@@ -23,8 +22,10 @@ const ProductItemComponent = ({ itemData }) => {
     </div>)
 }
 
-const ProductsViewListItemComponent = ({ itemData, }) => {
-    return (<p data-viewtype={itemData}>{itemData}</p>)
+const ProductsViewListItemComponent = ({ itemData, isActive }) => {
+    return (<p data-viewtype={itemData} className={`${isActive ? 'active' : ''}`}>
+        {itemData}
+    </p>)
 }
 
 const LoaderComponent = () => {
@@ -142,7 +143,7 @@ export const ViewtypesDisplayTypes = () => (<UnbxdSearchWrapper
         showVariants={true}
         variantsCount={2}
         productVariantMap={productVariantMap}
-        productViewDisplayType={'DROPDOWN'}
+        productViewDisplayType={'LIST'}
         ProductsViewListItemComponent={ProductsViewListItemComponent} />
 
 </UnbxdSearchWrapper >)
