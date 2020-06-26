@@ -52,6 +52,10 @@ class Facets extends React.Component {
         const clearFacets = unbxdCore.clearFacets.bind(unbxdCore);
         const getSelectedFacet = unbxdCore.getSelectedFacet.bind(unbxdCore);
         const getSelectedFacets = unbxdCore.getSelectedFacets.bind(unbxdCore);
+        const setRangeFacet = unbxdCore.setRangeFacet.bind(unbxdCore);
+        const applyRangeFacet = unbxdCore.applyRangeFacet.bind(unbxdCore);
+        const clearARangeFacet = unbxdCore.clearARangeFacet.bind(unbxdCore);
+        const selectedRangeFacets = unbxdCore.state.rangeFacet;
 
 
         //get text and range facets
@@ -148,6 +152,14 @@ class Facets extends React.Component {
             trackActions({ type: "FACETS_CLEAR" });
         }
 
+        const addRangeFacet = ({ facetName, start, end }) => {
+            setRangeFacet({ facetName, start, end });
+        }
+
+        const removeRangeFacet = ({ facetName, start, end }) => {
+            setRangeFacet({ facetName, start, end });
+        }
+
 
         const onFacetClick = (event) => {
 
@@ -184,6 +196,7 @@ class Facets extends React.Component {
             isClearFilters,
             moveFacetsOnSelect,
             selectedFacetsAPI,
+            selectedRangeFacets,
             ...this.state
         };
         const helpers = {
@@ -193,7 +206,11 @@ class Facets extends React.Component {
             clearFilters,
             setSelectedFacets,
             FacetItemComponent,
-            ActiveFacetItemComponent
+            ActiveFacetItemComponent,
+            addRangeFacet,
+            applyRangeFacet,
+            clearARangeFacet,
+            trackActions
         };
 
         return { data, helpers }

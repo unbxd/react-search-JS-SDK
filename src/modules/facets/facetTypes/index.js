@@ -1,4 +1,4 @@
-import TextFacets from './textFacets/TextFacets';
-import RangeFacets from './RangeFacets';
+import TextFacets from './textFacets';
+import RangeFacets from './rangeFacets';
 
 export { TextFacets, RangeFacets }
