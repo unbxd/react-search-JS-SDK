@@ -49,7 +49,6 @@ class Facets extends React.Component {
             moveFacetsOnSelect,
             FacetItemComponent,
             ActiveFacetItemComponent,
-            moveFacetsOnSelect,
             MultilevelFacetItemComponent,
             BreadcrumbItemComponent } = this.props;
 

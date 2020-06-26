@@ -19,6 +19,20 @@ const CustomProductCardComponent = (props) => {
     return (<p>Hello product card</p>)
 }
 
+const LoaderComponent = () => {
+    return (<p>loading...</p>)
+}
+
+const onProductClick = (product) => {
+    console.log('product is clicked', product);
+    return true;
+}
+
+const onZeroResults = (query) => {
+    console.log('Zero results', query);
+    return true;
+}
+
 const productMap = {
     productName: "title",
     uniqueId: "uniqueId",
@@ -205,5 +219,41 @@ export const CustomProductCard = () => (<UnbxdSearchWrapper
         variantsCount={2}
         productVariantMap={productVariantMap}
         ProductCardComponent={CustomProductCardComponent} />
+
+</UnbxdSearchWrapper >)
+
+export const ProductsWithALoader = () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Products
+        paginationType={'FIXED_PAGINATION'}
+        productMap={productMap}
+        showVariants={true}
+        variantsCount={2}
+        productVariantMap={productVariantMap}
+        ProductCardComponent={CustomProductCardComponent}
+        LoaderComponent={LoaderComponent}
+        showLoader={true}
+        onProductClick={onProductClick} />
+        onZeroResults={onZeroResults} />
+
+</UnbxdSearchWrapper >)
+
+export const ProductsCallbacks = () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Products
+        paginationType={'FIXED_PAGINATION'}
+        productMap={productMap}
+        showVariants={true}
+        variantsCount={2}
+        productVariantMap={productVariantMap}
+        ProductCardComponent={CustomProductCardComponent}
+        LoaderComponent={LoaderComponent}
+        showLoader={true}
+        onProductClick={onProductClick}
+        onZeroResults={onZeroResults} />
 
 </UnbxdSearchWrapper >)

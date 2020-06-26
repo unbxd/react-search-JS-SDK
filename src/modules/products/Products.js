@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import ViewTypes from './ViewTypes';
 import ProductsView from './ProductsView';
 import { conditionalRenderer, isContext } from '../../common/utils';
+import { Loader as defaultLoader } from '../../components'
 import { getProductViewType } from './utils'
 
 
@@ -16,7 +17,7 @@ import { getProductViewType } from './utils'
  * Products also manages the pagination options for the search results here.
  */
 export class Products extends React.PureComponent {
-    
+
     constructor(props) {
         super(props);
 
@@ -57,8 +58,8 @@ export class Products extends React.PureComponent {
         if (this.context === undefined) {
             isContext(Products.displayName);
         }
-        
-        const { unbxdCore, helpers: { trackActions } } = this.context;
+
+        const { unbxdCore, unbxdCoreStatus, helpers: { trackActions } } = this.context;
         const { ZeroResultsComponent,
             perRow,
             pageSize,
@@ -68,7 +69,11 @@ export class Products extends React.PureComponent {
             productViewTypes,
             heightDiffToTriggerNextPage,
             showVariants,
-            ProductCardComponent } = this.props;
+            ProductCardComponent,
+            LoaderComponent,
+            showLoader,
+            onProductClick: onProductClickCB,
+            onZeroResults } = this.props;
 
         const getSearchResults = unbxdCore.getSearchResults.bind(unbxdCore);
         const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
@@ -96,6 +101,7 @@ export class Products extends React.PureComponent {
         }
 
         const onProductClick = (event) => {
+            this.props.onProductClick && this.props.onProductClick();
             trackActions({ type: 'PRODUCT_CLICK', data: { uniqueId: event.target.dataset.uniqueid } });
         }
 
@@ -111,6 +117,7 @@ export class Products extends React.PureComponent {
         })
 
         const data = {
+            unbxdCoreStatus,
             perRow,
             paginationType,
             productMap,
@@ -118,6 +125,7 @@ export class Products extends React.PureComponent {
             productViewTypes,
             heightDiffToTriggerNextPage,
             showVariants,
+            showLoader,
             ...this.state
         };
         const helpers = {
@@ -128,20 +136,27 @@ export class Products extends React.PureComponent {
             onProductClick,
             getSearchResults,
             getNextPage,
-            ProductCardComponent
+            ProductCardComponent,
+            LoaderComponent,
+            onProductClickCB,
+            onZeroResults
         }
         return { data, helpers }
 
     }
 
     render() {
+        const { LoaderComponent } = this.props;
+
         const DefaultRender = <React.Fragment>
             <ViewTypes />
             <ProductsView />
-        </React.Fragment>
+        </React.Fragment>;
+        const LoaderRender = <LoaderComponent />;
+
 
         return (<ProductContextProvider value={this.getProductProps()}>
-            {conditionalRenderer(this.props.children, this.getProductProps(), DefaultRender)}
+            {conditionalRenderer(this.props.children, this.getProductProps(), DefaultRender, LoaderRender)}
         </ProductContextProvider>)
     }
 }
@@ -157,10 +172,11 @@ Products.defaultProps = {
     productViewTypes: ["GRID"],
     productMap: {},
     productVariantMap: {},
-    ZeroResultsComponent: false,
     paginationType: 'FIXED_PAGINATION',
     heightDiffToTriggerNextPage: 50,
     showVariants: false,
+    LoaderComponent: defaultLoader,
+    showLoader: true
 }
 
 Products.propTypes = {
@@ -208,6 +224,22 @@ Products.propTypes = {
     * Custom Product card component
     */
     ProductCardComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
+    * Custom loader component
+    */
+    LoaderComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
+    * Should loader be shown
+    */
+    showLoader: PropTypes.bool,
+    /**
+    * Callback function triggered on click of a product.
+    */
+    onProductClick: PropTypes.func,
+    /**
+    * Callback function triggered on zero results.
+    */
+    onZeroResults: PropTypes.func
 }
 
 export default Products;
