@@ -9,6 +9,7 @@ import '../public/css/index.scss';
 class App extends Component {
 
     setProductConfiguration = (config) => {
+
         const { pageSize, requiredFields, showVariants,
             variantsCount, variantRequiredFields, groupBy, paginationType } = config;
 
@@ -24,6 +25,19 @@ class App extends Component {
         }
     }
 
+    setPaginationConfiguration = (config, triggerResults = false) => {
+
+        const { pageSize } = config;
+
+        this.state.unbxdCore.setPageSize(pageSize);
+        this.state.unbxdCore.setPageStart(0);
+
+        if (triggerResults) {
+            this.state.unbxdCore.getResults();
+        }
+
+    }
+
     trackActions = ({ type = 'unbxdAction', data = {} }) => {
 
         this.unbxdCallBack(null, type, data);
@@ -31,6 +45,7 @@ class App extends Component {
 
     helpers = {
         setProductConfiguration: this.setProductConfiguration,
+        setPaginationConfiguration: this.setPaginationConfiguration,
         trackActions: this.trackActions
     }
 
@@ -59,8 +74,8 @@ class App extends Component {
     }
 
     componentDidMount() {
-        //this.state.unbxdCore.getResults('boots');
-        this.state.unbxdCore.getResults('cooking stoves');
+        this.state.unbxdCore.getResults('boots');
+        //this.state.unbxdCore.getResults('cooking stoves');
         //this.state.unbxdCore.getResults('red shirt');
         //this.state.unbxdCore.getResults('xxxxxxxxxxxxxxx');
     }
