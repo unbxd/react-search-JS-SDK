@@ -261,7 +261,7 @@ export const ProductsWithALoader = () => (<UnbxdSearchWrapper
         showVariants={true}
         variantsCount={2}
         productVariantMap={productVariantMap}
-        ProductCardComponent={CustomProductCardComponent}
+        ProductItemComponent={ProductItemComponent}
         LoaderComponent={LoaderComponent}
         showLoader={true}
         onProductClick={onProductClick} />
@@ -279,7 +279,7 @@ export const ProductsCallbacks = () => (<UnbxdSearchWrapper
         showVariants={true}
         variantsCount={2}
         productVariantMap={productVariantMap}
-        ProductCardComponent={CustomProductCardComponent}
+        ProductItemComponent={ProductItemComponent}
         LoaderComponent={LoaderComponent}
         showLoader={true}
         onProductClick={onProductClick}
