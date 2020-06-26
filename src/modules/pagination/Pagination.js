@@ -43,7 +43,7 @@ class Pagination extends React.PureComponent {
         const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
         const getResults = unbxdCore.getResults.bind(unbxdCore);
 
-        const { PageSizeListComponent, pageSizeOptions, pageSizeDisplayType } = this.props;
+        const { PageSizeItemComponent, pageSizeOptions, pageSizeDisplayType } = this.props;
 
         const { currentPage = 0,
             isNext = false,
@@ -95,7 +95,7 @@ class Pagination extends React.PureComponent {
         };
 
         const helpers = {
-            PageSizeListComponent,
+            PageSizeItemComponent,
             onPageSizeClick,
             onNextPageClick,
             onPreviousPageClick,
@@ -135,7 +135,7 @@ Pagination.propTypes = {
         PropTypes.shape({ id: PropTypes.number, value: PropTypes.string }))
         .isRequired,
     pageSizeDisplayType: PropTypes.string.isRequired,
-    PageSizeListComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    PageSizeItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     pagePadding: PropTypes.number
 }
 

@@ -53,7 +53,7 @@ class Sort extends React.Component {
     getSortProps() {
         const { helpers: { setSortConfiguration, trackActions } } = this.context;
 
-        const { sortOptions, sortDisplayType, SortListComponent } = this.props;
+        const { sortOptions, sortDisplayType, SortItemComponent } = this.props;
 
         //format datas for better handling.
         const formattedSortByOptions =
@@ -98,7 +98,7 @@ class Sort extends React.Component {
             ...this.state
         };
         const helpers = {
-            SortListComponent,
+            SortItemComponent,
             onSortClick,
             onSortResetClick
         };
@@ -140,7 +140,7 @@ Sort.propTypes = {
         }))
         .isRequired,
     sortDisplayType: PropTypes.string.isRequired,
-    SortListComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    SortItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 }
 
 export default Sort;

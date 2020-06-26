@@ -1,6 +1,6 @@
 import React from 'react';
 
-import UnbxdSearchWrapper from '../src/App';
+import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import Products from '../src/modules/products';
 import Pagination from '../src/modules/pagination';
 

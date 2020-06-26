@@ -22,3 +22,7 @@ export const debounce = (func, wait, immediate) => {
         if (callNow) func.apply(context, args);
     };
 };
+
+export const isContext = (componentName = 'Component') => {
+    throw new Error(`${componentName} must be used within UnbxdSearchWrapper.`);
+}

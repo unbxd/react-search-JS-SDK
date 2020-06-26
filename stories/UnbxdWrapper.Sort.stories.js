@@ -1,10 +1,11 @@
 import React from 'react';
 
-import UnbxdSearchWrapper from '../src/App';
+import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import Sort from '../src/modules/sort';
 
 export default {
-    title: 'UnbxdSearchWrapper'
+    title: 'Sort',
+    component: Sort
 }
 
 const MyListComponent = ({ itemData, onClick, isActive }) => {
@@ -43,7 +44,7 @@ const sortOptions = [
     }
 ]
 
-export const UnbxdSearchWrapperSortComponent = () => (<UnbxdSearchWrapper
+export const SortComponent = () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
@@ -55,6 +56,6 @@ export const UnbxdSearchWrapperSortComponent = () => (<UnbxdSearchWrapper
         }}
         sortOptions={sortOptions}
         sortDisplayType={'LIST'}
-        SortListComponent={MyListComponent} />
+        SortItemComponent={MyListComponent} />
 
 </UnbxdSearchWrapper >)  

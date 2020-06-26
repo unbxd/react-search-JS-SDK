@@ -10,7 +10,7 @@ const SortBy = () => {
         {({ data, helpers }) => {
 
             const { sortOptions: sortByOptions, sortDisplayType, sortBy, } = data;
-            const { onSortClick, SortListComponent } = helpers;
+            const { onSortClick, SortItemComponent } = helpers;
 
             if (!(Array.isArray(sortByOptions) && sortByOptions.length)) {
                 return null;
@@ -35,7 +35,7 @@ const SortBy = () => {
                             sortBy={sortBy}
                             sortByOptions={sortByOptions}
                             onSortClick={onSortClick}
-                            SortListComponent={SortListComponent}
+                            SortItemComponent={SortItemComponent}
                         />
                     }
                 </div>)

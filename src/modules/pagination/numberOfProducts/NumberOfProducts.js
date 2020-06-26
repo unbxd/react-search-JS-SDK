@@ -10,7 +10,7 @@ const NumberOfProducts = () => {
         {({ data, helpers }) => {
 
             const { pageSizeDisplayType, noOfPages, pageSize, pageSizeOptions } = data;
-            const { onPageSizeClick, PageSizeListComponent } = helpers;
+            const { onPageSizeClick, PageSizeItemComponent } = helpers;
 
             if (noOfPages === 0) {
                 return null;
@@ -34,7 +34,7 @@ const NumberOfProducts = () => {
                             pageSize={pageSize}
                             pageSizeOptions={pageSizeOptions}
                             onPageSizeClick={onPageSizeClick}
-                            PageSizeListComponent={PageSizeListComponent}
+                            PageSizeItemComponent={PageSizeItemComponent}
                         />
                     }
                 </div>)
