@@ -59,13 +59,6 @@ class UnbxdSearchWrapper extends Component {
         }
     }
 
-    helpers = {
-        setProductConfiguration: this.setProductConfiguration,
-        setPaginationConfiguration: this.setPaginationConfiguration,
-        setSortConfiguration: this.setSortConfiguration,
-        trackActions: this.trackActions
-    }
-
     constructor(props) {
         super(props);
 
@@ -101,8 +94,11 @@ class UnbxdSearchWrapper extends Component {
     getProps() {
         const helpers = {
             setProductConfiguration: this.setProductConfiguration,
-            trackActions: this.trackActions,
+            setPaginationConfiguration: this.setPaginationConfiguration,
+            setSortConfiguration: this.setSortConfiguration,
+            trackActions: this.trackActions
         }
+
 
         return {
             ...this.state, helpers
