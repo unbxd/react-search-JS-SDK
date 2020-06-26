@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ProductContextConsumer } from './context'
+import { ProductContextConsumer } from '../context'
 
 import NoProducts from './NoProducts';
 import ProductsWrapper from './ProductsWrapper';
@@ -10,8 +10,23 @@ import ProductsWrapper from './ProductsWrapper';
 const ProductsView = () => {
     return (<ProductContextConsumer>{({ data, helpers }) => {
 
-        const { productViewType, productMap, perRow, productVariantMap, paginationType, heightDiffToTriggerNextPage, showVariants } = data;
-        const { getSearchResults, ZeroResultsComponent, onProductClick, getNextPage, ProductCardComponent } = helpers;
+        const { productViewType,
+            productMap,
+            perRow,
+            productVariantMap,
+            paginationType,
+            heightDiffToTriggerNextPage,
+            showVariants,
+            showSwatches,
+            swatchAttributes,
+            groupBy } = data;
+
+        const { getSearchResults,
+            ZeroResultsComponent,
+            onProductClick,
+            getNextPage,
+            ProductItemComponent,
+            swatchItemComponent, } = helpers;
 
         const { numberOfProducts = 0, products = [] } = getSearchResults() || {};
 
@@ -37,7 +52,11 @@ const ProductsView = () => {
             heightDiffToTriggerNextPage={heightDiffToTriggerNextPage}
             showVariants={showVariants}
             onProductClick={onProductClick}
-            ProductCardComponent={ProductCardComponent}
+            ProductItemComponent={ProductItemComponent}
+            showSwatches={showSwatches}
+            swatchAttributes={swatchAttributes}
+            groupBy={groupBy}
+            swatchItemComponent={swatchItemComponent}
         />)
 
     }}

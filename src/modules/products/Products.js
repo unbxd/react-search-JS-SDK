@@ -4,9 +4,10 @@ import { ProductContextProvider } from './context'
 
 import PropTypes from 'prop-types';
 
-import ViewTypes from './ViewTypes';
-import ProductsView from './ProductsView';
+import ViewTypes from './viewTypes/ViewTypes';
+import ProductsView from './productsView/ProductsView';
 import { conditionalRenderer, isContext } from '../../common/utils';
+import { Loader as defaultLoader } from '../../components'
 import { getProductViewType } from './utils'
 
 
@@ -16,7 +17,7 @@ import { getProductViewType } from './utils'
  * Products also manages the pagination options for the search results here.
  */
 export class Products extends React.PureComponent {
-    
+
     constructor(props) {
         super(props);
 
@@ -38,8 +39,13 @@ export class Products extends React.PureComponent {
 
         const { helpers: { setProductConfiguration } } = this.context;
 
-        const { pageSize, productMap, showVariants,
-            variantsCount, productVariantMap, paginationType } = this.props
+        const { pageSize,
+            productMap,
+            showVariants,
+            variantsCount,
+            productVariantMap,
+            paginationType,
+            groupBy } = this.props
 
         //generate required fields here based on productMap and productVariantMap
         const requiredFields = Object.values(productMap);
@@ -48,7 +54,13 @@ export class Products extends React.PureComponent {
         //Set the main config
         //Do not set pageSize if pagination type is FIXED_SCROLLING
         setProductConfiguration({
-            pageSize, requiredFields, showVariants, variantsCount, variantRequiredFields, paginationType
+            pageSize,
+            requiredFields,
+            showVariants,
+            variantsCount,
+            variantRequiredFields,
+            paginationType,
+            groupBy
         });
     }
 
@@ -57,8 +69,8 @@ export class Products extends React.PureComponent {
         if (this.context === undefined) {
             isContext(Products.displayName);
         }
-        
-        const { unbxdCore, helpers: { trackActions } } = this.context;
+
+        const { unbxdCore, unbxdCoreStatus, helpers: { trackActions } } = this.context;
         const { ZeroResultsComponent,
             perRow,
             pageSize,
@@ -68,7 +80,17 @@ export class Products extends React.PureComponent {
             productViewTypes,
             heightDiffToTriggerNextPage,
             showVariants,
-            ProductCardComponent } = this.props;
+            LoaderComponent,
+            showLoader,
+            onProductClick: onProductClickCB,
+            onZeroResults ,
+            ProductItemComponent,
+            productViewDisplayType,
+            ProductsViewListItemComponent,
+            showSwatches,
+            swatchAttributes,
+            groupBy,
+            swatchItemComponent } = this.props;
 
         const getSearchResults = unbxdCore.getSearchResults.bind(unbxdCore);
         const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
@@ -77,7 +99,7 @@ export class Products extends React.PureComponent {
 
 
         const onViewToggle = (event) => {
-            const productViewType = event.target.dataset.viewtype;
+            const productViewType = event.target.dataset.viewtype || event.target.value;;
 
             trackActions({ type: 'PRODUCT_VIEW_TYPE', data: { productViewType } });
             this.setState({ productViewType });
@@ -96,6 +118,7 @@ export class Products extends React.PureComponent {
         }
 
         const onProductClick = (event) => {
+            this.props.onProductClick && this.props.onProductClick();
             trackActions({ type: 'PRODUCT_CLICK', data: { uniqueId: event.target.dataset.uniqueid } });
         }
 
@@ -111,6 +134,7 @@ export class Products extends React.PureComponent {
         })
 
         const data = {
+            unbxdCoreStatus,
             perRow,
             paginationType,
             productMap,
@@ -118,6 +142,11 @@ export class Products extends React.PureComponent {
             productViewTypes,
             heightDiffToTriggerNextPage,
             showVariants,
+            showLoader,
+            productViewDisplayType,
+            showSwatches,
+            swatchAttributes,
+            groupBy,
             ...this.state
         };
         const helpers = {
@@ -128,20 +157,30 @@ export class Products extends React.PureComponent {
             onProductClick,
             getSearchResults,
             getNextPage,
-            ProductCardComponent
+            LoaderComponent,
+            onProductClickCB,
+            onZeroResults,
+            ProductItemComponent,
+            ProductsViewListItemComponent,
+            swatchItemComponent,
         }
+
         return { data, helpers }
 
     }
 
     render() {
+        const { LoaderComponent } = this.props;
+
         const DefaultRender = <React.Fragment>
             <ViewTypes />
             <ProductsView />
-        </React.Fragment>
+        </React.Fragment>;
+        const LoaderRender = <LoaderComponent />;
+
 
         return (<ProductContextProvider value={this.getProductProps()}>
-            {conditionalRenderer(this.props.children, this.getProductProps(), DefaultRender)}
+            {conditionalRenderer(this.props.children, this.getProductProps(), DefaultRender, LoaderRender)}
         </ProductContextProvider>)
     }
 }
@@ -157,10 +196,12 @@ Products.defaultProps = {
     productViewTypes: ["GRID"],
     productMap: {},
     productVariantMap: {},
-    ZeroResultsComponent: false,
     paginationType: 'FIXED_PAGINATION',
     heightDiffToTriggerNextPage: 50,
     showVariants: false,
+    LoaderComponent: defaultLoader,
+    showLoader: true,
+    productViewDisplayType: "DROPDOWN"
 }
 
 Products.propTypes = {
@@ -176,6 +217,14 @@ Products.propTypes = {
     * Required ProductViewType.Possible options are`GRID` and `LIST`.
     */
     productViewTypes: PropTypes.arrayOf(PropTypes.string),
+    /**
+    * Required ProductViewType Display type.Possible options are`LIST` and `DROPDOWN`.
+    */
+    productViewDisplayType: PropTypes.string,
+    /**
+    * Custom `LIST` item component for product views.
+    */
+    ProductsViewListItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     /**
     * Mapping of catalog Product fields to SDK Product fields.
     */
@@ -208,6 +257,39 @@ Products.propTypes = {
     * Custom Product card component
     */
     ProductCardComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
+    * Custom loader component
+    */
+    LoaderComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
+    * Should loader be shown
+    */
+    showLoader: PropTypes.bool,
+    /**
+    * Callback function triggered on click of a product.
+    */
+    onProductClick: PropTypes.func,
+    /**
+    * Callback function triggered on zero results.
+    */
+    onZeroResults: PropTypes.func,
+    ProductItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
+    * Display swatches
+    */
+    showSwatches: PropTypes.bool,
+    /**
+    * Group variants by the attribute
+    */
+    groupBy: PropTypes.string,
+    /**
+    * Swatch attributes that change on click on of the swatch
+    */
+    swatchAttributes: PropTypes.object,
+    /**
+    * Custom swatch component
+    */
+    swatchItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 }
 
 export default Products;

@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 
 import GridView from './views/GridView';
 import ListView from './views/ListView';
-import { paginationTypes } from './utils';
-import { debounce } from '../../common/utils';
-import { productViewTypes as productViewTypesOptions, DEBOUNCE_TIME } from './utils'
-import { List } from '../../components/index';
+import { paginationTypes } from '../utils';
+import { debounce } from '../../../common/utils';
+import { productViewTypes as productViewTypesOptions, DEBOUNCE_TIME } from '../utils'
 
 class ProductsWrapper extends React.PureComponent {
 
@@ -67,7 +66,7 @@ class ProductsWrapper extends React.PureComponent {
 
     static getDerivedStateFromProps(props, state) {
 
-        const { paginationType } = props;
+        const { paginationType, start } = props;
 
         if (props.products.length === 0) {
             if (paginationType === paginationTypes.INFINITE_SCROLL) {
@@ -82,7 +81,7 @@ class ProductsWrapper extends React.PureComponent {
         if (state.products !== props.products &&
             (paginationType === paginationTypes.INFINITE_SCROLL || paginationType === paginationTypes.CLICK_N_SCROLL)) {
 
-            return { products: [...state.products, ...props.products] }
+            return start === 0 ? { products: props.products } : { products: [...state.products, ...props.products] }
         }
 
         if (state.products !== props.products && paginationType === paginationTypes.FIXED_PAGINATION) {
@@ -102,15 +101,12 @@ class ProductsWrapper extends React.PureComponent {
             productVariantMap,
             paginationType,
             showVariants,
-            ProductCardComponent } = this.props;
+            ProductItemComponent,
+            showSwatches,
+            swatchAttributes,
+            groupBy,
+            swatchItemComponent, } = this.props;
         const { products, hasMoreResults } = this.state;
-
-        const customProductRender = <List
-            idAttribute={'uniqueId'}
-            items={products}
-            ListItem={ProductCardComponent}
-            onClick={onProductClick}
-            productViewType={productViewType} />
 
         const productViewsRender = <React.Fragment>{productViewType === productViewTypesOptions.GRID &&
             <GridView perRow={perRow}
@@ -118,18 +114,31 @@ class ProductsWrapper extends React.PureComponent {
                 products={products}
                 onProductClick={onProductClick}
                 showVariants={showVariants}
-                productVariantMap={productVariantMap} />}
+                productVariantMap={productVariantMap}
+                ProductItemComponent={ProductItemComponent}
+                showSwatches={showSwatches}
+                swatchAttributes={swatchAttributes}
+                groupBy={groupBy}
+                swatchItemComponent={swatchItemComponent}
+            />}
 
             {productViewType === productViewTypesOptions.LIST &&
                 <ListView productMap={productMap}
                     products={products}
                     onProductClick={onProductClick}
                     showVariants={showVariants}
-                    productVariantMap={productVariantMap} />}</React.Fragment>
+                    productVariantMap={productVariantMap}
+                    ProductItemComponent={ProductItemComponent}
+                    showSwatches={showSwatches}
+                    swatchAttributes={swatchAttributes}
+                    groupBy={groupBy}
+                    swatchItemComponent={swatchItemComponent}
+                />}
+        </React.Fragment>
 
         return (<React.Fragment>
 
-            {ProductCardComponent ? customProductRender : productViewsRender}
+            {productViewsRender}
             {paginationType === paginationTypes.CLICK_N_SCROLL &&
                 hasMoreResults &&
                 <div className='UNX-product-load-more' onClick={this.loadMoreHandler}>
@@ -150,7 +159,7 @@ ProductsWrapper.propTypes = {
     paginationType: PropTypes.string,
     heightDiffToTriggerNextPage: PropTypes.number,
     showVariants: PropTypes.bool.isRequired,
-    ProductCardComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    ProductItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 }
 
 export default ProductsWrapper;

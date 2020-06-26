@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import UnbxdSearch from '@unbxd-ui/unbxd-search-core/src/index';
-import { AppContextProvider } from './common/context';
-import { searchConfigurations } from './config';
-import { paginationTypes } from './modules/products/utils';
+import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
 
+import { AppContextProvider } from './common/context';
+import { searchConfigurations, productTypes } from './config';
+import { paginationTypes } from './modules/products/utils';
 import '../public/css/core/index.scss';
 
 
@@ -29,56 +29,70 @@ class UnbxdSearchWrapper extends Component {
         }
     }
 
-    trackActions = ({ type = 'unbxdAction', data = {} }) => {
-
-        this.unbxdCallBack(null, type, data);
-    }
-
-    setFacetConfiguration = (config, triggerResults = false) => {
-
-        const { defaultFilters, categoryDisplayName, categoryField } = config;
-
-        this.state.unbxdCore.options.defaultFilters = defaultFilters;
-        if (categoryDisplayName.length > 0) {
-            this.state.unbxdCore.options.extraParams['f.categoryPath.displayName'] = categoryDisplayName;
-        }
-
-        if (categoryField.length > 0) {
-            this.state.unbxdCore.options.extraParams['facet.multilevel'] = categoryField;
-        }
+    setSearchBoxConfiguration(config) {
+        const { query = '*' } = config;
+        const { unbxdCore } = this.state;
+        unbxdCore.options.productType = productTypes.SEARCH;
+        unbxdCore.getResults(query);
     }
 
     constructor(props) {
-        super(props);
 
-        const { siteKey, apiKey } = this.props;
+        super(props);
+        const { siteKey, apiKey, getCategoryId, productType } = this.props;
 
         this.unbxdCallBack = this.unbxdCallBack.bind(this);
         this.setProductConfiguration = this.setProductConfiguration.bind(this);
         this.trackActions = this.trackActions.bind(this);
+        this.setSearchBoxConfiguration = this.setSearchBoxConfiguration.bind(this);
 
         this.state = {
             unbxdCore:
-                new UnbxdSearch({ ...searchConfigurations, siteKey, apiKey, callBackFn: this.unbxdCallBack }),
+                new UnbxdSearch({
+                    ...searchConfigurations,
+                    siteKey,
+                    apiKey,
+                    callBackFn: this.unbxdCallBack,
+                    getCategoryId
+                }),
+            productType
 
         };
 
+        this.initialResultLoad = true
+
     }
 
+    trackActions({ type = 'unbxdAction', data = {} }) {
+
+        this.unbxdCallBack(null, type, data);
+    }
+
+
     unbxdCallBack(unbxdSearchObj, eventName, data) {
+
+        const { onIntialResultLoad } = this.props;
+
         if (eventName === 'AFTER_API_CALL') {
+
+            if (this.initialResultLoad) {
+                //call onIntialResultLoad
+                typeof (onIntialResultLoad) == "function" &&
+                    onIntialResultLoad(unbxdSearchObj.getResponseObj());
+                this.initialResultLoad = false;
+            }
+
             this.setState({ unbxdCore: unbxdSearchObj })
         }
 
         console.log("unbxdCallBack ", eventName, data);
     }
 
-
     getProps() {
         const helpers = {
             setProductConfiguration: this.setProductConfiguration,
-            setFacetConfiguration: this.setFacetConfiguration,
-            trackActions: this.trackActions
+            trackActions: this.trackActions,
+            setSearchBoxConfiguration: this.setSearchBoxConfiguration,
         }
 
         return {
@@ -87,10 +101,49 @@ class UnbxdSearchWrapper extends Component {
     }
 
     componentDidMount() {
-        this.state.unbxdCore.getResults('boots');
-        //this.state.unbxdCore.getResults('cooking stoves');
-        //this.state.unbxdCore.getResults('red shirt');
-        //this.state.unbxdCore.getResults('xxxxxxxxxxxxxxx');
+        const { onPageLoad } = this.props;
+        const { unbxdCore } = this.state;
+        
+        const categoryId = typeof (unbxdCore.options.getCategoryId) === 'function' && unbxdCore.options.getCategoryId();
+        this.setState({ categoryId })
+        if (categoryId && typeof (categoryId) === "string" && categoryId.length > 0) {
+
+            unbxdCore.options.productType = productTypes.CATEGORY;
+            unbxdCore.getResults();
+        } else {
+
+            //call onPageLoad
+            typeof (onPageLoad) == "function" && onPageLoad(unbxdCore.getResponseObj());
+        }
+
+    }
+
+    componentDidUpdate(props, state) {
+
+        const { onPageLoad } = this.props;
+        const { unbxdCore, categoryId } = this.state;
+
+        console.log("diff ", props, this.props);
+        console.log("diff ", state, this.state);
+        const currentCategoryId = typeof (unbxdCore.options.getCategoryId) === 'function' && unbxdCore.options.getCategoryId();
+        if (categoryId !== currentCategoryId && currentCategoryId.length > 0) {
+
+            this.setState({ categoryId: currentCategoryId });
+            unbxdCore.options.productType = productTypes.CATEGORY;
+            unbxdCore.getResults();
+
+        } else {
+
+            //call onPageLoad
+            typeof (onPageLoad) == "function" && onPageLoad(unbxdCore.getResponseObj());
+        }
+
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        if (props.productType !== state.productType) {
+            return { productType: props.productType };
+        }
     }
 
     render() {
@@ -111,6 +164,18 @@ UnbxdSearchWrapper.propTypes = {
     * API key of the site.
     */
     apiKey: PropTypes.string.isRequired,
+    /**
+    * Callback for results load.
+    */
+    onIntialResultLoad: PropTypes.func,
+    /**
+    * Callback for results mounted.
+    */
+    onPageLoad: PropTypes.func,
+    /**
+    * Custom function to return the Category Id.
+    */
+    getCategoryId: PropTypes.func,
 }
 
 export default UnbxdSearchWrapper;

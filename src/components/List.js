@@ -1,21 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { listItemTypes } from './utils';
 
-const List = ({ items, activeItem, ListItem, idAttribute = "id", className = '', onClick, ...props }) => {
+const List = ({ items,
+    activeItem,
+    ListItem,
+    idAttribute = "id",
+    className = '',
+    onClick,
+    itemsType = listItemTypes.OBJECT,
+    ...props }) => {
     return (<div className={`UNX-list ${className}`} onClick={onClick ? onClick : null}>
         {items.map(item => {
 
-            const isActive = typeof activeItem === 'object' ?
-                activeItem[idAttribute] === item[idAttribute] : activeItem === item[idAttribute];
+            let isActive = false;
+            if (itemsType === listItemTypes.PRIMITIVE) {
+                isActive = item === activeItem;
+            } else {
+                isActive = typeof activeItem === 'object' ?
+                    activeItem[idAttribute] === item[idAttribute] : activeItem === item[idAttribute];
 
+            }
+
+
+            const key = itemsType === listItemTypes.PRIMITIVE ? item : item[idAttribute];
+            
             return <ListItem
                 itemData={item}
-                idAttribute={idAttribute}
+                idAttribute={key}
                 onClick={onClick ? onClick : null}
                 isActive={isActive}
                 {...props}
-                key={item[idAttribute]} />
+                key={key} />
         })}
     </div>)
 }
