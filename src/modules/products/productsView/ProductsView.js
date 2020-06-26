@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ProductContextConsumer } from './context'
+import { ProductContextConsumer } from '../context'
 
 import NoProducts from './NoProducts';
 import ProductsWrapper from './ProductsWrapper';
@@ -56,7 +56,7 @@ const ProductsView = () => {
             heightDiffToTriggerNextPage={heightDiffToTriggerNextPage}
             showVariants={showVariants}
             onProductClick={onProductClick}
-            ProductCardComponent={ProductCardComponent}
+            ProductItemComponent={ProductItemComponent}
         />)
 
     }}

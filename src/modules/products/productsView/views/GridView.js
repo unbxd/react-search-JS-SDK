@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { GridProductCard } from '../productCards';
-import { List } from '../../../components/index';
+import { List } from '../../../../components/index';
 //We need the productMap object to map to values
 
 const GridView = (props) => {
@@ -12,13 +12,14 @@ const GridView = (props) => {
         productMap,
         showVariants,
         productVariantMap,
-        onProductClick } = props;
+        onProductClick,
+        ProductItemComponent } = props;
 
     return (<div className='UNX-product-container'>
         <List
             idAttribute={'uniqueId'}
             items={products}
-            ListItem={GridProductCard}
+            ListItem={ProductItemComponent || GridProductCard}
             onClick={onProductClick}
             productMap={productMap}
             showVariants={showVariants}
