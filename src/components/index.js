@@ -1,3 +1,5 @@
 import List from './List';
+import Button from './Button';
+import RangeSlider from './RangeSlider';
 
-export { List };
+export { List, Button, RangeSlider };

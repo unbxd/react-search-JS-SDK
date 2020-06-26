@@ -5,29 +5,51 @@ const TerserJSPlugin = require('terser-webpack-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const glob = require('glob');
 const path = require('path');
+const RemovePlugin = require('remove-files-webpack-plugin');
 
 const PATHS = {
   src: path.join(__dirname, 'src')
 };
 
+function recursiveIssuer(m) {
+  if (m.issuer) {
+    return recursiveIssuer(m.issuer);
+  } else if (m.name) {
+    return m.name;
+  } else {
+    return false;
+  }
+}
+
 module.exports = {
   entry: {
-    //app: Path.resolve(__dirname, '../demo/index.js'),
-    "unbxd-react-search-sdk": Path.resolve(__dirname, '../src/index.js')
+    "core": Path.resolve(__dirname, '../public/css/core/index.scss'),
+    "theme": Path.resolve(__dirname, '../public/css/theme/index.scss'),
+    "react-search-sdk": Path.resolve(__dirname, '../src/index.js'),
   },
   mode: 'production',
   output: {
-    path: Path.join(__dirname, '../public'),
+    path: Path.join(__dirname, '../public/dist'),
     filename: 'js/[name].js',
-    sourceMapFilename: '[file].map'
+    sourceMapFilename: '[file].map',
+    libraryTarget: 'commonjs2'
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "common",
-          chunks: "all"
+        coreStyles: {
+          name: 'core',
+          test: (m, c, entry = 'core') =>
+            m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
+          chunks: 'all',
+          enforce: true,
+        },
+        themeStyles: {
+          name: 'theme',
+          test: (m, c, entry = 'theme') =>
+            m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
+          chunks: 'all',
+          enforce: true,
         }
       }
     },
@@ -41,9 +63,16 @@ module.exports = {
       chunkFilename: '[id].css'
 
     }),
-    new PurgecssPlugin({
-      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
-    }),
+    new RemovePlugin({
+      after: {
+        root: './public/dist',
+        include: [
+          'js/core.js',
+          'js/theme.js',
+          'css/unbxd-react-search-sdk.css'
+        ],
+      }
+    })
   ],
   resolve: {
     alias: {
@@ -74,7 +103,7 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
           },
-          'css-loader',
+          { loader: 'css-loader', options: { importLoaders: 1 } },
           {
             loader: 'postcss-loader',
             options: {
@@ -85,17 +114,13 @@ module.exports = {
               ],
             },
           },
-          {
-            loader: 'sass-loader',
-            options: {
-              sassOptions: {
-                includePaths: ['public/css']
-              },
-            }
-          },
+          require.resolve('sass-loader')
         ]
       }
 
     ]
+  },
+  externals: {
+    'react': 'commonjs react'
   }
 };

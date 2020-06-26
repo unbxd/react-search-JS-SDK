@@ -3,4 +3,7 @@
 @tailwind utilities;
 
 @import './modules.scss';
-@import './core.scss';
+
+.otherclass{
+    @apply bg-gray-500;
+}

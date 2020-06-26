@@ -1,6 +1,6 @@
 import { productViewTypes as productViewTypesOptions } from './constants';
 
-const getProductFields = (product, productMap, productVariantMap) => {
+const getProductFields = (product, productMap, showVariants, productVariantMap) => {
     const mapper = {
         PRODUCT_NAME: 'productName',
         IMAGE_URL: 'imageUrl',
@@ -12,7 +12,7 @@ const getProductFields = (product, productMap, productVariantMap) => {
     const productValues = {};
     for (let key in mapper) {
         const mappedKey = mapper[key];
-        if (product['relevantDocument'] === 'variant' && product['showVariants'].length > 0) {
+        if (product['relevantDocument'] === 'variant' && showVariants) {
             if (key === 'IMAGE_URL') {
                 const value = product['variants'][0][productVariantMap[mappedKey]];
                 productValues[mappedKey] = Array.isArray(value) && value.length ? value[0] : value;
@@ -34,7 +34,7 @@ const getProductFields = (product, productMap, productVariantMap) => {
     return productValues;
 }
 
-const getProductViewType = (productViewTypes) => {
+const getProductViewType = (productViewTypes = []) => {
     const validViewTypes = productViewTypes.filter(viewType => (productViewTypesOptions[viewType]));
     return validViewTypes.length ? validViewTypes : [productViewTypesOptions.GRID];
 }

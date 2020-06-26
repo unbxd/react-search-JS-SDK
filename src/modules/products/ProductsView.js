@@ -10,8 +10,8 @@ import ProductsWrapper from './ProductsWrapper';
 const ProductsView = () => {
     return (<ProductContextConsumer>{({ data, helpers }) => {
 
-        const { productViewType, productMap, perRow, productVariantMap, paginationType, heightDiffToTriggerNextPage } = data;
-        const { getSearchResults, ZeroResultsComponent, onProductClick, getNextPage } = helpers;
+        const { productViewType, productMap, perRow, productVariantMap, paginationType, heightDiffToTriggerNextPage, showVariants } = data;
+        const { getSearchResults, ZeroResultsComponent, onProductClick, getNextPage, ProductCardComponent } = helpers;
 
         const { numberOfProducts = 0, products = [] } = getSearchResults() || {};
 
@@ -35,7 +35,9 @@ const ProductsView = () => {
             paginationType={paginationType}
             getNextPage={getNextPage}
             heightDiffToTriggerNextPage={heightDiffToTriggerNextPage}
+            showVariants={showVariants}
             onProductClick={onProductClick}
+            ProductCardComponent={ProductCardComponent}
         />)
 
     }}
