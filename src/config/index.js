@@ -1,5 +1,4 @@
 import searchConfigurations from './searchConfigurations';
-import searchEvents from './searchEvents';
-import searchStatus from './searchStatus';
+import { searchStatus, searchEvents, productTypes } from './constants';
 
-export { searchConfigurations, searchEvents, searchStatus }
+export { searchConfigurations, searchStatus, searchEvents, productTypes };
