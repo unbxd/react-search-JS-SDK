@@ -4,6 +4,7 @@ const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const glob = require('glob');
 const path = require('path');
 
@@ -14,8 +15,8 @@ const PATHS = {
 
 module.exports = {
   entry: {
-    //app: Path.resolve(__dirname, '../demo/index.js'),
-    "unbxd-react-search-sdk": Path.resolve(__dirname, '../src/index.js')
+    "app": Path.resolve(__dirname, '../demo/js'),
+    "react-search-sdk": Path.resolve(__dirname, '../src/index.js'),
   },
   mode: 'development',
   devtool: 'inline-source-map',
@@ -47,10 +48,13 @@ module.exports = {
       filename: 'css/[name].css',
       chunkFilename: '[id].css'
     }),
-    new PurgecssPlugin({
-      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
-    }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      template: Path.resolve(__dirname, '../demo/index.html'),
+      chunks: ['common', 'app'],
+      path: Path.resolve(__dirname, '../public'),
+      filename: "index.html"
+    })
   ],
   resolve: {
     alias: {
@@ -58,7 +62,7 @@ module.exports = {
     }
   },
   devServer: {
-    contentBase: Path.join(__dirname, '../src'),
+    contentBase: Path.join(__dirname, '../demo'),
     port: 7000,
     watchContentBase: true
   },

@@ -2,7 +2,7 @@
   "name": "@unbxd-ui/react-search-sdk",
   "version": "0.0.1",
   "description": "Unbxd React Search JS SDK",
-  "main": "index.js",
+  "main": "public/dist/js/react-search-sdk.js",
   "scripts": {
     "start": "webpack-dev-server --open --config ./webpack/webpack.dev.js",
     "build": "webpack --config ./webpack/webpack.prod.js",
@@ -57,6 +57,8 @@
     "postcss-cli": "^7.1.1",
     "postcss-loader": "^3.0.0",
     "purgecss-webpack-plugin": "^2.2.0",
+    "react": "16.7.0",
+    "react-dom": "16.7.0",
     "remove-files-webpack-plugin": "^1.4.3",
     "sass-loader": "^8.0.2",
     "storybook-addon-react-docgen": "^1.2.34",
@@ -69,11 +71,9 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
-    "@unbxd-ui/unbxd-search-core": "../search-JS-core",
+    "@unbxd-ui/unbxd-search-core": "^0.0.2",
     "babel-polyfill": "^6.26.0",
-    "babel-runtime": "^6.26.0",
-    "react": "16.7.0",
-    "react-dom": "16.7.0"
+    "babel-runtime": "^6.26.0"
   },
   "keywords": [
     "React Search",
