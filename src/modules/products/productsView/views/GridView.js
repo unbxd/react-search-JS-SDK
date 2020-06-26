@@ -13,7 +13,11 @@ const GridView = (props) => {
         showVariants,
         productVariantMap,
         onProductClick,
-        ProductItemComponent } = props;
+        ProductItemComponent,
+        showSwatches,
+        swatchAttributes,
+        groupBy,
+        swatchItemComponent } = props;
 
     return (<div className='UNX-product-container'>
         <List
@@ -24,6 +28,10 @@ const GridView = (props) => {
             productMap={productMap}
             showVariants={showVariants}
             productVariantMap={productVariantMap}
+            showSwatches={showSwatches}
+            swatchAttributes={swatchAttributes}
+            groupBy={groupBy}
+            swatchItemComponent={swatchItemComponent}
             className={`UNX-grid-view grid-cols-${perRow}`} />
     </div>)
 }

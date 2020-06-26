@@ -39,8 +39,13 @@ export class Products extends React.PureComponent {
 
         const { helpers: { setProductConfiguration } } = this.context;
 
-        const { pageSize, productMap, showVariants,
-            variantsCount, productVariantMap, paginationType } = this.props
+        const { pageSize,
+            productMap,
+            showVariants,
+            variantsCount,
+            productVariantMap,
+            paginationType,
+            groupBy } = this.props
 
         //generate required fields here based on productMap and productVariantMap
         const requiredFields = Object.values(productMap);
@@ -49,7 +54,13 @@ export class Products extends React.PureComponent {
         //Set the main config
         //Do not set pageSize if pagination type is FIXED_SCROLLING
         setProductConfiguration({
-            pageSize, requiredFields, showVariants, variantsCount, variantRequiredFields, paginationType
+            pageSize,
+            requiredFields,
+            showVariants,
+            variantsCount,
+            variantRequiredFields,
+            paginationType,
+            groupBy
         });
     }
 
@@ -75,7 +86,11 @@ export class Products extends React.PureComponent {
             onZeroResults ,
             ProductItemComponent,
             productViewDisplayType,
-            ProductsViewListItemComponent } = this.props;
+            ProductsViewListItemComponent,
+            showSwatches,
+            swatchAttributes,
+            groupBy,
+            swatchItemComponent } = this.props;
 
         const getSearchResults = unbxdCore.getSearchResults.bind(unbxdCore);
         const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
@@ -129,6 +144,9 @@ export class Products extends React.PureComponent {
             showVariants,
             showLoader,
             productViewDisplayType,
+            showSwatches,
+            swatchAttributes,
+            groupBy,
             ...this.state
         };
         const helpers = {
@@ -143,7 +161,8 @@ export class Products extends React.PureComponent {
             onProductClickCB,
             onZeroResults,
             ProductItemComponent,
-            ProductsViewListItemComponent
+            ProductsViewListItemComponent,
+            swatchItemComponent,
         }
 
         return { data, helpers }
@@ -255,6 +274,22 @@ Products.propTypes = {
     */
     onZeroResults: PropTypes.func,
     ProductItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
+    * Display swatches
+    */
+    showSwatches: PropTypes.bool,
+    /**
+    * Group variants by the attribute
+    */
+    groupBy: PropTypes.string,
+    /**
+    * Swatch attributes that change on click on of the swatch
+    */
+    swatchAttributes: PropTypes.object,
+    /**
+    * Custom swatch component
+    */
+    swatchItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 }
 
 export default Products;

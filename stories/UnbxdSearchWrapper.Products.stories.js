@@ -46,18 +46,26 @@ const productMap = {
     productName: "title",
     uniqueId: "uniqueId",
     imageUrl: "imageUrl",
-    price: "RRP_Price",
-    sellingPrice: "unbxd_price",
+    price: "min_cheapest_default_price",
     productUrl: "productUrl"
 }
 
 const productVariantMap = {
-    productName: "v_title",
-    uniqueId: "vId",
-    imageUrl: "v_imageUrl",
-    price: "v_RRP_Price",
-    sellingPrice: "v_unbxd_price"
+    productName: "title",
+    uniqueId: "variantId",
+    imageUrl: "variant_image_array",
+    price: "v_default_price",
+    productUrl: "variant_productUrl",
+    swatchImage: "variant_overhead_swatch",
+    variant_color: "variant_color"
 }
+
+const swatchAttributes = {
+    uniqueId: "variantId",
+    swatchImageUrl: 'variant_overhead_swatch',
+    imageUrl: 'variant_image_array',
+    price: "v_default_price",
+};
 
 export const Product = () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'

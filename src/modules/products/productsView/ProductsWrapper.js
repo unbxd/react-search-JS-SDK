@@ -101,7 +101,11 @@ class ProductsWrapper extends React.PureComponent {
             productVariantMap,
             paginationType,
             showVariants,
-            ProductItemComponent } = this.props;
+            ProductItemComponent,
+            showSwatches,
+            swatchAttributes,
+            groupBy,
+            swatchItemComponent, } = this.props;
         const { products, hasMoreResults } = this.state;
 
         const productViewsRender = <React.Fragment>{productViewType === productViewTypesOptions.GRID &&
@@ -112,6 +116,10 @@ class ProductsWrapper extends React.PureComponent {
                 showVariants={showVariants}
                 productVariantMap={productVariantMap}
                 ProductItemComponent={ProductItemComponent}
+                showSwatches={showSwatches}
+                swatchAttributes={swatchAttributes}
+                groupBy={groupBy}
+                swatchItemComponent={swatchItemComponent}
             />}
 
             {productViewType === productViewTypesOptions.LIST &&
@@ -121,6 +129,10 @@ class ProductsWrapper extends React.PureComponent {
                     showVariants={showVariants}
                     productVariantMap={productVariantMap}
                     ProductItemComponent={ProductItemComponent}
+                    showSwatches={showSwatches}
+                    swatchAttributes={swatchAttributes}
+                    groupBy={groupBy}
+                    swatchItemComponent={swatchItemComponent}
                 />}
         </React.Fragment>
 

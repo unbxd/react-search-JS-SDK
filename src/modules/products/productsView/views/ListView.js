@@ -11,7 +11,11 @@ const ListView = (props) => {
         showVariants,
         productVariantMap,
         onProductClick,
-        ProductItemComponent } = props;
+        ProductItemComponent,
+        showSwatches,
+        swatchAttributes,
+        groupBy,
+        swatchItemComponent, } = props;
 
     return (<div className='UNX-product-container'>{
         <List
@@ -22,6 +26,10 @@ const ListView = (props) => {
             productMap={productMap}
             showVariants={showVariants}
             productVariantMap={productVariantMap}
+            showSwatches={showSwatches}
+            swatchAttributes={swatchAttributes}
+            groupBy={groupBy}
+            swatchItemComponent={swatchItemComponent}
             className='UNX-list-view grid-cols-1' />
     }
     </div>)
