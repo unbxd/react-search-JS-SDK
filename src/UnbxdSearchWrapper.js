@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
 
 import { AppContextProvider } from './common/context';
-import { searchConfigurations, searchEvents, searchStatus } from './config';
+import {searchConfigurations} from './config';
 import { paginationTypes } from './modules/products/utils';
-
 import '../public/css/core/index.scss';
 
 
@@ -48,7 +47,7 @@ class UnbxdSearchWrapper extends Component {
         this.state = {
             unbxdCore:
                 new UnbxdSearch({ ...searchConfigurations, siteKey, apiKey, callBackFn: this.unbxdCallBack }),
-            unbxdCoreStatus: searchStatus.READY
+
         };
 
     }
@@ -60,12 +59,8 @@ class UnbxdSearchWrapper extends Component {
 
 
     unbxdCallBack(unbxdSearchObj, eventName, data) {
-        if (eventName === searchEvents.AFTER_API_CALL) {
-            this.setState({ unbxdCore: unbxdSearchObj, unbxdCoreStatus: searchStatus.READY });
-        }
-
-        if (eventName === searchEvents.BEFORE_API_CALL) {
-            this.setState({ unbxdCore: unbxdSearchObj, unbxdCoreStatus: searchStatus.LOADING });
+        if (eventName === 'AFTER_API_CALL') {
+            this.setState({ unbxdCore: unbxdSearchObj })
         }
 
         console.log("unbxdCallBack ", eventName, data);
@@ -77,7 +72,6 @@ class UnbxdSearchWrapper extends Component {
             setProductConfiguration: this.setProductConfiguration,
             trackActions: this.trackActions,
             setSearchBoxConfiguration: this.setSearchBoxConfiguration,
-            
         }
 
         return {
