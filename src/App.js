@@ -43,9 +43,21 @@ class App extends Component {
         this.unbxdCallBack(null, type, data);
     }
 
+    setSortConfiguration = (config, triggerResults = false) => {
+
+        const { sortBy } = config;
+
+        if (triggerResults) {
+            this.state.unbxdCore.applySort(sortBy);
+        } else {
+            this.state.unbxdCore.setSort(sortBy)
+        }
+    }
+
     helpers = {
         setProductConfiguration: this.setProductConfiguration,
         setPaginationConfiguration: this.setPaginationConfiguration,
+        setSortConfiguration: this.setSortConfiguration,
         trackActions: this.trackActions
     }
 
