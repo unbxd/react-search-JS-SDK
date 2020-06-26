@@ -22,7 +22,7 @@ const searchConfigurations = {
     },
     extraParams: {
         "version": "V2",
-        "f.categoryPath.facet.version": "V2",
+        //"f.categoryPath.facet.version": "V2",
     },
     facetMultilevel: true,
     facetDepth: 6,

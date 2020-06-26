@@ -8,11 +8,12 @@ const ViewTypes = () => {
     return (<ProductContextConsumer>{({ data, helpers }) => {
 
         const { productViewTypes, productViewType } = data;
-        const { onViewToggle } = helpers;
+        const { onViewToggle, getSearchResults } = helpers;
 
+        const { numberOfProducts = 0 } = getSearchResults() || {};
         const validViewTypes = getProductViewType(productViewTypes);
 
-        if (validViewTypes.length < 2) {
+        if (validViewTypes.length < 2 || numberOfProducts === 0) {
             return null;
         }
 

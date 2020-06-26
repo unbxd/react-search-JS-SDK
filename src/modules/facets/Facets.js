@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import AppContext from '../../common/context';
 import { FacetsContextProvider } from './context'
-import { TextFacets, RangeFacets } from './facetTypes';
+import { TextFacets, RangeFacets, MultilevelFacets } from './facetTypes';
 import { ApplyFacets, ClearFacets } from './actions';
 import { SelectedFacets } from './selectedFacets';
 import { conditionalRenderer } from '../../common/utils';
@@ -31,10 +31,14 @@ class Facets extends React.Component {
     componentDidMount() {
         const { helpers: { setFacetConfiguration } } = this.context;
 
-        const { defaultFilters } = this.props;
+        const { defaultFilters,
+            categoryDisplayName,
+            categoryField,
+            MultilevelFacetItemComponent,
+            BreadcrumbItemComponent, } = this.props;
 
         //Set main config here
-        setFacetConfiguration({ defaultFilters });
+        setFacetConfiguration({ defaultFilters, categoryDisplayName, categoryField });
     }
 
     getFacetProps() {
@@ -44,7 +48,10 @@ class Facets extends React.Component {
             isClearFilters,
             moveFacetsOnSelect,
             FacetItemComponent,
-            ActiveFacetItemComponent } = this.props;
+            ActiveFacetItemComponent,
+            moveFacetsOnSelect,
+            MultilevelFacetItemComponent,
+            BreadcrumbItemComponent } = this.props;
 
         const updateFacets = unbxdCore.updateFacets.bind(unbxdCore);
         const deleteAFacet = unbxdCore.deleteAFacet.bind(unbxdCore);
@@ -52,10 +59,18 @@ class Facets extends React.Component {
         const clearFacets = unbxdCore.clearFacets.bind(unbxdCore);
         const getSelectedFacet = unbxdCore.getSelectedFacet.bind(unbxdCore);
         const getSelectedFacets = unbxdCore.getSelectedFacets.bind(unbxdCore);
+
         const setRangeFacet = unbxdCore.setRangeFacet.bind(unbxdCore);
         const applyRangeFacet = unbxdCore.applyRangeFacet.bind(unbxdCore);
         const clearARangeFacet = unbxdCore.clearARangeFacet.bind(unbxdCore);
         const selectedRangeFacets = unbxdCore.state.rangeFacet;
+
+        const getBucketedFacets = unbxdCore.getBucketedFacets.bind(unbxdCore);
+        const getSelectedBucketedFacet = unbxdCore.getSelectedBucketedFacet.bind(unbxdCore);
+        const getBreadCrumbsList = unbxdCore.getBreadCrumbsList.bind(unbxdCore);
+        const setCategoryFilter = unbxdCore.setCategoryFilter.bind(unbxdCore);
+        const deleteCategoryFilter = unbxdCore.deleteCategoryFilter.bind(unbxdCore);
+        const getResults = unbxdCore.getResults.bind(unbxdCore);
 
 
         //get text and range facets
@@ -160,6 +175,22 @@ class Facets extends React.Component {
             setRangeFacet({ facetName, start, end });
         }
 
+        const addCategoryFilter = (event) => {
+            const { unx_categoryname: name, unx_level: level, unx_multilevelfield: parent } = event.target.dataset;
+            const addCategoryObject = { parent, level, name };
+            setCategoryFilter(addCategoryObject);
+            getResults();
+            trackActions({ type: "CATEGORY_FILTER_ADD", data: addCategoryObject });
+        }
+
+        const removeCategoryFilter = (event) => {
+            const { unx_categoryname: name, unx_level: level, unx_multilevelfield: parent } = event.target.dataset;
+            const removeCategoryObject = { parent, level, name };
+            deleteCategoryFilter(removeCategoryObject);
+            getResults();
+            trackActions({ type: "CATEGORY_FILTER_REMOVE", data: removeCategoryObject });
+        }
+
 
         const onFacetClick = (event) => {
 
@@ -210,7 +241,14 @@ class Facets extends React.Component {
             addRangeFacet,
             applyRangeFacet,
             clearARangeFacet,
-            trackActions
+            trackActions,
+            getBucketedFacets,
+            getSelectedBucketedFacet,
+            getBreadCrumbsList,
+            addCategoryFilter,
+            removeCategoryFilter,
+            MultilevelFacetItemComponent,
+            BreadcrumbItemComponent
         };
 
         return { data, helpers }
@@ -236,6 +274,7 @@ class Facets extends React.Component {
 Facets.contextType = AppContext;
 Facets.TextFacets = TextFacets;
 Facets.RangeFacets = RangeFacets;
+Facets.MultilevelFacets = MultilevelFacets;
 Facets.ApplyFacets = ApplyFacets;
 Facets.ClearFacets = ClearFacets;
 Facets.SelectedFacets = SelectedFacets;
@@ -245,7 +284,9 @@ Facets.defaultProps = {
     defaultFilters: {},
     applyFilters: false,
     clearFilters: false,
-    moveFacetsOnSelect: false
+    moveFacetsOnSelect: false,
+    categoryDisplayName: "",
+    categoryField: ""
 }
 
 Facets.propTypes = {
@@ -273,6 +314,22 @@ Facets.propTypes = {
     * Custom active Facet item component
     */
     ActiveFacetItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
+    * Display name of the category
+    */
+    categoryDisplayName: PropTypes.string.isRequired,
+    /**  
+    * Category field in the feed
+    */
+    categoryField: PropTypes.string.isRequired,
+    /**  
+    * Custom Multilevel facet component
+    */
+    MultilevelFacetItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**  
+    * Custom BreadCrumb component
+    */
+    BreadcrumbItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 }
 
 export default Facets;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import UnbxdSearch from '@unbxd-ui/unbxd-search-core/src/index';
+import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
+
 import { AppContextProvider } from './common/context';
 import { searchConfigurations } from './config';
 import { paginationTypes } from './modules/products/utils';
@@ -29,16 +30,9 @@ class UnbxdSearchWrapper extends Component {
         }
     }
 
-    trackActions = ({ type = 'unbxdAction', data = {} }) => {
-
-        this.unbxdCallBack(null, type, data);
-    }
-
-    setFacetConfiguration = (config, triggerResults = false) => {
-
-        const { defaultFilters } = config;
-
-        this.state.unbxdCore.options.defaultFilters = defaultFilters;
+    setSearchBoxConfiguration(config) {
+        const { query = '*' } = config;
+        this.state.unbxdCore.getResults(query);
     }
 
     constructor(props) {
@@ -49,6 +43,7 @@ class UnbxdSearchWrapper extends Component {
         this.unbxdCallBack = this.unbxdCallBack.bind(this);
         this.setProductConfiguration = this.setProductConfiguration.bind(this);
         this.trackActions = this.trackActions.bind(this);
+        this.setSearchBoxConfiguration = this.setSearchBoxConfiguration.bind(this);
 
         this.state = {
             unbxdCore:
@@ -57,6 +52,12 @@ class UnbxdSearchWrapper extends Component {
         };
 
     }
+
+    trackActions({ type = 'unbxdAction', data = {} }) {
+
+        this.unbxdCallBack(null, type, data);
+    }
+
 
     unbxdCallBack(unbxdSearchObj, eventName, data) {
         if (eventName === 'AFTER_API_CALL') {
@@ -70,8 +71,8 @@ class UnbxdSearchWrapper extends Component {
     getProps() {
         const helpers = {
             setProductConfiguration: this.setProductConfiguration,
-            setFacetConfiguration: this.setFacetConfiguration,
-            trackActions: this.trackActions
+            trackActions: this.trackActions,
+            setSearchBoxConfiguration: this.setSearchBoxConfiguration,
         }
 
         return {
@@ -80,7 +81,7 @@ class UnbxdSearchWrapper extends Component {
     }
 
     componentDidMount() {
-        this.state.unbxdCore.getResults('boots');
+        //this.state.unbxdCore.getResults('boots');
         //this.state.unbxdCore.getResults('cooking stoves');
         //this.state.unbxdCore.getResults('red shirt');
         //this.state.unbxdCore.getResults('xxxxxxxxxxxxxxx');

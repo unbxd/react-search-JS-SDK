@@ -13,7 +13,7 @@ const ProductsView = () => {
         const { productViewType, productMap, perRow, productVariantMap, paginationType, heightDiffToTriggerNextPage, showVariants } = data;
         const { getSearchResults, ZeroResultsComponent, onProductClick, getNextPage, ProductCardComponent } = helpers;
 
-        const { numberOfProducts = 0, products = [] } = getSearchResults() || {};
+        const { numberOfProducts = 0, products = [], start } = getSearchResults() || {};
 
         //return the prop based Zero results template
         if (numberOfProducts === 0 && ZeroResultsComponent) {
@@ -29,6 +29,7 @@ const ProductsView = () => {
         return (<ProductsWrapper
             productViewType={productViewType}
             perRow={perRow}
+            start={start}
             products={products}
             productMap={productMap}
             productVariantMap={productVariantMap}

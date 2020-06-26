@@ -67,7 +67,7 @@ class ProductsWrapper extends React.PureComponent {
 
     static getDerivedStateFromProps(props, state) {
 
-        const { paginationType } = props;
+        const { paginationType, start } = props;
 
         if (props.products.length === 0) {
             if (paginationType === paginationTypes.INFINITE_SCROLL) {
@@ -82,7 +82,7 @@ class ProductsWrapper extends React.PureComponent {
         if (state.products !== props.products &&
             (paginationType === paginationTypes.INFINITE_SCROLL || paginationType === paginationTypes.CLICK_N_SCROLL)) {
 
-            return { products: [...state.products, ...props.products] }
+            return start === 0 ? { products: props.products } : { products: [...state.products, ...props.products] }
         }
 
         if (state.products !== props.products && paginationType === paginationTypes.FIXED_PAGINATION) {
