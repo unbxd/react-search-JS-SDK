@@ -1,22 +1,24 @@
 import React from 'react';
 
 import { SearchBoxContextConsumer } from '../context';
-import { Input } from '../../../components';
+import RenderInput from './RenderInput';
 
 const SearchInput = () => {
     return (<SearchBoxContextConsumer>
         {({ data, helpers }) => {
 
-            const { query, isAutoFocus, isClear } = data;
-            const { onQueryChange, onClearQuery } = helpers;
+            const { query, queryAPI, isAutoFocus, isClear } = data;
+            const { onQueryChange, onClearQuery, setSearchQuery } = helpers;
 
-            return (<Input
-                value={query}
-                onChange={onQueryChange}
+            return (<RenderInput
+                query={query}
+                queryAPI={queryAPI}
+                onQueryChange={onQueryChange}
                 className='UNX-searchbox query'
                 isAutoFocus={isAutoFocus}
                 isClear={isClear}
-                onClear={onClearQuery}
+                onClearQuery={onClearQuery}
+                setSearchQuery={setSearchQuery}
             />)
         }}
     </SearchBoxContextConsumer>)
