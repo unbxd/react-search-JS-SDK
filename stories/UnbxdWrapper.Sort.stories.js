@@ -8,9 +8,14 @@ export default {
     component: Sort
 }
 
-const MyListComponent = ({ itemData, onClick, isActive }) => {
+const SortItemComponent = ({ itemData, isActive }) => {
 
-    return (<div data-unxsortby={itemData.value}>{itemData.label}</div>)
+    return (<div
+        data-unxsortby={itemData.value}
+        className={`sort-item ${isActive ? 'active' : ''}`}
+    >
+        {itemData.label}
+    </div>)
 }
 
 const sortOptions = [
@@ -50,12 +55,43 @@ export const SortComponent = () => (<UnbxdSearchWrapper
 
     <Sort
         defaultSort={{
-            "label": "Brand Z-A",
+            "label": "Brand A-Z",
             "field": "title",
-            "order": "desc"
+            "order": "asc"
         }}
         sortOptions={sortOptions}
         sortDisplayType={'LIST'}
-        SortItemComponent={MyListComponent} />
+        SortItemComponent={SortItemComponent} />
 
-</UnbxdSearchWrapper >)  
+</UnbxdSearchWrapper >);
+
+export const SortDropdownComponent = () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Sort
+        defaultSort={{
+            "label": "Brand A-Z",
+            "field": "title",
+            "order": "asc"
+        }}
+        sortOptions={sortOptions}
+        sortDisplayType={'DROPDOWN'}
+        SortItemComponent={SortItemComponent} />
+
+</UnbxdSearchWrapper >);
+
+export const SortRenderProps = () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Sort
+        sortOptions={sortOptions}
+    >
+        {({ data, helpers }) => {
+            //data and helpers for Sort
+            return (<p>Hello from Sort</p>)
+        }}
+    </Sort>
+
+</UnbxdSearchWrapper >);  

@@ -29,9 +29,8 @@ const searchConfigurations = {
     productId: 'uniqueId',
     swatches: true,
     swatchMap: {},
-    callBackFn: () => { console.log("Loaded") },
-    ProductType:"SEARCH" //"CATEGORY"
-
+    callBackFn: () => { },
+    getCategoryId: () => { }
 }
 
 export default searchConfigurations;

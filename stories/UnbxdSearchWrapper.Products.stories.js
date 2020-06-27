@@ -67,6 +67,18 @@ const swatchAttributes = {
     price: "v_default_price",
 };
 
+const swatchItemComponent = ({ itemData }) => {
+    const { swatchImageUrl, swatchId, active } = itemData;
+    return (<div
+        className={`my-swatch ${active ? 'active' : ''}`}
+        data-variant_id={swatchId}
+    >
+        <img
+            data-variant_id={swatchId}
+            src={swatchImageUrl} className='image' />
+    </div>)
+}
+
 export const Product = () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
@@ -292,5 +304,63 @@ export const ProductsCallbacks = () => (<UnbxdSearchWrapper
         showLoader={true}
         onProductClick={onProductClick}
         onZeroResults={onZeroResults} />
+
+</UnbxdSearchWrapper >)
+
+export const ProductSwatches = () => (<UnbxdSearchWrapper
+    siteKey='prod-rugsusa808581564092094'
+    apiKey='ea4823934059ff8ad5def0be04f8dd4e'>
+
+    <Products
+        paginationType={'FIXED_PAGINATION'}
+        productMap={productMap}
+        showVariants={true}
+        productViewTypes={["GRID", "LIST"]}
+        variantsCount={4}
+        productVariantMap={productVariantMap}
+        showSwatches={true}
+        groupBy={'variant_color'}
+        swatchAttributes={swatchAttributes}
+    />
+
+</UnbxdSearchWrapper >)
+
+export const ProductSwatchesCustomSwatchItem = () => (<UnbxdSearchWrapper
+    siteKey='prod-rugsusa808581564092094'
+    apiKey='ea4823934059ff8ad5def0be04f8dd4e'>
+
+    <Products
+        paginationType={'FIXED_PAGINATION'}
+        productMap={productMap}
+        showVariants={true}
+        productViewTypes={["GRID", "LIST"]}
+        variantsCount={4}
+        productVariantMap={productVariantMap}
+        showSwatches={true}
+        groupBy={'variant_color'}
+        swatchAttributes={swatchAttributes}
+        swatchItemComponent={swatchItemComponent}
+    />
+
+</UnbxdSearchWrapper >)
+
+
+export const ProductRenderProps = () => (<UnbxdSearchWrapper
+    siteKey='prod-rugsusa808581564092094'
+    apiKey='ea4823934059ff8ad5def0be04f8dd4e'>
+
+    <Products
+        paginationType={'FIXED_PAGINATION'}
+        productMap={productMap}
+        showVariants={true}
+        productViewTypes={["GRID", "LIST"]}
+        variantsCount={4}
+        productVariantMap={productVariantMap}
+    >
+        {({ data, helpers }) => {
+            //products and viewtypes are passed as parameters
+            return (<p>Render the products here</p>)
+        }}
+    </Products>
 
 </UnbxdSearchWrapper >)
