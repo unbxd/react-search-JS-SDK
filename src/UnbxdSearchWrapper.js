@@ -36,6 +36,36 @@ class UnbxdSearchWrapper extends Component {
         unbxdCore.getResults(query);
     }
 
+    setPaginationConfiguration = (config, triggerResults = false) => {
+
+        const { pageSize } = config;
+
+        this.state.unbxdCore.setPageSize(pageSize);
+        this.state.unbxdCore.setPageStart(0);
+
+        if (triggerResults) {
+            this.state.unbxdCore.getResults();
+        }
+
+    }
+
+    setSortConfiguration = (config, triggerResults = false) => {
+
+        const { sortBy } = config;
+
+        if (triggerResults) {
+            this.state.unbxdCore.applySort(sortBy);
+        } else {
+            this.state.unbxdCore.setSort(sortBy)
+        }
+    }
+
+    trackActions({ type = 'unbxdAction', data = {} }) {
+
+        this.unbxdCallBack(null, type, data);
+    }
+
+
     constructor(props) {
 
         super(props);
@@ -63,12 +93,6 @@ class UnbxdSearchWrapper extends Component {
 
     }
 
-    trackActions({ type = 'unbxdAction', data = {} }) {
-
-        this.unbxdCallBack(null, type, data);
-    }
-
-
     unbxdCallBack(unbxdSearchObj, eventName, data) {
 
         const { onIntialResultLoad } = this.props;
@@ -89,10 +113,13 @@ class UnbxdSearchWrapper extends Component {
     }
 
     getProps() {
+        
         const helpers = {
             setProductConfiguration: this.setProductConfiguration,
-            trackActions: this.trackActions,
             setSearchBoxConfiguration: this.setSearchBoxConfiguration,
+            setPaginationConfiguration: this.setPaginationConfiguration,
+            setSortConfiguration: this.setSortConfiguration,
+            trackActions: this.trackActions,
         }
 
         return {

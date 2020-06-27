@@ -60,7 +60,7 @@ class Sort extends React.Component {
             sortOptions.map(sortByoption => (getFormattedSort(sortByoption)));
 
 
-        const onSortClick = () => {
+        const onSortClick = (event) => {
 
             const newSortBy = event.target.dataset.unxsortby || event.target.value;
             const selectedSort = getSelectedSort(newSortBy, formattedSortByOptions);
@@ -84,9 +84,10 @@ class Sort extends React.Component {
         }
 
         const onSortResetClick = () => {
-            
+
             trackActions({ type: 'SORT_RESET', data: {} });
-            this.setState({ sortBy: '' });
+            const resetSortBy = formattedSortByOptions.length ? formattedSortByOptions[0] : '';
+            this.setState({ sortBy: resetSortBy });
             setSortConfiguration({
                 sortBy: ''
             }, true);
