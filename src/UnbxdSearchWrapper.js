@@ -60,6 +60,20 @@ class UnbxdSearchWrapper extends Component {
         }
     }
 
+    setFacetConfiguration = (config, triggerResults = false) => {
+
+        const { defaultFilters, categoryDisplayName, categoryField } = config;
+
+        this.state.unbxdCore.options.defaultFilters = defaultFilters;
+        if (categoryDisplayName.length > 0) {
+            this.state.unbxdCore.options.extraParams['f.categoryPath.displayName'] = categoryDisplayName;
+        }
+
+        if (categoryField.length > 0) {
+            this.state.unbxdCore.options.extraParams['facet.multilevel'] = categoryField;
+        }
+    }
+
     trackActions({ type = 'unbxdAction', data = {} }) {
 
         this.unbxdCallBack(null, type, data);
@@ -113,12 +127,13 @@ class UnbxdSearchWrapper extends Component {
     }
 
     getProps() {
-        
+
         const helpers = {
             setProductConfiguration: this.setProductConfiguration,
             setSearchBoxConfiguration: this.setSearchBoxConfiguration,
             setPaginationConfiguration: this.setPaginationConfiguration,
             setSortConfiguration: this.setSortConfiguration,
+            setFacetConfiguration: this.setFacetConfiguration,
             trackActions: this.trackActions,
         }
 
@@ -130,7 +145,8 @@ class UnbxdSearchWrapper extends Component {
     componentDidMount() {
         const { onPageLoad } = this.props;
         const { unbxdCore } = this.state;
-        
+
+        //unbxdCore.getResults('boots');
         const categoryId = typeof (unbxdCore.options.getCategoryId) === 'function' && unbxdCore.options.getCategoryId();
         this.setState({ categoryId })
         if (categoryId && typeof (categoryId) === "string" && categoryId.length > 0) {
@@ -168,9 +184,12 @@ class UnbxdSearchWrapper extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
+
         if (props.productType !== state.productType) {
             return { productType: props.productType };
         }
+
+        return null;
     }
 
     render() {
