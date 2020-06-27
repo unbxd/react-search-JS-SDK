@@ -2008,10 +2008,8 @@
     "@types/webpack-sources" "*"
     source-map "^0.6.0"
 
-"@unbxd-ui/unbxd-search-core@^0.0.2":
+"@unbxd-ui/unbxd-search-core@../search-JS-core":
   version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@unbxd-ui/unbxd-search-core/-/unbxd-search-core-0.0.2.tgz#67942b4d3f09d89ba15335edfd4d26005ee122d8"
-  integrity sha512-b/fF3+onabGvTXB0DxYGcbyUa06DeJGySD0qjVHuTheX8Z6yveUXO8tpCfmTnu/z58v2dMXLmLEhzCgE65/KuA==
   dependencies:
     babel-polyfill "^6.26.0"
     babel-runtime "^6.26.0"

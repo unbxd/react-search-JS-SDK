@@ -259,6 +259,7 @@ class Facets extends React.Component {
         const DefaultRender = <React.Fragment>
             <TextFacets />
             <RangeFacets />
+            <MultilevelFacets />
             <ApplyFacets />
             <ClearFacets />
             <SelectedFacets />
