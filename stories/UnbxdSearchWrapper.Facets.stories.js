@@ -12,13 +12,21 @@ const defaultFilters = {
     brand_uFilter: 'The North Face'
 }
 
-const FacetItemComponent = ({ itemData, facetName }) => {
+
+const FacetItemComponent = ({ itemData, facetName, onClick, isFacetSelected, selectedFacets }) => {
+
     const { name, count, dataId } = itemData;
-    return (<p
-        data-unx_name={facetName}
-        data-unx_dataid={dataId}>
+    const isSelected = isFacetSelected(selectedFacets, facetName, dataId);
+    console.log("hello ", name, isSelected);
+    return (<div>
+        <input
+            type="checkbox"
+            checked={isSelected}
+            data-unx_name={facetName}
+            data-unx_dataid={dataId} />
+
         {name} - {count}
-    </p>)
+    </div>)
 }
 
 const ActiveFacetItemComponent = ({ itemData, facetName }) => {
@@ -26,7 +34,7 @@ const ActiveFacetItemComponent = ({ itemData, facetName }) => {
     return (<p
         data-unx_name={facetName}
         data-unx_dataid={dataId}>
-        {name} - X
+        {name}  x
     </p>)
 }
 
@@ -38,7 +46,7 @@ const MultilevelFacetItemComponent = ({ itemData, multiLevelField, level, }) => 
         data-unx_level={level}
         className='UNX-bucketed-facet-list-item'
     >
-        {name}---{count}
+        {name} - {count}
     </div>)
 }
 
@@ -50,11 +58,11 @@ const BreadcrumbItemComponent = ({ itemData }) => {
         data-unx_level={level}
         className={'UNX-breadcrumbs-list-item'}
     >
-        {value}X
+        {value} x
     </div>)
 }
 
-export const Facet = () => (<UnbxdSearchWrapper
+export const TextFacets = () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
@@ -86,6 +94,8 @@ export const FacetsWithMoveFacetsOnSelect = () => (<UnbxdSearchWrapper
         isClearFilters={true}
         moveFacetsOnSelect={true}>
         <Facets.TextFacets />
+        <Facets.ApplyFacets />
+        <Facets.ClearFacets />
     </Facets>
 
 </UnbxdSearchWrapper >);
@@ -107,6 +117,7 @@ export const FacetWithCustomFacetItemComponent = () => (<UnbxdSearchWrapper
 
     <Facets
         FacetItemComponent={FacetItemComponent}
+        ActiveFacetItemComponent={ActiveFacetItemComponent}
     />
 
 </UnbxdSearchWrapper >);
@@ -161,6 +172,24 @@ export const MultilevelFacetsWithCustomComponents = () => (<UnbxdSearchWrapper
         BreadcrumbItemComponent={BreadcrumbItemComponent}
     >
         <Facets.MultilevelFacets />
+    </Facets>
+
+</UnbxdSearchWrapper >);
+
+export const FacetsWithRenderProps = () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Facets
+        categoryDisplayName={'category'}
+        categoryField={'categoryPath'}
+        MultilevelFacetItemComponent={MultilevelFacetItemComponent}
+        BreadcrumbItemComponent={BreadcrumbItemComponent}
+    >
+        {({ data, helpers }) => {
+            //data and helpers for Facets
+            return (<div>Hello from Facets</div>)
+        }}
     </Facets>
 
 </UnbxdSearchWrapper >);

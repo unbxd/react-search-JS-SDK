@@ -6,10 +6,15 @@ import { Button } from '../../../components/index';
 const ResetSort = () => {
     return (<SortContextConsumer>
         {({ data, helpers }) => {
-            const { sortBy } = data;
+            
+            const { sortBy, noOfPages } = data;
             const { onSortResetClick } = helpers;
 
             if (Object.keys(sortBy).length === 0) {
+                return null;
+            }
+
+            if (noOfPages === 0) {
                 return null;
             }
 

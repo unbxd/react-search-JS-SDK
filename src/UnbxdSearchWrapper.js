@@ -161,13 +161,11 @@ class UnbxdSearchWrapper extends Component {
 
     }
 
-    componentDidUpdate(props, state) {
+    componentDidUpdate() {
 
         const { onPageLoad } = this.props;
         const { unbxdCore, categoryId } = this.state;
 
-        console.log("diff ", props, this.props);
-        console.log("diff ", state, this.state);
         const currentCategoryId = typeof (unbxdCore.options.getCategoryId) === 'function' && unbxdCore.options.getCategoryId();
         if (categoryId !== currentCategoryId && currentCategoryId.length > 0) {
 

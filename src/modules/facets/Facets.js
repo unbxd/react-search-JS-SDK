@@ -71,6 +71,9 @@ class Facets extends React.Component {
         const deleteCategoryFilter = unbxdCore.deleteCategoryFilter.bind(unbxdCore);
         const getResults = unbxdCore.getResults.bind(unbxdCore);
 
+        const getPaginationInfo = unbxdCore.getPaginationInfo.bind(unbxdCore);
+
+        const { noOfPages = 0, } = getPaginationInfo() || {};
 
         //get text and range facets
         const textFacets = [];
@@ -227,6 +230,7 @@ class Facets extends React.Component {
             moveFacetsOnSelect,
             selectedFacetsAPI,
             selectedRangeFacets,
+            noOfPages,
             ...this.state
         };
         const helpers = {

@@ -34,7 +34,8 @@ class GenerateFacets extends React.Component {
         });
     }
 
-    onApplyFilter = () => {
+    onApplyFilter = (event) => {
+
         const { applyRangeFacet, trackActions } = this.props;
         applyRangeFacet();
         trackActions({ type: "RANGE_FACETS_APPLY" });
@@ -85,10 +86,6 @@ class GenerateFacets extends React.Component {
                     const valMin = parseInt(selectedRangeFacets[facetName]['valMin']);
                     const valMax = parseInt(selectedRangeFacets[facetName]['valMax']);
 
-                    initialState[facetName] = { sliderMin, sliderMax, valMin, valMax, displayName };
-                } else if (state.rangeValues[facetName]) {
-
-                    const { valMin, valMax } = state.rangeValues[facetName];
                     initialState[facetName] = { sliderMin, sliderMax, valMin, valMax, displayName };
                 } else {
                     initialState[facetName] = { sliderMin, sliderMax, valMin: sliderMin, valMax: sliderMax, displayName };

@@ -7,11 +7,15 @@ const ClearFacets = () => {
     return (<FacetsContextConsumer>
         {({ data, helpers }) => {
 
-            const { isClearFilters } = data;
+            const { isClearFilters,noOfPages } = data;
             const { clearFilters } = helpers;
 
             if (!isClearFilters) {
                 return null
+            }
+
+            if (noOfPages === 0) {
+                return null;
             }
 
             return (<Button className='UNX-facet-actions clear-filters' onClick={clearFilters}>
