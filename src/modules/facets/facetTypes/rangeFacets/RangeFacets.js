@@ -10,7 +10,7 @@ const RangeFacets = () => {
         {({ data, helpers }) => {
 
             const { rangeFacets, selectedFacets, isApplyFilters, selectedRangeFacets } = data;
-            const { addRangeFacet, applyRangeFacet, clearARangeFacet, trackActions } = helpers;
+            const { addRangeFacet, applyRangeFacet, removeRangeFacet, trackActions } = helpers;
 
 
             return (<GenerateFacets
@@ -20,7 +20,7 @@ const RangeFacets = () => {
                 selectedRangeFacets={selectedRangeFacets}
                 addRangeFacet={addRangeFacet}
                 applyRangeFacet={applyRangeFacet}
-                clearARangeFacet={clearARangeFacet}
+                removeRangeFacet={removeRangeFacet}
                 trackActions={trackActions} />)
         }
         }</FacetsContextConsumer>)

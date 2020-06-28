@@ -12,7 +12,7 @@ const List = ({ items,
     itemsType = listItemTypes.OBJECT,
     ...props }) => {
     return (<div className={`UNX-list ${className}`} onClick={onClick ? onClick : null}>
-        {items.map(item => {
+        {items.map((item, idx) => {
 
             let isActive = false;
             if (itemsType === listItemTypes.PRIMITIVE) {
@@ -25,12 +25,13 @@ const List = ({ items,
 
 
             const key = itemsType === listItemTypes.PRIMITIVE ? item : item[idAttribute];
-            
+
             return <ListItem
                 itemData={item}
                 idAttribute={key}
                 onClick={onClick ? onClick : null}
                 isActive={isActive}
+                idx={idx}
                 {...props}
                 key={key} />
         })}

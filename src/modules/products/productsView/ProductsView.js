@@ -19,7 +19,10 @@ const ProductsView = () => {
             showVariants,
             showSwatches,
             swatchAttributes,
-            groupBy } = data;
+            groupBy,
+            unbxdCoreStatus,
+            query,
+            productIdAttribute } = data;
 
         const { getSearchResults,
             ZeroResultsComponent,
@@ -57,6 +60,9 @@ const ProductsView = () => {
             swatchAttributes={swatchAttributes}
             groupBy={groupBy}
             swatchItemComponent={swatchItemComponent}
+            unbxdCoreStatus={unbxdCoreStatus}
+            query={query}
+            productIdAttribute={productIdAttribute}
         />)
 
     }}

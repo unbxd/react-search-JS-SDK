@@ -8,7 +8,7 @@ import { ApplyFacets, ClearFacets } from './actions';
 import { SelectedFacets } from './selectedFacets';
 import { conditionalRenderer } from '../../common/utils';
 import { getFacetRow, isFacetSelected, manageStateTypes } from './utils';
-
+import { trackFacetClick } from '../analytics';
 
 
 /**
@@ -69,11 +69,13 @@ class Facets extends React.Component {
         const getBreadCrumbsList = unbxdCore.getBreadCrumbsList.bind(unbxdCore);
         const setCategoryFilter = unbxdCore.setCategoryFilter.bind(unbxdCore);
         const deleteCategoryFilter = unbxdCore.deleteCategoryFilter.bind(unbxdCore);
+        const selectedCategoryFilters = unbxdCore.state.categoryFilter;
         const getResults = unbxdCore.getResults.bind(unbxdCore);
 
         const getPaginationInfo = unbxdCore.getPaginationInfo.bind(unbxdCore);
 
         const { noOfPages = 0, } = getPaginationInfo() || {};
+        const query = unbxdCore.getSearchQuery() || "";
 
         //get text and range facets
         const textFacets = [];
@@ -157,24 +159,49 @@ class Facets extends React.Component {
             trackActions({ type: "FACETS_ADD", data: { selectedFacetName, selectedFacetId } });
         }
 
+        const getActiveFacets = () => {
+            const textFacets = this.state.selectedFacets;
+            const rangeFacets = selectedRangeFacets;
+            const categoryFacets = selectedCategoryFilters;
+            const textFacetsArr = Object.keys(textFacets);
+
+            let activeFacetsObj = {};
+            textFacetsArr.forEach((facet) => {
+                const valObj = textFacets[facet];
+                let arr = [];
+                valObj.forEach((val) => {
+                    arr.push(val.name)
+                });
+                activeFacetsObj[facet] = arr;
+            });
+
+            activeFacetsObj = { ...activeFacetsObj, ...rangeFacets };
+            activeFacetsObj['category'] = selectedCategoryFilters.join(">");
+
+
+            return activeFacetsObj;
+        }
+
         const applyFilters = () => {
             applyFacets(this.state.selectedFacets);
-            trackActions({ type: "FACETS_APPLY", data: this.state.selectedFacets });
+            trackFacetClick(query, getActiveFacets());
         }
 
         const clearFilters = () => {
             clearFacets();
             manageFacetState(null, null, null,
                 manageStateTypes.CLEAR);
-            trackActions({ type: "FACETS_CLEAR" });
+            trackFacetClick(query, getActiveFacets());
         }
 
         const addRangeFacet = ({ facetName, start, end }) => {
             setRangeFacet({ facetName, start, end });
+            trackFacetClick(query, getActiveFacets());
         }
 
-        const removeRangeFacet = ({ facetName, start, end }) => {
-            setRangeFacet({ facetName, start, end });
+        const removeRangeFacet = ({ facetName }) => {
+            clearARangeFacet(facetName);
+            trackFacetClick(query, getActiveFacets());
         }
 
         const addCategoryFilter = (event) => {
@@ -182,7 +209,7 @@ class Facets extends React.Component {
             const addCategoryObject = { parent, level, name };
             setCategoryFilter(addCategoryObject);
             getResults();
-            trackActions({ type: "CATEGORY_FILTER_ADD", data: addCategoryObject });
+            trackFacetClick(query, getActiveFacets());
         }
 
         const removeCategoryFilter = (event) => {
@@ -190,7 +217,7 @@ class Facets extends React.Component {
             const removeCategoryObject = { parent, level, name };
             deleteCategoryFilter(removeCategoryObject);
             getResults();
-            trackActions({ type: "CATEGORY_FILTER_REMOVE", data: removeCategoryObject });
+            trackFacetClick(query, getActiveFacets());
         }
 
 
@@ -242,6 +269,7 @@ class Facets extends React.Component {
             FacetItemComponent,
             ActiveFacetItemComponent,
             addRangeFacet,
+            removeRangeFacet,
             applyRangeFacet,
             clearARangeFacet,
             trackActions,

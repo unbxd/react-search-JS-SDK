@@ -33,3 +33,14 @@ export const debounce = (func, wait, immediate) => {
 export const isContext = (componentName = 'Component') => {
     throw new Error(`${componentName} must be used within UnbxdSearchWrapper.`);
 }
+
+
+export const tryCatchHandler = function (func, onCatch) {
+    return function () {
+        try {
+            return func.apply(this, arguments);
+        } catch (e) {
+            onCatch(e);
+        }
+    }
+}

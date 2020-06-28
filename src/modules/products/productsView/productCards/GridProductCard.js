@@ -55,7 +55,7 @@ class GridProductCard extends React.Component {
 
     render() {
 
-        const {swatchItemComponent} = this.props;
+        const { swatchItemComponent, idx } = this.props;
         const { productValues } = this.state;
         const [activeSwatch] = productValues['swatches'].filter((swatch) => {
             return swatch.active
@@ -71,13 +71,15 @@ class GridProductCard extends React.Component {
             sellingPrice,
             swatches } = product;
 
+        const prank = idx + 1;
+
         //Add support for router as a config
         return (<div className='UNX-product-card-container'>
-            <a href={productUrl} className={`UNX-product-card UNX-grid-card`} data-uniqueid={uniqueId}>
-                <img className='UNX-image' src={imageUrl} data-uniqueid={uniqueId} />
-                <p className='UNX-product-name' data-uniqueid={uniqueId}>{productName}</p>
-                <p className='UNX-price' data-uniqueid={uniqueId}>{price}</p>
-                <p className='UNX-selling-price' data-uniqueid={uniqueId}>{sellingPrice}</p>
+            <a href={productUrl} className={`UNX-product-card UNX-grid-card`} data-uniqueid={uniqueId} data-prank={prank}>
+                <img className='UNX-image' src={imageUrl} data-uniqueid={uniqueId} data-prank={prank} />
+                <p className='UNX-product-name' data-uniqueid={uniqueId} data-prank={prank}>{productName}</p>
+                <p className='UNX-price' data-uniqueid={uniqueId} data-prank={prank}>{price}</p>
+                <p className='UNX-selling-price' data-uniqueid={uniqueId} data-prank={prank}>{sellingPrice}</p>
             </a>
             <div className='UNX-swatch-content'>
                 <List

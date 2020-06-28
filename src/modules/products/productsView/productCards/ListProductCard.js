@@ -33,7 +33,7 @@ class ListProductCard extends React.Component {
 
     onSwatchClick = (event) => {
         const currentSwatchId = event.target.dataset['variant_id'];
-        
+
         this.setState((currentState) => {
             return {
                 productValues: {
@@ -52,7 +52,7 @@ class ListProductCard extends React.Component {
 
     render() {
 
-        const {swatchItemComponent} = this.props;
+        const { swatchItemComponent, idx } = this.props;
         const { productValues } = this.state;
         const [activeSwatch] = productValues['swatches'].filter((swatch) => {
             return swatch.active
@@ -68,12 +68,14 @@ class ListProductCard extends React.Component {
             sellingPrice,
             swatches } = product;
 
-        return (<div className='UNX-product-card-container' data-uniqueid={uniqueId}>
-            <a href={productUrl} className={`UNX-product-card UNX-list-card`} data-uniqueid={uniqueId}>
-                <img className='UNX-image' src={imageUrl} data-uniqueid={uniqueId} />
-                <p className='UNX-product-name data-uniqueid={uniqueId}'>{productName}</p>
-                <p className='UNX-price' data-uniqueid={uniqueId}>{price}</p>
-                <p className='UNX-selling-price' data-uniqueid={uniqueId}>{sellingPrice}</p>
+        const prank = idx + 1;
+
+        return (<div className='UNX-product-card-container' data-uniqueid={uniqueId} data-prank={prank}>
+            <a href={productUrl} className={`UNX-product-card UNX-list-card`} data-uniqueid={uniqueId} data-prank={prank}>
+                <img className='UNX-image' src={imageUrl} data-uniqueid={uniqueId} data-prank={prank} />
+                <p className='UNX-product-name data-uniqueid={uniqueId} data-prank={prank}'>{productName}</p>
+                <p className='UNX-price' data-uniqueid={uniqueId} data-prank={prank}>{price}</p>
+                <p className='UNX-selling-price' data-uniqueid={uniqueId} data-prank={prank}>{sellingPrice}</p>
             </a>
             <div className='UNX-swatch-content'>
                 <List
