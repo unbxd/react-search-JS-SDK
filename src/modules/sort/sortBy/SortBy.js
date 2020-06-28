@@ -9,10 +9,14 @@ const SortBy = () => {
     return (<SortContextConsumer>
         {({ data, helpers }) => {
 
-            const { sortOptions: sortByOptions, sortDisplayType, sortBy, } = data;
+            const { sortOptions: sortByOptions, sortDisplayType, sortBy,noOfPages } = data;
             const { onSortClick, SortItemComponent } = helpers;
 
             if (!(Array.isArray(sortByOptions) && sortByOptions.length)) {
+                return null;
+            }
+
+            if (noOfPages === 0) {
                 return null;
             }
 

@@ -51,7 +51,10 @@ class Sort extends React.Component {
     }
 
     getSortProps() {
-        const { helpers: { setSortConfiguration, trackActions } } = this.context;
+        const { unbxdCore, helpers: { setSortConfiguration, trackActions } } = this.context;
+        const getPaginationInfo = unbxdCore.getPaginationInfo.bind(unbxdCore);
+
+        const { noOfPages = 0, } = getPaginationInfo() || {};
 
         const { sortOptions, sortDisplayType, SortItemComponent } = this.props;
 
@@ -96,6 +99,7 @@ class Sort extends React.Component {
         const data = {
             sortOptions: formattedSortByOptions,
             sortDisplayType,
+            noOfPages,
             ...this.state
         };
         const helpers = {

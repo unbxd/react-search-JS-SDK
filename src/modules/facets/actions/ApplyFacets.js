@@ -7,11 +7,15 @@ const ApplyFacets = () => {
     return (<FacetsContextConsumer>
         {({ data, helpers }) => {
 
-            const { isApplyFilters } = data;
+            const { isApplyFilters, noOfPages } = data;
             const { applyFilters } = helpers;
 
             if (!isApplyFilters) {
                 return null
+            }
+
+            if (noOfPages === 0) {
+                return null;
             }
 
             return (<Button className='UNX-facet-actions apply-filters' onClick={applyFilters}>
