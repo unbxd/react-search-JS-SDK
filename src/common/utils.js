@@ -1,5 +1,12 @@
-export const conditionalRenderer = (children, state, DefaultComponents) => {
+import { searchStatus } from '../config';
+
+export const conditionalRenderer = (children, state, DefaultComponents, LoaderRender) => {
     const isChildren = children ? true : false;
+    const { data: { unbxdCoreStatus = searchStatus.READY, showLoader } } = state;
+
+    if (unbxdCoreStatus === searchStatus.LOADING && showLoader && LoaderRender) {
+        return (LoaderRender);
+    }
 
     return isChildren ?
         (typeof children === 'function' ?
@@ -9,16 +16,31 @@ export const conditionalRenderer = (children, state, DefaultComponents) => {
 
 
 export const debounce = (func, wait, immediate) => {
-    var timeout;
+    let timeout;
     return function () {
-        var context = this, args = arguments;
-        var later = function () {
+        const context = this, args = arguments;
+        const later = function () {
             timeout = null;
             if (!immediate) func.apply(context, args);
         };
-        var callNow = immediate && !timeout;
+        const callNow = immediate && !timeout;
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
         if (callNow) func.apply(context, args);
     };
 };
+
+export const isContext = (componentName = 'Component') => {
+    throw new Error(`${componentName} must be used within UnbxdSearchWrapper.`);
+}
+
+
+export const tryCatchHandler = function (func, onCatch) {
+    return function () {
+        try {
+            return func.apply(this, arguments);
+        } catch (e) {
+            onCatch(e);
+        }
+    }
+}

@@ -1,14 +1,18 @@
-const paginationTypes = {
+export const paginationTypes = {
     INFINITE_SCROLL: "INFINITE_SCROLL",
     CLICK_N_SCROLL: "CLICK_N_SCROLL",
     FIXED_PAGINATION: "FIXED_PAGINATION"
 }
 
-const productViewTypes = {
+export const productViewTypes = {
     GRID: "GRID",
     LIST: "LIST",
 }
 
-const DEBOUNCE_TIME = 500;
+export const productViewDisplayTypes = {
+    LIST: "LIST",
+    DROPDOWN: "DROPDOWN"
+}
 
-export { paginationTypes, productViewTypes, DEBOUNCE_TIME };
+export const DEBOUNCE_TIME = 500;
+
