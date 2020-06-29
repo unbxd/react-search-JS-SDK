@@ -1,12 +1,15 @@
 import React from 'react';
+import { storiesOf } from '@storybook/react';
 
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import Pagination from '../src/modules/pagination';
 
-export default {
-    title: 'Pagination',
-    component: Pagination
-}
+
+const stories = storiesOf('Pagination', module).addParameters({
+    props: {
+        propTablesExclude: [UnbxdSearchWrapper]
+    }
+});
 
 const PageSizeItemComponent = ({ itemData, isActive }) => {
 
@@ -18,35 +21,65 @@ const PageSizeItemComponent = ({ itemData, isActive }) => {
     </div>)
 }
 
-const pageSizeOptions = [{ id: 5, value: "5" }, { id: 10, value: "10" }, { id: 15, value: "15" }, { id: 20, value: "20" }];
+const pageSizeOptions = [
+    { id: 5, value: "5" },
+    { id: 10, value: "10" },
+    { id: 15, value: "15" },
+    { id: 20, value: "20" }
+];
 
-export const PaginationComponent = () => (<UnbxdSearchWrapper
+stories.add('default', () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Pagination />
+
+</UnbxdSearchWrapper >));
+
+stories.add('with pageSize', () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Pagination pageSize={15} />
+
+</UnbxdSearchWrapper >));
+
+stories.add('with pageSizeOptions', () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Pagination pageSizeOptions={pageSizeOptions} />
+
+</UnbxdSearchWrapper >));
+
+stories.add('with pageSizeDisplayType Dropdown', () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Pagination pageSizeDisplayType={'DROPDOWN'} />
+
+</UnbxdSearchWrapper >));
+
+stories.add('with pageSizeDisplayType List', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
     <Pagination
-        pageSize={15}
-        pageSizeOptions={pageSizeOptions}
         pageSizeDisplayType={'LIST'}
         PageSizeItemComponent={PageSizeItemComponent}
-        pagePadding={2} />
+    />
 
-</UnbxdSearchWrapper >);
+</UnbxdSearchWrapper >));
 
-export const PaginationDropdownComponent = () => (<UnbxdSearchWrapper
+stories.add('with pagePadding', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
-    <Pagination
-        pageSize={15}
-        pageSizeOptions={pageSizeOptions}
-        pageSizeDisplayType={'DROPDOWN'}
-        PageSizeItemComponent={PageSizeItemComponent}
-        pagePadding={2} />
+    <Pagination pagePadding={3} />
 
-</UnbxdSearchWrapper >);
+</UnbxdSearchWrapper >));
 
-export const PaginationRenderProps = () => (<UnbxdSearchWrapper
+stories.add('with render props', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
@@ -56,8 +89,8 @@ export const PaginationRenderProps = () => (<UnbxdSearchWrapper
     >
         {({ data, helpers }) => {
             //data and helpers for Pagination
-            return (<p>Hello from Pagination</p>)
+            return (<p>Hello Pagination</p>)
         }}
     </Pagination>
 
-</UnbxdSearchWrapper >)  
+</UnbxdSearchWrapper >));  

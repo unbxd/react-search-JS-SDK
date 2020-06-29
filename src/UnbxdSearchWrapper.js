@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
 
 import { AppContextProvider } from './common/context';
-import { searchConfigurations, productTypes,searchEvents, searchStatus } from './config';
+import { searchConfigurations, productTypes, searchEvents, searchStatus } from './config';
 import { paginationTypes } from './modules/products/utils';
 import '../public/css/core/index.scss';
 
@@ -154,7 +154,7 @@ class UnbxdSearchWrapper extends Component {
         const { onPageLoad } = this.props;
         const { unbxdCore } = this.state;
 
-        //unbxdCore.getResults('boots');
+        unbxdCore.getResults('boots');
         const categoryId = typeof (unbxdCore.options.getCategoryId) === 'function' && unbxdCore.options.getCategoryId();
         this.setState({ categoryId })
         if (categoryId && typeof (categoryId) === "string" && categoryId.length > 0) {
