@@ -154,15 +154,15 @@ export const IntroductionCategoryPages = () => {
             super();
 
             //explicitly setting the UnbxdAnalyticsConf
-            // window.UnbxdAnalyticsConf = {
-            //     "0": "l",
-            //     "1": "i",
-            //     "2": "g",
-            //     "3": "h",
-            //     "4": "t",
-            //     "page": "All Products>Boots",
-            //     "page_type": "CATEGORY_PATH"
-            // }
+            window.UnbxdAnalyticsConf = {
+                "0": "l",
+                "1": "i",
+                "2": "g",
+                "3": "h",
+                "4": "t",
+                "page": "All Products>Boots",
+                "page_type": "CATEGORY_PATH"
+            }
         }
         state = { productType: 'CATEGORY' };
 

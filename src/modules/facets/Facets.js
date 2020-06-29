@@ -33,9 +33,7 @@ class Facets extends React.Component {
 
         const { defaultFilters,
             categoryDisplayName,
-            categoryField,
-            MultilevelFacetItemComponent,
-            BreadcrumbItemComponent, } = this.props;
+            categoryField, } = this.props;
 
         //Set main config here
         setFacetConfiguration({ defaultFilters, categoryDisplayName, categoryField });
@@ -162,7 +160,6 @@ class Facets extends React.Component {
         const getActiveFacets = () => {
             const textFacets = this.state.selectedFacets;
             const rangeFacets = selectedRangeFacets;
-            const categoryFacets = selectedCategoryFilters;
             const textFacetsArr = Object.keys(textFacets);
 
             let activeFacetsObj = {};

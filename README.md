@@ -51,7 +51,7 @@ NPM will not automatically install these for you but it will show you a warning 
 
 
 ## Documentation
-API documentation available [here](https://sanjithkumar017.github.io/react-search-JS-SDK/).
+API documentation available [here](https://unbxd.github.io/react-search-JS-SDK/).
 
 
 ## Contributions
