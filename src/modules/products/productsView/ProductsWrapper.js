@@ -5,7 +5,8 @@ import GridView from './views/GridView';
 import ListView from './views/ListView';
 import { paginationTypes } from '../utils';
 import { debounce } from '../../../common/utils';
-import { productViewTypes as productViewTypesOptions, DEBOUNCE_TIME } from '../utils'
+import { productViewTypes as productViewTypesOptions, DEBOUNCE_TIME } from '../utils';
+import { trackProductImpressions } from '../../analytics';
 
 class ProductsWrapper extends React.PureComponent {
 
@@ -46,6 +47,14 @@ class ProductsWrapper extends React.PureComponent {
         if (paginationType === paginationTypes.INFINITE_SCROLL) {
             window.addEventListener('scroll', this.nextPageCallback);
         }
+
+        //get the pids
+        //get the search query
+        const { query, products, productIdAttribute } = this.props;
+        const pids = products.map((product) => {
+            return product[productIdAttribute]
+        })
+        trackProductImpressions(query, pids);
     }
 
     componentDidUpdate() {
@@ -55,6 +64,7 @@ class ProductsWrapper extends React.PureComponent {
         if (this.props.products.length === 0 && paginationType === paginationTypes.INFINITE_SCROLL) {
             window.removeEventListener('scroll', this.nextPageCallback);
         }
+
     }
 
     componentWillUnmount() {

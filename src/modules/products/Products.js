@@ -8,7 +8,8 @@ import ViewTypes from './viewTypes/ViewTypes';
 import ProductsView from './productsView/ProductsView';
 import { conditionalRenderer, isContext } from '../../common/utils';
 import { Loader as defaultLoader } from '../../components'
-import { getProductViewType } from './utils'
+import { getProductViewType } from './utils';
+import { trackProductClick } from '../analytics';
 
 
 /**
@@ -83,20 +84,23 @@ export class Products extends React.PureComponent {
             LoaderComponent,
             showLoader,
             onProductClick: onProductClickCB,
-            onZeroResults ,
+            onZeroResults,
             ProductItemComponent,
             productViewDisplayType,
             ProductsViewListItemComponent,
             showSwatches,
             swatchAttributes,
             groupBy,
-            swatchItemComponent } = this.props;
+            swatchItemComponent,
+            productIdAttribute } = this.props;
 
         const getSearchResults = unbxdCore.getSearchResults.bind(unbxdCore);
         const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
         const getPaginationInfo = unbxdCore.getPaginationInfo.bind(unbxdCore);
         const getResults = unbxdCore.getResults.bind(unbxdCore);
+        const getProductByPropValue = unbxdCore.getProductByPropValue.bind(unbxdCore);
 
+        const query = unbxdCore.getSearchQuery() || "";
 
         const onViewToggle = (event) => {
             const productViewType = event.target.dataset.viewtype || event.target.value;;
@@ -118,8 +122,13 @@ export class Products extends React.PureComponent {
         }
 
         const onProductClick = (event) => {
+
             this.props.onProductClick && this.props.onProductClick();
-            trackActions({ type: 'PRODUCT_CLICK', data: { uniqueId: event.target.dataset.uniqueid } });
+
+            const productUniqueId = event.target.dataset.uniqueid;
+            const prank = event.target.dataset.prank;
+            const clickedProduct = getProductByPropValue(productIdAttribute, productUniqueId);
+            trackProductClick(clickedProduct[productIdAttribute], prank);
         }
 
         //onClick for products
@@ -147,6 +156,8 @@ export class Products extends React.PureComponent {
             showSwatches,
             swatchAttributes,
             groupBy,
+            query,
+            productIdAttribute,
             ...this.state
         };
         const helpers = {
@@ -201,7 +212,8 @@ Products.defaultProps = {
     showVariants: false,
     LoaderComponent: defaultLoader,
     showLoader: true,
-    productViewDisplayType: "DROPDOWN"
+    productViewDisplayType: "DROPDOWN",
+    productIdAttribute: 'uniqueId',
 }
 
 Products.propTypes = {
@@ -273,6 +285,9 @@ Products.propTypes = {
     * Callback function triggered on zero results.
     */
     onZeroResults: PropTypes.func,
+    /**
+    * Custom product item component
+    */
     ProductItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     /**
     * Display swatches
@@ -290,6 +305,10 @@ Products.propTypes = {
     * Custom swatch component
     */
     swatchItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
+    * Unique attribute of the product
+    */
+    productIdAttribute: PropTypes.string,
 }
 
 export default Products;

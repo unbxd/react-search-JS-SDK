@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
 
 import { AppContextProvider } from './common/context';
-import { searchConfigurations, productTypes } from './config';
+import { searchConfigurations, productTypes,searchEvents, searchStatus } from './config';
 import { paginationTypes } from './modules/products/utils';
 import '../public/css/core/index.scss';
 
@@ -99,7 +99,8 @@ class UnbxdSearchWrapper extends Component {
                     callBackFn: this.unbxdCallBack,
                     getCategoryId
                 }),
-            productType
+            productType,
+            unbxdCoreStatus: searchStatus.READY
 
         };
 
@@ -111,7 +112,7 @@ class UnbxdSearchWrapper extends Component {
 
         const { onIntialResultLoad } = this.props;
 
-        if (eventName === 'AFTER_API_CALL') {
+        if (eventName === searchEvents.AFTER_API_CALL) {
 
             if (this.initialResultLoad) {
                 //call onIntialResultLoad
@@ -120,7 +121,14 @@ class UnbxdSearchWrapper extends Component {
                 this.initialResultLoad = false;
             }
 
-            this.setState({ unbxdCore: unbxdSearchObj })
+            this.setState({
+                unbxdCore: unbxdSearchObj,
+                unbxdCoreStatus: searchStatus.READY
+            })
+        }
+
+        if (eventName === searchEvents.BEFORE_API_CALL) {
+            this.setState({ unbxdCore: unbxdSearchObj, unbxdCoreStatus: searchStatus.LOADING });
         }
 
         console.log("unbxdCallBack ", eventName, data);

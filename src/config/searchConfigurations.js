@@ -26,7 +26,7 @@ const searchConfigurations = {
     },
     facetMultilevel: true,
     facetDepth: 6,
-    productId: 'uniqueId',
+    productIdAttribute: 'uniqueId',
     swatches: true,
     swatchMap: {},
     callBackFn: () => { },

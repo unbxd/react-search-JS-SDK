@@ -6,7 +6,8 @@ import { SearchBoxContextProvider } from './context'
 import SearchInput from './searchInput';
 import SearchButton from './searchButton';
 import { conditionalRenderer, isContext } from '../../common/utils';
-import { Loader as defaultLoader } from '../../components'
+import { Loader as defaultLoader } from '../../components';
+import { trackSearch } from '../analytics';
 
 /**
  * Component to set or update the search query.
@@ -59,7 +60,7 @@ class SearchBox extends React.Component {
 
                 setSearchBoxConfiguration({ query });
                 //track for search hit here
-                trackActions({ type: 'SEARCH', data: { query } })
+                trackSearch(query);
             }
         }
         else {
@@ -68,7 +69,7 @@ class SearchBox extends React.Component {
 
                 setSearchBoxConfiguration({ query });
                 //track for search hit here
-                trackActions({ type: 'SEARCH', data: { query } })
+                trackSearch(query);
             }
         }
 

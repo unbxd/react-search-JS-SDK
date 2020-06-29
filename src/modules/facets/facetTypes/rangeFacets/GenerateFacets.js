@@ -18,9 +18,8 @@ class GenerateFacets extends React.Component {
         const valMin = parseInt(selectedRange.valMin);
         const valMax = parseInt(selectedRange.valMax);
 
-        const { trackActions } = this.props;
+        const { addRangeFacet, trackActions } = this.props;
 
-        const { addRangeFacet } = this.props;
         const addFacetObj = { facetName: name, start: valMin, end: valMax };
         addRangeFacet(addFacetObj);
         trackActions({ type: "RANGE_FACETS_ADD", data: addFacetObj });
@@ -45,9 +44,8 @@ class GenerateFacets extends React.Component {
 
         const facetName = event.target.dataset['unx_facetname'];
 
-        const { clearARangeFacet, trackActions } = this.props;
-        clearARangeFacet(facetName);
-        trackActions({ type: "RANGE_FACETS_REMOVE", data: { facetName } });
+        const { removeRangeFacet } = this.props;
+        removeRangeFacet({facetName});
 
         const { [facetName]: currentFacet, ...otherFacets } = this.state.rangeValues;
         this.setState({
