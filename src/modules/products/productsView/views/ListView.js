@@ -7,15 +7,15 @@ import { List } from '../../../../components/index';
 const ListView = (props) => {
 
     const { products = [],
-        productMap,
+        productAttributes,
         showVariants,
-        productVariantMap,
+        variantAttributes,
         onProductClick,
         ProductItemComponent,
         showSwatches,
         swatchAttributes,
         groupBy,
-        swatchItemComponent, } = props;
+        SwatchItemComponent, } = props;
 
     return (<div className='UNX-product-container'>{
         <List
@@ -23,22 +23,22 @@ const ListView = (props) => {
             items={products}
             ListItem={ProductItemComponent || ListProductCard}
             onClick={onProductClick}
-            productMap={productMap}
+            productAttributes={productAttributes}
             showVariants={showVariants}
-            productVariantMap={productVariantMap}
+            variantAttributes={variantAttributes}
             showSwatches={showSwatches}
             swatchAttributes={swatchAttributes}
             groupBy={groupBy}
-            swatchItemComponent={swatchItemComponent}
+            SwatchItemComponent={SwatchItemComponent}
             className='UNX-list-view grid-cols-1' />
     }
     </div>)
 }
 ListView.propTypes = {
     products: PropTypes.arrayOf(PropTypes.object).isRequired,
-    productMap: PropTypes.object.isRequired,
+    productAttributes: PropTypes.object.isRequired,
     showVariants: PropTypes.bool.isRequired,
-    productVariantMap: PropTypes.object.isRequired,
+    variantAttributes: PropTypes.object.isRequired,
     onProductClick: PropTypes.func.isRequired
 }
 

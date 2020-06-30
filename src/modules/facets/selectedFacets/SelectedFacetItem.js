@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Button } from '../../../components';
 
-const ActiveFacetItem = ({ itemData, facetName }) => {
+const SelectedFacetItem = ({ itemData, facetName }) => {
 
     const { name, dataId } = itemData;
 
@@ -16,7 +16,7 @@ const ActiveFacetItem = ({ itemData, facetName }) => {
     </Button>)
 }
 
-ActiveFacetItem.propTypes = {
+SelectedFacetItem.propTypes = {
     itemData: PropTypes.shape({
         name: PropTypes.string,
         count: PropTypes.number,
@@ -25,4 +25,4 @@ ActiveFacetItem.propTypes = {
     facetName: PropTypes.string.isRequired,
 }
 
-export default ActiveFacetItem;
+export default SelectedFacetItem;

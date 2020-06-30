@@ -7,7 +7,7 @@ const SearchInput = () => {
     return (<SearchBoxContextConsumer>
         {({ data, helpers }) => {
 
-            const { query, queryAPI, isAutoFocus, isClear } = data;
+            const { query, queryAPI, autoFocus, clearable } = data;
             const { onQueryChange, onClearQuery, setSearchQuery } = helpers;
 
             return (<RenderInput
@@ -15,8 +15,8 @@ const SearchInput = () => {
                 queryAPI={queryAPI}
                 onQueryChange={onQueryChange}
                 className='UNX-searchbox query'
-                isAutoFocus={isAutoFocus}
-                isClear={isClear}
+                autoFocus={autoFocus}
+                clearable={clearable}
                 onClearQuery={onClearQuery}
                 setSearchQuery={setSearchQuery}
             />)

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import UnbxdSearchWrapper, { Products } from '@unbxd-ui/react-search-sdk';
 import '@unbxd-ui/react-search-sdk/public/dist/css/core.css';
 
-const productMap = {
+const productAttributes = {
     productName: "title",
     uniqueId: "uniqueId",
     imageUrl: "imageUrl",
@@ -13,7 +13,7 @@ const productMap = {
     productUrl: "productUrl"
 }
 
-const productVariantMap = {
+const variantAttributes = {
     productName: "v_title",
     uniqueId: "vId",
     imageUrl: "v_imageUrl",
@@ -41,10 +41,10 @@ const App = () => {
             pageSize={20}
             productViewTypes={["LIST", "GRID"]}
             ZeroResultsComponent={NoProductsComponent}
-            productMap={productMap}
+            productAttributes={productAttributes}
             showVariants={true}
             variantsCount={2}
-            productVariantMap={productVariantMap} />
+            variantAttributes={variantAttributes} />
     </UnbxdSearchWrapper>)
 }
 

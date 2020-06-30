@@ -1,17 +1,24 @@
 import React from 'react';
+import { storiesOf } from '@storybook/react';
 
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import Facets from '../src/modules/facets';
 
-export default {
-    title: 'Facets',
-    component: Facets
-}
+const stories = storiesOf('Facets', module).addParameters({
+    props: {
+        propTablesExclude: [UnbxdSearchWrapper,
+            'TextFacets',
+            'RangeFacets',
+            'MultilevelFacets',
+            'ApplyFacets',
+            'ClearFacets',
+        ]
+    }
+});
 
 const defaultFilters = {
     brand_uFilter: 'The North Face'
 }
-
 
 const FacetItemComponent = ({ itemData, facetName, onClick, isFacetSelected, selectedFacets }) => {
 
@@ -29,7 +36,7 @@ const FacetItemComponent = ({ itemData, facetName, onClick, isFacetSelected, sel
     </div>)
 }
 
-const ActiveFacetItemComponent = ({ itemData, facetName }) => {
+const SelectedFacetItemComponent = ({ itemData, facetName }) => {
     const { name, dataId } = itemData;
     return (<p
         data-unx_name={facetName}
@@ -62,7 +69,26 @@ const BreadcrumbItemComponent = ({ itemData }) => {
     </div>)
 }
 
-export const TextFacets = () => (<UnbxdSearchWrapper
+stories.add('default', () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Facets
+        categoryDisplayName={'category'}
+        categoryField={'categoryPath'} />
+
+</UnbxdSearchWrapper >));
+
+stories.add('with default filters', () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Facets
+        defaultFilters={defaultFilters} />
+
+</UnbxdSearchWrapper >));
+
+stories.add('with text facets', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
@@ -70,85 +96,58 @@ export const TextFacets = () => (<UnbxdSearchWrapper
         <Facets.TextFacets />
     </Facets>
 
-</UnbxdSearchWrapper >);
+</UnbxdSearchWrapper >));
 
-export const FacetsWithApplyAndClear = () => (<UnbxdSearchWrapper
+stories.add('with applyFilters and clearFilters', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
     <Facets
         isApplyFilters={true}
-        isClearFilters={true}
-    >
-        <Facets.TextFacets />
-    </Facets>
+        isClearFilters={true} />
 
-</UnbxdSearchWrapper >);
+</UnbxdSearchWrapper >));
 
-export const FacetsWithMoveFacetsOnSelect = () => (<UnbxdSearchWrapper
+stories.add('with moveFacetsOnSelect', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
     <Facets
-        isApplyFilters={true}
-        isClearFilters={true}
-        moveFacetsOnSelect={true}>
-        <Facets.TextFacets />
-        <Facets.ApplyFacets />
-        <Facets.ClearFacets />
-    </Facets>
+        moveFacetsOnSelect={true} />
 
-</UnbxdSearchWrapper >);
+</UnbxdSearchWrapper >));
 
-export const FacetsWithDefaultFilters = () => (<UnbxdSearchWrapper
+stories.add('with FacetItemComponent', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
     <Facets
-        defaultFilters={defaultFilters}>
-        <Facets.TextFacets />
-    </Facets>
+        FacetItemComponent={FacetItemComponent} />
 
-</UnbxdSearchWrapper >);
+</UnbxdSearchWrapper >));
 
-export const FacetWithCustomFacetItemComponent = () => (<UnbxdSearchWrapper
+stories.add('with SelectedFacetItemComponent', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
     <Facets
-        FacetItemComponent={FacetItemComponent}
-        ActiveFacetItemComponent={ActiveFacetItemComponent}
-    />
-
-</UnbxdSearchWrapper >);
-
-export const FacetWithCustomActiveFacetItemComponent = () => (<UnbxdSearchWrapper
-    siteKey='wildearthclone-neto-com-au808941566310465'
-    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
-
-    <Facets
-        ActiveFacetItemComponent={ActiveFacetItemComponent}
+        SelectedFacetItemComponent={SelectedFacetItemComponent}
         moveFacetsOnSelect={true}
     />
 
-</UnbxdSearchWrapper >);
+</UnbxdSearchWrapper >));
 
-export const RangeFacets = () => (<UnbxdSearchWrapper
+stories.add('with range facet', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
-    <Facets
-        isApplyFilters={true}
-        isClearFilters={true}
-        moveFacetsOnSelect={true}
-    >
+    <Facets>
         <Facets.RangeFacets />
     </Facets>
 
+</UnbxdSearchWrapper >));
 
-</UnbxdSearchWrapper >);
-
-export const MultilevelFacets = () => (<UnbxdSearchWrapper
+stories.add('with multilevel facet', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
@@ -159,9 +158,9 @@ export const MultilevelFacets = () => (<UnbxdSearchWrapper
         <Facets.MultilevelFacets />
     </Facets>
 
-</UnbxdSearchWrapper >);
+</UnbxdSearchWrapper >));
 
-export const MultilevelFacetsWithCustomComponents = () => (<UnbxdSearchWrapper
+stories.add('with MultilevelFacetItemComponent', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
@@ -169,14 +168,43 @@ export const MultilevelFacetsWithCustomComponents = () => (<UnbxdSearchWrapper
         categoryDisplayName={'category'}
         categoryField={'categoryPath'}
         MultilevelFacetItemComponent={MultilevelFacetItemComponent}
+    >
+        <Facets.MultilevelFacets />
+    </Facets>
+
+</UnbxdSearchWrapper >));
+
+stories.add('with BreadcrumbItemComponent', () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Facets
+        categoryDisplayName={'category'}
+        categoryField={'categoryPath'}
         BreadcrumbItemComponent={BreadcrumbItemComponent}
     >
         <Facets.MultilevelFacets />
     </Facets>
 
-</UnbxdSearchWrapper >);
+</UnbxdSearchWrapper >));
 
-export const FacetsWithRenderProps = () => (<UnbxdSearchWrapper
+stories.add('with more flexibility', () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Facets
+        categoryDisplayName={'category'}
+        categoryField={'categoryPath'}>
+        <Facets.TextFacets />
+        <Facets.ApplyFacets />
+        <Facets.ClearFacets />
+        <Facets.RangeFacets />
+        <Facets.MultilevelFacets />
+    </Facets>
+
+</UnbxdSearchWrapper >));
+
+stories.add('with render props', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
@@ -192,4 +220,4 @@ export const FacetsWithRenderProps = () => (<UnbxdSearchWrapper
         }}
     </Facets>
 
-</UnbxdSearchWrapper >);
+</UnbxdSearchWrapper >));

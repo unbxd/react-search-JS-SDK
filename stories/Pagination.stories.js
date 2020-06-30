@@ -7,7 +7,9 @@ import Pagination from '../src/modules/pagination';
 
 const stories = storiesOf('Pagination', module).addParameters({
     props: {
-        propTablesExclude: [UnbxdSearchWrapper]
+        propTablesExclude: [UnbxdSearchWrapper,
+            'Navigation',
+            'NumberOfProducts']
     }
 });
 
@@ -52,14 +54,6 @@ stories.add('with pageSizeOptions', () => (<UnbxdSearchWrapper
 
 </UnbxdSearchWrapper >));
 
-stories.add('with pageSizeDisplayType Dropdown', () => (<UnbxdSearchWrapper
-    siteKey='wildearthclone-neto-com-au808941566310465'
-    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
-
-    <Pagination pageSizeDisplayType={'DROPDOWN'} />
-
-</UnbxdSearchWrapper >));
-
 stories.add('with pageSizeDisplayType List', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
@@ -79,6 +73,17 @@ stories.add('with pagePadding', () => (<UnbxdSearchWrapper
 
 </UnbxdSearchWrapper >));
 
+stories.add('with more flexibility', () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Pagination>
+        <Pagination.NumberOfProducts />
+        <Pagination.Navigation />
+    </Pagination>
+
+</UnbxdSearchWrapper >));
+
 stories.add('with render props', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
@@ -88,6 +93,7 @@ stories.add('with render props', () => (<UnbxdSearchWrapper
         pageSizeOptions={pageSizeOptions}
     >
         {({ data, helpers }) => {
+
             //data and helpers for Pagination
             return (<p>Hello Pagination</p>)
         }}

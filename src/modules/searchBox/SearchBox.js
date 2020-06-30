@@ -87,8 +87,8 @@ class SearchBox extends React.Component {
 
         const { unbxdCoreStatus } = this.context;
         const {
-            isAutoFocus,
-            isClear,
+            autoFocus,
+            clearable,
             showLoader } = this.props;
 
         const { unbxdCore } = this.context;
@@ -96,8 +96,8 @@ class SearchBox extends React.Component {
 
         const data = {
             unbxdCoreStatus,
-            isAutoFocus,
-            isClear,
+            autoFocus,
+            clearable,
             showLoader,
             queryAPI,
             ...this.state
@@ -137,8 +137,8 @@ SearchBox.SearchButton = SearchButton;
 SearchBox.displayName = "SearchBox";
 
 SearchBox.defaultProps = {
-    isAutoFocus: false,
-    isClear: false,
+    autoFocus: false,
+    clearable: false,
     onSubmit: null,
     onClear: null,
     LoaderComponent: defaultLoader,
@@ -149,11 +149,11 @@ SearchBox.propTypes = {
     /**
     * Should the searchbox be focused by default.
     */
-    isAutoFocus: PropTypes.bool,
+    autoFocus: PropTypes.bool,
     /**
     * Should the searchbox be clearable.
     */
-    isClear: PropTypes.bool,
+    clearable: PropTypes.bool,
     /**
     * Hook for search query. The function should return `true` if the search is to be triggered, false otherwise.
     */

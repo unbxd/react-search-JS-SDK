@@ -36,7 +36,7 @@ class UnbxdSearchWrapper extends Component {
         unbxdCore.getResults(query);
     }
 
-    setPaginationConfiguration = (config, triggerResults = false) => {
+    setPaginationConfiguration(config, triggerResults = false) {
 
         const { pageSize } = config;
 
@@ -49,7 +49,7 @@ class UnbxdSearchWrapper extends Component {
 
     }
 
-    setSortConfiguration = (config, triggerResults = false) => {
+    setSortConfiguration(config, triggerResults = false) {
 
         const { sortBy } = config;
 
@@ -60,7 +60,7 @@ class UnbxdSearchWrapper extends Component {
         }
     }
 
-    setFacetConfiguration = (config, triggerResults = false) => {
+    setFacetConfiguration(config, triggerResults = false) {
 
         const { defaultFilters, categoryDisplayName, categoryField } = config;
 
@@ -86,9 +86,12 @@ class UnbxdSearchWrapper extends Component {
         const { siteKey, apiKey, getCategoryId, productType } = this.props;
 
         this.unbxdCallBack = this.unbxdCallBack.bind(this);
+        this.setPaginationConfiguration = this.setPaginationConfiguration.bind(this);
+        this.setSortConfiguration = this.setSortConfiguration.bind(this);
+        this.setFacetConfiguration = this.setFacetConfiguration.bind(this);
         this.setProductConfiguration = this.setProductConfiguration.bind(this);
-        this.trackActions = this.trackActions.bind(this);
         this.setSearchBoxConfiguration = this.setSearchBoxConfiguration.bind(this);
+        this.trackActions = this.trackActions.bind(this);
 
         this.state = {
             unbxdCore:
@@ -207,6 +210,10 @@ class UnbxdSearchWrapper extends Component {
     }
 }
 
+UnbxdSearchWrapper.defaultProps = {
+    productType: "SEARCH"
+}
+
 UnbxdSearchWrapper.propTypes = {
     /**
     * Site key of the site.
@@ -228,6 +235,10 @@ UnbxdSearchWrapper.propTypes = {
     * Custom function to return the Category Id.
     */
     getCategoryId: PropTypes.func,
+    /**
+    * Product type of UnbxdSearchWrapper.
+    */
+    productType: PropTypes.string,
 }
 
 export default UnbxdSearchWrapper;
