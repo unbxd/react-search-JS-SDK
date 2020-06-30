@@ -6,6 +6,7 @@ import ListView from './views/ListView';
 import { paginationTypes } from '../utils';
 import { debounce } from '../../../common/utils';
 import { productViewTypes as productViewTypesOptions, DEBOUNCE_TIME } from '../utils';
+import { searchStatus } from '../../../config';
 import { trackProductImpressions } from '../../analytics';
 
 class ProductsWrapper extends React.PureComponent {
@@ -16,7 +17,8 @@ class ProductsWrapper extends React.PureComponent {
         const { products } = this.props;
         this.state = {
             products,
-            hasMoreResults: true
+            hasMoreResults: true,
+            start: 0
         }
     }
 
@@ -35,7 +37,7 @@ class ProductsWrapper extends React.PureComponent {
     }, DEBOUNCE_TIME);
     //Does it make sense to add DEBOUNCE_TIME to component props
 
-    loadMoreHandler = () => {
+    loadMoreProducts = () => {
         const { getNextPage } = this.props;
 
         console.log("Loading new page");
@@ -89,14 +91,17 @@ class ProductsWrapper extends React.PureComponent {
         }
 
         if (state.products !== props.products &&
-            (paginationType === paginationTypes.INFINITE_SCROLL || paginationType === paginationTypes.CLICK_N_SCROLL)) {
+            state.start !== props.start &&
+            (paginationType === paginationTypes.INFINITE_SCROLL ||
+                paginationType === paginationTypes.CLICK_N_SCROLL)) {
 
-            return start === 0 ? { products: props.products } : { products: [...state.products, ...props.products] }
+            return start === 0 ? { products: props.products } :
+                { products: [...state.products, ...props.products], start: props.start }
         }
 
         if (state.products !== props.products && paginationType === paginationTypes.FIXED_PAGINATION) {
 
-            return { products: props.products }
+            return { products: props.products, start: props.start }
         }
 
         return null;
@@ -115,8 +120,17 @@ class ProductsWrapper extends React.PureComponent {
             showSwatches,
             swatchAttributes,
             groupBy,
-            SwatchItemComponent, } = this.props;
+            SwatchItemComponent,
+            LoadMoreComponent,
+            unbxdCoreStatus,
+            LoaderComponent,
+            showLoader } = this.props;
         const { products, hasMoreResults } = this.state;
+
+        const displayClickNScrollTrigger = paginationType === paginationTypes.CLICK_N_SCROLL &&
+            hasMoreResults && unbxdCoreStatus === searchStatus.READY;
+        const displayLoader = unbxdCoreStatus === searchStatus.LOADING && showLoader;
+
 
         const productViewsRender = <React.Fragment>{productViewType === productViewTypesOptions.GRID &&
             <GridView perRow={perRow}
@@ -149,11 +163,14 @@ class ProductsWrapper extends React.PureComponent {
         return (<React.Fragment>
 
             {productViewsRender}
-            {paginationType === paginationTypes.CLICK_N_SCROLL &&
-                hasMoreResults &&
-                <div className='UNX-product-load-more' onClick={this.loadMoreHandler}>
-                    Load more
-            </div>}
+
+            {displayClickNScrollTrigger &&
+                (LoadMoreComponent ? <LoadMoreComponent loadMoreProducts={this.loadMoreProducts} />
+                    : <div className='UNX-product-load-more' onClick={this.loadMoreProducts}>
+                        Load more
+                </div>)}
+
+            {displayLoader && <LoaderComponent />}
         </React.Fragment>)
     }
 }

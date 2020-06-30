@@ -84,6 +84,11 @@ const SwatchItemComponent = ({ itemData }) => {
     </div>)
 }
 
+const LoadMoreComponent = ({ loadMoreProducts }) => {
+
+    return (<div onClick={loadMoreProducts}>Load more</div>)
+}
+
 stories.add('default', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
@@ -160,6 +165,18 @@ stories.add('with click n scroll', () => (<UnbxdSearchWrapper
 
 </UnbxdSearchWrapper >));
 
+stories.add('with LoadMoreComponent', () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Products
+        pageSize={20}
+        paginationType={'CLICK_N_SCROLL'}
+        LoadMoreComponent={LoadMoreComponent}
+        productAttributes={productAttributes} />
+
+</UnbxdSearchWrapper >));
+
 stories.add('with ZeroResultsComponent', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
@@ -208,6 +225,7 @@ stories.add('with showLoader', () => (<UnbxdSearchWrapper
 
     <Products
         productAttributes={productAttributes}
+        paginationType={'CLICK_N_SCROLL'}
         LoaderComponent={LoaderComponent}
         showLoader={true} />
 

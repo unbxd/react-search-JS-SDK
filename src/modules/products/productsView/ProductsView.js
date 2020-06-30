@@ -22,16 +22,19 @@ const ProductsView = () => {
             groupBy,
             unbxdCoreStatus,
             query,
-            productIdAttribute } = data;
+            productIdAttribute,
+            showLoader } = data;
 
         const { getSearchResults,
             ZeroResultsComponent,
             onProductClick,
             getNextPage,
             ProductItemComponent,
-            SwatchItemComponent, } = helpers;
+            SwatchItemComponent,
+            LoadMoreComponent,
+            LoaderComponent } = helpers;
 
-        const { numberOfProducts = 0, products = [] } = getSearchResults() || {};
+        const { numberOfProducts = 0, products = [], start = 0 } = getSearchResults() || {};
 
         //return the prop based Zero results template
         if (numberOfProducts === 0 && ZeroResultsComponent) {
@@ -63,6 +66,10 @@ const ProductsView = () => {
             unbxdCoreStatus={unbxdCoreStatus}
             query={query}
             productIdAttribute={productIdAttribute}
+            LoadMoreComponent={LoadMoreComponent}
+            LoaderComponent={LoaderComponent}
+            showLoader={showLoader}
+            start={start}
         />)
 
     }}

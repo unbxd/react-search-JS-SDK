@@ -92,7 +92,8 @@ export class Products extends React.PureComponent {
             swatchAttributes,
             groupBy,
             SwatchItemComponent,
-            productIdAttribute } = this.props;
+            productIdAttribute,
+            LoadMoreComponent } = this.props;
 
         const getSearchResults = unbxdCore.getSearchResults.bind(unbxdCore);
         const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
@@ -174,6 +175,7 @@ export class Products extends React.PureComponent {
             ProductItemComponent,
             ProductsViewListItemComponent,
             SwatchItemComponent,
+            LoadMoreComponent,
         }
 
         return { data, helpers }
@@ -181,13 +183,12 @@ export class Products extends React.PureComponent {
     }
 
     render() {
-        const { LoaderComponent } = this.props;
 
         const DefaultRender = <React.Fragment>
             <ViewTypes />
             <ProductsView />
         </React.Fragment>;
-        const LoaderRender = <LoaderComponent />;
+        const LoaderRender = null;
 
 
         return (<ProductContextProvider value={this.getProductProps()}>
@@ -211,7 +212,7 @@ Products.defaultProps = {
     heightDiffToTriggerNextPage: 100,
     showVariants: false,
     LoaderComponent: defaultLoader,
-    showLoader: true,
+    showLoader: false,
     productViewDisplayType: "DROPDOWN",
     productIdAttribute: 'uniqueId',
 }
@@ -309,6 +310,10 @@ Products.propTypes = {
     * Unique attribute of the product
     */
     productIdAttribute: PropTypes.string,
+    /**
+    * Custom load more component for CLICK_N_SCROLL
+    */
+    LoadMoreComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 }
 
 export default Products;
