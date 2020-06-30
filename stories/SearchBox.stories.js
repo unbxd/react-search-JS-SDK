@@ -24,6 +24,24 @@ const LoaderComponent = () => {
     return (<div>Loading..</div>)
 }
 
+const InputComponent = ({ query, onSearchBoxChange, onSearchBoxClear }) => {
+
+    return (<input
+        value={query}
+        onChange={onSearchBoxChange}
+        onClear={onSearchBoxClear} />)
+}
+
+const SubmitComponent = ({ onSearchBoxSubmit }) => {
+
+    return (<div onClick={onSearchBoxSubmit}> Submit</div>)
+}
+
+const ClearComponent = ({ onSearchBoxClear }) => {
+
+    return (<div onClick={onSearchBoxClear}> x </div>)
+}
+
 stories.add('default', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
@@ -67,6 +85,34 @@ stories.add('with loader', () => (<UnbxdSearchWrapper
     <SearchBox
         showLoader={true}
         LoaderComponent={LoaderComponent} />
+
+</UnbxdSearchWrapper >));
+
+stories.add('with InputComponent', () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <SearchBox
+        InputComponent={InputComponent} />
+
+</UnbxdSearchWrapper >));
+
+stories.add('with SubmitComponent', () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <SearchBox
+        SubmitComponent={SubmitComponent} />
+
+</UnbxdSearchWrapper >));
+
+stories.add('with ClearComponent', () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <SearchBox
+        clearable={true}
+        ClearComponent={ClearComponent} />
 
 </UnbxdSearchWrapper >));
 

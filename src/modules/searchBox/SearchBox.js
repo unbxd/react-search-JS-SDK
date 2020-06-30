@@ -17,25 +17,25 @@ class SearchBox extends React.Component {
     constructor(props) {
         super(props);
 
-        this.onQueryChange = this.onQueryChange.bind(this);
-        this.onClearQuery = this.onClearQuery.bind(this);
-        this.handleQuerySubmit = this.handleQuerySubmit.bind(this);
-        this.setSearchQuery = this.setSearchQuery.bind(this);
+        this.onSearchBoxChange = this.onSearchBoxChange.bind(this);
+        this.onSearchBoxClear = this.onSearchBoxClear.bind(this);
+        this.onSearchBoxSubmit = this.onSearchBoxSubmit.bind(this);
+        this.setSearchBoxQuery = this.setSearchBoxQuery.bind(this);
 
         this.state = { query: '' };
     }
 
 
-    onQueryChange(event) {
+    onSearchBoxChange(event) {
         const query = event.target.value;
         this.setState({ query });
     }
 
-    setSearchQuery(query) {
+    setSearchBoxQuery(query) {
         this.setState({ query })
     }
 
-    onClearQuery() {
+    onSearchBoxClear() {
 
         const { query } = this.state;
         const { onClear } = this.props;
@@ -47,7 +47,7 @@ class SearchBox extends React.Component {
         }
     }
 
-    handleQuerySubmit(event) {
+    onSearchBoxSubmit(event) {
         event.preventDefault();
 
         const { query } = this.state;
@@ -72,8 +72,6 @@ class SearchBox extends React.Component {
                 trackSearch(query);
             }
         }
-
-
     }
 
     componentDidMount() {
@@ -89,25 +87,31 @@ class SearchBox extends React.Component {
         const {
             autoFocus,
             clearable,
-            showLoader } = this.props;
+            showLoader,
+            InputComponent,
+            SubmitComponent,
+            ClearComponent } = this.props;
 
         const { unbxdCore } = this.context;
-        const queryAPI = unbxdCore.getSearchQuery() || "";
+        const lastSearchedQuery = unbxdCore.getSearchQuery() || "";
 
         const data = {
             unbxdCoreStatus,
             autoFocus,
             clearable,
             showLoader,
-            queryAPI,
+            lastSearchedQuery,
             ...this.state
         };
-        const helpers = {
-            onQueryChange: this.onQueryChange,
-            handleQuerySubmit: this.handleQuerySubmit,
-            onClearQuery: this.onClearQuery,
-            setSearchQuery: this.setSearchQuery,
 
+        const helpers = {
+            onSearchBoxChange: this.onSearchBoxChange,
+            onSearchBoxSubmit: this.onSearchBoxSubmit,
+            onSearchBoxClear: this.onSearchBoxClear,
+            setSearchBoxQuery: this.setSearchBoxQuery,
+            InputComponent,
+            SubmitComponent,
+            ClearComponent
         };
 
         return { data, helpers };
@@ -117,7 +121,7 @@ class SearchBox extends React.Component {
 
         const { LoaderComponent } = this.props;
 
-        const DefaultRender = <form onSubmit={this.handleQuerySubmit} className='UNX-searchbox-container'>
+        const DefaultRender = <form onSubmit={this.onSearchBoxSubmit} className='UNX-searchbox-container'>
             <SearchInput />
             <SearchButton />
         </form>;
@@ -169,7 +173,19 @@ SearchBox.propTypes = {
     /**
     * Should loader be shown
     */
-    showLoader: PropTypes.bool
+    showLoader: PropTypes.bool,
+    /**
+    * Custom input component
+    */
+    InputComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
+    * Custom submit component
+    */
+    SubmitComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
+    * Custom reset component
+    */
+    ClearComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 
 }
 

@@ -6,9 +6,12 @@ import { Button } from '../../../components';
 const SearchButton = () => {
 
     return (<SearchBoxContextConsumer>
-        {() => {
+        {({ data, helpers }) => {
 
-            return (<Button type='submit' className='UNX-searchbox submit'>Search</Button>)
+            const { SubmitComponent, onSearchBoxSubmit } = helpers;
+
+            return (SubmitComponent ?
+                <SubmitComponent onSearchBoxSubmit={onSearchBoxSubmit} /> : <Button type='submit' className='UNX-searchbox submit'>Search</Button>)
         }}
     </SearchBoxContextConsumer>)
 }

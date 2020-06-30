@@ -13,7 +13,7 @@ const SpellCheckItem = ({ itemData, currentQuery }) => {
 SpellCheckItem.propTypes = {
     itemData: PropTypes.shape({
         suggestion: PropTypes.string,
-        frequency: PropTypes.number,
+        frequency: PropTypes.string,
     }),
     currentQuery: PropTypes.string.isRequired
 }

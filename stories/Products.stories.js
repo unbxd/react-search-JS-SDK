@@ -114,17 +114,6 @@ stories.add('with pageSize', () => (<UnbxdSearchWrapper
 
 </UnbxdSearchWrapper >));
 
-stories.add('with pageSize', () => (<UnbxdSearchWrapper
-    siteKey='wildearthclone-neto-com-au808941566310465'
-    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
-
-    <Products
-        pageSize={20}
-        paginationType={'INFINITE_SCROLL'}
-        productAttributes={productAttributes} />
-
-</UnbxdSearchWrapper >));
-
 stories.add('with showVariants', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
