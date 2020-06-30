@@ -2,8 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Input } from '../../../components';
+import { productTypes } from '../../../config';
 
 class RenderInput extends React.Component {
+
+    componentDidUpdate(prevProps) {
+
+        if (prevProps.lastSearchedQuery !== this.props.lastSearchedQuery &&
+            this.props.query !== this.props.lastSearchedQuery) {
+
+            if (this.props.productType === productTypes.CATEGORY) {
+
+                this.props.setSearchBoxQuery("");
+            } else {
+
+                this.props.setSearchBoxQuery(this.props.lastSearchedQuery);
+            }
+        }
+    }
 
     render() {
 
@@ -25,13 +41,7 @@ class RenderInput extends React.Component {
         />)
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.lastSearchedQuery !== this.props.lastSearchedQuery &&
-            this.props.query !== this.props.lastSearchedQuery) {
 
-            this.props.setSearchBoxQuery(this.props.lastSearchedQuery);
-        }
-    }
 }
 
 RenderInput.props = {

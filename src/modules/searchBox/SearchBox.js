@@ -83,7 +83,7 @@ class SearchBox extends React.Component {
 
     getSearchBoxProps() {
 
-        const { unbxdCoreStatus } = this.context;
+        const { unbxdCoreStatus, productType } = this.context;
         const {
             autoFocus,
             clearable,
@@ -101,7 +101,8 @@ class SearchBox extends React.Component {
             clearable,
             showLoader,
             lastSearchedQuery,
-            ...this.state
+            productType,
+            ...this.state,
         };
 
         const helpers = {

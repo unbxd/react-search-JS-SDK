@@ -10,7 +10,8 @@ const SearchInput = () => {
             const { query,
                 lastSearchedQuery,
                 autoFocus,
-                clearable } = data;
+                clearable,
+                productType } = data;
 
             const { onSearchBoxChange,
                 onSearchBoxClear,
@@ -23,6 +24,7 @@ const SearchInput = () => {
                 lastSearchedQuery,
                 autoFocus,
                 clearable,
+                productType,
                 InputComponent,
                 onSearchBoxChange,
                 onSearchBoxClear,
