@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import AppContext from '../../common/context';
 import { BannersContextProvider } from './context';
 import GenerateBanners from './generateBanners';
-import { conditionalRenderer, isContext } from '../../common/utils';
+import { conditionalRenderer, hasUnbxdSearchWrapperContext } from '../../common/utils';
 
 
 /**
@@ -12,10 +12,17 @@ import { conditionalRenderer, isContext } from '../../common/utils';
  */
 class Banners extends React.Component {
 
+    componentDidMount() {
+
+        if (this.context === undefined) {
+            hasUnbxdSearchWrapperContext(Banners.displayName);
+        }
+    }
+
     getBannerProps() {
 
         const { unbxdCore } = this.context;
-        const banners  = unbxdCore.getBanners();
+        const banners = unbxdCore.getBanners();
 
         const { altText, BannerItemComponent } = this.props;
         const data = { banners, altText }
@@ -37,6 +44,7 @@ class Banners extends React.Component {
 
 Banners.contextType = AppContext;
 Banners.GenerateBanners = GenerateBanners;
+Banners.displayName = "Banners";
 
 Banners.defaultProps = {
     altText: "Banner Image",

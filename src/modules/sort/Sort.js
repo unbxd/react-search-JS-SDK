@@ -5,7 +5,7 @@ import AppContext from '../../common/context';
 import { SortContextProvider } from './context'
 import SortBy from './sortBy';
 import ResetSort from './resetSort';
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer, hasUnbxdSearchWrapperContext } from '../../common/utils';
 import { getFormattedSort, getSelectedSort } from './utils';
 
 
@@ -34,6 +34,10 @@ class Sort extends React.Component {
     }
 
     componentDidMount() {
+
+        if (this.context === undefined) {
+            hasUnbxdSearchWrapperContext(Sort.displayName);
+        }
 
         const { helpers: { setSortConfiguration } } = this.context;
 
@@ -125,6 +129,7 @@ class Sort extends React.Component {
 Sort.contextType = AppContext;
 Sort.SortBy = SortBy;
 Sort.ResetSort = ResetSort;
+Sort.displayName = "Sort";
 
 Sort.defaultProps = {
     defaultSort: {

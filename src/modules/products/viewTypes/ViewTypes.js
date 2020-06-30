@@ -2,14 +2,14 @@ import React from 'react';
 
 import { ProductContextConsumer } from '../context';
 import { ViewTypesList, ViewTypesDropdown } from './displayTypes';
-import { productViewTypes as productViewTypesOptions, getProductViewType, productViewDisplayTypes } from '../utils';
+import { getProductViewType, productViewDisplayTypes } from '../utils';
 
 
 const ViewTypes = () => {
     return (<ProductContextConsumer>{({ data, helpers }) => {
 
         const { productViewTypes, productViewType, productViewDisplayType } = data;
-        const { onViewToggle, getSearchResults, ProductsViewListItemComponent } = helpers;
+        const { onViewToggle, getSearchResults, ProductsViewItemComponent } = helpers;
         
         const { numberOfProducts = 0 } = getSearchResults() || {};
         const validViewTypes = getProductViewType(productViewTypes);
@@ -34,7 +34,7 @@ const ViewTypes = () => {
                     productViewType={productViewType}
                     productViewTypes={productViewTypes}
                     onProductViewClick={onViewToggle}
-                    ProductsViewListItemComponent={ProductsViewListItemComponent}
+                    ProductsViewItemComponent={ProductsViewItemComponent}
                 />
             }
         </div>)

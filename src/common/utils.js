@@ -30,7 +30,7 @@ export const debounce = (func, wait, immediate) => {
     };
 };
 
-export const isContext = (componentName = 'Component') => {
+export const hasUnbxdSearchWrapperContext = (componentName = 'Component') => {
     throw new Error(`${componentName} must be used within UnbxdSearchWrapper.`);
 }
 

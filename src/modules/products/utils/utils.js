@@ -1,6 +1,6 @@
-import { productViewTypes as productViewTypesOptions } from './constants';
+import { productViewTypes as productViewTypeOptions } from './constants';
 
-const getProductFields = ({
+export const getProductFields = ({
     itemData: product, productAttributes,
     showVariants,
     variantAttributes,
@@ -45,7 +45,7 @@ const getProductFields = ({
     //we need to iterate variants array
     if (showSwatches) {
         swatches = product['variants'].map((variant, idx) => {
-            
+
             const swatchDetails = {};
             swatchDetails['swatchId'] = variant[variantAttributes[productAttributesMapper.UNIQUE_ID]];
             swatchDetails['swatchImageUrl'] = variant[swatchAttributes[productAttributesMapper.SWATCH_IMAGE_URL]];
@@ -79,9 +79,16 @@ const getProductFields = ({
     return productValues;
 }
 
-const getProductViewType = (productViewTypes = []) => {
-    const validViewTypes = productViewTypes.filter(viewType => (productViewTypesOptions[viewType]));
-    return validViewTypes.length ? validViewTypes : [productViewTypesOptions.GRID];
+export const getProductViewType = (productViewTypes = []) => {
+    const validViewTypes = productViewTypes.filter(viewType => (productViewTypeOptions[viewType]));
+    return validViewTypes.length ? validViewTypes : [productViewTypeOptions.GRID];
 }
 
-export { getProductFields, getProductViewType };
+export const getProductPids = (products, productIdAttribute) => {
+    
+    const pids = products.map((product) => {
+        return product[productIdAttribute]
+    })
+
+    return pids;
+}

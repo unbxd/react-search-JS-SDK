@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SwatchItem = ({ itemData }) => {
 
@@ -11,6 +12,10 @@ const SwatchItem = ({ itemData }) => {
             data-variant_id={swatchId}
             src={swatchImageUrl} className='UNX-swatch-item image' />
     </div>)
+}
+
+SwatchItem.propTypes = {
+    itemData: PropTypes.object.isRequired,
 }
 
 export default SwatchItem;

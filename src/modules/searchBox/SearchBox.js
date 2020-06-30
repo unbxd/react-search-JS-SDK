@@ -5,7 +5,7 @@ import AppContext from '../../common/context'
 import { SearchBoxContextProvider } from './context'
 import SearchInput from './searchInput';
 import SearchButton from './searchButton';
-import { conditionalRenderer, isContext } from '../../common/utils';
+import { conditionalRenderer, hasUnbxdSearchWrapperContext } from '../../common/utils';
 import { Loader as defaultLoader } from '../../components';
 import { trackSearch } from '../analytics';
 
@@ -25,6 +25,12 @@ class SearchBox extends React.Component {
         this.state = { query: '' };
     }
 
+    componentDidMount() {
+
+        if (this.context === undefined) {
+            hasUnbxdSearchWrapperContext(SearchBox.displayName);
+        }
+    }
 
     onSearchBoxChange(event) {
         const query = event.target.value;
@@ -71,13 +77,6 @@ class SearchBox extends React.Component {
                 //track for search hit here
                 trackSearch(query);
             }
-        }
-    }
-
-    componentDidMount() {
-
-        if (this.context === undefined) {
-            isContext(Products.displayName);
         }
     }
 
@@ -135,10 +134,8 @@ class SearchBox extends React.Component {
 }
 
 SearchBox.contextType = AppContext;
-
 SearchBox.SearchInput = SearchInput;
 SearchBox.SearchButton = SearchButton;
-
 SearchBox.displayName = "SearchBox";
 
 SearchBox.defaultProps = {

@@ -6,7 +6,7 @@ import { FacetsContextProvider } from './context'
 import { TextFacets, RangeFacets, MultilevelFacets } from './facetTypes';
 import { ApplyFacets, ClearFacets } from './actions';
 import { SelectedFacets } from './selectedFacets';
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer, hasUnbxdSearchWrapperContext } from '../../common/utils';
 import { getFacetRow, isFacetSelected, manageStateTypes } from './utils';
 import { trackFacetClick } from '../analytics';
 
@@ -29,6 +29,11 @@ class Facets extends React.Component {
     }
 
     componentDidMount() {
+
+        if (this.context === undefined) {
+            hasUnbxdSearchWrapperContext(Facets.displayName);
+        }
+
         const { helpers: { setFacetConfiguration } } = this.context;
 
         const { defaultFilters,
@@ -307,7 +312,7 @@ Facets.MultilevelFacets = MultilevelFacets;
 Facets.ApplyFacets = ApplyFacets;
 Facets.ClearFacets = ClearFacets;
 Facets.SelectedFacets = SelectedFacets;
-
+Facets.displayName = "Facets";
 
 Facets.defaultProps = {
     defaultFilters: {},

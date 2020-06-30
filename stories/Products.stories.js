@@ -12,7 +12,7 @@ const stories = storiesOf('Products', module).addParameters({
     }
 });
 
-class NoProductsComponent extends React.Component {
+class ZeroResultsComponent extends React.Component {
     render() {
         return (<p>No products found!!!</p>);
     }
@@ -26,7 +26,7 @@ const ProductItemComponent = ({ itemData }) => {
     </div>)
 }
 
-const ProductsViewListItemComponent = ({ itemData, isActive }) => {
+const ProductsViewItemComponent = ({ itemData, isActive }) => {
     return (<p data-viewtype={itemData} className={`${isActive ? 'active' : ''}`}>
         {itemData}
     </p>)
@@ -183,7 +183,7 @@ stories.add('with ZeroResultsComponent', () => (<UnbxdSearchWrapper
 
     <Products
         productAttributes={productAttributes}
-        ZeroResultsComponent={NoProductsComponent} />
+        ZeroResultsComponent={ZeroResultsComponent} />
 
 </UnbxdSearchWrapper >));
 
@@ -204,7 +204,7 @@ stories.add('with view type list', () => (<UnbxdSearchWrapper
     <Products
         productViewTypes={["LIST", "GRID"]}
         productViewDisplayType={'LIST'}
-        ProductsViewListItemComponent={ProductsViewListItemComponent}
+        ProductsViewItemComponent={ProductsViewItemComponent}
         productAttributes={productAttributes} />
 
 </UnbxdSearchWrapper >));

@@ -1,12 +1,11 @@
 import React from 'react';
-import AppContext from '../../common/context'
-import { ProductContextProvider } from './context'
-
 import PropTypes from 'prop-types';
 
+import AppContext from '../../common/context'
+import { ProductContextProvider } from './context'
 import ViewTypes from './viewTypes/ViewTypes';
 import ProductsView from './productsView/ProductsView';
-import { conditionalRenderer, isContext } from '../../common/utils';
+import { conditionalRenderer, hasUnbxdSearchWrapperContext } from '../../common/utils';
 import { Loader as defaultLoader } from '../../components'
 import { getProductViewType } from './utils';
 import { trackProductClick } from '../analytics';
@@ -35,7 +34,7 @@ export class Products extends React.PureComponent {
     componentDidMount() {
 
         if (this.context === undefined) {
-            isContext(Products.displayName);
+            hasUnbxdSearchWrapperContext(Products.displayName);
         }
 
         const { helpers: { setProductConfiguration } } = this.context;
@@ -46,7 +45,7 @@ export class Products extends React.PureComponent {
             variantsCount,
             variantAttributes,
             paginationType,
-            groupBy } = this.props
+            groupBy } = this.props;
 
         //generate required fields here based on productAttributes and variantAttributes
         const requiredFields = Object.values(productAttributes);
@@ -68,7 +67,7 @@ export class Products extends React.PureComponent {
     getProductProps() {
 
         if (this.context === undefined) {
-            isContext(Products.displayName);
+            hasUnbxdSearchWrapperContext(Products.displayName);
         }
 
         const { unbxdCore, unbxdCoreStatus, helpers: { trackActions } } = this.context;
@@ -76,24 +75,24 @@ export class Products extends React.PureComponent {
             perRow,
             pageSize,
             paginationType,
-            productAttributes,
-            variantAttributes,
             productViewTypes,
+            productViewDisplayType,
             heightDiffToTriggerNextPage,
-            showVariants,
             LoaderComponent,
             showLoader,
             onProductClick: onProductClickCB,
+            LoadMoreComponent,
             onZeroResults,
             ProductItemComponent,
-            productViewDisplayType,
-            ProductsViewListItemComponent,
+            ProductsViewItemComponent,
+            productIdAttribute,
+            productAttributes,
+            showVariants,
+            groupBy,
+            variantAttributes,
             showSwatches,
             swatchAttributes,
-            groupBy,
-            SwatchItemComponent,
-            productIdAttribute,
-            LoadMoreComponent } = this.props;
+            SwatchItemComponent } = this.props;
 
         const getSearchResults = unbxdCore.getSearchResults.bind(unbxdCore);
         const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
@@ -104,14 +103,12 @@ export class Products extends React.PureComponent {
         const query = unbxdCore.getSearchQuery() || "";
 
         const onViewToggle = (event) => {
+
             const productViewType = event.target.dataset.viewtype || event.target.value;;
 
-            trackActions({ type: 'PRODUCT_VIEW_TYPE', data: { productViewType } });
             this.setState({ productViewType });
-
         }
 
-        //Get next page method
         const getNextPage = () => {
 
             const { currentPage } = getPaginationInfo();
@@ -119,27 +116,37 @@ export class Products extends React.PureComponent {
 
             setPageStart(newStart);
             getResults();
-            trackActions({ type: 'NEXT_PAGE', data: { paginationType } });
         }
 
         const onProductClick = (event) => {
 
-            this.props.onProductClick && this.props.onProductClick();
-
             const productUniqueId = event.target.dataset.uniqueid;
             const prank = event.target.dataset.prank;
             const clickedProduct = getProductByPropValue(productIdAttribute, productUniqueId);
-            trackProductClick(clickedProduct[productIdAttribute], prank);
+
+            if (onProductClickCB) {
+
+                if (onProductClickCB(clickedProduct)) {
+
+                    trackProductClick(clickedProduct[productIdAttribute], prank);
+                } else {
+
+                    event.preventDefault();
+                }
+            } else {
+
+                trackProductClick(clickedProduct[productIdAttribute], prank);
+            }
+
+
+
         }
 
-        //onClick for products
-        const getProductsProp = ({ onClick, ...props }) => ({
+        const getOnProductsClickProps = ({ onClick, ...props }) => ({
             onClick: () => {
                 onProductClick();
                 onClick();
             },
-            getSearchResults,
-            getNextPage,
             ...props
         })
 
@@ -163,19 +170,18 @@ export class Products extends React.PureComponent {
         };
         const helpers = {
             ZeroResultsComponent,
-            onViewToggle: onViewToggle,
-            getProductsProp,
+            onViewToggle,
+            getOnProductsClickProps,
             getNextPage,
             onProductClick,
             getSearchResults,
             getNextPage,
             LoaderComponent,
-            onProductClickCB,
             onZeroResults,
             ProductItemComponent,
-            ProductsViewListItemComponent,
+            ProductsViewItemComponent,
             SwatchItemComponent,
-            LoadMoreComponent,
+            LoadMoreComponent
         }
 
         return { data, helpers }
@@ -203,7 +209,7 @@ Products.ProductsView = ProductsView;
 Products.displayName = "Products";
 
 Products.defaultProps = {
-    perRow: 5,
+    perRow: 4,
     pageSize: 10,
     productViewTypes: ["GRID"],
     productAttributes: {},
@@ -227,6 +233,18 @@ Products.propTypes = {
     */
     pageSize: PropTypes.number,
     /**
+    * Required pagination type. Possible options are `INFINITE_SCROLL`, `CLICK_N_SCROLL` and `FIXED_PAGINATION`.
+    */
+    paginationType: PropTypes.string,
+    /**
+     * Height difference to trigger for next page in case of paginationType `INFINITE_SCROLL`.
+     */
+    heightDiffToTriggerNextPage: PropTypes.number,
+    /**
+     * Custom load more component for CLICK_N_SCROLL
+     */
+    LoadMoreComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
     * Required ProductViewType.Possible options are`GRID` and `LIST`.
     */
     productViewTypes: PropTypes.arrayOf(PropTypes.string),
@@ -237,23 +255,15 @@ Products.propTypes = {
     /**
     * Custom `LIST` item component for product views.
     */
-    ProductsViewListItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    ProductsViewItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
+    * Unique attribute of the product
+    */
+    productIdAttribute: PropTypes.string,
     /**
     * Mapping of catalog Product fields to SDK Product fields.
     */
     productAttributes: PropTypes.object.isRequired,
-    /**      
-    *  Component to be shown in case of zero results.
-    */
-    ZeroResultsComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-    /**
-    * Required pagination type. Possible options are `INFINITE_SCROLL`, `CLICK_N_SCROLL` and `FIXED_PAGINATION`.
-    */
-    paginationType: PropTypes.string,
-    /**
-    * Height difference to trigger for next page in case of paginationType `INFINITE_SCROLL`.
-    */
-    heightDiffToTriggerNextPage: PropTypes.number,
     /**
     * Show variants to a product.
     */
@@ -266,10 +276,6 @@ Products.propTypes = {
     * Mapping of catalog Product variant fields to SDK Product variant fields.
     */
     variantAttributes: PropTypes.object,
-    /**
-    * Custom Product card component
-    */
-    ProductCardComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     /**
      * Should loader be shown
      */
@@ -287,10 +293,6 @@ Products.propTypes = {
     */
     onZeroResults: PropTypes.func,
     /**
-    * Custom product item component
-    */
-    ProductItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-    /**
     * Display swatches
     */
     showSwatches: PropTypes.bool,
@@ -307,13 +309,13 @@ Products.propTypes = {
     */
     SwatchItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     /**
-    * Unique attribute of the product
+    * Custom product item component
     */
-    productIdAttribute: PropTypes.string,
-    /**
-    * Custom load more component for CLICK_N_SCROLL
+    ProductItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**      
+    *  Component to be shown in case of zero results.
     */
-    LoadMoreComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    ZeroResultsComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 }
 
 export default Products;
