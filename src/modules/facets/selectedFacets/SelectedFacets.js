@@ -1,15 +1,15 @@
 import React from 'react';
 
 import { FacetsContextConsumer } from '../context';
-import ActiveFacetItem from './ActiveFacetItem';
-import { Button, List } from '../../../components';
+import SelectedFacetItem from './SelectedFacetItem';
+import { List } from '../../../components';
 
 const SelectedFacets = () => {
     return (<FacetsContextConsumer>
         {({ data, helpers }) => {
 
             const { selectedFacets, moveFacetsOnSelect } = data;
-            const { onFacetClick, ActiveFacetItemComponent } = helpers;
+            const { onFacetClick, SelectedFacetItemComponent } = helpers;
 
 
             if (!moveFacetsOnSelect) {
@@ -23,7 +23,7 @@ const SelectedFacets = () => {
 
                     return <List items={selectedValues}
                         idAttribute={'dataId'}
-                        ListItem={ActiveFacetItemComponent || ActiveFacetItem}
+                        ListItem={SelectedFacetItemComponent || SelectedFacetItem}
                         onClick={onFacetClick}
                         facetName={facetName}
                         className={'UNX-active-facet-container'}

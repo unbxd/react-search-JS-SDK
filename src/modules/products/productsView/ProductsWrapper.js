@@ -107,42 +107,42 @@ class ProductsWrapper extends React.PureComponent {
         const { productViewType,
             onProductClick,
             perRow,
-            productMap,
-            productVariantMap,
+            productAttributes,
+            variantAttributes,
             paginationType,
             showVariants,
             ProductItemComponent,
             showSwatches,
             swatchAttributes,
             groupBy,
-            swatchItemComponent, } = this.props;
+            SwatchItemComponent, } = this.props;
         const { products, hasMoreResults } = this.state;
 
         const productViewsRender = <React.Fragment>{productViewType === productViewTypesOptions.GRID &&
             <GridView perRow={perRow}
-                productMap={productMap}
+                productAttributes={productAttributes}
                 products={products}
                 onProductClick={onProductClick}
                 showVariants={showVariants}
-                productVariantMap={productVariantMap}
+                variantAttributes={variantAttributes}
                 ProductItemComponent={ProductItemComponent}
                 showSwatches={showSwatches}
                 swatchAttributes={swatchAttributes}
                 groupBy={groupBy}
-                swatchItemComponent={swatchItemComponent}
+                SwatchItemComponent={SwatchItemComponent}
             />}
 
             {productViewType === productViewTypesOptions.LIST &&
-                <ListView productMap={productMap}
+                <ListView productAttributes={productAttributes}
                     products={products}
                     onProductClick={onProductClick}
                     showVariants={showVariants}
-                    productVariantMap={productVariantMap}
+                    variantAttributes={variantAttributes}
                     ProductItemComponent={ProductItemComponent}
                     showSwatches={showSwatches}
                     swatchAttributes={swatchAttributes}
                     groupBy={groupBy}
-                    swatchItemComponent={swatchItemComponent}
+                    SwatchItemComponent={SwatchItemComponent}
                 />}
         </React.Fragment>
 
@@ -164,8 +164,8 @@ ProductsWrapper.propTypes = {
     onProductClick: PropTypes.func.isRequired,
     getNextPage: PropTypes.func.isRequired,
     perRow: PropTypes.number,
-    productMap: PropTypes.object.isRequired,
-    productVariantMap: PropTypes.object.isRequired,
+    productAttributes: PropTypes.object.isRequired,
+    variantAttributes: PropTypes.object.isRequired,
     paginationType: PropTypes.string,
     heightDiffToTriggerNextPage: PropTypes.number,
     showVariants: PropTypes.bool.isRequired,

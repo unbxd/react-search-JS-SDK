@@ -11,18 +11,18 @@ class ListProductCard extends React.Component {
         super(props);
 
         const { itemData,
-            productMap,
+            productAttributes,
             showVariants,
-            productVariantMap,
+            variantAttributes,
             showSwatches,
             swatchAttributes,
             groupBy } = this.props;
-        //Get the datas from the product bases on productMap and create the card
+        //Get the datas from the product bases on productAttributes and create the card
         const productValues = getProductFields({
             itemData,
-            productMap,
+            productAttributes,
             showVariants,
-            productVariantMap,
+            variantAttributes,
             showSwatches,
             swatchAttributes,
             groupBy
@@ -52,7 +52,7 @@ class ListProductCard extends React.Component {
 
     render() {
 
-        const { swatchItemComponent, idx } = this.props;
+        const { SwatchItemComponent, idx } = this.props;
         const { productValues } = this.state;
         const [activeSwatch] = productValues['swatches'].filter((swatch) => {
             return swatch.active
@@ -80,7 +80,7 @@ class ListProductCard extends React.Component {
             <div className='UNX-swatch-content'>
                 <List
                     items={swatches}
-                    ListItem={swatchItemComponent || SwatchItem}
+                    ListItem={SwatchItemComponent || SwatchItem}
                     idAttribute={'swatchId'}
                     onClick={this.onSwatchClick}
                     className='UNX-swatch-item-list-container' />
@@ -92,9 +92,9 @@ class ListProductCard extends React.Component {
 
 ListProductCard.propTypes = {
     itemData: PropTypes.object.isRequired,
-    productMap: PropTypes.object.isRequired,
+    productAttributes: PropTypes.object.isRequired,
     showVariants: PropTypes.bool.isRequired,
-    productVariantMap: PropTypes.object.isRequired
+    variantAttributes: PropTypes.object.isRequired
 }
 
 export default ListProductCard;

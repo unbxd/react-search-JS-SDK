@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
 
 import { AppContextProvider } from './common/context';
-import { searchConfigurations, productTypes,searchEvents, searchStatus } from './config';
+import { searchConfigurations, productTypes, searchEvents, searchStatus } from './config';
 import { paginationTypes } from './modules/products/utils';
 import '../public/css/core/index.scss';
 
@@ -36,7 +36,7 @@ class UnbxdSearchWrapper extends Component {
         unbxdCore.getResults(query);
     }
 
-    setPaginationConfiguration = (config, triggerResults = false) => {
+    setPaginationConfiguration(config, triggerResults = false) {
 
         const { pageSize } = config;
 
@@ -49,7 +49,7 @@ class UnbxdSearchWrapper extends Component {
 
     }
 
-    setSortConfiguration = (config, triggerResults = false) => {
+    setSortConfiguration(config, triggerResults = false) {
 
         const { sortBy } = config;
 
@@ -60,7 +60,7 @@ class UnbxdSearchWrapper extends Component {
         }
     }
 
-    setFacetConfiguration = (config, triggerResults = false) => {
+    setFacetConfiguration(config, triggerResults = false) {
 
         const { defaultFilters, categoryDisplayName, categoryField } = config;
 
@@ -86,9 +86,12 @@ class UnbxdSearchWrapper extends Component {
         const { siteKey, apiKey, getCategoryId, productType } = this.props;
 
         this.unbxdCallBack = this.unbxdCallBack.bind(this);
+        this.setPaginationConfiguration = this.setPaginationConfiguration.bind(this);
+        this.setSortConfiguration = this.setSortConfiguration.bind(this);
+        this.setFacetConfiguration = this.setFacetConfiguration.bind(this);
         this.setProductConfiguration = this.setProductConfiguration.bind(this);
-        this.trackActions = this.trackActions.bind(this);
         this.setSearchBoxConfiguration = this.setSearchBoxConfiguration.bind(this);
+        this.trackActions = this.trackActions.bind(this);
 
         this.state = {
             unbxdCore:
@@ -154,7 +157,7 @@ class UnbxdSearchWrapper extends Component {
         const { onPageLoad } = this.props;
         const { unbxdCore } = this.state;
 
-        //unbxdCore.getResults('boots');
+        unbxdCore.getResults('boots');
         const categoryId = typeof (unbxdCore.options.getCategoryId) === 'function' && unbxdCore.options.getCategoryId();
         this.setState({ categoryId })
         if (categoryId && typeof (categoryId) === "string" && categoryId.length > 0) {
@@ -207,6 +210,10 @@ class UnbxdSearchWrapper extends Component {
     }
 }
 
+UnbxdSearchWrapper.defaultProps = {
+    productType: "SEARCH"
+}
+
 UnbxdSearchWrapper.propTypes = {
     /**
     * Site key of the site.
@@ -228,6 +235,10 @@ UnbxdSearchWrapper.propTypes = {
     * Custom function to return the Category Id.
     */
     getCategoryId: PropTypes.func,
+    /**
+    * Product type of UnbxdSearchWrapper.
+    */
+    productType: PropTypes.string,
 }
 
 export default UnbxdSearchWrapper;

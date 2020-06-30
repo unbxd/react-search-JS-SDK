@@ -1,14 +1,14 @@
 import { productViewTypes as productViewTypesOptions } from './constants';
 
 const getProductFields = ({
-    itemData: product, productMap,
+    itemData: product, productAttributes,
     showVariants,
-    productVariantMap,
+    variantAttributes,
     showSwatches,
     swatchAttributes,
     groupBy }) => {
 
-    const productMapper = {
+    const productAttributesMapper = {
         PRODUCT_NAME: 'productName',
         PRODUCT_URL: 'productUrl',
         IMAGE_URL: 'imageUrl',
@@ -20,21 +20,21 @@ const getProductFields = ({
 
     const productValues = {};
     let swatches = [];
-    for (let key in productMapper) {
-        const mappedKey = productMapper[key];
+    for (let key in productAttributesMapper) {
+        const mappedKey = productAttributesMapper[key];
         if (product['relevantDocument'] === 'variant' && showVariants) {
             if (key === 'IMAGE_URL') {
-                const value = product['variants'][0][productVariantMap[mappedKey]];
+                const value = product['variants'][0][variantAttributes[mappedKey]];
                 productValues[mappedKey] = Array.isArray(value) && value.length ? value[0] : value;
             } else {
-                productValues[mappedKey] = product['variants'][0][productVariantMap[mappedKey]];
+                productValues[mappedKey] = product['variants'][0][variantAttributes[mappedKey]];
             }
         } else {
             if (key === 'IMAGE_URL') {
-                const value = product[productMap[mappedKey]];
+                const value = product[productAttributes[mappedKey]];
                 productValues[mappedKey] = Array.isArray(value) && value.length ? value[0] : value;
             } else {
-                productValues[mappedKey] = product[productMap[mappedKey]];
+                productValues[mappedKey] = product[productAttributes[mappedKey]];
             }
 
         }
@@ -47,8 +47,8 @@ const getProductFields = ({
         swatches = product['variants'].map((variant, idx) => {
             
             const swatchDetails = {};
-            swatchDetails['swatchId'] = variant[productVariantMap[productMapper.UNIQUE_ID]];
-            swatchDetails['swatchImageUrl'] = variant[swatchAttributes[productMapper.SWATCH_IMAGE_URL]];
+            swatchDetails['swatchId'] = variant[variantAttributes[productAttributesMapper.UNIQUE_ID]];
+            swatchDetails['swatchImageUrl'] = variant[swatchAttributes[productAttributesMapper.SWATCH_IMAGE_URL]];
             swatchDetails['groupByValue'] = variant[groupBy];
 
 

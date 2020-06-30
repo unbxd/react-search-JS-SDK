@@ -1,12 +1,16 @@
 import React from 'react';
+import { storiesOf } from '@storybook/react';
 
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import Sort from '../src/modules/sort';
 
-export default {
-    title: 'Sort',
-    component: Sort
-}
+const stories = storiesOf('Sort', module).addParameters({
+    props: {
+        propTablesExclude: [UnbxdSearchWrapper,
+            'SortBy',
+            'ResetSort']
+    }
+});
 
 const SortItemComponent = ({ itemData, isActive }) => {
 
@@ -49,7 +53,29 @@ const sortOptions = [
     }
 ]
 
-export const SortComponent = () => (<UnbxdSearchWrapper
+stories.add('default', () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Sort sortOptions={sortOptions} />
+
+</UnbxdSearchWrapper >));
+
+stories.add('with defaultSort', () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Sort
+        defaultSort={{
+            "label": "Brand A-Z",
+            "field": "title",
+            "order": "asc"
+        }}
+        sortOptions={sortOptions} />
+
+</UnbxdSearchWrapper >));
+
+stories.add('with sortDisplayType List', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
@@ -63,9 +89,9 @@ export const SortComponent = () => (<UnbxdSearchWrapper
         sortDisplayType={'LIST'}
         SortItemComponent={SortItemComponent} />
 
-</UnbxdSearchWrapper >);
+</UnbxdSearchWrapper >));
 
-export const SortDropdownComponent = () => (<UnbxdSearchWrapper
+stories.add('with more flexibility', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
@@ -76,12 +102,16 @@ export const SortDropdownComponent = () => (<UnbxdSearchWrapper
             "order": "asc"
         }}
         sortOptions={sortOptions}
-        sortDisplayType={'DROPDOWN'}
-        SortItemComponent={SortItemComponent} />
+    >
 
-</UnbxdSearchWrapper >);
+        <Sort.SortBy />
+        <Sort.ResetSort />
 
-export const SortRenderProps = () => (<UnbxdSearchWrapper
+    </Sort>
+
+</UnbxdSearchWrapper >));
+
+stories.add('with render props', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
@@ -89,9 +119,10 @@ export const SortRenderProps = () => (<UnbxdSearchWrapper
         sortOptions={sortOptions}
     >
         {({ data, helpers }) => {
+
             //data and helpers for Sort
-            return (<p>Hello from Sort</p>)
+            return (<p>Hello Sort</p>)
         }}
     </Sort>
 
-</UnbxdSearchWrapper >);  
+</UnbxdSearchWrapper >));  

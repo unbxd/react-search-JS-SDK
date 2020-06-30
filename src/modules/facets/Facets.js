@@ -46,7 +46,7 @@ class Facets extends React.Component {
             isClearFilters,
             moveFacetsOnSelect,
             FacetItemComponent,
-            ActiveFacetItemComponent,
+            SelectedFacetItemComponent,
             MultilevelFacetItemComponent,
             BreadcrumbItemComponent } = this.props;
 
@@ -264,7 +264,7 @@ class Facets extends React.Component {
             clearFilters,
             setSelectedFacets,
             FacetItemComponent,
-            ActiveFacetItemComponent,
+            SelectedFacetItemComponent,
             addRangeFacet,
             removeRangeFacet,
             applyRangeFacet,
@@ -342,7 +342,7 @@ Facets.propTypes = {
     /**
     * Custom active Facet item component
     */
-    ActiveFacetItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    SelectedFacetItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     /**
     * Display name of the category
     */

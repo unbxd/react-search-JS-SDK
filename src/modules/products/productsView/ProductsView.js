@@ -11,9 +11,9 @@ const ProductsView = () => {
     return (<ProductContextConsumer>{({ data, helpers }) => {
 
         const { productViewType,
-            productMap,
+            productAttributes,
             perRow,
-            productVariantMap,
+            variantAttributes,
             paginationType,
             heightDiffToTriggerNextPage,
             showVariants,
@@ -29,7 +29,7 @@ const ProductsView = () => {
             onProductClick,
             getNextPage,
             ProductItemComponent,
-            swatchItemComponent, } = helpers;
+            SwatchItemComponent, } = helpers;
 
         const { numberOfProducts = 0, products = [] } = getSearchResults() || {};
 
@@ -48,8 +48,8 @@ const ProductsView = () => {
             productViewType={productViewType}
             perRow={perRow}
             products={products}
-            productMap={productMap}
-            productVariantMap={productVariantMap}
+            productAttributes={productAttributes}
+            variantAttributes={variantAttributes}
             paginationType={paginationType}
             getNextPage={getNextPage}
             heightDiffToTriggerNextPage={heightDiffToTriggerNextPage}
@@ -59,7 +59,7 @@ const ProductsView = () => {
             showSwatches={showSwatches}
             swatchAttributes={swatchAttributes}
             groupBy={groupBy}
-            swatchItemComponent={swatchItemComponent}
+            SwatchItemComponent={SwatchItemComponent}
             unbxdCoreStatus={unbxdCoreStatus}
             query={query}
             productIdAttribute={productIdAttribute}

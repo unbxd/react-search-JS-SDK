@@ -41,16 +41,16 @@ export class Products extends React.PureComponent {
         const { helpers: { setProductConfiguration } } = this.context;
 
         const { pageSize,
-            productMap,
+            productAttributes,
             showVariants,
             variantsCount,
-            productVariantMap,
+            variantAttributes,
             paginationType,
             groupBy } = this.props
 
-        //generate required fields here based on productMap and productVariantMap
-        const requiredFields = Object.values(productMap);
-        const variantRequiredFields = Object.values(productVariantMap);
+        //generate required fields here based on productAttributes and variantAttributes
+        const requiredFields = Object.values(productAttributes);
+        const variantRequiredFields = Object.values(variantAttributes);
 
         //Set the main config
         //Do not set pageSize if pagination type is FIXED_SCROLLING
@@ -76,8 +76,8 @@ export class Products extends React.PureComponent {
             perRow,
             pageSize,
             paginationType,
-            productMap,
-            productVariantMap,
+            productAttributes,
+            variantAttributes,
             productViewTypes,
             heightDiffToTriggerNextPage,
             showVariants,
@@ -91,7 +91,7 @@ export class Products extends React.PureComponent {
             showSwatches,
             swatchAttributes,
             groupBy,
-            swatchItemComponent,
+            SwatchItemComponent,
             productIdAttribute } = this.props;
 
         const getSearchResults = unbxdCore.getSearchResults.bind(unbxdCore);
@@ -146,8 +146,8 @@ export class Products extends React.PureComponent {
             unbxdCoreStatus,
             perRow,
             paginationType,
-            productMap,
-            productVariantMap,
+            productAttributes,
+            variantAttributes,
             productViewTypes,
             heightDiffToTriggerNextPage,
             showVariants,
@@ -173,7 +173,7 @@ export class Products extends React.PureComponent {
             onZeroResults,
             ProductItemComponent,
             ProductsViewListItemComponent,
-            swatchItemComponent,
+            SwatchItemComponent,
         }
 
         return { data, helpers }
@@ -205,10 +205,10 @@ Products.defaultProps = {
     perRow: 5,
     pageSize: 10,
     productViewTypes: ["GRID"],
-    productMap: {},
-    productVariantMap: {},
+    productAttributes: {},
+    variantAttributes: {},
     paginationType: 'FIXED_PAGINATION',
-    heightDiffToTriggerNextPage: 50,
+    heightDiffToTriggerNextPage: 100,
     showVariants: false,
     LoaderComponent: defaultLoader,
     showLoader: true,
@@ -240,7 +240,7 @@ Products.propTypes = {
     /**
     * Mapping of catalog Product fields to SDK Product fields.
     */
-    productMap: PropTypes.object.isRequired,
+    productAttributes: PropTypes.object.isRequired,
     /**      
     *  Component to be shown in case of zero results.
     */
@@ -264,19 +264,19 @@ Products.propTypes = {
     /**
     * Mapping of catalog Product variant fields to SDK Product variant fields.
     */
-    productVariantMap: PropTypes.object,
+    variantAttributes: PropTypes.object,
     /**
     * Custom Product card component
     */
     ProductCardComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     /**
+     * Should loader be shown
+     */
+    showLoader: PropTypes.bool,
+    /**
     * Custom loader component
     */
     LoaderComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-    /**
-    * Should loader be shown
-    */
-    showLoader: PropTypes.bool,
     /**
     * Callback function triggered on click of a product.
     */
@@ -304,7 +304,7 @@ Products.propTypes = {
     /**
     * Custom swatch component
     */
-    swatchItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    SwatchItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     /**
     * Unique attribute of the product
     */

@@ -7,14 +7,14 @@ class RenderInput extends React.Component {
 
 
     render() {
-        const { query, onQueryChange, isAutoFocus, isClear, onClearQuery } = this.props;
+        const { query, onQueryChange, autoFocus, clearable, onClearQuery } = this.props;
 
         return (<Input
             value={query}
             onChange={onQueryChange}
             className='UNX-searchbox query'
-            isAutoFocus={isAutoFocus}
-            isClear={isClear}
+            autoFocus={autoFocus}
+            clearable={clearable}
             onClear={onClearQuery}
         />)
     }

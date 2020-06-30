@@ -3,21 +3,21 @@ import PropTypes from 'prop-types';
 
 import { GridProductCard } from '../productCards';
 import { List } from '../../../../components/index';
-//We need the productMap object to map to values
+//We need the productAttributes object to map to values
 
 const GridView = (props) => {
 
     const { products = [],
         perRow,
-        productMap,
+        productAttributes,
         showVariants,
-        productVariantMap,
+        variantAttributes,
         onProductClick,
         ProductItemComponent,
         showSwatches,
         swatchAttributes,
         groupBy,
-        swatchItemComponent } = props;
+        SwatchItemComponent } = props;
 
     return (<div className='UNX-product-container'>
         <List
@@ -25,13 +25,13 @@ const GridView = (props) => {
             items={products}
             ListItem={ProductItemComponent || GridProductCard}
             onClick={onProductClick}
-            productMap={productMap}
+            productAttributes={productAttributes}
             showVariants={showVariants}
-            productVariantMap={productVariantMap}
+            variantAttributes={variantAttributes}
             showSwatches={showSwatches}
             swatchAttributes={swatchAttributes}
             groupBy={groupBy}
-            swatchItemComponent={swatchItemComponent}
+            SwatchItemComponent={SwatchItemComponent}
             className={`UNX-grid-view grid-cols-${perRow}`} />
     </div>)
 }
@@ -39,9 +39,9 @@ const GridView = (props) => {
 GridView.propTypes = {
     products: PropTypes.arrayOf(PropTypes.object).isRequired,
     perRow: PropTypes.number.isRequired,
-    productMap: PropTypes.object.isRequired,
+    productAttributes: PropTypes.object.isRequired,
     showVariants: PropTypes.bool.isRequired,
-    productVariantMap: PropTypes.object.isRequired,
+    variantAttributes: PropTypes.object.isRequired,
     onProductClick: PropTypes.func.isRequired
 }
 
