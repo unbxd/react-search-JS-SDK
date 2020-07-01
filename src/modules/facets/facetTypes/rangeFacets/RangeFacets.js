@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { FacetsContextConsumer } from '../../context';
 import GenerateFacets from './GenerateFacets';

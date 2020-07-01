@@ -248,7 +248,7 @@ class Facets extends React.Component {
             manageFacetState(null, unx_name, null, manageStateTypes.RESET);
         }
 
-        const selectedFacetsAPI = getSelectedFacets();
+        const lastSelectedFacets = getSelectedFacets();
 
 
         const data = {
@@ -257,7 +257,7 @@ class Facets extends React.Component {
             isApplyFilters,
             isClearFilters,
             moveFacetsOnSelect,
-            selectedFacetsAPI,
+            lastSelectedFacets,
             selectedRangeFacets,
             noOfPages,
             ...this.state
@@ -285,7 +285,6 @@ class Facets extends React.Component {
         };
 
         return { data, helpers }
-
     }
 
     render() {

@@ -7,16 +7,14 @@ import FacetItem from './FacetItem';
 
 class GenerateFacets extends React.Component {
 
-    state = {};
+    componentDidUpdate() {
 
-    static getDerivedStateFromProps(props) {
-
-        if (props.selectedFacets !== props.selectedFacetsAPI) {
-            props.setSelectedFacets(props.isApplyFilters ?
-                props.selectedFacets : props.selectedFacetsAPI);
+        const { selectedFacets, lastSelectedFacets, setSelectedFacets, isApplyFilters } = this.props;
+        if (selectedFacets !== lastSelectedFacets) {
+            setSelectedFacets(isApplyFilters ?
+                selectedFacets : lastSelectedFacets);
         }
 
-        return null;
     }
 
     render() {
@@ -60,7 +58,7 @@ class GenerateFacets extends React.Component {
 GenerateFacets.propTypes = {
     textFacets: PropTypes.arrayOf(PropTypes.object),
     selectedFacets: PropTypes.object,
-    selectedFacetsAPI: PropTypes.object,
+    lastSelectedFacets: PropTypes.object,
     onFacetClick: PropTypes.func.isRequired,
     onFacetObjectReset: PropTypes.func.isRequired,
     setSelectedFacets: PropTypes.func.isRequired,
