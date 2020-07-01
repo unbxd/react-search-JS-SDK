@@ -157,7 +157,7 @@ class UnbxdSearchWrapper extends Component {
         const { onPageLoad } = this.props;
         const { unbxdCore } = this.state;
 
-        unbxdCore.getResults('boots');
+        unbxdCore.getResults('black rug');
         const categoryId = typeof (unbxdCore.options.getCategoryId) === 'function' && unbxdCore.options.getCategoryId();
         this.setState({ categoryId })
         if (categoryId && typeof (categoryId) === "string" && categoryId.length > 0) {

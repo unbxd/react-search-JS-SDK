@@ -121,24 +121,25 @@ export class Products extends React.PureComponent {
         const onProductClick = (event) => {
 
             const productUniqueId = event.target.dataset.uniqueid;
-            const prank = event.target.dataset.prank;
-            const clickedProduct = getProductByPropValue(productIdAttribute, productUniqueId);
+            if (productUniqueId) {
+                const prank = event.target.dataset.prank;
+                const clickedProduct = getProductByPropValue(productIdAttribute, productUniqueId);
 
-            if (onProductClickCB) {
+                if (onProductClickCB) {
 
-                if (onProductClickCB(clickedProduct)) {
+                    if (onProductClickCB(clickedProduct)) {
 
-                    trackProductClick(clickedProduct[productIdAttribute], prank);
+                        trackProductClick(clickedProduct[productIdAttribute], prank);
+                    } else {
+
+                        event.preventDefault();
+                    }
                 } else {
 
-                    event.preventDefault();
+                    trackProductClick(clickedProduct[productIdAttribute], prank);
                 }
-            } else {
 
-                trackProductClick(clickedProduct[productIdAttribute], prank);
             }
-
-
 
         }
 

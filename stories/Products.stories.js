@@ -18,12 +18,98 @@ class ZeroResultsComponent extends React.Component {
     }
 }
 
-const ProductItemComponent = ({ itemData }) => {
-    const { imageUrl, title } = itemData;
-    return (<div className='myproduct'>
-        <img src={imageUrl[0]} />
-        <p>{title}</p>
-    </div>)
+class ProductItemComponent extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        const {
+            itemData,
+            idAttribute,
+            showVariants,
+            showSwatches,
+            swatchAttributes
+        } = this.props;
+
+        this.state = {
+            productValues: this.getParsedProduct({
+                itemData,
+                showVariants,
+                showSwatches,
+                swatchAttributes,
+                idAttribute
+            })
+        };
+    }
+
+    getParsedProduct = ({
+        itemData,
+        idAttribute
+    }) => {
+
+        const { imageUrl, title, productUrl, variants } = itemData;
+        const swatchValues = variants.map((variant, index) => {
+
+            return {
+                swatchId: variant.variantId,
+                imageUrl: variant.variant_image_array[0],
+                swatchImageUrl: variant.variant_overhead_swatch,
+                active: index === 0 ? true : false
+            }
+        });
+
+        const productValues = { idAttribute, imageUrl, title, productUrl, swatchValues };
+        return productValues;
+    }
+
+    handleSwatchClick = (event) => {
+
+        const currentSwatchId = event.target.dataset['swatchid'];
+        this.setState(({ productValues }) => {
+            return {
+                productValues: {
+                    ...productValues,
+                    swatchValues: productValues.swatchValues.map(swatch => {
+                        if (swatch.swatchId === currentSwatchId) {
+                            return { ...swatch, active: true }
+                        } else {
+                            return { ...swatch, active: false }
+                        };
+                    })
+                }
+            }
+        })
+    }
+
+    render() {
+
+        const { productValues } = this.state;
+        const { idAttribute, idx, showSwatches } = this.props;
+
+        const [activeSwatch] = productValues['swatchValues'].filter((swatch) => {
+            return swatch.active
+        });
+
+        const product = { ...productValues, ...activeSwatch };
+        const { imageUrl, title, productUrl, swatchValues } = product;
+        const uniqueId = idAttribute;
+        const prank = idx + 1;
+
+        return (<div className='myproduct'>
+            <div className='myproduct-details' data-uniqueid={uniqueId} data-prank={prank}>
+                <a href={productUrl} className={`myproduct-card`} data-uniqueid={uniqueId} data-prank={prank}>
+                    <img className='myproduct-card image' src={imageUrl} data-uniqueid={uniqueId} data-prank={prank} />
+                    <p className='myproduct-card name' data-uniqueid={uniqueId} data-prank={prank}>{title}</p>
+                </a>
+            </div>
+            {showSwatches && <div className='myproduct-swatches'>
+                {swatchValues.map(swatch => {
+                    const { swatchImageUrl, swatchId } = swatch;
+                    return (<img className='myproduct-swatch image' src={swatchImageUrl} data-swatchid={swatchId} onClick={this.handleSwatchClick} />)
+                })}
+            </div>}
+        </div>)
+    }
 }
 
 const ProductsViewItemComponent = ({ itemData, isActive }) => {
@@ -210,12 +296,18 @@ stories.add('with view type list', () => (<UnbxdSearchWrapper
 </UnbxdSearchWrapper >));
 
 stories.add('with ProductItemComponent', () => (<UnbxdSearchWrapper
-    siteKey='wildearthclone-neto-com-au808941566310465'
-    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+    siteKey='prod-rugsusa808581564092094'
+    apiKey='ea4823934059ff8ad5def0be04f8dd4e'>
 
     <Products
+        ProductItemComponent={ProductItemComponent}
         productAttributes={productAttributes}
-        ProductItemComponent={ProductItemComponent} />
+        showVariants={true}
+        variantsCount={4}
+        variantAttributes={variantAttributes}
+        showSwatches={true}
+        groupBy={'variant_color'}
+        swatchAttributes={swatchAttributes} />
 
 </UnbxdSearchWrapper >));
 
