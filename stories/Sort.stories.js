@@ -12,11 +12,12 @@ const stories = storiesOf('Sort', module).addParameters({
     }
 });
 
-const SortItemComponent = ({ itemData, isActive }) => {
+const SortItemComponent = ({ itemData, isActive, onClick }) => {
 
     return (<div
         data-unxsortby={itemData.value}
         className={`sort-item ${isActive ? 'active' : ''}`}
+        onClick={onClick}
     >
         {itemData.label}
     </div>)

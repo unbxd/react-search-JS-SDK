@@ -73,36 +73,36 @@ class ProductsWrapper extends React.PureComponent {
         }
     }
 
-    static getDerivedStateFromProps(props, state) {
+    componentDidUpdate(prevProps) {
 
-        const { paginationType, products, start, query, productIdAttribute } = props;
+        const { paginationType, products, start, query, productIdAttribute } = this.props;
 
         if (products.length === 0) {
             if (paginationType === paginationTypes.INFINITE_SCROLL) {
-                return null;
+                return;
             }
 
             if (paginationType === paginationTypes.CLICK_N_SCROLL) {
-                return { hasMoreResults: false }
+                this.setState({ hasMoreResults: false });
             }
         }
 
-        if (state.start !== start &&
+        if (prevProps.start !== start &&
             (paginationType === paginationTypes.INFINITE_SCROLL ||
                 paginationType === paginationTypes.CLICK_N_SCROLL)) {
 
             trackProductImpressions(query, getProductPids(products, productIdAttribute));
-            return start === 0 ? { products: products } :
-                { products: [...state.products, ...products], start }
+            start === 0 ? this.setState({ products: products }) :
+                this.setState({ products: [...prevProps.products, ...products], start });
         }
 
-        if (state.products !== products && paginationType === paginationTypes.FIXED_PAGINATION) {
+        if (prevProps.start !== start &&
+            prevProps.products !== products &&
+            paginationType === paginationTypes.FIXED_PAGINATION) {
 
             trackProductImpressions(query, getProductPids(products, productIdAttribute));
-            return { products: products, start }
+            this.setState({ products: products, start });
         }
-
-        return null;
     }
 
     render() {

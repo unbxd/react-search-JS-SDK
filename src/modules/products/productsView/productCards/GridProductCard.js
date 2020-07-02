@@ -57,7 +57,7 @@ class GridProductCard extends React.Component {
 
     render() {
 
-        const { SwatchItemComponent, idx } = this.props;
+        const { SwatchItemComponent, idx, onClick } = this.props;
         const { productValues } = this.state;
         const [activeSwatch] = productValues['swatches'].filter((swatch) => {
             return swatch.active
@@ -78,7 +78,7 @@ class GridProductCard extends React.Component {
         //Add support for router as a config
         return (<div className='UNX-product-card-container'>
 
-            <a href={productUrl} className={`UNX-product-card UNX-grid-card`} data-uniqueid={uniqueId} data-prank={prank}>
+            <a href={productUrl} className={`UNX-product-card UNX-grid-card`} data-uniqueid={uniqueId} data-prank={prank} onClick={onClick}>
                 <img className='UNX-image' src={imageUrl} data-uniqueid={uniqueId} data-prank={prank} />
                 <p className='UNX-product-name' data-uniqueid={uniqueId} data-prank={prank}>{productName}</p>
                 <p className='UNX-price' data-uniqueid={uniqueId} data-prank={prank}>{price}</p>

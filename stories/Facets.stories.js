@@ -24,46 +24,50 @@ const FacetItemComponent = ({ itemData, facetName, onClick, isFacetSelected, sel
 
     const { name, count, dataId } = itemData;
     const isSelected = isFacetSelected(selectedFacets, facetName, dataId);
-    console.log("hello ", name, isSelected);
+
     return (<div>
         <input
             type="checkbox"
             checked={isSelected}
             data-unx_name={facetName}
-            data-unx_dataid={dataId} />
+            data-unx_dataid={dataId}
+            onClick={onClick} />
 
         {name} - {count}
     </div>)
 }
 
-const SelectedFacetItemComponent = ({ itemData, facetName }) => {
+const SelectedFacetItemComponent = ({ itemData, facetName, onClick }) => {
     const { name, dataId } = itemData;
     return (<p
         data-unx_name={facetName}
-        data-unx_dataid={dataId}>
+        data-unx_dataid={dataId}
+        onClick={onClick}>
         {name}  x
     </p>)
 }
 
-const MultilevelFacetItemComponent = ({ itemData, multiLevelField, level, }) => {
+const MultilevelFacetItemComponent = ({ itemData, multiLevelField, level, onClick }) => {
     const { name, count } = itemData;
     return (<div
         data-unx_categoryname={name}
         data-unx_multilevelfield={multiLevelField}
         data-unx_level={level}
         className='UNX-bucketed-facet-list-item'
+        onClick={onClick}
     >
         {name} - {count}
     </div>)
 }
 
-const BreadcrumbItemComponent = ({ itemData }) => {
+const BreadcrumbItemComponent = ({ itemData, onClick }) => {
     const { value, filterField, level } = itemData;
     return (<div
         data-unx_categoryname={value}
         data-unx_multilevelfield={filterField}
         data-unx_level={level}
         className={'UNX-breadcrumbs-list-item'}
+        onClick={onClick}
     >
         {value} x
     </div>)

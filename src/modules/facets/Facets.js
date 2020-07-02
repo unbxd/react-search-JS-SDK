@@ -178,7 +178,9 @@ class Facets extends React.Component {
             });
 
             activeFacetsObj = { ...activeFacetsObj, ...rangeFacets };
-            activeFacetsObj['category'] = selectedCategoryFilters.join(">");
+
+            const { categoryPath = [] } = selectedCategoryFilters;
+            activeFacetsObj['category'] = categoryPath.length ? categoryPath.join(">") : "";
 
 
             return activeFacetsObj;

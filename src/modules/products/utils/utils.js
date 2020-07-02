@@ -85,7 +85,7 @@ export const getProductViewType = (productViewTypes = []) => {
 }
 
 export const getProductPids = (products, productIdAttribute) => {
-    
+
     const pids = products.map((product) => {
         return product[productIdAttribute]
     })

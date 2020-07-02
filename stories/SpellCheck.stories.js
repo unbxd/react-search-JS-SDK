@@ -15,7 +15,9 @@ const stories = storiesOf('SpellCheck', module).addParameters({
 
 const SpellCheckItemComponent = ({ itemData, onClick }) => {
     const { suggestion } = itemData;
-    return (<p data-suggestion={suggestion} onClick={onClick}>Were you looking for {suggestion}</p>)
+    return (<p
+        data-suggestion={suggestion}
+        onClick={onClick}>Were you looking for {suggestion}</p>)
 }
 
 

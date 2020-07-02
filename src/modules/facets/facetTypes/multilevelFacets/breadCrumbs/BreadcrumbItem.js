@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Button } from '../../../../../components';
 
-const BreadCrumbItem = ({ itemData }) => {
+const BreadCrumbItem = ({ itemData, onClick }) => {
 
     const { value, filterField, level } = itemData;
     return (<Button
@@ -11,6 +11,7 @@ const BreadCrumbItem = ({ itemData }) => {
         data-unx_multilevelfield={filterField}
         data-unx_level={level}
         className={'UNX-breadcrumbs-list-item'}
+        onClick={onClick}
     >
         {value}
     </Button>)

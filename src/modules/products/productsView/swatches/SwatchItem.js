@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SwatchItem = ({ itemData }) => {
+const SwatchItem = ({ itemData, onClick }) => {
 
     const { swatchImageUrl, swatchId, active } = itemData;
     return (<div
         className={`UNX-swatch-item-container ${active ? 'active' : ''}`}
         data-variant_id={swatchId}
+        onClick={onClick}
     >
         <img
             data-variant_id={swatchId}

@@ -54,7 +54,7 @@ class ListProductCard extends React.Component {
 
     render() {
 
-        const { SwatchItemComponent, idx } = this.props;
+        const { SwatchItemComponent, idx, onClick } = this.props;
         const { productValues } = this.state;
         const [activeSwatch] = productValues['swatches'].filter((swatch) => {
             return swatch.active
@@ -72,9 +72,9 @@ class ListProductCard extends React.Component {
 
         const prank = idx + 1;
 
-        return (<div className='UNX-product-card-container' data-uniqueid={uniqueId} data-prank={prank}>
+        return (<div className='UNX-product-card-container'>
 
-            <a href={productUrl} className={`UNX-product-card UNX-list-card`} data-uniqueid={uniqueId} data-prank={prank}>
+            <a href={productUrl} className={`UNX-product-card UNX-list-card`} data-uniqueid={uniqueId} data-prank={prank} onClick={onClick}>
                 <img className='UNX-image' src={imageUrl} data-uniqueid={uniqueId} data-prank={prank} />
                 <p className='UNX-product-name data-uniqueid={uniqueId} data-prank={prank}'>{productName}</p>
                 <p className='UNX-price' data-uniqueid={uniqueId} data-prank={prank}>{price}</p>
@@ -89,7 +89,7 @@ class ListProductCard extends React.Component {
                     onClick={this.onSwatchClick}
                     className='UNX-swatch-item-list-container' />
             </div>
-            
+
         </div >
         )
     }

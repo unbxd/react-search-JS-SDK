@@ -96,7 +96,7 @@ class ProductItemComponent extends React.Component {
         const prank = idx + 1;
 
         return (<div className='myproduct'>
-            <div className='myproduct-details' data-uniqueid={uniqueId} data-prank={prank}>
+            <div className='myproduct-details' data-uniqueid={uniqueId} data-prank={prank} onClick={onClick}>
                 <a href={productUrl} className={`myproduct-card`} data-uniqueid={uniqueId} data-prank={prank}>
                     <img className='myproduct-card image' src={imageUrl} data-uniqueid={uniqueId} data-prank={prank} />
                     <p className='myproduct-card name' data-uniqueid={uniqueId} data-prank={prank}>{title}</p>
@@ -112,8 +112,11 @@ class ProductItemComponent extends React.Component {
     }
 }
 
-const ProductsViewItemComponent = ({ itemData, isActive }) => {
-    return (<p data-viewtype={itemData} className={`${isActive ? 'active' : ''}`}>
+const ProductsViewItemComponent = ({ itemData, isActive, onClick }) => {
+    return (<p
+        data-viewtype={itemData}
+        className={`${isActive ? 'active' : ''}`}
+        onClick={onClick}>
         {itemData}
     </p>)
 }
@@ -151,18 +154,19 @@ const variantAttributes = {
 }
 
 const swatchAttributes = {
-    uniqueId: "variantId",
+    swatchId: "variantId",
     swatchImageUrl: 'variant_overhead_swatch',
     imageUrl: 'variant_image_array',
     price: "v_default_price",
     productUrl: "variant_productUrl",
 };
 
-const SwatchItemComponent = ({ itemData }) => {
+const SwatchItemComponent = ({ itemData, onClick }) => {
     const { swatchImageUrl, swatchId, active } = itemData;
     return (<div
         className={`my-swatch ${active ? 'active' : ''}`}
         data-variant_id={swatchId}
+        onClick={onClick}
     >
         <img
             data-variant_id={swatchId}
