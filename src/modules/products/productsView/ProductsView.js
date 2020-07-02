@@ -6,13 +6,12 @@ import NoProducts from './NoProducts';
 import ProductsWrapper from './ProductsWrapper';
 
 
-
 const ProductsView = () => {
     return (<ProductContextConsumer>{({ data, helpers }) => {
 
-        const { productViewType,
+        const { perRow,
+            productViewType,
             productAttributes,
-            perRow,
             variantAttributes,
             paginationType,
             heightDiffToTriggerNextPage,
@@ -22,16 +21,19 @@ const ProductsView = () => {
             groupBy,
             unbxdCoreStatus,
             query,
-            productIdAttribute } = data;
+            productIdAttribute,
+            showLoader } = data;
 
         const { getSearchResults,
             ZeroResultsComponent,
             onProductClick,
             getNextPage,
             ProductItemComponent,
-            SwatchItemComponent, } = helpers;
+            SwatchItemComponent,
+            LoadMoreComponent,
+            LoaderComponent } = helpers;
 
-        const { numberOfProducts = 0, products = [] } = getSearchResults() || {};
+        const { numberOfProducts = 0, products = [], start = 0 } = getSearchResults() || {};
 
         //return the prop based Zero results template
         if (numberOfProducts === 0 && ZeroResultsComponent) {
@@ -44,26 +46,32 @@ const ProductsView = () => {
             return <NoProducts />;
         }
 
-        return (<ProductsWrapper
-            productViewType={productViewType}
-            perRow={perRow}
-            products={products}
-            productAttributes={productAttributes}
-            variantAttributes={variantAttributes}
-            paginationType={paginationType}
-            getNextPage={getNextPage}
-            heightDiffToTriggerNextPage={heightDiffToTriggerNextPage}
-            showVariants={showVariants}
-            onProductClick={onProductClick}
-            ProductItemComponent={ProductItemComponent}
-            showSwatches={showSwatches}
-            swatchAttributes={swatchAttributes}
-            groupBy={groupBy}
-            SwatchItemComponent={SwatchItemComponent}
-            unbxdCoreStatus={unbxdCoreStatus}
-            query={query}
-            productIdAttribute={productIdAttribute}
-        />)
+        const productsWrapperProps = {
+            perRow,
+            productViewType,
+            products,
+            productAttributes,
+            variantAttributes,
+            paginationType,
+            getNextPage,
+            heightDiffToTriggerNextPage,
+            showVariants,
+            onProductClick,
+            ProductItemComponent,
+            showSwatches,
+            swatchAttributes,
+            groupBy,
+            SwatchItemComponent,
+            unbxdCoreStatus,
+            query,
+            productIdAttribute,
+            LoadMoreComponent,
+            LoaderComponent,
+            showLoader,
+            start,
+        }
+
+        return (<ProductsWrapper {...productsWrapperProps} />)
 
     }}
     </ProductContextConsumer>);

@@ -15,13 +15,15 @@ const ListView = (props) => {
         showSwatches,
         swatchAttributes,
         groupBy,
-        SwatchItemComponent, } = props;
+        SwatchItemComponent,
+        productViewType } = props;
 
     return (<div className='UNX-product-container'>{
         <List
             idAttribute={'uniqueId'}
             items={products}
             ListItem={ProductItemComponent || ListProductCard}
+            productViewType={productViewType}
             onClick={onProductClick}
             productAttributes={productAttributes}
             showVariants={showVariants}
@@ -39,7 +41,13 @@ ListView.propTypes = {
     productAttributes: PropTypes.object.isRequired,
     showVariants: PropTypes.bool.isRequired,
     variantAttributes: PropTypes.object.isRequired,
-    onProductClick: PropTypes.func.isRequired
+    onProductClick: PropTypes.func.isRequired,
+    ProductItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    showSwatches: PropTypes.bool,
+    swatchAttributes: PropTypes.object,
+    groupBy: PropTypes.string,
+    SwatchItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    productViewType: PropTypes.string.isRequired,
 }
 
 export default ListView;

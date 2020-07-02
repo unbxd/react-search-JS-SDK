@@ -17,6 +17,7 @@ class ListProductCard extends React.Component {
             showSwatches,
             swatchAttributes,
             groupBy } = this.props;
+
         //Get the datas from the product bases on productAttributes and create the card
         const productValues = getProductFields({
             itemData,
@@ -32,6 +33,7 @@ class ListProductCard extends React.Component {
     }
 
     onSwatchClick = (event) => {
+
         const currentSwatchId = event.target.dataset['variant_id'];
 
         this.setState((currentState) => {
@@ -52,7 +54,7 @@ class ListProductCard extends React.Component {
 
     render() {
 
-        const { SwatchItemComponent, idx } = this.props;
+        const { SwatchItemComponent, idx, onClick } = this.props;
         const { productValues } = this.state;
         const [activeSwatch] = productValues['swatches'].filter((swatch) => {
             return swatch.active
@@ -70,13 +72,15 @@ class ListProductCard extends React.Component {
 
         const prank = idx + 1;
 
-        return (<div className='UNX-product-card-container' data-uniqueid={uniqueId} data-prank={prank}>
-            <a href={productUrl} className={`UNX-product-card UNX-list-card`} data-uniqueid={uniqueId} data-prank={prank}>
+        return (<div className='UNX-product-card-container'>
+
+            <a href={productUrl} className={`UNX-product-card UNX-list-card`} data-uniqueid={uniqueId} data-prank={prank} onClick={onClick}>
                 <img className='UNX-image' src={imageUrl} data-uniqueid={uniqueId} data-prank={prank} />
                 <p className='UNX-product-name data-uniqueid={uniqueId} data-prank={prank}'>{productName}</p>
                 <p className='UNX-price' data-uniqueid={uniqueId} data-prank={prank}>{price}</p>
                 <p className='UNX-selling-price' data-uniqueid={uniqueId} data-prank={prank}>{sellingPrice}</p>
             </a>
+
             <div className='UNX-swatch-content'>
                 <List
                     items={swatches}
@@ -85,6 +89,7 @@ class ListProductCard extends React.Component {
                     onClick={this.onSwatchClick}
                     className='UNX-swatch-item-list-container' />
             </div>
+
         </div >
         )
     }
@@ -94,7 +99,10 @@ ListProductCard.propTypes = {
     itemData: PropTypes.object.isRequired,
     productAttributes: PropTypes.object.isRequired,
     showVariants: PropTypes.bool.isRequired,
-    variantAttributes: PropTypes.object.isRequired
+    variantAttributes: PropTypes.object.isRequired,
+    showSwatches: PropTypes.bool.isRequired,
+    swatchAttributes: PropTypes.object,
+    groupBy: PropTypes.string
 }
 
 export default ListProductCard;

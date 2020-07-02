@@ -64,6 +64,7 @@ class GenerateFacets extends React.Component {
     }
 
     static getDerivedStateFromProps(props, state) {
+        
         if (props.rangeFacets !== state.rangeFacets) {
 
             let selectedRangeFacets = {};

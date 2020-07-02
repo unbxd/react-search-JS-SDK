@@ -2,28 +2,56 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Input } from '../../../components';
+import { productTypes } from '../../../config';
 
 class RenderInput extends React.Component {
 
+    componentDidUpdate(prevProps) {
+
+        if (prevProps.lastSearchedQuery !== this.props.lastSearchedQuery &&
+            this.props.query !== this.props.lastSearchedQuery) {
+
+            if (this.props.productType === productTypes.CATEGORY) {
+
+                this.props.setSearchBoxQuery("");
+            } else {
+
+                this.props.setSearchBoxQuery(this.props.lastSearchedQuery);
+            }
+        }
+    }
 
     render() {
-        const { query, onQueryChange, autoFocus, clearable, onClearQuery } = this.props;
+
+        const { query,
+            onSearchBoxChange,
+            autoFocus,
+            clearable,
+            onSearchBoxClear,
+            ClearComponent } = this.props;
 
         return (<Input
             value={query}
-            onChange={onQueryChange}
+            onChange={onSearchBoxChange}
             className='UNX-searchbox query'
             autoFocus={autoFocus}
             clearable={clearable}
-            onClear={onClearQuery}
+            onClear={onSearchBoxClear}
+            ClearComponent={ClearComponent}
         />)
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.queryAPI !== this.props.queryAPI && this.props.query !== this.props.queryAPI) {
-            this.props.setSearchQuery(this.props.queryAPI);
-        }
-    }
+
+}
+
+RenderInput.props = {
+    query: PropTypes.string.isRequired,
+    onSearchBoxChange: PropTypes.func.isRequired,
+    autoFocus: PropTypes.bool,
+    clearable: PropTypes.bool,
+    setSearchBoxQuery: PropTypes.func.isRequired,
+    onSearchBoxClear: PropTypes.func.isRequired,
+    ClearComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 }
 
 export default RenderInput;

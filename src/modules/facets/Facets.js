@@ -6,7 +6,7 @@ import { FacetsContextProvider } from './context'
 import { TextFacets, RangeFacets, MultilevelFacets } from './facetTypes';
 import { ApplyFacets, ClearFacets } from './actions';
 import { SelectedFacets } from './selectedFacets';
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer, hasUnbxdSearchWrapperContext } from '../../common/utils';
 import { getFacetRow, isFacetSelected, manageStateTypes } from './utils';
 import { trackFacetClick } from '../analytics';
 
@@ -29,6 +29,11 @@ class Facets extends React.Component {
     }
 
     componentDidMount() {
+
+        if (this.context === undefined) {
+            hasUnbxdSearchWrapperContext(Facets.displayName);
+        }
+
         const { helpers: { setFacetConfiguration } } = this.context;
 
         const { defaultFilters,
@@ -173,7 +178,9 @@ class Facets extends React.Component {
             });
 
             activeFacetsObj = { ...activeFacetsObj, ...rangeFacets };
-            activeFacetsObj['category'] = selectedCategoryFilters.join(">");
+
+            const { categoryPath = [] } = selectedCategoryFilters;
+            activeFacetsObj['category'] = categoryPath.length ? categoryPath.join(">") : "";
 
 
             return activeFacetsObj;
@@ -243,7 +250,7 @@ class Facets extends React.Component {
             manageFacetState(null, unx_name, null, manageStateTypes.RESET);
         }
 
-        const selectedFacetsAPI = getSelectedFacets();
+        const lastSelectedFacets = getSelectedFacets();
 
 
         const data = {
@@ -252,7 +259,7 @@ class Facets extends React.Component {
             isApplyFilters,
             isClearFilters,
             moveFacetsOnSelect,
-            selectedFacetsAPI,
+            lastSelectedFacets,
             selectedRangeFacets,
             noOfPages,
             ...this.state
@@ -280,7 +287,6 @@ class Facets extends React.Component {
         };
 
         return { data, helpers }
-
     }
 
     render() {
@@ -307,7 +313,7 @@ Facets.MultilevelFacets = MultilevelFacets;
 Facets.ApplyFacets = ApplyFacets;
 Facets.ClearFacets = ClearFacets;
 Facets.SelectedFacets = SelectedFacets;
-
+Facets.displayName = "Facets";
 
 Facets.defaultProps = {
     defaultFilters: {},

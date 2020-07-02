@@ -5,7 +5,7 @@ import AppContext from '../../common/context'
 import { PaginationContextProvider } from './context'
 import Navigation from './navigation';
 import NumberOfProducts from './numberOfProducts';
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer,hasUnbxdSearchWrapperContext } from '../../common/utils';
 
 /**
  * Component to manage the page size and page navigation. 
@@ -22,6 +22,11 @@ class Pagination extends React.PureComponent {
     }
 
     componentDidMount() {
+
+        if (this.context === undefined) {
+            hasUnbxdSearchWrapperContext(Pagination.displayName);
+        }
+
         const { helpers: { setPaginationConfiguration } } = this.context;
 
         const { pageSize } = this.props;
@@ -122,6 +127,7 @@ Pagination.contextType = AppContext;
 
 Pagination.NumberOfProducts = NumberOfProducts;
 Pagination.Navigation = Navigation;
+Pagination.displayName = "Pagination";
 
 Pagination.defaultProps = {
     pageSize: 10,

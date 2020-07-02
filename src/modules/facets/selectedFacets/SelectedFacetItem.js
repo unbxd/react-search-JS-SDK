@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Button } from '../../../components';
 
-const SelectedFacetItem = ({ itemData, facetName }) => {
+const SelectedFacetItem = ({ itemData, facetName, onClick }) => {
 
     const { name, dataId } = itemData;
 
@@ -11,7 +11,8 @@ const SelectedFacetItem = ({ itemData, facetName }) => {
         key={dataId}
         data-unx_name={facetName}
         data-unx_dataid={dataId}
-        className='UNX-active-facet-item'>
+        className='UNX-active-facet-item'
+        onClick={onClick}>
         {name}
     </Button>)
 }

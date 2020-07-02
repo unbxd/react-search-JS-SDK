@@ -13,11 +13,12 @@ const stories = storiesOf('Pagination', module).addParameters({
     }
 });
 
-const PageSizeItemComponent = ({ itemData, isActive }) => {
+const PageSizeItemComponent = ({ itemData, isActive,onClick }) => {
 
     return (<div
         data-unxpagesize={itemData.id}
         className={`pageSize-item ${isActive ? 'active' : ''}`}
+        onClick={onClick}
     >
         {itemData.value}
     </div>)

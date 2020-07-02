@@ -12,22 +12,111 @@ const stories = storiesOf('Products', module).addParameters({
     }
 });
 
-class NoProductsComponent extends React.Component {
+class ZeroResultsComponent extends React.Component {
     render() {
         return (<p>No products found!!!</p>);
     }
 }
 
-const ProductItemComponent = ({ itemData }) => {
-    const { imageUrl, title } = itemData;
-    return (<div className='myproduct'>
-        <img src={imageUrl[0]} />
-        <p>{title}</p>
-    </div>)
+class ProductItemComponent extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        const {
+            itemData,
+            idAttribute,
+            showVariants,
+            showSwatches,
+            swatchAttributes
+        } = this.props;
+
+        this.state = {
+            productValues: this.getParsedProduct({
+                itemData,
+                showVariants,
+                showSwatches,
+                swatchAttributes,
+                idAttribute
+            })
+        };
+    }
+
+    getParsedProduct = ({
+        itemData,
+        idAttribute
+    }) => {
+
+        const { imageUrl, title, productUrl, variants } = itemData;
+        const swatchValues = variants.map((variant, index) => {
+
+            return {
+                swatchId: variant.variantId,
+                imageUrl: variant.variant_image_array[0],
+                swatchImageUrl: variant.variant_overhead_swatch,
+                active: index === 0 ? true : false
+            }
+        });
+
+        const productValues = { idAttribute, imageUrl, title, productUrl, swatchValues };
+        return productValues;
+    }
+
+    handleSwatchClick = (event) => {
+
+        const currentSwatchId = event.target.dataset['swatchid'];
+        this.setState(({ productValues }) => {
+            return {
+                productValues: {
+                    ...productValues,
+                    swatchValues: productValues.swatchValues.map(swatch => {
+                        if (swatch.swatchId === currentSwatchId) {
+                            return { ...swatch, active: true }
+                        } else {
+                            return { ...swatch, active: false }
+                        };
+                    })
+                }
+            }
+        })
+    }
+
+    render() {
+
+        const { productValues } = this.state;
+        const { idAttribute, idx, showSwatches } = this.props;
+
+        const [activeSwatch] = productValues['swatchValues'].filter((swatch) => {
+            return swatch.active
+        });
+
+        const product = { ...productValues, ...activeSwatch };
+        const { imageUrl, title, productUrl, swatchValues } = product;
+        const uniqueId = idAttribute;
+        const prank = idx + 1;
+
+        return (<div className='myproduct'>
+            <div className='myproduct-details' data-uniqueid={uniqueId} data-prank={prank} onClick={onClick}>
+                <a href={productUrl} className={`myproduct-card`} data-uniqueid={uniqueId} data-prank={prank}>
+                    <img className='myproduct-card image' src={imageUrl} data-uniqueid={uniqueId} data-prank={prank} />
+                    <p className='myproduct-card name' data-uniqueid={uniqueId} data-prank={prank}>{title}</p>
+                </a>
+            </div>
+            {showSwatches && <div className='myproduct-swatches'>
+                {swatchValues.map(swatch => {
+                    const { swatchImageUrl, swatchId } = swatch;
+                    return (<img className='myproduct-swatch image' src={swatchImageUrl} data-swatchid={swatchId} onClick={this.handleSwatchClick} />)
+                })}
+            </div>}
+        </div>)
+    }
 }
 
-const ProductsViewListItemComponent = ({ itemData, isActive }) => {
-    return (<p data-viewtype={itemData} className={`${isActive ? 'active' : ''}`}>
+const ProductsViewItemComponent = ({ itemData, isActive, onClick }) => {
+    return (<p
+        data-viewtype={itemData}
+        className={`${isActive ? 'active' : ''}`}
+        onClick={onClick}>
         {itemData}
     </p>)
 }
@@ -65,23 +154,29 @@ const variantAttributes = {
 }
 
 const swatchAttributes = {
-    uniqueId: "variantId",
+    swatchId: "variantId",
     swatchImageUrl: 'variant_overhead_swatch',
     imageUrl: 'variant_image_array',
     price: "v_default_price",
     productUrl: "variant_productUrl",
 };
 
-const SwatchItemComponent = ({ itemData }) => {
+const SwatchItemComponent = ({ itemData, onClick }) => {
     const { swatchImageUrl, swatchId, active } = itemData;
     return (<div
         className={`my-swatch ${active ? 'active' : ''}`}
         data-variant_id={swatchId}
+        onClick={onClick}
     >
         <img
             data-variant_id={swatchId}
             src={swatchImageUrl} className='image' />
     </div>)
+}
+
+const LoadMoreComponent = ({ loadMoreProducts }) => {
+
+    return (<div onClick={loadMoreProducts}>Load more</div>)
 }
 
 stories.add('default', () => (<UnbxdSearchWrapper
@@ -99,17 +194,6 @@ stories.add('with perRow', () => (<UnbxdSearchWrapper
 
     <Products
         perRow={3}
-        productAttributes={productAttributes} />
-
-</UnbxdSearchWrapper >));
-
-stories.add('with pageSize', () => (<UnbxdSearchWrapper
-    siteKey='wildearthclone-neto-com-au808941566310465'
-    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
-
-    <Products
-        pageSize={20}
-        paginationType={'INFINITE_SCROLL'}
         productAttributes={productAttributes} />
 
 </UnbxdSearchWrapper >));
@@ -171,13 +255,25 @@ stories.add('with click n scroll', () => (<UnbxdSearchWrapper
 
 </UnbxdSearchWrapper >));
 
+stories.add('with LoadMoreComponent', () => (<UnbxdSearchWrapper
+    siteKey='wildearthclone-neto-com-au808941566310465'
+    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+
+    <Products
+        pageSize={20}
+        paginationType={'CLICK_N_SCROLL'}
+        LoadMoreComponent={LoadMoreComponent}
+        productAttributes={productAttributes} />
+
+</UnbxdSearchWrapper >));
+
 stories.add('with ZeroResultsComponent', () => (<UnbxdSearchWrapper
     siteKey='wildearthclone-neto-com-au808941566310465'
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
     <Products
         productAttributes={productAttributes}
-        ZeroResultsComponent={NoProductsComponent} />
+        ZeroResultsComponent={ZeroResultsComponent} />
 
 </UnbxdSearchWrapper >));
 
@@ -198,18 +294,24 @@ stories.add('with view type list', () => (<UnbxdSearchWrapper
     <Products
         productViewTypes={["LIST", "GRID"]}
         productViewDisplayType={'LIST'}
-        ProductsViewListItemComponent={ProductsViewListItemComponent}
+        ProductsViewItemComponent={ProductsViewItemComponent}
         productAttributes={productAttributes} />
 
 </UnbxdSearchWrapper >));
 
 stories.add('with ProductItemComponent', () => (<UnbxdSearchWrapper
-    siteKey='wildearthclone-neto-com-au808941566310465'
-    apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
+    siteKey='prod-rugsusa808581564092094'
+    apiKey='ea4823934059ff8ad5def0be04f8dd4e'>
 
     <Products
+        ProductItemComponent={ProductItemComponent}
         productAttributes={productAttributes}
-        ProductItemComponent={ProductItemComponent} />
+        showVariants={true}
+        variantsCount={4}
+        variantAttributes={variantAttributes}
+        showSwatches={true}
+        groupBy={'variant_color'}
+        swatchAttributes={swatchAttributes} />
 
 </UnbxdSearchWrapper >));
 
@@ -219,6 +321,7 @@ stories.add('with showLoader', () => (<UnbxdSearchWrapper
 
     <Products
         productAttributes={productAttributes}
+        paginationType={'CLICK_N_SCROLL'}
         LoaderComponent={LoaderComponent}
         showLoader={true} />
 
