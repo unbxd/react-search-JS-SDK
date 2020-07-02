@@ -7,6 +7,9 @@ const searchConfigurations = {
     searchQueryParam: 'q',
     fields: ['title'],
     defaultFilters: null,
+    spellCheck:{
+        enabled:false
+    },
     spellCheck: false,
     pageSize: 10,
     startPageNo: 0,
@@ -14,11 +17,12 @@ const searchConfigurations = {
     facetMultiSelectionMode: true,
     updateUrls: true,
     showVariants: false,
-    variantConfig: {
-        variantsCount: 1,
-        variantAttributes: [],
-        variantsGroupBy: '',
-        variantMapping: {}
+    variants: {
+        enabled:false,
+        count: 1,
+        attributes: [],
+        mapping: {},
+        groupBy:''
     },
     extraParams: {
         "version": "V2",
