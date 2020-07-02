@@ -17,6 +17,9 @@ class SpellCheck extends React.Component {
         if (this.context === undefined) {
             hasUnbxdSearchWrapperContext(SpellCheck.displayName);
         }
+
+        const { helpers: { setSpellCheckConfiguration } } = this.context;
+        setSpellCheckConfiguration({ enable: true });
     }
 
     getSpellCheckProps() {

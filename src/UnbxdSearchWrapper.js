@@ -14,6 +14,7 @@ import '../public/css/core/index.scss';
 class UnbxdSearchWrapper extends Component {
 
     setProductConfiguration(config) {
+
         const { pageSize, requiredFields, showVariants,
             variantsCount, variantRequiredFields, groupBy, paginationType } = config;
 
@@ -30,10 +31,19 @@ class UnbxdSearchWrapper extends Component {
     }
 
     setSearchBoxConfiguration(config) {
+
         const { query = '*' } = config;
         const { unbxdCore } = this.state;
         unbxdCore.options.productType = productTypes.SEARCH;
         unbxdCore.getResults(query);
+    }
+
+    setSpellCheckConfiguration(config) {
+
+        const { enable = false } = config;
+        const { unbxdCore } = this.state;
+
+        unbxdCore.setSpellCheck(enable);
     }
 
     setPaginationConfiguration(config, triggerResults = false) {
@@ -91,6 +101,7 @@ class UnbxdSearchWrapper extends Component {
         this.setFacetConfiguration = this.setFacetConfiguration.bind(this);
         this.setProductConfiguration = this.setProductConfiguration.bind(this);
         this.setSearchBoxConfiguration = this.setSearchBoxConfiguration.bind(this);
+        this.setSpellCheckConfiguration = this.setSpellCheckConfiguration.bind(this);
         this.trackActions = this.trackActions.bind(this);
 
         this.state = {
@@ -145,6 +156,7 @@ class UnbxdSearchWrapper extends Component {
             setPaginationConfiguration: this.setPaginationConfiguration,
             setSortConfiguration: this.setSortConfiguration,
             setFacetConfiguration: this.setFacetConfiguration,
+            setSpellCheckConfiguration: this.setSpellCheckConfiguration,
             trackActions: this.trackActions,
         }
 
