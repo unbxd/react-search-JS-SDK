@@ -7,7 +7,7 @@ import { TextFacets, RangeFacets, MultilevelFacets } from './facetTypes';
 import { ApplyFacets, ClearFacets } from './actions';
 import { SelectedFacets } from './selectedFacets';
 import { conditionalRenderer, hasUnbxdSearchWrapperContext } from '../../common/utils';
-import { getFacetRow, isFacetSelected, manageStateTypes } from './utils';
+import { getFacetRow, isFacetSelected, manageStateTypes, getFacetCoreMethods } from './utils';
 import { trackFacetClick } from '../analytics';
 
 
@@ -55,44 +55,40 @@ class Facets extends React.Component {
             MultilevelFacetItemComponent,
             BreadcrumbItemComponent } = this.props;
 
-        const updateFacets = unbxdCore.updateFacets.bind(unbxdCore);
-        const deleteAFacet = unbxdCore.deleteAFacet.bind(unbxdCore);
-        const applyFacets = unbxdCore.applyFacets.bind(unbxdCore);
-        const clearFacets = unbxdCore.clearFacets.bind(unbxdCore);
-        const getSelectedFacet = unbxdCore.getSelectedFacet.bind(unbxdCore);
-        const getSelectedFacets = unbxdCore.getSelectedFacets.bind(unbxdCore);
 
-        const setRangeFacet = unbxdCore.setRangeFacet.bind(unbxdCore);
-        const applyRangeFacet = unbxdCore.applyRangeFacet.bind(unbxdCore);
-        const clearARangeFacet = unbxdCore.clearARangeFacet.bind(unbxdCore);
-        const selectedRangeFacets = unbxdCore.state.rangeFacet;
+        const { getFacets,
+            updateFacets,
+            deleteAFacet,
+            applyFacets,
+            clearFacets,
+            getSelectedFacet,
+            getSelectedFacets, } = getFacetCoreMethods(unbxdCore);
 
-        const getBucketedFacets = unbxdCore.getBucketedFacets.bind(unbxdCore);
-        const getSelectedBucketedFacet = unbxdCore.getSelectedBucketedFacet.bind(unbxdCore);
-        const getBreadCrumbsList = unbxdCore.getBreadCrumbsList.bind(unbxdCore);
-        const setCategoryFilter = unbxdCore.setCategoryFilter.bind(unbxdCore);
-        const deleteCategoryFilter = unbxdCore.deleteCategoryFilter.bind(unbxdCore);
-        const selectedCategoryFilters = unbxdCore.state.categoryFilter;
-        const getResults = unbxdCore.getResults.bind(unbxdCore);
 
-        const getPaginationInfo = unbxdCore.getPaginationInfo.bind(unbxdCore);
+        const { getRangeFacets,
+            setRangeFacet,
+            applyRangeFacet,
+            clearARangeFacet,
+            selectedRangeFacets, } = getFacetCoreMethods(unbxdCore);
+
+
+        const { getBucketedFacets,
+            getSelectedBucketedFacet,
+            getBreadCrumbsList,
+            setCategoryFilter,
+            deleteCategoryFilter,
+            selectedCategoryFilters,
+            getResults, } = getFacetCoreMethods(unbxdCore);
+
+        const { getPaginationInfo, getSearchQuery } = getFacetCoreMethods(unbxdCore);
 
         const { noOfPages = 0, } = getPaginationInfo() || {};
-        const query = unbxdCore.getSearchQuery() || "";
+        const query = getSearchQuery() || "";
 
         //get text and range facets
-        const textFacets = [];
-        const rangeFacets = [];
+        const textFacets = getFacets()||[];
+        const rangeFacets = getRangeFacets()||[];
 
-        const fetchFacets = unbxdCore.getFacets();
-        if (fetchFacets && fetchFacets.length) {
-            textFacets.push(...fetchFacets)
-        }
-
-        const fetchRangeFacets = unbxdCore.getRangeFacets();
-        if (fetchRangeFacets && fetchRangeFacets.length) {
-            rangeFacets.push(...fetchRangeFacets);
-        }
 
         const manageFacetState = (currentFacet = {}, selectedFacetName = '', selectedFacetId = 0, action) => {
 
@@ -252,7 +248,6 @@ class Facets extends React.Component {
 
         const lastSelectedFacets = getSelectedFacets();
 
-
         const data = {
             textFacets,
             rangeFacets,
@@ -264,6 +259,7 @@ class Facets extends React.Component {
             noOfPages,
             ...this.state
         };
+
         const helpers = {
             onFacetClick,
             onFacetObjectReset,
