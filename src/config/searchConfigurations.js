@@ -7,18 +7,21 @@ const searchConfigurations = {
     searchQueryParam: 'q',
     fields: ['title'],
     defaultFilters: null,
-    spellCheck: false,
+    spellCheck: {
+        enabled: false
+    },
     pageSize: 10,
     startPageNo: 0,
     facetMultiSelect: true,
     facetMultiSelectionMode: true,
     updateUrls: true,
     showVariants: false,
-    variantConfig: {
-        variantsCount: 1,
-        variantAttributes: [],
-        variantsGroupBy: '',
-        variantMapping: {}
+    variants: {
+        enabled: false,
+        count: 1,
+        attributes: [],
+        mapping: {},
+        groupBy: ''
     },
     extraParams: {
         "version": "V2",
