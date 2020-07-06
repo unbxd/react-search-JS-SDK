@@ -2,14 +2,17 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
-import SearchBox from '../src/modules/searchBox';
 import Banners from '../src/modules/banners';
+import SearchBox from '../src/modules/searchBox';
+
 
 const stories = storiesOf('Banners', module).addParameters({
     props: {
         propTablesExclude: [UnbxdSearchWrapper, SearchBox]
     }
 });
+
+const defaultSearch = 'dress';
 
 const BannerItemComponent = ({ itemData }) => {
     const { imageUrl } = itemData;
@@ -20,8 +23,11 @@ stories.add('default', () => (<UnbxdSearchWrapper
     siteKey='demo-unbxd700181503576558'
     apiKey='fb853e3332f2645fac9d71dc63e09ec1'>
 
-    <SearchBox />
     <Banners />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -30,9 +36,12 @@ stories.add('with altText', () => (<UnbxdSearchWrapper
     siteKey='demo-unbxd700181503576558'
     apiKey='fb853e3332f2645fac9d71dc63e09ec1'>
 
-    <SearchBox />
     <Banners
         altText='ALT Banner Image' />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -40,9 +49,12 @@ stories.add('with BannerItemComponent', () => (<UnbxdSearchWrapper
     siteKey='demo-unbxd700181503576558'
     apiKey='fb853e3332f2645fac9d71dc63e09ec1'>
 
-    <SearchBox />
     <Banners
         BannerItemComponent={BannerItemComponent} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -50,7 +62,6 @@ stories.add('with render props', () => (<UnbxdSearchWrapper
     siteKey='demo-unbxd700181503576558'
     apiKey='fb853e3332f2645fac9d71dc63e09ec1'>
 
-    <SearchBox />
     <Banners>
         {({ data, helpers }) => {
 
@@ -59,4 +70,8 @@ stories.add('with render props', () => (<UnbxdSearchWrapper
 
         }}
     </Banners>
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
+
 </UnbxdSearchWrapper >));

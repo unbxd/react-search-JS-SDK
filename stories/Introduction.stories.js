@@ -23,7 +23,7 @@ const stories = storiesOf('Introduction', module).addParameters({
     }
 });
 
-const productAttributes = {
+const attributesMap = {
     productName: "title",
     uniqueId: "uniqueId",
     imageUrl: "imageUrl",
@@ -32,7 +32,7 @@ const productAttributes = {
     productUrl: "productUrl"
 }
 
-const variantAttributes = {
+const variantAttributesMap = {
     productName: "v_title",
     uniqueId: "vId",
     imageUrl: "v_imageUrl",
@@ -128,10 +128,10 @@ stories.add('search', () => (<UnbxdSearchWrapper
         perRow={3}
         pageSize={20}
         productViewTypes={["GRID", "LIST"]}
-        productAttributes={productAttributes}
+        attributesMap={attributesMap}
         showVariants={true}
         variantsCount={2}
-        variantAttributes={variantAttributes}
+        variantAttributesMap={variantAttributesMap}
     />
 
 </UnbxdSearchWrapper >));
@@ -163,10 +163,10 @@ stories.add('category', () => {
             perRow={3}
             pageSize={20}
             productViewTypes={["GRID", "LIST"]}
-            productAttributes={productAttributes}
+            attributesMap={attributesMap}
             showVariants={true}
             variantsCount={2}
-            variantAttributes={variantAttributes}
+            variantAttributesMap={variantAttributesMap}
         />
 
     </UnbxdSearchWrapper >)

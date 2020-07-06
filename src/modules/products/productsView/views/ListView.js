@@ -7,9 +7,9 @@ import { List } from '../../../../components/index';
 const ListView = (props) => {
 
     const { products = [],
-        productAttributes,
+        attributesMap,
         showVariants,
-        variantAttributes,
+        variantAttributesMap,
         onProductClick,
         ProductItemComponent,
         showSwatches,
@@ -25,9 +25,9 @@ const ListView = (props) => {
             ListItem={ProductItemComponent || ListProductCard}
             productViewType={productViewType}
             onClick={onProductClick}
-            productAttributes={productAttributes}
+            attributesMap={attributesMap}
             showVariants={showVariants}
-            variantAttributes={variantAttributes}
+            variantAttributesMap={variantAttributesMap}
             showSwatches={showSwatches}
             swatchAttributes={swatchAttributes}
             groupBy={groupBy}
@@ -38,9 +38,9 @@ const ListView = (props) => {
 }
 ListView.propTypes = {
     products: PropTypes.arrayOf(PropTypes.object).isRequired,
-    productAttributes: PropTypes.object.isRequired,
+    attributesMap: PropTypes.object.isRequired,
     showVariants: PropTypes.bool.isRequired,
-    variantAttributes: PropTypes.object.isRequired,
+    variantAttributesMap: PropTypes.object.isRequired,
     onProductClick: PropTypes.func.isRequired,
     ProductItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     showSwatches: PropTypes.bool,

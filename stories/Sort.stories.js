@@ -3,6 +3,8 @@ import { storiesOf } from '@storybook/react';
 
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import Sort from '../src/modules/sort';
+import SearchBox from '../src/modules/searchBox';
+
 
 const stories = storiesOf('Sort', module).addParameters({
     props: {
@@ -11,6 +13,8 @@ const stories = storiesOf('Sort', module).addParameters({
             'ResetSort']
     }
 });
+
+const defaultSearch = 'Boots';
 
 const SortItemComponent = ({ itemData, isActive, onClick }) => {
 
@@ -60,6 +64,10 @@ stories.add('default', () => (<UnbxdSearchWrapper
 
     <Sort sortOptions={sortOptions} />
 
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
+
 </UnbxdSearchWrapper >));
 
 stories.add('with defaultSort', () => (<UnbxdSearchWrapper
@@ -73,6 +81,10 @@ stories.add('with defaultSort', () => (<UnbxdSearchWrapper
             "order": "asc"
         }}
         sortOptions={sortOptions} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -89,6 +101,10 @@ stories.add('with sortDisplayType List', () => (<UnbxdSearchWrapper
         sortOptions={sortOptions}
         sortDisplayType={'LIST'}
         SortItemComponent={SortItemComponent} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -110,6 +126,10 @@ stories.add('with more flexibility', () => (<UnbxdSearchWrapper
 
     </Sort>
 
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
+
 </UnbxdSearchWrapper >));
 
 stories.add('with render props', () => (<UnbxdSearchWrapper
@@ -125,5 +145,9 @@ stories.add('with render props', () => (<UnbxdSearchWrapper
             return (<p>Hello Sort</p>)
         }}
     </Sort>
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));  
