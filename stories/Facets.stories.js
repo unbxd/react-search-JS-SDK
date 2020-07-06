@@ -3,6 +3,8 @@ import { storiesOf } from '@storybook/react';
 
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import Facets from '../src/modules/facets';
+import SearchBox from '../src/modules/searchBox';
+
 
 const stories = storiesOf('Facets', module).addParameters({
     props: {
@@ -15,6 +17,8 @@ const stories = storiesOf('Facets', module).addParameters({
         ]
     }
 });
+
+const defaultSearch = 'Boots';
 
 const defaultFilters = {
     brand_uFilter: 'The North Face'
@@ -81,6 +85,10 @@ stories.add('default', () => (<UnbxdSearchWrapper
         categoryDisplayName={'category'}
         categoryField={'categoryPath'} />
 
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
+
 </UnbxdSearchWrapper >));
 
 stories.add('with default filters', () => (<UnbxdSearchWrapper
@@ -89,6 +97,10 @@ stories.add('with default filters', () => (<UnbxdSearchWrapper
 
     <Facets
         defaultFilters={defaultFilters} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -100,6 +112,10 @@ stories.add('with text facets', () => (<UnbxdSearchWrapper
         <Facets.TextFacets />
     </Facets>
 
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
+
 </UnbxdSearchWrapper >));
 
 stories.add('with applyFilters and clearFilters', () => (<UnbxdSearchWrapper
@@ -110,6 +126,10 @@ stories.add('with applyFilters and clearFilters', () => (<UnbxdSearchWrapper
         isApplyFilters={true}
         isClearFilters={true} />
 
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
+
 </UnbxdSearchWrapper >));
 
 stories.add('with moveFacetsOnSelect', () => (<UnbxdSearchWrapper
@@ -119,6 +139,10 @@ stories.add('with moveFacetsOnSelect', () => (<UnbxdSearchWrapper
     <Facets
         moveFacetsOnSelect={true} />
 
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
+
 </UnbxdSearchWrapper >));
 
 stories.add('with FacetItemComponent', () => (<UnbxdSearchWrapper
@@ -127,6 +151,10 @@ stories.add('with FacetItemComponent', () => (<UnbxdSearchWrapper
 
     <Facets
         FacetItemComponent={FacetItemComponent} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -139,6 +167,10 @@ stories.add('with SelectedFacetItemComponent', () => (<UnbxdSearchWrapper
         moveFacetsOnSelect={true}
     />
 
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
+
 </UnbxdSearchWrapper >));
 
 stories.add('with range facet', () => (<UnbxdSearchWrapper
@@ -148,6 +180,10 @@ stories.add('with range facet', () => (<UnbxdSearchWrapper
     <Facets>
         <Facets.RangeFacets />
     </Facets>
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -161,6 +197,10 @@ stories.add('with multilevel facet', () => (<UnbxdSearchWrapper
     >
         <Facets.MultilevelFacets />
     </Facets>
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -176,6 +216,10 @@ stories.add('with MultilevelFacetItemComponent', () => (<UnbxdSearchWrapper
         <Facets.MultilevelFacets />
     </Facets>
 
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
+
 </UnbxdSearchWrapper >));
 
 stories.add('with BreadcrumbItemComponent', () => (<UnbxdSearchWrapper
@@ -189,6 +233,10 @@ stories.add('with BreadcrumbItemComponent', () => (<UnbxdSearchWrapper
     >
         <Facets.MultilevelFacets />
     </Facets>
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -205,6 +253,10 @@ stories.add('with more flexibility', () => (<UnbxdSearchWrapper
         <Facets.RangeFacets />
         <Facets.MultilevelFacets />
     </Facets>
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -223,5 +275,9 @@ stories.add('with render props', () => (<UnbxdSearchWrapper
             return (<div>Hello from Facets</div>)
         }}
     </Facets>
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));

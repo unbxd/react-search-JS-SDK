@@ -30,6 +30,12 @@ class SearchBox extends React.Component {
         if (this.context === undefined) {
             hasUnbxdSearchWrapperContext(SearchBox.displayName);
         }
+
+        const { helpers: { setSearchBoxConfiguration } } = this.context;
+        const { defaultSearch = '' } = this.props;
+        if (typeof defaultSearch === 'string' && defaultSearch.length) {
+            setSearchBoxConfiguration({ query: defaultSearch });
+        }
     }
 
     onSearchBoxChange(event) {
@@ -58,7 +64,7 @@ class SearchBox extends React.Component {
 
         const { query } = this.state;
         const { onSubmit } = this.props;
-        const { helpers: { setSearchBoxConfiguration, trackActions } } = this.context;
+        const { helpers: { setSearchBoxConfiguration } } = this.context;
 
         if (onSubmit) {
 
@@ -184,6 +190,10 @@ SearchBox.propTypes = {
     * Custom reset component
     */
     ClearComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
+    * Default search query
+    */
+    defaultSearch: PropTypes.string,
 
 }
 

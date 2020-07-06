@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 
 import { GridProductCard } from '../productCards';
 import { List } from '../../../../components/index';
-//We need the productAttributes object to map to values
+//We need the attributesMap object to map to values
 
 const GridView = (props) => {
 
     const { products = [],
         perRow,
-        productAttributes,
+        attributesMap,
         showVariants,
-        variantAttributes,
+        variantAttributesMap,
         onProductClick,
         ProductItemComponent,
         showSwatches,
@@ -27,9 +27,9 @@ const GridView = (props) => {
             ListItem={ProductItemComponent || GridProductCard}
             productViewType={productViewType}
             onClick={onProductClick}
-            productAttributes={productAttributes}
+            attributesMap={attributesMap}
             showVariants={showVariants}
-            variantAttributes={variantAttributes}
+            variantAttributesMap={variantAttributesMap}
             showSwatches={showSwatches}
             swatchAttributes={swatchAttributes}
             groupBy={groupBy}
@@ -41,9 +41,9 @@ const GridView = (props) => {
 GridView.propTypes = {
     products: PropTypes.arrayOf(PropTypes.object).isRequired,
     perRow: PropTypes.number.isRequired,
-    productAttributes: PropTypes.object.isRequired,
+    attributesMap: PropTypes.object.isRequired,
     showVariants: PropTypes.bool.isRequired,
-    variantAttributes: PropTypes.object.isRequired,
+    variantAttributesMap: PropTypes.object.isRequired,
     onProductClick: PropTypes.func.isRequired,
     ProductItemComponent:PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     showSwatches:PropTypes.bool,

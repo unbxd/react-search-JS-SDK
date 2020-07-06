@@ -40,16 +40,16 @@ export class Products extends React.PureComponent {
         const { helpers: { setProductConfiguration } } = this.context;
 
         const { pageSize,
-            productAttributes,
+            attributesMap,
             showVariants,
             variantsCount,
-            variantAttributes,
+            variantAttributesMap,
             paginationType,
             groupBy } = this.props;
 
-        //generate required fields here based on productAttributes and variantAttributes
-        const requiredFields = Object.values(productAttributes);
-        const variantRequiredFields = Object.values(variantAttributes);
+        //generate required fields here based on attributesMap and variantAttributesMap
+        const requiredFields = Object.values(attributesMap);
+        const variantRequiredFields = Object.values(variantAttributesMap);
 
         //Set the main config
         //Do not set pageSize if pagination type is FIXED_SCROLLING
@@ -86,10 +86,10 @@ export class Products extends React.PureComponent {
             ProductItemComponent,
             ProductsViewItemComponent,
             productIdAttribute,
-            productAttributes,
+            attributesMap,
             showVariants,
             groupBy,
-            variantAttributes,
+            variantAttributesMap,
             showSwatches,
             swatchAttributes,
             SwatchItemComponent } = this.props;
@@ -155,8 +155,8 @@ export class Products extends React.PureComponent {
             unbxdCoreStatus,
             perRow,
             paginationType,
-            productAttributes,
-            variantAttributes,
+            attributesMap,
+            variantAttributesMap,
             productViewTypes,
             heightDiffToTriggerNextPage,
             showVariants,
@@ -213,8 +213,8 @@ Products.defaultProps = {
     perRow: 4,
     pageSize: 10,
     productViewTypes: ["GRID"],
-    productAttributes: {},
-    variantAttributes: {},
+    attributesMap: {},
+    variantAttributesMap: {},
     paginationType: 'FIXED_PAGINATION',
     heightDiffToTriggerNextPage: 100,
     showVariants: false,
@@ -264,7 +264,7 @@ Products.propTypes = {
     /**
     * Mapping of catalog Product fields to SDK Product fields.
     */
-    productAttributes: PropTypes.object.isRequired,
+    attributesMap: PropTypes.object.isRequired,
     /**
     * Show variants to a product.
     */
@@ -276,7 +276,7 @@ Products.propTypes = {
     /**
     * Mapping of catalog Product variant fields to SDK Product variant fields.
     */
-    variantAttributes: PropTypes.object,
+    variantAttributesMap: PropTypes.object,
     /**
      * Should loader be shown
      */

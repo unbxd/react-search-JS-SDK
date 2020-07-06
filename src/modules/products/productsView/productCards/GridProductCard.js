@@ -11,20 +11,20 @@ class GridProductCard extends React.Component {
         super(props);
 
         const { itemData,
-            productAttributes,
+            attributesMap,
             showVariants,
-            variantAttributes,
+            variantAttributesMap,
             showSwatches,
             swatchAttributes,
             groupBy
         } = this.props;
 
-        //Get the datas from the product bases on productAttributes and create the card
+        //Get the datas from the product bases on attributesMap and create the card
         const productValues = getProductFields({
             itemData,
-            productAttributes,
+            attributesMap,
             showVariants,
-            variantAttributes,
+            variantAttributesMap,
             showSwatches,
             swatchAttributes,
             groupBy
@@ -100,9 +100,9 @@ class GridProductCard extends React.Component {
 
 GridProductCard.propTypes = {
     itemData: PropTypes.object.isRequired,
-    productAttributes: PropTypes.object.isRequired,
+    attributesMap: PropTypes.object.isRequired,
     showVariants: PropTypes.bool.isRequired,
-    variantAttributes: PropTypes.object.isRequired,
+    variantAttributesMap: PropTypes.object.isRequired,
     showSwatches: PropTypes.bool,
     swatchAttributes: PropTypes.object,
     groupBy: PropTypes.string

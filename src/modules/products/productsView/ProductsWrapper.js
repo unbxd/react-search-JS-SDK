@@ -18,7 +18,7 @@ class ProductsWrapper extends React.PureComponent {
         this.state = {
             products,
             hasMoreResults: true,
-            start: 0
+            start: 0,
         }
     }
 
@@ -56,11 +56,42 @@ class ProductsWrapper extends React.PureComponent {
         trackProductImpressions(query, getProductPids(products, productIdAttribute));
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
 
-        const { paginationType } = this.props;
+        const { paginationType, products, start, query, productIdAttribute, productViewType } = this.props;
+
         if (this.props.products.length === 0 && paginationType === paginationTypes.INFINITE_SCROLL) {
             window.removeEventListener('scroll', this.nextPageCallback);
+        }
+
+        if (products.length === 0) {
+            if (paginationType === paginationTypes.INFINITE_SCROLL) {
+                return;
+            }
+
+            if (paginationType === paginationTypes.CLICK_N_SCROLL) {
+                this.setState({ hasMoreResults: false });
+            }
+        }
+
+        if (productViewType !== prevProps.productViewType) {
+            return
+        }
+
+        if (prevProps.start !== start &&
+            (paginationType === paginationTypes.INFINITE_SCROLL ||
+                paginationType === paginationTypes.CLICK_N_SCROLL)) {
+
+            trackProductImpressions(query, getProductPids(products, productIdAttribute));
+            start === 0 ? this.setState({ products: products }) :
+                this.setState({ products: [...prevProps.products, ...products], start });
+        }
+
+        if (prevProps.products !== products &&
+            paginationType === paginationTypes.FIXED_PAGINATION) {
+
+            trackProductImpressions(query, getProductPids(products, productIdAttribute));
+            this.setState({ products: products, start });
         }
 
     }
@@ -73,45 +104,13 @@ class ProductsWrapper extends React.PureComponent {
         }
     }
 
-    componentDidUpdate(prevProps) {
-
-        const { paginationType, products, start, query, productIdAttribute } = this.props;
-
-        if (products.length === 0) {
-            if (paginationType === paginationTypes.INFINITE_SCROLL) {
-                return;
-            }
-
-            if (paginationType === paginationTypes.CLICK_N_SCROLL) {
-                this.setState({ hasMoreResults: false });
-            }
-        }
-
-        if (prevProps.start !== start &&
-            (paginationType === paginationTypes.INFINITE_SCROLL ||
-                paginationType === paginationTypes.CLICK_N_SCROLL)) {
-
-            trackProductImpressions(query, getProductPids(products, productIdAttribute));
-            start === 0 ? this.setState({ products: products }) :
-                this.setState({ products: [...prevProps.products, ...products], start });
-        }
-
-        if (prevProps.start !== start &&
-            prevProps.products !== products &&
-            paginationType === paginationTypes.FIXED_PAGINATION) {
-
-            trackProductImpressions(query, getProductPids(products, productIdAttribute));
-            this.setState({ products: products, start });
-        }
-    }
-
     render() {
 
         const { productViewType,
             onProductClick,
             perRow,
-            productAttributes,
-            variantAttributes,
+            attributesMap,
+            variantAttributesMap,
             paginationType,
             showVariants,
             ProductItemComponent,
@@ -131,11 +130,11 @@ class ProductsWrapper extends React.PureComponent {
 
         const viewProps = {
             perRow,
-            productAttributes,
+            attributesMap,
             products,
             onProductClick,
             showVariants,
-            variantAttributes,
+            variantAttributesMap,
             ProductItemComponent,
             showSwatches,
             swatchAttributes,
@@ -173,8 +172,8 @@ ProductsWrapper.propTypes = {
     products: PropTypes.arrayOf(PropTypes.object).isRequired,
     onProductClick: PropTypes.func.isRequired,
     getNextPage: PropTypes.func.isRequired,
-    productAttributes: PropTypes.object.isRequired,
-    variantAttributes: PropTypes.object.isRequired,
+    attributesMap: PropTypes.object.isRequired,
+    variantAttributesMap: PropTypes.object.isRequired,
     paginationType: PropTypes.string,
     heightDiffToTriggerNextPage: PropTypes.number,
     showVariants: PropTypes.bool.isRequired,

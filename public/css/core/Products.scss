@@ -20,18 +20,3 @@
     }
     
 }
-
-
-.myproduct{
-
-    .myproduct-swatches{
-        display: flex;
-    }
-    
-    .myproduct-swatch{
-        &.image{
-            height: 30px;
-            width: 30px;
-        }
-    } 
-}

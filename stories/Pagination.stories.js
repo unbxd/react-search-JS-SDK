@@ -3,17 +3,21 @@ import { storiesOf } from '@storybook/react';
 
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import Pagination from '../src/modules/pagination';
+import SearchBox from '../src/modules/searchBox';
 
 
 const stories = storiesOf('Pagination', module).addParameters({
     props: {
         propTablesExclude: [UnbxdSearchWrapper,
             'Navigation',
-            'NumberOfProducts']
+            'NumberOfProducts',
+            'SearchBox']
     }
 });
 
-const PageSizeItemComponent = ({ itemData, isActive,onClick }) => {
+const defaultSearch = 'Boots';
+
+const PageSizeItemComponent = ({ itemData, isActive, onClick }) => {
 
     return (<div
         data-unxpagesize={itemData.id}
@@ -37,6 +41,10 @@ stories.add('default', () => (<UnbxdSearchWrapper
 
     <Pagination />
 
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
+
 </UnbxdSearchWrapper >));
 
 stories.add('with pageSize', () => (<UnbxdSearchWrapper
@@ -45,6 +53,10 @@ stories.add('with pageSize', () => (<UnbxdSearchWrapper
 
     <Pagination pageSize={15} />
 
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
+
 </UnbxdSearchWrapper >));
 
 stories.add('with pageSizeOptions', () => (<UnbxdSearchWrapper
@@ -52,6 +64,10 @@ stories.add('with pageSizeOptions', () => (<UnbxdSearchWrapper
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
     <Pagination pageSizeOptions={pageSizeOptions} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -64,6 +80,10 @@ stories.add('with pageSizeDisplayType List', () => (<UnbxdSearchWrapper
         PageSizeItemComponent={PageSizeItemComponent}
     />
 
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
+
 </UnbxdSearchWrapper >));
 
 stories.add('with pagePadding', () => (<UnbxdSearchWrapper
@@ -71,6 +91,10 @@ stories.add('with pagePadding', () => (<UnbxdSearchWrapper
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
     <Pagination pagePadding={3} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -82,6 +106,10 @@ stories.add('with more flexibility', () => (<UnbxdSearchWrapper
         <Pagination.NumberOfProducts />
         <Pagination.Navigation />
     </Pagination>
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -99,5 +127,9 @@ stories.add('with render props', () => (<UnbxdSearchWrapper
             return (<p>Hello Pagination</p>)
         }}
     </Pagination>
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));  

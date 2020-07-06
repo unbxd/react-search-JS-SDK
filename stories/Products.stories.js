@@ -2,15 +2,20 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
-import { Products } from '../src/modules/products/Products';
+import Products from '../src/modules/products';
+import SearchBox from '../src/modules/searchBox';
 
 const stories = storiesOf('Products', module).addParameters({
     props: {
         propTablesExclude: [UnbxdSearchWrapper,
             'ProductViews',
-            'ViewTypes']
+            'ViewTypes',
+            'SearchBox']
     }
 });
+
+const defaultSearch = 'Boots';
+const swatchesDefaultSearch = 'rugs';
 
 class ZeroResultsComponent extends React.Component {
     render() {
@@ -84,7 +89,7 @@ class ProductItemComponent extends React.Component {
     render() {
 
         const { productValues } = this.state;
-        const { idAttribute, idx, showSwatches } = this.props;
+        const { idAttribute, idx, showSwatches, onClick } = this.props;
 
         const [activeSwatch] = productValues['swatchValues'].filter((swatch) => {
             return swatch.active
@@ -95,17 +100,17 @@ class ProductItemComponent extends React.Component {
         const uniqueId = idAttribute;
         const prank = idx + 1;
 
-        return (<div className='myproduct'>
-            <div className='myproduct-details' data-uniqueid={uniqueId} data-prank={prank} onClick={onClick}>
-                <a href={productUrl} className={`myproduct-card`} data-uniqueid={uniqueId} data-prank={prank}>
-                    <img className='myproduct-card image' src={imageUrl} data-uniqueid={uniqueId} data-prank={prank} />
-                    <p className='myproduct-card name' data-uniqueid={uniqueId} data-prank={prank}>{title}</p>
+        return (<div className='UNX-product-card-container'>
+            <div className='details' data-uniqueid={uniqueId} data-prank={prank} onClick={onClick}>
+                <a href={productUrl} data-uniqueid={uniqueId} data-prank={prank}>
+                    <img className='UNX-image' src={imageUrl} data-uniqueid={uniqueId} data-prank={prank} />
+                    <p className='UNX-product-name' data-uniqueid={uniqueId} data-prank={prank}>{title}</p>
                 </a>
             </div>
-            {showSwatches && <div className='myproduct-swatches'>
+            {showSwatches && <div className='UNX-swatch-item-list-container'>
                 {swatchValues.map(swatch => {
                     const { swatchImageUrl, swatchId } = swatch;
-                    return (<img className='myproduct-swatch image' src={swatchImageUrl} data-swatchid={swatchId} onClick={this.handleSwatchClick} />)
+                    return (<img className='UNX-swatch-item image' src={swatchImageUrl} data-swatchid={swatchId} onClick={this.handleSwatchClick} />)
                 })}
             </div>}
         </div>)
@@ -135,7 +140,7 @@ const onZeroResults = (query) => {
     return true;
 }
 
-const productAttributes = {
+const attributesMap = {
     productName: "title",
     uniqueId: "uniqueId",
     imageUrl: "imageUrl",
@@ -143,7 +148,7 @@ const productAttributes = {
     productUrl: "productUrl"
 }
 
-const variantAttributes = {
+const variantAttributesMap = {
     productName: "title",
     uniqueId: "variantId",
     imageUrl: "variant_image_array",
@@ -184,8 +189,11 @@ stories.add('default', () => (<UnbxdSearchWrapper
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
     <Products
-        productAttributes={productAttributes} />
+        attributesMap={attributesMap} />
 
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 </UnbxdSearchWrapper >));
 
 stories.add('with perRow', () => (<UnbxdSearchWrapper
@@ -194,7 +202,11 @@ stories.add('with perRow', () => (<UnbxdSearchWrapper
 
     <Products
         perRow={3}
-        productAttributes={productAttributes} />
+        attributesMap={attributesMap} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -205,7 +217,11 @@ stories.add('with pageSize', () => (<UnbxdSearchWrapper
     <Products
         pageSize={20}
         paginationType={'INFINITE_SCROLL'}
-        productAttributes={productAttributes} />
+        attributesMap={attributesMap} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -215,8 +231,12 @@ stories.add('with showVariants', () => (<UnbxdSearchWrapper
 
     <Products
         showVariants={true}
-        productAttributes={productAttributes}
-        variantAttributes={variantAttributes} />
+        attributesMap={attributesMap}
+        variantAttributesMap={variantAttributesMap} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -227,8 +247,12 @@ stories.add('with variantsCount', () => (<UnbxdSearchWrapper
     <Products
         showVariants={true}
         variantsCount={2}
-        productAttributes={productAttributes}
-        variantAttributes={variantAttributes} />
+        attributesMap={attributesMap}
+        variantAttributesMap={variantAttributesMap} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -240,7 +264,11 @@ stories.add('with infinite scroll', () => (<UnbxdSearchWrapper
         pageSize={20}
         paginationType={'INFINITE_SCROLL'}
         heightDiffToTriggerNextPage={200}
-        productAttributes={productAttributes} />
+        attributesMap={attributesMap} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -251,7 +279,11 @@ stories.add('with click n scroll', () => (<UnbxdSearchWrapper
     <Products
         pageSize={20}
         paginationType={'CLICK_N_SCROLL'}
-        productAttributes={productAttributes} />
+        attributesMap={attributesMap} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -263,7 +295,11 @@ stories.add('with LoadMoreComponent', () => (<UnbxdSearchWrapper
         pageSize={20}
         paginationType={'CLICK_N_SCROLL'}
         LoadMoreComponent={LoadMoreComponent}
-        productAttributes={productAttributes} />
+        attributesMap={attributesMap} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -272,8 +308,12 @@ stories.add('with ZeroResultsComponent', () => (<UnbxdSearchWrapper
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
     <Products
-        productAttributes={productAttributes}
+        attributesMap={attributesMap}
         ZeroResultsComponent={ZeroResultsComponent} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -283,7 +323,11 @@ stories.add('with view types', () => (<UnbxdSearchWrapper
 
     <Products
         productViewTypes={["LIST", "GRID"]}
-        productAttributes={productAttributes} />
+        attributesMap={attributesMap} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -295,7 +339,11 @@ stories.add('with view type list', () => (<UnbxdSearchWrapper
         productViewTypes={["LIST", "GRID"]}
         productViewDisplayType={'LIST'}
         ProductsViewItemComponent={ProductsViewItemComponent}
-        productAttributes={productAttributes} />
+        attributesMap={attributesMap} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -305,13 +353,17 @@ stories.add('with ProductItemComponent', () => (<UnbxdSearchWrapper
 
     <Products
         ProductItemComponent={ProductItemComponent}
-        productAttributes={productAttributes}
+        attributesMap={attributesMap}
         showVariants={true}
         variantsCount={4}
-        variantAttributes={variantAttributes}
+        variantAttributesMap={variantAttributesMap}
         showSwatches={true}
         groupBy={'variant_color'}
         swatchAttributes={swatchAttributes} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={swatchesDefaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -320,10 +372,14 @@ stories.add('with showLoader', () => (<UnbxdSearchWrapper
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
     <Products
-        productAttributes={productAttributes}
+        attributesMap={attributesMap}
         paginationType={'CLICK_N_SCROLL'}
         LoaderComponent={LoaderComponent}
         showLoader={true} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -332,9 +388,13 @@ stories.add('with callbacks', () => (<UnbxdSearchWrapper
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
     <Products
-        productAttributes={productAttributes}
+        attributesMap={attributesMap}
         onProductClick={onProductClick}
         onZeroResults={onZeroResults} />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -343,14 +403,18 @@ stories.add('with swatches', () => (<UnbxdSearchWrapper
     apiKey='ea4823934059ff8ad5def0be04f8dd4e'>
 
     <Products
-        productAttributes={productAttributes}
+        attributesMap={attributesMap}
         showVariants={true}
         variantsCount={4}
-        variantAttributes={variantAttributes}
+        variantAttributesMap={variantAttributesMap}
         showSwatches={true}
         groupBy={'variant_color'}
         swatchAttributes={swatchAttributes}
     />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={swatchesDefaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -359,15 +423,19 @@ stories.add('with SwatchItemComponent', () => (<UnbxdSearchWrapper
     apiKey='ea4823934059ff8ad5def0be04f8dd4e'>
 
     <Products
-        productAttributes={productAttributes}
+        attributesMap={attributesMap}
         showVariants={true}
         variantsCount={4}
-        variantAttributes={variantAttributes}
+        variantAttributesMap={variantAttributesMap}
         showSwatches={true}
         groupBy={'variant_color'}
         swatchAttributes={swatchAttributes}
         SwatchItemComponent={SwatchItemComponent}
     />
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={swatchesDefaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -376,10 +444,14 @@ stories.add('with more flexibility', () => (<UnbxdSearchWrapper
     apiKey='e6959ae0b643d51b565dc3e01bf41ec1'>
 
     <Products
-        productAttributes={productAttributes} >
+        attributesMap={attributesMap} >
         <Products.ViewTypes />
         <Products.ProductsView />
     </Products>
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));
 
@@ -389,16 +461,20 @@ stories.add('with render props', () => (<UnbxdSearchWrapper
 
     <Products
         paginationType={'FIXED_PAGINATION'}
-        productAttributes={productAttributes}
+        attributesMap={attributesMap}
         showVariants={true}
         productViewTypes={["GRID", "LIST"]}
         variantsCount={4}
-        variantAttributes={variantAttributes}
+        variantAttributesMap={variantAttributesMap}
     >
         {({ data, helpers }) => {
             //products and viewtypes are passed as parameters
             return (<p>Hello Products</p>)
         }}
     </Products>
+
+    <div className='hidden'>
+        <SearchBox defaultSearch={defaultSearch} />
+    </div>
 
 </UnbxdSearchWrapper >));

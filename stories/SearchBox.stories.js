@@ -10,6 +10,8 @@ const stories = storiesOf('SearchBox', module).addParameters({
     }
 });
 
+const defaultSearch = 'Boots';
+
 const onSubmit = () => {
     console.log("onSubmit ");
     return true;
