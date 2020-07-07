@@ -3,14 +3,7 @@ const webpack = require('webpack');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const PurgecssPlugin = require('purgecss-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const glob = require('glob');
-const path = require('path');
-
-const PATHS = {
-  src: path.join(__dirname, 'src')
-};
 
 
 module.exports = {

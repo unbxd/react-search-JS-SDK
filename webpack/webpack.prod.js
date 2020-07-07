@@ -2,14 +2,8 @@ const Path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
-const PurgecssPlugin = require('purgecss-webpack-plugin');
-const glob = require('glob');
-const path = require('path');
 const RemovePlugin = require('remove-files-webpack-plugin');
 
-const PATHS = {
-  src: path.join(__dirname, 'src')
-};
 
 function recursiveIssuer(m) {
   if (m.issuer) {
@@ -69,7 +63,7 @@ module.exports = {
         include: [
           'js/core.js',
           'js/theme.js',
-          'css/unbxd-react-search-sdk.css'
+          'css/react-search-sdk.css '
         ],
       }
     })
