@@ -58,6 +58,8 @@ API documentation available [here](https://unbxd.github.io/react-search-JS-SDK/)
 
 Use [GitHub issues](https://github.com/unbxd/react-search-JS-SDK/issues) for requests.
 
+We actively welcome pull requests; learn how to [contribute](https://github.com/unbxd/react-search-JS-SDK/blob/master/CONTRIBUTING.md).
+
 ## Changelog
 
-Changes are tracked in the [changelog]https://github.com/unbxd/react-search-JS-SDK/blob/master/CHANGELOG.md).
+Changes are tracked in the [changelog](https://github.com/unbxd/react-search-JS-SDK/blob/master/CHANGELOG.md).
