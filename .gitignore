@@ -5,3 +5,4 @@ package-lock.json
 .yo-rc.json
 .vscode
 public/dist
+demo/public/dist
