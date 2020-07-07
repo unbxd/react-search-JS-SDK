@@ -1,0 +1,4 @@
+.storybook/
+node_modules/
+stories
+demo
