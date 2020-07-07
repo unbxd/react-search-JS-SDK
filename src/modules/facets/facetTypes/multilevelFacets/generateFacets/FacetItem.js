@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 
 import { Button } from '../../../../../components';
 
-const FacetItem = ({ itemData, multiLevelField, level, }) => {
+const FacetItem = ({ itemData, multiLevelField, level, onClick }) => {
     const { name, count } = itemData;
     return (<Button
         data-unx_categoryname={name}
         data-unx_multilevelfield={multiLevelField}
         data-unx_level={level}
         className='UNX-bucketed-facet-list-item'
+        onClick={onClick}
     >
         {name}-{count}
     </Button>)

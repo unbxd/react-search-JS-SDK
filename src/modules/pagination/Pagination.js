@@ -5,16 +5,12 @@ import AppContext from '../../common/context'
 import { PaginationContextProvider } from './context'
 import Navigation from './navigation';
 import NumberOfProducts from './numberOfProducts';
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer,hasUnbxdSearchWrapperContext } from '../../common/utils';
 
+/**
+ * Component to manage the page size and page navigation. 
+ */
 class Pagination extends React.PureComponent {
-
-    ProductContext = React.createContext();
-    static contextType = AppContext;
-
-    static NumberOfProducts = NumberOfProducts;
-    static Navigation = Navigation;
-
 
     constructor(props) {
         super(props);
@@ -26,6 +22,11 @@ class Pagination extends React.PureComponent {
     }
 
     componentDidMount() {
+
+        if (this.context === undefined) {
+            hasUnbxdSearchWrapperContext(Pagination.displayName);
+        }
+
         const { helpers: { setPaginationConfiguration } } = this.context;
 
         const { pageSize } = this.props;
@@ -122,6 +123,12 @@ class Pagination extends React.PureComponent {
 
 }
 
+Pagination.contextType = AppContext;
+
+Pagination.NumberOfProducts = NumberOfProducts;
+Pagination.Navigation = Navigation;
+Pagination.displayName = "Pagination";
+
 Pagination.defaultProps = {
     pageSize: 10,
     pageSizeOptions: [{ id: 5, value: "5" }, { id: 10, value: "10" }, { id: 15, value: "15" }],
@@ -130,12 +137,27 @@ Pagination.defaultProps = {
 }
 
 Pagination.propTypes = {
-    pageSize: PropTypes.number.isRequired,
+    /**
+    * Number of products to load on a page. 
+    */
+    pageSize: PropTypes.number,
+    /**
+    * Options of number of products to load on a page. 
+    */
     pageSizeOptions: PropTypes.arrayOf(
         PropTypes.shape({ id: PropTypes.number, value: PropTypes.string }))
         .isRequired,
-    pageSizeDisplayType: PropTypes.string.isRequired,
+    /**
+    * Display type of `DROPDOWN` or `LIST` for pageSize. 
+    */
+    pageSizeDisplayType: PropTypes.string,
+    /**
+    * Custom LIST item component for pageSize. 
+    */
     PageSizeItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
+    * Page number padding for page navigation. 
+    */
     pagePadding: PropTypes.number
 }
 

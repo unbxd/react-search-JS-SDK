@@ -5,14 +5,14 @@ import AppContext from '../../common/context';
 import { SortContextProvider } from './context'
 import SortBy from './sortBy';
 import ResetSort from './resetSort';
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer, hasUnbxdSearchWrapperContext } from '../../common/utils';
 import { getFormattedSort, getSelectedSort } from './utils';
 
-class Sort extends React.Component {
 
-    static contextType = AppContext;
-    static SortBy = SortBy;
-    static ResetSort = ResetSort;
+/**
+ * Component to sort the products. 
+ */
+class Sort extends React.Component {
 
     constructor(props) {
         super(props);
@@ -35,6 +35,10 @@ class Sort extends React.Component {
 
     componentDidMount() {
 
+        if (this.context === undefined) {
+            hasUnbxdSearchWrapperContext(Sort.displayName);
+        }
+
         const { helpers: { setSortConfiguration } } = this.context;
 
         const { defaultSort: sortBy, } = this.props;
@@ -46,11 +50,10 @@ class Sort extends React.Component {
                 sortBy: `${sortBy.field} ${sortBy.order}`
             });
         }
-
-
     }
 
     getSortProps() {
+
         const { unbxdCore, helpers: { setSortConfiguration, trackActions } } = this.context;
         const getPaginationInfo = unbxdCore.getPaginationInfo.bind(unbxdCore);
 
@@ -117,26 +120,37 @@ class Sort extends React.Component {
             <ResetSort />
         </React.Fragment>
 
-        //Dont render anything if we don't get defaultSort or sortOptions
         return (<SortContextProvider value={this.getSortProps()}>
             {conditionalRenderer(this.props.children, this.getSortProps(), DefaultRender)}
         </SortContextProvider>)
     }
 }
 
+Sort.contextType = AppContext;
+Sort.SortBy = SortBy;
+Sort.ResetSort = ResetSort;
+Sort.displayName = "Sort";
+
 Sort.defaultProps = {
     defaultSort: {
         "label": "Most relevant"
     },
-    sortOptions: []
+    sortOptions: [],
+    sortDisplayType: "DROPDOWN"
 }
 
 Sort.propTypes = {
+    /**
+    * Default sort to be applied on products. 
+    */
     defaultSort: PropTypes.shape({
         "label": PropTypes.string,
         "field": PropTypes.string,
         "order": PropTypes.string,
     }),
+    /**
+    * Sort options to be applied on products. 
+    */
     sortOptions: PropTypes.arrayOf(
         PropTypes.shape({
             "label": PropTypes.string,
@@ -144,7 +158,13 @@ Sort.propTypes = {
             "order": PropTypes.string,
         }))
         .isRequired,
-    sortDisplayType: PropTypes.string.isRequired,
+    /**
+    * Display type of `DROPDOWN` or `LIST` for Sort. 
+    */
+    sortDisplayType: PropTypes.string,
+    /**
+    * Custom LIST item component for Sort. 
+    */
     SortItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 }
 

@@ -5,6 +5,7 @@ const ViewTypesDropdown = ({
     productViewType,
     productViewTypes,
     onProductViewClick }) => {
+        
     return (<div className='UNX-productsview-list'>
         <select name="productsview"
             className="UBX-productsview-dropdown"

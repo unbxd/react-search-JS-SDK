@@ -7,8 +7,8 @@ class Input extends React.PureComponent {
 
     componentDidMount() {
 
-        const { isAutoFocus } = this.props;
-        if (isAutoFocus) {
+        const { autoFocus } = this.props;
+        if (autoFocus) {
             this.inputRef.current.focus();
         }
     }
@@ -23,8 +23,8 @@ class Input extends React.PureComponent {
 
     render() {
 
-        const { value, onChange, className, isClear } = this.props;
-        const showClear = value && value.length > 0;
+        const { value, onChange, className, clearable, ClearComponent, onClear } = this.props;
+        const showClear = value && value.length > 0 && clearable;
 
         return (<div className='UNX-input-container'>
             <input
@@ -33,7 +33,10 @@ class Input extends React.PureComponent {
                 className={`UNX-input-el ${className}`}
                 ref={this.inputRef}
             />
-            {showClear && isClear && <div onClick={this.onClickClear} className='UNX-input clear-icon'>X</div>}
+            {showClear &&
+                (<ClearComponent onSearchBoxClear={onClear} /> ||
+                    <div onClick={this.onClickClear} className='UNX-input clear-icon'>X</div>)}
+
         </div>)
     }
 
@@ -42,16 +45,16 @@ class Input extends React.PureComponent {
 Input.defaultProps = {
     value: "",
     className: "",
-    isClear: false,
-    isAutoFocus: false
+    clearable: false,
+    autoFocus: false
 }
 
 Input.propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     className: PropTypes.string,
-    isClear: PropTypes.bool,
-    isAutoFocus: PropTypes.bool
+    clearable: PropTypes.bool,
+    autoFocus: PropTypes.bool
 }
 
 export default Input;

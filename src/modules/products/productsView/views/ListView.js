@@ -7,39 +7,47 @@ import { List } from '../../../../components/index';
 const ListView = (props) => {
 
     const { products = [],
-        productMap,
+        attributesMap,
         showVariants,
-        productVariantMap,
+        variantAttributesMap,
         onProductClick,
         ProductItemComponent,
         showSwatches,
         swatchAttributes,
         groupBy,
-        swatchItemComponent, } = props;
+        SwatchItemComponent,
+        productViewType } = props;
 
     return (<div className='UNX-product-container'>{
         <List
             idAttribute={'uniqueId'}
             items={products}
             ListItem={ProductItemComponent || ListProductCard}
+            productViewType={productViewType}
             onClick={onProductClick}
-            productMap={productMap}
+            attributesMap={attributesMap}
             showVariants={showVariants}
-            productVariantMap={productVariantMap}
+            variantAttributesMap={variantAttributesMap}
             showSwatches={showSwatches}
             swatchAttributes={swatchAttributes}
             groupBy={groupBy}
-            swatchItemComponent={swatchItemComponent}
+            SwatchItemComponent={SwatchItemComponent}
             className='UNX-list-view grid-cols-1' />
     }
     </div>)
 }
 ListView.propTypes = {
     products: PropTypes.arrayOf(PropTypes.object).isRequired,
-    productMap: PropTypes.object.isRequired,
+    attributesMap: PropTypes.object.isRequired,
     showVariants: PropTypes.bool.isRequired,
-    productVariantMap: PropTypes.object.isRequired,
-    onProductClick: PropTypes.func.isRequired
+    variantAttributesMap: PropTypes.object.isRequired,
+    onProductClick: PropTypes.func.isRequired,
+    ProductItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    showSwatches: PropTypes.bool,
+    swatchAttributes: PropTypes.object,
+    groupBy: PropTypes.string,
+    SwatchItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    productViewType: PropTypes.string.isRequired,
 }
 
 export default ListView;

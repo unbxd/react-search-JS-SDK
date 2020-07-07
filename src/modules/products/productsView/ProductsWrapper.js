@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 import GridView from './views/GridView';
 import ListView from './views/ListView';
-import { paginationTypes } from '../utils';
+import { paginationTypes, getProductPids } from '../utils';
 import { debounce } from '../../../common/utils';
-import { productViewTypes as productViewTypesOptions, DEBOUNCE_TIME } from '../utils';
+import { productViewTypes as productViewTypeOptions, DEBOUNCE_TIME } from '../utils';
+import { searchStatus } from '../../../config';
 import { trackProductImpressions } from '../../analytics';
 
 class ProductsWrapper extends React.PureComponent {
@@ -16,7 +17,8 @@ class ProductsWrapper extends React.PureComponent {
         const { products } = this.props;
         this.state = {
             products,
-            hasMoreResults: true
+            hasMoreResults: true,
+            start: 0,
         }
     }
 
@@ -35,71 +37,71 @@ class ProductsWrapper extends React.PureComponent {
     }, DEBOUNCE_TIME);
     //Does it make sense to add DEBOUNCE_TIME to component props
 
-    loadMoreHandler = () => {
+    loadMoreProducts = () => {
         const { getNextPage } = this.props;
 
         console.log("Loading new page");
         getNextPage();
     }
 
+
     componentDidMount() {
+
         const { paginationType } = this.props;
         if (paginationType === paginationTypes.INFINITE_SCROLL) {
             window.addEventListener('scroll', this.nextPageCallback);
         }
 
-        //get the pids
-        //get the search query
-        const { query, products, productIdAttribute } = this.props;
-        const pids = products.map((product) => {
-            return product[productIdAttribute]
-        })
-        trackProductImpressions(query, pids);
+        const { query, productIdAttribute, products } = this.props;
+        trackProductImpressions(query, getProductPids(products, productIdAttribute));
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
 
-        const { paginationType } = this.props;
+        const { paginationType, products, start, query, productIdAttribute, productViewType } = this.props;
 
         if (this.props.products.length === 0 && paginationType === paginationTypes.INFINITE_SCROLL) {
             window.removeEventListener('scroll', this.nextPageCallback);
         }
 
+        if (products.length === 0) {
+            if (paginationType === paginationTypes.INFINITE_SCROLL) {
+                return;
+            }
+
+            if (paginationType === paginationTypes.CLICK_N_SCROLL) {
+                this.setState({ hasMoreResults: false });
+            }
+        }
+
+        if (productViewType !== prevProps.productViewType) {
+            return
+        }
+
+        if (prevProps.start !== start &&
+            (paginationType === paginationTypes.INFINITE_SCROLL ||
+                paginationType === paginationTypes.CLICK_N_SCROLL)) {
+
+            trackProductImpressions(query, getProductPids(products, productIdAttribute));
+            start === 0 ? this.setState({ products: products }) :
+                this.setState({ products: [...prevProps.products, ...products], start });
+        }
+
+        if (prevProps.products !== products &&
+            paginationType === paginationTypes.FIXED_PAGINATION) {
+
+            trackProductImpressions(query, getProductPids(products, productIdAttribute));
+            this.setState({ products: products, start });
+        }
+
     }
 
     componentWillUnmount() {
+
         const { paginationType } = this.props;
         if (paginationType === paginationTypes.INFINITE_SCROLL) {
             window.removeEventListener('scroll', this.nextPageCallback);
         }
-    }
-
-    static getDerivedStateFromProps(props, state) {
-
-        const { paginationType, start } = props;
-
-        if (props.products.length === 0) {
-            if (paginationType === paginationTypes.INFINITE_SCROLL) {
-                return null;
-            }
-
-            if (paginationType === paginationTypes.CLICK_N_SCROLL) {
-                return { hasMoreResults: false }
-            }
-        }
-
-        if (state.products !== props.products &&
-            (paginationType === paginationTypes.INFINITE_SCROLL || paginationType === paginationTypes.CLICK_N_SCROLL)) {
-
-            return start === 0 ? { products: props.products } : { products: [...state.products, ...props.products] }
-        }
-
-        if (state.products !== props.products && paginationType === paginationTypes.FIXED_PAGINATION) {
-
-            return { products: props.products }
-        }
-
-        return null;
     }
 
     render() {
@@ -107,69 +109,79 @@ class ProductsWrapper extends React.PureComponent {
         const { productViewType,
             onProductClick,
             perRow,
-            productMap,
-            productVariantMap,
+            attributesMap,
+            variantAttributesMap,
             paginationType,
             showVariants,
             ProductItemComponent,
             showSwatches,
             swatchAttributes,
             groupBy,
-            swatchItemComponent, } = this.props;
+            SwatchItemComponent,
+            LoadMoreComponent,
+            unbxdCoreStatus,
+            LoaderComponent,
+            showLoader } = this.props;
         const { products, hasMoreResults } = this.state;
 
-        const productViewsRender = <React.Fragment>{productViewType === productViewTypesOptions.GRID &&
-            <GridView perRow={perRow}
-                productMap={productMap}
-                products={products}
-                onProductClick={onProductClick}
-                showVariants={showVariants}
-                productVariantMap={productVariantMap}
-                ProductItemComponent={ProductItemComponent}
-                showSwatches={showSwatches}
-                swatchAttributes={swatchAttributes}
-                groupBy={groupBy}
-                swatchItemComponent={swatchItemComponent}
-            />}
+        const displayClickNScrollTrigger = paginationType === paginationTypes.CLICK_N_SCROLL &&
+            hasMoreResults && unbxdCoreStatus === searchStatus.READY;
+        const displayLoader = unbxdCoreStatus === searchStatus.LOADING && showLoader;
 
-            {productViewType === productViewTypesOptions.LIST &&
-                <ListView productMap={productMap}
-                    products={products}
-                    onProductClick={onProductClick}
-                    showVariants={showVariants}
-                    productVariantMap={productVariantMap}
-                    ProductItemComponent={ProductItemComponent}
-                    showSwatches={showSwatches}
-                    swatchAttributes={swatchAttributes}
-                    groupBy={groupBy}
-                    swatchItemComponent={swatchItemComponent}
-                />}
+        const viewProps = {
+            perRow,
+            attributesMap,
+            products,
+            onProductClick,
+            showVariants,
+            variantAttributesMap,
+            ProductItemComponent,
+            showSwatches,
+            swatchAttributes,
+            groupBy,
+            SwatchItemComponent,
+            productViewType
+        }
+
+        const productViewsRender = <React.Fragment>
+            {productViewType === productViewTypeOptions.GRID &&
+                <GridView {...viewProps} />}
+
+            {productViewType === productViewTypeOptions.LIST &&
+                <ListView {...viewProps} />}
         </React.Fragment>
 
         return (<React.Fragment>
 
             {productViewsRender}
-            {paginationType === paginationTypes.CLICK_N_SCROLL &&
-                hasMoreResults &&
-                <div className='UNX-product-load-more' onClick={this.loadMoreHandler}>
-                    Load more
-            </div>}
+
+            {displayClickNScrollTrigger &&
+                (LoadMoreComponent ? <LoadMoreComponent loadMoreProducts={this.loadMoreProducts} />
+                    : <div className='UNX-product-load-more' onClick={this.loadMoreProducts}>
+                        Load more
+                </div>)}
+
+            {displayLoader && <LoaderComponent />}
         </React.Fragment>)
     }
 }
 
 ProductsWrapper.propTypes = {
+    perRow: PropTypes.number,
     productViewType: PropTypes.string.isRequired,
     products: PropTypes.arrayOf(PropTypes.object).isRequired,
     onProductClick: PropTypes.func.isRequired,
     getNextPage: PropTypes.func.isRequired,
-    perRow: PropTypes.number,
-    productMap: PropTypes.object.isRequired,
-    productVariantMap: PropTypes.object.isRequired,
+    attributesMap: PropTypes.object.isRequired,
+    variantAttributesMap: PropTypes.object.isRequired,
     paginationType: PropTypes.string,
     heightDiffToTriggerNextPage: PropTypes.number,
     showVariants: PropTypes.bool.isRequired,
     ProductItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    showSwatches: PropTypes.bool,
+    swatchAttributes: PropTypes.object,
+    groupBy: PropTypes.string,
+    SwatchItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 }
 
 export default ProductsWrapper;

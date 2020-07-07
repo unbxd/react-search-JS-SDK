@@ -7,19 +7,34 @@ const SearchInput = () => {
     return (<SearchBoxContextConsumer>
         {({ data, helpers }) => {
 
-            const { query, queryAPI, isAutoFocus, isClear } = data;
-            const { onQueryChange, onClearQuery, setSearchQuery } = helpers;
+            const { query,
+                lastSearchedQuery,
+                autoFocus,
+                clearable,
+                productType } = data;
 
-            return (<RenderInput
-                query={query}
-                queryAPI={queryAPI}
-                onQueryChange={onQueryChange}
-                className='UNX-searchbox query'
-                isAutoFocus={isAutoFocus}
-                isClear={isClear}
-                onClearQuery={onClearQuery}
-                setSearchQuery={setSearchQuery}
-            />)
+            const { onSearchBoxChange,
+                onSearchBoxClear,
+                setSearchBoxQuery,
+                InputComponent,
+                ClearComponent } = helpers;
+
+            const searchInputProps = {
+                query,
+                lastSearchedQuery,
+                autoFocus,
+                clearable,
+                productType,
+                InputComponent,
+                onSearchBoxChange,
+                onSearchBoxClear,
+                setSearchBoxQuery,
+                ClearComponent,
+                className: 'UNX-searchbox query'
+            }
+
+            return (InputComponent ?
+                <InputComponent {...searchInputProps} /> : <RenderInput {...searchInputProps} />)
         }}
     </SearchBoxContextConsumer>)
 

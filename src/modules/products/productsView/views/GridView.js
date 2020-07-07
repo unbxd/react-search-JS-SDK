@@ -3,35 +3,37 @@ import PropTypes from 'prop-types';
 
 import { GridProductCard } from '../productCards';
 import { List } from '../../../../components/index';
-//We need the productMap object to map to values
+//We need the attributesMap object to map to values
 
 const GridView = (props) => {
 
     const { products = [],
         perRow,
-        productMap,
+        attributesMap,
         showVariants,
-        productVariantMap,
+        variantAttributesMap,
         onProductClick,
         ProductItemComponent,
         showSwatches,
         swatchAttributes,
         groupBy,
-        swatchItemComponent } = props;
+        SwatchItemComponent,
+        productViewType } = props;
 
     return (<div className='UNX-product-container'>
         <List
             idAttribute={'uniqueId'}
             items={products}
             ListItem={ProductItemComponent || GridProductCard}
+            productViewType={productViewType}
             onClick={onProductClick}
-            productMap={productMap}
+            attributesMap={attributesMap}
             showVariants={showVariants}
-            productVariantMap={productVariantMap}
+            variantAttributesMap={variantAttributesMap}
             showSwatches={showSwatches}
             swatchAttributes={swatchAttributes}
             groupBy={groupBy}
-            swatchItemComponent={swatchItemComponent}
+            SwatchItemComponent={SwatchItemComponent}
             className={`UNX-grid-view grid-cols-${perRow}`} />
     </div>)
 }
@@ -39,10 +41,17 @@ const GridView = (props) => {
 GridView.propTypes = {
     products: PropTypes.arrayOf(PropTypes.object).isRequired,
     perRow: PropTypes.number.isRequired,
-    productMap: PropTypes.object.isRequired,
+    attributesMap: PropTypes.object.isRequired,
     showVariants: PropTypes.bool.isRequired,
-    productVariantMap: PropTypes.object.isRequired,
-    onProductClick: PropTypes.func.isRequired
+    variantAttributesMap: PropTypes.object.isRequired,
+    onProductClick: PropTypes.func.isRequired,
+    ProductItemComponent:PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    showSwatches:PropTypes.bool,
+    swatchAttributes:PropTypes.object,
+    groupBy:PropTypes.string,
+    SwatchItemComponent:PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    productViewType: PropTypes.string.isRequired,
+
 }
 
 export default GridView;

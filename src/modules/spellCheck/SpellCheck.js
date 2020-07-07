@@ -4,13 +4,23 @@ import PropTypes from 'prop-types';
 import AppContext from '../../common/context';
 import { SpellCheckContextProvider } from './context'
 import GenerateSpellCheck from './generateSpellCheck';
-import { conditionalRenderer, isContext } from '../../common/utils';
+import { conditionalRenderer, hasUnbxdSearchWrapperContext } from '../../common/utils';
 
 
 /**
  * Component to handle query suggestions.
  */
 class SpellCheck extends React.Component {
+
+    componentDidMount() {
+
+        if (this.context === undefined) {
+            hasUnbxdSearchWrapperContext(SpellCheck.displayName);
+        }
+
+        const { helpers: { setSpellCheckConfiguration } } = this.context;
+        setSpellCheckConfiguration({ enable: true });
+    }
 
     getSpellCheckProps() {
         const { unbxdCore, helpers: { setSearchBoxConfiguration } } = this.context;
@@ -35,6 +45,7 @@ class SpellCheck extends React.Component {
         const DefaultRender = <Fragment>
             <GenerateSpellCheck />
         </Fragment>
+
         return (<SpellCheckContextProvider value={this.getSpellCheckProps()}>
             {conditionalRenderer(this.props.children, this.getSpellCheckProps(), DefaultRender)}
         </SpellCheckContextProvider>)
@@ -42,9 +53,7 @@ class SpellCheck extends React.Component {
 }
 
 SpellCheck.contextType = AppContext;
-
 SpellCheck.GenerateSpellCheck = GenerateSpellCheck;
-
 SpellCheck.displayName = "SpellCheck";
 
 SpellCheck.propTypes = {

@@ -1,14 +1,14 @@
-import { productViewTypes as productViewTypesOptions } from './constants';
+import { productViewTypes as productViewTypeOptions } from './constants';
 
-const getProductFields = ({
-    itemData: product, productMap,
+export const getProductFields = ({
+    itemData: product, attributesMap,
     showVariants,
-    productVariantMap,
+    variantAttributesMap,
     showSwatches,
     swatchAttributes,
     groupBy }) => {
 
-    const productMapper = {
+    const attributesMapper = {
         PRODUCT_NAME: 'productName',
         PRODUCT_URL: 'productUrl',
         IMAGE_URL: 'imageUrl',
@@ -20,21 +20,21 @@ const getProductFields = ({
 
     const productValues = {};
     let swatches = [];
-    for (let key in productMapper) {
-        const mappedKey = productMapper[key];
+    for (let key in attributesMapper) {
+        const mappedKey = attributesMapper[key];
         if (product['relevantDocument'] === 'variant' && showVariants) {
             if (key === 'IMAGE_URL') {
-                const value = product['variants'][0][productVariantMap[mappedKey]];
+                const value = product['variants'][0][variantAttributesMap[mappedKey]];
                 productValues[mappedKey] = Array.isArray(value) && value.length ? value[0] : value;
             } else {
-                productValues[mappedKey] = product['variants'][0][productVariantMap[mappedKey]];
+                productValues[mappedKey] = product['variants'][0][variantAttributesMap[mappedKey]];
             }
         } else {
             if (key === 'IMAGE_URL') {
-                const value = product[productMap[mappedKey]];
+                const value = product[attributesMap[mappedKey]];
                 productValues[mappedKey] = Array.isArray(value) && value.length ? value[0] : value;
             } else {
-                productValues[mappedKey] = product[productMap[mappedKey]];
+                productValues[mappedKey] = product[attributesMap[mappedKey]];
             }
 
         }
@@ -45,10 +45,10 @@ const getProductFields = ({
     //we need to iterate variants array
     if (showSwatches) {
         swatches = product['variants'].map((variant, idx) => {
-            
+
             const swatchDetails = {};
-            swatchDetails['swatchId'] = variant[productVariantMap[productMapper.UNIQUE_ID]];
-            swatchDetails['swatchImageUrl'] = variant[swatchAttributes[productMapper.SWATCH_IMAGE_URL]];
+            swatchDetails['swatchId'] = variant[variantAttributesMap[attributesMapper.UNIQUE_ID]];
+            swatchDetails['swatchImageUrl'] = variant[swatchAttributes[attributesMapper.SWATCH_IMAGE_URL]];
             swatchDetails['groupByValue'] = variant[groupBy];
 
 
@@ -79,9 +79,16 @@ const getProductFields = ({
     return productValues;
 }
 
-const getProductViewType = (productViewTypes = []) => {
-    const validViewTypes = productViewTypes.filter(viewType => (productViewTypesOptions[viewType]));
-    return validViewTypes.length ? validViewTypes : [productViewTypesOptions.GRID];
+export const getProductViewType = (productViewTypes = []) => {
+    const validViewTypes = productViewTypes.filter(viewType => (productViewTypeOptions[viewType]));
+    return validViewTypes.length ? validViewTypes : [productViewTypeOptions.GRID];
 }
 
-export { getProductFields, getProductViewType };
+export const getProductPids = (products, productIdAttribute) => {
+
+    const pids = products.map((product) => {
+        return product[productIdAttribute]
+    })
+
+    return pids;
+}
