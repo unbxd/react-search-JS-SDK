@@ -3,6 +3,9 @@
   "version": "0.0.2",
   "description": "Unbxd React Search JS SDK",
   "main": "public/dist/js/react-search-sdk.js",
+  "files": [
+    "public/dist"
+  ],
   "scripts": {
     "start": "webpack-dev-server --open --config ./webpack/webpack.dev.js",
     "build": "webpack --config ./webpack/webpack.prod.js",
@@ -71,7 +74,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
-    "@unbxd-ui/unbxd-search-core": "^0.0.2",
+    "@unbxd-ui/unbxd-search-core": "^0.0.5",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0"
   },
