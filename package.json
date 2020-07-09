@@ -2,7 +2,7 @@
   "name": "@unbxd-ui/react-search-sdk",
   "version": "0.0.3",
   "description": "Unbxd React Search JS SDK",
-  "main": "public/dist/js/react-search-sdk.js",
+  "main": "src/index.js",
   "files": [
     "public/dist"
   ],
@@ -10,6 +10,7 @@
     "start": "webpack-dev-server --open --config ./webpack/webpack.dev.js",
     "build": "webpack --config ./webpack/webpack.prod.js",
     "server": "http-server ./public",
+    "pre-pack": "yarn build && npm pack",
     "storybook": "yarn build:tailwind:core && yarn build:tailwind:theme && start-storybook -p 6006 --ci",
     "build-storybook": "build-storybook",
     "build:tailwind:core": "postcss public/css/core/base.scss -o public/css/core/index.scss",

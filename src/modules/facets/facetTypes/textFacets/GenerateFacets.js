@@ -18,19 +18,21 @@ class GenerateFacets extends React.Component {
     }
 
     render() {
+
         const { textFacets, selectedFacets, onFacetClick, onFacetObjectReset, FacetItemComponent } = this.props;
+
         return (<div>{textFacets.map(({ displayName, facetName, values }) => {
 
             //decide whether to show clear or not
             const hasActiveFacets = selectedFacets[facetName] ? true : false;
 
-            return (<div key={facetName} className='UNX-facets-container text-facets'>
+            return (<div key={facetName} className='UNX-textFacet__container'>
 
-                <div className='UNX-facet-header'
+                <div className='UNX-textFacet__header'
                     data-unx_name={facetName}>
                     {displayName}
 
-                    {hasActiveFacets && <div className='UNX-facet-header clear'
+                    {hasActiveFacets && <div className='UNX-textFacet__header -clear'
                         data-unx_name={facetName}
                         onClick={onFacetObjectReset}>
                         Clear
@@ -38,13 +40,13 @@ class GenerateFacets extends React.Component {
 
                 </div>
 
-                <div className='UNX-facet-list-container'>
+                <div className='UNX-textFacet__element'>
                     <List items={values}
                         idAttribute={'dataId'}
                         ListItem={FacetItemComponent || FacetItem}
                         onClick={onFacetClick}
                         facetName={facetName}
-                        className={'UNX-facet-item-container'}
+                        className={'UNX-textFacet__list'}
                         isFacetSelected={isFacetSelected}
                         selectedFacets={selectedFacets}
                     />

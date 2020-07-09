@@ -5,11 +5,12 @@ const SortByDropdown = ({ sortBy, sortByOptions, onSortClick }) => {
 
     return (
         <select name="sortby"
-            className="UBX-sortby-dropdown"
+            className="UNX-sortby__dropdown"
             value={sortBy.value}
             onChange={onSortClick}>
             {sortByOptions.map(item => (<option value={item.value}
-                key={item.value}>
+                key={item.value}
+                className='UNX-dropdown__option'>
                 {item.label}
             </option>))}
         </select>

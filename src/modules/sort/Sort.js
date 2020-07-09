@@ -59,7 +59,7 @@ class Sort extends React.Component {
 
         const { noOfPages = 0, } = getPaginationInfo() || {};
 
-        const { sortOptions, sortDisplayType, SortItemComponent } = this.props;
+        const { sortOptions, sortDisplayType, SortItemComponent, reset } = this.props;
 
         //format datas for better handling.
         const formattedSortByOptions =
@@ -103,6 +103,7 @@ class Sort extends React.Component {
             sortOptions: formattedSortByOptions,
             sortDisplayType,
             noOfPages,
+            reset,
             ...this.state
         };
         const helpers = {
@@ -136,7 +137,8 @@ Sort.defaultProps = {
         "label": "Most relevant"
     },
     sortOptions: [],
-    sortDisplayType: "DROPDOWN"
+    sortDisplayType: "DROPDOWN",
+    reset: false
 }
 
 Sort.propTypes = {
@@ -166,6 +168,10 @@ Sort.propTypes = {
     * Custom LIST item component for Sort. 
     */
     SortItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    /**
+    * Display sort reset option. 
+    */
+    reset: PropTypes.bool
 }
 
 export default Sort;

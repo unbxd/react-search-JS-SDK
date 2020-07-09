@@ -20,7 +20,7 @@ const GridView = (props) => {
         SwatchItemComponent,
         productViewType } = props;
 
-    return (<div className='UNX-product-container'>
+    return (<div className='UNX-products__container'>
         <List
             idAttribute={'uniqueId'}
             items={products}
@@ -34,7 +34,7 @@ const GridView = (props) => {
             swatchAttributes={swatchAttributes}
             groupBy={groupBy}
             SwatchItemComponent={SwatchItemComponent}
-            className={`UNX-grid-view grid-cols-${perRow}`} />
+            className={`UNX-products__list -grid grid-cols-${perRow}`} />
     </div>)
 }
 

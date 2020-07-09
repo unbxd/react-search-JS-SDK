@@ -17,7 +17,7 @@ const GenerateBanners = () => {
                 ListItem={BannerItemComponent || BannerItem}
                 idAttribute={'imageUrl'}
                 altText={altText}
-                className='UNX-banner-list-container' />);
+                className='UNX-banners__container' />);
         }}
     </BannersContextConsumer>)
 

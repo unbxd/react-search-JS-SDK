@@ -5,13 +5,13 @@ import { List } from '../../../../components';
 
 const NumberOfProductsList = ({ pageSize, pageSizeOptions, onPageSizeClick, PageSizeItemComponent }) => {
 
-    return (<div className='UNX-pagesize-list'>
+    return (<div className='UNX-pageSize__element'>
         <List
             items={pageSizeOptions}
             activeItem={pageSize}
             ListItem={PageSizeItemComponent}
             onClick={onPageSizeClick}
-            className={'UNX-pagesize-list-container'} />
+            className={'UNX-pageSize__list'} />
     </div>)
 }
 

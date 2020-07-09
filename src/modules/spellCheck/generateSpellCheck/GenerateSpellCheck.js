@@ -15,7 +15,8 @@ const GenerateSpellCheck = () => {
                 ListItem={SpellCheckItemComponent || SpellCheckItem}
                 idAttribute={"suggestion"}
                 onClick={onSuggestionClick}
-                currentQuery={currentQuery} />);
+                currentQuery={currentQuery}
+                className={'UNX-spellCheck__list'} />);
         }}
     </SpellCheckContextConsumer>)
 }

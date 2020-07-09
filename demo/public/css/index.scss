@@ -1,3 +1,82 @@
-.hello {
-    background-color: goldenrod;
+@import './Products.scss';
+@import './SearchBox.scss';
+@import './Sort.scss';
+@import './SpellCheck.scss';
+@import './Facets.scss';
+@import './Pagination.scss';
+@import './Banners.scss';
+
+
+body {
+    background: #f4f5f6;
+    font-family: Barlow,sans-serif
+}
+
+
+.UNX-header__container{
+    padding-left: 100px;
+    padding-right: 100px
+}
+
+.UNX-header__logo {
+    width: 140px;
+    background: url(https://libraries.unbxdapi.com/sdk-assets/images/logo.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 35px;
+    display: inline-block
+}
+
+.UNX-header__container {
+    background: #f6f6f6;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    border: 1px solid #dae1e9;
+    display: flex;
+    align-items: center
+}
+
+.UNX-header__search{
+    width: 60%;
+    padding: 15px 0;
+    margin: 0 auto
+}
+
+.UNX-search__container{
+    position: relative;
+    margin: 0 100px;
+    
+}
+
+.UNX-searchResults__container{
+    margin-bottom: 35px;
+    display: flex
+}
+
+.UNX-searchFacet__container,.UNX-searchResult__container {
+    background-color: #fff
+}
+
+.UNX-searchFacet__container{
+    padding: 15px 21px;
+    margin-right: 35px;
+    border-radius: 5px;
+    width: 24%
+}
+
+.UNX-searchResult__container {
+    padding: 12px 18px;
+    border-radius: 5px;
+    flex: 1
+}
+
+.UNX-searchHeader__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px
+}
+
+.UNX-searchMeta__container{
+    margin-bottom: 50px;
+    height: 1px;
 }

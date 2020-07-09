@@ -11,7 +11,7 @@ export const getPageNavigationOptions = (currentPage, pagePadding, noOfPages, Pa
         .map(item => {
 
             return item > 0 ?
-                (<PageElement className='UNX-page-navigation button' data-pagenumber={item} onClick={onClick} key={item}>{item}</PageElement>)
+                (<PageElement className='UNX-pageNavigation__button' data-pagenumber={item} onClick={onClick} key={item}>{item}</PageElement>)
                 : null;
 
         });
@@ -22,7 +22,7 @@ export const getPageNavigationOptions = (currentPage, pagePadding, noOfPages, Pa
         .slice(currentPage, (currentPage + pagePadding))
         .map(item => {
 
-            return (<PageElement className='UNX-page-navigation button' data-pagenumber={item} onClick={onClick} key={item}>{item}</PageElement>);
+            return (<PageElement className='UNX-pageNavigation__button' data-pagenumber={item} onClick={onClick} key={item}>{item}</PageElement>);
         });
 
     return { prevPages, nextPages };

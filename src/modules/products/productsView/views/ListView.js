@@ -18,7 +18,7 @@ const ListView = (props) => {
         SwatchItemComponent,
         productViewType } = props;
 
-    return (<div className='UNX-product-container'>{
+    return (<div className='UNX-products__container'>{
         <List
             idAttribute={'uniqueId'}
             items={products}
@@ -32,7 +32,7 @@ const ListView = (props) => {
             swatchAttributes={swatchAttributes}
             groupBy={groupBy}
             SwatchItemComponent={SwatchItemComponent}
-            className='UNX-list-view grid-cols-1' />
+            className='UNX-products__list -list grid-cols-1' />
     }
     </div>)
 }

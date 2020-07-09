@@ -5,8 +5,8 @@ const BannerItem = ({ itemData, altText }) => {
 
     const { imageUrl } = itemData;
 
-    return (<div className='UNX-banner-item'>
-        <img alt={altText} className='UNX-banner-item image' src={imageUrl} />
+    return (<div className='UNX-banner__item'>
+        <img alt={altText} className='-item' src={imageUrl} />
     </div>);
 }
 

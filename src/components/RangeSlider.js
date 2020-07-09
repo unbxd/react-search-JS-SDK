@@ -1,4 +1,4 @@
-import React, { createRef, Fragment } from 'react';
+import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 
 
@@ -179,8 +179,8 @@ class RangeSlider extends React.PureComponent {
         const { sliderWidth, valMin, valMax } = this.state;
         const { unit = '' } = this.props;
 
-        return (<div className='UNX-slider-container'>
-            <div className='UNX-slider-track-container'
+        return (<div className='UNX-slider__container'>
+            <div className='UNX-sliderTrack__container'
                 ref={this.sliderRef}
                 onMouseDown={this.handleEvent}
                 onMouseUp={this.handleEvent}
@@ -188,7 +188,7 @@ class RangeSlider extends React.PureComponent {
             >
                 <div
                     ref={this.activeTrackRef}
-                    className='UNX-slider-active-track'
+                    className='UNX-sliderTrack -active'
                 />
 
                 <div
@@ -196,7 +196,7 @@ class RangeSlider extends React.PureComponent {
                     data-unx_thumb_type={'valMin'}
                     style={{ left: getLeftPercent(0, sliderWidth) }}
                     onMouseDown={this.handleMouseDown}
-                    className='UNX-slider-thumb-min'
+                    className='UNX-slider__thumb -min'
                 />
 
                 <div
@@ -204,20 +204,20 @@ class RangeSlider extends React.PureComponent {
                     data-unx_thumb_type={'valMax'}
                     style={{ left: getLeftPercent(100, sliderWidth) }}
                     onMouseDown={this.handleMouseDown}
-                    className='UNX-slider-thumb-max'
+                    className='UNX-slider__thumb -max'
                 />
             </div>
-            <div className='UNX-slider-ranges-text-container'>
-                <span className='UNX-slider-range-min-text-container'>
+            <div className='UNX-sliderRanges__container'>
+                <span className='-minValue__container'>
                     {unit}
-                    <span className='UNX-slider-range-min-text' ref={this.valMinRef}>
+                    <span className='-minValue' ref={this.valMinRef}>
                         {valMin}
                     </span>
                 </span>
 
-                <span className='UNX-slider-range-max-text-container'>
+                <span className='-maxValue__container'>
                     {unit}
-                    <span className='UNX-slider-range-min-text' ref={this.valMaxRef}>
+                    <span className='-minValue' ref={this.valMaxRef}>
                         {valMax}
                     </span>
                 </span>

@@ -45,7 +45,7 @@ class GenerateFacets extends React.Component {
         const facetName = event.target.dataset['unx_facetname'];
 
         const { removeRangeFacet } = this.props;
-        removeRangeFacet({facetName});
+        removeRangeFacet({ facetName });
 
         const { [facetName]: currentFacet, ...otherFacets } = this.state.rangeValues;
         this.setState({
@@ -64,7 +64,7 @@ class GenerateFacets extends React.Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        
+
         if (props.rangeFacets !== state.rangeFacets) {
 
             let selectedRangeFacets = {};
@@ -103,13 +103,13 @@ class GenerateFacets extends React.Component {
         const { rangeValues } = this.state;
 
         return (
-            <Fragment>
+            <div className='UNX-rangeFacet__container'>
                 {Object.keys(rangeValues).map((facetName) => {
 
                     const { sliderMin, sliderMax, valMin, valMax, displayName } = rangeValues[facetName];
 
-                    return (<div className='UNX-range-facet-item'>
-                        <div className='UNX-range-facet-item header'>{displayName}</div>
+                    return (<div className='UNX-rangeFacet__element'>
+                        <div className='UNX-rangeFacet__header'>{displayName}</div>
                         <RangeSlider
                             unit='$'
                             name={facetName}
@@ -119,14 +119,14 @@ class GenerateFacets extends React.Component {
                             valMax={valMax}
                             onChange={this.onSliderChange}
                         />
-                        <div className='UNX-range-facet-actions'>
-                            <div className='UNX-range-facet-action clear' data-unx_facetname={facetName} onClick={this.onClearFilter}>Clear</div>
-                            <div className='UNX-range-facet-action apply' data-unx_facetname={facetName} onClick={this.onApplyFilter}>Apply</div>
+                        <div className='UNX-rangeFacet__actions'>
+                            <div className='-clear' data-unx_facetname={facetName} onClick={this.onClearFilter}>Clear</div>
+                            <div className='-apply' data-unx_facetname={facetName} onClick={this.onApplyFilter}>Apply</div>
                         </div>
                     </div>)
                 })}
 
-            </Fragment>)
+            </div>)
     }
 }
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import AppContext from '../../common/context'
-import { SearchBoxContextProvider } from './context'
+import AppContext from '../../common/context';
+import { SearchBoxContextProvider } from './context';
 import SearchInput from './searchInput';
 import SearchButton from './searchButton';
 import { conditionalRenderer, hasUnbxdSearchWrapperContext } from '../../common/utils';
@@ -127,10 +127,12 @@ class SearchBox extends React.Component {
 
         const { LoaderComponent } = this.props;
 
-        const DefaultRender = <form onSubmit={this.onSearchBoxSubmit} className='UNX-searchbox-container'>
-            <SearchInput />
-            <SearchButton />
-        </form>;
+        const DefaultRender = <div className='UNX-searchbox__container'>
+            <form onSubmit={this.onSearchBoxSubmit} >
+                <SearchInput />
+                <SearchButton />
+            </form>
+        </div>;
         const LoaderRender = <LoaderComponent />;
 
         return (<SearchBoxContextProvider value={this.getSearchBoxProps()}>

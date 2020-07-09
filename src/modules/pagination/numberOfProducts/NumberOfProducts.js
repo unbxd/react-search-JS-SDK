@@ -18,7 +18,7 @@ const NumberOfProducts = () => {
 
             //Decide which DisplayType we using
             return (
-                <div className='UNX-pagesize-container'>
+                <div className='UNX-pageSize__container'>
                     {
                         pageSizeDisplayType === pageSizeDisplayTypes.DROPDOWN &&
                         <NumberOfProductsDropdown

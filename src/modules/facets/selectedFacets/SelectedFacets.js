@@ -16,7 +16,7 @@ const SelectedFacets = () => {
                 return null;
             }
 
-            return (<div className='UNX-active-facets-container'>
+            return (<div className='UNX-selectedFacet__container'>
                 {Object.keys(selectedFacets).map((facetName) => {
 
                     const selectedValues = selectedFacets[facetName] || [];
@@ -26,7 +26,7 @@ const SelectedFacets = () => {
                         ListItem={SelectedFacetItemComponent || SelectedFacetItem}
                         onClick={onFacetClick}
                         facetName={facetName}
-                        className={'UNX-active-facet-container'}
+                        className={'UNX-selectedFacet__list'}
                     />
 
                 })}</div>)

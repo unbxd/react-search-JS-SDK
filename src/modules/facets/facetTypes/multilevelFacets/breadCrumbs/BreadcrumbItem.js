@@ -10,7 +10,7 @@ const BreadCrumbItem = ({ itemData, onClick }) => {
         data-unx_categoryname={value}
         data-unx_multilevelfield={filterField}
         data-unx_level={level}
-        className={'UNX-breadcrumbs-list-item'}
+        className={'UNX-breadcrumb__item'}
         onClick={onClick}
     >
         {value}

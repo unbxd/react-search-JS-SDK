@@ -11,7 +11,7 @@ const SearchButton = () => {
             const { SubmitComponent, onSearchBoxSubmit } = helpers;
 
             return (SubmitComponent ?
-                <SubmitComponent onSearchBoxSubmit={onSearchBoxSubmit} /> : <Button type='submit' className='UNX-searchbox submit'>Search</Button>)
+                <SubmitComponent onSearchBoxSubmit={onSearchBoxSubmit} /> : <Button type='submit' className='UNX-searchbox__button'>Search</Button>)
         }}
     </SearchBoxContextConsumer>)
 }

@@ -30,7 +30,7 @@ const SearchInput = () => {
                 onSearchBoxClear,
                 setSearchBoxQuery,
                 ClearComponent,
-                className: 'UNX-searchbox query'
+                className: 'UNX-searchbox__input'
             }
 
             return (InputComponent ?

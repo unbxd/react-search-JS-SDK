@@ -33,7 +33,7 @@ class RenderInput extends React.Component {
         return (<Input
             value={query}
             onChange={onSearchBoxChange}
-            className='UNX-searchbox query'
+            className='UNX-searchbox__input'
             autoFocus={autoFocus}
             clearable={clearable}
             onClear={onSearchBoxClear}

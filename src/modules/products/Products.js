@@ -103,9 +103,8 @@ export class Products extends React.PureComponent {
         const query = unbxdCore.getSearchQuery() || "";
 
         const onViewToggle = (event) => {
-
-            const productViewType = event.target.dataset.viewtype || event.target.value;;
-
+        
+            const productViewType = event.target.dataset.viewtype || event.target.value;
             this.setState({ productViewType });
         }
 

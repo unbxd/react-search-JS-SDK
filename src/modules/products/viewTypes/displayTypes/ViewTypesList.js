@@ -10,16 +10,14 @@ const ViewTypesList = ({
     onProductViewClick,
     ProductsViewItemComponent }) => {
 
-    return (<div className='UNX-productsview-list'>
-        <List
-            idAttribute={''}
-            items={productViewTypes}
-            activeItem={productViewType}
-            ListItem={ProductsViewItemComponent}
-            onClick={onProductViewClick}
-            className={'UNX-productsview-list-container'}
-            itemsType={listItemTypes.PRIMITIVE} />
-    </div>)
+    return (<List
+        idAttribute={''}
+        items={productViewTypes}
+        activeItem={productViewType}
+        ListItem={ProductsViewItemComponent}
+        onClick={onProductViewClick}
+        className={'UNX-viewTypes__list'}
+        itemsType={listItemTypes.PRIMITIVE} />)
 }
 
 ViewTypesList.propTypes = {

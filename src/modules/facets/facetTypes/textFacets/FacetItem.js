@@ -7,7 +7,7 @@ const FacetItem = ({ itemData, isFacetSelected, selectedFacets, facetName, onCli
 
     const { name, count, dataId } = itemData;
     const isSelected = isFacetSelected(selectedFacets, facetName, dataId);
-    const stateClass = `UNX-facet-item ${isSelected ? 'active' : ''}`;
+    const stateClass = `UNX-textFacet__item ${isSelected ? 'active' : ''}`;
 
     return (<Button
         data-unx_name={facetName}

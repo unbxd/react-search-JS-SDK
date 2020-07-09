@@ -4,13 +4,23 @@ import { SortContextConsumer } from '../context';
 import { Button } from '../../../components/index';
 
 const ResetSort = () => {
+
     return (<SortContextConsumer>
         {({ data, helpers }) => {
-            
-            const { sortBy, noOfPages } = data;
+
+            const { sortBy, noOfPages, reset } = data;
             const { onSortResetClick } = helpers;
 
+            if (!reset) {
+                return false;
+            }
+
             if (Object.keys(sortBy).length === 0) {
+                return null;
+            }
+
+            const [title, order] = sortBy['value'].split("|");
+            if (title === order && order === 'undefined') {
                 return null;
             }
 

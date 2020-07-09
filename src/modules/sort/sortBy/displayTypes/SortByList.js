@@ -5,15 +5,13 @@ import { List } from '../../../../components';
 
 const SortByList = ({ sortBy, sortByOptions, onSortClick, SortItemComponent }) => {
 
-    return (<div className='UNX-sortby-list'>
-        <List
-            idAttribute={'value'}
-            items={sortByOptions}
-            activeItem={sortBy}
-            ListItem={SortItemComponent}
-            onClick={onSortClick}
-            className={'UNX-sortby-list-container'} />
-    </div>)
+    return (<List
+        idAttribute={'value'}
+        items={sortByOptions}
+        activeItem={sortBy}
+        ListItem={SortItemComponent}
+        onClick={onSortClick}
+        className={'UNX-sortby__list'} />)
 }
 
 SortByList.propTypes = {

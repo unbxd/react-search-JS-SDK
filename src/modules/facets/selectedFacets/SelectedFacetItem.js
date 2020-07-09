@@ -11,7 +11,7 @@ const SelectedFacetItem = ({ itemData, facetName, onClick }) => {
         key={dataId}
         data-unx_name={facetName}
         data-unx_dataid={dataId}
-        className='UNX-active-facet-item'
+        className='UNX-selectedFacet__item'
         onClick={onClick}>
         {name}
     </Button>)

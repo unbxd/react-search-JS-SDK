@@ -2,17 +2,17 @@
   "name": "react-search-sdk-demo",
   "version": "1.0.0",
   "description": "",
+  "sideEffects": false,
   "main": "js/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --open --config ./webpack/webpack.dev.js",
+    "start": "webpack-dev-server --config ./webpack/webpack.dev.js",
     "build": "webpack --config ./webpack/webpack.prod.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@unbxd-ui/react-search-sdk": "^0.0.1",
     "react": "16.13.0",
     "react-dom": "16.13.0"
   },

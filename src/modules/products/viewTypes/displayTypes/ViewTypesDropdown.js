@@ -5,18 +5,16 @@ const ViewTypesDropdown = ({
     productViewType,
     productViewTypes,
     onProductViewClick }) => {
-        
-    return (<div className='UNX-productsview-list'>
-        <select name="productsview"
-            className="UBX-productsview-dropdown"
-            value={productViewType}
-            onChange={onProductViewClick}>
-            {productViewTypes.map(item => (<option value={item}
-                key={item}>
-                {item}
-            </option>))}
-        </select>
-    </div>)
+
+    return (<select name="productsview"
+        className="UNX-viewTypes__dropdown"
+        value={productViewType}
+        onChange={onProductViewClick}>
+        {productViewTypes.map(item => (<option value={item}
+            key={item}>
+            {item}
+        </option>))}
+    </select>)
 }
 
 ViewTypesDropdown.propTypes = {

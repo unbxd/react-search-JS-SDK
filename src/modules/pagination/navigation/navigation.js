@@ -9,7 +9,7 @@ const Navigation = () => {
     return (<PaginationContextConsumer>
         {({ data, helpers }) => {
 
-            const { currentPage, isNext, isPrev, noOfPages } = data;
+            const { currentPage, isNext, isPrev, noOfPages, pagePadding } = data;
             const { onNextPageClick, onPreviousPageClick, onPageClick } = helpers;
 
 
@@ -17,16 +17,16 @@ const Navigation = () => {
                 return null;
             }
 
-            const activePage = <Button className='UNX-page-navigation button active' data-pagenumber={currentPage} key={currentPage}>
+            const activePage = <Button className='UNX-pageNavigation__button -active' data-pagenumber={currentPage} key={currentPage}>
                 {currentPage}
             </Button>
 
-            const { prevPages, nextPages } = getPageNavigationOptions(currentPage, 3, noOfPages, Button, onPageClick);
+            const { prevPages, nextPages } = getPageNavigationOptions(currentPage, pagePadding, noOfPages, Button, onPageClick);
 
-            return (<div className='UBX-page-navigation-container'>
+            return (<div className='UNX-pageNavigation__container'>
 
-                {isPrev && <Button className='UNX-page-navigation button action' onClick={onPreviousPageClick} data-pagenumber={currentPage - 1} key={currentPage - 1}>
-                    Previous
+                {isPrev && <Button className='UNX-pageNavigation__button -action' onClick={onPreviousPageClick} data-pagenumber={currentPage - 1} key={currentPage - 1}>
+                    &lt;
             </Button>}
 
                 {prevPages}
@@ -34,8 +34,8 @@ const Navigation = () => {
                 {nextPages}
 
 
-                {isNext && <Button className='UNX-page-navigation button action' onClick={onNextPageClick} data-pagenumber={currentPage + 1} key={currentPage + 1}>
-                    Next
+                {isNext && <Button className='UNX-pageNavigation__button -action' onClick={onNextPageClick} data-pagenumber={currentPage + 1} key={currentPage + 1}>
+                    &gt;
             </Button>}
             </div>)
         }}

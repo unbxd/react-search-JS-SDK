@@ -26,18 +26,18 @@ class Input extends React.PureComponent {
         const { value, onChange, className, clearable, ClearComponent, onClear } = this.props;
         const showClear = value && value.length > 0 && clearable;
 
-        return (<div className='UNX-input-container'>
+        return (<>
             <input
                 value={value}
                 onChange={onChange}
-                className={`UNX-input-el ${className}`}
+                className={className}
                 ref={this.inputRef}
             />
-            {showClear &&
-                (<ClearComponent onSearchBoxClear={onClear} /> ||
-                    <div onClick={this.onClickClear} className='UNX-input clear-icon'>X</div>)}
+            {showClear && (ClearComponent ?
+                <ClearComponent onSearchBoxClear={onClear} /> :
+                <div onClick={this.onClickClear} className='UNX-searchbox__clearIcon'>X</div>)}
 
-        </div>)
+        </>)
     }
 
 }

@@ -5,13 +5,13 @@ const SwatchItem = ({ itemData, onClick }) => {
 
     const { swatchImageUrl, swatchId, active } = itemData;
     return (<div
-        className={`UNX-swatch-item-container ${active ? 'active' : ''}`}
+        className={`UNX-swatch__item ${active ? '-active' : ''}`}
         data-variant_id={swatchId}
         onClick={onClick}
     >
         <img
             data-variant_id={swatchId}
-            src={swatchImageUrl} className='UNX-swatch-item image' />
+            src={swatchImageUrl} className='-image' />
     </div>)
 }
 

@@ -18,7 +18,7 @@ const ViewTypes = () => {
             return null;
         }
 
-        return (<div className='UNX-view-types-container'>
+        return (<div className='UNX-viewTypes__container'>
             {
                 productViewDisplayType === productViewDisplayTypes.DROPDOWN &&
                 <ViewTypesDropdown

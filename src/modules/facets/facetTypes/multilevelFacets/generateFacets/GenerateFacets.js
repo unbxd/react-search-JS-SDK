@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import FacetItem from './FacetItem';
@@ -13,28 +13,30 @@ class GenerateFacets extends React.Component {
             breadCrumbsList,
             MultilevelFacetItemComponent } = this.props;
 
-        return (bucketedFacets.map(bucketedFacet => {
+        return (<div className='UNX-bucketedFacet__container'>
+            {bucketedFacets.map(bucketedFacet => {
 
-            const { displayName, level, multiLevelField, values = [] } = bucketedFacet;
-            const breadCrumbsLength = breadCrumbsList.length;
+                const { displayName, level, multiLevelField, values = [] } = bucketedFacet;
+                const breadCrumbsLength = breadCrumbsList.length;
 
-            if (breadCrumbsLength === level || breadCrumbsLength > level) {
-                return null;
-            }
+                if (breadCrumbsLength === level || breadCrumbsLength > level) {
+                    return null;
+                }
 
-            return (<Fragment>
-                <div className='UNX-bucketed-facet-header'>{displayName}</div>
-                <List
-                    items={values}
-                    ListItem={MultilevelFacetItemComponent || FacetItem}
-                    idAttribute={name}
-                    level={level}
-                    multiLevelField={multiLevelField}
-                    onClick={addCategoryFilter}
-                    className='UNX-bucketed-facet-list-container'
-                />
-            </Fragment>)
-        }))
+                return (<div className='UNX-bucketedFacet__element'>
+                    <div className='UNX-bucketedFacet__header'>{displayName}</div>
+                    <List
+                        items={values}
+                        ListItem={MultilevelFacetItemComponent || FacetItem}
+                        idAttribute={name}
+                        level={level}
+                        multiLevelField={multiLevelField}
+                        onClick={addCategoryFilter}
+                        className='UNX-bucketedFacet__list'
+                    />
+                </div>)
+            })}
+        </div>)
 
     }
 }

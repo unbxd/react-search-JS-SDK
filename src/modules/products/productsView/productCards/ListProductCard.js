@@ -72,22 +72,26 @@ class ListProductCard extends React.Component {
 
         const prank = idx + 1;
 
-        return (<div className='UNX-product-card-container'>
+        return (<div className='UNX-productCard__container'>
 
             <a href={productUrl} className={`UNX-product-card UNX-list-card`} data-uniqueid={uniqueId} data-prank={prank} onClick={onClick}>
-                <img className='UNX-image' src={imageUrl} data-uniqueid={uniqueId} data-prank={prank} />
-                <p className='UNX-product-name data-uniqueid={uniqueId} data-prank={prank}'>{productName}</p>
-                <p className='UNX-price' data-uniqueid={uniqueId} data-prank={prank}>{price}</p>
-                <p className='UNX-selling-price' data-uniqueid={uniqueId} data-prank={prank}>{sellingPrice}</p>
+                <img className='-image' src={imageUrl} data-uniqueid={uniqueId} data-prank={prank} />
             </a>
+            <div className={'-details'}>
+                <div className='-title' data-uniqueid={uniqueId} data-prank={prank}>{productName}</div>
+                <div className='-price' data-uniqueid={uniqueId} data-prank={prank}>
+                    <span>{price} </span>
+                    <span className='-strike'> {sellingPrice}</span>
+                </div>
 
-            <div className='UNX-swatch-content'>
+            </div>
+            <div className='UNX-swatch__container'>
                 <List
                     items={swatches}
                     ListItem={SwatchItemComponent || SwatchItem}
                     idAttribute={'swatchId'}
                     onClick={this.onSwatchClick}
-                    className='UNX-swatch-item-list-container' />
+                    className='UNX-swatch__list' />
             </div>
 
         </div >
@@ -100,7 +104,7 @@ ListProductCard.propTypes = {
     attributesMap: PropTypes.object.isRequired,
     showVariants: PropTypes.bool.isRequired,
     variantAttributesMap: PropTypes.object.isRequired,
-    showSwatches: PropTypes.bool.isRequired,
+    showSwatches: PropTypes.bool,
     swatchAttributes: PropTypes.object,
     groupBy: PropTypes.string
 }

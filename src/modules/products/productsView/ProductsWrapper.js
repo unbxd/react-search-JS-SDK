@@ -157,7 +157,7 @@ class ProductsWrapper extends React.PureComponent {
 
             {displayClickNScrollTrigger &&
                 (LoadMoreComponent ? <LoadMoreComponent loadMoreProducts={this.loadMoreProducts} />
-                    : <div className='UNX-product-load-more' onClick={this.loadMoreProducts}>
+                    : <div className='UNX-productLoadMore' onClick={this.loadMoreProducts}>
                         Load more
                 </div>)}
 

@@ -23,7 +23,7 @@ const SortBy = () => {
 
             //Decide which DisplayType we using
             return (
-                <div className='UNX-sortby-container'>
+                <div className='UNX-sortby__container'>
                     {
                         sortDisplayType === sortDisplayTypes.DROPDOWN &&
                         <SortByDropdown

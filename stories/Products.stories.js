@@ -100,11 +100,11 @@ class ProductItemComponent extends React.Component {
         const uniqueId = idAttribute;
         const prank = idx + 1;
 
-        return (<div className='UNX-product-card-container'>
+        return (<div className='UNX-productCard__container'>
             <div className='details' data-uniqueid={uniqueId} data-prank={prank} onClick={onClick}>
                 <a href={productUrl} data-uniqueid={uniqueId} data-prank={prank}>
-                    <img className='UNX-image' src={imageUrl} data-uniqueid={uniqueId} data-prank={prank} />
-                    <p className='UNX-product-name' data-uniqueid={uniqueId} data-prank={prank}>{title}</p>
+                    <img className='-image' src={imageUrl} data-uniqueid={uniqueId} data-prank={prank} />
+                    <p className='-title' data-uniqueid={uniqueId} data-prank={prank}>{title}</p>
                 </a>
             </div>
             {showSwatches && <div className='UNX-swatch-item-list-container'>
@@ -118,12 +118,14 @@ class ProductItemComponent extends React.Component {
 }
 
 const ProductsViewItemComponent = ({ itemData, isActive, onClick }) => {
-    return (<p
-        data-viewtype={itemData}
-        className={`${isActive ? 'active' : ''}`}
-        onClick={onClick}>
-        {itemData}
-    </p>)
+    return (<div className='UNX-viewType__wrapper'>
+        <p
+            data-viewtype={itemData}
+            className={`${isActive ? 'active' : ''}`}
+            onClick={onClick}>
+            {itemData}
+        </p>
+    </div>)
 }
 
 const LoaderComponent = () => {

@@ -18,7 +18,7 @@ const ApplyFacets = () => {
                 return null;
             }
 
-            return (<Button className='UNX-facet-actions apply-filters' onClick={applyFilters}>
+            return (<Button className='UNX-facet__action -applyFilters' onClick={applyFilters}>
                 Apply Facets
             </Button>)
         }}

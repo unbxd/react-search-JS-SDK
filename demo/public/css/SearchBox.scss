@@ -1,0 +1,43 @@
+.UNX-searchbox__container {
+    position: relative;
+    width: 100%;
+}
+
+.UNX-searchbox__input {
+    width: 100%;
+    color: #696e79;
+    display: block;
+    font-size: 16px;
+    padding: 7px 20px 7px 22px;
+    color: #888;
+    border: 1px solid #dae1e9;
+    border-radius: 25px;
+    height: 50px;
+    box-shadow: inset 0 1px 4px 0 rgba(133,146,172,.46);
+    outline: 0
+}
+
+.UNX-searchbox__input:-moz-placeholder,.UNX-searchbox__input:-ms-input-placeholder,.UNX-searchbox__input::-webkit-input-placeholder .UNX-searchbox__input::-moz-placeholder,.UNX-searchbox__input::placeholder {
+    font-size: 14px
+}
+
+.UNX-searchbox__button {
+    width: 56px;
+    height: 50px;
+    background-color: #323949;
+    border-radius: 0 25px 25px 0;
+    background-image: url(https://libraries.unbxdapi.com/sdk-assets/images/searchIcon.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    border: unset;
+    background-size: 20px;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    z-index: 1;
+    cursor: pointer
+}
+
+.UNX-searchbox__button:active,.UNX-searchbox__button:hover {
+    background-color: #656d7f
+}

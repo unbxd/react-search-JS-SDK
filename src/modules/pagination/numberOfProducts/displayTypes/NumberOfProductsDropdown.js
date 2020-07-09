@@ -5,7 +5,7 @@ const NumberOfProductsDropdown = ({ pageSize, pageSizeOptions, onPageSizeClick }
 
     return (
         <select name="pageSize"
-            className="UBX-pagesize-dropdown"
+            className="UNX-pageSize__dropdown"
             value={pageSize}
             onChange={onPageSizeClick}>
             {pageSizeOptions.map(item => (<option value={item.id}

@@ -11,7 +11,7 @@ const BreadCrumbs = ({ breadCrumbsList, removeCategoryFilter, BreadcrumbItemComp
         idAttribute={'value'}
         ListItem={BreadcrumbItemComponent || BreadCrumbItem}
         onClick={removeCategoryFilter}
-        className={'UNX-breadcrumbs-list-container'} />)
+        className={'UNX-breadcrumbs__container'} />)
 }
 
 BreadCrumbs.propTypes = {
