@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@unbxd-ui/react-search-sdk": "file:../unbxd-ui-react-search-sdk-0.0.3.tgz",
+    "@unbxd-ui/react-search-sdk": "^0.0.4",
     "react": "16.13.0",
     "react-dom": "16.13.0"
   },

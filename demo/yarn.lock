@@ -967,16 +967,17 @@
     "@types/webpack-sources" "*"
     source-map "^0.6.0"
 
-"@unbxd-ui/react-search-sdk@../unbxd-ui-react-search-sdk-0.0.3.tgz":
+"@unbxd-ui/react-search-sdk@^0.0.3":
   version "0.0.3"
-  resolved "../unbxd-ui-react-search-sdk-0.0.3.tgz#6efeaf23548e368007a1ba330f868eae2344b19f"
+  resolved "https://registry.yarnpkg.com/@unbxd-ui/react-search-sdk/-/react-search-sdk-0.0.3.tgz#c56f96e120eaa29bcce1a29e1c3e7b8a0a3e469f"
+  integrity sha512-IcXD1wNlCfdqd1Dtd8yKafDuR05ag0X8AeVqqqQ90j1nv7vRD4TNETehCr9XmWFUlB0MUORNH8p0c5z7PZnPGw==
   dependencies:
-    "@unbxd-ui/unbxd-search-core" "^0.0.7"
+    "@unbxd-ui/unbxd-search-core" "^0.0.5"
 
-"@unbxd-ui/unbxd-search-core@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@unbxd-ui/unbxd-search-core/-/unbxd-search-core-0.0.7.tgz#d69b628b56b64d5f7bab1c5578bebb9fff756f29"
-  integrity sha512-y7AK6G6wqPog273re7+1eDZJFVfvvOUED79TrKMn4imqhAbkbF0E6NkgrRyLD+3owpgzMP2UJkBXgWaMC998Iw==
+"@unbxd-ui/unbxd-search-core@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@unbxd-ui/unbxd-search-core/-/unbxd-search-core-0.0.5.tgz#e8f3a406203fdbafb5325bd8981f73184c3bd05b"
+  integrity sha512-vCrwW6OBVQ69o+dnd5fdwWH97fiUjJyyXLkChkOjWrT8mrGFhjltFea58XbhxTSyfNjn3qaMoEMHlG/apq9GJA==
   dependencies:
     babel-polyfill "^6.26.0"
     babel-runtime "^6.26.0"
