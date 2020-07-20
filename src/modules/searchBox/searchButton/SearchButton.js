@@ -1,19 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import { SearchBoxContextConsumer } from '../context';
+
 import { Button } from '../../../components';
 
-const SearchButton = () => {
+const SearchButton = props => {
+  const { SubmitComponent, onSearchBoxSubmit } = props;
 
-    return (<SearchBoxContextConsumer>
-        {({ data, helpers }) => {
+  return SubmitComponent ? (
+    <SubmitComponent onSearchBoxSubmit={onSearchBoxSubmit} />
+  ) : (
+    <Button type="submit" className="UNX-searchbox__button">
+      Search
+    </Button>
+  );
+};
 
-            const { SubmitComponent, onSearchBoxSubmit } = helpers;
-
-            return (SubmitComponent ?
-                <SubmitComponent onSearchBoxSubmit={onSearchBoxSubmit} /> : <Button type='submit' className='UNX-searchbox__button'>Search</Button>)
-        }}
-    </SearchBoxContextConsumer>)
-}
+SearchButton.propTypes = {
+  SubmitComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  onSearchBoxSubmit: PropTypes.func.isRequired
+};
 
 export default SearchButton;

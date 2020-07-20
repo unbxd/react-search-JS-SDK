@@ -5,10 +5,10 @@ import { SpellCheck } from '@unbxd-ui/react-search-sdk';
 const SpellCheckItemComponent = ({ itemData, onClick }) => {
     const { suggestion } = itemData;
     return (<div
-        className='UNX-spellCheck__item'>DID YOU MEAN :
+        className='UNX-spellCheck__item'>Did you mean
         <span className='-suggestion'
             data-suggestion={suggestion}
-            onClick={onClick}> {suggestion}</span>?</div>)
+            onClick={onClick}>{suggestion}</span>?</div>)
 }
 
 

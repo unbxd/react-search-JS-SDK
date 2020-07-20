@@ -1,0 +1,38 @@
+.UNX-pagination__pageSize{
+    display: flex;
+    align-items: center;
+    display: none;
+
+    .UNX-pageSize__dropdown{
+        border: 1px solid rgba(194, 194, 194, 0.38);
+        margin-left: 10px;
+        height: 30px;
+        padding: 4px 8px;
+        color: rgba(0, 0, 0, 0.75);
+        font-weight: 400;
+        background: 0 0;
+    }
+
+}
+
+.UNX-pageNavigation__container{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 14px;
+
+    .UNX-pageNavigation__button{
+
+        padding: 3px 10px;
+
+        &.-active{
+            background-color: #1d2e44;
+            color: #fff
+        }
+
+        &.-action{
+            background: #ddd;
+            border-radius: 3px;
+            color: #837a7a
+        }
+    }
+}

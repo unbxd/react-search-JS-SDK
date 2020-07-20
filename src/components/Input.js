@@ -23,12 +23,13 @@ class Input extends React.PureComponent {
 
     render() {
 
-        const { value, onChange, className, clearable, ClearComponent, onClear } = this.props;
+        const { value, onChange, className, clearable, ClearComponent, onClear,placeholder } = this.props;
         const showClear = value && value.length > 0 && clearable;
 
         return (<>
             <input
                 value={value}
+                placeholder={placeholder}
                 onChange={onChange}
                 className={className}
                 ref={this.inputRef}
@@ -43,14 +44,16 @@ class Input extends React.PureComponent {
 }
 
 Input.defaultProps = {
-    value: "",
-    className: "",
+    value: '',
+    className: '',
     clearable: false,
-    autoFocus: false
+    autoFocus: false,
+    placeholder:''
 }
 
 Input.propTypes = {
     value: PropTypes.string,
+    placeholder: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     className: PropTypes.string,
     clearable: PropTypes.bool,

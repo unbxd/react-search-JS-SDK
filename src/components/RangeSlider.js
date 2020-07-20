@@ -180,6 +180,23 @@ class RangeSlider extends React.PureComponent {
         const { unit = '' } = this.props;
 
         return (<div className='UNX-slider__container'>
+
+        <div className='UNX-sliderRanges__container'>
+                <span className='-minValue__container'>
+                    {unit}
+                    <span className='-minValue' ref={this.valMinRef}>
+                        {valMin}
+                    </span>
+                </span>
+
+                <span className='-maxValue__container'>
+                    {unit}
+                    <span className='-minValue' ref={this.valMaxRef}>
+                        {valMax}
+                    </span>
+                </span>
+            </div>
+            
             <div className='UNX-sliderTrack__container'
                 ref={this.sliderRef}
                 onMouseDown={this.handleEvent}
@@ -207,21 +224,7 @@ class RangeSlider extends React.PureComponent {
                     className='UNX-slider__thumb -max'
                 />
             </div>
-            <div className='UNX-sliderRanges__container'>
-                <span className='-minValue__container'>
-                    {unit}
-                    <span className='-minValue' ref={this.valMinRef}>
-                        {valMin}
-                    </span>
-                </span>
-
-                <span className='-maxValue__container'>
-                    {unit}
-                    <span className='-minValue' ref={this.valMaxRef}>
-                        {valMax}
-                    </span>
-                </span>
-            </div>
+            
         </div >)
     }
 }

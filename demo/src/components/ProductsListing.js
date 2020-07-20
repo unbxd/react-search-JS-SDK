@@ -4,47 +4,46 @@ import React from 'react';
 import { Products } from '@unbxd-ui/react-search-sdk';
 
 const attributesMap = {
-    productName: "title",
-    uniqueId: "uniqueId",
-    imageUrl: "imageUrl",
-    price: "unbxd_price",
-    sellingPrice: "RRP_Price",
-    productUrl: "productUrl"
-}
-
-const variantAttributesMap = {
-    productName: "title",
-    uniqueId: "vId",
-    imageUrl: "imageUrl",
-    price: "unbxd_price",
-    sellingPrice: "RRP_Price",
-    productUrl: "productUrl"
-}
-
-const ProductsViewItemComponent = ({ itemData, isActive, onClick }) => {
-    const iconClassName = itemData === "GRID" ? `glyphicon glyphicon-th` : `glyphicon glyphicon-th-list`
-    return (<div className='UNX-viewType__wrapper'>
-        <a
-            className={`${isActive ? '-active' : ''}`}
-            data-viewtype={itemData}
-            onClick={onClick}
-            href="#">
-            <i className={iconClassName} data-viewtype={itemData}></i>
-        </a>
-    </div>)
-}
+    productName: 'title',
+    uniqueId: 'uniqueId',
+    imageUrl: 'imageUrl',
+    price: 'min_cheapest_default_price',
+    sellingPrice:'cheapest_msrp',
+    productUrl: 'productUrl'
+  };
+  
+  const variantAttributesMap = {
+    productName: 'title',
+    uniqueId: 'variantId',
+    imageUrl: 'variant_image_array',
+    price: 'variant_cheapest_default_price',
+    sellingPrice:'variant_min_cheapest_msrp',
+    productUrl: 'variant_productUrl',
+    swatchImage: 'variant_overhead_swatch',
+    variant_color: 'variant_color'
+  };
+  
+  const swatchAttributes = {
+    swatchId: 'variantId',
+    swatchImageUrl: 'variant_overhead_swatch',
+    imageUrl: 'variant_image_array',
+    price: 'variant_cheapest_default_price',
+    sellingPrice:'variant_min_cheapest_msrp',
+    productUrl: 'variant_productUrl'
+  };
 
 const ProductsListing = () => {
     return (
         <Products
-            perRow={4}
-            attributesMap={attributesMap}
-            showVariants={true}
-            variantsCount={2}
-            variantAttributesMap={variantAttributesMap}
-            productViewTypes={['GRID', 'LIST']}
-            productViewDisplayType={'LIST'}
-            ProductsViewItemComponent={ProductsViewItemComponent}
+        attributesMap={attributesMap}
+        pageSize={20}
+        showVariants={true}
+        variantsCount={4}
+        variantAttributesMap={variantAttributesMap}
+        showSwatches={true}
+        groupBy={'variant_color'}
+        swatchAttributes={swatchAttributes}
+        paginationType={'FIXED_PAGINATION'}
         />
 
     )

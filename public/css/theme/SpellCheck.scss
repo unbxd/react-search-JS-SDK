@@ -1,0 +1,18 @@
+.UNX-spellCheck__list{
+
+    color: #5c656a;
+    font-size: 14px;
+    padding: 4px 0;
+    font-weight: 600
+}
+
+.UNX-spellCheck__item{
+
+    .-suggestion{
+        display: inline-block;
+        margin: 0 2px;
+        color: #0282A6;
+        text-transform: uppercase;
+        text-decoration: underline;
+    }
+}

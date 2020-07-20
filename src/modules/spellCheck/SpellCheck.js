@@ -1,66 +1,47 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import AppContext from '../../common/context';
-import { SpellCheckContextProvider } from './context'
-import GenerateSpellCheck from './generateSpellCheck';
-import { conditionalRenderer, hasUnbxdSearchWrapperContext } from '../../common/utils';
-
+import { AppContextConsumer } from '../../common/context';
+import { hasUnbxdSearchWrapperContext } from '../../common/utils';
+import SpellCheckContainer from './SpellCheckContainer';
 
 /**
- * Component to handle query suggestions.
+ * Component to manage the view type of products.
+ * ViewType supports `GRID` view by default.
  */
-class SpellCheck extends React.Component {
-
-    componentDidMount() {
-
-        if (this.context === undefined) {
-            hasUnbxdSearchWrapperContext(SpellCheck.displayName);
+const SpellCheck = props => {
+  return (
+    <AppContextConsumer>
+      {appState => {
+        if (appState === undefined) {
+          hasUnbxdSearchWrapperContext(SpellCheck.displayName);
         }
 
-        const { helpers: { setSpellCheckConfiguration } } = this.context;
-        setSpellCheckConfiguration({ enable: true });
-    }
+        const { unbxdCore, unbxdCoreStatus, helpers } = appState;
 
-    getSpellCheckProps() {
-        const { unbxdCore, helpers: { setSearchBoxConfiguration } } = this.context;
+        return (
+          <SpellCheckContainer
+            unbxdCore={unbxdCore}
+            unbxdCoreStatus={unbxdCoreStatus}
+            helpers={helpers}
+            {...props}
+          />
+        );
+      }}
+    </AppContextConsumer>
+  );
+};
 
-        const { SpellCheckItemComponent } = this.props;
-        const spellChecks = unbxdCore.getDidYouMeanFromResponse();
-        const currentQuery = unbxdCore.getSearchQuery() || "";
-        const onSuggestionClick = (event) => {
-            const suggestion = event.target.dataset['suggestion'];
-            setSearchBoxConfiguration({ query: suggestion });
-        }
-
-
-        const data = { spellChecks, currentQuery };
-        const helpers = { onSuggestionClick, SpellCheckItemComponent };
-        return { data, helpers };
-
-    }
-
-    render() {
-
-        const DefaultRender = <Fragment>
-            <GenerateSpellCheck />
-        </Fragment>
-
-        return (<SpellCheckContextProvider value={this.getSpellCheckProps()}>
-            {conditionalRenderer(this.props.children, this.getSpellCheckProps(), DefaultRender)}
-        </SpellCheckContextProvider>)
-    }
-}
-
-SpellCheck.contextType = AppContext;
-SpellCheck.GenerateSpellCheck = GenerateSpellCheck;
-SpellCheck.displayName = "SpellCheck";
+SpellCheck.displayName = 'SpellCheck';
 
 SpellCheck.propTypes = {
-    /**
-    * Custom Spell check component
-    */
-    SpellCheckItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-}
+  /**
+   * Custom Spell check component
+   */
+  SpellCheckItemComponent: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.func
+  ])
+};
 
 export default SpellCheck;

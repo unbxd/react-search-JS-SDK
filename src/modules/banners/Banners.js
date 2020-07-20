@@ -1,49 +1,38 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import AppContext from '../../common/context';
-import { BannersContextProvider } from './context';
-import GenerateBanners from './generateBanners';
-import { conditionalRenderer, hasUnbxdSearchWrapperContext } from '../../common/utils';
+import { AppContextConsumer } from '../../common/context';
+import { hasUnbxdSearchWrapperContext } from '../../common/utils';
+import BannersContainer from './BannersContainer';
 
 
 /**
  * Component to display merchandising banners.
  */
-class Banners extends React.Component {
+const Banners = (props) => {
 
-    componentDidMount() {
+    return (<AppContextConsumer>
+        {(appState) => {
 
-        if (this.context === undefined) {
-            hasUnbxdSearchWrapperContext(Banners.displayName);
-        }
-    }
+            if (appState === undefined) {
+                hasUnbxdSearchWrapperContext(Banners.displayName);
+            }
 
-    getBannerProps() {
+            const { unbxdCore, unbxdCoreStatus, helpers, unbxdState } = appState;
+            const { enableApplyFilters, selectedFacets } = unbxdState;
 
-        const { unbxdCore } = this.context;
-        const banners = unbxdCore.getBanners();
-
-        const { altText, BannerItemComponent } = this.props;
-        const data = { banners, altText }
-        const helpers = { BannerItemComponent };
-
-        return { data, helpers };
-    }
-
-    render() {
-        const DefaultRender = <Fragment>
-            <GenerateBanners />
-        </Fragment>
-
-        return (<BannersContextProvider value={this.getBannerProps()}>
-            {conditionalRenderer(this.props.children, this.getBannerProps(), DefaultRender)}
-        </BannersContextProvider>)
-    }
+            return (<BannersContainer
+                unbxdCore={unbxdCore}
+                unbxdCoreStatus={unbxdCoreStatus}
+                helpers={helpers}
+                enableApplyFilters={enableApplyFilters}
+                selectedFacets={selectedFacets}
+                {...props}
+            />)
+        }}
+    </AppContextConsumer>)
 }
 
-Banners.contextType = AppContext;
-Banners.GenerateBanners = GenerateBanners;
 Banners.displayName = "Banners";
 
 Banners.defaultProps = {
@@ -59,6 +48,7 @@ Banners.propTypes = {
     * Banner custom component
     */
     BannerItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+
 }
 
 export default Banners;

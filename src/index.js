@@ -1,13 +1,37 @@
 //sdk exports
-import UnbxdSearchWrapper from './UnbxdSearchWrapper';
-import Products from './modules/products';
-import Facets from './modules/facets';
-import Pagination from './modules/pagination';
-import Sort from './modules/sort';
-import SearchBox from './modules/searchBox';
-import SpellCheck from './modules/spellCheck';
 import Banners from './modules/banners';
+import Breadcrumbs from './modules/breadcrumbs';
+import FacetActions from './modules/facetActions';
+import MultilevelFacets from './modules/multilevelFacets';
+import PageSize from './modules/pageSize';
+import Pagination from './modules/pagination';
+import Products from './modules/products';
+import RangeFacets from './modules/rangeFacets';
+import SearchBox from './modules/searchBox';
 import SearchTitle from './modules/searchTitle';
+import SelectedFacets from './modules/selectedFacets';
+import Sort from './modules/sort';
+import SpellCheck from './modules/spellCheck';
+import TextFacets from './modules/textFacets';
+import ViewTypes from './modules/viewTypes';
+import UnbxdSearchWrapper from './UnbxdSearchWrapper';
 
 export default UnbxdSearchWrapper;
-export { Products, Facets, Pagination, Sort, SearchBox, SpellCheck, Banners, SearchTitle };
+export {
+  Banners,
+  Breadcrumbs,
+  FacetActions,
+  MultilevelFacets,
+  PageSize,
+  Pagination,
+  Products,
+  RangeFacets,
+  SearchBox,
+  SearchTitle,
+  SelectedFacets,
+  Sort,
+  SpellCheck,
+  TextFacets,
+  ViewTypes,
+  UnbxdSearchWrapper
+};

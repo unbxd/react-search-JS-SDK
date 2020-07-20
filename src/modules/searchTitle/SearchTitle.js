@@ -2,40 +2,43 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { AppContextConsumer } from '../../common/context';
-import GenerateSearchTitle from './GenerateSearchTitle';
+import SearchTitleContainer from './SearchTitleContainer';
 import { hasUnbxdSearchWrapperContext } from '../../common/utils';
 
-const SearchTitle = (props) => {
-    return (<AppContextConsumer>
-        {(state) => {
+/**
+ * Component to display search meta data.
+ */
+const SearchTitle = props => {
+  return (
+    <AppContextConsumer>
+      {appState => {
+        if (appState === undefined) {
+          hasUnbxdSearchWrapperContext(SearchTitle.displayName);
+        }
 
-            if (state === undefined) {
-                hasUnbxdSearchWrapperContext(Banners.displayName);
-            }
-            const { unbxdCore, } = state;
-            const { SearchTitleItem } = props;
+        const { unbxdCore, unbxdCoreStatus, helpers,unbxdState } = appState;
 
-            const searchQuery = unbxdCore.getSearchQuery() || '';
-            const paginationInfo = unbxdCore.getPaginationInfo() || {};
-
-            const getSearchTitleProps = () => {
-                const data = { searchQuery, paginationInfo };
-                const helpers = {};
-
-                return { data, helpers };
-            }
-
-            return (SearchTitleItem ?
-                <SearchTitleItem {...getSearchTitleProps()} /> :
-                <GenerateSearchTitle {...getSearchTitleProps()} />)
-        }}
-    </AppContextConsumer>)
-}
+        return (
+          <SearchTitleContainer
+            unbxdCore={unbxdCore}
+            unbxdCoreStatus={unbxdCoreStatus}
+            helpers={helpers}
+            unbxdState={unbxdState}
+            {...props}
+          />
+        );
+      }}
+    </AppContextConsumer>
+  );
+};
 
 SearchTitle.displayName = 'SearchTitle';
 
 SearchTitle.propTypes = {
-    SearchTitleItem: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-}
+  /**
+   * Custom search title item.
+   */
+  SearchTitleItem: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
+};
 
 export default SearchTitle;

@@ -1,7 +1,20 @@
+@import './Banners.scss';
+@import './Breadcrumbs.scss';
+@import './MultilevelFacets.scss';
+@import './PageSize.scss';
+@import './Pagination.scss';
 @import './Products.scss';
+@import './RangeFacets.scss';
 @import './SearchBox.scss';
+@import './SearchTitle.scss';
+@import './SelectedFacets.scss';
 @import './Sort.scss';
 @import './SpellCheck.scss';
-@import './Facets.scss';
-@import './Pagination.scss';
-@import './Banners.scss';
+@import './TextFacets.scss';
+@import './ViewTypes.scss';
+@import './Loader.scss';
+@import './RangeSlider.scss';
+
+.hidden {
+    display: none;
+}

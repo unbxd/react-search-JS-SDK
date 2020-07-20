@@ -33,12 +33,9 @@ const sortOptions = [
         "order": "desc"
     }
 ]
-
+const label = <div className='-label'>Sort by</div>
 const Sorter = () => {
-    return (<div className='UNX-sort__container'>
-        <div className='-label'>Sort by</div>
-        <Sort sortOptions={sortOptions} />
-    </div>)
+        return (<Sort sortOptions={sortOptions} label={label} />)
 }
 
 export default Sorter;

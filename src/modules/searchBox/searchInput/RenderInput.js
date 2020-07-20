@@ -5,53 +5,62 @@ import { Input } from '../../../components';
 import { productTypes } from '../../../config';
 
 class RenderInput extends React.Component {
-
-    componentDidUpdate(prevProps) {
-
-        if (prevProps.lastSearchedQuery !== this.props.lastSearchedQuery &&
-            this.props.query !== this.props.lastSearchedQuery) {
-
-            if (this.props.productType === productTypes.CATEGORY) {
-
-                this.props.setSearchBoxQuery("");
-            } else {
-
-                this.props.setSearchBoxQuery(this.props.lastSearchedQuery);
-            }
-        }
+  componentDidUpdate(prevProps) {
+    const {
+      query,
+      lastSearchedQuery,
+      productType,
+      setSearchBoxQuery
+    } = this.props;
+    if (
+      prevProps.lastSearchedQuery !== lastSearchedQuery &&
+      query !== lastSearchedQuery
+    ) {
+      if (productType === productTypes.CATEGORY) {
+        setSearchBoxQuery('');
+      } else {
+        setSearchBoxQuery(lastSearchedQuery);
+      }
     }
+  }
 
-    render() {
+  render() {
+    const {
+      query,
+      placeholder,
+      onSearchBoxChange,
+      autoFocus,
+      clearable,
+      onSearchBoxClear,
+      ClearComponent
+    } = this.props;
 
-        const { query,
-            onSearchBoxChange,
-            autoFocus,
-            clearable,
-            onSearchBoxClear,
-            ClearComponent } = this.props;
-
-        return (<Input
-            value={query}
-            onChange={onSearchBoxChange}
-            className='UNX-searchbox__input'
-            autoFocus={autoFocus}
-            clearable={clearable}
-            onClear={onSearchBoxClear}
-            ClearComponent={ClearComponent}
-        />)
-    }
-
-
+    return (
+      <Input
+        value={query}
+        onChange={onSearchBoxChange}
+        className="UNX-searchbox__input"
+        autoFocus={autoFocus}
+        clearable={clearable}
+        onClear={onSearchBoxClear}
+        ClearComponent={ClearComponent}
+        placeholder={placeholder}
+      />
+    );
+  }
 }
 
-RenderInput.props = {
-    query: PropTypes.string.isRequired,
-    onSearchBoxChange: PropTypes.func.isRequired,
-    autoFocus: PropTypes.bool,
-    clearable: PropTypes.bool,
-    setSearchBoxQuery: PropTypes.func.isRequired,
-    onSearchBoxClear: PropTypes.func.isRequired,
-    ClearComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-}
+RenderInput.propTypes = {
+  query: PropTypes.string.isRequired,
+  lastSearchedQuery: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  productType: PropTypes.string.isRequired,
+  onSearchBoxChange: PropTypes.func.isRequired,
+  setSearchBoxQuery: PropTypes.func.isRequired,
+  autoFocus: PropTypes.bool,
+  clearable: PropTypes.bool,
+  onSearchBoxClear: PropTypes.func.isRequired,
+  ClearComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
+};
 
 export default RenderInput;

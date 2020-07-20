@@ -3,7 +3,6 @@ const searchConfigurations = {
     siteKey: '',
     isFlag: true,
     sdkHostName: 'https://search.unbxd.io/',
-    queryString: '/search?q=',
     searchQueryParam: 'q',
     fields: ['title'],
     defaultFilters: null,
@@ -33,7 +32,9 @@ const searchConfigurations = {
     swatches: true,
     swatchMap: {},
     callBackFn: () => { },
-    getCategoryId: () => { }
+    getCategoryId: () => { },
+    applyMultipleFilters: false,
+    hashMode: true
 }
 
 export default searchConfigurations;
