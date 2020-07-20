@@ -17,13 +17,14 @@ const SearchTitle = props => {
         }
 
         const { unbxdCore, unbxdCoreStatus, helpers,unbxdState } = appState;
+        const {paginationType} = unbxdState;
 
         return (
           <SearchTitleContainer
             unbxdCore={unbxdCore}
             unbxdCoreStatus={unbxdCoreStatus}
             helpers={helpers}
-            unbxdState={unbxdState}
+            paginationType={paginationType}
             {...props}
           />
         );
