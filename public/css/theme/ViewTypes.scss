@@ -1,0 +1,28 @@
+.UNX-viewTypes__container{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-left: auto;
+    
+}
+
+.UNX-viewTypes__list{
+    display: flex
+}
+
+.UNX-viewType__wrapper {
+    margin-right: 13px
+}
+
+.UNX-viewType__wrapper:last-child {
+    margin-right: 0
+}
+
+.UNX-viewType__wrapper a {
+    color: #cdd5d9;
+    font-size: 22px;
+}
+
+.UNX-viewType__wrapper .-active {
+    color: #687d88;
+}

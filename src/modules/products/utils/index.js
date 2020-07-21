@@ -1,12 +1,8 @@
-import { getProductFields, getProductViewType, getProductPids } from './utils';
-import { paginationTypes, productViewTypes, DEBOUNCE_TIME, productViewDisplayTypes } from './constants';
+import { getProductFields, getProductPids } from './utils';
+import { DEBOUNCE_TIME } from './constants';
 
 export {
-    paginationTypes,
-    productViewTypes,
     getProductFields,
-    getProductViewType,
     DEBOUNCE_TIME,
-    productViewDisplayTypes,
     getProductPids
 };

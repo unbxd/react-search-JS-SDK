@@ -1,3 +1,5 @@
+/*global Unbxd*/
+
 const onCatch = (e) => {
     console.error("Error tracking::", e);
 }

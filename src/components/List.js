@@ -11,7 +11,7 @@ const List = ({ items,
     onClick,
     itemsType = listItemTypes.OBJECT,
     ...props }) => {
-    return (<div className={`UNX-list ${className}`}>
+    return (<div className={className}>
         {items.map((item, idx) => {
 
             let isActive = false;

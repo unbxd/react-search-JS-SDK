@@ -1,77 +1,77 @@
+/* eslint react/prop-types: 0 */
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import Banners from '../src/modules/banners';
 import SearchBox from '../src/modules/searchBox';
 
-
-const stories = storiesOf('Banners', module).addParameters({
+export default {
+  title: 'Banners',
+  parameters: {
     props: {
-        propTablesExclude: [UnbxdSearchWrapper, SearchBox]
+      propTablesExclude: [UnbxdSearchWrapper, SearchBox]
     }
-});
+  }
+};
 
 const defaultSearch = 'dress';
 
 const BannerItemComponent = ({ itemData }) => {
-    const { imageUrl } = itemData;
-    return (<img src={imageUrl} />);
-}
+  const { imageUrl } = itemData;
+  return <img src={imageUrl} />;
+};
 
-stories.add('default', () => (<UnbxdSearchWrapper
-    siteKey='demo-unbxd700181503576558'
-    apiKey='fb853e3332f2645fac9d71dc63e09ec1'>
-
+export const Default = () => (
+  <UnbxdSearchWrapper
+    siteKey="demo-unbxd700181503576558"
+    apiKey="fb853e3332f2645fac9d71dc63e09ec1"
+  >
     <Banners />
 
-    <div className='hidden'>
-        <SearchBox defaultSearch={defaultSearch} />
+    <div className="hidden">
+      <SearchBox defaultSearch={defaultSearch} />
     </div>
+  </UnbxdSearchWrapper>
+);
 
-</UnbxdSearchWrapper >));
+export const With_AltText = () => (
+  <UnbxdSearchWrapper
+    siteKey="demo-unbxd700181503576558"
+    apiKey="fb853e3332f2645fac9d71dc63e09ec1"
+  >
+    <Banners altText="ALT Banner Image" />
 
-
-stories.add('with altText', () => (<UnbxdSearchWrapper
-    siteKey='demo-unbxd700181503576558'
-    apiKey='fb853e3332f2645fac9d71dc63e09ec1'>
-
-    <Banners
-        altText='ALT Banner Image' />
-
-    <div className='hidden'>
-        <SearchBox defaultSearch={defaultSearch} />
+    <div className="hidden">
+      <SearchBox defaultSearch={defaultSearch} />
     </div>
+  </UnbxdSearchWrapper>
+);
 
-</UnbxdSearchWrapper >));
+export const With_Custom_Component = () => (
+  <UnbxdSearchWrapper
+    siteKey="demo-unbxd700181503576558"
+    apiKey="fb853e3332f2645fac9d71dc63e09ec1"
+  >
+    <Banners BannerItemComponent={BannerItemComponent} />
 
-stories.add('with BannerItemComponent', () => (<UnbxdSearchWrapper
-    siteKey='demo-unbxd700181503576558'
-    apiKey='fb853e3332f2645fac9d71dc63e09ec1'>
-
-    <Banners
-        BannerItemComponent={BannerItemComponent} />
-
-    <div className='hidden'>
-        <SearchBox defaultSearch={defaultSearch} />
+    <div className="hidden">
+      <SearchBox defaultSearch={defaultSearch} />
     </div>
+  </UnbxdSearchWrapper>
+);
 
-</UnbxdSearchWrapper >));
-
-stories.add('with render props', () => (<UnbxdSearchWrapper
-    siteKey='demo-unbxd700181503576558'
-    apiKey='fb853e3332f2645fac9d71dc63e09ec1'>
-
+export const With_Render_Props = () => (
+  <UnbxdSearchWrapper
+    siteKey="demo-unbxd700181503576558"
+    apiKey="fb853e3332f2645fac9d71dc63e09ec1"
+  >
     <Banners>
-        {({ data, helpers }) => {
-
-            //data and helpers for Banners
-            return (<p>Hello Banners</p>)
-
-        }}
+      {() => {
+        return <p>Hello Banners</p>;
+      }}
     </Banners>
-    <div className='hidden'>
-        <SearchBox defaultSearch={defaultSearch} />
+    <div className="hidden">
+      <SearchBox defaultSearch={defaultSearch} />
     </div>
-
-</UnbxdSearchWrapper >));
+  </UnbxdSearchWrapper>
+);

@@ -1,6 +1,6 @@
-const pageSizeDisplayTypes = {
+const displayTypes = {
     LIST: "LIST",
     DROPDOWN: "DROPDOWN"
 }
 
-export {pageSizeDisplayTypes}
+export {displayTypes}

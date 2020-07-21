@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 const SpellCheckItem = ({ itemData, currentQuery, onClick }) => {
 
     const { suggestion } = itemData;
-    return (<div className='UNX-spellcheck-item'>
-        <div className='UNX-spellcheck current-query'>Showing results for {currentQuery}</div>
-        <div className='UNX-spellcheck suggestion-container'>
+    return (<div className='UNX-spellCheck__item'>
+        <div className='UNX-spellCheck__query'>
+            Showing results for
+        <span className='-query'> {currentQuery}</span></div>
+        <div className='UNX-spellCheck__suggestion'>
             Did you mean
-        <strong className='UNX-spellcheck suggestion' onClick={onClick} data-suggestion={suggestion}> {suggestion}</strong>
+        <span className='-suggestion' onClick={onClick} data-suggestion={suggestion}> {suggestion}</span>
             ?</div>
     </div>)
 }

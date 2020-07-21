@@ -1,0 +1,23 @@
+.UNX-breadcrumbs__container{
+    display: flex;
+    justify-content: flex-start;
+    width:100%;
+
+
+    .UNX-breadcrumb__root,
+    .UNX-breadcrumb__separator{
+        display: inline-block;
+        margin: 0 5px;
+    }
+
+    .UNX-breadcrumbs__list{
+        display: flex;
+
+        .UNX-breadcrumbs-list-item{
+            color: #0282A6;
+        }
+    }
+
+}
+
+

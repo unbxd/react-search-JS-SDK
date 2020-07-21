@@ -1,20 +1,20 @@
 //Product grid and list styles
-.UNX-grid-view, .UNX-list-view{
+.UNX-products__list{
     @apply grid gap-4 p-4;
 }
 
-.UNX-swatch-item-list-container {
+.UNX-swatch__list {
     display: flex;
 
-    .UNX-swatch-item-container {
+    .UNX-swatch__item {
         @apply m-1;
 
-        &.active {
+        &.-active {
             @apply border-2 border-gray-600;
         }
     }
 
-    .image{
+    .-image{
         height: 30px;
         width: 30px;
     }

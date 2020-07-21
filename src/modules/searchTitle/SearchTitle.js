@@ -1,0 +1,45 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import { AppContextConsumer } from '../../common/context';
+import SearchTitleContainer from './SearchTitleContainer';
+import { hasUnbxdSearchWrapperContext } from '../../common/utils';
+
+/**
+ * Component to display search meta data.
+ */
+const SearchTitle = props => {
+  return (
+    <AppContextConsumer>
+      {appState => {
+        if (appState === undefined) {
+          hasUnbxdSearchWrapperContext(SearchTitle.displayName);
+        }
+
+        const { unbxdCore, unbxdCoreStatus, helpers,unbxdState } = appState;
+        const {paginationType} = unbxdState;
+
+        return (
+          <SearchTitleContainer
+            unbxdCore={unbxdCore}
+            unbxdCoreStatus={unbxdCoreStatus}
+            helpers={helpers}
+            paginationType={paginationType}
+            {...props}
+          />
+        );
+      }}
+    </AppContextConsumer>
+  );
+};
+
+SearchTitle.displayName = 'SearchTitle';
+
+SearchTitle.propTypes = {
+  /**
+   * Custom search title item.
+   */
+  SearchTitleItem: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
+};
+
+export default SearchTitle;

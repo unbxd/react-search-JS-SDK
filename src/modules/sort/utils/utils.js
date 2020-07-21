@@ -1,5 +1,7 @@
-export const getFormattedSort = sortBy => {
-    return { ...sortBy, value: `${sortBy.field}|${sortBy.order}` }
+export const getFormattedSort = (sortBy, activeSort) => {
+
+    const isSelected = activeSort === undefined ? false : `${sortBy.field}|${sortBy.order}` === activeSort.value;
+    return { ...sortBy, value: `${sortBy.field}|${sortBy.order}`, isSelected }
 };
 
 export const getSelectedSort = (selectedSort, sortOptions) => {

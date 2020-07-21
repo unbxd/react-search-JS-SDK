@@ -1,5 +1,3 @@
-import { pageSizeDisplayTypes } from './constants';
-import { getPageNavigationOptions } from './utils';
+import { displayTypes } from './constants';
 
-export { pageSizeDisplayTypes,getPageNavigationOptions }
-    
+export { displayTypes };

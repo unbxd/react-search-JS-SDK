@@ -1,5 +1,3 @@
-import { productViewTypes as productViewTypeOptions } from './constants';
-
 export const getProductFields = ({
     itemData: product, attributesMap,
     showVariants,
@@ -77,11 +75,6 @@ export const getProductFields = ({
 
     productValues['swatches'] = swatches;
     return productValues;
-}
-
-export const getProductViewType = (productViewTypes = []) => {
-    const validViewTypes = productViewTypes.filter(viewType => (productViewTypeOptions[viewType]));
-    return validViewTypes.length ? validViewTypes : [productViewTypeOptions.GRID];
 }
 
 export const getProductPids = (products, productIdAttribute) => {

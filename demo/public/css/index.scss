@@ -1,0 +1,90 @@
+body {
+    background: #f4f5f6;
+    font-family: Barlow,sans-serif
+}
+
+
+.UNX-header__container{
+    padding-left: 100px;
+    padding-right: 100px
+}
+
+.UNX-header__logo {
+    width: 140px;
+    background: url(https://libraries.unbxdapi.com/sdk-assets/images/logo.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 35px;
+    display: inline-block
+}
+
+.UNX-header__container {
+    background: #f6f6f6;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    border: 1px solid #dae1e9;
+    display: flex;
+    align-items: center
+}
+
+.UNX-header__search{
+    width: 60%;
+    padding: 15px 0;
+    margin: 0 auto
+}
+
+.UNX-search__container{
+    position: relative;
+    margin: 0 100px;
+    
+}
+
+.UNX-searchResults__container{
+    margin-bottom: 35px;
+    display: flex
+}
+
+.UNX-searchFacet__container,.UNX-searchResult__container {
+    background-color: #fff
+}
+
+.UNX-searchFacet__container{
+    padding: 15px 21px;
+    margin-right: 35px;
+    border-radius: 5px;
+    width: 28%
+}
+
+.UNX-searchResult__container {
+    padding: 12px 18px;
+    border-radius: 5px;
+    flex: 1
+}
+
+.UNX-searchHeader__container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px
+}
+
+.UNX-searchMeta__container{
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.UNX-searchMeta__more{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.UNX-searchFacet__mainHeader{
+    font-size: 20px;
+    font-weight: 400;
+    color: #0a0b0c;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e7e7e7;
+}
