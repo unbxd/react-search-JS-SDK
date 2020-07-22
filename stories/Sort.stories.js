@@ -3,18 +3,35 @@ import React from 'react';
 
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import Sort from '../src/modules/sort';
+import Products from '../src/modules/products';
 import SearchBox from '../src/modules/searchBox';
 
 export default {
   title: 'Sort',
   parameters: {
     props: {
-      propTablesExclude: [UnbxdSearchWrapper, SearchBox]
+      propTablesExclude: [UnbxdSearchWrapper, Products, SearchBox]
     }
   }
 };
 
 const defaultSearch = 'Boots';
+
+const attributesMap = {
+  productName: 'title',
+  uniqueId: 'uniqueId',
+  imageUrl: 'imageUrl',
+  price: 'unbxd_price',
+  productUrl: 'productUrl'
+};
+
+const variantAttributesMap = {
+  productName: 'title',
+  uniqueId: 'vId',
+  imageUrl: 'imageUrl',
+  price: 'v_unbxd_price',
+  productUrl: 'productUrl'
+};
 
 const SortItemComponent = ({ itemData, onClick }) => {
   const { value, isSelected = false } = itemData;
@@ -67,6 +84,12 @@ export const Default = () => (
   >
     <Sort sortOptions={sortOptions} />
 
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
+
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />
     </div>
@@ -79,6 +102,12 @@ export const With_Sort_Options = () => (
     apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
   >
     <Sort defaultSort={sortOptions[4]} sortOptions={sortOptions} />
+
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
 
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />
@@ -98,6 +127,12 @@ export const With_Display_Type = () => (
       SortItemComponent={SortItemComponent}
     />
 
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
+
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />
     </div>
@@ -114,6 +149,12 @@ export const With_Render_Props = () => (
         return <p>Hello Sort</p>;
       }}
     </Sort>
+
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
 
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />

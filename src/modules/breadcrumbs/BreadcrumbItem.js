@@ -3,16 +3,9 @@ import PropTypes from 'prop-types';
 
 import { Button } from '../../components';
 
-const BreadCrumbItem = ({
-  itemData,
-  Root,
-  separator,
-  breadCrumbsLength,
-  onClick,
-  idx
-}) => {
+const BreadCrumbItem = ({ itemData, Root, separator, onClick, idx }) => {
   const { value, filterField, level } = itemData;
-  const isLast = breadCrumbsLength - idx - 1 === 0;
+
   return (
     <>
       {idx === 0 && <Root />}
@@ -22,7 +15,7 @@ const BreadCrumbItem = ({
         data-unx_multilevelfield={filterField}
         data-unx_level={level}
         className={'UNX-breadcrumb__item'}
-        onClick={isLast ? null : onClick}
+        onClick={onClick}
       >
         {value}
       </Button>
@@ -42,7 +35,6 @@ BreadCrumbItem.propTypes = {
     PropTypes.node
   ]),
   separator: PropTypes.node,
-  breadCrumbsLength: PropTypes.number,
   onClick: PropTypes.func.isRequired,
   idx: PropTypes.number
 };

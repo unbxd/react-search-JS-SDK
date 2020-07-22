@@ -3,18 +3,35 @@ import React from 'react';
 
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import PageSize from '../src/modules/pageSize';
+import Products from '../src/modules/products';
 import SearchBox from '../src/modules/searchBox';
 
 export default {
   title: 'PageSize',
   parameters: {
     props: {
-      propTablesExclude: [UnbxdSearchWrapper, SearchBox]
+      propTablesExclude: [UnbxdSearchWrapper, Products, SearchBox]
     }
   }
 };
 
-const defaultSearch = 'dress';
+const defaultSearch = 'Boots';
+
+const attributesMap = {
+  productName: 'title',
+  uniqueId: 'uniqueId',
+  imageUrl: 'imageUrl',
+  price: 'unbxd_price',
+  productUrl: 'productUrl'
+};
+
+const variantAttributesMap = {
+  productName: 'title',
+  uniqueId: 'vId',
+  imageUrl: 'imageUrl',
+  price: 'v_unbxd_price',
+  productUrl: 'productUrl'
+};
 
 const PageSizeItemComponent = ({ itemData, isActive, onClick }) => {
   return (
@@ -37,10 +54,16 @@ const sizeOptions = [
 
 export const Default = () => (
   <UnbxdSearchWrapper
-    siteKey="demo-unbxd700181503576558"
-    apiKey="fb853e3332f2645fac9d71dc63e09ec1"
+    siteKey="wildearthclone-neto-com-au808941566310465"
+    apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
   >
     <PageSize />
+
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
 
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />
@@ -50,10 +73,16 @@ export const Default = () => (
 
 export const With_Size = () => (
   <UnbxdSearchWrapper
-    siteKey="demo-unbxd700181503576558"
-    apiKey="fb853e3332f2645fac9d71dc63e09ec1"
+    siteKey="wildearthclone-neto-com-au808941566310465"
+    apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
   >
     <PageSize size={5} />
+
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
 
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />
@@ -63,10 +92,16 @@ export const With_Size = () => (
 
 export const With_Size_Options = () => (
   <UnbxdSearchWrapper
-    siteKey="demo-unbxd700181503576558"
-    apiKey="fb853e3332f2645fac9d71dc63e09ec1"
+    siteKey="wildearthclone-neto-com-au808941566310465"
+    apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
   >
     <PageSize sizeOptions={sizeOptions} />
+
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
 
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />
@@ -76,12 +111,18 @@ export const With_Size_Options = () => (
 
 export const With_Display_Type_And_Custom_Component = () => (
   <UnbxdSearchWrapper
-    siteKey="demo-unbxd700181503576558"
-    apiKey="fb853e3332f2645fac9d71dc63e09ec1"
+    siteKey="wildearthclone-neto-com-au808941566310465"
+    apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
   >
     <PageSize
       displayType={'LIST'}
       PageSizeItemComponent={PageSizeItemComponent}
+    />
+
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
     />
 
     <div className="hidden">
@@ -92,14 +133,20 @@ export const With_Display_Type_And_Custom_Component = () => (
 
 export const With_Render_Props = () => (
   <UnbxdSearchWrapper
-    siteKey="demo-unbxd700181503576558"
-    apiKey="fb853e3332f2645fac9d71dc63e09ec1"
+    siteKey="wildearthclone-neto-com-au808941566310465"
+    apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
   >
     <PageSize>
       {() => {
         return <div>Hello PageSize</div>;
       }}
     </PageSize>
+
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
 
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />

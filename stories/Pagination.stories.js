@@ -3,20 +3,37 @@ import React from 'react';
 
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import Pagination from '../src/modules/pagination';
+import Products from '../src/modules/products';
 import SearchBox from '../src/modules/searchBox';
 
 export default {
   title: 'Pagination',
   parameters: {
     props: {
-      propTablesExclude: [UnbxdSearchWrapper, SearchBox]
+      propTablesExclude: [UnbxdSearchWrapper, Products, SearchBox]
     }
   }
 };
 
 const defaultSearch = 'Boots';
 
-const PaginationItemComponent = props => {
+const attributesMap = {
+  productName: 'title',
+  uniqueId: 'uniqueId',
+  imageUrl: 'imageUrl',
+  price: 'unbxd_price',
+  productUrl: 'productUrl'
+};
+
+const variantAttributesMap = {
+  productName: 'title',
+  uniqueId: 'vId',
+  imageUrl: 'imageUrl',
+  price: 'v_unbxd_price',
+  productUrl: 'productUrl'
+};
+
+const PaginationItemComponent = (props) => {
   const { pagenumber, onClick, label, type } = props;
   return (
     <div
@@ -38,6 +55,12 @@ export const Default = () => (
   >
     <Pagination />
 
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
+
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />
     </div>
@@ -51,6 +74,12 @@ export const With_Padding = () => (
   >
     <Pagination padding={3} />
 
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
+
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />
     </div>
@@ -63,6 +92,12 @@ export const With_Custom_Component = () => (
     apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
   >
     <Pagination PaginationItemComponent={PaginationItemComponent} />
+
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
 
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />
@@ -80,6 +115,12 @@ export const With_Render_Props = () => (
         return <p>Hello Pagination</p>;
       }}
     </Pagination>
+
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
 
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />

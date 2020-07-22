@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import BreadCrumbItem from './BreadcrumbItem';
 import { List } from '../../components';
 
-const BreadcrumbsWrapper = props => {
+const BreadcrumbsWrapper = (props) => {
   const {
     removeCategoryFilter,
     breadCrumbsList,
@@ -20,7 +20,6 @@ const BreadcrumbsWrapper = props => {
         ListItem={BreadcrumbItemComponent || BreadCrumbItem}
         Root={Root}
         separator={separator}
-        breadCrumbsLength={breadCrumbsList.length}
         onClick={removeCategoryFilter}
         className={'UNX-breadcrumbs__list'}
       />
