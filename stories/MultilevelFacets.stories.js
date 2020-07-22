@@ -3,18 +3,35 @@ import React from 'react';
 
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import MultilevelFacets from '../src/modules/multilevelFacets';
+import Products from '../src/modules/products';
 import SearchBox from '../src/modules/searchBox';
 
 export default {
   title: 'MultilevelFacets',
   parameters: {
     props: {
-      propTablesExclude: [UnbxdSearchWrapper, SearchBox]
+      propTablesExclude: [UnbxdSearchWrapper, Products, SearchBox]
     }
   }
 };
 
-const defaultSearch = 'boots';
+const defaultSearch = 'Shoes';
+
+const attributesMap = {
+  productName: 'title',
+  uniqueId: 'uniqueId',
+  imageUrl: 'imageUrl',
+  price: 'unbxd_price',
+  productUrl: 'productUrl'
+};
+
+const variantAttributesMap = {
+  productName: 'title',
+  uniqueId: 'vId',
+  imageUrl: 'imageUrl',
+  price: 'v_unbxd_price',
+  productUrl: 'productUrl'
+};
 
 const FacetItemComponent = ({ itemData, multiLevelField, level, onClick }) => {
   const { name, count } = itemData;
@@ -41,6 +58,12 @@ export const Default = () => (
       categoryField={'categoryPath'}
     />
 
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
+
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />
     </div>
@@ -58,6 +81,12 @@ export const With_Default_Category_Filter = () => (
       defaultCategoryFilter={'All Products'}
     />
 
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
+
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />
     </div>
@@ -73,6 +102,12 @@ export const With_Custom_Component = () => (
       categoryDisplayName={'category'}
       categoryField={'categoryPath'}
       FacetItemComponent={FacetItemComponent}
+    />
+
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
     />
 
     <div className="hidden">
@@ -94,6 +129,12 @@ export const With_Render_Props = () => (
         return <div>Hello MultilevelFacets</div>;
       }}
     </MultilevelFacets>
+
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
 
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { PageSizeDropdown, PageSizeList } from './displayTypes';
 import { displayTypes } from '../../config';
 
-const PageSizeWrapper = props => {
+const PageSizeWrapper = (props) => {
   const {
     onPageSizeClick,
     displayType,
@@ -21,7 +21,7 @@ const PageSizeWrapper = props => {
 
   return (
     <div className="UNX-pageSize__container">
-      {label?label:null}
+      {label ? label : null}
       {displayType === displayTypes.DROPDOWN && (
         <PageSizeDropdown
           size={size}
@@ -54,7 +54,7 @@ PageSizeWrapper.propTypes = {
     PropTypes.element,
     PropTypes.func
   ]),
-  label:PropTypes.node
+  label: PropTypes.node
 };
 
 export default PageSizeWrapper;

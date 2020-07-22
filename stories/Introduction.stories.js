@@ -35,6 +35,8 @@ export default {
   }
 };
 
+const defaultSearch = 'Shoes';
+
 const attributesMap = {
   productName: 'title',
   uniqueId: 'uniqueId',
@@ -212,6 +214,10 @@ export const Category = () => {
         variantsCount={2}
         variantAttributesMap={variantAttributesMap}
       />
+
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
     </UnbxdSearchWrapper>
   );
 };

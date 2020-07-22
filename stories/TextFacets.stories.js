@@ -2,6 +2,7 @@
 import React from 'react';
 
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
+import Products from '../src/modules/products';
 import TextFacets from '../src/modules/textFacets';
 import SearchBox from '../src/modules/searchBox';
 
@@ -9,12 +10,28 @@ export default {
   title: 'TextFacets',
   parameters: {
     props: {
-      propTablesExclude: [UnbxdSearchWrapper, SearchBox]
+      propTablesExclude: [UnbxdSearchWrapper, Products, SearchBox]
     }
   }
 };
 
-const defaultSearch = 'boots';
+const defaultSearch = 'Shoes';
+
+const attributesMap = {
+  productName: 'title',
+  uniqueId: 'uniqueId',
+  imageUrl: 'imageUrl',
+  price: 'unbxd_price',
+  productUrl: 'productUrl'
+};
+
+const variantAttributesMap = {
+  productName: 'title',
+  uniqueId: 'vId',
+  imageUrl: 'imageUrl',
+  price: 'v_unbxd_price',
+  productUrl: 'productUrl'
+};
 
 const FacetItemComponent = ({
   itemData,
@@ -47,6 +64,12 @@ export const Default = () => (
   >
     <TextFacets />
 
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
+
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />
     </div>
@@ -59,6 +82,12 @@ export const With_Custom_Component = () => (
     apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
   >
     <TextFacets FacetItemComponent={FacetItemComponent} />
+
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
 
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />
@@ -76,6 +105,12 @@ export const With_Render_Props = () => (
         return <div>Hello from TextFacets render props</div>;
       }}
     </TextFacets>
+
+    <Products
+      attributesMap={attributesMap}
+      showVariants={true}
+      variantAttributesMap={variantAttributesMap}
+    />
 
     <div className="hidden">
       <SearchBox defaultSearch={defaultSearch} />

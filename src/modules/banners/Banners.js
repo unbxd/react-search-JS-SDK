@@ -5,50 +5,50 @@ import { AppContextConsumer } from '../../common/context';
 import { hasUnbxdSearchWrapperContext } from '../../common/utils';
 import BannersContainer from './BannersContainer';
 
-
 /**
  * Component to display merchandising banners.
  */
 const Banners = (props) => {
+  return (
+    <AppContextConsumer>
+      {(appState) => {
+        if (appState === undefined) {
+          hasUnbxdSearchWrapperContext(Banners.displayName);
+        }
 
-    return (<AppContextConsumer>
-        {(appState) => {
+        const { unbxdCore, unbxdCoreStatus, helpers, unbxdState } = appState;
+        const { enableApplyFilters, selectedFacets } = unbxdState;
 
-            if (appState === undefined) {
-                hasUnbxdSearchWrapperContext(Banners.displayName);
-            }
+        return (
+          <BannersContainer
+            unbxdCore={unbxdCore}
+            unbxdCoreStatus={unbxdCoreStatus}
+            helpers={helpers}
+            enableApplyFilters={enableApplyFilters}
+            selectedFacets={selectedFacets}
+            {...props}
+          />
+        );
+      }}
+    </AppContextConsumer>
+  );
+};
 
-            const { unbxdCore, unbxdCoreStatus, helpers, unbxdState } = appState;
-            const { enableApplyFilters, selectedFacets } = unbxdState;
-
-            return (<BannersContainer
-                unbxdCore={unbxdCore}
-                unbxdCoreStatus={unbxdCoreStatus}
-                helpers={helpers}
-                enableApplyFilters={enableApplyFilters}
-                selectedFacets={selectedFacets}
-                {...props}
-            />)
-        }}
-    </AppContextConsumer>)
-}
-
-Banners.displayName = "Banners";
+Banners.displayName = 'Banners';
 
 Banners.defaultProps = {
-    altText: "Banner Image",
-}
+  altText: 'banner image'
+};
 
 Banners.propTypes = {
-    /**
-    * Image alt text
-    */
-    altText: PropTypes.string,
-    /**
-    * Banner custom component
-    */
-    BannerItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-
-}
+  /**
+   * Image alt text
+   */
+  altText: PropTypes.string,
+  /**
+   * Banner custom component
+   */
+  BannerItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
+};
 
 export default Banners;
