@@ -1,0 +1,204 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import UnbxdSearchWrapper from '../../src/UnbxdSearchWrapper';
+import Pagination from '../../src/modules/pagination';
+import Products from '../../src/modules/products';
+import SearchBox from '../../src/modules/searchBox';
+const attributesMap = {
+  productName: 'title',
+  uniqueId: 'uniqueId',
+  imageUrl: 'imageUrl',
+  price: 'unbxd_price',
+  productUrl: 'productUrl'
+};
+const variantAttributesMap = {
+  productName: 'title',
+  uniqueId: 'vId',
+  imageUrl: 'imageUrl',
+  price: 'v_unbxd_price',
+  productUrl: 'productUrl'
+};
+const PaginationItemComponent = (props) => {
+  const { pagenumber, onClick, label, type } = props;
+  return (
+    <div
+      data-pagenumber={pagenumber}
+      onClick={onClick ? onClick : null}
+      className={`UNX-pageNavigation__button ${type ? '-action' : ''}`}
+    >
+      {type === 'NUMBER' && <span>{label}</span>}
+      {type === 'PREVIOUS' && <span>&lt;</span>}
+      {type === 'NEXT' && <span>&gt;</span>}
+    </div>
+  );
+};
+
+<Meta title="Pagination" component={Pagination} />
+
+# Pagination
+
+### Component to navigate across pages.
+
+```jsx
+<Pagination />
+```
+
+<Preview>
+  <Story name="default">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <Pagination />
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={'shoes'} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Padding.
+
+Number of pages on either side of active page can be configured by passing `padding`.
+
+```jsx
+<Pagination
+  //...
+  padding={3}
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with padding">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <Pagination padding={3} />
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={'shoes'} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Custom component.
+
+The default Pagination item component can be overridden by passing `PaginationItemComponent`.
+
+```jsx
+const PaginationItemComponent = (props) => {
+  const { pagenumber, onClick, label, type } = props;
+  return (
+    <div data-pagenumber={pagenumber} onClick={onClick ? onClick : null}>
+      {type === 'NUMBER' && <span>{label}</span>}
+      {type === 'PREVIOUS' && <span>&lt;</span>}
+      {type === 'NEXT' && <span>&gt;</span>}
+    </div>
+  );
+};
+```
+
+```jsx
+<Pagination
+  //..
+  PaginationItemComponent={PaginationItemComponent}
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with custom component">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <Pagination PaginationItemComponent={PaginationItemComponent} />
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={'shoes'} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Render Props.
+
+- This approach gives the control of UI to the user.
+- The anonymous function will receive all the data and helpers needed to build the UI.
+
+#### Render prop parameters
+
+| Name                     | Type          | Description                                           |
+| ------------------------ | ------------- | ----------------------------------------------------- |
+| currentPage,             | number        | current page number.                                  |
+| isNext,                  | bool          | does next page exist.                                 |
+| isPrev,                  | bool          | does previous page exist.                             |
+| noOfPages,               | number        | total number of pages.                                |
+| padding,                 | number        | number of pages on either side of active page.        |
+| onNextPageClick,         | func          | handle click of next page.                            |
+| onPreviousPageClick,     | func          | handle click of previous page.                        |
+| onPageClick,             | func          | handle click of page.                                 |
+| PaginationItemComponent, | element\|func | custom component.                                     |
+| paginationType           | string        | INFINITE_SCROLL \| CLICK_N_SCROLL \| FIXED_PAGINATION |
+
+<Preview>
+  <Story name="with render props">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <Pagination>
+        {({
+          currentPage,
+          isNext,
+          isPrev,
+          noOfPages,
+          padding,
+          onNextPageClick,
+          onPreviousPageClick,
+          onPageClick,
+          PaginationItemComponent,
+          paginationType
+        }) => {
+          return <p>custom render pagination</p>;
+        }}
+      </Pagination>
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={'shoes'} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+# Props
+
+<Props of={Pagination} />

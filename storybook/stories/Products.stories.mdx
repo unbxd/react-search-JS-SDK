@@ -1,0 +1,966 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import UnbxdSearchWrapper from '../../src/UnbxdSearchWrapper';
+import Products from '../../src/modules/products';
+import SearchBox from '../../src/modules/searchBox';
+const defaultSearch = 'Boots';
+const swatchesDefaultSearch = 'rugs';
+const ZeroResultsComponent = () => {
+  return <p>No products found!!!</p>;
+};
+class ProductItemComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    const {
+      itemData,
+      idAttribute,
+      showVariants,
+      showSwatches,
+      swatchAttributesMap
+    } = this.props;
+    this.handleSwatchClick = this.handleSwatchClick.bind(this);
+    this.state = {
+      productValues: this.getParsedProduct({
+        itemData,
+        showVariants,
+        showSwatches,
+        swatchAttributesMap,
+        idAttribute
+      })
+    };
+  }
+  getParsedProduct({ itemData, idAttribute }) {
+    const { imageUrl, title, productUrl, variants } = itemData;
+    const swatchValues = variants.map((variant, index) => {
+      return {
+        swatchId: variant.variantId,
+        imageUrl: variant.variant_image_array[0],
+        swatchImageUrl: variant.variant_overhead_swatch,
+        active: index === 0 ? true : false
+      };
+    });
+    const productValues = {
+      idAttribute,
+      imageUrl,
+      title,
+      productUrl,
+      swatchValues
+    };
+    return productValues;
+  }
+  handleSwatchClick(event) {
+    debugger;
+    const currentSwatchId = event.target.dataset['swatchid'];
+    this.setState(({ productValues }) => {
+      return {
+        productValues: {
+          ...productValues,
+          swatchValues: productValues.swatchValues.map((swatch) => {
+            if (swatch.swatchId === currentSwatchId) {
+              return { ...swatch, active: true };
+            } else {
+              return { ...swatch, active: false };
+            }
+          })
+        }
+      };
+    });
+  }
+  render() {
+    const { productValues } = this.state;
+    const { idAttribute, idx, showSwatches, onClick } = this.props;
+    const [activeSwatch] = productValues['swatchValues'].filter((swatch) => {
+      return swatch.active;
+    });
+    const product = { ...productValues, ...activeSwatch };
+    const { imageUrl, title, productUrl, swatchValues } = product;
+    const uniqueId = idAttribute;
+    const prank = idx + 1;
+    return (
+      <div className="UNX-productCard__container">
+        <div
+          className="details"
+          data-uniqueid={uniqueId}
+          data-prank={prank}
+          onClick={onClick}
+        >
+          <a href={productUrl} data-uniqueid={uniqueId} data-prank={prank}>
+            <img
+              className="-image"
+              src={imageUrl}
+              data-uniqueid={uniqueId}
+              data-prank={prank}
+            />
+          </a>
+          <div className="-title" data-uniqueid={uniqueId} data-prank={prank}>
+            {title}
+          </div>
+        </div>
+        {showSwatches && (
+          <div className="UNX-swatch__list">
+            {swatchValues.map((swatch) => {
+              const { swatchImageUrl, swatchId } = swatch;
+              return (
+                <img
+                  className="-image"
+                  src={swatchImageUrl}
+                  data-swatchid={swatchId}
+                  onClick={this.handleSwatchClick}
+                />
+              );
+            })}
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+const ProductsViewItemComponent = ({ itemData, isActive, onClick }) => {
+  return (
+    <div className="UNX-viewType__wrapper">
+      <p
+        data-viewtype={itemData}
+        className={`${isActive ? 'active' : ''}`}
+        onClick={onClick}
+      >
+        {itemData}
+      </p>
+    </div>
+  );
+};
+const LoaderComponent = () => {
+  return <p>loading...</p>;
+};
+const onProductClick = (product) => {
+  console.log('product is clicked', product);
+  return true;
+};
+const onZeroResults = (query) => {
+  console.log('Zero results', query);
+  return true;
+};
+const attributesMap = {
+  productName: 'title',
+  uniqueId: 'uniqueId',
+  imageUrl: 'imageUrl',
+  price: 'min_cheapest_default_price',
+  productUrl: 'productUrl'
+};
+const variantAttributesMap = {
+  productName: 'title',
+  uniqueId: 'variantId',
+  imageUrl: 'variant_image_array',
+  price: 'v_default_price',
+  productUrl: 'variant_productUrl',
+  swatchImage: 'variant_overhead_swatch',
+  variant_color: 'variant_color'
+};
+const swatchAttributesMap = {
+  swatchId: 'variantId',
+  swatchImageUrl: 'variant_overhead_swatch',
+  imageUrl: 'variant_image_array',
+  price: 'v_default_price',
+  productUrl: 'variant_productUrl'
+};
+const SwatchItemComponent = ({ itemData, onClick }) => {
+  const { swatchImageUrl, swatchId, active } = itemData;
+  return (
+    <div
+      className={`UNX-swatch__list ${active ? 'active' : ''}`}
+      data-variant_id={swatchId}
+      onClick={onClick}
+    >
+      <img data-variant_id={swatchId} src={swatchImageUrl} className="-image" />
+    </div>
+  );
+};
+const LoadMoreComponent = ({ loadMoreProducts }) => {
+  return <div onClick={loadMoreProducts}>Load more</div>;
+};
+
+<Meta title="Products" component={Products} />
+
+# Products
+
+### Component to display products.
+
+Map the catalog fields to `Products` fields.
+
+```js
+const attributesMap = {
+  productName: 'title',
+  uniqueId: 'uniqueId',
+  imageUrl: 'imageUrl',
+  price: 'min_cheapest_default_price',
+  productUrl: 'productUrl'
+};
+```
+
+```jsx
+<Products
+  //...
+  attributesMap={attributesMap} //dimension map for product attributes
+  //...
+/>
+```
+
+<Preview>
+  <Story name="default">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <Products attributesMap={attributesMap} />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Rows.
+
+Number of products to be shown per row.
+
+```jsx
+<Products
+  //...
+  perRow={3} //products per row.
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with rows">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <Products perRow={3} attributesMap={attributesMap} />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Page Size.
+
+Number of products to be loaded on a page.
+
+```jsx
+<Products
+  //...
+  pageSize={20} //products per page.
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with page size">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <Products
+        pageSize={20}
+        paginationType={'INFINITE_SCROLL'}
+        attributesMap={attributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Variants.
+
+Group different variants of the same product together. By default `showVariants` is set to `false`.
+
+```js
+const variantAttributesMap = {
+  productName: 'title',
+  uniqueId: 'variantId',
+  imageUrl: 'variant_image_array',
+  price: 'v_default_price',
+  productUrl: 'variant_productUrl',
+  swatchImage: 'variant_overhead_swatch',
+  variant_color: 'variant_color'
+};
+```
+
+```jsx
+<Products
+  //....
+  showVariants={true} //enable variants.
+  variantsCount={2} //number of variants.
+  variantAttributesMap={variantAttributesMap} //dimension map for variants.
+  //...
+/>
+```
+
+###### Note:
+
+- If `showVariants` is set to `true`, please pass prop `variantAttributesMap` also.
+
+<Preview>
+  <Story name="with variants">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <Products
+        showVariants={true}
+        variantsCount={2}
+        attributesMap={attributesMap}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+### Pagination.
+
+Pagination can be controlled by `paginationType` prop. By default `paginationType` is set to `FIXED_PAGINATION`.
+
+```js
+paginationType: `FIXED_PAGINATION` | `INFINITE_SCROLL` | `CLICK_N_SCROLL`;
+```
+
+###### Note:
+
+- If `paginationType` is set to `FIXED_PAGINATION`, please include module `<Pagination>`.
+
+#### Infinite Scroll.
+
+if `paginationType` is set to `INFINITE_SCROLL`, the scroll height to trigger the next set of results can be managed by `heightDiffToTriggerNextPage`.
+
+```jsx
+<Products
+  //...
+  paginationType={'INFINITE_SCROLL'}
+  heightDiffToTriggerNextPage={300} //scroll height in pixels
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with infinite scroll">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <Products
+        pageSize={20}
+        paginationType={'INFINITE_SCROLL'}
+        heightDiffToTriggerNextPage={300}
+        attributesMap={attributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+#### Click N Scroll.
+
+click the Load more button to load next set of results.
+
+##### Default.
+
+```jsx
+<Products
+  //...
+  paginationType={'CLICK_N_SCROLL'}
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with click n scroll">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <Products
+        pageSize={10}
+        paginationType={'CLICK_N_SCROLL'}
+        attributesMap={attributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+##### Custom Load More Component.
+
+The Load More Component can be overriden by passing `LoadMoreComponent`.
+
+```jsx
+const LoadMoreComponent = ({ loadMoreProducts }) => {
+  return <div onClick={loadMoreProducts}>Load more</div>;
+};
+```
+
+```jsx
+<Products
+  //...
+  paginationType={'CLICK_N_SCROLL'}
+  LoadMoreComponent={LoadMoreComponent}
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with custom load more">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <Products
+        pageSize={10}
+        paginationType={'CLICK_N_SCROLL'}
+        LoadMoreComponent={LoadMoreComponent}
+        attributesMap={attributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Zero Results.
+
+When there are not results for a search query, we show zero results page.
+
+#### Default.
+
+<Preview>
+  <Story name="with zero results component">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <Products attributesMap={attributesMap} />
+      <div className="hidden">
+        <SearchBox defaultSearch={'somejunksearchquery'} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+#### Custom Zero Results Component.
+
+```jsx
+const ZeroResultsComponent = () => {
+  return <p>No products found!!!</p>;
+};
+```
+
+```jsx
+<Products
+  //...
+  ZeroResultsComponent={ZeroResultsComponent}
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with custom zero results component">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <Products
+        attributesMap={attributesMap}
+        ZeroResultsComponent={ZeroResultsComponent}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={'somejunksearchquery'} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Loader.
+
+By default `showLoader` is set to `false`. Enable Loader by passing `showLoader` set to `true`.
+
+#### Default.
+
+```jsx
+<Products
+  //...
+  showLoader={true}
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with loader">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <Products
+        attributesMap={attributesMap}
+        paginationType={'CLICK_N_SCROLL'}
+        LoaderComponent={LoaderComponent}
+        showLoader={true}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+#### Custom Loader.
+
+The default Loader can be overriden by passing `LoaderComponent`.
+
+```jsx
+const LoaderComponent = () => {
+  return <div>loading...</div>;
+};
+```
+
+```jsx
+<Products
+  //...
+  LoaderComponent={LoaderComponent}
+  showLoader={true}
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with custom loader">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <Products
+        attributesMap={attributesMap}
+        paginationType={'CLICK_N_SCROLL'}
+        LoaderComponent={LoaderComponent}
+        showLoader={true}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Callbacks.
+
+use callbacks to get notified on events like `product click` and `zero results`.
+
+```js
+const onProductClick = (product) => {
+  //process
+  return true;
+};
+
+const onZeroResults = (query) => {
+  //process
+  return true;
+};
+```
+
+```jsx
+<Products
+  //...
+  onProductClick={onProductClick}
+  onZeroResults={onZeroResults}
+  //...
+/>
+```
+
+###### Note:
+
+- The callbacks must return `true` in order to continue the event lifecycle or, `false` to destroy the event.
+
+<Preview>
+  <Story name="with callbacks">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <Products
+        attributesMap={attributesMap}
+        onProductClick={onProductClick}
+        onZeroResults={onZeroResults}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Swatches.
+
+By default `showSwatches` is set to `false`. To enable swatches, pass `showSwatches` as `true`. swatches would also require `swatchAttributesMap` for dimension mapping and `groupBy` to group the variants by the given attribute.
+
+```js
+const swatchAttributesMap = {
+  swatchId: 'variantId',
+  swatchImageUrl: 'variant_overhead_swatch',
+  imageUrl: 'variant_image_array',
+  price: 'v_default_price',
+  productUrl: 'variant_productUrl'
+};
+```
+
+```jsx
+<Products
+  //...
+  showVariants={true}
+  variantsCount={4}
+  variantAttributesMap={variantAttributesMap}
+  showSwatches={true}
+  groupBy={'variant_color'}
+  swatchAttributesMap={swatchAttributesMap} //dimension map for swatches
+  //...
+/>
+```
+
+###### Note:
+
+- `showVariants` must be enabled for swatches to work.
+
+- `variantsCount` has to be more than 1.
+
+- `variantAttributesMap` must be passed.
+
+#### Default.
+
+<Preview>
+  <Story name="with swatches">
+    <UnbxdSearchWrapper
+      siteKey="prod-rugsusa808581564092094"
+      apiKey="ea4823934059ff8ad5def0be04f8dd4e"
+    >
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantsCount={4}
+        variantAttributesMap={variantAttributesMap}
+        showSwatches={true}
+        groupBy={'variant_color'}
+        swatchAttributesMap={swatchAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={swatchesDefaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+#### Custom Swatches.
+
+The default swatches can be overriden by passing `SwatchItemComponent`.
+
+```jsx
+const SwatchItemComponent = ({ itemData, onClick }) => {
+  const { swatchImageUrl, swatchId, active } = itemData;
+  return (
+    <div data-variant_id={swatchId} onClick={onClick}>
+      <img data-variant_id={swatchId} src={swatchImageUrl} />
+    </div>
+  );
+};
+```
+
+```jsx
+<Products
+  showVariants={true}
+  variantsCount={4}
+  variantAttributesMap={variantAttributesMap}
+  showSwatches={true}
+  groupBy={'variant_color'}
+  swatchAttributesMap={swatchAttributesMap}
+  SwatchItemComponent={SwatchItemComponent}
+/>
+```
+
+<Preview>
+  <Story name="with custom swatches">
+    <UnbxdSearchWrapper
+      siteKey="prod-rugsusa808581564092094"
+      apiKey="ea4823934059ff8ad5def0be04f8dd4e"
+    >
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantsCount={4}
+        variantAttributesMap={variantAttributesMap}
+        showSwatches={true}
+        groupBy={'variant_color'}
+        swatchAttributesMap={swatchAttributesMap}
+        SwatchItemComponent={SwatchItemComponent}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={swatchesDefaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Custom Product Component.
+
+To override the product card completely, pass `ProductItemComponent`.
+
+```jsx
+class ProductItemComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    const {
+      itemData,
+      idAttribute,
+      showVariants,
+      showSwatches,
+      swatchAttributesMap
+    } = this.props;
+    this.handleSwatchClick = this.handleSwatchClick.bind(this);
+    this.state = {
+      productValues: this.getParsedProduct({
+        itemData,
+        showVariants,
+        showSwatches,
+        swatchAttributesMap,
+        idAttribute
+      })
+    };
+  }
+  getParsedProduct({ itemData, idAttribute }) {
+    const { imageUrl, title, productUrl, variants } = itemData;
+    const swatchValues = variants.map((variant, index) => {
+      return {
+        swatchId: variant.variantId,
+        imageUrl: variant.variant_image_array[0],
+        swatchImageUrl: variant.variant_overhead_swatch,
+        active: index === 0 ? true : false
+      };
+    });
+    const productValues = {
+      idAttribute,
+      imageUrl,
+      title,
+      productUrl,
+      swatchValues
+    };
+    return productValues;
+  }
+  handleSwatchClick(event) {
+    debugger;
+    const currentSwatchId = event.target.dataset['swatchid'];
+    this.setState(({ productValues }) => {
+      return {
+        productValues: {
+          ...productValues,
+          swatchValues: productValues.swatchValues.map((swatch) => {
+            if (swatch.swatchId === currentSwatchId) {
+              return { ...swatch, active: true };
+            } else {
+              return { ...swatch, active: false };
+            }
+          })
+        }
+      };
+    });
+  }
+  render() {
+    const { productValues } = this.state;
+    const { idAttribute, idx, showSwatches, onClick } = this.props;
+    const [activeSwatch] = productValues['swatchValues'].filter((swatch) => {
+      return swatch.active;
+    });
+    const product = { ...productValues, ...activeSwatch };
+    const { imageUrl, title, productUrl, swatchValues } = product;
+    const uniqueId = idAttribute;
+    const prank = idx + 1;
+    return (
+      <div className="UNX-productCard__container">
+        <div
+          className="details"
+          data-uniqueid={uniqueId}
+          data-prank={prank}
+          onClick={onClick}
+        >
+          <a href={productUrl} data-uniqueid={uniqueId} data-prank={prank}>
+            <img
+              className="-image"
+              src={imageUrl}
+              data-uniqueid={uniqueId}
+              data-prank={prank}
+            />
+          </a>
+          <div className="-title" data-uniqueid={uniqueId} data-prank={prank}>
+            {title}
+          </div>
+        </div>
+        {showSwatches && (
+          <div className="UNX-swatch__list">
+            {swatchValues.map((swatch) => {
+              const { swatchImageUrl, swatchId } = swatch;
+              return (
+                <img
+                  className="-image"
+                  src={swatchImageUrl}
+                  data-swatchid={swatchId}
+                  onClick={this.handleSwatchClick}
+                />
+              );
+            })}
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+```
+
+```jsx
+<Products
+  attributesMap={attributesMap}
+  showVariants={true}
+  variantsCount={4}
+  variantAttributesMap={variantAttributesMap}
+  showSwatches={true}
+  groupBy={'variant_color'}
+  swatchAttributesMap={swatchAttributesMap}
+  ProductItemComponent={ProductItemComponent}
+/>
+```
+
+<Preview>
+  <Story name="with custom product component">
+    <UnbxdSearchWrapper
+      siteKey="prod-rugsusa808581564092094"
+      apiKey="ea4823934059ff8ad5def0be04f8dd4e"
+    >
+      <Products
+        ProductItemComponent={ProductItemComponent}
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantsCount={4}
+        variantAttributesMap={variantAttributesMap}
+        showSwatches={true}
+        groupBy={'variant_color'}
+        swatchAttributesMap={swatchAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={swatchesDefaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Render Props.
+
+- This approach gives the control of UI to the user.
+- The anonymous function will receive all the data and helpers needed to build the UI.
+
+#### Render prop parameters
+
+| Name                  | Type          | Description                                             |
+| --------------------- | ------------- | ------------------------------------------------------- |
+| viewType              | string        | `GRID` \| `LIST`                                        |
+| perRow                | number        | products per row.                                       |
+| numberOfProducts      | number        | products per page.                                      |
+| attributesMap         | object        | dimension map of product attrributes.                   |
+| variantAttributesMap  | object        | dimension map of product variant attributes.            |
+| paginationType        | string        | `FIXED_PAGINATION`\|`INFINITE_SCROLL`\|`CLICK_N_SCROLL` |
+| unbxdCoreStatus       | string        | `LOADING`\|`READY`                                      |
+| showVariants          | bool          | display variants.                                       |
+| showSwatches          | bool          | display swatches.                                       |
+| swatchAttributesMap   | object        | dimension map of swatch attributes.                     |
+| groupBy               | string        | group product variants.                                 |
+| showLoader            | bool          | display loader.                                         |
+| onProductClick        | func          | handle product click.                                   |
+| ProductItemComponent  | element\|func | custom component.                                       |
+| SwatchItemComponent,  | element\|func | custom swatch component.                                |
+| LoadMoreComponent     | element\|func | custom load more component.                             |
+| ZeroResultsComponent, | element\|func | custom zero results component.                          |
+| LoaderComponent,      | element\|func | custom loader component.                                |
+| priceUnit             | string        | price unit.                                             |
+
+<Preview>
+  <Story name="with render props">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <Products
+        paginationType={'FIXED_PAGINATION'}
+        attributesMap={attributesMap}
+        showVariants={true}
+        productViewTypes={['GRID', 'LIST']}
+        variantsCount={4}
+        variantAttributesMap={variantAttributesMap}
+      >
+        {({
+          viewType,
+          perRow,
+          numberOfProducts,
+          attributesMap,
+          variantAttributesMap,
+          paginationType,
+          unbxdCoreStatus,
+          showVariants,
+          showSwatches,
+          swatchAttributesMap,
+          groupBy,
+          showLoader,
+          onProductClick,
+          ProductItemComponent,
+          SwatchItemComponent,
+          LoadMoreComponent,
+          ZeroResultsComponent,
+          LoaderComponent,
+          priceUnit
+        }) => {
+          return <p>render custom products</p>;
+        }}
+      </Products>
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+# Props
+
+<Props of={Products} />

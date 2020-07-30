@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { ListProductCard } from '../productCards';
 import { List } from '../../../../components/index';
 
-const ListView = props => {
+const ListView = (props) => {
   const {
     products = [],
     attributesMap,
@@ -13,7 +13,7 @@ const ListView = props => {
     onProductClick,
     ProductItemComponent,
     showSwatches,
-    swatchAttributes,
+    swatchAttributesMap,
     groupBy,
     SwatchItemComponent,
     viewType,
@@ -33,7 +33,7 @@ const ListView = props => {
           showVariants={showVariants}
           variantAttributesMap={variantAttributesMap}
           showSwatches={showSwatches}
-          swatchAttributes={swatchAttributes}
+          swatchAttributesMap={swatchAttributesMap}
           groupBy={groupBy}
           SwatchItemComponent={SwatchItemComponent}
           className="UNX-products__list -list grid-cols-1"
@@ -54,7 +54,7 @@ ListView.propTypes = {
     PropTypes.func
   ]),
   showSwatches: PropTypes.bool,
-  swatchAttributes: PropTypes.object,
+  swatchAttributesMap: PropTypes.object,
   groupBy: PropTypes.string,
   SwatchItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   viewType: PropTypes.string.isRequired,

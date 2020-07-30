@@ -1,0 +1,162 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import UnbxdSearchWrapper from '../../src/UnbxdSearchWrapper';
+import SelectedFacets from '../../src/modules/selectedFacets';
+import TextFacets from '../../src/modules/textFacets';
+import Products from '../../src/modules/products';
+import SearchBox from '../../src/modules/searchBox';
+const defaultSearch = 'Boots';
+const attributesMap = {
+  productName: 'title',
+  uniqueId: 'uniqueId',
+  imageUrl: 'imageUrl',
+  price: 'unbxd_price',
+  productUrl: 'productUrl'
+};
+const variantAttributesMap = {
+  productName: 'title',
+  uniqueId: 'vId',
+  imageUrl: 'imageUrl',
+  price: 'v_unbxd_price',
+  productUrl: 'productUrl'
+};
+const FacetItemComponent = ({ itemData, facetName, onClick }) => {
+  const { name, dataId } = itemData;
+  return (
+    <div data-unx_name={facetName} data-unx_dataid={dataId} onClick={onClick}>
+      {name} x
+    </div>
+  );
+};
+
+<Meta title="SelectedFacets" component={SelectedFacets} />
+
+# SelectedFacets
+
+### Component to display the selected facets.
+
+```jsx
+<SelectedFacets />
+```
+
+<Preview>
+  <Story name="default">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <SelectedFacets />
+      <TextFacets />
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Custom Component.
+
+The default SelectedFacets item component can be overrideden by passing `FacetItemComponent`.
+
+```jsx
+const FacetItemComponent = ({ itemData, facetName, onClick }) => {
+  const { name, dataId } = itemData;
+  return (
+    <div data-unx_name={facetName} data-unx_dataid={dataId} onClick={onClick}>
+      {name} x
+    </div>
+  );
+};
+```
+
+```jsx
+<SelectedFacets
+  //...
+  FacetItemComponent={FacetItemComponent}
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with custom component">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <SelectedFacets FacetItemComponent={FacetItemComponent} />
+      <TextFacets />
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Render Props.
+
+- This approach gives the control of UI to the user.
+- The anonymous function will receive all the data and helpers needed to build the UI.
+
+#### Render prop parameters
+
+| Name                       | Type          | Description                    |
+| -------------------------- | ------------- | ------------------------------ |
+| activeFacets               | object        | current active facets.         |
+| handleTextFacetClick       | func          | handle text facet click.       |
+| handleRangeFacetClick      | func          | handle range facet click.      |
+| handleMultilevelFacetClick | func          | handle multilevel facet click. |
+| FacetItemComponent         | element\|func | custom component.              |
+| priceUnit                  | string        | price unit.                    |
+| label                      | node          | label for the component        |
+
+<Preview>
+  <Story name="with render props">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <SelectedFacets>
+        {({
+          activeFacets,
+          handleTextFacetClick,
+          handleRangeFacetClick,
+          handleMultilevelFacetClick,
+          FacetItemComponent,
+          priceUnit,
+          label
+        }) => {
+          return <div>Hello SelectedFacets</div>;
+        }}
+      </SelectedFacets>
+      <TextFacets />
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+# Props
+
+<Props of={SelectedFacets} />
