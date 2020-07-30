@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
 
 import { AppContextProvider } from './common/context';
-import { searchConfigurations, productTypes, searchStatus,paginationTypes } from './config';
+import {
+  searchConfigurations,
+  productTypes,
+  searchStatus,
+  paginationTypes
+} from './config';
 import {
   setProductConfiguration,
   setSearchBoxConfiguration,
@@ -27,7 +32,7 @@ import '../public/css/core/index.scss';
  */
 const initialUnbxdState = {
   viewType: 'GRID',
-  paginationType:null,
+  paginationType: paginationTypes.FIXED_PAGINATION,
   enableApplyFilters: false,
   selectedFacets: {}
 };
@@ -68,6 +73,7 @@ class UnbxdSearchWrapper extends Component {
         getCategoryId
       }),
       productType,
+      categoryId: '',
       unbxdState: initialUnbxdState,
       unbxdCoreStatus: searchStatus.READY,
       helpers: {
@@ -119,15 +125,22 @@ class UnbxdSearchWrapper extends Component {
       unbxdCore.options.getCategoryId();
 
     if (unbxdCore.options.applyMultipleFilters) {
-      this.setState((currentState)=>{
+      this.setState((currentState) => {
         return {
           ...currentState,
           unbxdState: { ...currentState.unbxdState, enableApplyFilters: true }
-        }
+        };
       });
     }
 
     if (categoryId && typeof categoryId === 'string' && categoryId.length > 0) {
+      this.setState((currentState) => {
+        return {
+          ...currentState,
+          categoryId,
+          productType: productTypes.CATEGORY
+        };
+      });
       unbxdCore.options.productType = productTypes.CATEGORY;
       unbxdCore.getResults();
     } else {
@@ -136,12 +149,12 @@ class UnbxdSearchWrapper extends Component {
     }
 
     const urlParams = unbxdCore.getQueryParams();
-    if(urlParams[unbxdCore.options.searchQueryParam]){
+    if (urlParams[unbxdCore.options.searchQueryParam]) {
       unbxdCore.renderFromUrl();
     }
 
-    if(unbxdCore.options.hashMode) {
-      window.onhashchange= unbxdCore.onLocationChange.bind(unbxdCore);
+    if (unbxdCore.options.hashMode) {
+      window.onhashchange = unbxdCore.onLocationChange.bind(unbxdCore);
     }
   }
 
@@ -153,7 +166,13 @@ class UnbxdSearchWrapper extends Component {
       typeof unbxdCore.options.getCategoryId === 'function' &&
       unbxdCore.options.getCategoryId();
     if (categoryId !== currentCategoryId && currentCategoryId.length > 0) {
-      this.setState({ categoryId: currentCategoryId });
+      this.setState((currentState) => {
+        return {
+          ...currentState,
+          categoryId,
+          productType: productTypes.CATEGORY
+        };
+      });
       unbxdCore.options.productType = productTypes.CATEGORY;
       unbxdCore.getResults();
     } else {

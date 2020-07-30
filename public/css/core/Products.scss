@@ -1,22 +1,28 @@
 //Product grid and list styles
-.UNX-products__list{
-    @apply grid gap-4 p-4;
+.UNX-products__list {
+  @apply grid gap-4 p-4;
+}
+
+.UNX-productCard__container {
+  .-image {
+    height: 200px;
+    width: 200px;
+  }
 }
 
 .UNX-swatch__list {
-    display: flex;
+  display: flex;
 
-    .UNX-swatch__item {
-        @apply m-1;
+  .UNX-swatch__item {
+    @apply m-1;
 
-        &.-active {
-            @apply border-2 border-gray-600;
-        }
+    &.-active {
+      @apply border-2 border-gray-600;
     }
+  }
 
-    .-image{
-        height: 30px;
-        width: 30px;
-    }
-    
+  .-image {
+    height: 30px;
+    width: 30px;
+  }
 }

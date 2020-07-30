@@ -18,7 +18,7 @@ class SortContainer extends React.Component {
       };
     } else {
       this.state = {
-        sortBy: {value:''}
+        sortBy: { value: '' }
       };
     }
   }
@@ -48,14 +48,14 @@ class SortContainer extends React.Component {
 
     const { noOfPages = 0 } = getPaginationInfo() || {};
 
-    const { sortOptions, displayType, SortItemComponent } = this.props;
+    const { sortOptions = [], displayType, SortItemComponent } = this.props;
 
     //format datas for better handling.
-    const formattedSortByOptions = sortOptions.map(sortByoption =>
+    const formattedSortByOptions = sortOptions.map((sortByoption) =>
       getFormattedSort(sortByoption, this.state.sortBy)
     );
 
-    const onSortClick = event => {
+    const onSortClick = (event) => {
       const newSortBy = event.target.dataset.unxsortby || event.target.value;
       const selectedSort = getSelectedSort(newSortBy, formattedSortByOptions);
 
@@ -78,7 +78,7 @@ class SortContainer extends React.Component {
     const onSortResetClick = () => {
       const resetSortBy = formattedSortByOptions.length
         ? formattedSortByOptions[0]
-        : {value:''};
+        : { value: '' };
       this.setState({ sortBy: resetSortBy });
       setSortConfiguration(
         {
@@ -99,7 +99,6 @@ class SortContainer extends React.Component {
       onSortClick,
       onSortResetClick,
       label
-
     };
     return { ...data, ...helpers };
   }
@@ -133,7 +132,7 @@ SortContainer.propTypes = {
   ).isRequired,
   displayType: PropTypes.string,
   SortItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  label:PropTypes.node
+  label: PropTypes.node
 };
 
 export default SortContainer;

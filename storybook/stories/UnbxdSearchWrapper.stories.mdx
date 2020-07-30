@@ -1,0 +1,130 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import UnbxdSearchWrapper from '../../src/UnbxdSearchWrapper';
+const onPageLoad = (unbxdSearchObject) => {
+  //do things on pageLoad
+};
+const onIntialResultLoad = (unbxdSearchObject) => {
+  //do things on initial result load
+};
+const getCategoryId = () => {
+  if (window.UnbxdAnalyticsConf) {
+    return encodeURIComponent(window.UnbxdAnalyticsConf['page']);
+  }
+};
+
+<Meta title="UnbxdSearchWrapper" component={UnbxdSearchWrapper} />
+
+# UnbxdSearchWrapper
+
+### Component to wrap widgets.
+
+```jsx
+<UnbxdSearchWrapper
+  //...
+  siteKey="wildearthclone-neto-com-au808941566310465"
+  apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+  //...
+>
+  {/*modules*/}
+</UnbxdSearchWrapper>
+```
+
+<Preview>
+  <Story name="default">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <div>
+        Wrap all the widgets in <strong>UnbxdSearchWrapper</strong>
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Callbacks.
+
+Pass callbacks to get notified on event such as `IntialResultLoad` and `PageLoad`.
+
+```js
+const onPageLoad = (unbxdSearchObject) => {
+  //do things on pageLoad
+};
+
+const onIntialResultLoad = (unbxdSearchObject) => {
+  //do things on initial result load
+};
+```
+
+```jsx
+<UnbxdSearchWrapper
+  //...
+  onIntialResultLoad={onIntialResultLoad}
+  onPageLoad={onPageLoad}
+  //...
+>
+  {/*modules*/}
+</UnbxdSearchWrapper>
+```
+
+<Preview>
+  <Story name="with callbacks">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+      onIntialResultLoad={onIntialResultLoad}
+      onPageLoad={onPageLoad}
+    >
+      <div>
+        Wrap all the widgets in <strong>UnbxdSearchWrapper</strong>
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### CategoryId.
+
+Pass `getCategoryId` which returns the category path, used on category pages.
+
+```js
+const getCategoryId = () => {
+  if (window.UnbxdAnalyticsConf) {
+    return encodeURIComponent(window.UnbxdAnalyticsConf['page']);
+  }
+};
+```
+
+```jsx
+<UnbxdSearchWrapper
+  //...
+  getCategoryId={getCategoryId}
+  //...
+>
+  {/*modules*/}
+</UnbxdSearchWrapper>
+```
+
+<Preview>
+  <Story name="with category id">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+      getCategoryId={getCategoryId}
+    >
+      <div>
+        Wrap all the widgets in <strong>UnbxdSearchWrapper</strong>
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+# Props
+
+<Props of={UnbxdSearchWrapper} />

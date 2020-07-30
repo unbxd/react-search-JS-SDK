@@ -1,0 +1,285 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import UnbxdSearchWrapper from '../../src/UnbxdSearchWrapper';
+import PageSize from '../../src/modules/pageSize';
+import Products from '../../src/modules/products';
+import SearchBox from '../../src/modules/searchBox';
+const attributesMap = {
+  productName: 'title',
+  uniqueId: 'uniqueId',
+  imageUrl: 'imageUrl',
+  price: 'unbxd_price',
+  productUrl: 'productUrl'
+};
+const variantAttributesMap = {
+  productName: 'title',
+  uniqueId: 'vId',
+  imageUrl: 'imageUrl',
+  price: 'v_unbxd_price',
+  productUrl: 'productUrl'
+};
+const PageSizeItemComponent = ({ itemData, isActive, onClick }) => {
+  return (
+    <div
+      data-unxpagesize={itemData.id}
+      className={`pageSize-item ${isActive ? '-active' : ''}`}
+      onClick={onClick}
+    >
+      {itemData.value}
+    </div>
+  );
+};
+const sizeOptions = [
+  { id: 5, value: '5' },
+  { id: 10, value: '10' },
+  { id: 15, value: '15' },
+  { id: 20, value: '20' }
+];
+
+<Meta title="PageSize" component={PageSize} />
+
+# PageSize
+
+### Component to configure the number of products to load.
+
+```jsx
+<PageSize />
+```
+
+<Preview>
+  <Story name="default">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <PageSize />
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={'shoes'} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Size.
+
+The page size can be controlled by passing `size`.
+
+```jsx
+<PageSize
+  //...
+  size={5}
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with size">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <PageSize size={5} />
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={'shoes'} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Size Options.
+
+Page size options can be provided by passing `sizeOptions`.
+
+```js
+const sizeOptions = [
+  { id: 5, value: '5' },
+  { id: 10, value: '10' },
+  { id: 15, value: '15' },
+  { id: 20, value: '20' }
+];
+```
+
+```jsx
+<PageSize
+  //...
+  sizeOptions={sizeOptions}
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with size options">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <PageSize sizeOptions={sizeOptions} />
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={'shoes'} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Custom component.
+
+The default PageSize item component can be overridden by setting `displayType` to `LIST` and passing `PageSizeItemComponent`.
+
+```jsx
+const PageSizeItemComponent = ({ itemData, isActive, onClick }) => {
+  return (
+    <div data-unxpagesize={itemData.id} onClick={onClick}>
+      {itemData.value}
+    </div>
+  );
+};
+```
+
+```jsx
+<PageSize
+  //...
+  displayType={'LIST'}
+  PageSizeItemComponent={PageSizeItemComponent}
+  //...
+/>
+```
+
+##### Note:
+
+- When `displayType` is set to `LIST`, it is mandatory to pass `PageSizeItemComponent`.
+
+<Preview>
+  <Story name="with custom component">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <PageSize
+        displayType={'LIST'}
+        PageSizeItemComponent={PageSizeItemComponent}
+      />
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={'shoes'} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Label.
+
+A label for the component can be diplayed by passing `label`.
+
+```jsx
+<PageSize
+  //...
+  label={'Products per page:'}
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with label">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <PageSize
+        displayType={'LIST'}
+        PageSizeItemComponent={PageSizeItemComponent}
+        label={'Products per page:'}
+      />
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={'shoes'} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Render Props.
+
+- This approach gives the control of UI to the user.
+- The anonymous function will receive all the data and helpers needed to build the UI.
+
+#### Render prop parameters
+
+| Name                  | Type          | Description                        |
+| --------------------- | ------------- | ---------------------------------- |
+| size                  | number        | current selected pageSize.         |
+| sizeOptions           | array         | pageSize options.                  |
+| noOfPages             | number        | number of pages for current query. |
+| displayType           | string        | `DROPDOWN` \| `LIST`               |
+| onPageSizeClick       | func          | handle pageSize click.             |
+| PageSizeItemComponent | element\|func | custom component.                  |
+| label                 | node          | label for the component.           |
+
+<Preview>
+  <Story name="with render props">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <PageSize>
+        {({
+          size,
+          sizeOptions,
+          noOfPages,
+          displayType,
+          onPageSizeClick,
+          PageSizeItemComponent,
+          label
+        }) => {
+          return <div>render custom pageSize</div>;
+        }}
+      </PageSize>
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={'shoes'} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+# Props
+
+<Props of={PageSize} />

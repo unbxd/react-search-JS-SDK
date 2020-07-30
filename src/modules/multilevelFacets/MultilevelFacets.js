@@ -8,10 +8,10 @@ import MultilevelFacetsContainer from './MultilevelFacetsContainer';
 /**
  * Component to manage multilevel categories.
  */
-const MultilevelFacets = props => {
+const MultilevelFacets = (props) => {
   return (
     <AppContextConsumer>
-      {appState => {
+      {(appState) => {
         if (appState === undefined) {
           hasUnbxdSearchWrapperContext(MultilevelFacets.displayName);
         }
@@ -34,8 +34,6 @@ const MultilevelFacets = props => {
 MultilevelFacets.displayName = 'MultilevelFacets';
 
 MultilevelFacets.defaultProps = {
-  categoryDisplayName: '',
-  categoryField: '',
   defaultCategoryFilter: '',
   facetDepth: 6,
   facetLimit: 100
@@ -67,9 +65,9 @@ MultilevelFacets.propTypes = {
    */
   FacetItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   /**
-    * Label for the component. 
-    */
-  label:PropTypes.node
+   * Label for the component.
+   */
+  label: PropTypes.node
 };
 
 export default MultilevelFacets;

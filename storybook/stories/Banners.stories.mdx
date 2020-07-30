@@ -1,0 +1,141 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import Banners from '../../src/modules/banners';
+import Products from '../../src/modules/products';
+import UnbxdSearchWrapper from '../../src/UnbxdSearchWrapper';
+import SearchBox from '../../src/modules/searchBox';
+const attributesMap = {
+  productName: 'title',
+  uniqueId: 'uniqueId',
+  imageUrl: 'imageUrl',
+  price: 'sortPrice',
+  productUrl: 'productUrl'
+};
+export const BannerItemComponent = ({ itemData }) => {
+  const { imageUrl } = itemData;
+  return <img src={imageUrl} />;
+};
+
+<Meta title="Banners" component={Banners} />
+
+# Banners
+
+### Component to display the merchandizing banners based on search.
+
+<Preview>
+  <Story name="default">
+    <UnbxdSearchWrapper
+      siteKey="demo-unbxd700181503576558"
+      apiKey="fb853e3332f2645fac9d71dc63e09ec1"
+    >
+      <Banners />
+      <Products attributesMap={attributesMap} />
+      <div className="hidden">
+        <SearchBox defaultSearch={'dress'} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### alt text.
+
+Configure alt text for images by passing `altText`.
+
+```jsx
+<Banners
+  //...
+  altText="alt banner text"
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with alt text">
+    <UnbxdSearchWrapper
+      siteKey="demo-unbxd700181503576558"
+      apiKey="fb853e3332f2645fac9d71dc63e09ec1"
+    >
+      <Banners altText="alt banner text" />
+      <Products attributesMap={attributesMap} />
+      <div className="hidden">
+        <SearchBox defaultSearch={'dress'} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### custom component.
+
+The default Banner item component can be overidden by passing `BannerItemComponent`.
+
+```jsx
+const BannerItemComponent = ({ itemData }) => {
+  const { imageUrl } = itemData;
+  return <img src={imageUrl} />;
+};
+```
+
+```jsx
+<Banners
+  //...
+  BannerItemComponent={BannerItemComponent}
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with custom component">
+    <UnbxdSearchWrapper
+      siteKey="demo-unbxd700181503576558"
+      apiKey="fb853e3332f2645fac9d71dc63e09ec1"
+    >
+      <Banners BannerItemComponent={BannerItemComponent} />
+      <Products attributesMap={attributesMap} />
+      <div className="hidden">
+        <SearchBox defaultSearch={'dress'} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+### Render props
+
+- This approach gives the control of UI to the user.
+- The anonymous function will receive all the data and helpers needed to build the UI.
+
+#### Render prop parameters
+
+| Name                | Type    | Description             |
+| ------------------- | ------- | ----------------------- |
+| banners             | array   | banner data             |
+| altText             | string  | image alt text          |
+| BannerItemComponent | element | banner custom component |
+
+<Preview>
+  <Story name="with render props">
+    <UnbxdSearchWrapper
+      siteKey="demo-unbxd700181503576558"
+      apiKey="fb853e3332f2645fac9d71dc63e09ec1"
+    >
+      <Banners>
+        {({ banners, altText, BannerItemComponent }) => {
+          return <p>render custom banners</p>;
+        }}
+      </Banners>
+      <Products attributesMap={attributesMap} />
+      <div className="hidden">
+        <SearchBox defaultSearch={'dress'} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+# Props
+
+<Props of={Banners} />

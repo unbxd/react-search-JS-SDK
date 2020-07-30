@@ -12,6 +12,7 @@ import unbxdCallBack from './unbxdCallBack';
 import getActiveFacets from './getActiveFacets';
 import handleViewTypeClick from './handleViewTypeClick';
 import setSelectedFacets from './setSelectedFacets';
+import setCategoryPath from './setCategoryPath';
 
 export {
   setProductConfiguration,
@@ -27,5 +28,6 @@ export {
   unbxdCallBack,
   getActiveFacets,
   handleViewTypeClick,
-  setSelectedFacets
+  setSelectedFacets,
+  setCategoryPath
 };

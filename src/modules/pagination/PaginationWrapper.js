@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Button } from '../../components';
 import PageNavigationOptions from './PageNavigationOptions';
-import {paginationTypes} from '../../config';
+import { paginationTypes } from '../../config';
 
 const paginationButtonTypes = {
   NUMBER: 'NUMBER',
@@ -11,7 +11,7 @@ const paginationButtonTypes = {
   NEXT: 'NEXT'
 };
 
-const PaginationWrapper = props => {
+const PaginationWrapper = (props) => {
   const {
     currentPage,
     isNext,
@@ -25,8 +25,7 @@ const PaginationWrapper = props => {
     paginationType
   } = props;
 
-
-  if(paginationType!==paginationTypes.FIXED_PAGINATION || paginationType === null){
+  if (paginationType !== paginationTypes.FIXED_PAGINATION) {
     return null;
   }
 
@@ -122,7 +121,7 @@ PaginationWrapper.propTypes = {
     PropTypes.element,
     PropTypes.func
   ]),
-  paginationType:PropTypes.string.isRequired,
+  paginationType: PropTypes.string.isRequired
 };
 
 export default PaginationWrapper;

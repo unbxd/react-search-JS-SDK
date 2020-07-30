@@ -48,7 +48,7 @@ class ProductsWrapper extends React.PureComponent {
     }
   }
 
-  componentDidUpdate(prevProps,prevState) {
+  componentDidUpdate(prevProps, prevState) {
     const {
       paginationType,
       products = [],
@@ -143,7 +143,7 @@ class ProductsWrapper extends React.PureComponent {
       showVariants,
       ProductItemComponent,
       showSwatches,
-      swatchAttributes,
+      swatchAttributesMap,
       groupBy,
       SwatchItemComponent,
       LoadMoreComponent,
@@ -190,7 +190,7 @@ class ProductsWrapper extends React.PureComponent {
       variantAttributesMap,
       ProductItemComponent,
       showSwatches,
-      swatchAttributes,
+      swatchAttributesMap,
       groupBy,
       SwatchItemComponent,
       viewType,
@@ -243,7 +243,7 @@ ProductsWrapper.propTypes = {
     PropTypes.func
   ]),
   showSwatches: PropTypes.bool,
-  swatchAttributes: PropTypes.object,
+  swatchAttributesMap: PropTypes.object,
   groupBy: PropTypes.string,
   SwatchItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   numberOfProducts: PropTypes.number.isRequired,
