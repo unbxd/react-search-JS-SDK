@@ -73,6 +73,7 @@ class UnbxdSearchWrapper extends Component {
         getCategoryId
       }),
       productType,
+      categoryId: '',
       unbxdState: initialUnbxdState,
       unbxdCoreStatus: searchStatus.READY,
       helpers: {
@@ -133,6 +134,13 @@ class UnbxdSearchWrapper extends Component {
     }
 
     if (categoryId && typeof categoryId === 'string' && categoryId.length > 0) {
+      this.setState((currentState) => {
+        return {
+          ...currentState,
+          categoryId,
+          productType: productTypes.CATEGORY
+        };
+      });
       unbxdCore.options.productType = productTypes.CATEGORY;
       unbxdCore.getResults();
     } else {
@@ -158,7 +166,13 @@ class UnbxdSearchWrapper extends Component {
       typeof unbxdCore.options.getCategoryId === 'function' &&
       unbxdCore.options.getCategoryId();
     if (categoryId !== currentCategoryId && currentCategoryId.length > 0) {
-      this.setState({ categoryId: currentCategoryId });
+      this.setState((currentState) => {
+        return {
+          ...currentState,
+          categoryId,
+          productType: productTypes.CATEGORY
+        };
+      });
       unbxdCore.options.productType = productTypes.CATEGORY;
       unbxdCore.getResults();
     } else {

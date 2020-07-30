@@ -8,10 +8,10 @@ import RangeFacetsContainer from './RangeFacetsContainer';
 /**
  * Component to manage range facets.
  */
-const RangeFacets = props => {
+const RangeFacets = (props) => {
   return (
     <AppContextConsumer>
-      {appState => {
+      {(appState) => {
         if (appState === undefined) {
           hasUnbxdSearchWrapperContext(RangeFacets.displayName);
         }
@@ -42,15 +42,33 @@ const RangeFacets = props => {
 
 RangeFacets.displayName = 'RangeFacets';
 
+RangeFacets.defaultProps = {
+  displayType: 'SLIDER'
+};
+
 RangeFacets.propTypes = {
   /**
-   * Custom facet component.
+   * display type of facet component.
    */
-  FacetItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  displayType: PropTypes.string,
   /**
-  * Label for the component. 
-  */
-  label:PropTypes.node
+   * Custom facet slider item component.
+   */
+  FacetSliderItemComponent: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.func
+  ]),
+  /**
+   * Custom facet list item component.
+   */
+  FacetListItemComponent: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.func
+  ]),
+  /**
+   * Label for the component.
+   */
+  label: PropTypes.node
 };
 
 export default RangeFacets;

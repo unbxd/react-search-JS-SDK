@@ -1,0 +1,312 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import UnbxdSearchWrapper from '../../src/UnbxdSearchWrapper';
+import RangeFacets from '../../src/modules/rangeFacets';
+import Products from '../../src/modules/products';
+import SearchBox from '../../src/modules/searchBox';
+const defaultSearch = 'Shoes';
+const attributesMap = {
+  productName: 'title',
+  uniqueId: 'uniqueId',
+  imageUrl: 'imageUrl',
+  price: 'unbxd_price',
+  productUrl: 'productUrl'
+};
+const variantAttributesMap = {
+  productName: 'title',
+  uniqueId: 'vId',
+  imageUrl: 'imageUrl',
+  price: 'v_unbxd_price',
+  productUrl: 'productUrl'
+};
+const FacetSliderItemComponent = ({
+  sliderMin,
+  sliderMax,
+  valMin,
+  valMax,
+  onChange,
+  onClearFilter,
+  onApplyFilter,
+  displayName,
+  key
+}) => {
+  return <div>render custom slider</div>;
+};
+const FacetListItemComponent = ({
+  itemData,
+  facetName,
+  onClick,
+  priceUnit
+}) => {
+  const { from, to, isSelected = false } = itemData;
+  const { name: fromName, count, dataId: fromDataId } = from;
+  const { name: ToName, dataId: toDataId } = to;
+  console.log('hello');
+  return (
+    <div
+      key={`${facetName}_${fromDataId}-${toDataId}`}
+      onClick={onClick}
+      data-unx_facetname={`${facetName}_${fromDataId}-${toDataId}`}
+      className={`UNX-rangeFacet__item ${isSelected ? '-active' : ''}`}
+    >
+      {priceUnit} {fromName} - {priceUnit} {ToName} -&gt; {count}
+    </div>
+  );
+};
+
+<Meta title="RangeFacets" component={RangeFacets} />
+
+# RangeFacets
+
+### Component to display range facets.
+
+By default the `displayType` is set to `SLIDER`.
+
+#### Default
+
+```jsx
+<RangeFacets />
+```
+
+<Preview>
+  <Story name="default">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <RangeFacets />
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+#### Custom Slider Component.
+
+The default Slider item component can be overriden by passing `FacetSliderItemComponent`.
+
+The custom component will receive the following props
+
+```jsx
+const FacetSliderItemComponent = ({
+  sliderMin,
+  sliderMax,
+  valMin,
+  valMax,
+  onChange,
+  onClearFilter,
+  onApplyFilter,
+  displayName,
+  key
+}) => {
+  return <div>render custom slider</div>;
+};
+```
+
+#### FacetSliderItemComponent Props
+
+| Name          | Type   | Description                 |
+| ------------- | ------ | --------------------------- |
+| sliderMin     | number | Slider maximum value.       |
+| sliderMax     | number | Slider minimum value.       |
+| valMin        | number | Selected minimum value.     |
+| valMax        | number | Selected maximum value.     |
+| onChange      | func   | handle slider change.       |
+| onClearFilter | func   | handle slider clear.        |
+| onApplyFilter | func   | handle slider apply.        |
+| displayName   | string | display name of the slider. |
+| key           | string | id.                         |
+
+```jsx
+<RangeFacets
+  //...
+  FacetSliderItemComponent={FacetSliderItemComponent}
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with custom slider component">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <RangeFacets FacetSliderItemComponent={FacetSliderItemComponent} />
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Display List.
+
+#### Default
+
+To change the display of facets to a list, pass `displayType` as `LIST`.
+
+```jsx
+<RangeFacets
+  //...
+  displayType={'LIST'}
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with display list">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <RangeFacets displayType={'LIST'} />
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+#### Custom List Item Component.
+
+The default List item component can be overriden by passing `FacetListItemComponent`.
+
+```jsx
+const FacetListItemComponent = ({
+  itemData,
+  facetName,
+  onClick,
+  priceUnit
+}) => {
+  const { from, to, isSelected = false } = itemData;
+  const { name: fromName, count, dataId: fromDataId } = from;
+  const { name: ToName, dataId: toDataId } = to;
+  console.log('hello');
+  return (
+    <div
+      key={`${facetName}_${fromDataId}-${toDataId}`}
+      onClick={onClick}
+      data-unx_facetname={`${facetName}_${fromDataId}-${toDataId}`}
+      className={`UNX-rangeFacet__item ${isSelected ? '-active' : ''}`}
+    >
+      {priceUnit} {fromName} - {priceUnit} {ToName} -&gt; {count}
+    </div>
+  );
+};
+```
+
+The custom component will receive the following props
+
+#### FacetListItemComponent Props
+
+| Name      | Type   | Description          |
+| --------- | ------ | -------------------- |
+| itemData  | object | facet values.        |
+| facetName | string | facet name.          |
+| onClick   | func   | handle facet change. |
+| priceUnit | string | price unit.          |
+
+```jsx
+<RangeFacets
+  //...
+  displayType={'LIST'}
+  FacetListItemComponent={FacetListItemComponent}
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with custom list component">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <RangeFacets
+        displayType={'LIST'}
+        FacetListItemComponent={FacetListItemComponent}
+      />
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Render Props.
+
+- This approach gives the control of UI to the user.
+- The anonymous function will receive all the data and helpers needed to build the UI.
+
+#### Render prop parameters
+
+| Name                     | Type          | Description                  |
+| ------------------------ | ------------- | ---------------------------- |
+| rangeFacets              | array         | range facet values.          |
+| selectedRangeFacets      | object        | selected range facet values. |
+| displayType              | string        | `SLIDER`\|`LIST`             |
+| priceUnit                | string        | price unit.                  |
+| FacetSliderItemComponent | element\|func | custom slider component.     |
+| FacetListItemComponent,  | element\|func | custom list item component.  |
+| label                    | node          | label for the component.     |
+
+<Preview>
+  <Story name="with render props">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <RangeFacets>
+        {({
+          rangeFacets,
+          selectedRangeFacets,
+          displayType,
+          priceUnit,
+          FacetSliderItemComponent,
+          FacetListItemComponent,
+          label
+        }) => {
+          return <div>render custom rangeFacets</div>;
+        }}
+      </RangeFacets>
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+# Props
+
+<Props of={RangeFacets} />

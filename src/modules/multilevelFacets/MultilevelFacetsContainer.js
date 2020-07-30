@@ -8,8 +8,8 @@ import MultilevelFacetsWrapper from './MultilevelFacetsWrapper';
 class MultilevelFacetsContainer extends React.PureComponent {
   componentDidMount() {
     const {
-      categoryDisplayName,
-      categoryField,
+      categoryDisplayName='',
+      categoryField='',
       defaultCategoryFilter,
       facetDepth,
       facetLimit,

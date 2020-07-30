@@ -1,0 +1,151 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import UnbxdSearchWrapper from '../../src/UnbxdSearchWrapper';
+import SpellCheck from '../../src/modules/spellCheck';
+import Products from '../../src/modules/products';
+import SearchBox from '../../src/modules/searchBox';
+const defaultSearch = 'rde shirt';
+const attributesMap = {
+  productName: 'title',
+  uniqueId: 'uniqueId',
+  imageUrl: 'imageUrl',
+  price: 'min_cheapest_default_price',
+  productUrl: 'productUrl'
+};
+const variantAttributesMap = {
+  productName: 'title',
+  uniqueId: 'variantId',
+  imageUrl: 'imageUrl',
+  price: 'v_unbxd_price'
+};
+const SpellCheckItemComponent = ({ itemData, onClick }) => {
+  const { suggestion } = itemData;
+  return (
+    <p data-suggestion={suggestion} onClick={onClick}>
+      Were you looking for {suggestion}
+    </p>
+  );
+};
+
+<Meta title="SpellCheck" component={SpellCheck} />
+
+# SpellCheck
+
+### Component to query spell check.
+
+```jsx
+<SpellCheck />
+```
+
+<Preview>
+  <Story name="default">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <SpellCheck />
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Custom Component.
+
+The default SpellCheck item component can be overridden by passing `SpellCheckItemComponent`.
+
+```jsx
+const SpellCheckItemComponent = ({ itemData, onClick }) => {
+  const { suggestion } = itemData;
+  return (
+    <p data-suggestion={suggestion} onClick={onClick}>
+      Were you looking for {suggestion}
+    </p>
+  );
+};
+```
+
+```jsx
+<SpellCheck
+  //...
+  SpellCheckItemComponent={SpellCheckItemComponent}
+  //...
+/>
+```
+
+<Preview>
+  <Story name="with custom component">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <SpellCheck SpellCheckItemComponent={SpellCheckItemComponent} />
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+### Render Props.
+
+- This approach gives the control of UI to the user.
+- The anonymous function will receive all the data and helpers needed to build the UI.
+
+#### Render prop parameters
+
+| Name                    | Type          | Description                  |
+| ----------------------- | ------------- | ---------------------------- |
+| spellChecks             | array         | spell check data.            |
+| currentQuery            | string        | current search query.        |
+| onSuggestionClick       | func          | handle suggestion click.     |
+| SpellCheckItemComponent | element\|func | custom spellcheck component. |
+
+<Preview>
+  <Story name="with render props">
+    <UnbxdSearchWrapper
+      siteKey="wildearthclone-neto-com-au808941566310465"
+      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+    >
+      <SpellCheck>
+        {({
+          spellChecks,
+          currentQuery,
+          onSuggestionClick,
+          SpellCheckItemComponent
+        }) => {
+          return <div>render custom spellCheck</div>;
+        }}
+      </SpellCheck>
+      <Products
+        attributesMap={attributesMap}
+        showVariants={true}
+        variantAttributesMap={variantAttributesMap}
+      />
+      <div className="hidden">
+        <SearchBox defaultSearch={defaultSearch} />
+      </div>
+    </UnbxdSearchWrapper>
+  </Story>
+</Preview>
+
+---
+
+# Props
+
+<Props of={SpellCheck} />

@@ -9,11 +9,11 @@ class ProductsContainer extends React.PureComponent {
   componentDidMount() {
     const {
       pageSize,
-      attributesMap,
+      attributesMap = {},
       showVariants,
       variantsCount,
-      variantAttributesMap,
-      swatchAttributes,
+      variantAttributesMap = {},
+      swatchAttributesMap = {},
       paginationType,
       groupBy,
       helpers: { setProductConfiguration }
@@ -23,7 +23,7 @@ class ProductsContainer extends React.PureComponent {
     const requiredFields = Object.values(attributesMap);
     const variantFields = [
       ...Object.values(variantAttributesMap),
-      ...Object.values(swatchAttributes)
+      ...Object.values(swatchAttributesMap)
     ];
     const variantRequiredFields = [...new Set(variantFields)];
 
@@ -56,12 +56,12 @@ class ProductsContainer extends React.PureComponent {
       onZeroResults,
       ProductItemComponent,
       productIdAttribute,
-      attributesMap,
+      attributesMap = {},
       showVariants,
       groupBy,
-      variantAttributesMap,
+      variantAttributesMap = {},
       showSwatches,
-      swatchAttributes,
+      swatchAttributesMap = {},
       SwatchItemComponent,
       viewType,
       priceUnit
@@ -86,7 +86,7 @@ class ProductsContainer extends React.PureComponent {
       getResults();
     };
 
-    const onProductClick = event => {
+    const onProductClick = (event) => {
       const productUniqueId = event.target.dataset.uniqueid;
       if (productUniqueId) {
         const prank = event.target.dataset.prank;
@@ -125,7 +125,7 @@ class ProductsContainer extends React.PureComponent {
       showVariants,
       showLoader,
       showSwatches,
-      swatchAttributes,
+      swatchAttributesMap,
       groupBy,
       query,
       productIdAttribute,
@@ -185,7 +185,7 @@ ProductsContainer.propTypes = {
   onZeroResults: PropTypes.func,
   showSwatches: PropTypes.bool,
   groupBy: PropTypes.string,
-  swatchAttributes: PropTypes.object,
+  swatchAttributesMap: PropTypes.object,
   SwatchItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   ProductItemComponent: PropTypes.oneOfType([
     PropTypes.element,

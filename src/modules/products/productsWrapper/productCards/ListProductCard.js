@@ -15,7 +15,7 @@ class ListProductCard extends React.Component {
       showVariants,
       variantAttributesMap,
       showSwatches,
-      swatchAttributes,
+      swatchAttributesMap,
       groupBy
     } = this.props;
 
@@ -26,21 +26,21 @@ class ListProductCard extends React.Component {
       showVariants,
       variantAttributesMap,
       showSwatches,
-      swatchAttributes,
+      swatchAttributesMap,
       groupBy
     });
 
     this.state = { productValues };
   }
 
-  onSwatchClick = event => {
+  onSwatchClick = (event) => {
     const currentSwatchId = event.target.dataset['variant_id'];
 
-    this.setState(currentState => {
+    this.setState((currentState) => {
       return {
         productValues: {
           ...currentState.productValues,
-          swatches: currentState.productValues.swatches.map(swatchObject => {
+          swatches: currentState.productValues.swatches.map((swatchObject) => {
             if (swatchObject.swatchId === currentSwatchId) {
               return { ...swatchObject, active: true };
             } else {
@@ -55,7 +55,7 @@ class ListProductCard extends React.Component {
   render() {
     const { SwatchItemComponent, idx, onClick, priceUnit } = this.props;
     const { productValues } = this.state;
-    const [activeSwatch] = productValues['swatches'].filter(swatch => {
+    const [activeSwatch] = productValues['swatches'].filter((swatch) => {
       return swatch.active;
     });
 
@@ -102,12 +102,18 @@ class ListProductCard extends React.Component {
             {productName}
           </div>
           <div className="-price" data-uniqueid={uniqueId} data-prank={prank}>
-            <span>
-              {priceUnit}{price}{' '}
-            </span>
-            <span className="-strike">
-              {priceUnit}{sellingPrice}{' '}
-            </span>
+            {price && (
+              <span>
+                {priceUnit}
+                {price}{' '}
+              </span>
+            )}
+            {sellingPrice && (
+              <span className="-strike">
+                {priceUnit}
+                {sellingPrice}
+              </span>
+            )}
           </div>
         </div>
       </div>
@@ -121,7 +127,7 @@ ListProductCard.propTypes = {
   showVariants: PropTypes.bool.isRequired,
   variantAttributesMap: PropTypes.object.isRequired,
   showSwatches: PropTypes.bool,
-  swatchAttributes: PropTypes.object,
+  swatchAttributesMap: PropTypes.object,
   groupBy: PropTypes.string,
   SwatchItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   idx: PropTypes.number,

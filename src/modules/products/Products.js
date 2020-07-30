@@ -10,10 +10,10 @@ import { hasUnbxdSearchWrapperContext } from '../../common/utils';
  * Component to manage products.
  * Products also manages the pagination options for the search results here.
  */
-const Products = props => {
+const Products = (props) => {
   return (
     <AppContextConsumer>
-      {appState => {
+      {(appState) => {
         if (appState === undefined) {
           hasUnbxdSearchWrapperContext(Products.displayName);
         }
@@ -47,10 +47,7 @@ Products.displayName = 'Products';
 Products.defaultProps = {
   perRow: 4,
   pageSize: 10,
-  attributesMap: {},
   variantsCount: 5,
-  variantAttributesMap: {},
-  swatchAttributes: {},
   paginationType: 'FIXED_PAGINATION',
   heightDiffToTriggerNextPage: 100,
   showVariants: false,
@@ -127,7 +124,7 @@ Products.propTypes = {
   /**
    * Swatch attributes that change on click on of the swatch
    */
-  swatchAttributes: PropTypes.object,
+  swatchAttributesMap: PropTypes.object,
   /**
    * Custom swatch component
    */
