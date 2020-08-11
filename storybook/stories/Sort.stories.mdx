@@ -53,7 +53,7 @@ const SortItemComponent = ({ itemData, onClick }) => {
   return (
     <div
       data-unxsortby={value}
-      className={`sort-item ${isSelected ? '-active' : ''}`}
+      className={`UNX-sortby__item ${isSelected ? '-selected' : ''}`}
       onClick={onClick}
     >
       {itemData.label}
@@ -169,7 +169,7 @@ const SortItemComponent = ({ itemData, onClick }) => {
   return (
     <div
       data-unxsortby={value}
-      className={`sort-item ${isSelected ? '-active' : ''}`}
+      className={`UNX-sortby__item ${isSelected ? '-selected' : ''}`}
       onClick={onClick}
     >
       {itemData.label}

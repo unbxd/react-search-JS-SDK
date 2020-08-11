@@ -49,7 +49,7 @@ Products.defaultProps = {
   pageSize: 10,
   variantsCount: 5,
   paginationType: 'FIXED_PAGINATION',
-  heightDiffToTriggerNextPage: 100,
+  heightDiffToTriggerNextPage: 300,
   showVariants: false,
   LoaderComponent: defaultLoader,
   showLoader: false,

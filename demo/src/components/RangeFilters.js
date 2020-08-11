@@ -2,8 +2,52 @@ import React from 'react';
 
 import { RangeFacets } from '@unbxd-ui/react-search-sdk';
 
+const FacetListItemComponent = ({
+  itemData,
+  facetName,
+  onClick,
+  priceUnit
+}) => {
+  const { from, to, isSelected = false } = itemData;
+  const { name: fromName, count, dataId: fromDataId } = from;
+  const { name: ToName, dataId: toDataId } = to;
+
+  return (
+    <div
+      className={`UNX-rangeFacet__item ${isSelected ? 'selected' : ''}`}
+      data-unx_facetname={`${facetName}_${fromDataId}-${toDataId}`}
+      onClick={onClick}
+      key={`${facetName}_${fromDataId}-${toDataId}`}
+    >
+      <div
+        className="-checkbox"
+        data-unx_facetname={`${facetName}_${fromDataId}-${toDataId}`}
+      />
+      <div
+        className="-label"
+        data-unx_facetname={`${facetName}_${fromDataId}-${toDataId}`}
+      >
+        {priceUnit}
+        {fromName} - {priceUnit}
+        {ToName}
+      </div>
+      <div
+        className="-count"
+        data-unx_facetname={`${facetName}_${fromDataId}-${toDataId}`}
+      >
+        ({count})
+      </div>
+    </div>
+  );
+};
+
 const RangeFilters = () => {
-    return (<RangeFacets />)
-}
+  return (
+    <RangeFacets
+      displayType={'LIST'}
+      FacetListItemComponent={FacetListItemComponent}
+    />
+  );
+};
 
 export default RangeFilters;
