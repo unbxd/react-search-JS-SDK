@@ -19,16 +19,22 @@ const variantAttributesMap = {
   productUrl: 'productUrl'
 };
 const PaginationItemComponent = (props) => {
-  const { pagenumber, onClick, label, type } = props;
+  const { pagenumber, onClick, label, type, active } = props;
   return (
-    <div
-      data-pagenumber={pagenumber}
-      onClick={onClick ? onClick : null}
-      className={`UNX-pageNavigation__button ${type ? '-action' : ''}`}
-    >
-      {type === 'NUMBER' && <span>{label}</span>}
-      {type === 'PREVIOUS' && <span>&lt;</span>}
-      {type === 'NEXT' && <span>&gt;</span>}
+    <div data-pagenumber={pagenumber} onClick={onClick ? onClick : null}>
+      {type === 'NUMBER' && (
+        <button
+          className={`UNX-pageNavigation__button ${active ? '-active' : ''}`}
+        >
+          {label}
+        </button>
+      )}
+      {type === 'PREVIOUS' && (
+        <button className="UNX-pageNavigation__button -action">&lt;</button>
+      )}
+      {type === 'NEXT' && (
+        <button className="UNX-pageNavigation__button -action">&gt;</button>
+      )}
     </div>
   );
 };
@@ -103,12 +109,22 @@ The default Pagination item component can be overridden by passing `PaginationIt
 
 ```jsx
 const PaginationItemComponent = (props) => {
-  const { pagenumber, onClick, label, type } = props;
+  const { pagenumber, onClick, label, type, active } = props;
   return (
     <div data-pagenumber={pagenumber} onClick={onClick ? onClick : null}>
-      {type === 'NUMBER' && <span>{label}</span>}
-      {type === 'PREVIOUS' && <span>&lt;</span>}
-      {type === 'NEXT' && <span>&gt;</span>}
+      {type === 'NUMBER' && (
+        <button
+          className={`UNX-pageNavigation__button ${active ? '-active' : ''}`}
+        >
+          {label}
+        </button>
+      )}
+      {type === 'PREVIOUS' && (
+        <button className="UNX-pageNavigation__button -action">&lt;</button>
+      )}
+      {type === 'NEXT' && (
+        <button className="UNX-pageNavigation__button -action">&gt;</button>
+      )}
     </div>
   );
 };

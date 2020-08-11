@@ -41,7 +41,6 @@ const FacetListItemComponent = ({
   const { from, to, isSelected = false } = itemData;
   const { name: fromName, count, dataId: fromDataId } = from;
   const { name: ToName, dataId: toDataId } = to;
-  console.log('hello');
   return (
     <div
       key={`${facetName}_${fromDataId}-${toDataId}`}
@@ -199,7 +198,7 @@ const FacetListItemComponent = ({
   const { from, to, isSelected = false } = itemData;
   const { name: fromName, count, dataId: fromDataId } = from;
   const { name: ToName, dataId: toDataId } = to;
-  console.log('hello');
+
   return (
     <div
       key={`${facetName}_${fromDataId}-${toDataId}`}

@@ -6,7 +6,7 @@ import SearchBox from '../../src/modules/searchBox';
 const defaultSearch = 'Boots';
 const swatchesDefaultSearch = 'rugs';
 const ZeroResultsComponent = () => {
-  return <p>No products found!!!</p>;
+  return <div>No products found!!!</div>;
 };
 class ProductItemComponent extends React.Component {
   constructor(props) {
@@ -345,6 +345,10 @@ paginationType: `FIXED_PAGINATION` | `INFINITE_SCROLL` | `CLICK_N_SCROLL`;
 
 if `paginationType` is set to `INFINITE_SCROLL`, the scroll height to trigger the next set of results can be managed by `heightDiffToTriggerNextPage`.
 
+###### Note:
+
+- If `paginationType` is set to `INFINITE_SCROLL`, `Pagination` component will be ignored.You can control number of products per page by passing `pageSize`.
+
 ```jsx
 <Products
   //...
@@ -386,6 +390,10 @@ click the Load more button to load next set of results.
   //...
 />
 ```
+
+###### Note:
+
+- If `paginationType` is set to `CLICK_N_SCROLL`, `Pagination` component will be ignored.You can control number of products per page by passing `pageSize`.
 
 <Preview>
   <Story name="with click n scroll">
@@ -469,7 +477,7 @@ When there are not results for a search query, we show zero results page.
 
 ```jsx
 const ZeroResultsComponent = () => {
-  return <p>No products found!!!</p>;
+  return <div>No products found!!!</div>;
 };
 ```
 
@@ -949,7 +957,7 @@ class ProductItemComponent extends React.Component {
           LoaderComponent,
           priceUnit
         }) => {
-          return <p>render custom products</p>;
+          return <div>render custom products</div>;
         }}
       </Products>
       <div className="hidden">

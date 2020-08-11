@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 
 import GridView from './views/GridView';
@@ -21,16 +21,24 @@ class ProductsWrapper extends React.PureComponent {
       hasMoreResults: true,
       start: 0
     };
+
+    this.productsContainerRef = createRef();
   }
 
   nextPageCallback = debounce(() => {
     const { getNextPage, heightDiffToTriggerNextPage } = this.props;
 
+    const productContainerHeight = this.productsContainerRef.current
+      .clientHeight;
     const documentHeight = document.documentElement.offsetHeight;
     const scrollHeight =
       window.innerHeight + document.documentElement.scrollTop;
 
-    if (documentHeight - scrollHeight < heightDiffToTriggerNextPage) {
+    if (
+      documentHeight - scrollHeight < heightDiffToTriggerNextPage ||
+      (scrollHeight > productContainerHeight &&
+        scrollHeight - productContainerHeight < heightDiffToTriggerNextPage * 2)
+    ) {
       getNextPage();
     }
   }, DEBOUNCE_TIME);
@@ -72,6 +80,14 @@ class ProductsWrapper extends React.PureComponent {
         return;
       }
 
+      if (
+        products.length === 0 &&
+        start !== 0 &&
+        paginationType === paginationTypes.INFINITE_SCROLL
+      ) {
+        window.removeEventListener('scroll', this.nextPageCallback);
+      }
+
       if (this.state.products.length > 0 && products.length === 0) {
         if (paginationType === paginationTypes.INFINITE_SCROLL) {
           return;
@@ -79,6 +95,8 @@ class ProductsWrapper extends React.PureComponent {
 
         if (paginationType === paginationTypes.CLICK_N_SCROLL) {
           this.setState({ hasMoreResults: false });
+
+          return;
         }
       }
 
@@ -101,26 +119,17 @@ class ProductsWrapper extends React.PureComponent {
               products: [...prevState.products, ...products],
               start
             });
+
+        return;
       }
 
-      if (
-        prevProps.products !== products &&
-        products.length > 0 &&
-        paginationType === paginationTypes.FIXED_PAGINATION
-      ) {
+      if (prevProps.products !== products && products.length > 0) {
         trackProductImpressions(
           query,
           getProductPids(products, productIdAttribute)
         );
         this.setState({ products: products, start });
-      }
-
-      if (
-        this.props.products.length === 0 &&
-        start !== 0 &&
-        paginationType === paginationTypes.INFINITE_SCROLL
-      ) {
-        window.removeEventListener('scroll', this.nextPageCallback);
+        return;
       }
     }
   }
@@ -206,7 +215,7 @@ class ProductsWrapper extends React.PureComponent {
     );
 
     return (
-      <React.Fragment>
+      <div ref={this.productsContainerRef}>
         {productViewsRender}
 
         {displayClickNScrollTrigger &&
@@ -222,7 +231,7 @@ class ProductsWrapper extends React.PureComponent {
           ))}
 
         {displayLoader && <LoaderComponent />}
-      </React.Fragment>
+      </div>
     );
   }
 }

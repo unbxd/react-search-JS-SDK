@@ -11,7 +11,12 @@
 }
 
 .UNX-viewType__wrapper {
-    margin-right: 13px
+    margin-right: 13px;
+    
+    button{
+        font-size: 22px;
+        color:#cdd5d9;
+      }
 }
 
 .UNX-viewType__wrapper:last-child {

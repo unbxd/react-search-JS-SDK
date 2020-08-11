@@ -33,8 +33,11 @@ class RangeFacetsContainer extends React.PureComponent {
       }
     };
 
-    const removeRangeFacet = ({ facetName }) => {
+    const removeRangeFacet = ({ facetName }, getResults = false) => {
       clearARangeFacet(facetName);
+      if (getResults) {
+        applyRangeFacet();
+      }
     };
 
     return {
@@ -82,7 +85,7 @@ RangeFacetsContainer.propTypes = {
   displayType: PropTypes.string.isRequired,
   enableApplyFilters: PropTypes.bool.isRequired,
   priceUnit: PropTypes.string.isRequired,
-  label:PropTypes.node
+  label: PropTypes.node
 };
 
 export default RangeFacetsContainer;
