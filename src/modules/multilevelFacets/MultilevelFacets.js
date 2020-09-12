@@ -36,7 +36,9 @@ MultilevelFacets.displayName = 'MultilevelFacets';
 MultilevelFacets.defaultProps = {
   defaultCategoryFilter: '',
   facetDepth: 6,
-  facetLimit: 100
+  facetLimit: 100,
+  collapsible: false,
+  searchable: false
 };
 
 MultilevelFacets.propTypes = {
@@ -60,6 +62,14 @@ MultilevelFacets.propTypes = {
    * Default category filter
    */
   defaultCategoryFilter: PropTypes.string,
+  /**
+   * Collapse facet values
+   */
+  collapsible: PropTypes.bool,
+  /**
+   * Search facet values
+   */
+  searchable: PropTypes.bool,
   /**
    * Custom Multilevel facet component
    */

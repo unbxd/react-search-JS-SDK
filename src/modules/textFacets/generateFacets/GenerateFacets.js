@@ -35,7 +35,7 @@ class GenerateFacets extends React.Component {
         return {
           ...textFacet,
           isOpen: matchTextFacet ? matchTextFacet.isOpen : true,
-          filter: ''
+          filter: matchTextFacet ? matchTextFacet.filter : ''
         };
       });
       this.setState(() => {
@@ -126,14 +126,16 @@ class GenerateFacets extends React.Component {
                     />
                   )}
                 </div>
-                {searchable && <div className="UNX-facetFilter__container">
-                  <Input
-                    className="-input"
-                    value={filter}
-                    name={facetName}
-                    onChange={this.handleFilterChange}
-                  />
-                </div>}
+                {searchable && isOpen && (
+                  <div className="UNX-facetFilter__container">
+                    <Input
+                      className="-input"
+                      value={filter}
+                      name={facetName}
+                      onChange={this.handleFilterChange}
+                    />
+                  </div>
+                )}
                 <List
                   items={filteredValues}
                   idAttribute={'dataId'}

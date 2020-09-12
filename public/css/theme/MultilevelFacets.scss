@@ -1,84 +1,129 @@
-.UNX-bucketedFacet__container{
-    width: 100%;
-    padding-bottom: 13px;
-    margin-bottom: 13px;
-    border-bottom: 1px solid #e7e7e7;
-    overflow: scroll;
-    display: table;
+.UNX-bucketedFacet__container {
+  width: 100%;
+  padding-bottom: 13px;
+  margin-bottom: 13px;
+  border-bottom: 1px solid #e7e7e7;
+  overflow: scroll;
+  display: table;
 
-    .UNX-bucketedFacet__header{
-        font-size: 16px;
-        font-weight: 400;
-        color: #0a0b0c;
-        padding-bottom: 15px;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        text-transform: capitalize;
+  .UNX-bucketedFacet__element {
+    cursor: pointer;
+    transition: 0.4s;
+    display: flex;
+    flex-direction: column;
 
+    &.open {
+      .UNX-bucketedFacet__list {
+        max-height: 500px;
+      }
+
+      .-clear {
+        display: block;
+      }
+
+      .-collapse-icon {
+        font-size: 32px;
+        font-weight: 300;
+        line-height: 32px;
+        &:before {
+          content: '-';
+        }
+      }
+    }
+
+    .UNX-bucketedFacet__list {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+    }
+    .-clear {
+      display: none;
+      font-size: 12px;
+      padding: 0;
+      margin-left: auto;
+    }
+
+    .UNX-bucketedFacet__header {
+      font-size: 16px;
+      font-weight: 400;
+      color: #0a0b0c;
+      padding-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      text-transform: capitalize;
+    }
+
+    .-collapse-icon {
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 32px;
+      &:before {
+        content: '+';
+      }
     }
 
     .UNX-bucketedFacet__item {
-        color: #282c3f;
-        cursor: pointer;
+      color: #282c3f;
+      cursor: pointer;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+      text-transform: capitalize;
+      position: relative;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      font-weight: 100;
+      margin-bottom: 12px;
+
+      .-checkbox {
+        background: #fff;
+        border: 1px solid #c3c2c9;
+        border-radius: 2px;
+        box-sizing: border-box;
+        height: 16px;
+        width: 16px;
+        position: relative;
+      }
+
+      &.selected {
+        .-checkbox {
+          background-color: #1d2e44;
+          border: 0;
+        }
+        .-checkbox::after {
+          border: 2px solid #fff;
+          border-right-style: none;
+          border-top-style: none;
+          content: '';
+          height: 5px;
+          left: 4px;
+          position: absolute;
+          top: 4px;
+          -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+          width: 9px;
+          z-index: 1;
+        }
+      }
+
+      .-label {
+        padding-left: 6px;
+        max-width: 80%;
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 100%;
-        text-transform: capitalize;
-        position: relative;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        font-weight: 100;
-        margin-bottom: 12px;
+      }
 
-        .-checkbox{
-            background: #fff;
-            border: 1px solid #c3c2c9;
-            border-radius: 2px;
-            box-sizing: border-box;
-            height: 16px;
-            width: 16px;
-            position: relative;
-        }
-
-        &.selected{
-
-            .-checkbox{
-                background-color: #1d2e44;
-                border: 0;
-            }
-            .-checkbox::after{
-                border: 2px solid #fff;
-                border-right-style: none;
-                border-top-style: none;
-                content: "";
-                height: 5px;
-                left: 4px;
-                position: absolute;
-                top: 4px;
-                -webkit-transform: rotate(-45deg);
-                transform: rotate(-45deg);
-                width: 9px;
-                z-index: 1;
-            }
-        }
-
-        .-label{
-            padding-left: 6px;
-            max-width: 80%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .-count{
-            color: #a7a7a7;
-            font-size: 14px;
-            padding-left: 6px;
-        }
+      .-count {
+        color: #a7a7a7;
+        font-size: 14px;
+        padding-left: 6px;
+      }
     }
+  }
 }
