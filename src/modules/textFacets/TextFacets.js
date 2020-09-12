@@ -37,7 +37,9 @@ const TextFacets = (props) => {
 TextFacets.displayName = "TextFacets"
 
 TextFacets.defaultProps = {
-    defaultFilters: {}
+    defaultFilters: {},
+    collapsible:false,
+    searchable:false
 }
 
 TextFacets.propTypes = {
@@ -45,6 +47,14 @@ TextFacets.propTypes = {
     * Apply default filters which will be enabled on every request.
     */
     defaultFilters: PropTypes.object,
+    /**
+     * Collapse facet values
+     */
+    collapsible:PropTypes.bool,
+    /**
+     * Search facet values
+     */
+    searchable:PropTypes.bool,
     /**
      * Custom Facet item component
      */
