@@ -109,11 +109,11 @@ class GenerateFacets extends React.Component {
 
             return (
               <div
-                className={`UNX-textFacet__element ${isOpen ? 'open' : ''}`}
+                className={`UNX-facet__element ${isOpen ? 'open' : ''}`}
                 key={facetName}
               >
                 <div
-                  className="UNX-textFacet__header"
+                  className="UNX-facet__header"
                   data-unx_name={facetName}
                 >
                   {displayName}
@@ -141,7 +141,7 @@ class GenerateFacets extends React.Component {
                   ListItem={FacetItemComponent || FacetItem}
                   onClick={onFacetClick}
                   facetName={facetName}
-                  className={'UNX-textFacet__list'}
+                  className={'UNX-facet__list'}
                   isFacetSelected={isFacetSelected}
                   selectedFacets={selectedFacets}
                 />

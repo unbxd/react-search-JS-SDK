@@ -89,7 +89,7 @@ class GenerateFacets extends React.Component {
     }
 
     return (
-      <div className="UNX-bucketedFacet__container">
+      <div className="UNX-facet__container">
         {label ? label : null}
         {bucketedFacets.map((bucketedFacet) => {
           const {
@@ -114,10 +114,10 @@ class GenerateFacets extends React.Component {
 
           return (
             <div
-              className={`UNX-bucketedFacet__element ${isOpen ? 'open' : ''}`}
+              className={`UNX-facet__element ${isOpen ? 'open' : ''}`}
               key={multiLevelField}
             >
-              <div className="UNX-bucketedFacet__header">
+              <div className="UNX-facet__header">
                 {displayName}
 
                 {collapsible && (
@@ -146,7 +146,7 @@ class GenerateFacets extends React.Component {
                 level={level}
                 multiLevelField={multiLevelField}
                 onClick={addCategoryFilter}
-                className="UNX-bucketedFacet__list"
+                className="UNX-facet__list"
               />
             </div>
           );

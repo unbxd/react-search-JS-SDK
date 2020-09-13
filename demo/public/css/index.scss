@@ -89,12 +89,12 @@ body {
   border-bottom: 1px solid #e7e7e7;
 }
 
-.UNX-rangeFacet__headerContainer {
+.UNX-facet__headerContainer {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
 
-  .UNX-rangeFacet__header {
+  .UNX-facet__header {
     font-size: 16px;
     font-weight: 400;
     color: #0a0b0c;
@@ -107,7 +107,7 @@ body {
   }
 }
 
-.UNX-rangeFacet__item {
+.UNX-facet__item {
   color: #282c3f;
   cursor: pointer;
   overflow: hidden;

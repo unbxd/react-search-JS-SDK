@@ -211,7 +211,7 @@ class GenerateFacets extends React.Component {
     }
 
     return (
-      <div className="UNX-rangeFacet__container">
+      <div className="UNX-facet__container">
         {label ? label : null}
         {displayType === displayTypes.SLIDER &&
           Object.keys(rangeValues).map((facetName) => {
@@ -238,10 +238,10 @@ class GenerateFacets extends React.Component {
               />
             ) : (
               <div
-                className={`UNX-rangeFacet__element ${isOpen ? 'open' : ''}`}
+                className={`UNX-facet__element ${isOpen ? 'open' : ''}`}
                 key={facetName}
               >
-                <div className="UNX-rangeFacet__header">
+                <div className="UNX-facet__header">
                   {displayName}
                   {collapsible && (
                     <span
@@ -260,7 +260,7 @@ class GenerateFacets extends React.Component {
                   valMax={valMax}
                   onChange={this.onSliderChange}
                 />
-                <div className="UNX-rangeFacet__actions">
+                <div className="UNX-facet__actions">
                   <div
                     className="-clear"
                     data-unx_facetname={facetName}
@@ -288,11 +288,11 @@ class GenerateFacets extends React.Component {
 
             return (
               <div
-                className={`UNX-rangeFacet__element ${isOpen ? 'open' : ''}`}
+                className={`UNX-facet__element ${isOpen ? 'open' : ''}`}
                 key={facetName}
               >
-                <div className="UNX-rangeFacet__headerContainer">
-                  <div className="UNX-rangeFacet__header">
+                <div className="UNX-facet__headerContainer">
+                  <div className="UNX-facet__header">
                     {displayName}
                     {collapsible && (
                       <span
@@ -309,7 +309,7 @@ class GenerateFacets extends React.Component {
                   onClick={this.handleRangeValueClick}
                   idAttribute={facetName}
                   facetName={facetName}
-                  className="UNX-rangeFacet__list"
+                  className="UNX-facet__list"
                   priceUnit={priceUnit}
                 />
                 {isSelected && (
