@@ -6,6 +6,52 @@
   overflow: scroll;
   display: table;
 
+  .UNX-rangeFacet__element {
+    cursor: pointer;
+    transition: 0.4s;
+    display: flex;
+    flex-direction: column;
+
+    &.open {
+      .UNX-rangeFacet__list {
+        max-height: 500px;
+      }
+
+      .UNX-slider__container {
+        display: block;
+      }
+
+      .UNX-rangeFacet__actions {
+        display: flex;
+      }
+
+      .-clear {
+        display: block;
+      }
+
+      .-collapse-icon {
+        font-size: 32px;
+        font-weight: 300;
+        line-height: 32px;
+        &:before {
+          content: '-';
+        }
+      }
+    }
+  }
+
+  .UNX-rangeFacet__list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+  .-clear {
+    display: none;
+    font-size: 12px;
+    padding: 0;
+    margin-left: auto;
+  }
+
   .UNX-rangeFacet__header {
     font-size: 16px;
     font-weight: 400;
@@ -15,11 +61,21 @@
     justify-content: space-between;
     align-items: flex-end;
     text-transform: capitalize;
+    width: 100%;
+
+    .-collapse-icon {
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 32px;
+      &:before {
+        content: '+';
+      }
+    }
   }
 
   .UNX-slider__thumb {
-    box-shadow: 0 2px 4px 0 rgba(133,146,172,0.27);
-    border: 1px solid #DAE1E9;
+    box-shadow: 0 2px 4px 0 rgba(133, 146, 172, 0.27);
+    border: 1px solid #dae1e9;
   }
 
   .UNX-rangeFacet__item {
@@ -83,5 +139,10 @@
       font-size: 14px;
       padding-left: 6px;
     }
+  }
+
+  .UNX-slider__container,
+  .UNX-rangeFacet__actions {
+    display: none;
   }
 }

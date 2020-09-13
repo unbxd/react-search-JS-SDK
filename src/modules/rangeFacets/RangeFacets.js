@@ -43,7 +43,8 @@ const RangeFacets = (props) => {
 RangeFacets.displayName = 'RangeFacets';
 
 RangeFacets.defaultProps = {
-  displayType: 'SLIDER'
+  displayType: 'SLIDER',
+  collapsible: true
 };
 
 RangeFacets.propTypes = {
@@ -52,7 +53,11 @@ RangeFacets.propTypes = {
    */
   displayType: PropTypes.string,
   /**
-   * Custom facet slider item component.
+   * Collapse facet values
+   */
+  collapsible: PropTypes.bool,
+  /**
+   * Search facet values
    */
   FacetSliderItemComponent: PropTypes.oneOfType([
     PropTypes.element,

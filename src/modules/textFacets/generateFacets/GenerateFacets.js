@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { isFacetSelected } from '../utils';
-import { List } from '../../../components';
+import { List, Input } from '../../../components';
 import FacetItem from './FacetItem';
-import Input from '../../../components/Input';
 import { searchStatus } from './../../../config';
 
 class GenerateFacets extends React.Component {
