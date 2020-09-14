@@ -9,8 +9,6 @@ import { searchStatus } from './../../../config';
 class GenerateFacets extends React.Component {
   constructor(props) {
     super(props);
-    this.handleCollapseToggle = this.handleCollapseToggle.bind(this);
-    this.handleFilterChange = this.handleFilterChange.bind(this);
     this.state = { textFacets: [] };
   }
   componentDidUpdate(prevProps) {
@@ -47,7 +45,7 @@ class GenerateFacets extends React.Component {
     }
   }
 
-  handleCollapseToggle(event) {
+  handleCollapseToggle = (event) => {
     const facetId = event.target.dataset['unx_name'];
     this.setState((currentState) => {
       const updatedTextFacets = currentState.textFacets.map((textFacet) => {
@@ -59,9 +57,9 @@ class GenerateFacets extends React.Component {
 
       return { ...currentState, textFacets: updatedTextFacets };
     });
-  }
+  };
 
-  handleFilterChange(event) {
+  handleFilterChange = (event) => {
     const facetId = event.target.name;
     const value = event.target.value;
     this.setState((currentState) => {
@@ -74,7 +72,7 @@ class GenerateFacets extends React.Component {
 
       return { ...currentState, textFacets: updatedTextFacets };
     });
-  }
+  };
 
   render() {
     const {
@@ -112,10 +110,7 @@ class GenerateFacets extends React.Component {
                 className={`UNX-facet__element ${isOpen ? 'open' : ''}`}
                 key={facetName}
               >
-                <div
-                  className="UNX-facet__header"
-                  data-unx_name={facetName}
-                >
+                <div className="UNX-facet__header" data-unx_name={facetName}>
                   {displayName}
                   {collapsible && (
                     <span

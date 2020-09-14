@@ -9,8 +9,6 @@ import FacetListItem from './FacetListItem';
 class GenerateFacets extends React.Component {
   constructor(props) {
     super(props);
-    this.handleCollapseToggle = this.handleCollapseToggle.bind(this);
-    this.handleFilterChange = this.handleFilterChange.bind(this);
     this.state = {
       rangeValues: {}
     };
@@ -97,7 +95,7 @@ class GenerateFacets extends React.Component {
     this.setFacetValue({ facetName, valMin, valMax }, !enableApplyFilters);
   };
 
-  handleCollapseToggle(event) {
+  handleCollapseToggle = (event) => {
     const facetId = event.target.dataset['unx_name'];
     this.setState((existingState) => {
       const currentFacet = existingState.rangeValues[facetId];
@@ -107,9 +105,9 @@ class GenerateFacets extends React.Component {
         rangeValues: { ...existingState.rangeValues, [facetId]: currentFacet }
       };
     });
-  }
+  };
 
-  handleFilterChange(event) {
+  handleFilterChange = (event) => {
     const facetId = event.target.name;
     const value = event.target.value;
     this.setState((existingState) => {
@@ -120,7 +118,7 @@ class GenerateFacets extends React.Component {
         rangeValues: { ...existingState.rangeValues, [facetId]: currentFacet }
       };
     });
-  }
+  };
 
   componentDidUpdate(prevProps) {
     const { rangeFacets, selectedRangeFacets } = this.props;
@@ -211,7 +209,7 @@ class GenerateFacets extends React.Component {
     }
 
     return (
-      <div className="UNX-facet__container">
+      <div className="UNX-rangefacet__container">
         {label ? label : null}
         {displayType === displayTypes.SLIDER &&
           Object.keys(rangeValues).map((facetName) => {

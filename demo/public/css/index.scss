@@ -169,3 +169,33 @@ body {
     padding-left: 6px;
   }
 }
+
+.UNX-categoryLinks__container {
+  margin:0 40px;
+
+  .topnav {
+    overflow: hidden;
+    background-color: #687d88;
+    margin-top: 20px;
+  }
+  
+  .topnav div {
+    float: left;
+    color: #000000;
+    background-color: #cdd5d9;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .topnav div:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .topnav div.active {
+    background-color: #1d2e44;
+    color: white;
+  }
+} 

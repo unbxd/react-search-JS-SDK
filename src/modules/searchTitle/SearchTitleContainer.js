@@ -5,7 +5,7 @@ import { conditionalRenderer } from '../../common/utils';
 import SearchTitleWrapper from './SearchTitleWrapper';
 
 const SearchTitleContainer = memo(props => {
-  const { unbxdCore, SearchTitleItem, paginationType } = props;
+  const { unbxdCore, SearchTitleItem, paginationType,productType } = props;
 
   const searchQuery = unbxdCore.getSearchQuery() || '';
   const { start, productsLn, numberOfProducts = 0 } =
@@ -18,6 +18,7 @@ const SearchTitleContainer = memo(props => {
       productsLn,
       SearchTitleItem,
       numberOfProducts,
+      productType,
       paginationType
     };
   };
@@ -34,6 +35,7 @@ const SearchTitleContainer = memo(props => {
 SearchTitleContainer.propTypes = {
   unbxdCore: PropTypes.object.isRequired,
   SearchTitleItem: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  productType:PropTypes.string.isRequired,
   paginationType:PropTypes.string.isRequired,
 };
 

@@ -1,4 +1,7 @@
-.UNX-facet__container {
+.UNX-rangefacet__container {
+  width: 100%;
+  overflow: scroll;
+  display: block;
   .UNX-facet__element {
     cursor: pointer;
     transition: 0.4s;

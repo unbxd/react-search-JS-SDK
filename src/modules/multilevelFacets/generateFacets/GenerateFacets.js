@@ -7,10 +7,6 @@ import { List, Input } from '../../../components';
 class GenerateFacets extends React.Component {
   constructor(props) {
     super(props);
-
-    this.handleCollapseToggle = this.handleCollapseToggle.bind(this);
-    this.handleFilterChange = this.handleFilterChange.bind(this);
-
     this.state = { bucketedFacets: [] };
   }
 
@@ -36,7 +32,7 @@ class GenerateFacets extends React.Component {
     }
   }
 
-  handleCollapseToggle(event) {
+  handleCollapseToggle = (event) => {
     const facetId = event.target.dataset['unx_name'];
     this.setState((currentState) => {
       const updatedTextFacets = currentState.bucketedFacets.map(
@@ -50,9 +46,9 @@ class GenerateFacets extends React.Component {
 
       return { ...currentState, bucketedFacets: updatedTextFacets };
     });
-  }
+  };
 
-  handleFilterChange(event) {
+  handleFilterChange = (event) => {
     const facetId = event.target.name;
     const value = event.target.value;
     this.setState((currentState) => {
@@ -67,7 +63,7 @@ class GenerateFacets extends React.Component {
 
       return { ...currentState, bucketedFacets: updatedTextFacets };
     });
-  }
+  };
 
   render() {
     const {
@@ -89,7 +85,7 @@ class GenerateFacets extends React.Component {
     }
 
     return (
-      <div className="UNX-facet__container">
+      <div className="UNX-bucketedFacet__container">
         {label ? label : null}
         {bucketedFacets.map((bucketedFacet) => {
           const {

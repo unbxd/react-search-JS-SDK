@@ -45,6 +45,8 @@ const MultilevelFilters = () => {
       categoryDisplayName={'category'}
       categoryField={'categoryPath'}
       //defaultCategoryFilter={'All Products'}
+      collapsible={true}
+      searchable={true}
       FacetItemComponent={FacetItemComponent}
       label={label}
     />
@@ -52,4 +54,3 @@ const MultilevelFilters = () => {
 };
 
 export default MultilevelFilters;
-//UNX-facet__item
