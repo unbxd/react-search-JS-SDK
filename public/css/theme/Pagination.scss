@@ -1,20 +1,3 @@
-.UNX-pagination__pageSize{
-    display: flex;
-    align-items: center;
-    display: none;
-
-    .UNX-pageSize__dropdown{
-        border: 1px solid rgba(194, 194, 194, 0.38);
-        margin-left: 10px;
-        height: 30px;
-        padding: 4px 8px;
-        color: rgba(0, 0, 0, 0.75);
-        font-weight: 400;
-        background: 0 0;
-    }
-
-}
-
 .UNX-pageNavigation__container{
     display: flex;
     justify-content: flex-end;

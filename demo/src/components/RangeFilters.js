@@ -14,7 +14,7 @@ const FacetListItemComponent = ({
 
   return (
     <div
-      className={`UNX-rangeFacet__item ${isSelected ? 'selected' : ''}`}
+      className={`UNX-facet__item ${isSelected ? 'selected' : ''}`}
       data-unx_facetname={`${facetName}_${fromDataId}-${toDataId}`}
       onClick={onClick}
       key={`${facetName}_${fromDataId}-${toDataId}`}
@@ -46,6 +46,7 @@ const RangeFilters = () => {
     <RangeFacets
       displayType={'LIST'}
       FacetListItemComponent={FacetListItemComponent}
+      collapsible={true}
     />
   );
 };

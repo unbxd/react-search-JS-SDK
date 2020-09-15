@@ -1,33 +1,31 @@
-.UNX-slider__container{
-
-    .UNX-sliderTrack__container{
-        cursor: pointer;
-        background-color: #F2F3F7;
-        height:6px;
-        .UNX-sliderTrack{
-            &.-active{
-                background-color:#1D2E44; 
-            }
-
-
-        }   
-        .UNX-slider__thumb{
-            background-color: #ffffff;
-            border-radius: 25px;
-            height: 18px;
-            width: 18px;
-            box-shadow: 0 2px 4px 0 rgba(133,146,172,0.27);
-        }
+.UNX-slider__container {
+  .UNX-sliderTrack__container {
+    cursor: pointer;
+    background-color: #f2f3f7;
+    height: 6px;
+    .UNX-sliderTrack {
+      &.-active {
+        background-color: #1d2e44;
+      }
     }
+    .UNX-slider__thumb {
+      background-color: #ffffff;
+      border-radius: 25px;
+      height: 18px;
+      width: 18px;
+      box-shadow: 0 2px 4px 0 rgba(133, 146, 172, 0.27);
+    }
+  }
 }
 
-.UNX-rangeFacet__actions{
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
+.UNX-facet__actions {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
 
-    .-apply,
-    .-clear{
-        cursor: pointer;
-    }
+  .-apply,
+  .-clear {
+    font-size: 14px;
+    cursor: pointer;
+  }
 }

@@ -11,7 +11,7 @@ const FacetListItem = ({ itemData, facetName, onClick, priceUnit }) => {
       key={`${facetName}_${fromDataId}-${toDataId}`}
       onClick={onClick}
       data-unx_facetname={`${facetName}_${fromDataId}-${toDataId}`}
-      className={`UNX-rangeFacet__item ${isSelected ? '-active' : ''}`}
+      className={`UNX-facet__item ${isSelected ? '-active' : ''}`}
     >
       {priceUnit} {fromName} - {priceUnit} {ToName} - {count}
     </div>

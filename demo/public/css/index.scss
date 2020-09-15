@@ -50,7 +50,7 @@ body {
   padding: 15px 21px;
   margin-right: 35px;
   border-radius: 5px;
-  width: 28%;
+  width: 24%;
 }
 
 .UNX-searchResult__container {
@@ -89,12 +89,12 @@ body {
   border-bottom: 1px solid #e7e7e7;
 }
 
-.UNX-rangeFacet__headerContainer {
+.UNX-facet__headerContainer {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
 
-  .UNX-rangeFacet__header {
+  .UNX-facet__header {
     font-size: 16px;
     font-weight: 400;
     color: #0a0b0c;
@@ -107,7 +107,7 @@ body {
   }
 }
 
-.UNX-rangeFacet__item {
+.UNX-facet__item {
   color: #282c3f;
   cursor: pointer;
   overflow: hidden;
@@ -169,3 +169,33 @@ body {
     padding-left: 6px;
   }
 }
+
+.UNX-categoryLinks__container {
+  margin:0 40px;
+
+  .topnav {
+    overflow: hidden;
+    background-color: #687d88;
+    margin-top: 20px;
+  }
+  
+  .topnav div {
+    float: left;
+    color: #000000;
+    background-color: #cdd5d9;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .topnav div:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .topnav div.active {
+    background-color: #1d2e44;
+    color: white;
+  }
+} 

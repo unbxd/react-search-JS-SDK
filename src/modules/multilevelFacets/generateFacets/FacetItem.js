@@ -10,7 +10,7 @@ const FacetItem = ({ itemData, multiLevelField, level, onClick }) => {
       data-unx_categoryname={name}
       data-unx_multilevelfield={multiLevelField}
       data-unx_level={level}
-      className="UNX-bucketedFacet__item"
+      className="UNX-facet__item"
       onClick={onClick}
     >
       {name}-{count}

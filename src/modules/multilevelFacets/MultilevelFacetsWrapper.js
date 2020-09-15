@@ -10,7 +10,9 @@ const MultilevelFacetsWrapper = props => {
     selectedBucketedFacet,
     breadCrumbsList,
     FacetItemComponent,
-    label
+    label,
+    collapsible,
+    searchable
   } = props;
   return (
     <GenerateFacets
@@ -20,6 +22,8 @@ const MultilevelFacetsWrapper = props => {
       breadCrumbsList={breadCrumbsList}
       FacetItemComponent={FacetItemComponent}
       label={label}
+      collapsible={collapsible}
+      searchable={searchable}
     />
   );
 };
@@ -30,7 +34,9 @@ MultilevelFacetsWrapper.propTypes = {
   selectedBucketedFacet: PropTypes.object,
   breadCrumbsList: PropTypes.array,
   FacetItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  label:PropTypes.node
+  label:PropTypes.node,
+  collapsible: PropTypes.bool,
+  searchable: PropTypes.bool
 };
 
 export default MultilevelFacetsWrapper;

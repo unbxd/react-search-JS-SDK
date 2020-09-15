@@ -8,22 +8,29 @@ import { hasUnbxdSearchWrapperContext } from '../../common/utils';
 /**
  * Component to display search meta data.
  */
-const SearchTitle = props => {
+const SearchTitle = (props) => {
   return (
     <AppContextConsumer>
-      {appState => {
+      {(appState) => {
         if (appState === undefined) {
           hasUnbxdSearchWrapperContext(SearchTitle.displayName);
         }
 
-        const { unbxdCore, unbxdCoreStatus, helpers,unbxdState } = appState;
-        const {paginationType} = unbxdState;
+        const {
+          unbxdCore,
+          unbxdCoreStatus,
+          helpers,
+          unbxdState,
+          productType
+        } = appState;
+        const { paginationType } = unbxdState;
 
         return (
           <SearchTitleContainer
             unbxdCore={unbxdCore}
             unbxdCoreStatus={unbxdCoreStatus}
             helpers={helpers}
+            productType={productType}
             paginationType={paginationType}
             {...props}
           />

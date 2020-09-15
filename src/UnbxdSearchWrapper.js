@@ -165,11 +165,15 @@ class UnbxdSearchWrapper extends Component {
     const currentCategoryId =
       typeof unbxdCore.options.getCategoryId === 'function' &&
       unbxdCore.options.getCategoryId();
-    if (categoryId !== currentCategoryId && currentCategoryId.length > 0) {
+    if (
+      categoryId !== currentCategoryId &&
+      typeof currentCategoryId === 'string' &&
+      currentCategoryId.length > 0
+    ) {
       this.setState((currentState) => {
         return {
           ...currentState,
-          categoryId,
+          categoryId: currentCategoryId,
           productType: productTypes.CATEGORY
         };
       });

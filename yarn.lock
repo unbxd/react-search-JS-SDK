@@ -1784,10 +1784,10 @@
     "@types/webpack-sources" "*"
     source-map "^0.6.0"
 
-"@unbxd-ui/unbxd-search-core@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@unbxd-ui/unbxd-search-core/-/unbxd-search-core-0.0.7.tgz#d69b628b56b64d5f7bab1c5578bebb9fff756f29"
-  integrity sha512-y7AK6G6wqPog273re7+1eDZJFVfvvOUED79TrKMn4imqhAbkbF0E6NkgrRyLD+3owpgzMP2UJkBXgWaMC998Iw==
+"@unbxd-ui/unbxd-search-core@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@unbxd-ui/unbxd-search-core/-/unbxd-search-core-0.1.6.tgz#310d493510b2f3c51b72d994eefd127bee4e8a3c"
+  integrity sha512-EPZUVs2MvWjbhMQIuv0b6Zv4mgpoEneXYHzAGf+JblWaotQcD/giVqfqKZiVpw2MfR2Gq5HSaxYvL2gggh/A+g==
   dependencies:
     babel-polyfill "^6.26.0"
     babel-runtime "^6.26.0"

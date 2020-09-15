@@ -24,7 +24,9 @@ class TextFacetsContainer extends React.PureComponent {
       enableApplyFilters,
       helpers: { manageTextFacets, setSelectedFacets },
       selectedFacets,
-      label
+      label,
+      collapsible,
+      searchable
     } = this.props;
 
     const {
@@ -48,7 +50,7 @@ class TextFacetsContainer extends React.PureComponent {
       updateFacets({ selectedFacetName, selectedFacetId, facetData });
     };
 
-    const onFacetClick = event => {
+    const onFacetClick = (event) => {
       const {
         unx_name: selectedFacetName,
         unx_dataid: selectedFacetId
@@ -80,7 +82,7 @@ class TextFacetsContainer extends React.PureComponent {
         removeFacet({ selectedFacetName, selectedFacetId });
     };
 
-    const onFacetObjectReset = event => {
+    const onFacetObjectReset = (event) => {
       const { unx_name } = event.target.dataset;
       removeFacet({ selectedFacetName: unx_name });
       setPageStart(0);
@@ -95,7 +97,9 @@ class TextFacetsContainer extends React.PureComponent {
       textFacets,
       enableApplyFilters,
       lastSelectedFacets,
-      selectedFacets
+      selectedFacets,
+      collapsible,
+      searchable
     };
 
     const helpers = {
@@ -128,7 +132,9 @@ TextFacetsContainer.propTypes = {
   defaultFilters: PropTypes.object.isRequired,
   enableApplyFilters: PropTypes.bool.isRequired,
   selectedFacets: PropTypes.object.isRequired,
-  label:PropTypes.node
+  label: PropTypes.node,
+  collapsible: PropTypes.bool.isRequired,
+  searchable: PropTypes.bool.isRequired
 };
 
 export default TextFacetsContainer;

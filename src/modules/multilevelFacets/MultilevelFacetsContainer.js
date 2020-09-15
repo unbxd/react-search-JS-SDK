@@ -8,8 +8,8 @@ import MultilevelFacetsWrapper from './MultilevelFacetsWrapper';
 class MultilevelFacetsContainer extends React.PureComponent {
   componentDidMount() {
     const {
-      categoryDisplayName='',
-      categoryField='',
+      categoryDisplayName = '',
+      categoryField = '',
       defaultCategoryFilter,
       facetDepth,
       facetLimit,
@@ -26,7 +26,13 @@ class MultilevelFacetsContainer extends React.PureComponent {
   }
 
   getMultilevelFacetsProps() {
-    const { unbxdCore, FacetItemComponent,label } = this.props;
+    const {
+      unbxdCore,
+      FacetItemComponent,
+      label,
+      collapsible,
+      searchable
+    } = this.props;
 
     const {
       getBucketedFacets,
@@ -40,7 +46,7 @@ class MultilevelFacetsContainer extends React.PureComponent {
     const selectedBucketedFacet = getSelectedBucketedFacet();
     const breadCrumbsList = getBreadCrumbsList();
 
-    const addCategoryFilter = event => {
+    const addCategoryFilter = (event) => {
       const {
         unx_categoryname: name,
         unx_level: level,
@@ -57,7 +63,9 @@ class MultilevelFacetsContainer extends React.PureComponent {
       selectedBucketedFacet,
       breadCrumbsList,
       FacetItemComponent,
-      label
+      label,
+      collapsible,
+      searchable
     };
   }
 
@@ -82,7 +90,9 @@ MultilevelFacetsContainer.propTypes = {
   facetLimit: PropTypes.number,
   defaultCategoryFilter: PropTypes.string,
   FacetItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  label:PropTypes.node
+  label: PropTypes.node,
+  collapsible: PropTypes.bool,
+  searchable: PropTypes.bool
 };
 
 export default MultilevelFacetsContainer;
