@@ -1,4 +1,4 @@
-[Bug Reports](#bugs) | [Features Requests](#features) | [Submitting Pull Requests](#pull-requests) | [Running Local Demo](#running-the-app) | [Running Tests](#running-tests)
+[Setting Up](setting-up) | [Bug Reports](#bugs) | [Features Requests](#features) | [Submitting Pull Requests](#pull-requests) | [Running Local Demo](#running-the-app) | [Running Tests](#running-tests)
 
 # Contributing to this project
 
@@ -6,6 +6,15 @@ Please take a moment to review this document in order to make the contribution p
 
 Following these guidelines helps to communicate that you respect the time of the developers managing and developing this open source project.
 In return, they should reciprocate that respect in addressing your issue or assessing patches and features.
+
+<a name="setting-up"></a>
+
+## Setting the project up for development
+
+### Prerequisites
+
+Install [npm](https://www.npmjs.com/get-npm)
+
 
 <a name="bugs"></a>
 
@@ -129,6 +138,8 @@ You can run the Storybook with NPM like so:
 
 ```bash
 cd <root>
+cd storybook
+yarn install
 yarn storybook
 ```
 
@@ -141,6 +152,7 @@ You can run the local demo with NPM like so:
 ```bash
 cd <root>
 cd demo
+yarn install
 yarn start
 ```
 

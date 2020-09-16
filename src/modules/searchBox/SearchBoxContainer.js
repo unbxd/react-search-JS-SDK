@@ -9,137 +9,137 @@ import { trackSearch } from '../analytics';
  * Component to manage the search query.
  */
 class SearchBoxContainer extends React.PureComponent {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.onSearchBoxChange = this.onSearchBoxChange.bind(this);
-    this.onSearchBoxClear = this.onSearchBoxClear.bind(this);
-    this.onSearchBoxSubmit = this.onSearchBoxSubmit.bind(this);
-    this.setSearchBoxQuery = this.setSearchBoxQuery.bind(this);
+        this.onSearchBoxChange = this.onSearchBoxChange.bind(this);
+        this.onSearchBoxClear = this.onSearchBoxClear.bind(this);
+        this.onSearchBoxSubmit = this.onSearchBoxSubmit.bind(this);
+        this.setSearchBoxQuery = this.setSearchBoxQuery.bind(this);
 
-    this.state = { query: '' };
-  }
-
-  componentDidMount() {
-    const {
-      helpers: { setSearchBoxConfiguration }
-    } = this.props;
-    const { defaultSearch = '' } = this.props;
-    if (typeof defaultSearch === 'string' && defaultSearch.length) {
-      setSearchBoxConfiguration({ query: defaultSearch });
+        this.state = { query: '' };
     }
-  }
 
-  onSearchBoxChange(event) {
-    const query = event.target.value;
-    this.setState({ query });
-  }
-
-  setSearchBoxQuery(query) {
-    this.setState({ query });
-  }
-
-  onSearchBoxClear() {
-    const { query } = this.state;
-    const { onClear } = this.props;
-
-    if (onClear) {
-      onClear(query) && this.setState({ query: '' });
-    } else {
-      this.setState({ query: '' });
+    componentDidMount() {
+        const {
+            helpers: { setSearchBoxConfiguration },
+        } = this.props;
+        const { defaultSearch = '' } = this.props;
+        if (typeof defaultSearch === 'string' && defaultSearch.length) {
+            setSearchBoxConfiguration({ query: defaultSearch });
+        }
     }
-  }
 
-  onSearchBoxSubmit(event) {
-    event.preventDefault();
-
-    const { query } = this.state;
-    const { onSubmit } = this.props;
-    const {
-      helpers: { setSearchBoxConfiguration }
-    } = this.props;
-
-    if (onSubmit) {
-      if (onSubmit(query) && query.length) {
-        setSearchBoxConfiguration({ query });
-        //track for search hit here
-        trackSearch(query);
-      }
-    } else {
-      if (query.length) {
-        setSearchBoxConfiguration({ query });
-        //track for search hit here
-        trackSearch(query);
-      }
+    onSearchBoxChange(event) {
+        const query = event.target.value;
+        this.setState({ query });
     }
-  }
 
-  getSearchBoxProps() {
-    const {
-      unbxdCore,
-      unbxdCoreStatus,
-      productType,
-      autoFocus,
-      clearable,
-      showLoader,
-      InputComponent,
-      SubmitComponent,
-      ClearComponent,
-      placeholder
-    } = this.props;
+    setSearchBoxQuery(query) {
+        this.setState({ query });
+    }
 
-    const lastSearchedQuery = unbxdCore.getSearchQuery() || '';
+    onSearchBoxClear() {
+        const { query } = this.state;
+        const { onClear } = this.props;
 
-    const data = {
-      unbxdCoreStatus,
-      autoFocus,
-      clearable,
-      showLoader,
-      lastSearchedQuery,
-      placeholder,
-      productType,
-      ...this.state
-    };
+        if (onClear) {
+            onClear(query) && this.setState({ query: '' });
+        } else {
+            this.setState({ query: '' });
+        }
+    }
 
-    const helpers = {
-      onSearchBoxChange: this.onSearchBoxChange,
-      onSearchBoxSubmit: this.onSearchBoxSubmit,
-      onSearchBoxClear: this.onSearchBoxClear,
-      setSearchBoxQuery: this.setSearchBoxQuery,
-      InputComponent,
-      SubmitComponent,
-      ClearComponent
-    };
+    onSearchBoxSubmit(event) {
+        event.preventDefault();
 
-    return { ...data, ...helpers };
-  }
+        const { query } = this.state;
+        const { onSubmit } = this.props;
+        const {
+            helpers: { setSearchBoxConfiguration },
+        } = this.props;
+        const queryString = encodeURIComponent(query);
+        if (onSubmit) {
+            if (onSubmit(query) && query.length) {
+                setSearchBoxConfiguration({ query: queryString });
+                //track for search hit here
+                trackSearch(query);
+            }
+        } else {
+            if (query.length) {
+                setSearchBoxConfiguration({ query: queryString });
+                //track for search hit here
+                trackSearch(query);
+            }
+        }
+    }
 
-  render() {
-    const DefaultRender = SearchBoxWrapper;
+    getSearchBoxProps() {
+        const {
+            unbxdCore,
+            unbxdCoreStatus,
+            productType,
+            autoFocus,
+            clearable,
+            showLoader,
+            InputComponent,
+            SubmitComponent,
+            ClearComponent,
+            placeholder,
+        } = this.props;
 
-    return conditionalRenderer(
-      this.props.children,
-      this.getSearchBoxProps(),
-      DefaultRender
-    );
-  }
+        const lastSearchedQuery = unbxdCore.getSearchQuery() || '';
+
+        const data = {
+            unbxdCoreStatus,
+            autoFocus,
+            clearable,
+            showLoader,
+            lastSearchedQuery,
+            placeholder,
+            productType,
+            ...this.state,
+        };
+
+        const helpers = {
+            onSearchBoxChange: this.onSearchBoxChange,
+            onSearchBoxSubmit: this.onSearchBoxSubmit,
+            onSearchBoxClear: this.onSearchBoxClear,
+            setSearchBoxQuery: this.setSearchBoxQuery,
+            InputComponent,
+            SubmitComponent,
+            ClearComponent,
+        };
+
+        return { ...data, ...helpers };
+    }
+
+    render() {
+        const DefaultRender = SearchBoxWrapper;
+
+        return conditionalRenderer(
+            this.props.children,
+            this.getSearchBoxProps(),
+            DefaultRender
+        );
+    }
 }
 
 SearchBoxContainer.propTypes = {
-  unbxdCore: PropTypes.object.isRequired,
-  unbxdCoreStatus: PropTypes.string.isRequired,
-  helpers: PropTypes.object.isRequired,
-  autoFocus: PropTypes.bool,
-  clearable: PropTypes.bool,
-  onSubmit: PropTypes.func,
-  onClear: PropTypes.func,
-  showLoader: PropTypes.bool,
-  InputComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  SubmitComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  ClearComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  defaultSearch: PropTypes.string,
-  placeholder: PropTypes.string,
-  productType: PropTypes.string
+    unbxdCore: PropTypes.object.isRequired,
+    unbxdCoreStatus: PropTypes.string.isRequired,
+    helpers: PropTypes.object.isRequired,
+    autoFocus: PropTypes.bool,
+    clearable: PropTypes.bool,
+    onSubmit: PropTypes.func,
+    onClear: PropTypes.func,
+    showLoader: PropTypes.bool,
+    InputComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    SubmitComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    ClearComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    defaultSearch: PropTypes.string,
+    placeholder: PropTypes.string,
+    productType: PropTypes.string,
 };
 
 export default SearchBoxContainer;

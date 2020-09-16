@@ -49,6 +49,7 @@ const App = () => {
     setCategoryPathLinks(updatedPathLinks);
     window.UnbxdAnalyticsConf = {};
     window.UnbxdAnalyticsConf['page'] = path;
+    window.UnbxdAnalyticsConf['page_type'] = "BOOLEAN";
     setProductType('CATEGORY');
   };
 

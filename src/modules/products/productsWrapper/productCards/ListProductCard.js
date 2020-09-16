@@ -102,17 +102,17 @@ class ListProductCard extends React.Component {
             {productName}
           </div>
           <div className="-price" data-uniqueid={uniqueId} data-prank={prank}>
-            {price && (
-              <span>
-                {priceUnit}
-                {price}{' '}
-              </span>
-            )}
             {sellingPrice && (
-              <span className="-strike">
-                {priceUnit}
-                {sellingPrice}
-              </span>
+                <span>
+                  {priceUnit}
+                  {sellingPrice}
+                </span>
+            )}
+            {price && (
+                <span className="-strike">
+                  {priceUnit}
+                  {price}{' '}
+                </span>
             )}
           </div>
         </div>
