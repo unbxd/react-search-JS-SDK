@@ -39,6 +39,14 @@ class ViewTypesContainer extends React.PureComponent {
     };
   }
 
+  componentDidUpdate(prevProps,prevState) {
+    const { unbxdCore, viewType, helpers: { setViewTypeConfiguration } } = this.props;
+    const {viewType:currentViewType} = unbxdCore.getQueryParams();
+    if(currentViewType && viewType!==currentViewType) {
+      setViewTypeConfiguration({viewType:currentViewType});
+    }
+  }
+
   render() {
     const DefaultRender = ViewTypesWrapper;
 
