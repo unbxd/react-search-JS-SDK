@@ -105,16 +105,16 @@ class GridProductCard extends React.Component {
           </div>
 
           <div className="-price" data-uniqueid={uniqueId} data-prank={prank}>
-            {price && (
+            {sellingPrice && (
               <span>
                 {priceUnit}
-                {price}{' '}
+                {sellingPrice}
               </span>
             )}
-            {sellingPrice && (
+            {price && (
               <span className="-strike">
                 {priceUnit}
-                {sellingPrice}
+                {price}{' '}
               </span>
             )}
           </div>

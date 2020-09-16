@@ -1,3 +1,15 @@
-import { trackSearch, trackProductClick, trackProductImpressions, trackFacetClick, } from './analytics';
+import {
+    trackSearch,
+    trackCategory,
+    trackProductClick,
+    trackProductImpressions,
+    trackFacetClick,
+} from './analytics';
 
-export { trackSearch, trackProductClick, trackProductImpressions, trackFacetClick };
+export {
+    trackSearch,
+    trackCategory,
+    trackProductClick,
+    trackProductImpressions,
+    trackFacetClick,
+};

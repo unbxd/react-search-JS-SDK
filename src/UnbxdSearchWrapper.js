@@ -26,6 +26,7 @@ import {
   setSelectedFacets
 } from './utils';
 import '../public/css/core/index.scss';
+import { trackCategory } from './modules/analytics';
 
 /**
  * Component to initialize Unbxd Search. UnbxdSearchWrapper also acts as a root component for modules such as Products, Pagination and facets.
@@ -143,6 +144,7 @@ class UnbxdSearchWrapper extends Component {
       });
       unbxdCore.options.productType = productTypes.CATEGORY;
       unbxdCore.getResults();
+      trackCategory(window.UnbxdAnalyticsConf);
     } else {
       //call onPageLoad
       typeof onPageLoad == 'function' && onPageLoad(unbxdCore.getResponseObj());
@@ -179,6 +181,7 @@ class UnbxdSearchWrapper extends Component {
       });
       unbxdCore.options.productType = productTypes.CATEGORY;
       unbxdCore.getResults();
+      trackCategory(window.UnbxdAnalyticsConf);
     } else {
       //call onPageLoad
       typeof onPageLoad == 'function' && onPageLoad(unbxdCore.getResponseObj());
