@@ -54,3 +54,10 @@ export const tryCatchHandler = function(func, onCatch) {
     }
   };
 };
+
+export const scrollTop = ()=>{
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}

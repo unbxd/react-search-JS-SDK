@@ -1498,7 +1498,7 @@
     json5 "^2.1.1"
     lazy-universal-dotenv "^3.0.1"
     micromatch "^4.0.2"
-    node-fetch "^2.6.0"
+    node-fetch "^2.6.1"
     open "^7.0.0"
     pnp-webpack-plugin "1.5.0"
     postcss-flexbugs-fixes "^4.1.0"
@@ -8368,7 +8368,7 @@ pretty-hrtime@^1.0.3:
   resolved "https://registry.yarnpkg.com/pretty-hrtime/-/pretty-hrtime-1.0.3.tgz#b7e3ea42435a4c9b2759d99e0f201eb195802ee1"
   integrity sha1-t+PqQkNaTJsnWdmeDyAesZWALuE=
 
-prismjs@^1.8.4:
+prismjs@^1.21.0:
   version "1.20.0"
   resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.20.0.tgz#9b685fc480a3514ee7198eac6a3bf5024319ff03"
   integrity sha512-AEDjSrVNkynnw6A+B1DsFkd6AVdTnp+/WoUixFRULlCLZVRZlVQMVWio/16jv7G1FscUxQxOQhWwApgbnxr6kQ==

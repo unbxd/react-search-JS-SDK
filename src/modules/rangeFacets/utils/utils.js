@@ -2,12 +2,18 @@ export const getSelectedRangeFacets = (rangeFilterObject) => {
   const selectedRangeFacets = {};
 
   Object.keys(rangeFilterObject).map((facetName) => {
-    const filterString = rangeFilterObject[facetName][0];
-    const [valMin, valMax] = filterString
+    const filterStringArr = rangeFilterObject[facetName];
+    filterStringArr.map(filterString=>{
+      const [valMin, valMax] = filterString
       .replace('[', '')
       .replace(']', '')
       .split(' TO ');
-    selectedRangeFacets[facetName] = { valMin, valMax };
+    if(!selectedRangeFacets[facetName]){
+      selectedRangeFacets[facetName] = [];
+    }
+    selectedRangeFacets[facetName].push({ valMin, valMax });
+    })
+    
   });
 
   return selectedRangeFacets;

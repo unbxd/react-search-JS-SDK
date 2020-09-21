@@ -6,8 +6,12 @@
             display: flex;
             flex-direction: row;
 
+            .UNX-product-card {
+                flex: 0.4;
+            }
             .-details{
-                margin-left:40px;
+                flex: 0.6;
+                min-width: 0;
             }
         }
     }
@@ -35,9 +39,9 @@
         font-size: 16px;
         font-weight: 600;
         overflow: hidden;
-        text-overflow: ellipsis;
         white-space: nowrap;
-        text-transform: capitalize;
+        overflow: hidden;
+        text-overflow: ellipsis;
         margin-bottom: 10px;
     }
 
@@ -57,6 +61,8 @@
             color: #e75178;
             font-size: 14px;
             text-decoration: line-through;
+            display:inline-block;
+            margin-left: 10px;
         }
     }
 }
