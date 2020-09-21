@@ -16,6 +16,8 @@ class GenerateFacets extends React.Component {
 
   setFacetValue(facetAddObj, getResults = false) {
     const { facetName, valMin, valMax } = facetAddObj;
+    const { displayType } = this.props;
+    const applyMutiple = displayType === displayTypes.LIST;
     const isSelected = isFacetSelected(facetAddObj, this.state.rangeValues);
     this.setState((currentFacetState) => {
       const rangeObject = currentFacetState.rangeValues[facetName];
@@ -41,7 +43,7 @@ class GenerateFacets extends React.Component {
     });
 
     const { addRangeFacet, removeRangeFacet } = this.props;
-    if (isSelected) {
+    if (isSelected && !applyMutiple) {
       removeRangeFacet({ facetName }, getResults);
     } else {
       addRangeFacet({ facetName, start: valMin, end: valMax }, getResults);
@@ -99,10 +101,9 @@ class GenerateFacets extends React.Component {
     const facetId = event.target.dataset['unx_name'];
     this.setState((existingState) => {
       const currentFacet = existingState.rangeValues[facetId];
-      currentFacet['isOpen'] = !currentFacet['isOpen'];
       return {
         ...existingState,
-        rangeValues: { ...existingState.rangeValues, [facetId]: currentFacet }
+        rangeValues: { ...existingState.rangeValues, [facetId]: {...currentFacet,isOpen:!currentFacet.isOpen} }
       };
     });
   };
@@ -139,34 +140,47 @@ class GenerateFacets extends React.Component {
           const sliderMax = parseInt(end);
 
           if (formattedSelectedFacets[facetName]) {
-            const valMin = parseInt(
-              formattedSelectedFacets[facetName]['valMin']
-            );
-            const valMax = parseInt(
-              formattedSelectedFacets[facetName]['valMax']
-            );
+            const selectedValues = formattedSelectedFacets[facetName];
+            const valuesAggregator = [];
+            selectedValues.map(selectedValue=>{
 
-            const updatedValues = values.map((rangeValues) => {
-              const { from, to } = rangeValues;
-              const { dataId: fromValue } = from;
-              const { dataId: toValue } = to;
-
-              if (valMin >= fromValue && valMax <= toValue) {
-                return { ...rangeValues, isSelected: true };
-              } else {
-                return { ...rangeValues, isSelected: false };
-              }
-            });
-
-            updatedFacetState[facetName] = {
-              sliderMin,
-              sliderMax,
-              valMin,
-              valMax,
-              values: updatedValues,
-              displayName,
-              isSelected: true
-            };
+              const valMin = parseInt(
+                selectedValue['valMin']
+              );
+              const valMax = parseInt(
+                selectedValue['valMax']
+              );
+  
+              values.map((rangeValues,idx) => {
+                const { from, to, isSelected } = rangeValues;
+                const { dataId: fromValue } = from;
+                const { dataId: toValue } = to;
+                const key = `${fromValue}_${toValue}`;
+                const currentVal = valuesAggregator.find(val=>val[key]);
+                if(currentVal === undefined || !currentVal[key]['isSelected']) {
+                  const tempVal = {};
+                  if (valMin >= fromValue && valMax <= toValue) {
+                    tempVal[key] = { ...rangeValues, isSelected: true };
+                  } else {
+                    tempVal[key] = { ...rangeValues, isSelected: false };
+                  }
+                  valuesAggregator[idx] = tempVal;
+                }
+                
+              });
+  
+              const aggregatedValues = valuesAggregator.map(val=>Object.values(val)[0])
+              updatedFacetState[facetName] = {
+                sliderMin,
+                sliderMax,
+                valMin,
+                valMax,
+                values: aggregatedValues,
+                displayName,
+                isSelected: true
+              };
+            })
+            
           } else {
             const valMin = sliderMin;
             const valMax = sliderMax;

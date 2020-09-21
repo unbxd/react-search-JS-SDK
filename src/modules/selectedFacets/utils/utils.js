@@ -5,6 +5,7 @@ export const getFacetCoreMethods = (unbxdCore) => {
     const getSelectedFacets = unbxdCore.getSelectedFacets.bind(unbxdCore);
     const getFacets = unbxdCore.getFacets.bind(unbxdCore);
     const applyRangeFacet = unbxdCore.applyRangeFacet.bind(unbxdCore);
+    const setRangeFacet = unbxdCore.setRangeFacet.bind(unbxdCore);
     const clearARangeFacet = unbxdCore.clearARangeFacet.bind(unbxdCore);
     const selectedRangeFacets = unbxdCore.state.rangeFacet;
     const getBreadCrumbsList = unbxdCore.getBreadCrumbsList.bind(unbxdCore);
@@ -15,6 +16,7 @@ export const getFacetCoreMethods = (unbxdCore) => {
         getSelectedFacets,
         getFacets,
         applyRangeFacet,
+        setRangeFacet,
         clearARangeFacet,
         selectedRangeFacets,
         getBreadCrumbsList,

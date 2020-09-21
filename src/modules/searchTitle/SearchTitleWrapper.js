@@ -33,7 +33,7 @@ const SearchTitleWrapper = (props) => {
     <div className="UNBXD-searchTitle__container">
       Showing results for
       <span className="-query"> {formattedQuery}</span>
-      {paginationType === paginationTypes.FIXED_PAGINATION && (
+      {paginationType === paginationTypes.FIXED_PAGINATION && numberOfProducts !== 0 && (
         <span className="-pageDescription">
           - {start + 1} to {start + productsLn} of {numberOfProducts} products
         </span>

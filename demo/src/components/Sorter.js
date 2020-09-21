@@ -5,7 +5,7 @@ import { Sort } from '@unbxd-ui/react-search-sdk';
 
 const sortOptions = [
     {
-        "label": "Most Popular"
+        "label": "Most Relevant"
     },
     {
         "label": "Newest",

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer, scrollTop } from '../../common/utils';
 import PaginationWrapper from './PaginationWrapper';
 
 class PaginationContainer extends React.PureComponent {
@@ -24,12 +24,14 @@ class PaginationContainer extends React.PureComponent {
       const newPageNumber = rows * currentPage;
       setPageStart(newPageNumber);
       getResults();
+      scrollTop();
     };
 
     const onPreviousPageClick = () => {
       const newPageNumber = (currentPage - 2) * rows;
       setPageStart(newPageNumber);
       getResults();
+      scrollTop();
     };
 
     const onPageClick = event => {
@@ -37,6 +39,7 @@ class PaginationContainer extends React.PureComponent {
       const newPageNumber = (pageNo - 1) * rows;
       setPageStart(newPageNumber);
       getResults();
+      scrollTop();
     };
 
     const data = {

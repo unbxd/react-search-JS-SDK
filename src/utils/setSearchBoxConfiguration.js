@@ -1,10 +1,9 @@
 import { productTypes } from '../config';
 
 function setSearchBoxConfiguration(config) {
-  const { query = '*' } = config;
-  const { unbxdCore } = this.state;
+  const { unbxdCore, helpers: { getUpdatedResults } } = this.state;
   unbxdCore.options.productType = productTypes.SEARCH;
-  unbxdCore.getResults(query);
+  getUpdatedResults(config);
 }
 
 export default setSearchBoxConfiguration;

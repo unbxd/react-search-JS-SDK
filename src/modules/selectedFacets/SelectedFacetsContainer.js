@@ -7,7 +7,7 @@ import SelectedFacetsWrapper from './SelectedFacetsWrapper';
 
 class SelectedFacetsContainer extends React.PureComponent {
   getSelectedFacetsProps = () => {
-    const { unbxdCore, FacetItemComponent, priceUnit,label } = this.props;
+    const { unbxdCore, FacetItemComponent, priceUnit, label, getUpdatedResults } = this.props;
 
     const {
       getSelectedFacets,
@@ -15,6 +15,7 @@ class SelectedFacetsContainer extends React.PureComponent {
       getFacets,
       deleteAFacet,
       clearARangeFacet,
+      setRangeFacet,
       applyRangeFacet,
       getBreadCrumbsList,
       deleteCategoryFilter
@@ -26,19 +27,24 @@ class SelectedFacetsContainer extends React.PureComponent {
 
     const removeTextFacet =(facetName,dataId)=>{
       deleteAFacet(facetName, dataId);
-      unbxdCore.setPageStart(0);
-      unbxdCore.getResults();
+      getUpdatedResults();
     }
 
     const removeRangeFacet =(facetName)=>{
+      //call addRangeFacet from here
       clearARangeFacet(facetName);
+      applyRangeFacet();
+    }
+
+    const addRangeFacet =(facetName,dataid)=>{
+      const [from,to] = typeof dataid === "string"?dataid.split(" TO "):"";
+      setRangeFacet({facetName, start, end, applyMultiple});
       applyRangeFacet();
     }
 
     const removeMultilevelFacet =(parent, name, level)=>{
       deleteCategoryFilter({parent,name,level});
-      unbxdCore.setPageStart(0);
-      unbxdCore.getResults();
+      getUpdatedResults();
     }
 
     const handleTextFacetClick = event => {
@@ -47,8 +53,8 @@ class SelectedFacetsContainer extends React.PureComponent {
     };
 
     const handleRangeFacetClick = event => {
-      const { unx_name } = event.target.dataset;
-      removeRangeFacet(unx_name);
+      const { unx_name,unx_dataid } = event.target.dataset;
+      removeRangeFacet(unx_name,unx_dataid);
     };
 
     const handleMultilevelFacetClick = event => {
@@ -78,8 +84,12 @@ class SelectedFacetsContainer extends React.PureComponent {
 
     activeFacets['rangeFacets'] = [];
     Object.keys(selectedRangeFacets).map(facetName => {
-      const name = selectedRangeFacets[facetName][0].replace(/[\[\]']/g, '');
-      activeFacets['rangeFacets'].push({ facetName, name });
+      const values = selectedRangeFacets[facetName];//[0].replace(/[\[\]']/g, '');
+      values.map(facetValues=>{
+        const name= facetValues.replace(/[\[\]']/g, '');
+        activeFacets['rangeFacets'].push({ facetName, name });
+      })
+      
     });
 
     activeFacets['multilevelFacets'] = [];
@@ -114,7 +124,8 @@ SelectedFacetsContainer.propTypes = {
   unbxdCore: PropTypes.object.isRequired,
   FacetItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   priceUnit: PropTypes.string.isRequired,
-  label:PropTypes.node
+  label:PropTypes.node,
+  getUpdatedResults:PropTypes.func.isRequired
 };
 
 export default SelectedFacetsContainer;

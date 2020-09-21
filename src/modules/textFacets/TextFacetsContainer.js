@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer, scrollTop } from '../../common/utils';
 import { getFacetRow, isFacetSelected, getFacetCoreMethods } from './utils';
 import { manageStateTypes } from '../../config';
 import GenerateFacets from './generateFacets';
@@ -80,6 +80,7 @@ class TextFacetsContainer extends React.PureComponent {
       isSelected &&
         !enableApplyFilters &&
         removeFacet({ selectedFacetName, selectedFacetId });
+      scrollTop();
     };
 
     const onFacetObjectReset = (event) => {
@@ -88,6 +89,7 @@ class TextFacetsContainer extends React.PureComponent {
       setPageStart(0);
       getResults();
       manageTextFacets(null, unx_name, null, manageStateTypes.RESET);
+      scrollTop();
     };
 
     const lastSelectedFacets = getSelectedFacets();

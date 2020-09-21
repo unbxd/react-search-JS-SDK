@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer, scrollTop } from '../../common/utils';
 import GenerateFacets from './GenerateFacets';
-import { getFacetCoreMethods } from './utils';
+import { getFacetCoreMethods, displayTypes } from './utils';
 
 class RangeFacetsContainer extends React.PureComponent {
   getRangeFacetsProps() {
@@ -25,12 +25,13 @@ class RangeFacetsContainer extends React.PureComponent {
       clearARangeFacet,
       selectedRangeFacets
     } = getFacetCoreMethods(unbxdCore);
-
+    const applyMultiple = displayType === displayTypes.LIST;
     const rangeFacets = getRangeFacets() || [];
     const addRangeFacet = ({ facetName, start, end }, getResults = false) => {
-      setRangeFacet({ facetName, start, end });
+      setRangeFacet({ facetName, start, end, applyMultiple });
       if (getResults) {
         applyRangeFacet();
+        scrollTop();
       }
     };
 
@@ -38,6 +39,7 @@ class RangeFacetsContainer extends React.PureComponent {
       clearARangeFacet(facetName);
       if (getResults) {
         applyRangeFacet();
+        scrollTop();
       }
     };
 
