@@ -16,13 +16,14 @@ const SelectedFacets = props => {
           hasUnbxdSearchWrapperContext(SelectedFacets.displayName);
         }
 
-        const { unbxdCore, unbxdCoreStatus, priceUnit } = appState;
+        const { unbxdCore, unbxdCoreStatus, priceUnit,helpers: { getUpdatedResults } } = appState;
 
         return (
           <SelectedFacetsContainer
             unbxdCore={unbxdCore}
             unbxdCoreStatus={unbxdCoreStatus}
             priceUnit={priceUnit}
+            getUpdatedResults={getUpdatedResults}
             {...props}
           />
         );

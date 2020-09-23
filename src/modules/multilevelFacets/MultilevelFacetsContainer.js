@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer, scrollTop } from '../../common/utils';
 import { getFacetCoreMethods } from './utils';
 import MultilevelFacetsWrapper from './MultilevelFacetsWrapper';
 
@@ -55,6 +55,7 @@ class MultilevelFacetsContainer extends React.PureComponent {
       const addCategoryObject = { parent, level, name };
       setCategoryFilter(addCategoryObject);
       getResults();
+      scrollTop();
     };
 
     return {

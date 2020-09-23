@@ -1,26 +1,38 @@
-const getActiveFacets = unbxdSearchObj => {
-  const textFacets = unbxdSearchObj.state.selectedFacets;
-  const rangeFacets = unbxdSearchObj.state.rangeFacet;
-  const textFacetsArr = Object.keys(textFacets);
+const getActiveFacets = (unbxdSearchObj) => {
+    const textFacets = unbxdSearchObj.state.selectedFacets;
+    const rangeFacets = unbxdSearchObj.state.rangeFacet;
+    const categoryFacets = unbxdSearchObj.state.categoryFilter;
+    const textFacetsArr = Object.keys(textFacets);
+    const categoryFacetsArr = Object.keys(categoryFacets);
 
-  let activeFacetsObj = {};
-  textFacetsArr.forEach(facet => {
-    const valObj = textFacets[facet];
-    let arr = [];
-    valObj.forEach(val => {
-      arr.push(val.name);
+    const activeTextFacets = {};
+    textFacetsArr.forEach((facet) => {
+        const valObj = textFacets[facet];
+        let arr = [];
+        valObj.forEach((val) => {
+            arr.push(val.name);
+        });
+        activeTextFacets[facet] = arr;
     });
-    activeFacetsObj[facet] = arr;
-  });
 
-  activeFacetsObj = { ...activeFacetsObj, ...rangeFacets };
+    const activeRangeFacets = rangeFacets;
 
-  const { categoryPath = [] } = unbxdSearchObj.state.categoryFilter;
-  activeFacetsObj[unbxdSearchObj.state.categoryFilter] = categoryPath.length
-    ? categoryPath.join('>')
-    : '';
+    const activeCategoryFacets = {};
+    categoryFacetsArr.forEach((category) => {
+        const val = categoryFacets[category];
+        if (Array.isArray(val)) {
+            const original = val.join('>');
+            activeCategoryFacets[category] = original;
+        }
+    });
 
-  return activeFacetsObj;
+    const activeFacetsObj = {
+        ...activeTextFacets,
+        ...activeRangeFacets,
+        ...activeCategoryFacets,
+    };
+
+    return activeFacetsObj;
 };
 
 export default getActiveFacets;

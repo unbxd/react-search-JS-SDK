@@ -13,6 +13,7 @@ import getActiveFacets from './getActiveFacets';
 import handleViewTypeClick from './handleViewTypeClick';
 import setSelectedFacets from './setSelectedFacets';
 import setCategoryPath from './setCategoryPath';
+import getUpdatedResults from './getUpdatedResults';
 
 export {
   setProductConfiguration,
@@ -29,5 +30,6 @@ export {
   getActiveFacets,
   handleViewTypeClick,
   setSelectedFacets,
-  setCategoryPath
+  setCategoryPath,
+  getUpdatedResults
 };

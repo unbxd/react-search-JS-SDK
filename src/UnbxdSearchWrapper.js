@@ -23,9 +23,12 @@ import {
   unbxdCallBack,
   getActiveFacets,
   handleViewTypeClick,
+  getUpdatedResults,
   setSelectedFacets
 } from './utils';
 import '../public/css/core/index.scss';
+import { viewTypes } from './config/constants';
+import { trackCategory } from './modules/analytics';
 
 /**
  * Component to initialize Unbxd Search. UnbxdSearchWrapper also acts as a root component for modules such as Products, Pagination and facets.
@@ -63,6 +66,7 @@ class UnbxdSearchWrapper extends Component {
     this.manageTextFacets = manageTextFacets.bind(this);
     this.setSelectedFacets = setSelectedFacets.bind(this);
     this.handleViewTypeClick = handleViewTypeClick.bind(this);
+    this.getUpdatedResults = getUpdatedResults.bind(this);
 
     this.state = {
       unbxdCore: new UnbxdSearch({
@@ -89,6 +93,7 @@ class UnbxdSearchWrapper extends Component {
         manageTextFacets: this.manageTextFacets,
         setSelectedFacets: this.setSelectedFacets,
         handleViewTypeClick: this.handleViewTypeClick,
+        getUpdatedResults:this.getUpdatedResults,
         getActiveFacets
       },
       priceUnit
@@ -124,6 +129,9 @@ class UnbxdSearchWrapper extends Component {
       typeof unbxdCore.options.getCategoryId === 'function' &&
       unbxdCore.options.getCategoryId();
 
+    const viewType = this.state.unbxdCore.getQueryParams()['viewType'] || viewTypes.GRID;
+    unbxdCore.options.extraParams['viewType'] = viewType
+
     if (unbxdCore.options.applyMultipleFilters) {
       this.setState((currentState) => {
         return {
@@ -143,6 +151,7 @@ class UnbxdSearchWrapper extends Component {
       });
       unbxdCore.options.productType = productTypes.CATEGORY;
       unbxdCore.getResults();
+      trackCategory(window.UnbxdAnalyticsConf);
     } else {
       //call onPageLoad
       typeof onPageLoad == 'function' && onPageLoad(unbxdCore.getResponseObj());
@@ -179,6 +188,7 @@ class UnbxdSearchWrapper extends Component {
       });
       unbxdCore.options.productType = productTypes.CATEGORY;
       unbxdCore.getResults();
+      trackCategory(window.UnbxdAnalyticsConf);
     } else {
       //call onPageLoad
       typeof onPageLoad == 'function' && onPageLoad(unbxdCore.getResponseObj());

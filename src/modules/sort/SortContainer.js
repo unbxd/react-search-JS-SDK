@@ -26,14 +26,33 @@ class SortContainer extends React.Component {
   componentDidMount() {
     const {
       defaultSort: sortBy,
-      helpers: { setSortConfiguration }
+      helpers: { setSortConfiguration },
+      unbxdCore,
+      sortOptions
     } = this.props;
 
     //Set the main config
-    const { field = '', order = '' } = sortBy;
+    let sortOn = null;
+    const { sort = '' } = unbxdCore.getQueryParams();
+    if(typeof sort === "string" && sort.length) {
+      const [ field, order ] = sort.split(' ');
+      sortOn = { field, order }
+      const formattedSort = `${field}|${order}`;
+      const formattedSortByOptions = sortOptions.map((sortByoption) =>
+        getFormattedSort(sortByoption, this.state.sortBy)
+      );
+      const selectedSort = getSelectedSort(formattedSort, formattedSortByOptions);
+      if (field.length && order.length) {
+        this.setState({ sortBy: selectedSort });
+      }
+    }else{
+      sortOn = sortBy;
+    }
+    
+    const { field ="", order="" } = sortOn;
     if (field.length && order.length) {
       setSortConfiguration({
-        sortBy: `${sortBy.field} ${sortBy.order}`
+        sortBy: `${sortOn.field} ${sortOn.order}`
       });
     }
   }

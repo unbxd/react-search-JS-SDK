@@ -16,6 +16,18 @@ export const trackSearch = function (searchQuery) {
     }
 };
 
+export const trackCategory = function (unbxdAnalyticsConf) {
+
+    try {
+        Unbxd.track(
+            "categoryPage",
+            {...unbxdAnalyticsConf}
+        )
+    } catch (e) {
+        onCatch(e);
+    }
+};
+
 export const trackProductClick = function (uniqueId, prank) {
 
 
