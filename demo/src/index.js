@@ -9,6 +9,7 @@ import Paginator from './components/Paginator';
 import Sorter from './components/Sorter';
 import MerchandizingBanner from './components/MerchandizingBanner';
 import TextFilters from './components/TextFilters';
+import CombinedFilters from './components/CombinedFilters';
 import RangeFilters from './components/RangeFilters';
 import MultilevelFilters from './components/MultilevelFilters';
 import ActiveFilters from './components/ActiveFilters';
@@ -96,8 +97,9 @@ const App = () => {
         <div className="UNX-searchResults__container">
           <div className="UNX-searchFacet__container">
             <MultilevelFilters />
-            <RangeFilters />
-            <TextFilters />
+            {/* <RangeFilters />
+            <TextFilters />  */}
+             <CombinedFilters /> 
           </div>
 
           <div className="UNX-searchResult__container">
