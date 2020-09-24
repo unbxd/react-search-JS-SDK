@@ -55,8 +55,6 @@ class CombinedFacetsContainer extends React.PureComponent {
     const textFacets = getFacets() || [];
     const rangeFacets = getRangeFacets() || [];
 
-    console.log("Range Facets %%%%%%%%%%", rangeFacets)
-
     const textFacetsWithType = textFacets && textFacets.length && textFacets.map((facet) => {
         facet.facetType = 'text';
         return facet;
