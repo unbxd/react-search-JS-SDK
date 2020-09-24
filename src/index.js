@@ -13,6 +13,7 @@ import SelectedFacets from './modules/selectedFacets';
 import Sort from './modules/sort';
 import SpellCheck from './modules/spellCheck';
 import TextFacets from './modules/textFacets';
+import CombinedFacets from './modules/combinedFacets';
 import ViewTypes from './modules/viewTypes';
 import UnbxdSearchWrapper from './UnbxdSearchWrapper';
 
@@ -32,6 +33,7 @@ export {
   Sort,
   SpellCheck,
   TextFacets,
+  CombinedFacets,
   ViewTypes,
   UnbxdSearchWrapper
 };
