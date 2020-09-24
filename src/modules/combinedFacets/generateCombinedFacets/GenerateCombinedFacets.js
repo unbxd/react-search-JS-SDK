@@ -5,7 +5,7 @@ import { List, Input } from '../../../components';
 import FacetItem from './FacetItem';
 import { RangeSlider } from '../../../components';
 import FacetListItem from './FacetListItem';
-import { searchStatus } from './../../../config';
+import { searchStatus } from '../../../config';
 
 class GenerateCombinedFacets extends React.Component {
   constructor(props) {
