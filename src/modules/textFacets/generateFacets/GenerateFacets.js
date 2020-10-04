@@ -18,7 +18,8 @@ class GenerateFacets extends React.Component {
       lastSelectedFacets,
       setSelectedFacets,
       enableApplyFilters,
-      unbxdCoreStatus
+      unbxdCoreStatus,
+      sortTextFacets
     } = this.props;
     if (
       prevProps.unbxdCoreStatus !== unbxdCoreStatus &&
@@ -35,6 +36,11 @@ class GenerateFacets extends React.Component {
           filter: matchTextFacet ? matchTextFacet.filter : ''
         };
       });
+
+      if(sortTextFacets && typeof(sortTextFacets) === 'function'){
+        sortTextFacets.call(formattedTextFacets);
+      }
+
       this.setState(() => {
         return { textFacets: formattedTextFacets };
       });

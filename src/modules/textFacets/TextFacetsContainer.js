@@ -26,7 +26,8 @@ class TextFacetsContainer extends React.PureComponent {
       selectedFacets,
       label,
       collapsible,
-      searchable
+      searchable,
+      sortTextFacets
     } = this.props;
 
     const {
@@ -109,7 +110,8 @@ class TextFacetsContainer extends React.PureComponent {
       onFacetObjectReset,
       setSelectedFacets,
       FacetItemComponent,
-      label
+      label,
+      sortTextFacets
     };
 
     return { ...data, ...helpers };

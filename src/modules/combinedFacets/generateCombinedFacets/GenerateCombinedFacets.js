@@ -59,7 +59,8 @@ class GenerateCombinedFacets extends React.Component {
       lastSelectedFacets,
       selectedFacets,
       selectedRangeFacets,
-      setSelectedFacets
+      setSelectedFacets,
+      sortCombinedFacets
     } = this.props;
     if (
       prevProps.unbxdCoreStatus !== unbxdCoreStatus &&
@@ -147,6 +148,10 @@ class GenerateCombinedFacets extends React.Component {
       formattedCombinedFacets.sort((a, b) => {
         return a.position - b.position;
       });
+
+      if(sortCombinedFacets && typeof(sortCombinedFacets) === 'function'){
+        sortCombinedFacets.call(formattedCombinedFacets);
+      }
 
       this.setState(() => {
         return { combinedFacets: formattedCombinedFacets };

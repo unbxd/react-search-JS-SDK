@@ -202,6 +202,11 @@ class GenerateFacets extends React.Component {
             ? currentFacet['filter']
             : '';
         });
+
+        if(sortRangeFacets && typeof(sortRangeFacets) === 'function'){
+          sortRangeFacets.call(rangeFacets);
+        }
+
         return { rangeValues: updatedFacetState };
       });
     }

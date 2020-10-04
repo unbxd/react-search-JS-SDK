@@ -2,6 +2,9 @@ import React from 'react';
 
 import  { CombinedFacets } from '@unbxd-ui/react-search-sdk';
 
+const sortCombinedFacets = function(){
+  console.log(this);
+};
 
 const FacetItemComponent = ({
   itemData,
@@ -85,6 +88,7 @@ const FacetListItemComponent = ({
 const CombinedFilters = () => {
     return (
       <CombinedFacets
+        sortCombinedFacets = {sortCombinedFacets}
         FacetListItemComponent={FacetListItemComponent}
         FacetItemComponent={FacetItemComponent}
       />
