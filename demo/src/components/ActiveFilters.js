@@ -14,7 +14,7 @@ const FacetItemComponent = ({ itemData, onClick,priceUnit }) => {
     return (
       <div className='UNX-selectedFacets__item'
         data-unx_name={facetName}
-        data-unx_dataid={dataId||name}
+        data-unx_dataid={name}
         data-unx_categoryname={name}
         data-unx_multilevelfield={filterField}
         data-unx_level={level}
@@ -24,6 +24,7 @@ const FacetItemComponent = ({ itemData, onClick,priceUnit }) => {
          data-unx_dataid={dataId}
          data-unx_categoryname={name}
         data-unx_multilevelfield={filterField}
+        data-unx_dataid={name}
         data-unx_level={level}></span>
       </div>
     );

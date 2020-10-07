@@ -37,7 +37,10 @@ class SelectedFacetsContainer extends React.PureComponent {
     }
 
     const addRangeFacet =(facetName,dataid)=>{
-      const [from,to] = typeof dataid === "string"?dataid.split(" TO "):"";
+      const [ from, to ] = typeof dataid === "string" ? dataid.split(" TO ") : "";
+      const start = parseInt(from);
+      const end = parseInt(to);
+      const applyMultiple = true;
       setRangeFacet({facetName, start, end, applyMultiple});
       applyRangeFacet();
     }
@@ -54,7 +57,7 @@ class SelectedFacetsContainer extends React.PureComponent {
 
     const handleRangeFacetClick = event => {
       const { unx_name,unx_dataid } = event.target.dataset;
-      removeRangeFacet(unx_name,unx_dataid);
+      addRangeFacet(unx_name,unx_dataid);
     };
 
     const handleMultilevelFacetClick = event => {
