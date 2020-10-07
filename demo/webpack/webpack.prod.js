@@ -67,7 +67,7 @@ module.exports = {
             }
         ]
     },
-    plugins: [bundleAnalyzerPlugin, miniCssExtractPlugin, htmlPlugin],
+    plugins: [/*bundleAnalyzerPlugin,*/ miniCssExtractPlugin, htmlPlugin],
     optimization: {
         minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
     },
