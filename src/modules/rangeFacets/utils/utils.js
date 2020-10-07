@@ -24,9 +24,9 @@ export const isFacetSelected = (currentFacetRangeVal, facetRangeValues) => {
   const currentFacetObj = facetRangeValues[facetName] || {};
   const { values = [] } = currentFacetObj;
   const match = values.find((rangeValues) => {
-    const { from, to, isSelected } = rangeValues;
+    const { from, end, isSelected } = rangeValues;
     const { dataId: fromValue } = from;
-    const { dataId: toValue } = to;
+    const { dataId: toValue } = end;
 
     if (valMin >= fromValue && valMax <= toValue && isSelected) {
       return true;
