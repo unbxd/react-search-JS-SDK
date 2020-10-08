@@ -337,6 +337,7 @@ class GenerateCombinedFacets extends React.Component {
                                 className={'UNX-facet__list'}
                                 isFacetSelected={isFacetSelected}
                                 selectedFacets={selectedFacets}
+                                combinedFacets={combinedFacets}
                             />
                             {hasActiveFacets && (
                             <div
@@ -440,6 +441,7 @@ class GenerateCombinedFacets extends React.Component {
                         onClick={this.handleRangeValueClick}
                         idAttribute={facetName}
                         facetName={facetName}
+                        combinedFacets={combinedFacets}
                         className="UNX-facet__list"
                         priceUnit={priceUnit}
                       />

@@ -142,6 +142,8 @@ class GenerateFacets extends React.Component {
                 level={level}
                 multiLevelField={multiLevelField}
                 onClick={addCategoryFilter}
+                bucketedFacets={bucketedFacets}
+                displayName={displayName}
                 className="UNX-facet__list"
               />
             </div>

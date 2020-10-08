@@ -122,7 +122,7 @@ class GenerateFacets extends React.Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { rangeFacets, selectedRangeFacets } = this.props;
+    const { rangeFacets, selectedRangeFacets, sortRangeFacets } = this.props;
     if (prevProps.rangeFacets !== rangeFacets) {
       let formattedSelectedFacets = {};
       if (Object.keys(selectedRangeFacets).length) {
@@ -326,6 +326,7 @@ class GenerateFacets extends React.Component {
                   onClick={this.handleRangeValueClick}
                   idAttribute={facetName}
                   facetName={facetName}
+                  isRangeOpen={isOpen}
                   className="UNX-facet__list"
                   priceUnit={priceUnit}
                 />

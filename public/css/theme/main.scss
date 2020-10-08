@@ -10,8 +10,12 @@
   &.open {
     .UNX-facet__list {
       max-height: 500px;
+      overflow: auto;
     }
-
+    .UNX-facet__list.UNX-facet__listShowLimited{
+      max-height: 90px !important;
+      overflow: auto;
+    }
     .-clear {
       display: block;
     }
@@ -28,9 +32,10 @@
 
   .UNX-facet__list {
     max-height: 0;
-    overflow: hidden;
+    overflow: auto;
     transition: max-height 0.2s ease-out;
   }
+
   .-clear {
     display: none;
     font-size: 12px;

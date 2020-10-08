@@ -142,6 +142,7 @@ class GenerateFacets extends React.Component {
                   ListItem={FacetItemComponent || FacetItem}
                   onClick={onFacetClick}
                   facetName={facetName}
+                  textFacets={textFacets}
                   className={'UNX-facet__list'}
                   isFacetSelected={isFacetSelected}
                   selectedFacets={selectedFacets}
