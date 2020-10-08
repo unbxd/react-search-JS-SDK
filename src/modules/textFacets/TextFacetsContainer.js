@@ -13,7 +13,6 @@ class TextFacetsContainer extends React.PureComponent {
             unbxdCoreStatus,
             helpers: { setTextFacetsConfiguration },
         } = this.props;
-        debugger;
         if (unbxdCoreStatus !== 'READY') {
             setTextFacetsConfiguration({ defaultFilters });
         }

@@ -39,7 +39,7 @@ const FacetItemComponent = ({ itemData, multiLevelField, level, onClick }) => {
 };
 
 const label = <div className="UNX-searchFacet__mainHeader">Filter By</div>;
-const MultilevelFilters = ({ label = true }) => {
+const MultilevelFilters = ({ showLabel = true }) => {
     return (
         <MultilevelFacets
             categoryDisplayName={'category'}
@@ -48,7 +48,7 @@ const MultilevelFilters = ({ label = true }) => {
             collapsible={true}
             searchable={true}
             FacetItemComponent={FacetItemComponent}
-            label={label ? label : undefined}
+            label={showLabel ? label : undefined}
         />
     );
 };

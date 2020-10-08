@@ -10,14 +10,7 @@ class GenerateFacets extends React.Component {
     constructor(props) {
         super(props);
         const { textFacets } = props;
-        const formattedTextFacets = textFacets.map((textFacet) => {
-            return {
-                ...textFacet,
-                isOpen: true,
-                filter: '',
-            };
-        });
-        this.state = { textFacets: formattedTextFacets };
+        this.state = { textFacets: textFacets };
     }
 
     componentDidUpdate(prevProps) {
@@ -108,7 +101,13 @@ class GenerateFacets extends React.Component {
             <div className="UNX-textFacet__container">
                 {label ? label : null}
                 {textFacets.map(
-                    ({ displayName, facetName, values, isOpen, filter }) => {
+                    ({
+                        displayName,
+                        facetName,
+                        values,
+                        isOpen = true,
+                        filter = '',
+                    }) => {
                         //decide whether to show clear or not
                         const hasActiveFacets = selectedFacets[facetName]
                             ? true

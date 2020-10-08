@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { RangeSlider } from '../../components';
-import { getSelectedRangeFacets, displayTypes, isFacetSelected } from './utils';
+import {
+    getSelectedRangeFacets,
+    displayTypes,
+    isFacetSelected,
+    getUpdatedFacets,
+} from './utils';
 import { List } from '../../components';
 import FacetListItem from './FacetListItem';
 
@@ -11,85 +16,10 @@ class GenerateFacets extends React.Component {
         super(props);
 
         const { rangeFacets, selectedRangeFacets } = this.props;
-        let formattedSelectedFacets = {};
-        if (Object.keys(selectedRangeFacets).length) {
-            formattedSelectedFacets = getSelectedRangeFacets(
-                selectedRangeFacets
-            );
-        }
-        const updatedFacetState = {};
-
-        rangeFacets.map((facet) => {
-            const { facetName, displayName, start, end, values } = facet;
-
-            const sliderMin = parseInt(start);
-            const sliderMax = parseInt(end);
-
-            if (formattedSelectedFacets[facetName]) {
-                const selectedValues = formattedSelectedFacets[facetName];
-                const valuesAggregator = [];
-                selectedValues.map((selectedValue) => {
-                    const valMin = parseInt(selectedValue['valMin']);
-                    const valMax = parseInt(selectedValue['valMax']);
-
-                    values.map((rangeValues, idx) => {
-                        const { from, end, isSelected } = rangeValues;
-                        const { dataId: fromValue } = from;
-                        const { dataId: toValue } = end;
-                        const key = `${fromValue}_${toValue}`;
-                        const currentVal = valuesAggregator.find(
-                            (val) => val[key]
-                        );
-                        if (
-                            currentVal === undefined ||
-                            !currentVal[key]['isSelected']
-                        ) {
-                            const tempVal = {};
-                            if (valMin >= fromValue && valMax <= toValue) {
-                                tempVal[key] = {
-                                    ...rangeValues,
-                                    isSelected: true,
-                                };
-                            } else {
-                                tempVal[key] = {
-                                    ...rangeValues,
-                                    isSelected: false,
-                                };
-                            }
-                            valuesAggregator[idx] = tempVal;
-                        }
-                    });
-
-                    const aggregatedValues = valuesAggregator.map(
-                        (val) => Object.values(val)[0]
-                    );
-                    updatedFacetState[facetName] = {
-                        sliderMin,
-                        sliderMax,
-                        valMin,
-                        valMax,
-                        values: aggregatedValues,
-                        displayName,
-                        isSelected: true,
-                    };
-                });
-            } else {
-                const valMin = sliderMin;
-                const valMax = sliderMax;
-                updatedFacetState[facetName] = {
-                    sliderMin,
-                    sliderMax,
-                    valMin,
-                    valMax,
-                    displayName,
-                    values,
-                    isSelected: false,
-                };
-            }
-
-            updatedFacetState[facetName]['isOpen'] = true;
-            updatedFacetState[facetName]['filter'] = '';
-        });
+        const updatedFacetState = getUpdatedFacets(
+            rangeFacets,
+            selectedRangeFacets
+        );
 
         this.state = {
             rangeValues: updatedFacetState,
@@ -105,14 +35,14 @@ class GenerateFacets extends React.Component {
             const rangeObject = currentFacetState.rangeValues[facetName];
             //also go into values and set the specific from to as is selected
             const updatedValues = rangeObject.values.map((rangeValues) => {
-                const { from, end } = rangeValues;
+                const { from, end, isSelected = false } = rangeValues;
                 const { dataId: fromValue } = from;
                 const { dataId: toValue } = end;
 
                 if (valMin >= fromValue && valMax <= toValue) {
-                    return { ...rangeValues, isSelected: true };
+                    return { ...rangeValues, isSelected: !isSelected };
                 } else {
-                    return { ...rangeValues, isSelected: false };
+                    return { ...rangeValues };
                 }
             });
 
@@ -204,121 +134,16 @@ class GenerateFacets extends React.Component {
         });
     };
 
-    handleFilterChange = (event) => {
-        const facetId = event.target.name;
-        const value = event.target.value;
-        this.setState((existingState) => {
-            const currentFacet = existingState.rangeValues[facetId];
-            currentFacet['filter'] = value;
-            return {
-                ...existingState,
-                rangeValues: {
-                    ...existingState.rangeValues,
-                    [facetId]: currentFacet,
-                },
-            };
-        });
-    };
-
     componentDidUpdate(prevProps) {
         const { rangeFacets, selectedRangeFacets } = this.props;
         if (prevProps.rangeFacets !== rangeFacets) {
-            let formattedSelectedFacets = {};
-            if (Object.keys(selectedRangeFacets).length) {
-                formattedSelectedFacets = getSelectedRangeFacets(
-                    selectedRangeFacets
-                );
-            }
-
             this.setState((existingState) => {
                 //set the state with starts and ends
-                const updatedFacetState = {};
-
-                rangeFacets.map((facet) => {
-                    const {
-                        facetName,
-                        displayName,
-                        start,
-                        end,
-                        values,
-                    } = facet;
-
-                    const sliderMin = parseInt(start);
-                    const sliderMax = parseInt(end);
-
-                    if (formattedSelectedFacets[facetName]) {
-                        const selectedValues =
-                            formattedSelectedFacets[facetName];
-                        const valuesAggregator = [];
-                        selectedValues.map((selectedValue) => {
-                            const valMin = parseInt(selectedValue['valMin']);
-                            const valMax = parseInt(selectedValue['valMax']);
-
-                            values.map((rangeValues, idx) => {
-                                const { from, end } = rangeValues;
-                                const { dataId: fromValue } = from;
-                                const { dataId: toValue } = end;
-                                const key = `${fromValue}_${toValue}`;
-                                const currentVal = valuesAggregator.find(
-                                    (val) => val[key]
-                                );
-                                if (
-                                    currentVal === undefined ||
-                                    !currentVal[key]['isSelected']
-                                ) {
-                                    const tempVal = {};
-                                    if (
-                                        valMin >= fromValue &&
-                                        valMax <= toValue
-                                    ) {
-                                        tempVal[key] = {
-                                            ...rangeValues,
-                                            isSelected: true,
-                                        };
-                                    } else {
-                                        tempVal[key] = {
-                                            ...rangeValues,
-                                            isSelected: false,
-                                        };
-                                    }
-                                    valuesAggregator[idx] = tempVal;
-                                }
-                            });
-
-                            const aggregatedValues = valuesAggregator.map(
-                                (val) => Object.values(val)[0]
-                            );
-                            updatedFacetState[facetName] = {
-                                sliderMin,
-                                sliderMax,
-                                valMin,
-                                valMax,
-                                values: aggregatedValues,
-                                displayName,
-                                isSelected: true,
-                            };
-                        });
-                    } else {
-                        const valMin = sliderMin;
-                        const valMax = sliderMax;
-                        updatedFacetState[facetName] = {
-                            sliderMin,
-                            sliderMax,
-                            valMin,
-                            valMax,
-                            displayName,
-                            values,
-                            isSelected: false,
-                        };
-                    }
-                    const currentFacet = existingState.rangeValues[facetName];
-                    updatedFacetState[facetName]['isOpen'] = currentFacet
-                        ? currentFacet['isOpen']
-                        : true;
-                    updatedFacetState[facetName]['filter'] = currentFacet
-                        ? currentFacet['filter']
-                        : '';
-                });
+                const updatedFacetState = getUpdatedFacets(
+                    rangeFacets,
+                    selectedRangeFacets,
+                    existingState
+                );
                 return { rangeValues: updatedFacetState };
             });
         }
@@ -350,7 +175,7 @@ class GenerateFacets extends React.Component {
                             valMin,
                             valMax,
                             displayName,
-                            isOpen,
+                            isOpen = true,
                         } = rangeValues[facetName];
 
                         return FacetSliderItemComponent ? (
@@ -417,7 +242,7 @@ class GenerateFacets extends React.Component {
                             values,
                             displayName,
                             isSelected,
-                            isOpen,
+                            isOpen = true,
                         } = rangeValues[facetName];
 
                         return (

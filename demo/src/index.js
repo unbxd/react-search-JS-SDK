@@ -94,7 +94,7 @@ const searchConfigurations = {
     swatchMap: {},
     onEvent: () => {},
     getCategoryId: () => {},
-    applyMultipleFilters: true,
+    applyMultipleFilters: false,
     hashMode: true,
 };
 
@@ -143,19 +143,11 @@ const App = () => {
                     <Sorter />
                     <ProductsSize />
                     <FacetApplyClear />
-                    <MultilevelFilters label={false} />
+                    <MultilevelFilters showLabel={false} />
                     <RangeFilters />
                     <TextFilters />
                     <FacetApplyClear />
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
             </Modal>
             <SearchBar onSearch={setProductType} productType={productType} />
             <div className="UNX-categoryLinks__container">
@@ -229,8 +221,10 @@ const App = () => {
                 <div className="UNX-searchResults__container">
                     <div className="UNX-searchFacet__container">
                         <MultilevelFilters />
+                        <FacetApplyClear />
                         <RangeFilters />
                         <TextFilters />
+                        <FacetApplyClear />
                     </div>
 
                     <div className="UNX-searchResult__container">

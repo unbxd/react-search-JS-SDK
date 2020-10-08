@@ -7,14 +7,7 @@ import { List, Input } from '../../../components';
 class GenerateFacets extends React.Component {
     constructor(props) {
         super(props);
-        const formattedFacets = props.bucketedFacets.map((bucketedFacet) => {
-            return {
-                ...bucketedFacet,
-                isOpen: true,
-                filter: '',
-            };
-        });
-        this.state = { bucketedFacets: formattedFacets };
+        this.state = { bucketedFacets: props.bucketedFacets };
     }
 
     componentDidUpdate(prevProps) {
@@ -118,8 +111,8 @@ class GenerateFacets extends React.Component {
                         level,
                         multiLevelField,
                         values = [],
-                        isOpen,
-                        filter,
+                        isOpen = true,
+                        filter = '',
                     } = bucketedFacet;
                     const breadCrumbsLength = breadCrumbsList.length;
                     let filteredValues = values;

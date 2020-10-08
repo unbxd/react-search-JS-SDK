@@ -44,7 +44,6 @@ const PaginationWrapper = (props) => {
     <Button
       className="UNX-pageNavigation__button -active"
       data-pagenumber={currentPage}
-      isSelected={true}
       key={currentPage}
     >
       {currentPage}
