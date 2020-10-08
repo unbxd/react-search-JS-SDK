@@ -1,33 +1,34 @@
-.UNX-viewTypes__container{
+.UNX-viewTypes__container {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-left: auto;
-    
 }
 
-.UNX-viewTypes__list{
-    display: flex
+.UNX-viewTypes__list {
+    display: flex;
 }
 
 .UNX-viewType__wrapper {
     margin-right: 13px;
-    
-    button{
+
+    button {
         font-size: 22px;
-        color:#cdd5d9;
-      }
+        color: #cdd5d9;
+    }
 }
 
 .UNX-viewType__wrapper:last-child {
-    margin-right: 0
+    margin-right: 0;
 }
 
-.UNX-viewType__wrapper a {
-    color: #cdd5d9;
-    font-size: 22px;
-}
-
-.UNX-viewType__wrapper .-active {
-    color: #687d88;
+.UNX-viewType__wrapper {
+    .UNX-viewType__option {
+        color: #cdd5d9;
+        font-size: 22px;
+        
+        &.-active {
+            color: #687d88;
+        }
+    }
 }

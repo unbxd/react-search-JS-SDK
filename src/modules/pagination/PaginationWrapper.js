@@ -45,6 +45,7 @@ const PaginationWrapper = (props) => {
       className="UNX-pageNavigation__button -active"
       data-pagenumber={currentPage}
       key={currentPage}
+      data-testid={`UNX_pageNumber${currentPage}`}
     >
       {currentPage}
     </Button>
@@ -76,6 +77,7 @@ const PaginationWrapper = (props) => {
             onClick={onPreviousPageClick}
             data-pagenumber={currentPage - 1}
             key={currentPage - 1}
+            data-testid={`UNX_pageNumber${currentPage-1}`}
           >
             &lt;
           </Button>
@@ -92,6 +94,7 @@ const PaginationWrapper = (props) => {
             pagenumber={currentPage + 1}
             type={paginationButtonTypes.NEXT}
             label={currentPage + 1}
+            data-testid={`UNX_pageNumber${currentPage+1}`}
             active={false}
           />
         ) : (
@@ -100,6 +103,7 @@ const PaginationWrapper = (props) => {
             onClick={onNextPageClick}
             data-pagenumber={currentPage + 1}
             key={currentPage + 1}
+            data-testid={`UNX_pageNumber${currentPage+1}`}
           >
             &gt;
           </Button>

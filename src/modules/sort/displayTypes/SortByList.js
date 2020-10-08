@@ -10,7 +10,8 @@ const SortByList = ({ sortByOptions, onSortClick, SortItemComponent }) => {
         items={sortByOptions}
         ListItem={SortItemComponent}
         onClick={onSortClick}
-        className={'UNX-sortby__list'} />)
+        className={'UNX-sortby__list'}
+        testId={'UNX_unbxdSorter'} />)
 }
 
 SortByList.propTypes = {

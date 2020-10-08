@@ -155,6 +155,7 @@ class GenerateFacets extends React.Component {
                                         value={filter}
                                         name={displayName}
                                         onChange={this.handleFilterChange}
+                                        data-testid={'UNX_searchFacets'}
                                     />
                                 </div>
                             )}
