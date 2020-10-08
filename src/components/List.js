@@ -10,8 +10,9 @@ const List = ({ items,
     className = '',
     onClick,
     itemsType = listItemTypes.OBJECT,
+    testId,
     ...props }) => {
-    return (<div className={className}>
+    return (<div className={className} data-testid={testId}>
         {items.map((item, idx) => {
 
             let isActive = false;
@@ -44,7 +45,8 @@ List.propTypes = {
     ListItem: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
     className: PropTypes.string,
     onClick: PropTypes.func,
-    idAttribute: PropTypes.string
+    idAttribute: PropTypes.string,
+    testId: PropTypes.string
 }
 
 export default List;

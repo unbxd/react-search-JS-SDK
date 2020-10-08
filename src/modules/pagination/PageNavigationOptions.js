@@ -24,6 +24,7 @@ const PageNavigationOptions = (
           type={type}
           label={item}
           key={item}
+          data-testid={`UNX_pageNumber${item}`}
         >
           {item}
         </PageElement>
@@ -43,6 +44,7 @@ const PageNavigationOptions = (
           type={type}
           label={item}
           key={item}
+          data-testid={`UNX_pageNumber${item}`}
         >
           {item}
         </PageElement>

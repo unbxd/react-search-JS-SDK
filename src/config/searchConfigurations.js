@@ -1,10 +1,9 @@
 const searchConfigurations = {
     siteName: '',
     siteKey: '',
-    isFlag: true,
-    sdkHostName: 'https://search.unbxd.io/',
+    searchEndPoint: 'https://search.unbxd.io/',
     searchQueryParam: 'q',
-    fields: ['title'],
+    productAttributes: ['title'],
     defaultFilters: null,
     spellCheck: {
         enabled: false
@@ -14,7 +13,6 @@ const searchConfigurations = {
     facetMultiSelect: true,
     facetMultiSelectionMode: true,
     updateUrls: true,
-    showVariants: false,
     variants: {
         enabled: false,
         count: 1,
@@ -29,9 +27,9 @@ const searchConfigurations = {
     facetMultilevel: true,
     facetDepth: 6,
     productIdAttribute: 'uniqueId',
-    swatches: true,
+    showSwatches: true,
     swatchMap: {},
-    callBackFn: () => { },
+    onEvent: () => { },
     getCategoryId: () => { },
     applyMultipleFilters: false,
     hashMode: true

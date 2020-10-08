@@ -1,11 +1,16 @@
 .UNX-facetActions__container {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e7e7e7;
 
     .-apply,
     .-clear {
         background-color: #e1e6e9;
         border-radius: 25px;
         color: #717989;
+        width: 80px;
+        height: 33px;
     }
 }

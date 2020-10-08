@@ -8,9 +8,9 @@ const FacetListItemComponent = ({
   onClick,
   priceUnit
 }) => {
-  const { from, to, isSelected = false } = itemData;
+  const { from, end, isSelected = false } = itemData;
   const { name: fromName, count, dataId: fromDataId } = from;
-  const { name: ToName, dataId: toDataId } = to;
+  const { name: ToName, dataId: toDataId } = end;
 
   return (
     <div

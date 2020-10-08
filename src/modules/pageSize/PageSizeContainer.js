@@ -22,9 +22,9 @@ class PageSizeContainer extends React.PureComponent {
     } = this.props;
     const { rows = false } = unbxdCore.getQueryParams();
     if(!isNaN(rows))
-      this.setState({ size: rows || size });
+      this.setState({ size: parseInt(rows)|| parseInt(size)});
     setPageSizeConfiguration({
-      size: rows|| size
+      size: parseInt(rows)|| parseInt(size)
     });
   }
 

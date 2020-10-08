@@ -225,6 +225,7 @@ class ProductsWrapper extends React.PureComponent {
             <div
               className="UNX-productLoadMore"
               onClick={this.loadMoreProducts}
+              data-testid={'UNX_loadMore'}
             >
               Load more
             </div>
