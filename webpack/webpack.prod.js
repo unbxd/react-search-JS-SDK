@@ -16,6 +16,7 @@ function recursiveIssuer(m) {
 
 module.exports = {
   entry: {
+    ie: Path.resolve(__dirname, '../public/css/ie/index.scss'),
     core: Path.resolve(__dirname, '../public/css/core/index.scss'),
     theme: Path.resolve(__dirname, '../public/css/theme/index.scss'),
     'react-search-sdk': Path.resolve(__dirname, '../src/index.js')

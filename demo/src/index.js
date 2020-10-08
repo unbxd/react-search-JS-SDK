@@ -1,3 +1,7 @@
+//IE imports
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -17,10 +21,12 @@ import Crumbs from './components/Crumbs';
 import SearchDescription from './components/SearchDescription';
 import ProductViewTypes from './components/ProductViewTypes';
 import ProductsSize from './components/ProductsSize';
-import '@unbxd-ui/react-search-sdk/public/dist/css/core.css';
 import '@unbxd-ui/react-search-sdk/public/dist/css/theme.css';
-
+import '@unbxd-ui/react-search-sdk/public/dist/css/core.css';
+//import '@unbxd-ui/react-search-sdk/public/dist/css/ie.css';
 import '../public/css/index.scss';
+
+
 
 const categoryLinksInit = [
   { path: 'All Products>Shorts', id: 'shorts', label: 'Shorts' },
@@ -74,7 +80,7 @@ const App = () => {
           {categoryPathLinks.map(({ path, id, label, isSelected }) => {
             return (
               <div
-                className={`${
+                className={`menu-items ${
                   isSelected && productType === 'CATEGORY' ? 'active' : ''
                 }`}
                 data-unx_path={path}
