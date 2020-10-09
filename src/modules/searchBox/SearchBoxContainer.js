@@ -54,13 +54,24 @@ class SearchBoxContainer extends React.PureComponent {
         event.preventDefault();
 
         const { query } = this.state;
-        const { onSubmit } = this.props;
+        const { onSubmit, unbxdCore } = this.props;
         const {
             helpers: { setSearchBoxConfiguration },
         } = this.props;
         const queryString = encodeURIComponent(query);
         if (onSubmit) {
             if (onSubmit(query) && query.length) {
+                if (unbxdCore.state.responseObj !== null) {
+                    unbxdCore.state.selectedSort = '';
+                }
+                unbxdCore.state.selectedFacets = {};
+                unbxdCore.state.rangeFacet = {};
+                unbxdCore.state.categoryFilter = {};
+                unbxdCore.state.breadcrumbs = {};
+                //unbxdCore.state.didYouMean = null;
+                //unbxdCore.state.startPageNo = 0;
+                //unbxdCore.state.selectedSort = '';
+                //unbxdCore.state.responseObj = null;
                 setSearchBoxConfiguration({ query: queryString });
                 //track for search hit here
                 trackSearch(query);

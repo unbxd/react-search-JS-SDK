@@ -41,9 +41,7 @@ class GenerateFacets extends React.Component {
                 return { textFacets: formattedTextFacets };
             });
 
-            setSelectedFacets(
-                enableApplyFilters ? selectedFacets : lastSelectedFacets
-            );
+            setSelectedFacets(lastSelectedFacets);
         }
     }
 
