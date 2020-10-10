@@ -21,6 +21,7 @@ class GenerateFacets extends React.Component {
             setSelectedFacets,
             enableApplyFilters,
             unbxdCoreStatus,
+            sortTextFacets
         } = this.props;
         if (
             prevProps.unbxdCoreStatus !== unbxdCoreStatus &&
@@ -37,9 +38,24 @@ class GenerateFacets extends React.Component {
                     filter: matchTextFacet ? matchTextFacet.filter : '',
                 };
             });
-            this.setState(() => {
-                return { textFacets: formattedTextFacets };
-            });
+
+            formattedTextFacets.map((textFacet)=>{
+                textFacet.viewLess = false;
+                textFacet.className = "UNX-facet__list";
+                return textFacet;
+            })
+
+            if(sortTextFacets && typeof(sortTextFacets) === 'function'){
+                let returnedFacets = sortTextFacets.call(formattedTextFacets);
+                this.setState(() => {
+                    return { textFacets: returnedFacets };
+                });
+            }else{
+                this.setState(() => {
+                    return { textFacets: formattedTextFacets };
+                });
+            }
+            
 
             setSelectedFacets(lastSelectedFacets);
         }
@@ -78,6 +94,29 @@ class GenerateFacets extends React.Component {
         });
     };
 
+    toggleViewLess = (event) =>{
+        const facetName = event.target.dataset['unx_name'];
+        this.setState((textFacetsState) => {
+          let interimTextFacets = [...textFacetsState.textFacets]
+          interimTextFacets.map((textFacet)=>{ 
+            if(textFacet.facetName === facetName){
+              const currentFacet = textFacet;
+              currentFacet['viewLess'] = !currentFacet['viewLess'];
+              if(currentFacet['viewLess']){
+                currentFacet.className = "UNX-facet__list UNX-facet__listShowLimited"
+              }else{
+                currentFacet.className = "UNX-facet__list"
+              }
+              return currentFacet;
+            }
+            return textFacet;
+          })
+          return {
+            textFacets: [...interimTextFacets]
+          }
+        });
+      }
+
     render() {
         const {
             selectedFacets,
@@ -105,6 +144,8 @@ class GenerateFacets extends React.Component {
                         values,
                         isOpen = true,
                         filter = '',
+                        viewLess, 
+                        className
                     }) => {
                         //decide whether to show clear or not
                         const hasActiveFacets = selectedFacets[facetName]
@@ -156,7 +197,7 @@ class GenerateFacets extends React.Component {
                                     ListItem={FacetItemComponent || FacetItem}
                                     onClick={onFacetClick}
                                     facetName={facetName}
-                                    className={'UNX-facet__list'}
+                                    className={className}
                                     isFacetSelected={isFacetSelected}
                                     selectedFacets={selectedFacets}
                                 />
@@ -169,6 +210,22 @@ class GenerateFacets extends React.Component {
                                         Clear
                                     </div>
                                 )}
+                                {isOpen?
+                                    (!viewLess) ? (
+                                        <div className="view-More"
+                                        data-unx_name={facetName}
+                                        onClick={this.toggleViewLess}>
+                                        View Less
+                                        </div>
+                                    ):(
+                                        <div 
+                                        className="view-More"
+                                        data-unx_name={facetName}
+                                        onClick={this.toggleViewLess}>
+                                        View More
+                                        </div>
+                                    ): ""
+                                }
                             </div>
                         );
                     }

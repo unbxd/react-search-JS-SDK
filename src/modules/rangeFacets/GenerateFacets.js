@@ -135,7 +135,7 @@ class GenerateFacets extends React.Component {
     };
 
     componentDidUpdate(prevProps) {
-        const { rangeFacets, selectedRangeFacets } = this.props;
+        const { rangeFacets, selectedRangeFacets, sortRangeFacets } = this.props;
         if (prevProps.rangeFacets !== rangeFacets) {
             this.setState((existingState) => {
                 //set the state with starts and ends
@@ -144,9 +144,35 @@ class GenerateFacets extends React.Component {
                     selectedRangeFacets,
                     existingState
                 );
+
+                if(sortRangeFacets && typeof(sortRangeFacets) === 'function'){
+                    let returnedFacets = sortRangeFacets.call(updatedFacetState);
+                    return { rangeValues: returnedFacets };
+                  }
                 return { rangeValues: updatedFacetState };
             });
         }
+    }
+
+    toggleViewLess = (event) =>{
+        const facetName = event.target.dataset['unx_name'];
+        
+        this.setState((existingState) => {
+            const currentFacet = existingState.rangeValues[facetName];
+            let classNameTemp = currentFacet.className;
+            classNameTemp = (classNameTemp.indexOf("UNX-facet__listShowLimited") < 0)?"UNX-facet__list UNX-facet__listShowLimited": "UNX-facet__list"
+            return {
+                ...existingState,
+                rangeValues: {
+                    ...existingState.rangeValues,
+                    [facetName]: {
+                        ...currentFacet,
+                        className: classNameTemp,
+                        viewLess: !currentFacet.viewLess,
+                    },
+                },
+            };
+        });
     }
 
     render() {
@@ -243,6 +269,8 @@ class GenerateFacets extends React.Component {
                             displayName,
                             isSelected,
                             isOpen = true,
+                            viewLess,
+                            className
                         } = rangeValues[facetName];
 
                         return (
@@ -273,7 +301,7 @@ class GenerateFacets extends React.Component {
                                     }
                                     onClick={this.handleRangeValueClick}
                                     facetName={facetName}
-                                    className="UNX-facet__list"
+                                    className={className}
                                     priceUnit={priceUnit}
                                 />
                                 {isSelected && (
@@ -285,6 +313,22 @@ class GenerateFacets extends React.Component {
                                         Clear
                                     </div>
                                 )}
+                                {isOpen?
+                                    (!viewLess) ? (
+                                    <div className="view-More"
+                                        data-unx_name={facetName}
+                                        onClick={this.toggleViewLess}>
+                                        View Less
+                                    </div>
+                                    ):(
+                                    <div 
+                                        className="view-More"
+                                        data-unx_name={facetName}
+                                        onClick={this.toggleViewLess}>
+                                        View More
+                                    </div>
+                                    ): ""
+                                }
                             </div>
                         );
                     })}
