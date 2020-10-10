@@ -2,6 +2,11 @@ import React from 'react';
 
 import { TextFacets } from '@unbxd-ui/react-search-sdk';
 
+const sortTextFacets = function(){
+  console.log(this);
+  return this;
+};
+
 const FacetItemComponent = ({
   itemData,
   facetName,
@@ -48,6 +53,7 @@ const TextFilters = () => {
       FacetItemComponent={FacetItemComponent}
       collapsible={true}
       searchable={true}
+      sortTextFacets={sortTextFacets}
     />
   );
 };

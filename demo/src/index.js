@@ -224,6 +224,7 @@ const App = () => {
                         <FacetApplyClear />
                         <RangeFilters />
                         <TextFilters />
+                        {/* <CombinedFilters /> */}
                         <FacetApplyClear />
                     </div>
 

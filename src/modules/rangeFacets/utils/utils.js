@@ -97,6 +97,8 @@ export const getUpdatedFacets = (
                     values: aggregatedValues,
                     displayName,
                     isSelected: true,
+                    viewLess : false,
+                    className : "UNX-facet__list"
                 };
             });
         } else {
@@ -110,6 +112,8 @@ export const getUpdatedFacets = (
                 displayName,
                 values,
                 isSelected: false,
+                viewLess : false,
+                className : "UNX-facet__list"
             };
         }
 

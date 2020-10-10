@@ -44,16 +44,6 @@ module.exports = {
                     'style-loader',
                     'css-loader',
                     {
-                        loader: 'postcss-loader',
-                        options: {
-                            ident: 'postcss',
-                            plugins: [
-                                require('tailwindcss'),
-                                require('autoprefixer'),
-                            ],
-                        },
-                    },
-                    {
                         loader: 'sass-loader',
                         options: {
                             sassOptions: {

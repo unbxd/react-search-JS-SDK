@@ -2,6 +2,11 @@ import React from 'react';
 
 import { RangeFacets } from '@unbxd-ui/react-search-sdk';
 
+const sortRangeFacets = function(){
+  console.log(this);
+  return this;
+};
+
 const FacetListItemComponent = ({
   itemData,
   facetName,
@@ -44,6 +49,7 @@ const FacetListItemComponent = ({
 const RangeFilters = () => {
   return (
     <RangeFacets
+      sortRangeFacets = {sortRangeFacets}
       displayType={'LIST'}
       FacetListItemComponent={FacetListItemComponent}
       collapsible={true}

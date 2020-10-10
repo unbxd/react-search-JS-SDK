@@ -30,6 +30,7 @@ class TextFacetsContainer extends React.PureComponent {
             label,
             collapsible,
             searchable,
+            sortTextFacets
         } = this.props;
 
         const {
@@ -117,6 +118,7 @@ class TextFacetsContainer extends React.PureComponent {
             setSelectedFacets,
             FacetItemComponent,
             label,
+            sortTextFacets
         };
 
         return { ...data, ...helpers };
