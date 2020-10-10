@@ -53,6 +53,7 @@ const RangeFilters = () => {
       displayType={'LIST'}
       FacetListItemComponent={FacetListItemComponent}
       collapsible={true}
+      enableViewMore={true}
     />
   );
 };

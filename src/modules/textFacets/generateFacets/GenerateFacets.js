@@ -21,7 +21,7 @@ class GenerateFacets extends React.Component {
             setSelectedFacets,
             enableApplyFilters,
             unbxdCoreStatus,
-            sortTextFacets
+            sortTextFacets,
         } = this.props;
         if (
             prevProps.unbxdCoreStatus !== unbxdCoreStatus &&
@@ -126,6 +126,7 @@ class GenerateFacets extends React.Component {
             label,
             collapsible,
             searchable,
+            enableViewMore
         } = this.props;
 
         const { textFacets } = this.state;
@@ -210,7 +211,7 @@ class GenerateFacets extends React.Component {
                                         Clear
                                     </div>
                                 )}
-                                {isOpen?
+                                {enableViewMore && isOpen?
                                     (!viewLess) ? (
                                         <div className="view-More"
                                         data-unx_name={facetName}

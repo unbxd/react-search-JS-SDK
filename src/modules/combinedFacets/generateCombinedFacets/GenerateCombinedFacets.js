@@ -312,7 +312,8 @@ class GenerateCombinedFacets extends React.Component {
       FacetListItemComponent,
       displayType,
       priceUnit,
-      rangeCollapsible
+      rangeCollapsible,
+      enableViewMore
     } = this.props;
 
     const { combinedFacets } = this.state;
@@ -376,7 +377,7 @@ class GenerateCombinedFacets extends React.Component {
                                 Clear
                             </div>
                             )}
-                            {isOpen?
+                            {enableViewMore && isOpen?
                               (!viewLess) ? (
                                 <div className="view-More"
                                   data-unx_name={facetName}
@@ -499,7 +500,7 @@ class GenerateCombinedFacets extends React.Component {
                           Clear
                         </div>
                       )}
-                      {isOpen?
+                      {enableViewMore && isOpen?
                         (!viewLess) ? (
                           <div className="view-More"
                             data-unx_name={facetName}

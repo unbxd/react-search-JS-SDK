@@ -92,6 +92,7 @@ const CombinedFilters = () => {
         sortCombinedFacets = {sortCombinedFacets}
         FacetListItemComponent={FacetListItemComponent}
         FacetItemComponent={FacetItemComponent}
+        enableViewMore={true}
       />
     );
 };
