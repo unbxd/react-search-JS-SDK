@@ -184,6 +184,7 @@ class GenerateFacets extends React.Component {
             priceUnit,
             label,
             collapsible,
+            enableViewMore
         } = this.props;
 
         if (Object.keys(rangeValues).length === 0) {
@@ -313,7 +314,7 @@ class GenerateFacets extends React.Component {
                                         Clear
                                     </div>
                                 )}
-                                {isOpen?
+                                {enableViewMore && isOpen?
                                     (!viewLess) ? (
                                     <div className="view-More"
                                         data-unx_name={facetName}

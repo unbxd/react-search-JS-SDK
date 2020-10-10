@@ -59,6 +59,7 @@ const TextFilters = () => {
     <TextFacets
       FacetItemComponent={FacetItemComponent}
       collapsible={true}
+      enableViewMore={true}
       searchable={true}
       sortTextFacets={sortTextFacets}
       onFacetClick={onFacetClick}

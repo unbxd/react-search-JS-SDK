@@ -17,7 +17,8 @@ class RangeFacetsContainer extends React.PureComponent {
       label,
       collapsible,
       onFacetClick,
-      sortRangeFacets
+      sortRangeFacets,
+      enableViewMore
     } = this.props;
 
     const {
@@ -58,7 +59,8 @@ class RangeFacetsContainer extends React.PureComponent {
       priceUnit,
       label,
       collapsible,
-      sortRangeFacets
+      sortRangeFacets,
+      enableViewMore
     };
   }
 
