@@ -2,11 +2,13 @@ import React from 'react';
 
 import { MultilevelFacets } from '@unbxd-ui/react-search-sdk';
 
-const FacetItemComponent = ({ itemData, multiLevelField, level, onClick }) => {
-    const { name, count } = itemData;
+const FacetItemComponent = ({ itemData, multiLevelField, onClick }) => {
+    const { name, count, level, isSelected } = itemData;
     return (
         <div
-            className="UNX-facet__item"
+            className={`UNX-facet__item l${level} ${
+                isSelected ? 'selected' : ''
+            }`}
             data-unx_categoryname={name}
             data-unx_multilevelfield={multiLevelField}
             data-unx_level={level}
@@ -26,14 +28,16 @@ const FacetItemComponent = ({ itemData, multiLevelField, level, onClick }) => {
             >
                 {name}
             </div>
-            <div
-                className="-count"
-                data-unx_categoryname={name}
-                data-unx_multilevelfield={multiLevelField}
-                data-unx_level={level}
-            >
-                ({count})
-            </div>
+            {count && (
+                <div
+                    className="-count"
+                    data-unx_categoryname={name}
+                    data-unx_multilevelfield={multiLevelField}
+                    data-unx_level={level}
+                >
+                    ({count})
+                </div>
+            )}
         </div>
     );
 };

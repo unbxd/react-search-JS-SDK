@@ -433,7 +433,7 @@ class GenerateCombinedFacets extends React.Component {
                         items={values}
                         ListItem={FacetListItemComponent || FacetListItem}
                         onClick={this.handleRangeValueClick}
-                        idAttribute={facetName}
+                        idAttribute={'facetName'}
                         facetName={facetName}
                         className="UNX-facet__list"
                         priceUnit={priceUnit}

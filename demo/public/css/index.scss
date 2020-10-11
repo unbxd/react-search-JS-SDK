@@ -6,8 +6,7 @@ body {
 }
 
 .UNX-header__container {
-    padding-left: 100px;
-    padding-right: 100px;
+    padding: 0 40px;
 }
 
 .UNX-header__logo {
@@ -174,7 +173,7 @@ body {
 
 .UNX-categoryLinks__container {
     background-color: #ffffff;
-    padding: 0 100px;
+    padding: 0 40px;
 
     .UNX-categoryLink__Header {
         overflow: hidden;

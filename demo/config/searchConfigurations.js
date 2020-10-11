@@ -41,6 +41,7 @@ const searchConfigurations = {
         'f.categoryPath.max.depth': '',
         'f.categoryPath.facet.limit': '',
         //"f.categoryPath.facet.version": "V2",
+        //'category-filter': 'All Products',
     },
     facetMultilevel: true,
     facetDepth: 6,

@@ -200,10 +200,11 @@ class UnbxdSearchWrapper extends Component {
                 };
             });
             unbxdCore.options.productType = productTypes.CATEGORY;
+            this.resetSearch();
             unbxdCore.getResults();
             trackCategory(window.UnbxdAnalyticsConf);
         } else if (
-            unbxdCore.getResponseObj === null &&
+            unbxdCore.getResponseObj() === null &&
             urlParams[unbxdCore.options.searchQueryParam]
         ) {
             unbxdCore.renderFromUrl();
