@@ -25,6 +25,7 @@ import {
     handleViewTypeClick,
     getUpdatedResults,
     setSelectedFacets,
+    resetSearch,
 } from './utils';
 import '../public/css/core/index.scss';
 import { viewTypes } from './config/constants';
@@ -70,6 +71,7 @@ class UnbxdSearchWrapper extends Component {
         this.setSelectedFacets = setSelectedFacets.bind(this);
         this.handleViewTypeClick = handleViewTypeClick.bind(this);
         this.getUpdatedResults = getUpdatedResults.bind(this);
+        this.resetSearch = resetSearch.bind(this);
 
         this.state = {
             unbxdCore: new UnbxdSearch({
@@ -99,6 +101,7 @@ class UnbxdSearchWrapper extends Component {
                 setSelectedFacets: this.setSelectedFacets,
                 handleViewTypeClick: this.handleViewTypeClick,
                 getUpdatedResults: this.getUpdatedResults,
+                resetSearch: this.resetSearch,
                 getActiveFacets,
             },
             priceUnit,
@@ -171,11 +174,6 @@ class UnbxdSearchWrapper extends Component {
                 onPageLoad(unbxdCore.getResponseObj());
         }
 
-        const urlParams = unbxdCore.getQueryParams();
-        if (urlParams[unbxdCore.options.searchQueryParam]) {
-            unbxdCore.renderFromUrl();
-        }
-
         if (unbxdCore.options.hashMode) {
             window.onhashchange = unbxdCore.onLocationChange.bind(unbxdCore);
         }
@@ -184,6 +182,7 @@ class UnbxdSearchWrapper extends Component {
     componentDidUpdate() {
         const { onPageLoad } = this.props;
         const { unbxdCore, categoryId } = this.state;
+        const urlParams = unbxdCore.getQueryParams();
 
         const currentCategoryId =
             typeof unbxdCore.options.getCategoryId === 'function' &&
@@ -203,6 +202,11 @@ class UnbxdSearchWrapper extends Component {
             unbxdCore.options.productType = productTypes.CATEGORY;
             unbxdCore.getResults();
             trackCategory(window.UnbxdAnalyticsConf);
+        } else if (
+            unbxdCore.getResponseObj === null &&
+            urlParams[unbxdCore.options.searchQueryParam]
+        ) {
+            unbxdCore.renderFromUrl();
         } else {
             //call onPageLoad
             typeof onPageLoad == 'function' &&

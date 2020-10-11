@@ -44,7 +44,6 @@ const MultilevelFilters = ({ showLabel = true }) => {
         <MultilevelFacets
             categoryDisplayName={'category'}
             categoryField={'categoryPath'}
-            defaultCategoryFilter={'All Products'}
             collapsible={true}
             searchable={true}
             FacetItemComponent={FacetItemComponent}

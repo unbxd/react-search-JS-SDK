@@ -173,35 +173,27 @@ body {
 }
 
 .UNX-categoryLinks__container {
-    margin: 0 40px;
+    background-color: #ffffff;
+    padding: 0 100px;
 
     .UNX-categoryLink__Header {
         overflow: hidden;
-        background-color: #687d88;
-        margin-top: 20px;
+    }
 
-        .menu-items {
-            float: left;
-            color: #000000;
-            background-color: #cdd5d9;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
+    .menu-items {
+        float: left;
+        color: #1d2e44;
+        font-size: 16px;
+        font-weight: 500;
+        text-align: center;
+        margin: 14px 16px;
 
-            &:hover {
-                background-color: #ddd;
-                color: black;
-            }
-
-            &.active {
-                background-color: #1d2e44;
-                color: white;
-            }
+        &:first-child {
+            margin-left: 0;
         }
 
-        .hamburger-menu-icon {
-            display: none;
+        .menu-item-link {
+            color: unset;
         }
     }
 }

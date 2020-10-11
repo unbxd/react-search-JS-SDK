@@ -13,7 +13,7 @@ const htmlPlugin = new HtmlWebPackPlugin({
 module.exports = {
     entry: Path.resolve(__dirname, '../src/index.js'),
     output: {
-        path: Path.resolve(__dirname, '../public'),
+        path: Path.resolve('dist'),
         publicPath: '/',
         filename: 'js/[name].js',
         sourceMapFilename: '[file].map'
@@ -76,6 +76,7 @@ module.exports = {
         contentBase: './dist',
         open:false,
         hot: true,
-        port: 6969
+        port: 6969,
+        historyApiFallback: true
     }
 };
