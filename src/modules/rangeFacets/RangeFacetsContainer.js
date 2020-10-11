@@ -15,7 +15,8 @@ class RangeFacetsContainer extends React.PureComponent {
       enableApplyFilters,
       priceUnit,
       label,
-      collapsible
+      collapsible,
+      onFacetClick
     } = this.props;
 
     const {
@@ -90,7 +91,8 @@ RangeFacetsContainer.propTypes = {
   enableApplyFilters: PropTypes.bool.isRequired,
   priceUnit: PropTypes.string.isRequired,
   label: PropTypes.node,
-  collapsible: PropTypes.bool
+  collapsible: PropTypes.bool,
+  onFacetClick:PropTypes.node
 };
 
 export default RangeFacetsContainer;

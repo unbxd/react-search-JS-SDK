@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { MultilevelFacets } from '@unbxd-ui/react-search-sdk';
+import { scrollTop } from '../utils';
 
 const FacetItemComponent = ({ itemData, multiLevelField, onClick }) => {
     const { name, count, level, isSelected } = itemData;
@@ -42,6 +43,11 @@ const FacetItemComponent = ({ itemData, multiLevelField, onClick }) => {
     );
 };
 
+const onFacetClick = (facet) => {
+    console.log('Facet change :', facet);
+    scrollTop();
+    return true;
+};
 const label = <div className="UNX-searchFacet__mainHeader">Filter By</div>;
 const MultilevelFilters = ({ showLabel = true }) => {
     return (
@@ -52,6 +58,7 @@ const MultilevelFilters = ({ showLabel = true }) => {
             searchable={true}
             FacetItemComponent={FacetItemComponent}
             label={showLabel ? label : undefined}
+            //onFacetClick={onFacetClick}
         />
     );
 };

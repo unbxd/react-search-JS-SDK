@@ -8,48 +8,57 @@ import PaginationContainer from './PaginationContainer';
 /**
  * Component to manage pagination.
  */
-const Pagination = props => {
-  return (
-    <AppContextConsumer>
-      {appState => {
-        if (appState === undefined) {
-          hasUnbxdSearchWrapperContext(Pagination.displayName);
-        }
+const Pagination = (props) => {
+    return (
+        <AppContextConsumer>
+            {(appState) => {
+                if (appState === undefined) {
+                    hasUnbxdSearchWrapperContext(Pagination.displayName);
+                }
 
-        const { unbxdCore, unbxdCoreStatus, helpers,unbxdState } = appState;
-        const {paginationType} = unbxdState;
-        return (
-          <PaginationContainer
-            unbxdCore={unbxdCore}
-            unbxdCoreStatus={unbxdCoreStatus}
-            helpers={helpers}
-            paginationType={paginationType}
-            {...props}
-          />
-        );
-      }}
-    </AppContextConsumer>
-  );
+                const {
+                    unbxdCore,
+                    unbxdCoreStatus,
+                    helpers,
+                    unbxdState,
+                } = appState;
+                const { paginationType } = unbxdState;
+                return (
+                    <PaginationContainer
+                        unbxdCore={unbxdCore}
+                        unbxdCoreStatus={unbxdCoreStatus}
+                        helpers={helpers}
+                        paginationType={paginationType}
+                        {...props}
+                    />
+                );
+            }}
+        </AppContextConsumer>
+    );
 };
 
 Pagination.displayName = 'Pagination';
 
 Pagination.defaultProps = {
-  padding: 2
+    padding: 2,
 };
 
 Pagination.propTypes = {
-  /**
-   * Page number padding for page navigation.
-   */
-  padding: PropTypes.number,
-  /**
-   * Custom product item component
-   */
-  PaginationItemComponent: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.func
-  ])
+    /**
+     * Page number padding for page navigation.
+     */
+    padding: PropTypes.number,
+    /**
+     * Custom product item component
+     */
+    PaginationItemComponent: PropTypes.oneOfType([
+        PropTypes.element,
+        PropTypes.func,
+    ]),
+    /**
+     * Callback for page change.
+     */
+    onPageChange: PropTypes.func,
 };
 
 export default Pagination;

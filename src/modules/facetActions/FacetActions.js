@@ -6,55 +6,76 @@ import { hasUnbxdSearchWrapperContext } from '../../common/utils';
 import FacetActionsContainer from './FacetActionsContainer';
 
 /**
- * Component to manage facet actions. 
+ * Component to manage facet actions.
  */
 const FacetActions = (props) => {
+    return (
+        <AppContextConsumer>
+            {(appState) => {
+                if (appState === undefined) {
+                    hasUnbxdSearchWrapperContext(FacetActions.displayName);
+                }
 
-    return (<AppContextConsumer>
-        {(appState) => {
+                const {
+                    unbxdCore,
+                    unbxdCoreStatus,
+                    helpers,
+                    unbxdState,
+                } = appState;
+                const { selectedFacets } = unbxdState;
 
-            if (appState === undefined) {
-                hasUnbxdSearchWrapperContext(FacetActions.displayName);
-            }
+                return (
+                    <FacetActionsContainer
+                        unbxdCore={unbxdCore}
+                        unbxdCoreStatus={unbxdCoreStatus}
+                        helpers={helpers}
+                        selectedFacets={selectedFacets}
+                        {...props}
+                    />
+                );
+            }}
+        </AppContextConsumer>
+    );
+};
 
-            const { unbxdCore, unbxdCoreStatus, helpers, unbxdState } = appState;
-            const { selectedFacets } = unbxdState;
-
-            return (<FacetActionsContainer
-                unbxdCore={unbxdCore}
-                unbxdCoreStatus={unbxdCoreStatus}
-                helpers={helpers}
-                selectedFacets={selectedFacets}
-                {...props}
-            />)
-        }}
-    </AppContextConsumer>)
-}
-
-FacetActions.displayName = "FacetActions"
+FacetActions.displayName = 'FacetActions';
 
 FacetActions.defaultProps = {
     showApplyFilter: true,
-    showClearFilter: true
-}
+    showClearFilter: true,
+};
 
 FacetActions.propTypes = {
     /**
-    * Enable apply facets.
-    */
+     * Enable apply facets.
+     */
     showApplyFilter: PropTypes.bool,
     /**
-    * Enable clear all facets.
-    */
+     * Enable clear all facets.
+     */
     showClearFilter: PropTypes.bool,
     /**
-    * Custom apply filter component.
-    */
-    ApplyFilterComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+     * Custom apply filter component.
+     */
+    ApplyFilterComponent: PropTypes.oneOfType([
+        PropTypes.element,
+        PropTypes.func,
+    ]),
     /**
-    * Custom clear filter component.
-    */
-    ClearFilterComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-}
+     * Custom clear filter component.
+     */
+    ClearFilterComponent: PropTypes.oneOfType([
+        PropTypes.element,
+        PropTypes.func,
+    ]),
+    /**
+     * Callback for apply.
+     */
+    onApply: PropTypes.func,
+    /**
+     * Callback for clear.
+     */
+    onClear: PropTypes.func,
+};
 
 export default FacetActions;

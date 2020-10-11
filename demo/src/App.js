@@ -5,7 +5,7 @@ import UnbxdSearchWrapper from '@unbxd-ui/react-search-sdk';
 
 import { Jackets, Shirts, Shoes, Shorts, Home } from './pages';
 
-import { searchConfigurations, categoryLinks } from '../config';
+import { searchConfigurations, categoryLinks } from './config';
 import { ProductTypeContext } from './context';
 import MobileModal from './components/MobileModal';
 import CategoryLinks from './components/CategoryLinks';

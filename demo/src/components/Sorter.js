@@ -33,9 +33,10 @@ const sortOptions = [
     },
 ];
 const label = <div className="-label">Sort by</div>;
-// const Sorter = () => {
-//         return (<Sort sortOptions={sortOptions} label={label} />)
-// }
+const onSortChange = (field, order) => {
+    console.log('Sort change: ', field, order);
+    return true;
+};
 
 const SortItemComponent = ({ itemData, onClick }) => {
     const { value, isSelected = false } = itemData;
@@ -55,6 +56,7 @@ const Sorter = () => {
         <Sort
             sortOptions={sortOptions}
             label={label}
+            onSortChange={onSortChange}
             //displayType={'LIST'}
             //defaultSort={sortOptions[1]}
             //SortItemComponent={SortItemComponent}
