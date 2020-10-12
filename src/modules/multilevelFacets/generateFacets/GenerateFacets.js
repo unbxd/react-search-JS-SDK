@@ -7,19 +7,19 @@ import { List, Input } from '../../../components';
 class GenerateFacets extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { bucketedFacets: props.bucketedFacets };
+        this.state = { multilevelFacets: props.multilevelFacets };
     }
 
     componentDidUpdate(prevProps) {
-        const { bucketedFacets } = this.props;
-        if (prevProps.bucketedFacets !== bucketedFacets) {
-            const formattedBucketedFacets = bucketedFacets.map(
+        const { multilevelFacets } = this.props;
+        if (prevProps.multilevelFacets !== multilevelFacets) {
+            const formattedMultilevelFacets = multilevelFacets.map(
                 (bucketedFacet) => {
-                    const matchBucketedFacet = this.state.bucketedFacets.find(
+                    const matchBucketedFacet = this.state.multilevelFacets.find(
                         (bucketedFacetObj) => {
                             return (
-                                bucketedFacetObj.displayName ===
-                                bucketedFacet.displayName
+                                bucketedFacetObj.facetDisplayName ===
+                                bucketedFacet.facetDisplayName
                             );
                         }
                     );
@@ -37,8 +37,7 @@ class GenerateFacets extends React.Component {
 
             this.setState((currentState) => {
                 return {
-                    ...currentState,
-                    bucketedFacets: formattedBucketedFacets,
+                    multilevelFacets: formattedMultilevelFacets,
                 };
             });
         }
@@ -47,19 +46,19 @@ class GenerateFacets extends React.Component {
     handleCollapseToggle = (event) => {
         const facetId = event.target.dataset['unx_name'];
         this.setState((currentState) => {
-            const updatedTextFacets = currentState.bucketedFacets.map(
-                (bucketedFacet) => {
-                    if (facetId === bucketedFacet.displayName) {
+            const updatedTextFacets = currentState.multilevelFacets.map(
+                (multilevelFacet) => {
+                    if (facetId === multilevelFacet.facetDisplayName) {
                         return {
-                            ...bucketedFacet,
-                            isOpen: !bucketedFacet.isOpen,
+                            ...multilevelFacet,
+                            isOpen: !multilevelFacet.isOpen,
                         };
                     }
-                    return { ...bucketedFacet };
+                    return { ...multilevelFacet };
                 }
             );
 
-            return { ...currentState, bucketedFacets: updatedTextFacets };
+            return { ...currentState, multilevelFacets: updatedTextFacets };
         });
     };
 
@@ -67,9 +66,9 @@ class GenerateFacets extends React.Component {
         const facetId = event.target.name;
         const value = event.target.value;
         this.setState((currentState) => {
-            const updatedTextFacets = currentState.bucketedFacets.map(
+            const updatedMultilevelFacets = currentState.multilevelFacets.map(
                 (bucketedFacet) => {
-                    if (facetId === bucketedFacet.displayName) {
+                    if (facetId === bucketedFacet.facetDisplayName) {
                         return {
                             ...bucketedFacet,
                             filter: value.toLowerCase(),
@@ -79,54 +78,45 @@ class GenerateFacets extends React.Component {
                 }
             );
 
-            return { ...currentState, bucketedFacets: updatedTextFacets };
+            return {
+                ...currentState,
+                multilevelFacets: updatedMultilevelFacets,
+            };
         });
     };
 
     render() {
         const {
-            addCategoryFilter,
-            breadCrumbsList,
+            onFacetClick,
             FacetItemComponent,
             label,
             collapsible,
             searchable,
         } = this.props;
 
-        const { bucketedFacets } = this.state;
+        const { multilevelFacets } = this.state;
 
-        if (
-            bucketedFacets.length === 0 ||
-            (bucketedFacets.length && bucketedFacets[0].values.length === 0)
-        ) {
+        if (multilevelFacets.length === 0) {
             return null;
         }
 
         return (
             <div className="UNX-bucketedFacet__container">
                 {label ? label : null}
-                {bucketedFacets.map((bucketedFacet) => {
+                {multilevelFacets.map((multilevelFacet) => {
                     const {
-                        displayName,
-                        level,
+                        facetDisplayName,
                         multiLevelField,
                         values = [],
                         isOpen = true,
                         filter = '',
-                    } = bucketedFacet;
-                    const breadCrumbsLength = breadCrumbsList.length;
+                    } = multilevelFacet;
+
                     let filteredValues = values;
                     if (filter.length > 0) {
                         filteredValues = values.filter((value) => {
                             return value.name.toLowerCase().includes(filter);
                         });
-                    }
-
-                    if (
-                        breadCrumbsLength === level ||
-                        breadCrumbsLength > level
-                    ) {
-                        return null;
                     }
 
                     return (
@@ -137,12 +127,12 @@ class GenerateFacets extends React.Component {
                             key={multiLevelField}
                         >
                             <div className="UNX-facet__header">
-                                {displayName}
+                                {facetDisplayName}
 
                                 {collapsible && (
                                     <span
                                         className="-collapse-icon"
-                                        data-unx_name={displayName}
+                                        data-unx_name={facetDisplayName}
                                         onClick={this.handleCollapseToggle}
                                     />
                                 )}
@@ -153,7 +143,7 @@ class GenerateFacets extends React.Component {
                                     <Input
                                         className="-input"
                                         value={filter}
-                                        name={displayName}
+                                        name={facetDisplayName}
                                         onChange={this.handleFilterChange}
                                         data-testid={'UNX_searchFacets'}
                                     />
@@ -163,9 +153,8 @@ class GenerateFacets extends React.Component {
                                 items={filteredValues}
                                 ListItem={FacetItemComponent || FacetItem}
                                 idAttribute={'name'}
-                                level={level}
                                 multiLevelField={multiLevelField}
-                                onClick={addCategoryFilter}
+                                onClick={onFacetClick}
                                 className="UNX-facet__list"
                             />
                         </div>
@@ -177,9 +166,8 @@ class GenerateFacets extends React.Component {
 }
 
 GenerateFacets.propTypes = {
-    bucketedFacets: PropTypes.array.isRequired,
-    addCategoryFilter: PropTypes.func.isRequired,
-    breadCrumbsList: PropTypes.array.isRequired,
+    multilevelFacets: PropTypes.array.isRequired,
+    onFacetClick: PropTypes.func.isRequired,
     FacetItemComponent: PropTypes.oneOfType([
         PropTypes.element,
         PropTypes.func,

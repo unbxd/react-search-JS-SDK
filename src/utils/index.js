@@ -14,6 +14,7 @@ import handleViewTypeClick from './handleViewTypeClick';
 import setSelectedFacets from './setSelectedFacets';
 import setCategoryPath from './setCategoryPath';
 import getUpdatedResults from './getUpdatedResults';
+import resetSearch from './resetSearch';
 
 export {
   setProductConfiguration,
@@ -31,5 +32,6 @@ export {
   handleViewTypeClick,
   setSelectedFacets,
   setCategoryPath,
-  getUpdatedResults
+  getUpdatedResults,
+  resetSearch
 };

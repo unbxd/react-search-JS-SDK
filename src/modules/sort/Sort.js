@@ -72,7 +72,11 @@ Sort.propTypes = {
   /**
    * Label for the component.
    */
-  label: PropTypes.node
+  label: PropTypes.node,
+  /**
+   * Callback for sort change.
+   */
+  onSortChange: PropTypes.func
 };
 
 export default Sort;

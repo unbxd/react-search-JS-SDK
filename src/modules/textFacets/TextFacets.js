@@ -62,7 +62,11 @@ TextFacets.propTypes = {
     /**
     * Label for the component. 
     */
-    label:PropTypes.node
+    label:PropTypes.node,
+    /**
+    * Callback for facet click. 
+    */
+    onFacetClick:PropTypes.node
 }
 
 export default TextFacets;

@@ -5,6 +5,7 @@ import { conditionalRenderer, scrollTop } from '../../common/utils';
 import { getFacetRow, isFacetSelected, getFacetCoreMethods } from './utils';
 import { manageStateTypes } from '../../config';
 import GenerateFacets from './generateFacets';
+import { executeCallback } from '../../common/utils';
 
 class TextFacetsContainer extends React.PureComponent {
     componentDidMount() {
@@ -30,6 +31,7 @@ class TextFacetsContainer extends React.PureComponent {
             label,
             collapsible,
             searchable,
+            onFacetClick,
         } = this.props;
 
         const {
@@ -57,7 +59,7 @@ class TextFacetsContainer extends React.PureComponent {
             updateFacets({ selectedFacetName, selectedFacetId, facetData });
         };
 
-        const onFacetClick = (event) => {
+        const handleFacetClick = (event) => {
             const {
                 unx_name: selectedFacetName,
                 unx_dataid: selectedFacetId,
@@ -73,21 +75,30 @@ class TextFacetsContainer extends React.PureComponent {
                 selectedFacetName,
                 selectedFacetId
             );
-            enableApplyFilters &&
-                manageTextFacets(
-                    facetRow,
-                    selectedFacetName,
-                    selectedFacetId,
-                    isSelected ? manageStateTypes.REMOVE : manageStateTypes.ADD
-                );
 
-            !isSelected &&
-                !enableApplyFilters &&
-                addFacet({ selectedFacetName, selectedFacetId, facetData });
-            isSelected &&
-                !enableApplyFilters &&
-                removeFacet({ selectedFacetName, selectedFacetId });
-            scrollTop();
+            const onFinish = () => {
+                enableApplyFilters &&
+                    manageTextFacets(
+                        facetRow,
+                        selectedFacetName,
+                        selectedFacetId,
+                        isSelected
+                            ? manageStateTypes.REMOVE
+                            : manageStateTypes.ADD
+                    );
+
+                !isSelected &&
+                    !enableApplyFilters &&
+                    addFacet({ selectedFacetName, selectedFacetId, facetData });
+                isSelected &&
+                    !enableApplyFilters &&
+                    removeFacet({ selectedFacetName, selectedFacetId });
+            };
+            executeCallback(
+                onFacetClick,
+                [selectedFacetName, !isSelected],
+                onFinish
+            );
         };
 
         const onFacetObjectReset = (event) => {
@@ -112,7 +123,7 @@ class TextFacetsContainer extends React.PureComponent {
         };
 
         const helpers = {
-            onFacetClick,
+            onFacetClick: handleFacetClick,
             onFacetObjectReset,
             setSelectedFacets,
             FacetItemComponent,
@@ -147,6 +158,7 @@ TextFacetsContainer.propTypes = {
     label: PropTypes.node,
     collapsible: PropTypes.bool.isRequired,
     searchable: PropTypes.bool.isRequired,
+    onFacetClick: PropTypes.node,
 };
 
 export default TextFacetsContainer;

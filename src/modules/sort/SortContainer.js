@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { conditionalRenderer } from '../../common/utils';
 import { getFormattedSort, getSelectedSort } from './utils';
 import SortWrapper from './SortWrapper';
+import { executeCallback } from '../../common/utils';
 
 class SortContainer extends React.Component {
     constructor(props) {
@@ -88,6 +89,7 @@ class SortContainer extends React.Component {
         const {
             unbxdCore,
             label,
+            onSortChange,
             helpers: { setSortConfiguration },
         } = this.props;
         const getPaginationInfo = unbxdCore.getPaginationInfo.bind(unbxdCore);
@@ -112,14 +114,19 @@ class SortContainer extends React.Component {
             const { field = '', order = '' } = selectedSort;
 
             if (field.length && order.length) {
-                this.setState({ sortBy: selectedSort });
                 //we pass `price desc` format to set Configuration
-                setSortConfiguration(
-                    {
-                        sortBy: `${field} ${order}`,
-                    },
-                    true
-                );
+
+                const onFinish = () => {
+                    this.setState({ sortBy: selectedSort });
+                    setSortConfiguration(
+                        {
+                            sortBy: `${field} ${order}`,
+                        },
+                        true
+                    );
+                };
+
+                executeCallback(onSortChange, [field, order], onFinish);
             } else {
                 onSortResetClick();
             }
@@ -183,6 +190,7 @@ SortContainer.propTypes = {
     displayType: PropTypes.string,
     SortItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     label: PropTypes.node,
+    onSortChange: PropTypes.func,
 };
 
 export default SortContainer;

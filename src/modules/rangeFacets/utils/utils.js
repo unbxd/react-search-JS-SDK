@@ -82,6 +82,7 @@ export const getUpdatedFacets = (
                                 isSelected: false,
                             };
                         }
+                        tempVal['id'] = `${facetName}_${fromValue}-${toValue}`;
                         valuesAggregator[idx] = tempVal;
                     }
                 });
@@ -102,13 +103,20 @@ export const getUpdatedFacets = (
         } else {
             const valMin = sliderMin;
             const valMax = sliderMax;
+            const formattedValues = values.map((val) => {
+                const { from, end } = val;
+                const { dataId: fromValue } = from;
+                const { dataId: toValue } = end;
+                const id = `${fromValue}_${toValue}`;
+                return { ...val, id };
+            });
             updatedFacetState[facetName] = {
                 sliderMin,
                 sliderMax,
                 valMin,
                 valMax,
                 displayName,
-                values,
+                values: formattedValues,
                 isSelected: false,
             };
         }
