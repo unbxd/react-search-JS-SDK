@@ -279,23 +279,20 @@ class GenerateCombinedFacets extends React.Component {
   toggleViewLess = (event) =>{
     const facetName = event.target.dataset['unx_name'];
     this.setState((combinedFacetsState) => {
-      let interimCombinedFacets = [...combinedFacetsState.combinedFacets]
-      interimCombinedFacets.map((combinedFacet)=>{ 
+      const interimCombinedFacets = combinedFacetsState.combinedFacets.map((combinedFacet)=>{ 
         if(combinedFacet.facetName === facetName){
-          const currentFacet = combinedFacet;
+          const currentFacet = {...combinedFacet};
           currentFacet['viewLess'] = !currentFacet['viewLess'];
           if(currentFacet['viewLess']){
             currentFacet.className = "UNX-facet__list UNX-facet__listShowLimited"
           }else{
             currentFacet.className = "UNX-facet__list"
           }
-          return currentFacet;
+          return {...combinedFacet, viewLess: currentFacet['viewLess'], className: currentFacet["className"]};
         }
-        return combinedFacet;
+        return {...combinedFacet};
       })
-      return {
-        combinedFacets: [...interimCombinedFacets]
-      }
+      return {...combinedFacetsState, combinedFacets: interimCombinedFacets}
     });
   }
 
