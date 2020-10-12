@@ -1,18 +1,21 @@
 .UNX-facet__element {
-<<<<<<< HEAD
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #e7e7e7;
-    cursor: pointer;
-    transition: 0.4s;
-    display: flex;
-    flex-direction: column;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e7e7e7;
+  cursor: pointer;
+  transition: 0.4s;
+  display: flex;
+  flex-direction: column;
 
-    &.open {
+  &.open {  
         .UNX-facet__list {
-            max-height: 500px;
+        max-height: 500px;
+        overflow: auto;
         }
-
+        .UNX-facet__list.UNX-facet__listShowLimited{
+        max-height: 90px !important;
+        overflow: auto;
+        }
         .-clear {
             display: block;
         }
@@ -27,42 +30,10 @@
         }
     }
 
-    .UNX-facet__list {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.2s ease-out;
-    }
-=======
-  padding-bottom: 15px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #e7e7e7;
-  cursor: pointer;
-  transition: 0.4s;
-  display: flex;
-  flex-direction: column;
-
-  &.open {
-    .UNX-facet__list {
-      max-height: 500px;
-      overflow: auto;
-    }
-    .UNX-facet__list.UNX-facet__listShowLimited{
-      max-height: 90px !important;
-      overflow: auto;
-    }
->>>>>>> 04b79a4... facets features
-    .-clear {
-        display: none;
-        font-size: 12px;
-        padding: 0;
-        margin-left: auto;
-    }
-
     .l1 {
         padding-left: 0;
     }
 
-<<<<<<< HEAD
     .l2 {
         padding-left: 12px;
     }
@@ -74,7 +45,6 @@
     .l4 {
         padding-left: 36px;
     }
-=======
   .UNX-facet__list {
     max-height: 0;
     overflow: auto;
@@ -87,7 +57,6 @@
     padding: 0;
     margin-left: auto;
   }
->>>>>>> 04b79a4... facets features
 }
 
 .UNX-facet__header {
