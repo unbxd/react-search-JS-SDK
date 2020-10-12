@@ -31,7 +31,9 @@ class CombinedFacetsContainer extends React.PureComponent {
       FacetListItemComponent,
       displayType,
       priceUnit,
-      rangeCollapsible
+      rangeCollapsible,
+      sortCombinedFacets,
+      enableViewMore
     } = this.props;
 
     const {
@@ -144,7 +146,8 @@ class CombinedFacetsContainer extends React.PureComponent {
       textSearchable,
       displayType,
       priceUnit,
-      rangeCollapsible
+      rangeCollapsible,
+      enableViewMore
     };
 
     const helpers = {
@@ -159,6 +162,7 @@ class CombinedFacetsContainer extends React.PureComponent {
       selectedRangeFacets,
       FacetSliderItemComponent,
       FacetListItemComponent,
+      sortCombinedFacets
     };
 
     return { ...data, ...helpers };

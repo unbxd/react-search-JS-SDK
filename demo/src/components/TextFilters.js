@@ -3,6 +3,11 @@ import React from 'react';
 import { TextFacets } from '@unbxd-ui/react-search-sdk';
 import { scrollTop } from '../utils';
 
+const sortTextFacets = function(){
+  console.log(this);
+  return this;
+};
+
 const FacetItemComponent = ({
     itemData,
     facetName,
@@ -50,14 +55,16 @@ const onFacetClick = (facet, isSelected) => {
 };
 
 const TextFilters = () => {
-    return (
-        <TextFacets
-            FacetItemComponent={FacetItemComponent}
-            collapsible={true}
-            searchable={true}
-            onFacetClick={onFacetClick}
-        />
-    );
+  return (
+    <TextFacets
+      FacetItemComponent={FacetItemComponent}
+      collapsible={true}
+      enableViewMore={true}
+      searchable={true}
+      sortTextFacets={sortTextFacets}
+      onFacetClick={onFacetClick}
+    />
+  );
 };
 
 export default TextFilters;

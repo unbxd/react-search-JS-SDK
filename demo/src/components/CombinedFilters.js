@@ -2,6 +2,10 @@ import React from 'react';
 
 import  { CombinedFacets } from '@unbxd-ui/react-search-sdk';
 
+const sortCombinedFacets = function(){
+  console.log(this);
+  return this;
+};
 
 const FacetItemComponent = ({
   itemData,
@@ -49,9 +53,9 @@ const FacetListItemComponent = ({
   onClick,
   priceUnit
 }) => {
-  const { from, to, isSelected = false } = itemData;
+  const { from, end, isSelected = false } = itemData;
   const { name: fromName, count, dataId: fromDataId } = from;
-  const { name: ToName, dataId: toDataId } = to;
+  const { name: ToName, dataId: toDataId } = end;
 
   return (
     <div
@@ -85,8 +89,10 @@ const FacetListItemComponent = ({
 const CombinedFilters = () => {
     return (
       <CombinedFacets
+        sortCombinedFacets = {sortCombinedFacets}
         FacetListItemComponent={FacetListItemComponent}
         FacetItemComponent={FacetItemComponent}
+        enableViewMore={true}
       />
     );
 };

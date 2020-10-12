@@ -59,7 +59,8 @@ class GenerateCombinedFacets extends React.Component {
       lastSelectedFacets,
       selectedFacets,
       selectedRangeFacets,
-      setSelectedFacets
+      setSelectedFacets,
+      sortCombinedFacets
     } = this.props;
     if (
       prevProps.unbxdCoreStatus !== unbxdCoreStatus &&
@@ -147,11 +148,21 @@ class GenerateCombinedFacets extends React.Component {
       formattedCombinedFacets.sort((a, b) => {
         return a.position - b.position;
       });
-
-      this.setState(() => {
-        return { combinedFacets: formattedCombinedFacets };
-      });
-
+      formattedCombinedFacets.map((combinedFacet)=>{
+        combinedFacet.viewLess = false;
+        combinedFacet.className = "UNX-facet__list";
+        return combinedFacet;
+      })
+      if(sortCombinedFacets && typeof(sortCombinedFacets) === 'function'){
+        let returnedFacets = sortCombinedFacets.call(formattedCombinedFacets);
+        this.setState(() => {
+          return { combinedFacets: returnedFacets };
+        });
+      }else{
+        this.setState(() => {
+          return { combinedFacets: formattedCombinedFacets };
+        });
+      }
       setSelectedFacets(
         enableApplyFilters ? selectedFacets : lastSelectedFacets
       );
@@ -242,7 +253,7 @@ class GenerateCombinedFacets extends React.Component {
         if(combinedFacet.facetName === facetId && combinedFacet.facetType === 'range'){
           const currentFacet = combinedFacet;
           currentFacet['isOpen'] = !currentFacet['isOpen'];
-          return combinedFacet;
+          return currentFacet;
         }
         return combinedFacet;
       })
@@ -265,6 +276,29 @@ class GenerateCombinedFacets extends React.Component {
     });
   };
 
+  toggleViewLess = (event) =>{
+    const facetName = event.target.dataset['unx_name'];
+    this.setState((combinedFacetsState) => {
+      let interimCombinedFacets = [...combinedFacetsState.combinedFacets]
+      interimCombinedFacets.map((combinedFacet)=>{ 
+        if(combinedFacet.facetName === facetName){
+          const currentFacet = combinedFacet;
+          currentFacet['viewLess'] = !currentFacet['viewLess'];
+          if(currentFacet['viewLess']){
+            currentFacet.className = "UNX-facet__list UNX-facet__listShowLimited"
+          }else{
+            currentFacet.className = "UNX-facet__list"
+          }
+          return currentFacet;
+        }
+        return combinedFacet;
+      })
+      return {
+        combinedFacets: [...interimCombinedFacets]
+      }
+    });
+  }
+
   render() {
     const {
       selectedFacets,
@@ -278,7 +312,8 @@ class GenerateCombinedFacets extends React.Component {
       FacetListItemComponent,
       displayType,
       priceUnit,
-      rangeCollapsible
+      rangeCollapsible,
+      enableViewMore
     } = this.props;
 
     const { combinedFacets } = this.state;
@@ -291,7 +326,7 @@ class GenerateCombinedFacets extends React.Component {
         <div>
         {combinedFacets.map((combinedFacet) => {
             if(combinedFacet.facetType === 'text'){
-                const {displayName, facetName, values, isOpen, filter} = combinedFacet;
+                const {displayName, facetName, values, isOpen, filter, viewLess, className} = combinedFacet;
                 const hasActiveFacets = selectedFacets[facetName] ? true : false;
                 let filteredValues = values;
                 if (filter.length > 0) {
@@ -329,7 +364,7 @@ class GenerateCombinedFacets extends React.Component {
                                 ListItem={FacetItemComponent || FacetItem}
                                 onClick={onFacetClick}
                                 facetName={facetName}
-                                className={'UNX-facet__list'}
+                                className={className}
                                 isFacetSelected={isFacetSelected}
                                 selectedFacets={selectedFacets}
                             />
@@ -342,6 +377,22 @@ class GenerateCombinedFacets extends React.Component {
                                 Clear
                             </div>
                             )}
+                            {enableViewMore && isOpen?
+                              (!viewLess) ? (
+                                <div className="view-More"
+                                  data-unx_name={facetName}
+                                  onClick={this.toggleViewLess}>
+                                  View Less
+                                </div>
+                              ):(
+                                <div 
+                                  className="view-More"
+                                  data-unx_name={facetName}
+                                  onClick={this.toggleViewLess}>
+                                  View More
+                                </div>
+                              ): ""
+                            }
                         </div>
                     </div>
                 )
@@ -355,7 +406,9 @@ class GenerateCombinedFacets extends React.Component {
                 isOpen,
                 facetName, 
                 values,
-                isSelected
+                isSelected,
+                viewLess, 
+                className
               } = combinedFacet;
             
             if(displayType === displayTypes.SLIDER){
@@ -435,7 +488,7 @@ class GenerateCombinedFacets extends React.Component {
                         onClick={this.handleRangeValueClick}
                         idAttribute={facetName}
                         facetName={facetName}
-                        className="UNX-facet__list"
+                        className={className}
                         priceUnit={priceUnit}
                       />
                       {isSelected && (
@@ -447,6 +500,22 @@ class GenerateCombinedFacets extends React.Component {
                           Clear
                         </div>
                       )}
+                      {enableViewMore && isOpen?
+                        (!viewLess) ? (
+                          <div className="view-More"
+                            data-unx_name={facetName}
+                            onClick={this.toggleViewLess}>
+                            View Less
+                          </div>
+                        ):(
+                          <div 
+                            className="view-More"
+                            data-unx_name={facetName}
+                            onClick={this.toggleViewLess}>
+                            View More
+                          </div>
+                        ): ""
+                      }
                     </div>
                 );
             }
