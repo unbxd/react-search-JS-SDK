@@ -97,23 +97,20 @@ class GenerateFacets extends React.Component {
     toggleViewLess = (event) =>{
         const facetName = event.target.dataset['unx_name'];
         this.setState((textFacetsState) => {
-          let interimTextFacets = [...textFacetsState.textFacets]
-          interimTextFacets.map((textFacet)=>{ 
+          const interimTextFacets = textFacetsState.textFacets.map((textFacet)=>{ 
             if(textFacet.facetName === facetName){
-              const currentFacet = textFacet;
+              const currentFacet = {...textFacet};
               currentFacet['viewLess'] = !currentFacet['viewLess'];
               if(currentFacet['viewLess']){
                 currentFacet.className = "UNX-facet__list UNX-facet__listShowLimited"
               }else{
                 currentFacet.className = "UNX-facet__list"
               }
-              return currentFacet;
+              return {...textFacet, viewLess: currentFacet['viewLess'], className: currentFacet["className"]};
             }
-            return textFacet;
+            return {...textFacet};
           })
-          return {
-            textFacets: [...interimTextFacets]
-          }
+          return {...textFacetsState, textFacets: interimTextFacets}
         });
       }
 
