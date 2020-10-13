@@ -1,10 +1,11 @@
 import React from 'react';
 
 import { RangeFacets } from '@unbxd-ui/react-search-sdk';
+import { scrollTop } from '../utils';
 
-const sortRangeFacets = function(){
-  console.log(this);
-  return this;
+const sortRangeFacets = function () {
+    console.log(this);
+    return this;
 };
 
 const FacetListItemComponent = ({
@@ -46,16 +47,22 @@ const FacetListItemComponent = ({
     );
 };
 
+const onFacetClick = (facet, isSelected) => {
+    console.log('Facet change :', facet, isSelected);
+    scrollTop();
+    return true;
+};
+
 const RangeFilters = () => {
-  return (
-    <RangeFacets
-      sortRangeFacets = {sortRangeFacets}
-      displayType={'LIST'}
-      FacetListItemComponent={FacetListItemComponent}
-      collapsible={true}
-      enableViewMore={true}
-    />
-  );
+    return (
+        <RangeFacets
+            sortRangeFacets={sortRangeFacets}
+            FacetListItemComponent={FacetListItemComponent}
+            collapsible={true}
+            enableViewMore={true}
+            //onFacetClick={onFacetClick}
+        />
+    );
 };
 
 export default RangeFilters;

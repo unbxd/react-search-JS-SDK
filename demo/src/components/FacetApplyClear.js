@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { FacetActions } from '@unbxd-ui/react-search-sdk';
-import { scrollTop } from '../utils';
+import { scrollTop, srollTopIE } from '../utils';
 
 const ApplyFilter = ({ onApplyFilter }) => (
     <button className="-apply" onClick={onApplyFilter}>
@@ -14,25 +14,32 @@ const ClearFilter = ({ onClearFilter }) => (
     </button>
 );
 
-const onApply = (facets) => {
-    console.log('Facets apply :', facets);
-    scrollTop();
-    return true;
-};
+const FacetApplyClear = (props) => {
+    const { handleClose } = props;
+    const onApply = (facets) => {
+        console.log('Facets apply :', facets);
+        scrollTop();
+        //srollTopIE();
+        handleClose();
+        return true;
+    };
 
-const onClear = () => {
-    console.log('Facets clear :');
-    scrollTop();
-    return true;
-};
+    const onClear = () => {
+        console.log('Facets clear :');
+        scrollTop();
+        //srollTopIE();
+        handleClose();
+        return true;
+    };
 
-const FacetApplyClear = () => (
-    <FacetActions
-        ApplyFilterComponent={ApplyFilter}
-        ClearFilterComponent={ClearFilter}
-        //onApply={onApply}
-        //onClear={onClear}
-    />
-);
+    return (
+        <FacetActions
+            ApplyFilterComponent={ApplyFilter}
+            ClearFilterComponent={ClearFilter}
+            onApply={onApply}
+            onClear={onClear}
+        />
+    );
+};
 
 export default FacetApplyClear;

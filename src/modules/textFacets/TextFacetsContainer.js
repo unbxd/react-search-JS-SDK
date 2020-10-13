@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { conditionalRenderer, scrollTop } from '../../common/utils';
+import { conditionalRenderer } from '../../common/utils';
 import { getFacetRow, isFacetSelected, getFacetCoreMethods } from './utils';
 import { manageStateTypes } from '../../config';
 import GenerateFacets from './generateFacets';
@@ -33,7 +33,7 @@ class TextFacetsContainer extends React.PureComponent {
             searchable,
             onFacetClick,
             sortTextFacets,
-            enableViewMore
+            enableViewMore,
         } = this.props;
 
         const {
@@ -109,7 +109,6 @@ class TextFacetsContainer extends React.PureComponent {
             setPageStart(0);
             getResults();
             manageTextFacets(null, unx_name, null, manageStateTypes.RESET);
-            scrollTop();
         };
 
         const lastSelectedFacets = getSelectedFacets();
@@ -122,7 +121,7 @@ class TextFacetsContainer extends React.PureComponent {
             selectedFacets,
             collapsible,
             searchable,
-            enableViewMore
+            enableViewMore,
         };
 
         const helpers = {
@@ -131,7 +130,7 @@ class TextFacetsContainer extends React.PureComponent {
             setSelectedFacets,
             FacetItemComponent,
             label,
-            sortTextFacets
+            sortTextFacets,
         };
 
         return { ...data, ...helpers };

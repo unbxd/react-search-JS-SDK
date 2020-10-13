@@ -2,14 +2,14 @@ import {
   getSelectedRangeFacets,
   getFacetCoreMethods,
   isFacetSelected,
-  getUpdatedFacets
+  getUpdatedFacets,
+  getFormattedFacets
 } from './utils';
-import { displayTypes } from './constants';
 
 export {
   getSelectedRangeFacets,
   getFacetCoreMethods,
-  displayTypes,
   isFacetSelected,
-  getUpdatedFacets
+  getUpdatedFacets,
+  getFormattedFacets
 };
