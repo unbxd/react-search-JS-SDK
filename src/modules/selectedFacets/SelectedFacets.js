@@ -8,41 +8,51 @@ import SelectedFacetsContainer from './SelectedFacetsContainer';
 /**
  * Component to manage selected facets.
  */
-const SelectedFacets = props => {
-  return (
-    <AppContextConsumer>
-      {appState => {
-        if (appState === undefined) {
-          hasUnbxdSearchWrapperContext(SelectedFacets.displayName);
-        }
+const SelectedFacets = (props) => {
+    return (
+        <AppContextConsumer>
+            {(appState) => {
+                if (appState === undefined) {
+                    hasUnbxdSearchWrapperContext(SelectedFacets.displayName);
+                }
 
-        const { unbxdCore, unbxdCoreStatus, priceUnit,helpers: { getUpdatedResults } } = appState;
+                const {
+                    unbxdCore,
+                    unbxdCoreStatus,
+                    priceUnit,
+                    helpers: { getUpdatedResults },
+                    productType,
+                } = appState;
 
-        return (
-          <SelectedFacetsContainer
-            unbxdCore={unbxdCore}
-            unbxdCoreStatus={unbxdCoreStatus}
-            priceUnit={priceUnit}
-            getUpdatedResults={getUpdatedResults}
-            {...props}
-          />
-        );
-      }}
-    </AppContextConsumer>
-  );
+                return (
+                    <SelectedFacetsContainer
+                        unbxdCore={unbxdCore}
+                        unbxdCoreStatus={unbxdCoreStatus}
+                        priceUnit={priceUnit}
+                        getUpdatedResults={getUpdatedResults}
+                        productType={productType}
+                        {...props}
+                    />
+                );
+            }}
+        </AppContextConsumer>
+    );
 };
 
 SelectedFacets.displayName = 'SelectedFacets';
 
 SelectedFacets.propTypes = {
-  /**
-   * Custom facet item component.
-   */
-  FacetItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  /**
-    * Label for the component. 
-   */
-  label:PropTypes.node
+    /**
+     * Custom facet item component.
+     */
+    FacetItemComponent: PropTypes.oneOfType([
+        PropTypes.element,
+        PropTypes.func,
+    ]),
+    /**
+     * Label for the component.
+     */
+    label: PropTypes.node,
 };
 
 export default SelectedFacets;

@@ -36,11 +36,7 @@ export const isFacetSelected = (currentFacetRangeVal, facetRangeValues) => {
     return false;
 };
 
-export const getUpdatedFacets = (
-    rangeFacets,
-    selectedRangeFacets,
-    existingState
-) => {
+export const getFormattedFacets = (rangeFacets, selectedRangeFacets) => {
     let formattedSelectedFacets = {};
     if (Object.keys(selectedRangeFacets).length) {
         formattedSelectedFacets = getSelectedRangeFacets(selectedRangeFacets);
@@ -98,8 +94,8 @@ export const getUpdatedFacets = (
                     values: aggregatedValues,
                     displayName,
                     isSelected: true,
-                    viewLess : false,
-                    className : "UNX-facet__list"
+                    viewLess: false,
+                    className: 'UNX-facet__list',
                 };
             });
         } else {
@@ -120,20 +116,23 @@ export const getUpdatedFacets = (
                 displayName,
                 values: formattedValues,
                 isSelected: false,
-                viewLess : false,
-                className : "UNX-facet__list"
+                viewLess: false,
+                className: 'UNX-facet__list',
             };
-        }
-
-        if (existingState) {
-            const currentFacet = existingState.rangeValues[facetName];
-            updatedFacetState[facetName]['isOpen'] = currentFacet
-                ? currentFacet['isOpen']
-                : true;
         }
     });
 
     return updatedFacetState;
+};
+
+export const getUpdatedFacets = (rangeFacets, existingRangeValues = {}) => {
+    Object.keys(existingRangeValues).map((facetName) => {
+        const currentFacet = existingRangeValues[facetName];
+        rangeFacets[facetName]['isOpen'] = currentFacet
+            ? currentFacet['isOpen']
+            : true;
+    });
+    return rangeFacets;
 };
 
 export const getFacetCoreMethods = (unbxdCore) => {

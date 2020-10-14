@@ -1,21 +1,20 @@
 const Path = require('path');
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+    .BundleAnalyzerPlugin;
 
 const htmlPlugin = new HtmlWebPackPlugin({
     template: Path.resolve(__dirname, '../public/index.html'),
-    filename: "index.html"
+    filename: 'index.html',
 });
 
 const miniCssExtractPlugin = new MiniCssExtractPlugin({
     path: Path.resolve(__dirname, '../public/dist'),
     filename: 'css/[name].css',
-    chunkFilename: '[id].css'
-
+    chunkFilename: '[id].css',
 });
 
 const bundleAnalyzerPlugin = new BundleAnalyzerPlugin();
@@ -26,27 +25,33 @@ module.exports = {
         path: Path.resolve(__dirname, '../public/dist'),
         publicPath: '/',
         filename: 'js/[name].js',
-        sourceMapFilename: '[file].map'
+        sourceMapFilename: '[file].map',
     },
-    mode: "production",
+    mode: 'production',
     module: {
         rules: [
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                use: [{
-                    loader: "babel-loader",
-                    options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react'],
-                        plugins: [
-                            '@babel/plugin-transform-runtime', '@babel/plugin-proposal-class-properties'
-                        ]
-                    }
-                }]
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                '@babel/preset-env',
+                                '@babel/preset-react',
+                            ],
+                            plugins: [
+                                '@babel/plugin-transform-runtime',
+                                '@babel/plugin-proposal-class-properties',
+                            ],
+                        },
+                    },
+                ],
             },
             {
                 test: /\.html$/,
-                loader: 'html-loader'
+                loader: 'html-loader',
             },
             {
                 test: /\.s?css$/,
@@ -59,13 +64,13 @@ module.exports = {
                         loader: 'sass-loader',
                         options: {
                             sassOptions: {
-                                includePaths: ['public/css']
+                                includePaths: ['public/css'],
                             },
-                        }
+                        },
                     },
-                ]
-            }
-        ]
+                ],
+            },
+        ],
     },
     plugins: [/*bundleAnalyzerPlugin,*/ miniCssExtractPlugin, htmlPlugin],
     optimization: {
@@ -74,7 +79,7 @@ module.exports = {
     resolve: {
         extensions: ['*', '.js', '.jsx'],
         alias: {
-            '~': Path.resolve(__dirname, '../src')
-        }
-    }
+            '~': Path.resolve(__dirname, '../src'),
+        },
+    },
 };
