@@ -99,8 +99,8 @@ class SortContainer extends React.Component {
         const { sortOptions = [], displayType, SortItemComponent } = this.props;
 
         //format datas for better handling.
-        const formattedSortByOptions = sortOptions.map((sortByoption) =>
-            getFormattedSort(sortByoption, this.state.sortBy)
+        const formattedSortByOptions = sortOptions.map((sortByoption, idx) =>
+            getFormattedSort(sortByoption, this.state.sortBy, idx)
         );
 
         const onSortClick = (event) => {

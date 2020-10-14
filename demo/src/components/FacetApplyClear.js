@@ -20,7 +20,7 @@ const FacetApplyClear = (props) => {
         console.log('Facets apply :', facets);
         scrollTop();
         //srollTopIE();
-        handleClose();
+        handleClose && handleClose();
         return true;
     };
 
@@ -28,7 +28,7 @@ const FacetApplyClear = (props) => {
         console.log('Facets clear :');
         scrollTop();
         //srollTopIE();
-        handleClose();
+        handleClose && handleClose();
         return true;
     };
 
