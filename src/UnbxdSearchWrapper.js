@@ -235,6 +235,7 @@ class UnbxdSearchWrapper extends Component {
 UnbxdSearchWrapper.defaultProps = {
     productType: 'SEARCH',
     priceUnit: '$',
+    searchConfigurations: {}
 };
 
 UnbxdSearchWrapper.propTypes = {

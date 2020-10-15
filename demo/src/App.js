@@ -55,7 +55,6 @@ const AppRoutes = () => {
                     <UnbxdSearchWrapper
                         siteKey="wildearthclone-neto-com-au808941566310465"
                         apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-                        searchConfigurations={searchConfigurations}
                         getCategoryId={getCategoryId}
                         productType={productType}
                     >
