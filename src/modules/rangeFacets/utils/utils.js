@@ -126,12 +126,14 @@ export const getFormattedFacets = (rangeFacets, selectedRangeFacets) => {
 };
 
 export const getUpdatedFacets = (rangeFacets, existingRangeValues = {}) => {
-    Object.keys(existingRangeValues).map((facetName) => {
-        const currentFacet = existingRangeValues[facetName];
-        rangeFacets[facetName]['isOpen'] = currentFacet
-            ? currentFacet['isOpen']
-            : true;
-    });
+    if (Object.keys(rangeFacets).length > 0) {
+        Object.keys(existingRangeValues).map((facetName) => {
+            const currentFacet = existingRangeValues[facetName];
+            rangeFacets[facetName]['isOpen'] = currentFacet
+                ? currentFacet['isOpen']
+                : true;
+        });
+    }
     return rangeFacets;
 };
 
