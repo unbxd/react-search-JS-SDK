@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { conditionalRenderer, scrollTop } from '../../common/utils';
+import { conditionalRenderer } from '../../common/utils';
 import { getFacetCoreMethods } from './utils';
 import MultilevelFacetsWrapper from './MultilevelFacetsWrapper';
 import { executeCallback } from '../../common/utils';

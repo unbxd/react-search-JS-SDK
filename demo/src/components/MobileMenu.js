@@ -1,5 +1,6 @@
 import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { Link } from 'react-router-dom';
 
 const MobileMenu = (props) => {
     const {
@@ -33,8 +34,13 @@ const MobileMenu = (props) => {
                                     key={id}
                                     onClick={handleCategoryLinkClick}
                                 >
-                                    {' '}
-                                    {label}
+                                    <Link
+                                        className="menu-item-link"
+                                        data-unx_path={path}
+                                        to={`/${id}`}
+                                    >
+                                        {label}
+                                    </Link>
                                 </Dropdown.Item>
                             );
                         }

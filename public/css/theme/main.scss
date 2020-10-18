@@ -1,20 +1,20 @@
 .UNX-facet__element {
-  padding-bottom: 15px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #e7e7e7;
-  cursor: pointer;
-  transition: 0.4s;
-  display: flex;
-  flex-direction: column;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e7e7e7;
+    cursor: pointer;
+    transition: 0.4s;
+    display: flex;
+    flex-direction: column;
 
-  &.open {  
+    &.open {
         .UNX-facet__list {
-        max-height: 500px;
-        overflow: auto;
+            max-height: 500px;
+            overflow: auto;
         }
-        .UNX-facet__list.UNX-facet__listShowLimited{
-        max-height: 90px;
-        overflow: auto;
+        .UNX-facet__list.UNX-facet__listShowLimited {
+            max-height: 100px;
+            overflow: auto;
         }
         .-clear {
             display: block;
@@ -45,18 +45,18 @@
     .l4 {
         padding-left: 36px;
     }
-  .UNX-facet__list {
-    max-height: 0;
-    overflow: auto;
-    transition: max-height 0.2s ease-out;
-  }
+    .UNX-facet__list {
+        max-height: 0;
+        overflow: auto;
+        transition: max-height 0.2s ease-out;
+    }
 
-  .-clear {
-    display: none;
-    font-size: 12px;
-    padding: 0;
-    margin-left: auto;
-  }
+    .-clear {
+        display: none;
+        font-size: 12px;
+        padding: 0;
+        margin-left: auto;
+    }
 }
 
 .UNX-facet__header {

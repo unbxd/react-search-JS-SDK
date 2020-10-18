@@ -61,7 +61,13 @@ class SearchBoxContainer extends React.PureComponent {
         const {
             helpers: { setSearchBoxConfiguration },
         } = this.props;
+        if (!query.replace(/\s/g, '').length) {
+            return false;
+        }
         const queryString = encodeURIComponent(query);
+        //check for empty string
+        //dont call search if the query is empty.
+
         if (onSubmit) {
             if (onSubmit(query) && query.length) {
                 resetSearch();

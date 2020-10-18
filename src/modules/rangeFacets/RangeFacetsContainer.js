@@ -1,102 +1,96 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { conditionalRenderer, scrollTop } from '../../common/utils';
+import { conditionalRenderer } from '../../common/utils';
 import GenerateFacets from './GenerateFacets';
-import { getFacetCoreMethods, displayTypes } from './utils';
+import { getFacetCoreMethods, getFormattedFacets } from './utils';
 
 class RangeFacetsContainer extends React.PureComponent {
-  getRangeFacetsProps() {
-    const {
-      unbxdCore,
-      FacetSliderItemComponent,
-      FacetListItemComponent,
-      displayType,
-      enableApplyFilters,
-      priceUnit,
-      label,
-      collapsible,
-      onFacetClick,
-      sortRangeFacets,
-      enableViewMore
-    } = this.props;
+    getRangeFacetsProps() {
+        const {
+            unbxdCore,
+            FacetListItemComponent,
+            enableApplyFilters,
+            priceUnit,
+            label,
+            collapsible,
+            onFacetClick,
+            sortRangeFacets,
+            enableViewMore,
+        } = this.props;
 
-    const {
-      getRangeFacets,
-      setRangeFacet,
-      applyRangeFacet,
-      clearARangeFacet,
-      selectedRangeFacets
-    } = getFacetCoreMethods(unbxdCore);
-    const applyMultiple = displayType === displayTypes.LIST;
-    const rangeFacets = getRangeFacets() || [];
-    const addRangeFacet = ({ facetName, start, end }, getResults = false) => {
-      setRangeFacet({ facetName, start, end, applyMultiple });
-      if (getResults) {
-        applyRangeFacet();
-        scrollTop();
-      }
-    };
+        const {
+            getRangeFacets,
+            setRangeFacet,
+            applyRangeFacet,
+            clearARangeFacet,
+            selectedRangeFacets,
+        } = getFacetCoreMethods(unbxdCore);
+        const applyMultiple = true;
+        const rangeFacets = getRangeFacets();
 
-    const removeRangeFacet = ({ facetName }, getResults = false) => {
-      clearARangeFacet(facetName);
-      if (getResults) {
-        applyRangeFacet();
-        scrollTop();
-      }
-    };
+        const formattedRangeFacets = getFormattedFacets(
+            rangeFacets,
+            selectedRangeFacets
+        );
 
-    return {
-      rangeFacets,
-      addRangeFacet,
-      applyRangeFacet,
-      removeRangeFacet,
-      selectedRangeFacets,
-      FacetSliderItemComponent,
-      FacetListItemComponent,
-      displayType,
-      enableApplyFilters,
-      priceUnit,
-      label,
-      collapsible,
-      sortRangeFacets,
-      enableViewMore
-    };
-  }
+        const addRangeFacet = (
+            { facetName, start, end },
+            getResults = false
+        ) => {
+            setRangeFacet({ facetName, start, end, applyMultiple });
+            if (getResults) {
+                applyRangeFacet();
+            }
+        };
 
-  render() {
-    const DefaultRender = GenerateFacets;
+        const removeRangeFacet = ({ facetName }, getResults = false) => {
+            clearARangeFacet(facetName);
+            if (getResults) {
+                applyRangeFacet();
+            }
+        };
 
-    return conditionalRenderer(
-      this.props.children,
-      this.getRangeFacetsProps(),
-      DefaultRender
-    );
-  }
+        return {
+            rangeFacets: formattedRangeFacets,
+            addRangeFacet,
+            applyRangeFacet,
+            removeRangeFacet,
+            FacetListItemComponent,
+            enableApplyFilters,
+            priceUnit,
+            label,
+            collapsible,
+            sortRangeFacets,
+            enableViewMore,
+            onFacetClick,
+        };
+    }
+
+    render() {
+        const DefaultRender = GenerateFacets;
+
+        return conditionalRenderer(
+            this.props.children,
+            this.getRangeFacetsProps(),
+            DefaultRender
+        );
+    }
 }
 
-RangeFacetsContainer.defaultProps = {
-  displayType: 'SLIDER'
-};
-
 RangeFacetsContainer.propTypes = {
-  unbxdCore: PropTypes.object.isRequired,
-  unbxdCoreStatus: PropTypes.string.isRequired,
-  helpers: PropTypes.object.isRequired,
-  FacetSliderItemComponent: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.func
-  ]),
-  FacetListItemComponent: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.func
-  ]),
-  displayType: PropTypes.string.isRequired,
-  enableApplyFilters: PropTypes.bool.isRequired,
-  priceUnit: PropTypes.string.isRequired,
-  label: PropTypes.node,
-  collapsible: PropTypes.bool,
-  onFacetClick:PropTypes.node
+    unbxdCore: PropTypes.object.isRequired,
+    unbxdCoreStatus: PropTypes.string.isRequired,
+    helpers: PropTypes.object.isRequired,
+    FacetListItemComponent: PropTypes.oneOfType([
+        PropTypes.element,
+        PropTypes.func,
+    ]),
+    enableApplyFilters: PropTypes.bool.isRequired,
+    priceUnit: PropTypes.string.isRequired,
+    label: PropTypes.node,
+    collapsible: PropTypes.bool,
+    onFacetClick: PropTypes.node,
 };
 
 export default RangeFacetsContainer;

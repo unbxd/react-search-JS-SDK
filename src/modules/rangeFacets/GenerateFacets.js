@@ -1,83 +1,67 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { RangeSlider } from '../../components';
-import {
-    getSelectedRangeFacets,
-    displayTypes,
-    isFacetSelected,
-    getUpdatedFacets,
-} from './utils';
+import { isFacetSelected, getUpdatedFacets } from './utils';
 import { List } from '../../components';
 import FacetListItem from './FacetListItem';
+import { executeCallback } from '../../common/utils';
 
 class GenerateFacets extends React.Component {
     constructor(props) {
         super(props);
 
-        const { rangeFacets, selectedRangeFacets } = this.props;
-        const updatedFacetState = getUpdatedFacets(
-            rangeFacets,
-            selectedRangeFacets
-        );
-
+        const { rangeFacets } = this.props;
         this.state = {
-            rangeValues: updatedFacetState,
+            rangeValues: rangeFacets,
         };
     }
 
-    setFacetValue(facetAddObj, getResults = false) {
-        const { facetName, valMin, valMax } = facetAddObj;
-        const { displayType } = this.props;
-        const applyMutiple = displayType === displayTypes.LIST;
-        const isSelected = isFacetSelected(facetAddObj, this.state.rangeValues);
-        this.setState((currentFacetState) => {
-            const rangeObject = currentFacetState.rangeValues[facetName];
-            //also go into values and set the specific from to as is selected
-            const updatedValues = rangeObject.values.map((rangeValues) => {
-                const { from, end, isSelected = false } = rangeValues;
-                const { dataId: fromValue } = from;
-                const { dataId: toValue } = end;
+    setFacetValue(facetObj, getResults = false) {
+        const { onFacetClick } = this.props;
+        const { facetName, valMin, valMax } = facetObj;
+        const applyMutiple = true;
+        const isSelected = isFacetSelected(facetObj, this.state.rangeValues);
+        const onFinish = () => {
+            this.setState((currentFacetState) => {
+                const rangeObject = currentFacetState.rangeValues[facetName];
+                //also go into values and set the specific from to as is selected
+                const updatedValues = rangeObject.values.map((rangeValues) => {
+                    const { from, end, isSelected = false } = rangeValues;
+                    const { dataId: fromValue } = from;
+                    const { dataId: toValue } = end;
 
-                if (valMin >= fromValue && valMax <= toValue) {
-                    return { ...rangeValues, isSelected: !isSelected };
-                } else {
-                    return { ...rangeValues };
-                }
+                    if (valMin >= fromValue && valMax <= toValue) {
+                        return { ...rangeValues, isSelected: !isSelected };
+                    } else {
+                        return { ...rangeValues };
+                    }
+                });
+
+                return {
+                    rangeValues: {
+                        ...currentFacetState.rangeValues,
+                        [facetName]: {
+                            ...rangeObject,
+                            valMin,
+                            valMax,
+                            values: updatedValues,
+                        },
+                    },
+                };
             });
 
-            return {
-                rangeValues: {
-                    ...currentFacetState.rangeValues,
-                    [facetName]: {
-                        ...rangeObject,
-                        valMin,
-                        valMax,
-                        values: updatedValues,
-                    },
-                },
-            };
-        });
-
-        const { addRangeFacet, removeRangeFacet } = this.props;
-        if (isSelected && !applyMutiple) {
-            removeRangeFacet({ facetName }, getResults);
-        } else {
-            addRangeFacet(
-                { facetName, start: valMin, end: valMax },
-                getResults
-            );
-        }
+            const { addRangeFacet, removeRangeFacet } = this.props;
+            if (isSelected && !applyMutiple) {
+                removeRangeFacet({ facetName }, getResults);
+            } else {
+                addRangeFacet(
+                    { facetName, start: valMin, end: valMax },
+                    getResults
+                );
+            }
+        };
+        executeCallback(onFacetClick, [facetObj, !isSelected], onFinish);
     }
-
-    onSliderChange = (selectedRange) => {
-        const facetName = selectedRange.name;
-        const valMin = parseInt(selectedRange.valMin);
-        const valMax = parseInt(selectedRange.valMax);
-
-        const addFacetObj = { facetName, valMin, valMax };
-        this.setFacetValue(addFacetObj);
-    };
 
     onApplyFilter = () => {
         const { applyRangeFacet } = this.props;
@@ -108,7 +92,7 @@ class GenerateFacets extends React.Component {
         this.onApplyFilter();
     };
 
-    handleRangeValueClick = (event) => {
+    handleFacetClick = (event) => {
         const facetInfo = event.target.dataset['unx_facetname'];
         const [facetName, ranges] = facetInfo.split('_');
         const [valMin, valMax] = ranges.split('-');
@@ -127,7 +111,10 @@ class GenerateFacets extends React.Component {
                     ...existingState.rangeValues,
                     [facetId]: {
                         ...currentFacet,
-                        isOpen: !currentFacet.isOpen,
+                        isOpen:
+                            currentFacet.isOpen === undefined
+                                ? false
+                                : !currentFacet.isOpen,
                     },
                 },
             };
@@ -135,32 +122,35 @@ class GenerateFacets extends React.Component {
     };
 
     componentDidUpdate(prevProps) {
-        const { rangeFacets, selectedRangeFacets, sortRangeFacets } = this.props;
+        const { rangeFacets, sortRangeFacets } = this.props;
         if (prevProps.rangeFacets !== rangeFacets) {
             this.setState((existingState) => {
-                //set the state with starts and ends
+                const { rangeValues } = existingState;
                 const updatedFacetState = getUpdatedFacets(
                     rangeFacets,
-                    selectedRangeFacets,
-                    existingState
+                    rangeValues
                 );
 
-                if(sortRangeFacets && typeof(sortRangeFacets) === 'function'){
-                    let returnedFacets = sortRangeFacets.call(updatedFacetState);
+                if (sortRangeFacets && typeof sortRangeFacets === 'function') {
+                    let returnedFacets = sortRangeFacets.call(
+                        updatedFacetState
+                    );
                     return { rangeValues: returnedFacets };
-                  }
+                }
                 return { rangeValues: updatedFacetState };
             });
         }
     }
 
-    toggleViewLess = (event) =>{
+    toggleViewLess = (event) => {
         const facetName = event.target.dataset['unx_name'];
-        
         this.setState((existingState) => {
             const currentFacet = existingState.rangeValues[facetName];
             let classNameTemp = currentFacet.className;
-            classNameTemp = (classNameTemp.indexOf("UNX-facet__listShowLimited") < 0)?"UNX-facet__list UNX-facet__listShowLimited": "UNX-facet__list"
+            classNameTemp =
+                classNameTemp.indexOf('UNX-facet__listShowLimited') < 0
+                    ? 'UNX-facet__list UNX-facet__listShowLimited'
+                    : 'UNX-facet__list';
             return {
                 ...existingState,
                 rangeValues: {
@@ -173,18 +163,16 @@ class GenerateFacets extends React.Component {
                 },
             };
         });
-    }
+    };
 
     render() {
         const { rangeValues } = this.state;
         const {
-            FacetSliderItemComponent,
             FacetListItemComponent,
-            displayType,
             priceUnit,
             label,
             collapsible,
-            enableViewMore
+            enableViewMore,
         } = this.props;
 
         if (Object.keys(rangeValues).length === 0) {
@@ -194,36 +182,25 @@ class GenerateFacets extends React.Component {
         return (
             <div className="UNX-rangefacet__container">
                 {label ? label : null}
-                {displayType === displayTypes.SLIDER &&
-                    Object.keys(rangeValues).map((facetName) => {
-                        const {
-                            sliderMin,
-                            sliderMax,
-                            valMin,
-                            valMax,
-                            displayName,
-                            isOpen = true,
-                        } = rangeValues[facetName];
 
-                        return FacetSliderItemComponent ? (
-                            <FacetSliderItemComponent
-                                sliderMin={sliderMin}
-                                sliderMax={sliderMax}
-                                valMin={valMin}
-                                valMax={valMax}
-                                onChange={this.onSliderChange}
-                                onClearFilter={this.onClearFilter}
-                                onApplyFilter={this.onApplyFilter}
-                                displayName={displayName}
-                                key={facetName}
-                            />
-                        ) : (
-                            <div
-                                className={`UNX-facet__element ${
-                                    isOpen ? 'open' : ''
-                                }`}
-                                key={facetName}
-                            >
+                {Object.keys(rangeValues).map((facetName) => {
+                    const {
+                        values,
+                        displayName,
+                        isSelected,
+                        isOpen = true,
+                        viewLess,
+                        className,
+                    } = rangeValues[facetName];
+
+                    return (
+                        <div
+                            className={`UNX-facet__element ${
+                                isOpen ? 'open' : ''
+                            }`}
+                            key={facetName}
+                        >
+                            <div className="UNX-facet__headerContainer">
                                 <div className="UNX-facet__header">
                                     {displayName}
                                     {collapsible && (
@@ -234,122 +211,61 @@ class GenerateFacets extends React.Component {
                                         />
                                     )}
                                 </div>
-                                <RangeSlider
-                                    unit={priceUnit}
-                                    name={facetName}
-                                    sliderMin={sliderMin}
-                                    sliderMax={sliderMax}
-                                    valMin={valMin}
-                                    valMax={valMax}
-                                    onChange={this.onSliderChange}
-                                />
-                                <div className="UNX-facet__actions">
-                                    <div
-                                        className="-clear"
-                                        data-unx_facetname={facetName}
-                                        onClick={this.onClearFilter}
-                                    >
-                                        Clear
-                                    </div>
-                                    <div
-                                        className="-apply"
-                                        data-unx_facetname={facetName}
-                                        onClick={this.onApplyFilter}
-                                    >
-                                        Apply
-                                    </div>
-                                </div>
                             </div>
-                        );
-                    })}
-
-                {displayType === displayTypes.LIST &&
-                    Object.keys(rangeValues).map((facetName) => {
-                        const {
-                            values,
-                            displayName,
-                            isSelected,
-                            isOpen = true,
-                            viewLess,
-                            className
-                        } = rangeValues[facetName];
-
-                        return (
-                            <div
-                                className={`UNX-facet__element ${
-                                    isOpen ? 'open' : ''
-                                }`}
-                                key={facetName}
-                            >
-                                <div className="UNX-facet__headerContainer">
-                                    <div className="UNX-facet__header">
-                                        {displayName}
-                                        {collapsible && (
-                                            <span
-                                                className="-collapse-icon"
-                                                data-unx_name={facetName}
-                                                onClick={
-                                                    this.handleCollapseToggle
-                                                }
-                                            />
-                                        )}
-                                    </div>
+                            <List
+                                items={values}
+                                ListItem={
+                                    FacetListItemComponent || FacetListItem
+                                }
+                                onClick={this.handleFacetClick}
+                                facetName={facetName}
+                                className={className}
+                                priceUnit={priceUnit}
+                            />
+                            {isSelected && (
+                                <div
+                                    onClick={this.onClearFilter}
+                                    data-unx_facetname={facetName}
+                                    className="-clear"
+                                >
+                                    Clear
                                 </div>
-                                <List
-                                    items={values}
-                                    ListItem={
-                                        FacetListItemComponent || FacetListItem
-                                    }
-                                    onClick={this.handleRangeValueClick}
-                                    facetName={facetName}
-                                    className={className}
-                                    priceUnit={priceUnit}
-                                />
-                                {isSelected && (
+                            )}
+                            {enableViewMore && isOpen ? (
+                                !viewLess ? (
                                     <div
-                                        onClick={this.onClearFilter}
-                                        data-unx_facetname={facetName}
-                                        className="-clear"
-                                    >
-                                        Clear
-                                    </div>
-                                )}
-                                {enableViewMore && isOpen?
-                                    (!viewLess) ? (
-                                    <div className="view-More"
-                                        data-unx_name={facetName}
-                                        onClick={this.toggleViewLess}>
-                                        View Less
-                                    </div>
-                                    ):(
-                                    <div 
                                         className="view-More"
                                         data-unx_name={facetName}
-                                        onClick={this.toggleViewLess}>
+                                        onClick={this.toggleViewLess}
+                                    >
+                                        View Less
+                                    </div>
+                                ) : (
+                                    <div
+                                        className="view-More"
+                                        data-unx_name={facetName}
+                                        onClick={this.toggleViewLess}
+                                    >
                                         View More
                                     </div>
-                                    ): ""
-                                }
-                            </div>
-                        );
-                    })}
+                                )
+                            ) : (
+                                ''
+                            )}
+                        </div>
+                    );
+                })}
             </div>
         );
     }
 }
 
 GenerateFacets.propTypes = {
-    displayType: PropTypes.string,
     rangeFacets: PropTypes.array,
-    selectedRangeFacets: PropTypes.object,
     enableApplyFilters: PropTypes.bool.isRequired,
     addRangeFacet: PropTypes.func.isRequired,
     applyRangeFacet: PropTypes.func.isRequired,
     removeRangeFacet: PropTypes.func.isRequired,
-    FacetSliderItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
     FacetListItemComponent: PropTypes.oneOfType([
         PropTypes.element,
         PropTypes.func,

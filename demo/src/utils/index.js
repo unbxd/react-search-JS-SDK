@@ -4,3 +4,7 @@ export const scrollTop = () => {
         behavior: 'smooth',
     });
 };
+
+export const srollTopIE = () => {
+    document.documentElement.scrollTop = x
+};

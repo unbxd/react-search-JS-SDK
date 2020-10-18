@@ -43,7 +43,6 @@ const RangeFacets = (props) => {
 RangeFacets.displayName = 'RangeFacets';
 
 RangeFacets.defaultProps = {
-  displayType: 'SLIDER',
   collapsible: true
 };
 
