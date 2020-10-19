@@ -448,7 +448,7 @@ class GenerateCombinedFacets extends React.Component {
                                         }
                                         onClick={onFacetClick}
                                         facetName={facetName}
-                                        className={className}
+                                        className={className || "UNX-facet__list"}
                                         isFacetSelected={isFacetSelected}
                                         selectedFacets={selectedFacets}
                                     />
@@ -479,9 +479,7 @@ class GenerateCombinedFacets extends React.Component {
                                                 View More
                                             </div>
                                         )
-                                    ) : (
-                                        ''
-                                    )}
+                                    ) : null }
                                 </div>
                             </div>
                         );

@@ -249,9 +249,7 @@ class GenerateFacets extends React.Component {
                                         View More
                                     </div>
                                 )
-                            ) : (
-                                ''
-                            )}
+                            ) : null}
                         </div>
                     );
                 })}
