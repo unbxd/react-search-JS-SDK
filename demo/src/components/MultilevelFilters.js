@@ -52,6 +52,7 @@ const label = <div className="UNX-searchFacet__mainHeader">Filter By</div>;
 const MultilevelFilters = ({ showLabel = true }) => {
     return (
         <MultilevelFacets
+            enableViewMore={true}
             categoryDisplayName={'category'}
             categoryField={'categoryPath'}
             collapsible={true}

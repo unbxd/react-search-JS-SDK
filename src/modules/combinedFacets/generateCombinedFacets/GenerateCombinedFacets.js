@@ -5,7 +5,7 @@ import {
     getSelectedRangeFacets,
     isRangeFacetSelected,
 } from '../utils';
-import { List, Input } from '../../../components';
+import { List, Input, ViewMore } from '../../../components';
 import FacetItem from './FacetItem';
 import FacetListItem from './FacetListItem';
 import { searchStatus } from '../../../config';
@@ -87,7 +87,7 @@ class GenerateCombinedFacets extends React.Component {
                     selectedRangeFacets
                 );
             }
-            const formattedCombinedFacets = combinedFacets.map(
+            let formattedCombinedFacets = combinedFacets.map(
                 (combinedFacet) => {
                     if (combinedFacet.facetType === 'text') {
                         const matchcombinedFacet = this.state.combinedFacets.find(
@@ -187,7 +187,7 @@ class GenerateCombinedFacets extends React.Component {
             formattedCombinedFacets.sort((a, b) => {
                 return a.position - b.position;
             });
-            formattedCombinedFacets.map((combinedFacet) => {
+            formattedCombinedFacets = formattedCombinedFacets.map((combinedFacet) => {
                 combinedFacet.viewLess = false;
                 combinedFacet.className = 'UNX-facet__list';
                 return combinedFacet;
@@ -461,25 +461,8 @@ class GenerateCombinedFacets extends React.Component {
                                             Clear
                                         </div>
                                     )}
-                                    {enableViewMore && isOpen ? (
-                                        !viewLess ? (
-                                            <div
-                                                className="view-More"
-                                                data-unx_name={facetName}
-                                                onClick={this.toggleViewLess}
-                                            >
-                                                View Less
-                                            </div>
-                                        ) : (
-                                            <div
-                                                className="view-More"
-                                                data-unx_name={facetName}
-                                                onClick={this.toggleViewLess}
-                                            >
-                                                View More
-                                            </div>
-                                        )
-                                    ) : null }
+                                    {enableViewMore && isOpen? 
+                                    <ViewMore  facetName={facetName} toggleViewLess={this.toggleViewLess} viewLess={viewLess}/>: null }
                                 </div>
                             </div>
                         );

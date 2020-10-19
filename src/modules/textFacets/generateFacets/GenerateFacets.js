@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { isFacetSelected } from '../utils';
-import { List, Input } from '../../../components';
+import { List, Input, ViewMore } from '../../../components';
 import FacetItem from './FacetItem';
 import { searchStatus } from './../../../config';
 
@@ -204,22 +204,8 @@ class GenerateFacets extends React.Component {
                                         Clear
                                     </div>
                                 )}
-                                {enableViewMore && isOpen?
-                                    (!viewLess) ? (
-                                        <div className="view-More"
-                                        data-unx_name={facetName}
-                                        onClick={this.toggleViewLess}>
-                                        View Less
-                                        </div>
-                                    ):(
-                                        <div 
-                                        className="view-More"
-                                        data-unx_name={facetName}
-                                        onClick={this.toggleViewLess}>
-                                        View More
-                                        </div>
-                                    ): null
-                                }
+                                {enableViewMore && isOpen? 
+                                    <ViewMore  facetName={facetName} toggleViewLess={this.toggleViewLess} viewLess={viewLess}/>: null }
                             </div>
                         );
                     }
