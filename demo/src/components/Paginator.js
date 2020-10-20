@@ -12,7 +12,7 @@ const onPageChange = (page) => {
 const Paginator = () => {
     return (
         <div className="UNX-pagination__pageNavigation">
-            <Pagination padding={3} /*onPageChange={onPageChange}*/ />
+            <Pagination padding={3} onPageChange={onPageChange} />
         </div>
     );
 };

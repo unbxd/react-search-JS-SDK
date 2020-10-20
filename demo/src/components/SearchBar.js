@@ -24,7 +24,9 @@ const SearchBar = (props) => {
     };
     return (
         <div className="UNX-header__container">
-            <a href="/" className="UNX-header__logo"></a>
+            <a href="/">
+                <span className="UNX-header__logo"></span>
+            </a>
             <div className="UNX-header__search">
                 <SearchBox
                     SubmitComponent={SearchButton}
