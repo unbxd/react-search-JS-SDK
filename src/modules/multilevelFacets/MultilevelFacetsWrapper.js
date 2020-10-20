@@ -11,6 +11,7 @@ const MultilevelFacetsWrapper = (props) => {
         label,
         collapsible,
         searchable,
+        enableViewMore
     } = props;
     return (
         <GenerateFacets
@@ -19,6 +20,7 @@ const MultilevelFacetsWrapper = (props) => {
             FacetItemComponent={FacetItemComponent}
             label={label}
             collapsible={collapsible}
+            enableViewMore={enableViewMore}
             searchable={searchable}
         />
     );
