@@ -9,14 +9,14 @@ const ProductsViewItemComponent = ({ itemData, isActive, onClick }) => {
     const dataTestId = itemData === 'GRID' ? `UNX_gridBtn` : `UNX_listBtn`;
     return (
         <div className="UNX-viewType__wrapper">
-            <a
+            <span
                 className={`UNX-viewType__option ${isActive ? '-active' : ''}`}
                 data-viewtype={itemData}
                 data-testid={dataTestId}
                 onClick={onClick}
             >
                 <i className={iconClassName} data-viewtype={itemData}></i>
-            </a>
+            </span>
         </div>
     );
 };
