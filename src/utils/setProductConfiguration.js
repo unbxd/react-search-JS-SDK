@@ -17,9 +17,13 @@ function setProductConfiguration(config) {
   this.state.unbxdCore.setVariantAttributes(variantRequiredFields);
   this.state.unbxdCore.setVariantsGroupBy(groupBy);
   
-  paginationType === paginationTypes.INFINITE_SCROLL? this.state.unbxdCore.options.pagination.type = paginationTypes.INFINITE_SCROLL :
-  paginationType === paginationTypes.CLICK_N_SCROLL ? this.state.unbxdCore.options.pagination.type = paginationTypes.CLICK_N_SCROLL:
-  this.state.unbxdCore.options.pagination.type = paginationTypes.FIXED_PAGINATION
+  if(paginationType===paginationTypes.INFINITE_SCROLL ||
+    paginationType===paginationTypes. CLICK_N_SCROLL ||
+    paginationType===paginationTypes. FIXED_PAGINATION){
+        this.state.unbxdCore.options.pagination.type = paginationType;
+    } else {
+        this.state.unbxdCore.options.pagination.type = paginationTypes. FIXED_PAGINATION;
+  }
 
   if (
     paginationType === paginationTypes.INFINITE_SCROLL ||

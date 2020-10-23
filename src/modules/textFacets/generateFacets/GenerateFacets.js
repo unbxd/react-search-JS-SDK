@@ -111,6 +111,10 @@ class GenerateFacets extends React.Component {
         });
       }
 
+    static defaultProps = {
+        minViewMore: 3
+    }
+
     render() {
         const {
             selectedFacets,
@@ -121,7 +125,7 @@ class GenerateFacets extends React.Component {
             collapsible,
             searchable,
             enableViewMore,
-            minViewMore = 3
+            minViewMore
         } = this.props;
 
         const { textFacets } = this.state;

@@ -21,7 +21,7 @@ const MultilevelFacetsWrapper = (props) => {
             FacetItemComponent={FacetItemComponent}
             label={label}
             collapsible={collapsible}
-            minViewMore={minViewMore || 3}
+            minViewMore={minViewMore}
             enableViewMore={enableViewMore}
             searchable={searchable}
         />

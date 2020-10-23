@@ -360,6 +360,10 @@ class GenerateCombinedFacets extends React.Component {
         });
     };
 
+    static defaultProps = {
+        minViewMore: 3
+    }
+
     render() {
         const {
             selectedFacets,
@@ -372,7 +376,7 @@ class GenerateCombinedFacets extends React.Component {
             priceUnit,
             rangeCollapsible,
             enableViewMore,
-            minViewMore = 3
+            minViewMore
         } = this.props;
 
         const { combinedFacets } = this.state;
