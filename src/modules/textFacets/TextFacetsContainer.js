@@ -34,6 +34,7 @@ class TextFacetsContainer extends React.PureComponent {
             onFacetClick,
             sortTextFacets,
             enableViewMore,
+            minViewMore
         } = this.props;
 
         const {
@@ -122,6 +123,7 @@ class TextFacetsContainer extends React.PureComponent {
             collapsible,
             searchable,
             enableViewMore,
+            minViewMore
         };
 
         const helpers = {

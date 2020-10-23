@@ -17,6 +17,7 @@ class RangeFacetsContainer extends React.PureComponent {
             onFacetClick,
             sortRangeFacets,
             enableViewMore,
+            minViewMore
         } = this.props;
 
         const {
@@ -64,6 +65,7 @@ class RangeFacetsContainer extends React.PureComponent {
             sortRangeFacets,
             enableViewMore,
             onFacetClick,
+            minViewMore
         };
     }
 

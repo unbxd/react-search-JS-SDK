@@ -372,6 +372,7 @@ class GenerateCombinedFacets extends React.Component {
             priceUnit,
             rangeCollapsible,
             enableViewMore,
+            minViewMore = 3
         } = this.props;
 
         const { combinedFacets } = this.state;
@@ -461,7 +462,7 @@ class GenerateCombinedFacets extends React.Component {
                                             Clear
                                         </div>
                                     )}
-                                    {enableViewMore && isOpen? 
+                                    {enableViewMore && isOpen && filteredValues.length > minViewMore ? 
                                     <ViewMore  facetName={facetName} toggleViewLess={this.toggleViewLess} viewLess={viewLess}/>: null }
                                 </div>
                             </div>
@@ -522,27 +523,8 @@ class GenerateCombinedFacets extends React.Component {
                                     Clear
                                 </div>
                             )}
-                            {enableViewMore && isOpen ? (
-                                !viewLess ? (
-                                    <div
-                                        className="view-More"
-                                        data-unx_name={facetName}
-                                        onClick={this.toggleViewLess}
-                                    >
-                                        View Less
-                                    </div>
-                                ) : (
-                                    <div
-                                        className="view-More"
-                                        data-unx_name={facetName}
-                                        onClick={this.toggleViewLess}
-                                    >
-                                        View More
-                                    </div>
-                                )
-                            ) : (
-                                ''
-                            )}
+                            {enableViewMore && isOpen && values.length > minViewMore? 
+                                <ViewMore  facetName={facetName} toggleViewLess={this.toggleViewLess} viewLess={viewLess}/>: null }
                         </div>
                     );
                 })}

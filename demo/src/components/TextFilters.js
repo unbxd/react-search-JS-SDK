@@ -62,6 +62,7 @@ const TextFilters = () => {
       enableViewMore={true}
       searchable={true}
       sortTextFacets={sortTextFacets}
+      minViewMore={3}
       //onFacetClick={onFacetClick}
     />
   );

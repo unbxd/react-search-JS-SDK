@@ -34,7 +34,8 @@ class MultilevelFacetsContainer extends React.PureComponent {
             collapsible,
             searchable,
             onFacetClick,
-            enableViewMore
+            enableViewMore,
+            minViewMore
         } = this.props;
 
         const {
@@ -152,7 +153,8 @@ class MultilevelFacetsContainer extends React.PureComponent {
             label,
             collapsible,
             searchable,
-            enableViewMore
+            enableViewMore,
+            minViewMore
         };
     }
 

@@ -60,6 +60,7 @@ const RangeFilters = () => {
             FacetListItemComponent={FacetListItemComponent}
             collapsible={true}
             enableViewMore={true}
+            minViewMore={3}
             //onFacetClick={onFacetClick}
         />
     );

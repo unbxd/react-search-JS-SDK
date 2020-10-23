@@ -59,6 +59,7 @@ const MultilevelFilters = ({ showLabel = true }) => {
             searchable={true}
             FacetItemComponent={FacetItemComponent}
             label={showLabel ? label : undefined}
+            minViewMore={3}
             //onFacetClick={onFacetClick}
         />
     );
