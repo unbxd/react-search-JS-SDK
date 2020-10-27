@@ -5,6 +5,7 @@ import { isFacetSelected, getUpdatedFacets } from './utils';
 import { List, ViewMore } from '../../components';
 import FacetListItem from './FacetListItem';
 import { executeCallback } from '../../common/utils';
+import { listItemTypes } from '../../components/utils';
 
 class GenerateFacets extends React.Component {
     constructor(props) {
@@ -173,6 +174,7 @@ class GenerateFacets extends React.Component {
             label,
             collapsible,
             enableViewMore,
+            minViewMore
         } = this.props;
 
         if (Object.keys(rangeValues).length === 0) {
@@ -231,7 +233,7 @@ class GenerateFacets extends React.Component {
                                     Clear
                                 </div>
                             )}
-                            {enableViewMore && isOpen? 
+                            {enableViewMore && isOpen && values.length > minViewMore? 
                                     <ViewMore  facetName={facetName} toggleViewLess={this.toggleViewLess} viewLess={viewLess}/>: null }
                         </div>
                     );

@@ -39,7 +39,9 @@ TextFacets.displayName = "TextFacets"
 TextFacets.defaultProps = {
     defaultFilters: {},
     collapsible:false,
-    searchable:false
+    searchable:false,
+    minViewMore: 3,
+    enableViewMore: true
 }
 
 TextFacets.propTypes = {
@@ -66,7 +68,15 @@ TextFacets.propTypes = {
     /**
     * Callback for facet click. 
     */
-    onFacetClick:PropTypes.node
+    onFacetClick:PropTypes.node,
+    /**
+     * Min value for viewMore to be enabled.
+     */
+    minViewMore: PropTypes.number,
+    /**
+     * Bool value to enable disable viewMore.
+    */
+    enableViewMore: PropTypes.bool
 }
 
 export default TextFacets;

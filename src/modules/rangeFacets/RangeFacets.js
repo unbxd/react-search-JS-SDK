@@ -43,7 +43,9 @@ const RangeFacets = (props) => {
 RangeFacets.displayName = 'RangeFacets';
 
 RangeFacets.defaultProps = {
-  collapsible: true
+  collapsible: true,
+  minViewMore: 3,
+  enableViewMore: true
 };
 
 RangeFacets.propTypes = {
@@ -76,7 +78,15 @@ RangeFacets.propTypes = {
   /**
     * Callback for facet click. 
     */
-   onFacetClick:PropTypes.node
+   onFacetClick:PropTypes.node,
+   /**
+     * Min value for viewMore to be enabled.
+     */
+    minViewMore: PropTypes.number,
+    /**
+     * Bool value to enable disable viewMore.
+    */
+    enableViewMore: PropTypes.bool
 };
 
 export default RangeFacets;

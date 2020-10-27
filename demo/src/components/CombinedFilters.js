@@ -93,6 +93,7 @@ const CombinedFilters = () => {
         FacetListItemComponent={FacetListItemComponent}
         FacetItemComponent={FacetItemComponent}
         enableViewMore={true}
+        minViewMore={3}
       />
     );
 };

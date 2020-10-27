@@ -33,7 +33,8 @@ class CombinedFacetsContainer extends React.PureComponent {
       priceUnit,
       rangeCollapsible,
       sortCombinedFacets,
-      enableViewMore
+      enableViewMore,
+      minViewMore
     } = this.props;
 
     const {
@@ -147,7 +148,8 @@ class CombinedFacetsContainer extends React.PureComponent {
       displayType,
       priceUnit,
       rangeCollapsible,
-      enableViewMore
+      enableViewMore,
+      minViewMore
     };
 
     const helpers = {

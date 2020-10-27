@@ -127,7 +127,8 @@ class GenerateFacets extends React.Component {
             label,
             collapsible,
             searchable,
-            enableViewMore
+            enableViewMore,
+            minViewMore
         } = this.props;
 
         const { multilevelFacets } = this.state;
@@ -195,7 +196,7 @@ class GenerateFacets extends React.Component {
                                 onClick={onFacetClick}
                                 className={className || "UNX-facet__list"}
                             />
-                            {enableViewMore && isOpen? 
+                            {enableViewMore && isOpen && filteredValues.length > minViewMore? 
                                 <ViewMore  facetName={facetDisplayName} toggleViewLess={this.toggleViewLess} viewLess={viewLess}/>: null }
                         </div>
                     );

@@ -22,6 +22,7 @@ class GenerateFacets extends React.Component {
             enableApplyFilters,
             unbxdCoreStatus,
             sortTextFacets,
+            
         } = this.props;
         if (
             prevProps.unbxdCoreStatus !== unbxdCoreStatus &&
@@ -119,7 +120,8 @@ class GenerateFacets extends React.Component {
             label,
             collapsible,
             searchable,
-            enableViewMore
+            enableViewMore,
+            minViewMore
         } = this.props;
 
         const { textFacets } = this.state;
@@ -204,7 +206,7 @@ class GenerateFacets extends React.Component {
                                         Clear
                                     </div>
                                 )}
-                                {enableViewMore && isOpen? 
+                                {enableViewMore && isOpen && filteredValues.length > minViewMore? 
                                     <ViewMore  facetName={facetName} toggleViewLess={this.toggleViewLess} viewLess={viewLess}/>: null }
                             </div>
                         );
