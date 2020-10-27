@@ -1,184 +1,235 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import { conditionalRenderer } from '../../common/utils';
-import { getFacetRow, isFacetSelected, getFacetCoreMethods, getRangeFacetCoreMethods } from './utils';
+import {
+    getTextFacetItem,
+    getTextFacetFacetCoreMethods,
+    getFormattedTextFacets,
+} from '../textFacets/utils';
+import {
+    getRangeFacetCoreMethods,
+    getFormattedRangeFacets,
+} from '../rangeFacets/utils';
 import { manageStateTypes } from '../../config';
 import GenerateCombinedFacets from './generateCombinedFacets';
+import { executeCallback } from '../../common/utils';
 
 class CombinedFacetsContainer extends React.PureComponent {
-  componentDidMount() {
-    const {
-      helpers: { setTextFacetsConfiguration }
-    } = this.props;
-    let { defaultFilters } = this.props;
-    defaultFilters = defaultFilters?defaultFilters:{};
-    setTextFacetsConfiguration({ defaultFilters });
-  }
+    //a way to pass data to render props and our component
+    getCombinedFacetsProps() {
+        const {
+            unbxdCore,
+            unbxdCoreStatus,
+            helpers: { manageTextFacets, setSelectedFacets },
+            selectedFacets,
+            TextFacetItemComponent,
+            enableApplyFilters,
+            RangeFacetItemComponent,
+            priceUnit,
+            transform,
+            collapsible,
+            searchable,
+            enableViewMore,
+            minViewMore,
+            label,
+            onFacetClick,
+        } = this.props;
 
-  //a way to pass data to render props and our component
-  getCombinedFacetsProps() {
-    const {
-      unbxdCore,
-      unbxdCoreStatus,
-      FacetItemComponent,
-      enableApplyFilters,
-      helpers: { manageTextFacets, setSelectedFacets },
-      selectedFacets,
-      label,
-      textCollapsible,
-      textSearchable,
-      FacetSliderItemComponent,
-      FacetListItemComponent,
-      displayType,
-      priceUnit,
-      rangeCollapsible,
-      sortCombinedFacets,
-      enableViewMore,
-      minViewMore
-    } = this.props;
+        const {
+            getFacets,
+            updateFacets,
+            deleteAFacet,
+            getSelectedFacet,
+            getSelectedFacets,
+            setPageStart,
+            getResults,
+        } = getTextFacetFacetCoreMethods(unbxdCore);
 
-    const {
-      getFacets,
-      updateFacets,
-      deleteAFacet,
-      getSelectedFacet,
-      getSelectedFacets,
-      setPageStart,
-      getResults
-    } = getFacetCoreMethods(unbxdCore);
+        const {
+            getRangeFacets,
+            setRangeFacet,
+            applyRangeFacet,
+            clearARangeFacet,
+            selectedRangeFacets,
+        } = getRangeFacetCoreMethods(unbxdCore);
 
-    const{
-      getRangeFacets,
-      setRangeFacet,
-      applyRangeFacet,
-      clearARangeFacet,
-      selectedRangeFacets
-    }=getRangeFacetCoreMethods(unbxdCore);
+        const textFacets = getFacets() || [];
+        const lastSelectedFacets = getSelectedFacets();
+        const applyMultiple = true;
+        const rangeFacets = getRangeFacets() || [];
 
-    const textFacets = getFacets() || [];
-    const rangeFacets = getRangeFacets() || [];
-
-    const textFacetsWithType = textFacets && textFacets.length && textFacets.map((facet) => {
-        facet.facetType = 'text';
-        return facet;
-    })
-    const rangeFacetsWithType = rangeFacets && rangeFacets.length && rangeFacets.map((facet) => {
-        facet.facetType = 'range';
-        return facet;
-    })
-    let combinedFacets = textFacetsWithType && rangeFacetsWithType && textFacetsWithType.length && rangeFacetsWithType.length && [...textFacetsWithType, ...rangeFacetsWithType] || [];
-
-    combinedFacets && combinedFacets.length && combinedFacets.sort((a, b) => {
-        return a.position - b.position;
-    });
-
-    //Methods to handle click on facets
-    const removeFacet = ({ selectedFacetName, selectedFacetId = null }) => {
-      deleteAFacet(selectedFacetName, selectedFacetId);
-    };
-
-    const addFacet = ({ selectedFacetName, selectedFacetId, facetData }) => {
-      updateFacets({ selectedFacetName, selectedFacetId, facetData });
-    };
-
-    const onFacetClick = (event) => {
-      const {
-        unx_name: selectedFacetName,
-        unx_dataid: selectedFacetId
-      } = event.target.dataset;
-
-      const facetData = getSelectedFacet(selectedFacetName);
-      const { values: facetValues = [] } = facetData;
-
-      //add or delete from state
-      const facetRow = getFacetRow(facetValues, selectedFacetId);
-      const isSelected = isFacetSelected(
-        selectedFacets,
-        selectedFacetName,
-        selectedFacetId
-      );
-      enableApplyFilters &&
-        manageTextFacets(
-          facetRow,
-          selectedFacetName,
-          selectedFacetId,
-          isSelected ? manageStateTypes.REMOVE : manageStateTypes.ADD
+        const formattedTextFacets = getFormattedTextFacets(
+            textFacets,
+            selectedFacets
         );
 
-      !isSelected &&
-        !enableApplyFilters &&
-        addFacet({ selectedFacetName, selectedFacetId, facetData });
-      isSelected &&
-        !enableApplyFilters &&
-        removeFacet({ selectedFacetName, selectedFacetId });
-    };
+        const formattedRangeFacets = getFormattedRangeFacets(
+            rangeFacets,
+            selectedRangeFacets
+        );
 
-    const onFacetObjectReset = (event) => {
-      const { unx_name } = event.target.dataset;
-      removeFacet({ selectedFacetName: unx_name });
-      setPageStart(0);
-      getResults();
-      manageTextFacets(null, unx_name, null, manageStateTypes.RESET);
-    };
-    
-    const addRangeFacet = ({ facetName, start, end }, getResults = false) => {
-        setRangeFacet({ facetName, start, end });
-        if (getResults) {
-          applyRangeFacet();
-        }
-      };
+        const combinedFacets = [
+            ...formattedTextFacets,
+            ...formattedRangeFacets,
+        ];
 
-    const removeRangeFacet = ({ facetName }, getResults = false) => {
-        clearARangeFacet(facetName);
-        if (getResults) {
-          applyRangeFacet();
-        }
-      };
+        combinedFacets &&
+            combinedFacets.length &&
+            combinedFacets.sort((a, b) => {
+                return a.position - b.position;
+            });
 
-    const lastSelectedFacets = getSelectedFacets();
+        //Methods to handle click on facets
+        const removeTextFacet = ({
+            selectedFacetName,
+            selectedFacetId = null,
+        }) => {
+            deleteAFacet(selectedFacetName, selectedFacetId);
+        };
 
-    const data = {
-      unbxdCoreStatus,
-      combinedFacets,
-      enableApplyFilters,
-      lastSelectedFacets,
-      selectedFacets,
-      textCollapsible,
-      textSearchable,
-      displayType,
-      priceUnit,
-      rangeCollapsible,
-      enableViewMore,
-      minViewMore
-    };
+        const addTextFacet = ({
+            selectedFacetName,
+            selectedFacetId,
+            facetData,
+        }) => {
+            updateFacets({ selectedFacetName, selectedFacetId, facetData });
+        };
 
-    const helpers = {
-      onFacetClick,
-      onFacetObjectReset,
-      setSelectedFacets,
-      FacetItemComponent,
-      label,
-      addRangeFacet,
-      applyRangeFacet,
-      removeRangeFacet,
-      selectedRangeFacets,
-      FacetSliderItemComponent,
-      FacetListItemComponent,
-      sortCombinedFacets
-    };
+        const handleTextFacetClick = (currentItem) => {
+            const { facetName, dataId, isSelected = false } = currentItem;
 
-    return { ...data, ...helpers };
-  }
+            const facetData = getSelectedFacet(facetName);
+            const { values: facetValues = [] } = facetData;
 
-  render() {
-    const DefaultRender = GenerateCombinedFacets;
+            //add or delete from state
+            const facetRow = getTextFacetItem(facetValues, dataId);
 
-    return conditionalRenderer(
-      this.props.children,
-      this.getCombinedFacetsProps(),
-      DefaultRender
-    );
-  }
+            const onFinish = () => {
+                enableApplyFilters &&
+                    manageTextFacets(
+                        facetRow,
+                        facetName,
+                        dataId,
+                        isSelected
+                            ? manageStateTypes.REMOVE
+                            : manageStateTypes.ADD
+                    );
+
+                !isSelected &&
+                    !enableApplyFilters &&
+                    addFacet({
+                        selectedFacetName: facetName,
+                        selectedFacetId: dataId,
+                        facetData,
+                    });
+                isSelected &&
+                    !enableApplyFilters &&
+                    removeFacet({
+                        selectedFacetName: facetName,
+                        selectedFacetId: dataId,
+                    });
+            };
+            executeCallback(onFacetClick, [facetName, !isSelected], onFinish);
+        };
+
+        const handleTextFacetClear = (event) => {
+            const { unx_name } = event.target.dataset;
+
+            const onFinish = () => {
+                if (enableApplyFilters) {
+                    manageTextFacets(
+                        null,
+                        unx_name,
+                        null,
+                        manageStateTypes.RESET
+                    );
+                }
+
+                if (!enableApplyFilters) {
+                    removeFacet({ selectedFacetName: unx_name });
+                    setPageStart(0);
+                    getResults();
+                }
+            };
+            executeCallback(onFacetClick, [unx_name], onFinish);
+        };
+
+        const addRangeFacet = (
+            { facetName, start, end },
+            getResults = false
+        ) => {
+            setRangeFacet({ facetName, start, end, applyMultiple });
+            if (getResults) {
+                applyRangeFacet();
+            }
+        };
+
+        const removeRangeFacet = ({ facetName }, getResults = false) => {
+            clearARangeFacet(facetName);
+            if (getResults) {
+                applyRangeFacet();
+            }
+        };
+
+        const data = {
+            unbxdCoreStatus,
+            combinedFacets,
+            enableApplyFilters,
+            lastSelectedFacets,
+            selectedFacets,
+            priceUnit,
+            collapsible,
+            searchable,
+            enableViewMore,
+            minViewMore
+        };
+
+        const helpers = {
+            onTextFacetClick: handleTextFacetClick,
+            onTextFacetClear: handleTextFacetClear,
+            setSelectedFacets,
+            TextFacetItemComponent,
+            label,
+            addRangeFacet,
+            applyRangeFacet,
+            removeRangeFacet,
+            selectedRangeFacets,
+            RangeFacetItemComponent,
+            transform,
+        };
+
+        return { ...data, ...helpers };
+    }
+
+    render() {
+        const DefaultRender = GenerateCombinedFacets;
+
+        return conditionalRenderer(
+            this.props.children,
+            this.getCombinedFacetsProps(),
+            DefaultRender
+        );
+    }
 }
+CombinedFacetsContainer.propTypes = {
+    unbxdCore: PropTypes.object.isRequired,
+    unbxdCoreStatus: PropTypes.string.isRequired,
+    helpers: PropTypes.object.isRequired,
+    priceUnit: PropTypes.string.isRequired,
+    enableApplyFilters: PropTypes.bool.isRequired,
+    collapsible: PropTypes.bool,
+    searchable: PropTypes.bool,
+    TextFacetItemComponent: PropTypes.oneOfType([
+        PropTypes.element,
+        PropTypes.func,
+    ]),
+    RangeFacetItemComponent: PropTypes.oneOfType([
+        PropTypes.element,
+        PropTypes.func,
+    ]),
+    transform: PropTypes.func,
+    label: PropTypes.node,
+    onFacetClick: PropTypes.node,
+};
 
 export default CombinedFacetsContainer;

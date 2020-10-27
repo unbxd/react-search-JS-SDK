@@ -49,6 +49,7 @@ class UnbxdSearchWrapper extends Component {
             apiKey,
             searchConfigurations,
             getCategoryId,
+            setCategoryId,
             productType,
             priceUnit,
         } = this.props;
@@ -81,6 +82,7 @@ class UnbxdSearchWrapper extends Component {
                 apiKey,
                 onEvent: this.unbxdCallBack,
                 getCategoryId,
+                setCategoryId,
             }),
             productType,
             categoryId: '',
@@ -233,7 +235,7 @@ class UnbxdSearchWrapper extends Component {
 UnbxdSearchWrapper.defaultProps = {
     productType: 'SEARCH',
     priceUnit: '$',
-    searchConfigurations: {}
+    searchConfigurations: {},
 };
 
 UnbxdSearchWrapper.propTypes = {
@@ -257,6 +259,10 @@ UnbxdSearchWrapper.propTypes = {
      * Custom function to return the Category Id.
      */
     getCategoryId: PropTypes.func,
+    /**
+     * Custom function to set the Category Id.
+     */
+    setCategoryId: PropTypes.func,
     /**
      * Product type of UnbxdSearchWrapper.
      */

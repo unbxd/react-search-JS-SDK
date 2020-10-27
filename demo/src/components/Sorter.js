@@ -40,12 +40,14 @@ const onSortChange = (field, order) => {
 
 const SortItemComponent = ({ itemData, onClick }) => {
     const { value, isSelected = false } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
     return (
         <button
-            data-unxsortby={value}
             className={`UNX-sortby__item ${isSelected ? '-selected' : ''}`}
             data-testid={value.split('|').join(' ')}
-            onClick={onClick}
+            onClick={handleClick}
         >
             {itemData.label}
         </button>
@@ -58,7 +60,6 @@ const Sorter = () => {
             label={label}
             onSortChange={onSortChange}
             //displayType={'LIST'}
-            //defaultSort={sortOptions[1]}
             //SortItemComponent={SortItemComponent}
         />
     );

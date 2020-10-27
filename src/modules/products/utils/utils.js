@@ -67,7 +67,7 @@ export const getProductFields = ({
       const swatchItem = { ...swatchDetails, ...variantValues };
 
       if (idx === 0) {
-        swatchItem['active'] = true;
+        swatchItem['isSelected'] = true;
       }
       return swatchItem;
     });

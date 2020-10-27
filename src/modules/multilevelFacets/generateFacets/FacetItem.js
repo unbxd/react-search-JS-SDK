@@ -3,15 +3,17 @@ import PropTypes from 'prop-types';
 
 import { Button } from '../../../components';
 
-const FacetItem = ({ itemData, multiLevelField, onClick }) => {
+const FacetItem = ({ itemData, onClick }) => {
     const { name, count, level, isSelected = false } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
     return (
         <Button
-            data-unx_categoryname={name}
-            data-unx_multilevelfield={multiLevelField}
-            data-unx_level={level}
-            className={`UNX-facet__item l${level} ${isSelected ? 'selected' : ''}`}
-            onClick={onClick}
+            className={`UNX-facet__item l${level} ${
+                isSelected ? '-selected' : ''
+            }`}
+            onClick={handleClick}
         >
             {name} {count && <span>-{count}</span>}
         </Button>

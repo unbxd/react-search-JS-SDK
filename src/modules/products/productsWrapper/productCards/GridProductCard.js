@@ -43,9 +43,9 @@ class GridProductCard extends React.Component {
                     swatches: currentState.productValues.swatches.map(
                         (swatchObject) => {
                             if (swatchObject.swatchId === currentSwatchId) {
-                                return { ...swatchObject, active: true };
+                                return { ...swatchObject, isSelected: true };
                             } else {
-                                return { ...swatchObject, active: false };
+                                return { ...swatchObject, isSelected: false };
                             }
                         }
                     ),
@@ -57,8 +57,8 @@ class GridProductCard extends React.Component {
     render() {
         const { SwatchItemComponent, idx, onClick, priceUnit } = this.props;
         const { productValues } = this.state;
-        const [activeSwatch] = productValues['swatches'].filter((swatch) => {
-            return swatch.active;
+        const activeSwatch = productValues['swatches'].find((swatch) => {
+            return swatch.isSelected;
         });
 
         const product = { ...productValues, ...activeSwatch };

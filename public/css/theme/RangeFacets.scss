@@ -1,32 +1,22 @@
 .UNX-rangefacet__container {
-  width: 100%;
-  display: block;
-  .UNX-facet__element {
-    cursor: pointer;
-    transition: 0.4s;
-    display: flex;
-    flex-direction: column;
-
-    &.open {
-      .UNX-slider__container {
-        display: block;
-      }
-
-      .UNX-facet__actions {
+    width: 100%;
+    display: block;
+    .UNX-facet__element {
+        cursor: pointer;
+        transition: 0.4s;
         display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
-      }
+        flex-direction: column;
+
+        &.open {
+            .UNX-facet__actions {
+                display: flex;
+                flex-direction: row-reverse;
+                justify-content: space-between;
+            }
+        }
     }
-  }
 
-  .UNX-slider__thumb {
-    box-shadow: 0 2px 4px 0 rgba(133, 146, 172, 0.27);
-    border: 1px solid #dae1e9;
-  }
-
-  .UNX-slider__container,
-  .UNX-facet__actions {
-    display: none;
-  }
+    .UNX-facet__actions {
+        display: none;
+    }
 }

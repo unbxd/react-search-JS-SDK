@@ -2,29 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { List } from '../../../components';
-import { listItemTypes } from '../../../components/utils';
 
-const ViewTypesList = ({
-    viewType,
-    viewTypes,
-    onViewTypeClick,
-    ViewItemComponent }) => {
-
-    return (<List
-        idAttribute={''}
-        items={viewTypes}
-        activeItem={viewType}
-        ListItem={ViewItemComponent}
-        onClick={onViewTypeClick}
-        className={'UNX-viewTypes__list'}
-        itemsType={listItemTypes.PRIMITIVE} />)
-}
+const ViewTypesList = ({ viewTypes, onViewTypeClick, ViewItemComponent }) => {
+    return (
+        <List
+            idAttribute={'viewType'}
+            items={viewTypes}
+            ListItem={ViewItemComponent}
+            onClick={onViewTypeClick}
+            className={'UNX-viewTypes__list'}
+        />
+    );
+};
 
 ViewTypesList.propTypes = {
-    viewType: PropTypes.string,
-    viewTypes: PropTypes.arrayOf(PropTypes.string),
+    viewTypes: PropTypes.arrayOf(
+        PropTypes.shape({
+            viewType: PropTypes.string.isRequired,
+            isSelected: PropTypes.bool.isRequired,
+        })
+    ),
     onViewTypeClick: PropTypes.func.isRequired,
     ViewItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-}
+};
 
 export default ViewTypesList;

@@ -21,7 +21,7 @@
   .UNX-swatch__item {
     @apply m-1;
 
-    &.-active {
+    &.-selected {
       @apply border-2 border-gray-600;
     }
   }

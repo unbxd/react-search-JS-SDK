@@ -39,14 +39,14 @@ class FacetActionsContainer extends React.PureComponent {
 
         const { noOfPages = 0 } = getPaginationInfo() || {};
 
-        const onApplyFilter = () => {
+        const handleApplyFilter = () => {
             const onFinish = () => {
                 applyFacets(selectedFacets);
             };
             executeCallback(onApply, [selectedFacets], onFinish);
         };
 
-        const onClearFilter = () => {
+        const handleClearFilter = () => {
             const onFinish = () => {
                 Object.keys(selectedRangeFacets).map((rangeFacetName) => {
                     clearARangeFacet(rangeFacetName);
@@ -60,8 +60,8 @@ class FacetActionsContainer extends React.PureComponent {
         return {
             showApplyFilter,
             showClearFilter,
-            onApplyFilter,
-            onClearFilter,
+            onApplyFilter: handleApplyFilter,
+            onClearFilter: handleClearFilter,
             noOfPages,
             ApplyFilterComponent,
             ClearFilterComponent,

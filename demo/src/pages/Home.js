@@ -32,7 +32,7 @@ const Home = () => {
                     <FacetApplyClear />
                     <RangeFilters />
                     <TextFilters />
-                    {/* //<CombinedFilters/> */}
+                    {/* <CombinedFilters/> */}
                     <FacetApplyClear />
                 </div>
 

@@ -37,7 +37,6 @@ const TextFacets = (props) => {
 TextFacets.displayName = "TextFacets"
 
 TextFacets.defaultProps = {
-    defaultFilters: {},
     collapsible:false,
     searchable:false,
     minViewMore: 3,

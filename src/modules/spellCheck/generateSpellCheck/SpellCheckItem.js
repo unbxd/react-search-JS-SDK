@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 const SpellCheckItem = ({ itemData, currentQuery, onClick }) => {
     const { suggestion } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
     return (
         <div className="UNX-spellCheck__item">
             <div className="UNX-spellCheck__query">
@@ -13,8 +16,7 @@ const SpellCheckItem = ({ itemData, currentQuery, onClick }) => {
                 Did you mean
                 <span
                     className="-suggestion"
-                    onClick={onClick}
-                    data-suggestion={suggestion}
+                    onClick={handleClick}
                     data-testid={'UNX_spellCheck'}
                 >
                     {' '}

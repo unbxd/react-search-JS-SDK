@@ -11,7 +11,6 @@ class MultilevelFacetsContainer extends React.PureComponent {
         const {
             categoryDisplayName = '',
             categoryField = '',
-            defaultCategoryFilter,
             facetDepth,
             facetLimit,
             helpers: { setMultilevelFacetsConfiguration },
@@ -20,7 +19,6 @@ class MultilevelFacetsContainer extends React.PureComponent {
         setMultilevelFacetsConfiguration({
             categoryDisplayName,
             categoryField,
-            defaultCategoryFilter,
             facetDepth,
             facetLimit,
         });
@@ -118,12 +116,8 @@ class MultilevelFacetsContainer extends React.PureComponent {
             multilevelFacets.push(facet);
         });
 
-        const handleFacetClick = (event) => {
-            const {
-                unx_categoryname: name,
-                unx_level: level,
-                unx_multilevelfield: parent,
-            } = event.target.dataset;
+        const handleFacetClick = (currentItem) => {
+            const { name, fieldName: parent, level } = currentItem;
             const categoryObject = { parent, level, name };
 
             const onFinish = () => {
@@ -177,7 +171,6 @@ MultilevelFacetsContainer.propTypes = {
     categoryField: PropTypes.string.isRequired,
     facetDepth: PropTypes.number,
     facetLimit: PropTypes.number,
-    defaultCategoryFilter: PropTypes.string,
     FacetItemComponent: PropTypes.oneOfType([
         PropTypes.element,
         PropTypes.func,
