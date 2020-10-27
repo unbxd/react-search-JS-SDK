@@ -68,6 +68,17 @@ class PaginationContainer extends React.PureComponent {
         return { ...data, ...helpers };
     }
 
+    componentDidMount(){
+        const { unbxdCore } = this.props;
+        const queryParams = unbxdCore.getQueryParams();
+        const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
+        if(queryParams.start){
+            setPageStart(parseInt(queryParams.start))
+        }else{
+            setPageStart(0)
+        }
+    }
+
     render() {
         const DefaultRender = PaginationWrapper;
 

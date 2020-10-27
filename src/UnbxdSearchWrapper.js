@@ -132,7 +132,6 @@ class UnbxdSearchWrapper extends Component {
     componentDidMount() {
         const { onPageLoad } = this.props;
         const { unbxdCore } = this.state;
-        const queryParams = this.state.unbxdCore.getQueryParams();
         const categoryId =
             typeof unbxdCore.options.getCategoryId === 'function' &&
             unbxdCore.options.getCategoryId();
@@ -173,9 +172,6 @@ class UnbxdSearchWrapper extends Component {
             typeof onPageLoad == 'function' &&
                 onPageLoad(unbxdCore.getResponseObj());
         }
-        if (unbxdCore.getResponseObj() === null && queryParams[unbxdCore.options.searchQueryParam]) {
-            unbxdCore.renderFromUrl.apply(unbxdCore);
-        }
 
         if (unbxdCore.options.hashMode) {
             window.onhashchange = unbxdCore.onLocationChange.bind(unbxdCore);
@@ -186,7 +182,7 @@ class UnbxdSearchWrapper extends Component {
         const { onPageLoad } = this.props;
         const { unbxdCore, categoryId } = this.state;
         const urlParams = unbxdCore.getQueryParams();
-
+        
         const currentCategoryId =
             typeof unbxdCore.options.getCategoryId === 'function' &&
             unbxdCore.options.getCategoryId();
@@ -206,6 +202,9 @@ class UnbxdSearchWrapper extends Component {
             this.resetSearch();
             unbxdCore.getResults();
             trackCategory(window.UnbxdAnalyticsConf);
+        }
+        else if(unbxdCore.getResponseObj() === null && urlParams[unbxdCore.options.searchQueryParam]) {
+            unbxdCore.renderFromUrl();
         }
         else {
             //call onPageLoad
