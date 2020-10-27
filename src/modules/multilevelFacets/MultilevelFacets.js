@@ -39,6 +39,8 @@ MultilevelFacets.defaultProps = {
     facetLimit: 100,
     collapsible: false,
     searchable: false,
+    minViewMore: 3,
+    enableViewMore: true
 };
 
 MultilevelFacets.propTypes = {
@@ -85,6 +87,13 @@ MultilevelFacets.propTypes = {
      * Callback for facet click.
      */
     onFacetClick: PropTypes.node,
+    /**
+     * Min value for viewMore to be enabled.
+     */
+    minViewMore: PropTypes.number,
+    /**
+     * Bool value to enable disable viewMore.
+     */enableViewMore: PropTypes.bool
 };
 
 export default MultilevelFacets;

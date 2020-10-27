@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { AppContextConsumer } from '../../common/context';
 import { hasUnbxdSearchWrapperContext } from '../../common/utils';
@@ -39,5 +40,21 @@ const CombinedFacets = (props) => {
 }
 
 CombinedFacets.displayName = "CombinedFacets"
+
+CombinedFacets.defaultProps = {
+    minViewMore: 3,
+    enableViewMore: true
+};
+
+CombinedFacets.propTypes = {
+    /**
+     * Min value for viewMore to be enabled.
+     */
+    minViewMore: PropTypes.number,
+    /**
+     * Bool value to enable disable viewMore.
+     */
+    enableViewMore: PropTypes.bool
+};
 
 export default CombinedFacets;

@@ -119,9 +119,6 @@ class GenerateFacets extends React.Component {
             };
         });
     };
-    static defaultProps = {
-        minViewMore: 3
-    }
 
     render() {
         const {
