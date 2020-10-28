@@ -12,17 +12,6 @@ import GenerateFacets from './generateFacets';
 import { executeCallback } from '../../common/utils';
 
 class TextFacetsContainer extends React.PureComponent {
-    componentDidMount() {
-        const {
-            defaultFilters,
-            unbxdCoreStatus,
-            helpers: { setTextFacetsConfiguration },
-        } = this.props;
-        if (unbxdCoreStatus !== 'READY') {
-            setTextFacetsConfiguration({ defaultFilters });
-        }
-    }
-
     //a way to pass data to render props and our component
     getTextFacetsProps() {
         const {

@@ -354,17 +354,14 @@ class GenerateCombinedFacets extends React.Component {
                                     )}
                                     <List
                                         items={filteredValues}
-                                        idAttribute={'dataId'}
                                         ListItem={
                                             TextFacetItemComponent ||
                                             TextFacetItem
                                         }
                                         onClick={onTextFacetClick}
-                                        facetName={facetName}
                                         className={
                                             className || 'UNX-facet__list'
                                         }
-                                        selectedFacets={selectedFacets}
                                     />
                                     {hasActiveFacets && (
                                         <div

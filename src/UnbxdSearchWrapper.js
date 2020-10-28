@@ -15,7 +15,6 @@ import {
     setSpellCheckConfiguration,
     setPageSizeConfiguration,
     setSortConfiguration,
-    setTextFacetsConfiguration,
     setMultilevelFacetsConfiguration,
     setFacetsActionConfiguration,
     setViewTypeConfiguration,
@@ -57,7 +56,6 @@ class UnbxdSearchWrapper extends Component {
         this.unbxdCallBack = unbxdCallBack.bind(this);
         this.setPageSizeConfiguration = setPageSizeConfiguration.bind(this);
         this.setSortConfiguration = setSortConfiguration.bind(this);
-        this.setTextFacetsConfiguration = setTextFacetsConfiguration.bind(this);
         this.setMultilevelFacetsConfiguration = setMultilevelFacetsConfiguration.bind(
             this
         );
@@ -93,7 +91,6 @@ class UnbxdSearchWrapper extends Component {
                 setSearchBoxConfiguration: this.setSearchBoxConfiguration,
                 setPageSizeConfiguration: this.setPageSizeConfiguration,
                 setSortConfiguration: this.setSortConfiguration,
-                setTextFacetsConfiguration: this.setTextFacetsConfiguration,
                 setMultilevelFacetsConfiguration: this
                     .setMultilevelFacetsConfiguration,
                 setFacetsActionConfiguration: this.setFacetsActionConfiguration,

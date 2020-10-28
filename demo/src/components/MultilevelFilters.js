@@ -10,7 +10,7 @@ const FacetItemComponent = ({ itemData, onClick }) => {
     };
     return (
         <div
-            className={`UNX-facet__item l${level} ${
+            className={`UNX-facet__item -l${level} ${
                 isSelected ? '-selected' : ''
             }`}
             onClick={handleClick}

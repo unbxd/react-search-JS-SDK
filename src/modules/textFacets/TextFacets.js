@@ -45,10 +45,6 @@ TextFacets.defaultProps = {
 
 TextFacets.propTypes = {
     /**
-    * Apply default filters which will be enabled on every request.
-    */
-    defaultFilters: PropTypes.object,
-    /**
      * Collapse facet values
      */
     collapsible:PropTypes.bool,
