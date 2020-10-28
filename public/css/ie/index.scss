@@ -3,6 +3,7 @@ html {
 }
 
 .UNX-products__container {
+    margin-bottom: 20px;
     .grid-cols-1 {
         display: flex;
         flex-direction: row;
@@ -13,7 +14,7 @@ html {
             margin-bottom: 40px;
             min-width: 205px;
             width: calc((100% / 1) - 30px);
-            height: 330px;
+            height: 300px;
         }
     }
 
@@ -27,7 +28,7 @@ html {
             margin-bottom: 40px;
             min-width: 205px;
             width: calc((100% / 2) - 30px);
-            height: 330px;
+            height: 300px;
         }
     }
 
@@ -41,7 +42,7 @@ html {
             margin-bottom: 40px;
             min-width: 205px;
             width: calc((100% / 3) - 30px);
-            height: 330px;
+            height: 300px;
         }
     }
 
@@ -55,7 +56,7 @@ html {
             margin-bottom: 40px;
             min-width: 205px;
             width: calc((100% / 4) - 30px);
-            height: 330px;
+            height: 300px;
         }
     }
 
@@ -69,7 +70,16 @@ html {
             margin-bottom: 40px;
             min-width: 205px;
             width: calc((100% / 5) - 30px);
-            height: 330px;
+            height: 300px;
+        }
+    }
+}
+
+.UNX-facet__element {
+    &.open {
+        .-clear {
+            display: block;
+            text-align: right;
         }
     }
 }
