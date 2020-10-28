@@ -23,6 +23,28 @@ const getCategoryId = () => {
     }
 };
 
+const setCategoryId = (param, self) => {
+    const { level, name } = param;
+    let page = ``;
+    let pathArr = [];
+    const l = Number(level);
+    const breadCrumbs = self.getBreadCrumbsList();
+    breadCrumbs.forEach((element, i) => {
+        const { value, level } = element;
+
+        if (l > level) {
+            pathArr.push(value);
+        }
+    });
+    if (l > breadCrumbs.length) {
+        pathArr.push(name);
+    }
+    page = pathArr.join('>');
+    if (window.UnbxdAnalyticsConf) {
+        window.UnbxdAnalyticsConf.page = page;
+    }
+};
+
 const AppRoutes = () => {
     const [categoryPathLinks, setCategoryPathLinks] = useState(categoryLinks);
     const [productType, setProductType] = useState('SEARCH');
@@ -56,6 +78,7 @@ const AppRoutes = () => {
                         siteKey="wildearthclone-neto-com-au808941566310465"
                         apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
                         getCategoryId={getCategoryId}
+                        setCategoryId={setCategoryId}
                         productType={productType}
                     >
                         <MobileModal

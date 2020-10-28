@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { isFacetSelected } from '../utils';
 import { List, Input, ViewMore } from '../../../components';
 import FacetItem from './FacetItem';
 import { searchStatus } from './../../../config';
@@ -10,7 +9,7 @@ class GenerateFacets extends React.Component {
     constructor(props) {
         super(props);
         const { textFacets } = props;
-        this.state = { textFacets: textFacets };
+        this.state = { textFacetsList: textFacets };
     }
 
     componentDidUpdate(prevProps) {
@@ -19,18 +18,13 @@ class GenerateFacets extends React.Component {
             selectedFacets,
             lastSelectedFacets,
             setSelectedFacets,
-            enableApplyFilters,
             unbxdCoreStatus,
-            sortTextFacets,
-            
+            transform,
         } = this.props;
-        if (
-            prevProps.unbxdCoreStatus !== unbxdCoreStatus &&
-            unbxdCoreStatus === searchStatus.READY &&
-            selectedFacets !== lastSelectedFacets
-        ) {
+        if (textFacets !== prevProps.textFacets) {
             const formattedTextFacets = textFacets.map((textFacet) => {
-                const matchTextFacet = this.state.textFacets.find(
+                const { textFacetsList } = this.state;
+                const matchTextFacet = textFacetsList.find(
                     (facetObj) => facetObj.facetName === textFacet.facetName
                 );
                 return {
@@ -38,82 +32,81 @@ class GenerateFacets extends React.Component {
                     isOpen: matchTextFacet ? matchTextFacet.isOpen : true,
                     filter: matchTextFacet ? matchTextFacet.filter : '',
                     viewLess: false,
-                    className: "UNX-facet__list"
+                    className: 'UNX-facet__list',
                 };
             });
 
-            if(sortTextFacets && typeof(sortTextFacets) === 'function'){
-                let returnedFacets = sortTextFacets.call(formattedTextFacets);
+            if (transform && typeof transform === 'function') {
+                let returnedFacets = transform.call(formattedTextFacets);
                 this.setState(() => {
-                    return { textFacets: returnedFacets };
+                    return { textFacetsList: returnedFacets };
                 });
-            }else{
+            } else {
                 this.setState(() => {
-                    return { textFacets: formattedTextFacets };
+                    return { textFacetsList: formattedTextFacets };
                 });
             }
-            
+        }
 
+        if (
+            prevProps.unbxdCoreStatus !== unbxdCoreStatus &&
+            unbxdCoreStatus === searchStatus.READY &&
+            selectedFacets !== lastSelectedFacets
+        ) {
             setSelectedFacets(lastSelectedFacets);
         }
     }
 
     handleCollapseToggle = (event) => {
         const facetId = event.target.dataset['unx_name'];
-        this.setState((currentState) => {
-            const updatedTextFacets = currentState.textFacets.map(
-                (textFacet) => {
-                    if (facetId === textFacet.facetName) {
-                        return { ...textFacet, isOpen: !textFacet.isOpen };
-                    }
-                    return { ...textFacet };
+        this.setState((existingState) => {
+            const { textFacetsList } = existingState;
+            const updatedTextFacets = textFacetsList.map((textFacet) => {
+                if (facetId === textFacet.facetName) {
+                    return { ...textFacet, isOpen: !textFacet.isOpen };
                 }
-            );
+                return { ...textFacet };
+            });
 
-            return { ...currentState, textFacets: updatedTextFacets };
+            return { ...existingState, textFacetsList: updatedTextFacets };
         });
     };
 
     handleFilterChange = (event) => {
         const facetId = event.target.name;
         const value = event.target.value;
-        this.setState((currentState) => {
-            const updatedTextFacets = currentState.textFacets.map(
-                (textFacet) => {
-                    if (facetId === textFacet.facetName) {
-                        return { ...textFacet, filter: value.toLowerCase() };
-                    }
-                    return { ...textFacet };
+        this.setState((existingState) => {
+            const { textFacetsList } = existingState;
+            const updatedTextFacets = textFacetsList.map((textFacet) => {
+                if (facetId === textFacet.facetName) {
+                    return { ...textFacet, filter: value.toLowerCase() };
                 }
-            );
+                return { ...textFacet };
+            });
 
-            return { ...currentState, textFacets: updatedTextFacets };
+            return { ...existingState, textFacetsList: updatedTextFacets };
         });
     };
 
-    toggleViewLess = (event) =>{
+    toggleViewLess = (event) => {
         const facetName = event.target.dataset['unx_name'];
-        this.setState((textFacetsState) => {
-          const interimTextFacets = textFacetsState.textFacets.map((textFacet)=>{ 
-            if(textFacet.facetName === facetName){
-              const currentFacet = {...textFacet};
-              currentFacet['viewLess'] = !currentFacet['viewLess'];
-              if(currentFacet['viewLess']){
-                currentFacet.className = "UNX-facet__list UNX-facet__listShowLimited"
-              }else{
-                currentFacet.className = "UNX-facet__list"
-              }
-              return {...textFacet, viewLess: currentFacet['viewLess'], className: currentFacet["className"]};
-            }
-            return {...textFacet};
-          })
-          return {...textFacetsState, textFacets: interimTextFacets}
+        this.setState((existingState) => {
+            const { textFacetsList } = existingState;
+            const updatedTextFacets = textFacetsList.map((textFacet) => {
+                if (textFacet.facetName === facetName) {
+                    return {
+                        ...textFacet,
+                        viewLess: !textFacet['viewLess'],
+                    };
+                }
+                return { ...textFacet };
+            });
+            return { ...existingState, textFacetsList: updatedTextFacets };
         });
-      }
+    };
 
     render() {
         const {
-            selectedFacets,
             onFacetClick,
             onFacetObjectReset,
             FacetItemComponent,
@@ -121,97 +114,97 @@ class GenerateFacets extends React.Component {
             collapsible,
             searchable,
             enableViewMore,
-            minViewMore
+            minViewMore,
         } = this.props;
 
-        const { textFacets } = this.state;
+        const { textFacetsList } = this.state;
 
-        if (textFacets.length === 0) {
+        if (textFacetsList.length === 0) {
             return null;
         }
 
         return (
             <div className="UNX-textFacet__container">
                 {label ? label : null}
-                {textFacets.map(
-                    ({
+                {textFacetsList.map((facet) => {
+                    const {
                         displayName,
                         facetName,
                         values,
                         isOpen = true,
                         filter = '',
-                        viewLess, 
-                        className
-                    }) => {
-                        //decide whether to show clear or not
-                        const hasActiveFacets = selectedFacets[facetName]
-                            ? true
-                            : false;
-                        let filteredValues = values;
-                        if (filter.length > 0) {
-                            filteredValues = values.filter((value) => {
-                                return value.name
-                                    .toLowerCase()
-                                    .includes(filter);
-                            });
-                        }
+                        viewLess,
+                        isSelected = false,
+                    } = facet;
 
-                        return (
-                            <div
-                                className={`UNX-facet__element ${
-                                    isOpen ? 'open' : ''
-                                }`}
-                                key={facetName}
-                            >
-                                <div
-                                    className="UNX-facet__header"
-                                    data-unx_name={facetName}
-                                >
-                                    {displayName}
-                                    {collapsible && (
-                                        <span
-                                            className="-collapse-icon"
-                                            data-unx_name={facetName}
-                                            onClick={this.handleCollapseToggle}
-                                        />
-                                    )}
-                                </div>
-                                {searchable && isOpen && (
-                                    <div className="UNX-facetFilter__container">
-                                        <Input
-                                            className="-input"
-                                            value={filter}
-                                            name={facetName}
-                                            onChange={this.handleFilterChange}
-                                            data-testid={'UNX_searchFacets'}
-                                        />
-                                    </div>
-                                )}
-                                <List
-                                    items={filteredValues}
-                                    idAttribute={'dataId'}
-                                    ListItem={FacetItemComponent || FacetItem}
-                                    onClick={onFacetClick}
-                                    facetName={facetName}
-                                    className={className || "UNX-facet__list"}
-                                    isFacetSelected={isFacetSelected}
-                                    selectedFacets={selectedFacets}
-                                />
-                                {hasActiveFacets && (
-                                    <div
-                                        className="-clear"
-                                        data-unx_name={facetName}
-                                        onClick={onFacetObjectReset}
-                                    >
-                                        Clear
-                                    </div>
-                                )}
-                                {enableViewMore && isOpen && filteredValues.length > minViewMore? 
-                                    <ViewMore  facetName={facetName} toggleViewLess={this.toggleViewLess} viewLess={viewLess}/>: null }
-                            </div>
-                        );
+                    let filteredValues = values;
+                    if (filter.length > 0) {
+                        filteredValues = values.filter((value) => {
+                            return value.name.toLowerCase().includes(filter);
+                        });
                     }
-                )}
+
+                    return (
+                        <div
+                            className={`UNX-facet__element ${
+                                isOpen ? 'open' : ''
+                            }`}
+                            key={facetName}
+                        >
+                            <div
+                                className="UNX-facet__header"
+                                data-unx_name={facetName}
+                            >
+                                {displayName}
+                                {collapsible && (
+                                    <span
+                                        className="-collapse-icon"
+                                        data-unx_name={facetName}
+                                        onClick={this.handleCollapseToggle}
+                                    />
+                                )}
+                            </div>
+                            {searchable && isOpen && (
+                                <div className="UNX-facetFilter__container">
+                                    <Input
+                                        className="-input"
+                                        value={filter}
+                                        name={facetName}
+                                        onChange={this.handleFilterChange}
+                                        data-testid={'UNX_searchFacets'}
+                                    />
+                                </div>
+                            )}
+                            <List
+                                items={filteredValues}
+                                idAttribute={'dataId'}
+                                ListItem={FacetItemComponent || FacetItem}
+                                onClick={onFacetClick}
+                                className={`UNX-facet__list ${
+                                    viewLess ? 'UNX-facet__listShowLimited' : ''
+                                }`}
+                            />
+                            {isSelected && (
+                                <div
+                                    className="-clear"
+                                    data-unx_name={facetName}
+                                    onClick={onFacetObjectReset}
+                                >
+                                    Clear
+                                </div>
+                            )}
+                            {enableViewMore &&
+                            isOpen &&
+                            values.length > minViewMore ? (
+                                <ViewMore
+                                    facetName={facetName}
+                                    toggleViewLess={this.toggleViewLess}
+                                    viewLess={viewLess}
+                                />
+                            ) : null}
+                        </div>
+                    );
+                })}
             </div>
         );
     }

@@ -11,7 +11,7 @@ class SortContainer extends React.Component {
         super(props);
 
         //we will maintain the sort field here
-        const { unbxdCore, defaultSort } = this.props;
+        const { unbxdCore } = this.props;
 
         if (unbxdCore.state.responseObj !== null) {
             const sortStr = unbxdCore.state.selectedSort;
@@ -21,28 +21,19 @@ class SortContainer extends React.Component {
                 sortBy: formattedSortBy,
             };
         } else {
-            if (defaultSort.field && defaultSort.order) {
-                const formattedSortBy = getFormattedSort(defaultSort);
-                this.state = {
-                    sortBy: formattedSortBy,
-                };
-            } else {
-                this.state = {
-                    sortBy: { value: '' },
-                };
-            }
+            this.state = {
+                sortBy: { value: '' },
+            };
         }
     }
 
     componentDidMount() {
         const {
-            defaultSort: sortBy,
             helpers: { setSortConfiguration },
             unbxdCore,
             sortOptions,
         } = this.props;
 
-        //Set the main config
         let sortOn = null;
         const { sort = '' } = unbxdCore.getQueryParams();
         if (typeof sort === 'string' && sort.length) {
@@ -60,7 +51,7 @@ class SortContainer extends React.Component {
                 this.setState({ sortBy: selectedSort });
             }
         } else {
-            sortOn = sortBy;
+            sortOn = '';
         }
 
         if (unbxdCore.state.responseObj === null) {
@@ -103,9 +94,13 @@ class SortContainer extends React.Component {
             getFormattedSort(sortByoption, this.state.sortBy, idx)
         );
 
-        const onSortClick = (event) => {
-            const newSortBy =
-                event.target.dataset.unxsortby || event.target.value;
+        const handleSortClick = (sortOption) => {
+            let newSortBy = null;
+            if (sortOption.target) {
+                newSortBy = sortOption.target.value;
+            } else {
+                newSortBy = sortOption.value;
+            }
             const selectedSort = getSelectedSort(
                 newSortBy,
                 formattedSortByOptions
@@ -153,7 +148,7 @@ class SortContainer extends React.Component {
         };
         const helpers = {
             SortItemComponent,
-            onSortClick,
+            onSortClick: handleSortClick,
             onSortResetClick,
             label,
         };
@@ -175,11 +170,6 @@ SortContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
     unbxdCoreStatus: PropTypes.string.isRequired,
     helpers: PropTypes.object.isRequired,
-    defaultSort: PropTypes.shape({
-        label: PropTypes.string,
-        field: PropTypes.string,
-        order: PropTypes.string,
-    }),
     sortOptions: PropTypes.arrayOf(
         PropTypes.shape({
             label: PropTypes.string,

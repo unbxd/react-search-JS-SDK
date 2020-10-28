@@ -49,11 +49,6 @@ SortWrapper.propTypes = {
   sortBy: PropTypes.object,
   noOfPages: PropTypes.number.isRequired,
   onSortClick: PropTypes.func.isRequired,
-  defaultSort: PropTypes.shape({
-    label: PropTypes.string,
-    field: PropTypes.string,
-    order: PropTypes.string
-  }),
   sortOptions: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,

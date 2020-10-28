@@ -1,15 +1,13 @@
 import {
-  getSelectedRangeFacets,
-  getFacetCoreMethods,
-  isFacetSelected,
-  getUpdatedFacets,
-  getFormattedFacets
+    getSelectedRangeFacets,
+    getRangeFacetCoreMethods,
+    getUpdatedRangeFacets,
+    getFormattedRangeFacets,
 } from './utils';
 
 export {
-  getSelectedRangeFacets,
-  getFacetCoreMethods,
-  isFacetSelected,
-  getUpdatedFacets,
-  getFormattedFacets
+    getSelectedRangeFacets,
+    getRangeFacetCoreMethods,
+    getUpdatedRangeFacets,
+    getFormattedRangeFacets,
 };

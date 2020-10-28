@@ -7,7 +7,7 @@ import { List, Input, ViewMore } from '../../../components';
 class GenerateFacets extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { multilevelFacets: props.multilevelFacets };
+        this.state = { multilevelFacetsList: props.multilevelFacets };
     }
 
     componentDidUpdate(prevProps) {
@@ -15,7 +15,8 @@ class GenerateFacets extends React.Component {
         if (prevProps.multilevelFacets !== multilevelFacets) {
             const formattedMultilevelFacets = multilevelFacets.map(
                 (bucketedFacet) => {
-                    const matchBucketedFacet = this.state.multilevelFacets.find(
+                    const { multilevelFacetsList } = this.state;
+                    const matchBucketedFacet = multilevelFacetsList.find(
                         (bucketedFacetObj) => {
                             return (
                                 bucketedFacetObj.facetDisplayName ===
@@ -40,9 +41,10 @@ class GenerateFacets extends React.Component {
                 return multiFacet;
             });
 
-            this.setState((currentState) => {
+            this.setState((existingState) => {
                 return {
-                    multilevelFacets: multiFacets,
+                    ...existingState,
+                    multilevelFacetsList: multiFacets,
                 };
             });
         }
@@ -50,8 +52,9 @@ class GenerateFacets extends React.Component {
 
     handleCollapseToggle = (event) => {
         const facetId = event.target.dataset['unx_name'];
-        this.setState((currentState) => {
-            const updatedTextFacets = currentState.multilevelFacets.map(
+        this.setState((existingState) => {
+            const { multilevelFacetsList } = existingState;
+            const updatedTextFacets = multilevelFacetsList.map(
                 (multilevelFacet) => {
                     if (facetId === multilevelFacet.facetDisplayName) {
                         return {
@@ -63,36 +66,9 @@ class GenerateFacets extends React.Component {
                 }
             );
 
-            return { ...currentState, multilevelFacets: updatedTextFacets };
-        });
-    };
-
-    toggleViewLess = (event) => {
-        const facetName = event.target.dataset['unx_name'];
-        this.setState((multiFacetsState) => {
-            const interimCombinedFacets = multiFacetsState.multilevelFacets.map(
-                (multiFacet) => {
-                    if (multiFacet.facetDisplayName === facetName) {
-                        const currentFacet = { ...multiFacet };
-                        currentFacet['viewLess'] = !currentFacet['viewLess'];
-                        if (currentFacet['viewLess']) {
-                            currentFacet.className =
-                                'UNX-facet__list UNX-facet__listShowLimited';
-                        } else {
-                            currentFacet.className = 'UNX-facet__list';
-                        }
-                        return {
-                            ...multiFacet,
-                            viewLess: currentFacet['viewLess'],
-                            className: currentFacet['className'],
-                        };
-                    }
-                    return { ...multiFacet };
-                }
-            );
             return {
-                ...multiFacetsState,
-                multilevelFacets: interimCombinedFacets,
+                ...existingState,
+                multilevelFacetsList: updatedTextFacets,
             };
         });
     };
@@ -100,8 +76,9 @@ class GenerateFacets extends React.Component {
     handleFilterChange = (event) => {
         const facetId = event.target.name;
         const value = event.target.value;
-        this.setState((currentState) => {
-            const updatedMultilevelFacets = currentState.multilevelFacets.map(
+        this.setState((existingState) => {
+            const { multilevelFacetsList } = existingState;
+            const updatedMultilevelFacets = multilevelFacetsList.map(
                 (bucketedFacet) => {
                     if (facetId === bucketedFacet.facetDisplayName) {
                         return {
@@ -114,8 +91,30 @@ class GenerateFacets extends React.Component {
             );
 
             return {
-                ...currentState,
-                multilevelFacets: updatedMultilevelFacets,
+                ...existingState,
+                multilevelFacetsList: updatedMultilevelFacets,
+            };
+        });
+    };
+
+    toggleViewLess = (event) => {
+        const facetName = event.target.dataset['unx_name'];
+        this.setState((existingState) => {
+            const { multilevelFacetsList } = existingState;
+            const interimCombinedFacets = multilevelFacetsList.map(
+                (multiFacet) => {
+                    if (multiFacet.facetDisplayName === facetName) {
+                        return {
+                            ...multiFacet,
+                            viewLess: !multiFacet['viewLess'],
+                        };
+                    }
+                    return { ...multiFacet };
+                }
+            );
+            return {
+                ...existingState,
+                multilevelFacetsList: interimCombinedFacets,
             };
         });
     };
@@ -131,16 +130,16 @@ class GenerateFacets extends React.Component {
             minViewMore
         } = this.props;
 
-        const { multilevelFacets } = this.state;
+        const { multilevelFacetsList } = this.state;
 
-        if (multilevelFacets.length === 0) {
+        if (multilevelFacetsList.length === 0) {
             return null;
         }
 
         return (
             <div className="UNX-bucketedFacet__container">
                 {label ? label : null}
-                {multilevelFacets.map((multilevelFacet) => {
+                {multilevelFacetsList.map((multilevelFacet) => {
                     const {
                         facetDisplayName,
                         multiLevelField,
@@ -148,7 +147,6 @@ class GenerateFacets extends React.Component {
                         isOpen = true,
                         filter = '',
                         viewLess,
-                        className
                     } = multilevelFacet;
 
                     let filteredValues = values;
@@ -192,9 +190,10 @@ class GenerateFacets extends React.Component {
                                 items={filteredValues}
                                 ListItem={FacetItemComponent || FacetItem}
                                 idAttribute={'name'}
-                                multiLevelField={multiLevelField}
                                 onClick={onFacetClick}
-                                className={className || "UNX-facet__list"}
+                                className={`UNX-facet__list ${
+                                    viewLess ? 'UNX-facet__listShowLimited' : ''
+                                }`}
                             />
                             {enableViewMore && isOpen && filteredValues.length > minViewMore? 
                                 <ViewMore  facetName={facetDisplayName} toggleViewLess={this.toggleViewLess} viewLess={viewLess}/>: null }

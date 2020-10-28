@@ -1,3 +1,4 @@
+import { facetTypes } from '../../../config';
 export const getSelectedRangeFacets = (rangeFilterObject) => {
     const selectedRangeFacets = {};
 
@@ -18,114 +19,94 @@ export const getSelectedRangeFacets = (rangeFilterObject) => {
     return selectedRangeFacets;
 };
 
-export const isFacetSelected = (currentFacetRangeVal, facetRangeValues) => {
-    const { facetName, valMin, valMax } = currentFacetRangeVal;
-    const currentFacetObj = facetRangeValues[facetName] || {};
-    const { values = [] } = currentFacetObj;
-    const match = values.find((rangeValues) => {
-        const { from, end, isSelected } = rangeValues;
-        const { dataId: fromValue } = from;
-        const { dataId: toValue } = end;
-
-        if (valMin >= fromValue && valMax <= toValue && isSelected) {
-            return true;
-        }
-    });
-
-    if (match) return true;
-    return false;
-};
-
-export const getFormattedFacets = (rangeFacets, selectedRangeFacets) => {
-    let formattedSelectedFacets = {};
+export const getFormattedRangeFacets = (rangeFacets, selectedRangeFacets) => {
+    let selectedFacets = {};
     if (Object.keys(selectedRangeFacets).length) {
-        formattedSelectedFacets = getSelectedRangeFacets(selectedRangeFacets);
+        selectedFacets = getSelectedRangeFacets(selectedRangeFacets);
     }
-    const updatedFacetState = {};
 
-    rangeFacets.map((facet) => {
-        const { facetName, displayName, start, end, values } = facet;
+    const formattedFacets = rangeFacets.map((facetObj) => {
+        const { facetName } = facetObj;
 
-        const sliderMin = parseInt(start);
-        const sliderMax = parseInt(end);
-
-        if (formattedSelectedFacets[facetName]) {
-            const selectedValues = formattedSelectedFacets[facetName];
-            const valuesAggregator = [];
-            selectedValues.map((selectedValue) => {
-                const valMin = parseInt(selectedValue['valMin']);
-                const valMax = parseInt(selectedValue['valMax']);
-
-                values.map((rangeValues, idx) => {
-                    const { from, end } = rangeValues;
-                    const { dataId: fromValue } = from;
-                    const { dataId: toValue } = end;
-                    const key = `${fromValue}_${toValue}`;
-                    const currentVal = valuesAggregator.find((val) => val[key]);
-                    if (
-                        currentVal === undefined ||
-                        !currentVal[key]['isSelected']
-                    ) {
-                        const tempVal = {};
-                        if (valMin >= fromValue && valMax <= toValue) {
-                            tempVal[key] = {
-                                ...rangeValues,
-                                isSelected: true,
-                            };
-                        } else {
-                            tempVal[key] = {
-                                ...rangeValues,
-                                isSelected: false,
-                            };
-                        }
-                        tempVal['id'] = `${facetName}_${fromValue}-${toValue}`;
-                        valuesAggregator[idx] = tempVal;
-                    }
-                });
-
-                const aggregatedValues = valuesAggregator.map(
-                    (val) => Object.values(val)[0]
-                );
-                updatedFacetState[facetName] = {
-                    sliderMin,
-                    sliderMax,
-                    valMin,
-                    valMax,
-                    values: aggregatedValues,
-                    displayName,
-                    isSelected: true,
-                    viewLess: false,
-                    className: 'UNX-facet__list',
-                };
-            });
-        } else {
-            const valMin = sliderMin;
-            const valMax = sliderMax;
-            const formattedValues = values.map((val) => {
-                const { from, end } = val;
-                const { dataId: fromValue } = from;
-                const { dataId: toValue } = end;
-                const id = `${fromValue}_${toValue}`;
-                return { ...val, id };
-            });
-            updatedFacetState[facetName] = {
-                sliderMin,
+        if (selectedFacets[facetName]) {
+            const { start, end } = facetObj;
+            const sliderMin = start;
+            const sliderMax = end;
+            const currentFacetObj = {
+                ...facetObj,
+                facetType: facetTypes.RANGE_FACET,
                 sliderMax,
-                valMin,
-                valMax,
-                displayName,
-                values: formattedValues,
-                isSelected: false,
+                sliderMin,
+                isSelected: true,
                 viewLess: false,
                 className: 'UNX-facet__list',
             };
+            const activeFacets = selectedFacets[facetName];
+            const values = currentFacetObj.values.map((facetitem) => {
+                const { from, end } = facetitem;
+                const { dataId: fromValue } = from;
+                const { dataId: toValue } = end;
+                const id = `${fromValue}_${toValue}`;
+
+                const hit = activeFacets.find((val) => {
+                    const { valMin, valMax } = val;
+                    const selectedMin = parseInt(valMin);
+                    const selectedMax = parseInt(valMax);
+                    return selectedMin >= fromValue && selectedMax <= toValue;
+                });
+
+                if (hit) {
+                    currentFacetObj['valMin'] = hit.valMin;
+                    currentFacetObj['valMax'] = hit.valMax;
+                    return {
+                        ...hit,
+                        ...facetitem,
+                        facetName,
+                        isSelected: true,
+                        id,
+                    };
+                } else {
+                    return { ...facetitem, facetName, id };
+                }
+            });
+            currentFacetObj['values'] = values;
+            return currentFacetObj;
+        } else {
+            const { start, end } = facetObj;
+            const sliderMin = start;
+            const sliderMax = end;
+            const currentFacetObj = {
+                ...facetObj,
+                isOpen: true,
+                facetType: facetTypes.RANGE_FACET,
+                sliderMin,
+                sliderMax,
+                viewLess: false,
+                className: 'UNX-facet__list',
+            };
+            const values = currentFacetObj.values.map((facetitem) => {
+                const { from, end } = facetitem;
+                const { dataId: fromValue } = from;
+                const { dataId: toValue } = end;
+                const id = `${fromValue}_${toValue}`;
+                return {
+                    ...facetitem,
+                    facetName,
+                    id,
+                };
+            });
+            currentFacetObj['values'] = values;
+            return currentFacetObj;
         }
     });
 
-    return updatedFacetState;
+    return formattedFacets;
 };
 
-export const getUpdatedFacets = (rangeFacets, existingRangeValues = {}) => {
+export const getUpdatedRangeFacets = (
+    rangeFacets,
+    existingRangeValues = {}
+) => {
     if (Object.keys(rangeFacets).length > 0) {
         Object.keys(existingRangeValues).map((facetName) => {
             const currentFacet = existingRangeValues[facetName];
@@ -137,7 +118,7 @@ export const getUpdatedFacets = (rangeFacets, existingRangeValues = {}) => {
     return rangeFacets;
 };
 
-export const getFacetCoreMethods = (unbxdCore) => {
+export const getRangeFacetCoreMethods = (unbxdCore) => {
     const getRangeFacets = unbxdCore.getRanges.bind(unbxdCore);
     const setRangeFacet = unbxdCore.setRangeFacet.bind(unbxdCore);
     const applyRangeFacet = unbxdCore.applyRangeFacet.bind(unbxdCore);

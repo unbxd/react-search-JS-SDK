@@ -21,7 +21,7 @@ class PaginationContainer extends React.PureComponent {
             rows = 0,
         } = unbxdCore.getPaginationInfo() || {};
 
-        const onNextPageClick = () => {
+        const handleNextPageClick = () => {
             const newPageNumber = rows * currentPage;
             const onFinish = () => {
                 setPageStart(newPageNumber);
@@ -30,7 +30,7 @@ class PaginationContainer extends React.PureComponent {
             executeCallback(onPageChange, [newPageNumber], onFinish);
         };
 
-        const onPreviousPageClick = () => {
+        const handlePreviousPageClick = () => {
             const newPageNumber = (currentPage - 2) * rows;
             const onFinish = () => {
                 setPageStart(newPageNumber);
@@ -39,7 +39,7 @@ class PaginationContainer extends React.PureComponent {
             executeCallback(onPageChange, [newPageNumber], onFinish);
         };
 
-        const onPageClick = (event) => {
+        const handlePageClick = (event) => {
             const pageNo = parseInt(event.target.dataset.pagenumber);
             const newPageNumber = (pageNo - 1) * rows;
             const onFinish = () => {
@@ -59,9 +59,9 @@ class PaginationContainer extends React.PureComponent {
         };
 
         const helpers = {
-            onNextPageClick,
-            onPreviousPageClick,
-            onPageClick,
+            onNextPageClick: handlePageClick,
+            onPreviousPageClick: handlePreviousPageClick,
+            onPageClick: handlePageClick,
             PaginationItemComponent,
         };
 

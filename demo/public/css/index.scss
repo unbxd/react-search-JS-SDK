@@ -136,7 +136,7 @@ body {
         position: relative;
     }
 
-    &.selected {
+    &.-selected {
         .-checkbox {
             background-color: #1d2e44;
             border: 0;

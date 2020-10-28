@@ -5,6 +5,7 @@ import { conditionalRenderer } from '../../common/utils';
 import { getFacetCoreMethods } from './utils';
 import SelectedFacetsWrapper from './SelectedFacetsWrapper';
 import { productTypes } from '../../config';
+import { facetTypes } from '../../config';
 
 class SelectedFacetsContainer extends React.PureComponent {
     getSelectedFacetsProps = () => {
@@ -59,22 +60,18 @@ class SelectedFacetsContainer extends React.PureComponent {
             getUpdatedResults();
         };
 
-        const handleTextFacetClick = (event) => {
-            const { unx_name, unx_dataid } = event.target.dataset;
-            removeTextFacet(unx_name, unx_dataid);
+        const handleTextFacetClick = (currentItem) => {
+            const { facetName, dataId } = currentItem;
+            removeTextFacet(facetName, dataId);
         };
 
-        const handleRangeFacetClick = (event) => {
-            const { unx_name, unx_dataid } = event.target.dataset;
-            addRangeFacet(unx_name, unx_dataid);
+        const handleRangeFacetClick = (currentItem) => {
+            const { facetName, dataId } = currentItem;
+            addRangeFacet(facetName, dataId);
         };
 
-        const handleMultilevelFacetClick = (event) => {
-            const {
-                unx_categoryname: name,
-                unx_level: level,
-                unx_multilevelfield: parent,
-            } = event.target.dataset;
+        const handleMultilevelFacetClick = (currentItem) => {
+            const { name, level, filterField: parent } = currentItem;
             const categoryObject = { parent, level, name };
             if (productType === productTypes.CATEGORY) {
                 unbxdCore.setCategoryId(categoryObject, unbxdCore);
@@ -94,6 +91,7 @@ class SelectedFacetsContainer extends React.PureComponent {
                             activeFacets['textFacets'].push({
                                 ...selectedFacet,
                                 facetName,
+                                type: facetTypes.TEXT_FACET,
                             });
                             return true;
                         }
@@ -104,24 +102,33 @@ class SelectedFacetsContainer extends React.PureComponent {
 
         activeFacets['rangeFacets'] = [];
         Object.keys(selectedRangeFacets).map((facetName) => {
-            const values = selectedRangeFacets[facetName]; //[0].replace(/[\[\]']/g, '');
+            const values = selectedRangeFacets[facetName];
             values.map((facetValues) => {
                 const name = facetValues.replace(/[\[\]']/g, '');
-                activeFacets['rangeFacets'].push({ facetName, name });
+                activeFacets['rangeFacets'].push({
+                    facetName,
+                    dataId: name,
+                    type: facetTypes.RANGE_FACET,
+                });
             });
         });
 
         activeFacets['multilevelFacets'] = [];
         multilevelFacets.map((facetValue) => {
             const { value: name, filterField, level } = facetValue;
-            activeFacets['multilevelFacets'].push({ name, filterField, level });
+            activeFacets['multilevelFacets'].push({
+                name,
+                filterField,
+                level,
+                type: facetTypes.MULTILEVEL_FACET,
+            });
         });
 
         return {
             activeFacets,
-            handleTextFacetClick,
-            handleRangeFacetClick,
-            handleMultilevelFacetClick,
+            onTextFacetClick: handleTextFacetClick,
+            onRangeFacetClick: handleRangeFacetClick,
+            onMultilevelFacetClick: handleMultilevelFacetClick,
             FacetItemComponent,
             priceUnit,
             label,

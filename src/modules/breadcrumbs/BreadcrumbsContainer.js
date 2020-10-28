@@ -24,13 +24,9 @@ class BreadcrumbsContainer extends React.PureComponent {
 
         const breadCrumbsList = getBreadCrumbsList();
 
-        const removeCategoryFilter = (event) => {
-            const {
-                unx_categoryname: name,
-                unx_level: level,
-                unx_multilevelfield: parent,
-            } = event.target.dataset;
-            const categoryObject = { parent, level, name };
+        const handleBreadCrumbClick = (currentItem) => {
+            const { value, filterField, level } = currentItem;
+            const categoryObject = { parent: filterField, level, name: value };
             if (productType === productTypes.CATEGORY) {
                 unbxdCore.setCategoryId(categoryObject, unbxdCore);
             } else {
@@ -41,7 +37,7 @@ class BreadcrumbsContainer extends React.PureComponent {
         };
 
         return {
-            removeCategoryFilter,
+            onBreadCrumbClick: handleBreadCrumbClick,
             breadCrumbsList,
             Root,
             separator,

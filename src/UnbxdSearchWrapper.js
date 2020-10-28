@@ -15,7 +15,6 @@ import {
     setSpellCheckConfiguration,
     setPageSizeConfiguration,
     setSortConfiguration,
-    setTextFacetsConfiguration,
     setMultilevelFacetsConfiguration,
     setFacetsActionConfiguration,
     setViewTypeConfiguration,
@@ -49,6 +48,7 @@ class UnbxdSearchWrapper extends Component {
             apiKey,
             searchConfigurations,
             getCategoryId,
+            setCategoryId,
             productType,
             priceUnit,
         } = this.props;
@@ -56,7 +56,6 @@ class UnbxdSearchWrapper extends Component {
         this.unbxdCallBack = unbxdCallBack.bind(this);
         this.setPageSizeConfiguration = setPageSizeConfiguration.bind(this);
         this.setSortConfiguration = setSortConfiguration.bind(this);
-        this.setTextFacetsConfiguration = setTextFacetsConfiguration.bind(this);
         this.setMultilevelFacetsConfiguration = setMultilevelFacetsConfiguration.bind(
             this
         );
@@ -81,6 +80,7 @@ class UnbxdSearchWrapper extends Component {
                 apiKey,
                 onEvent: this.unbxdCallBack,
                 getCategoryId,
+                setCategoryId,
             }),
             productType,
             categoryId: '',
@@ -91,7 +91,6 @@ class UnbxdSearchWrapper extends Component {
                 setSearchBoxConfiguration: this.setSearchBoxConfiguration,
                 setPageSizeConfiguration: this.setPageSizeConfiguration,
                 setSortConfiguration: this.setSortConfiguration,
-                setTextFacetsConfiguration: this.setTextFacetsConfiguration,
                 setMultilevelFacetsConfiguration: this
                     .setMultilevelFacetsConfiguration,
                 setFacetsActionConfiguration: this.setFacetsActionConfiguration,
@@ -233,7 +232,7 @@ class UnbxdSearchWrapper extends Component {
 UnbxdSearchWrapper.defaultProps = {
     productType: 'SEARCH',
     priceUnit: '$',
-    searchConfigurations: {}
+    searchConfigurations: {},
 };
 
 UnbxdSearchWrapper.propTypes = {
@@ -257,6 +256,10 @@ UnbxdSearchWrapper.propTypes = {
      * Custom function to return the Category Id.
      */
     getCategoryId: PropTypes.func,
+    /**
+     * Custom function to set the Category Id.
+     */
+    setCategoryId: PropTypes.func,
     /**
      * Product type of UnbxdSearchWrapper.
      */

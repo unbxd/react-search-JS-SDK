@@ -3,46 +3,33 @@ import React from 'react';
 import { RangeFacets } from '@unbxd-ui/react-search-sdk';
 import { scrollTop } from '../utils';
 
-const sortRangeFacets = function () {
+const transform = function () {
     console.log(this);
     return this;
 };
 
-const FacetListItemComponent = ({
-    itemData,
-    facetName,
-    onClick,
-    priceUnit,
-}) => {
-    const { from, end, isSelected = false } = itemData;
+export const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
+    const { from, end, facetName, isSelected = false } = itemData;
     const { name: fromName, count, dataId: fromDataId } = from;
     const { name: ToName, dataId: toDataId } = end;
 
+    const handleClick = () => {
+        onClick(itemData);
+    };
+
     return (
         <div
-            className={`UNX-facet__item ${isSelected ? 'selected' : ''}`}
-            data-unx_facetname={`${facetName}_${fromDataId}-${toDataId}`}
-            onClick={onClick}
             key={`${facetName}_${fromDataId}-${toDataId}`}
+            className={`UNX-facet__item ${isSelected ? '-selected' : ''}`}
+            onClick={handleClick}
         >
-            <div
-                className="-checkbox"
-                data-unx_facetname={`${facetName}_${fromDataId}-${toDataId}`}
-            />
-            <div
-                className="-label"
-                data-unx_facetname={`${facetName}_${fromDataId}-${toDataId}`}
-            >
+            <div className="-checkbox" />
+            <div className="-label">
                 {priceUnit}
                 {fromName} - {priceUnit}
                 {ToName}
             </div>
-            <div
-                className="-count"
-                data-unx_facetname={`${facetName}_${fromDataId}-${toDataId}`}
-            >
-                ({count})
-            </div>
+            <div className="-count">({count})</div>
         </div>
     );
 };
@@ -56,8 +43,8 @@ const onFacetClick = (facet, isSelected) => {
 const RangeFilters = () => {
     return (
         <RangeFacets
-            sortRangeFacets={sortRangeFacets}
-            FacetListItemComponent={FacetListItemComponent}
+            transform={transform}
+            FacetItemComponent={FacetItemComponent}
             collapsible={true}
             enableViewMore={true}
             minViewMore={3}

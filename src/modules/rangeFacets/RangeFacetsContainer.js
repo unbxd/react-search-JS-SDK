@@ -3,19 +3,19 @@ import PropTypes from 'prop-types';
 
 import { conditionalRenderer } from '../../common/utils';
 import GenerateFacets from './GenerateFacets';
-import { getFacetCoreMethods, getFormattedFacets } from './utils';
+import { getRangeFacetCoreMethods, getFormattedRangeFacets } from './utils';
 
 class RangeFacetsContainer extends React.PureComponent {
     getRangeFacetsProps() {
         const {
             unbxdCore,
-            FacetListItemComponent,
+            FacetItemComponent,
             enableApplyFilters,
             priceUnit,
             label,
             collapsible,
             onFacetClick,
-            sortRangeFacets,
+            transform,
             enableViewMore,
             minViewMore
         } = this.props;
@@ -26,11 +26,11 @@ class RangeFacetsContainer extends React.PureComponent {
             applyRangeFacet,
             clearARangeFacet,
             selectedRangeFacets,
-        } = getFacetCoreMethods(unbxdCore);
+        } = getRangeFacetCoreMethods(unbxdCore);
         const applyMultiple = true;
         const rangeFacets = getRangeFacets();
 
-        const formattedRangeFacets = getFormattedFacets(
+        const formattedRangeFacets = getFormattedRangeFacets(
             rangeFacets,
             selectedRangeFacets
         );
@@ -57,12 +57,12 @@ class RangeFacetsContainer extends React.PureComponent {
             addRangeFacet,
             applyRangeFacet,
             removeRangeFacet,
-            FacetListItemComponent,
+            FacetItemComponent,
             enableApplyFilters,
             priceUnit,
             label,
             collapsible,
-            sortRangeFacets,
+            transform,
             enableViewMore,
             onFacetClick,
             minViewMore
@@ -84,7 +84,7 @@ RangeFacetsContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
     unbxdCoreStatus: PropTypes.string.isRequired,
     helpers: PropTypes.object.isRequired,
-    FacetListItemComponent: PropTypes.oneOfType([
+    FacetItemComponent: PropTypes.oneOfType([
         PropTypes.element,
         PropTypes.func,
     ]),

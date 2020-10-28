@@ -37,7 +37,6 @@ const TextFacets = (props) => {
 TextFacets.displayName = "TextFacets"
 
 TextFacets.defaultProps = {
-    defaultFilters: {},
     collapsible:false,
     searchable:false,
     minViewMore: 3,
@@ -45,10 +44,6 @@ TextFacets.defaultProps = {
 }
 
 TextFacets.propTypes = {
-    /**
-    * Apply default filters which will be enabled on every request.
-    */
-    defaultFilters: PropTypes.object,
     /**
      * Collapse facet values
      */

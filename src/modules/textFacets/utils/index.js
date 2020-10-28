@@ -1,3 +1,11 @@
-import { getFacetRow, isFacetSelected, getFacetCoreMethods } from './utils';
+import {
+    getTextFacetItem,
+    getTextFacetFacetCoreMethods,
+    getFormattedTextFacets,
+} from './utils';
 
-export { getFacetRow, isFacetSelected, getFacetCoreMethods };
+export {
+    getTextFacetItem,
+    getTextFacetFacetCoreMethods,
+    getFormattedTextFacets,
+};

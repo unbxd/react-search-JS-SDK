@@ -34,7 +34,6 @@ const MultilevelFacets = (props) => {
 MultilevelFacets.displayName = 'MultilevelFacets';
 
 MultilevelFacets.defaultProps = {
-    defaultCategoryFilter: '',
     facetDepth: 6,
     facetLimit: 100,
     collapsible: false,
@@ -60,10 +59,6 @@ MultilevelFacets.propTypes = {
      * Maximum number of values present in a facet.
      */
     facetLimit: PropTypes.number,
-    /**
-     * Default category filter
-     */
-    defaultCategoryFilter: PropTypes.string,
     /**
      * Collapse facet values
      */

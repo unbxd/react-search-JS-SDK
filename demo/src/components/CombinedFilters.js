@@ -1,102 +1,26 @@
 import React from 'react';
 
-import  { CombinedFacets } from '@unbxd-ui/react-search-sdk';
+import { CombinedFacets } from '@unbxd-ui/react-search-sdk';
+import { FacetItemComponent as TextFacetItemComponent } from './TextFilters';
+import { FacetItemComponent as RangeFacetItemComponent } from './RangeFilters';
 
-const sortCombinedFacets = function(){
-  console.log(this);
-  return this;
-};
-
-const FacetItemComponent = ({
-  itemData,
-  facetName,
-  onClick,
-  isFacetSelected,
-  selectedFacets
-}) => {
-  const { name, count, dataId } = itemData;
-  const isSelected = isFacetSelected(selectedFacets, facetName, dataId);
-
-  return (
-    <div
-      className={`UNX-facet__item ${isSelected ? 'selected' : ''}`}
-      data-unx_name={facetName}
-      data-unx_dataid={dataId}
-      onClick={onClick}
-    >
-      <div
-        className="-checkbox"
-        data-unx_name={facetName}
-        data-unx_dataid={dataId}
-      ></div>
-      <div
-        className="-label"
-        data-unx_name={facetName}
-        data-unx_dataid={dataId}
-      >
-        {name}
-      </div>
-      <div
-        className="-count"
-        data-unx_name={facetName}
-        data-unx_dataid={dataId}
-      >
-        ({count})
-      </div>
-    </div>
-  );
-};
-
-const FacetListItemComponent = ({
-  itemData,
-  facetName,
-  onClick,
-  priceUnit
-}) => {
-  const { from, end, isSelected = false } = itemData;
-  const { name: fromName, count, dataId: fromDataId } = from;
-  const { name: ToName, dataId: toDataId } = end;
-
-  return (
-    <div
-      className={`UNX-facet__item ${isSelected ? 'selected' : ''}`}
-      data-unx_facetname={`${facetName}_${fromDataId}-${toDataId}`}
-      onClick={onClick}
-      key={`${facetName}_${fromDataId}-${toDataId}`}
-    >
-      <div
-        className="-checkbox"
-        data-unx_facetname={`${facetName}_${fromDataId}-${toDataId}`}
-      />
-      <div
-        className="-label"
-        data-unx_facetname={`${facetName}_${fromDataId}-${toDataId}`}
-      >
-        {priceUnit}
-        {fromName} - {priceUnit}
-        {ToName}
-      </div>
-      <div
-        className="-count"
-        data-unx_facetname={`${facetName}_${fromDataId}-${toDataId}`}
-      >
-        ({count})
-      </div>
-    </div>
-  );
+const transform = function () {
+    console.log(this);
+    return this;
 };
 
 const CombinedFilters = () => {
     return (
-      <CombinedFacets
-        sortCombinedFacets = {sortCombinedFacets}
-        FacetListItemComponent={FacetListItemComponent}
-        FacetItemComponent={FacetItemComponent}
-        enableViewMore={true}
-        minViewMore={3}
-      />
+        <CombinedFacets
+            transform={transform}
+            RangeFacetItemComponent={RangeFacetItemComponent}
+            TextFacetItemComponent={TextFacetItemComponent}
+            collapsible={true}
+            enableViewMore={true}
+            searchable={true}
+            minViewMore={3}
+        />
     );
 };
 
 export default CombinedFilters;
-

@@ -3,42 +3,21 @@ import React from 'react';
 import { MultilevelFacets } from '@unbxd-ui/react-search-sdk';
 import { scrollTop } from '../utils';
 
-const FacetItemComponent = ({ itemData, multiLevelField, onClick }) => {
+const FacetItemComponent = ({ itemData, onClick }) => {
     const { name, count, level, isSelected } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
     return (
         <div
-            className={`UNX-facet__item l${level} ${
-                isSelected ? 'selected' : ''
+            className={`UNX-facet__item -l${level} ${
+                isSelected ? '-selected' : ''
             }`}
-            data-unx_categoryname={name}
-            data-unx_multilevelfield={multiLevelField}
-            data-unx_level={level}
-            onClick={onClick}
+            onClick={handleClick}
         >
-            <div
-                className="-checkbox"
-                data-unx_categoryname={name}
-                data-unx_multilevelfield={multiLevelField}
-                data-unx_level={level}
-            ></div>
-            <div
-                className="-label"
-                data-unx_categoryname={name}
-                data-unx_multilevelfield={multiLevelField}
-                data-unx_level={level}
-            >
-                {name}
-            </div>
-            {count && (
-                <div
-                    className="-count"
-                    data-unx_categoryname={name}
-                    data-unx_multilevelfield={multiLevelField}
-                    data-unx_level={level}
-                >
-                    ({count})
-                </div>
-            )}
+            <div className="-checkbox"></div>
+            <div className="-label">{name}</div>
+            {count && <div className="-count">({count})</div>}
         </div>
     );
 };

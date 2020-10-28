@@ -1,222 +1,151 @@
 import React from 'react';
-
-import {
-    isFacetSelected,
-    getSelectedRangeFacets,
-    isRangeFacetSelected,
-} from '../utils';
 import { List, Input, ViewMore } from '../../../components';
-import FacetItem from './FacetItem';
-import FacetListItem from './FacetListItem';
-import { searchStatus } from '../../../config';
+import TextFacetItem from './TextFacetItem';
+import RangeFacetItem from './RangeFacetItem';
+import { searchStatus, facetTypes } from '../../../config';
+import { executeCallback } from '../../../common/utils';
 
 class GenerateCombinedFacets extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { combinedFacets: [] };
+        this.state = { combinedFacetsList: props.combinedFacets };
     }
 
-    setFacetValue(facetAddObj, getResults = false) {
-        const { facetName, valMin, valMax } = facetAddObj;
-        const isSelected = isRangeFacetSelected(
-            facetAddObj,
-            this.state.combinedFacets
-        );
-        this.setState((combinedFacetsState) => {
-            let interimCombinedFacets = [...combinedFacetsState.combinedFacets];
-            interimCombinedFacets.map((combinedFacet) => {
-                if (combinedFacet.facetType === 'range') {
-                    const rangeObject = combinedFacet;
-                    const updatedValues = rangeObject.values.map(
-                        (rangeValues) => {
-                            const { from, to } = rangeValues;
-                            const { dataId: fromValue } = from;
-                            const { dataId: toValue } = to;
+    setFacetValue(facetObj, getResults = false) {
+        const { onFacetClick } = this.props;
+        const { facetName, valMin, valMax, isSelected } = facetObj;
+        const applyMutiple = true;
 
-                            if (valMin >= fromValue && valMax <= toValue) {
-                                return { ...rangeValues, isSelected: true };
-                            } else {
-                                return { ...rangeValues, isSelected: false };
-                            }
+        const onFinish = () => {
+            this.setState((existingState) => {
+                const { combinedFacetsList } = existingState;
+                const updatedRangeValues = combinedFacetsList.map(
+                    (rangeValue) => {
+                        if (
+                            rangeValue.facetType === facetTypes.RANGE_FACET &&
+                            rangeValue.facetName === facetName
+                        ) {
+                            //also go into values and set the specific from to as is selected
+                            const updatedValues = rangeValue.values.map(
+                                (facetValue) => {
+                                    const {
+                                        from,
+                                        end,
+                                        isSelected = false,
+                                    } = facetValue;
+                                    const { dataId: fromValue } = from;
+                                    const { dataId: toValue } = end;
+
+                                    if (
+                                        valMin >= fromValue &&
+                                        valMax <= toValue
+                                    ) {
+                                        return {
+                                            ...facetValue,
+                                            isSelected: !isSelected,
+                                        };
+                                    } else {
+                                        return { ...facetValue };
+                                    }
+                                }
+                            );
+
+                            return {
+                                ...rangeValue,
+                                valMin,
+                                valMax,
+                                values: updatedValues,
+                            };
+                        } else {
+                            return { ...rangeValue };
                         }
-                    );
-                    return {
-                        ...rangeObject,
-                        valMin,
-                        valMax,
-                        values: updatedValues,
-                    };
-                }
-                return combinedFacet;
-            });
-            return {
-                combinedFacets: [...interimCombinedFacets],
-            };
-        });
+                    }
+                );
 
-        const { addRangeFacet, removeRangeFacet } = this.props;
-        if (isSelected) {
-            removeRangeFacet({ facetName }, getResults);
-        } else {
-            addRangeFacet(
-                { facetName, start: valMin, end: valMax },
-                getResults
-            );
-        }
+                return {
+                    ...existingState,
+                    combinedFacetsList: updatedRangeValues,
+                };
+            });
+
+            const { addRangeFacet, removeRangeFacet } = this.props;
+            if (isSelected && !applyMutiple) {
+                removeRangeFacet({ facetName }, getResults);
+            } else {
+                addRangeFacet(
+                    { facetName, start: valMin, end: valMax },
+                    getResults
+                );
+            }
+        };
+        executeCallback(onFacetClick, [facetObj, !isSelected], onFinish);
     }
 
     componentDidUpdate(prevProps) {
         const {
             unbxdCoreStatus,
             combinedFacets,
-            enableApplyFilters,
             lastSelectedFacets,
             selectedFacets,
-            selectedRangeFacets,
             setSelectedFacets,
-            sortCombinedFacets,
+            transform,
         } = this.props;
+        if (combinedFacets !== prevProps.combinedFacets) {
+            // sorting the array
+            let formattedCombinedFacets = [...combinedFacets];
+            formattedCombinedFacets.sort((a, b) => {
+                return a.position - b.position;
+            });
+            formattedCombinedFacets = formattedCombinedFacets.map(
+                (combinedFacet) => {
+                    const { combinedFacetsList } = this.state;
+                    const match = combinedFacetsList.find(
+                        (combinedFacetObj) =>
+                            combinedFacetObj.facetName ===
+                            combinedFacet.facetName
+                    );
+                    const combinedFacetObj = { ...combinedFacet };
+                    if (match) {
+                        combinedFacetObj['viewLess'] = match.viewLess;
+                        combinedFacetObj['className'] = 'UNX-facet__list';
+                        combinedFacetObj['filter'] = match.filter;
+                        combinedFacetObj['isOpen'] = match.isOpen;
+                    } else {
+                        combinedFacetObj['viewLess'] = false;
+                        combinedFacetObj['className'] = 'UNX-facet__list';
+                        combinedFacetObj['filter'] = '';
+                        combinedFacetObj['isOpen'] = true;
+                    }
+
+                    return combinedFacetObj;
+                }
+            );
+            if (transform && typeof transform === 'function') {
+                let returnedFacets = transform.call(formattedCombinedFacets);
+                this.setState(() => {
+                    return { combinedFacetsList: returnedFacets };
+                });
+            } else {
+                this.setState(() => {
+                    return { combinedFacetsList: formattedCombinedFacets };
+                });
+            }
+        }
+
         if (
             prevProps.unbxdCoreStatus !== unbxdCoreStatus &&
             unbxdCoreStatus === searchStatus.READY &&
             selectedFacets !== lastSelectedFacets
         ) {
-            let formattedSelectedRangeFacets = {};
-            if (Object.keys(selectedRangeFacets).length) {
-                formattedSelectedRangeFacets = getSelectedRangeFacets(
-                    selectedRangeFacets
-                );
-            }
-            let formattedCombinedFacets = combinedFacets.map(
-                (combinedFacet) => {
-                    if (combinedFacet.facetType === 'text') {
-                        const matchcombinedFacet = this.state.combinedFacets.find(
-                            (facetObj) =>
-                                facetObj.facetName === combinedFacet.facetName
-                        );
-                        return {
-                            ...combinedFacet,
-                            isOpen: matchcombinedFacet
-                                ? matchcombinedFacet.isOpen
-                                : true,
-                            filter: matchcombinedFacet
-                                ? matchcombinedFacet.filter
-                                : '',
-                        };
-                    }
-                    const {
-                        facetName,
-                        displayName,
-                        start,
-                        end,
-                        values,
-                        position,
-                        facetType,
-                    } = combinedFacet;
-                    const sliderMin = parseInt(start);
-                    const sliderMax = parseInt(end);
-
-                    let updatedFacet = {};
-
-                    if (
-                        Object.keys(formattedSelectedRangeFacets).length &&
-                        formattedSelectedRangeFacets[facetName]
-                    ) {
-                        const valMin = parseInt(
-                            formattedSelectedRangeFacets[facetName]['valMin']
-                        );
-                        const valMax = parseInt(
-                            formattedSelectedRangeFacets[facetName]['valMax']
-                        );
-
-                        const updatedValues = values.map((rangeValues) => {
-                            const { from, to } = rangeValues;
-                            const { dataId: fromValue } = from;
-                            const { dataId: toValue } = to;
-
-                            if (valMin >= fromValue && valMax <= toValue) {
-                                return { ...rangeValues, isSelected: true };
-                            } else {
-                                return { ...rangeValues, isSelected: false };
-                            }
-                        });
-
-                        updatedFacet = {
-                            facetName,
-                            sliderMin,
-                            sliderMax,
-                            valMin,
-                            valMax,
-                            values: updatedValues,
-                            displayName,
-                            isSelected: true,
-                            position,
-                            facetType,
-                        };
-                    } else {
-                        const valMin = sliderMin;
-                        const valMax = sliderMax;
-                        updatedFacet = {
-                            facetName,
-                            sliderMin,
-                            sliderMax,
-                            valMin,
-                            valMax,
-                            displayName,
-                            values,
-                            isSelected: false,
-                            position,
-                            facetType,
-                        };
-                    }
-                    const matchcombinedFacet = this.state.combinedFacets.find(
-                        (facetObj) => facetObj.facetName === facetName
-                    );
-                    return {
-                        ...updatedFacet,
-                        isOpen: matchcombinedFacet
-                            ? matchcombinedFacet.isOpen
-                            : true,
-                        filter: matchcombinedFacet
-                            ? matchcombinedFacet.filter
-                            : '',
-                    };
-                }
-            );
-            // sorting the array
-            formattedCombinedFacets.sort((a, b) => {
-                return a.position - b.position;
-            });
-            formattedCombinedFacets = formattedCombinedFacets.map((combinedFacet) => {
-                combinedFacet.viewLess = false;
-                combinedFacet.className = 'UNX-facet__list';
-                return combinedFacet;
-            });
-            if (
-                sortCombinedFacets &&
-                typeof sortCombinedFacets === 'function'
-            ) {
-                let returnedFacets = sortCombinedFacets.call(
-                    formattedCombinedFacets
-                );
-                this.setState(() => {
-                    return { combinedFacets: returnedFacets };
-                });
-            } else {
-                this.setState(() => {
-                    return { combinedFacets: formattedCombinedFacets };
-                });
-            }
-            setSelectedFacets(
-                enableApplyFilters ? selectedFacets : lastSelectedFacets
-            );
+            setSelectedFacets(lastSelectedFacets);
         }
     }
 
     handleCollapseToggle = (event) => {
         const facetId = event.target.dataset['unx_name'];
-        this.setState((currentState) => {
-            const updatedCombinedFacets = currentState.combinedFacets.map(
+        this.setState((existingState) => {
+            const { combinedFacetsList } = existingState;
+            const updatedCombinedFacets = combinedFacetsList.map(
                 (combinedFacet) => {
                     if (facetId === combinedFacet.facetName) {
                         return {
@@ -228,15 +157,19 @@ class GenerateCombinedFacets extends React.Component {
                 }
             );
 
-            return { ...currentState, combinedFacets: updatedCombinedFacets };
+            return {
+                ...existingState,
+                combinedFacetsList: updatedCombinedFacets,
+            };
         });
     };
 
     handleFilterChange = (event) => {
         const facetId = event.target.name;
         const value = event.target.value;
-        this.setState((currentState) => {
-            const updatedCombinedFacets = currentState.combinedFacets.map(
+        this.setState((existingState) => {
+            const { combinedFacetsList } = existingState;
+            const updatedCombinedFacets = combinedFacetsList.map(
                 (combinedFacet) => {
                     if (facetId === combinedFacet.facetName) {
                         return {
@@ -248,7 +181,10 @@ class GenerateCombinedFacets extends React.Component {
                 }
             );
 
-            return { ...currentState, textFacets: updatedCombinedFacets };
+            return {
+                ...existingState,
+                combinedFacetsList: updatedCombinedFacets,
+            };
         });
     };
 
@@ -257,83 +193,59 @@ class GenerateCombinedFacets extends React.Component {
         applyRangeFacet();
     };
 
-    onClearFilter = (event) => {
+    onRangeFacetClear = (event) => {
         const facetName = event.target.dataset['unx_facetname'];
 
         const { removeRangeFacet } = this.props;
         removeRangeFacet({ facetName });
-
-        this.setState((combinedFacetsState) => {
-            let interimCombinedFacets = [...combinedFacetsState.combinedFacets];
-            interimCombinedFacets.map((combinedFacet) => {
-                if (
-                    combinedFacet.facetName === facetName &&
-                    combinedFacet.facetType === 'range'
-                ) {
-                    const currentFacet = combinedFacet;
-                    (currentFacet.valMin = currentFacet.sliderMin),
-                        (currentFacet.valMax = currentFacet.sliderMax);
-                    return combinedFacet;
-                }
-                return combinedFacet;
-            });
-            return {
-                combinedFacets: [...interimCombinedFacets],
-            };
-        });
-        this.onApplyFilter();
-    };
-
-    handleRangeValueClick = (event) => {
-        const facetInfo = event.target.dataset['unx_facetname'];
-        const [facetName, ranges] = facetInfo.split('_');
-        const [valMin, valMax] = ranges.split('-');
-
-        const { enableApplyFilters } = this.props;
-        this.setFacetValue({ facetName, valMin, valMax }, !enableApplyFilters);
-    };
-
-    handleRangeCollapseToggle = (event) => {
-        const facetId = event.target.dataset['unx_name'];
-        this.setState((combinedFacetsState) => {
-            let interimCombinedFacets = [...combinedFacetsState.combinedFacets];
-            interimCombinedFacets.map((combinedFacet) => {
-                if (
-                    combinedFacet.facetName === facetId &&
-                    combinedFacet.facetType === 'range'
-                ) {
-                    const currentFacet = combinedFacet;
-                    currentFacet['isOpen'] = !currentFacet['isOpen'];
-                    return currentFacet;
-                }
-                return combinedFacet;
-            });
-            return {
-                combinedFacets: [...interimCombinedFacets],
-            };
-        });
-    };
-
-    handleRangeFilterChange = (event) => {
-        const facetId = event.target.name;
-        const value = event.target.value;
         this.setState((existingState) => {
-            const currentFacet = existingState.rangeValues[facetId];
-            currentFacet['filter'] = value;
+            const { combinedFacetsList } = existingState;
+            const updatedRangeValues = combinedFacetsList.map((rangeValue) => {
+                if (
+                    rangeValue.facetName === facetName &&
+                    rangeValue.facetType === facetTypes.RANGE_FACET
+                ) {
+                    const updatedValues = rangeValue.values.map(
+                        (facetValue) => {
+                            return { ...facetValue, isSelected: false };
+                        }
+                    );
+                    return {
+                        ...rangeValue,
+                        isSelected: false,
+                        valMin: rangeValue.sliderMin,
+                        valMax: rangeValue.sliderMax,
+                        values: updatedValues,
+                    };
+                } else {
+                    return { ...rangeValue };
+                }
+            });
+
             return {
                 ...existingState,
-                rangeValues: {
-                    ...existingState.rangeValues,
-                    [facetId]: currentFacet,
-                },
+                combinedFacetsList: updatedRangeValues,
             };
         });
+
+        !applyMutiple && this.onApplyFilter();
+    };
+
+    handleRangeFacetClick = (currentItem) => {
+        const { from, end, facetName, isSelected = false } = currentItem;
+        const { dataId: valMin } = from;
+        const { dataId: valMax } = end;
+
+        const { enableApplyFilters } = this.props;
+        const facetObj = { facetName, valMin, valMax, isSelected };
+        this.setFacetValue(facetObj, !enableApplyFilters);
     };
 
     toggleViewLess = (event) => {
         const facetName = event.target.dataset['unx_name'];
-        this.setState((combinedFacetsState) => {
-            const interimCombinedFacets = combinedFacetsState.combinedFacets.map(
+        this.setState((existingState) => {
+            const { combinedFacetsList } = existingState;
+            const updatedCombinedFacets = combinedFacetsList.map(
                 (combinedFacet) => {
                     if (combinedFacet.facetName === facetName) {
                         const currentFacet = { ...combinedFacet };
@@ -354,8 +266,8 @@ class GenerateCombinedFacets extends React.Component {
                 }
             );
             return {
-                ...combinedFacetsState,
-                combinedFacets: interimCombinedFacets,
+                ...existingState,
+                combinedFacetsList: updatedCombinedFacets,
             };
         });
     };
@@ -363,33 +275,32 @@ class GenerateCombinedFacets extends React.Component {
     render() {
         const {
             selectedFacets,
-            onFacetClick,
-            onFacetObjectReset,
-            FacetItemComponent,
-            textCollapsible,
-            textSearchable,
-            FacetListItemComponent,
+            onTextFacetClick,
+            onTextFacetClear,
+            TextFacetItemComponent,
+            collapsible,
+            searchable,
+            RangeFacetItemComponent,
             priceUnit,
-            rangeCollapsible,
             enableViewMore,
-            minViewMore
+            minViewMore,
         } = this.props;
 
-        const { combinedFacets } = this.state;
+        const { combinedFacetsList } = this.state;
 
-        if (combinedFacets.length === 0) {
+        if (combinedFacetsList.length === 0) {
             return null;
         }
 
         return (
             <div>
-                {combinedFacets.map((combinedFacet) => {
-                    if (combinedFacet.facetType === 'text') {
+                {combinedFacetsList.map((combinedFacet) => {
+                    if (combinedFacet.facetType === facetTypes.TEXT_FACET) {
                         const {
                             displayName,
                             facetName,
                             values,
-                            isOpen,
+                            isOpen = true,
                             filter,
                             viewLess,
                             className,
@@ -419,7 +330,7 @@ class GenerateCombinedFacets extends React.Component {
                                         data-unx_name={facetName}
                                     >
                                         {displayName}
-                                        {textCollapsible && (
+                                        {collapsible && (
                                             <span
                                                 className="-collapse-icon"
                                                 data-unx_name={facetName}
@@ -429,7 +340,7 @@ class GenerateCombinedFacets extends React.Component {
                                             />
                                         )}
                                     </div>
-                                    {textSearchable && isOpen && (
+                                    {searchable && isOpen && (
                                         <div className="UNX-facetFilter__container">
                                             <Input
                                                 className="-input"
@@ -443,38 +354,40 @@ class GenerateCombinedFacets extends React.Component {
                                     )}
                                     <List
                                         items={filteredValues}
-                                        idAttribute={'dataId'}
                                         ListItem={
-                                            FacetItemComponent || FacetItem
+                                            TextFacetItemComponent ||
+                                            TextFacetItem
                                         }
-                                        onClick={onFacetClick}
-                                        facetName={facetName}
-                                        className={className || "UNX-facet__list"}
-                                        isFacetSelected={isFacetSelected}
-                                        selectedFacets={selectedFacets}
+                                        onClick={onTextFacetClick}
+                                        className={
+                                            className || 'UNX-facet__list'
+                                        }
                                     />
                                     {hasActiveFacets && (
                                         <div
                                             className="-clear"
                                             data-unx_name={facetName}
-                                            onClick={onFacetObjectReset}
+                                            onClick={onTextFacetClear}
                                         >
                                             Clear
                                         </div>
                                     )}
-                                    {enableViewMore && isOpen && filteredValues.length > minViewMore ? 
-                                    <ViewMore  facetName={facetName} toggleViewLess={this.toggleViewLess} viewLess={viewLess}/>: null }
+                                    {enableViewMore &&
+                                    isOpen &&
+                                    filteredValues.length > minViewMore ? (
+                                        <ViewMore
+                                            facetName={facetName}
+                                            toggleViewLess={this.toggleViewLess}
+                                            viewLess={viewLess}
+                                        />
+                                    ) : null}
                                 </div>
                             </div>
                         );
                     }
                     const {
-                        sliderMin,
-                        sliderMax,
-                        valMin,
-                        valMax,
                         displayName,
-                        isOpen,
+                        isOpen = true,
                         facetName,
                         values,
                         isSelected,
@@ -483,48 +396,58 @@ class GenerateCombinedFacets extends React.Component {
                     } = combinedFacet;
 
                     return (
-                        <div
-                            className={`UNX-facet__element ${
-                                isOpen ? 'open' : ''
-                            }`}
-                            key={facetName}
-                        >
-                            <div className="UNX-facet__headerContainer">
-                                <div className="UNX-facet__header">
-                                    {displayName}
-                                    {rangeCollapsible && (
-                                        <span
-                                            className="-collapse-icon"
-                                            data-unx_name={facetName}
-                                            onClick={
-                                                this.handleRangeCollapseToggle
-                                            }
-                                        />
-                                    )}
+                        <div className="UNX-rangefacet__container">
+                            <div
+                                className={`UNX-facet__element ${
+                                    isOpen ? 'open' : ''
+                                }`}
+                                key={facetName}
+                            >
+                                <div className="UNX-facet__headerContainer">
+                                    <div className="UNX-facet__header">
+                                        {displayName}
+                                        {collapsible && (
+                                            <span
+                                                className="-collapse-icon"
+                                                data-unx_name={facetName}
+                                                onClick={
+                                                    this.handleCollapseToggle
+                                                }
+                                            />
+                                        )}
+                                    </div>
                                 </div>
+                                <List
+                                    items={values}
+                                    ListItem={
+                                        RangeFacetItemComponent ||
+                                        RangeFacetItem
+                                    }
+                                    onClick={this.handleRangeFacetClick}
+                                    idAttribute={facetName}
+                                    facetName={facetName}
+                                    className={className}
+                                    priceUnit={priceUnit}
+                                />
+                                {isSelected && (
+                                    <div
+                                        onClick={this.onRangeFacetClear}
+                                        data-unx_facetname={facetName}
+                                        className="-clear"
+                                    >
+                                        Clear
+                                    </div>
+                                )}
+                                {enableViewMore &&
+                                isOpen &&
+                                filteredValues.length > minViewMore ? (
+                                    <ViewMore
+                                        facetName={facetName}
+                                        toggleViewLess={this.toggleViewLess}
+                                        viewLess={viewLess}
+                                    />
+                                ) : null}
                             </div>
-                            <List
-                                items={values}
-                                ListItem={
-                                    FacetListItemComponent || FacetListItem
-                                }
-                                onClick={this.handleRangeValueClick}
-                                idAttribute={facetName}
-                                facetName={facetName}
-                                className={className}
-                                priceUnit={priceUnit}
-                            />
-                            {isSelected && (
-                                <div
-                                    onClick={this.onClearFilter}
-                                    data-unx_facetname={facetName}
-                                    className="-clear"
-                                >
-                                    Clear
-                                </div>
-                            )}
-                            {enableViewMore && isOpen && values.length > minViewMore? 
-                                <ViewMore  facetName={facetName} toggleViewLess={this.toggleViewLess} viewLess={viewLess}/>: null }
                         </div>
                     );
                 })}

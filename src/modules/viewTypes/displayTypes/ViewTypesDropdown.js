@@ -10,11 +10,16 @@ const ViewTypesDropdown = ({ viewType, viewTypes, onViewTypeClick }) => {
             onChange={onViewTypeClick}
         >
             {viewTypes.map((item) => {
+                const { viewType } = item;
                 const dataTestId =
-                    item === 'GRID' ? `UNX_gridBtn` : `UNX_listBtn`;
+                    viewType === 'GRID' ? `UNX_gridBtn` : `UNX_listBtn`;
                 return (
-                    <option value={item} key={item} data-testid={dataTestId}>
-                        {item}
+                    <option
+                        value={viewType}
+                        key={viewType}
+                        data-testid={dataTestId}
+                    >
+                        {viewType}
                     </option>
                 );
             })}
