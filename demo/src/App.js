@@ -28,6 +28,9 @@ const setCategoryId = (param, self) => {
     let page = ``;
     let pathArr = [];
     const l = Number(level);
+    if (l === 1) {
+        return;
+    }
     const breadCrumbs = self.getBreadCrumbsList();
     breadCrumbs.forEach((element, i) => {
         const { value, level } = element;

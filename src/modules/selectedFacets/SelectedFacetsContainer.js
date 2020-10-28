@@ -77,7 +77,7 @@ class SelectedFacetsContainer extends React.PureComponent {
                 unbxdCore.setCategoryId(categoryObject, unbxdCore);
                 getUpdatedResults();
             } else {
-                removeMultilevelFacet(parent, level, name);
+                removeMultilevelFacet(parent, name, level);
             }
         };
 
