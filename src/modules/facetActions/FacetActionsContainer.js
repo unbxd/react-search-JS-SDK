@@ -41,7 +41,8 @@ class FacetActionsContainer extends React.PureComponent {
 
         const handleApplyFilter = () => {
             const onFinish = () => {
-                applyFacets(selectedFacets);
+                //does not work if we pass it as it is.
+                applyFacets({...selectedFacets});
             };
             executeCallback(onApply, [selectedFacets], onFinish);
         };
