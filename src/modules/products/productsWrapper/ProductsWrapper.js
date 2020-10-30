@@ -36,8 +36,7 @@ class ProductsWrapper extends React.PureComponent {
 
     if (
       documentHeight - scrollHeight < heightDiffToTriggerNextPage ||
-      (scrollHeight > productContainerHeight &&
-        scrollHeight - productContainerHeight < heightDiffToTriggerNextPage * 2)
+      (scrollHeight > productContainerHeight)
     ) {
       getNextPage();
     }
