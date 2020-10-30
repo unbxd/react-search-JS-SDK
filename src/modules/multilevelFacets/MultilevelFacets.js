@@ -16,13 +16,19 @@ const MultilevelFacets = (props) => {
                     hasUnbxdSearchWrapperContext(MultilevelFacets.displayName);
                 }
 
-                const { unbxdCore, unbxdCoreStatus, helpers } = appState;
+                const {
+                    unbxdCore,
+                    unbxdCoreStatus,
+                    helpers,
+                    productType,
+                } = appState;
 
                 return (
                     <MultilevelFacetsContainer
                         unbxdCore={unbxdCore}
                         unbxdCoreStatus={unbxdCoreStatus}
                         helpers={helpers}
+                        productType={productType}
                         {...props}
                     />
                 );
@@ -39,7 +45,7 @@ MultilevelFacets.defaultProps = {
     collapsible: false,
     searchable: false,
     minViewMore: 3,
-    enableViewMore: true
+    enableViewMore: true,
 };
 
 MultilevelFacets.propTypes = {
@@ -88,7 +94,8 @@ MultilevelFacets.propTypes = {
     minViewMore: PropTypes.number,
     /**
      * Bool value to enable disable viewMore.
-     */enableViewMore: PropTypes.bool
+     */ 
+    enableViewMore: PropTypes.bool,
 };
 
 export default MultilevelFacets;

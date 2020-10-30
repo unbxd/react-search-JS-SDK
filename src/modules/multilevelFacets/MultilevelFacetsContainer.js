@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { conditionalRenderer } from '../../common/utils';
 import { getFacetCoreMethods } from './utils';
 import MultilevelFacetsWrapper from './MultilevelFacetsWrapper';
+import { productTypes } from '../../config';
 import { executeCallback } from '../../common/utils';
 
 class MultilevelFacetsContainer extends React.PureComponent {
@@ -33,7 +34,8 @@ class MultilevelFacetsContainer extends React.PureComponent {
             searchable,
             onFacetClick,
             enableViewMore,
-            minViewMore
+            minViewMore,
+            productType,
         } = this.props;
 
         const {
@@ -119,23 +121,30 @@ class MultilevelFacetsContainer extends React.PureComponent {
         const handleFacetClick = (currentItem) => {
             const { name, fieldName: parent, level } = currentItem;
             const categoryObject = { parent, level, name };
+            const { helpers } = this.props;
+            const { getUpdatedResults } = helpers;
 
             const onFinish = () => {
-                if (highestBreadcrumbLevel === parseInt(level)) {
-                    deleteCategoryFilter(categoryObject);
+                if (productType === productTypes.CATEGORY) {
+                    unbxdCore.setCategoryId(categoryObject, unbxdCore);
+                    getUpdatedResults();
                 } else {
-                    //check if it is a breadcrumb
-                    const hit = breadCrumbsList.find(({ value }) => {
-                        return name === value;
-                    });
-
-                    if (hit) {
+                    if (highestBreadcrumbLevel === parseInt(level)) {
                         deleteCategoryFilter(categoryObject);
                     } else {
-                        setCategoryFilter(categoryObject);
+                        //check if it is a breadcrumb
+                        const hit = breadCrumbsList.find(({ value }) => {
+                            return name === value;
+                        });
+
+                        if (hit) {
+                            deleteCategoryFilter(categoryObject);
+                        } else {
+                            setCategoryFilter(categoryObject);
+                        }
                     }
+                    getResults();
                 }
-                getResults();
             };
             executeCallback(onFacetClick, [categoryObject], onFinish);
         };
@@ -148,7 +157,7 @@ class MultilevelFacetsContainer extends React.PureComponent {
             collapsible,
             searchable,
             enableViewMore,
-            minViewMore
+            minViewMore,
         };
     }
 
