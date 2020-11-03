@@ -5,136 +5,136 @@ import Products from '../../src/modules/products';
 import SearchBox from '../../src/modules/searchBox';
 const defaultSearch = 'Boots';
 const attributesMap = {
-  productName: 'title',
-  uniqueId: 'uniqueId',
-  imageUrl: 'imageUrl',
-  price: 'unbxd_price',
-  productUrl: 'productUrl'
+    productName: 'title',
+    uniqueId: 'uniqueId',
+    imageUrl: 'imageUrl',
+    price: 'unbxd_price',
+    productUrl: 'productUrl',
 };
 const variantAttributesMap = {
-  productName: 'title',
-  uniqueId: 'vId',
-  imageUrl: 'imageUrl',
-  price: 'v_unbxd_price',
-  productUrl: 'productUrl'
+    productName: 'title',
+    uniqueId: 'vId',
+    imageUrl: 'imageUrl',
+    price: 'v_unbxd_price',
+    productUrl: 'productUrl',
 };
 const onSubmit = () => {
-  console.log('onSubmit ');
-  return true;
+    console.log('onSubmit ');
+    return true;
 };
 const onClear = () => {
-  console.log('onClear ');
-  return true;
+    console.log('onClear ');
+    return true;
 };
 const InputComponent = ({ query, onSearchBoxChange, onSearchBoxClear }) => {
-  return (
-    <input
-      value={query}
-      onChange={onSearchBoxChange}
-      onClear={onSearchBoxClear}
-    />
-  );
+    return (
+        <input
+            value={query}
+            onChange={onSearchBoxChange}
+            onClear={onSearchBoxClear}
+        />
+    );
 };
 const SubmitComponent = ({ onSearchBoxSubmit }) => {
-  return <div onClick={onSearchBoxSubmit}> Submit</div>;
+    return <div onClick={onSearchBoxSubmit}> Submit</div>;
 };
 const ClearComponent = ({ onSearchBoxClear }) => {
-  return <div onClick={onSearchBoxClear}> x </div>;
+    return <div onClick={onSearchBoxClear}> x </div>;
 };
 
 <Meta title="SearchBox" component={SearchBox} />
 
 # SearchBox
 
-### Component to display the searchbox.
+### Widget to display the searchbox.
 
 ```jsx
 <SearchBox />
 ```
 
 <Preview>
-  <Story name="default">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <SearchBox />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={defaultSearch} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="default">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SearchBox />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Autofocus.
+### autoFocus
 
 The Searchbox can be autofocused by passing `autoFocus`.
 
 ```jsx
 <SearchBox
-  //...
-  autoFocus={true}
-  //...
+    //...
+    autoFocus={true}
+    //...
 />
 ```
 
 <Preview>
-  <Story name="with autofocus">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <SearchBox autoFocus={true} />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={defaultSearch} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with autoFocus">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SearchBox autoFocus={true} />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Clearable.
+### clearable
 
 The Searchbox can be made clearable by passing `clearable`.
 
 ```jsx
 <SearchBox
-  //...
-  clearable={true}
-  //...
+    //...
+    clearable={true}
+    //...
 />
 ```
 
 <Preview>
-  <Story name="with clear">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <SearchBox clearable={true} />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={defaultSearch} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with clearable">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SearchBox clearable={true} />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
@@ -145,174 +145,174 @@ The user can be notified on events such as `submit` and `clear` by passing the c
 
 ```js
 const onSubmit = () => {
-  //process
-  return true;
+    //process
+    return true;
 };
 
 const onClear = () => {
-  //process
-  return true;
+    //process
+    return true;
 };
 ```
 
 ```jsx
 <SearchBox
-  //...
-  onSubmit={onSubmit}
-  onClear={onClear}
-  //...
+    //...
+    onSubmit={onSubmit}
+    onClear={onClear}
+    //...
 />
 ```
 
 <Preview>
-  <Story name="with calllbacks">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <SearchBox onSubmit={onSubmit} onClear={onClear} />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={defaultSearch} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with calllbacks">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SearchBox onSubmit={onSubmit} onClear={onClear} />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Custom Input.
+### InputComponent
 
 The default Input component can be overridden by passing `InputComponent`.
 
 ```jsx
 const InputComponent = ({ query, onSearchBoxChange, onSearchBoxClear }) => {
-  return (
-    <input
-      value={query}
-      onChange={onSearchBoxChange}
-      onClear={onSearchBoxClear}
-    />
-  );
+    return (
+        <input
+            value={query}
+            onChange={onSearchBoxChange}
+            onClear={onSearchBoxClear}
+        />
+    );
 };
 ```
 
 ```jsx
 <SearchBox
-  //...
-  InputComponent={InputComponent}
-  //...
+    //...
+    InputComponent={InputComponent}
+    //...
 />
 ```
 
 <Preview>
-  <Story name="with custom input">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <SearchBox InputComponent={InputComponent} />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={defaultSearch} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with InputComponent">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SearchBox InputComponent={InputComponent} />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Custom Button.
+### SubmitComponent
 
 The default Submit component can be overridden by passing `SubmitComponent`.
 
 ```jsx
 const SubmitComponent = ({ onSearchBoxSubmit }) => {
-  return <div onClick={onSearchBoxSubmit}> Submit</div>;
+    return <div onClick={onSearchBoxSubmit}> Submit</div>;
 };
 ```
 
 ```jsx
 <SearchBox
-  //...
-  SubmitComponent={SubmitComponent}
-  //...
+    //...
+    SubmitComponent={SubmitComponent}
+    //...
 />
 ```
 
 <Preview>
-  <Story name="with custom button">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <SearchBox SubmitComponent={SubmitComponent} />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={defaultSearch} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with SubmitComponent">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SearchBox SubmitComponent={SubmitComponent} />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Custom Clear.
+### ClearComponent
 
 The default Clear component can be overridden by passing `ClearComponent`.
 
 ```jsx
 const ClearComponent = ({ onSearchBoxClear }) => {
-  return <div onClick={onSearchBoxClear}> x </div>;
+    return <div onClick={onSearchBoxClear}> x </div>;
 };
 ```
 
 ```jsx
 <SearchBox
-  //...
-  clearable={true}
-  ClearComponent={ClearComponent}
-  //...
+    //...
+    clearable={true}
+    ClearComponent={ClearComponent}
+    //...
 />
 ```
 
 <Preview>
-  <Story name="with custom clear">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <SearchBox clearable={true} ClearComponent={ClearComponent} />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={defaultSearch} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with ClearComponent">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SearchBox clearable={true} ClearComponent={ClearComponent} />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Render Props.
+### Render Props
 
-- This approach gives the control of UI to the user.
-- The anonymous function will receive all the data and helpers needed to build the UI.
+-   This approach gives the total control of the widget to the user.
+-   The anonymous function will receive all the data and methods needed to build and manage the widget.
 
 #### Render prop parameters
 
@@ -332,40 +332,40 @@ const ClearComponent = ({ onSearchBoxClear }) => {
 | ClearComponent    | element\|func | custom clear component.    |
 
 <Preview>
-  <Story name="with render props">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <SearchBox>
-        {({
-          autoFocus,
-          clearable,
-          query,
-          lastSearchedQuery,
-          placeholder,
-          productType,
-          onSearchBoxChange,
-          onSearchBoxSubmit,
-          onSearchBoxClear,
-          setSearchBoxQuery,
-          InputComponent,
-          SubmitComponent,
-          ClearComponent
-        }) => {
-          return <div>render custom searchBox</div>;
-        }}
-      </SearchBox>
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={defaultSearch} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with render props">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SearchBox>
+                {({
+                    autoFocus,
+                    clearable,
+                    query,
+                    lastSearchedQuery,
+                    placeholder,
+                    productType,
+                    onSearchBoxChange,
+                    onSearchBoxSubmit,
+                    onSearchBoxClear,
+                    setSearchBoxQuery,
+                    InputComponent,
+                    SubmitComponent,
+                    ClearComponent,
+                }) => {
+                    return <div>render SearchBox</div>;
+                }}
+            </SearchBox>
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---

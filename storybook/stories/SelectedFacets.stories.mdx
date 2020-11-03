@@ -7,109 +7,147 @@ import Products from '../../src/modules/products';
 import SearchBox from '../../src/modules/searchBox';
 const defaultSearch = 'Boots';
 const attributesMap = {
-  productName: 'title',
-  uniqueId: 'uniqueId',
-  imageUrl: 'imageUrl',
-  price: 'unbxd_price',
-  productUrl: 'productUrl'
+    productName: 'title',
+    uniqueId: 'uniqueId',
+    imageUrl: 'imageUrl',
+    price: 'unbxd_price',
+    productUrl: 'productUrl',
 };
 const variantAttributesMap = {
-  productName: 'title',
-  uniqueId: 'vId',
-  imageUrl: 'imageUrl',
-  price: 'v_unbxd_price',
-  productUrl: 'productUrl'
+    productName: 'title',
+    uniqueId: 'vId',
+    imageUrl: 'imageUrl',
+    price: 'v_unbxd_price',
+    productUrl: 'productUrl',
 };
-const FacetItemComponent = ({ itemData, facetName, onClick }) => {
-  const { name, dataId } = itemData;
-  return (
-    <div data-unx_name={facetName} data-unx_dataid={dataId} onClick={onClick}>
-      {name} x
-    </div>
-  );
+const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
+    const { name, type, dataId } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
+    let selectedFacetMarkup = null;
+    if (type === 'TEXT_FACET') {
+        selectedFacetMarkup = <span>{name}</span>;
+    }
+    if (type === 'RANGE_FACET') {
+        const [valMin, valMax] = dataId.split(' TO ');
+        selectedFacetMarkup = (
+            <span>
+                {priceUnit} {valMin} - {priceUnit} {valMax}
+            </span>
+        );
+    }
+    if (type === 'MULTILEVEL_FACET') {
+        selectedFacetMarkup = <span>{name}</span>;
+    }
+    return (
+        <div className="UNX-selectedFacets__item" onClick={handleClick}>
+            {selectedFacetMarkup} <span className="-cross"></span>
+        </div>
+    );
 };
 
 <Meta title="SelectedFacets" component={SelectedFacets} />
 
 # SelectedFacets
 
-### Component to display the selected facets.
+### Widget to display the selected facets.
 
 ```jsx
 <SelectedFacets />
 ```
 
 <Preview>
-  <Story name="default">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <SelectedFacets />
-      <TextFacets />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={defaultSearch} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="default">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SelectedFacets />
+            <TextFacets />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Custom Component.
+### FacetItemComponent
 
 The default SelectedFacets item component can be overrideden by passing `FacetItemComponent`.
 
 ```jsx
-const FacetItemComponent = ({ itemData, facetName, onClick }) => {
-  const { name, dataId } = itemData;
-  return (
-    <div data-unx_name={facetName} data-unx_dataid={dataId} onClick={onClick}>
-      {name} x
-    </div>
-  );
+const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
+    const { name, type, dataId } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
+
+    let selectedFacetMarkup = null;
+    if (type === 'TEXT_FACET') {
+        selectedFacetMarkup = <span>{name}</span>;
+    }
+    if (type === 'RANGE_FACET') {
+        const [valMin, valMax] = dataId.split(' TO ');
+        selectedFacetMarkup = (
+            <span>
+                {priceUnit} {valMin} - {priceUnit} {valMax}
+            </span>
+        );
+    }
+    if (type === 'MULTILEVEL_FACET') {
+        selectedFacetMarkup = <span>{name}</span>;
+    }
+
+    return (
+        <div className="UNX-selectedFacets__item" onClick={handleClick}>
+            {selectedFacetMarkup} <span className="-cross"></span>
+        </div>
+    );
 };
 ```
 
 ```jsx
 <SelectedFacets
-  //...
-  FacetItemComponent={FacetItemComponent}
-  //...
+    //...
+    FacetItemComponent={FacetItemComponent}
+    //...
 />
 ```
 
 <Preview>
-  <Story name="with custom component">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <SelectedFacets FacetItemComponent={FacetItemComponent} />
-      <TextFacets />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={defaultSearch} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with FacetItemComponent">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SelectedFacets FacetItemComponent={FacetItemComponent} />
+            <TextFacets />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Render Props.
+### Render Props
 
-- This approach gives the control of UI to the user.
-- The anonymous function will receive all the data and helpers needed to build the UI.
+-   This approach gives the total control of the widget to the user.
+-   The anonymous function will receive all the data and methods needed to build and manage the widget.
 
 #### Render prop parameters
 
@@ -124,35 +162,35 @@ const FacetItemComponent = ({ itemData, facetName, onClick }) => {
 | label                      | node          | label for the component        |
 
 <Preview>
-  <Story name="with render props">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <SelectedFacets>
-        {({
-          activeFacets,
-          handleTextFacetClick,
-          handleRangeFacetClick,
-          handleMultilevelFacetClick,
-          FacetItemComponent,
-          priceUnit,
-          label
-        }) => {
-          return <div>custom render selectedFacets</div>;
-        }}
-      </SelectedFacets>
-      <TextFacets />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={defaultSearch} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with render props">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SelectedFacets>
+                {({
+                    activeFacets,
+                    handleTextFacetClick,
+                    handleRangeFacetClick,
+                    handleMultilevelFacetClick,
+                    FacetItemComponent,
+                    priceUnit,
+                    label,
+                }) => {
+                    return <div>render SelectedFacets</div>;
+                }}
+            </SelectedFacets>
+            <TextFacets />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---

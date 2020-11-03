@@ -6,32 +6,35 @@ import Products from '../../src/modules/products';
 import UnbxdSearchWrapper from '../../src/UnbxdSearchWrapper';
 import SearchBox from '../../src/modules/searchBox';
 const attributesMap = {
-  productName: 'title',
-  uniqueId: 'uniqueId',
-  imageUrl: 'imageUrl',
-  price: 'unbxd_price',
-  productUrl: 'productUrl'
+    productName: 'title',
+    uniqueId: 'uniqueId',
+    imageUrl: 'imageUrl',
+    price: 'unbxd_price',
+    productUrl: 'productUrl',
 };
 const variantAttributesMap = {
-  productName: 'title',
-  uniqueId: 'vId',
-  imageUrl: 'imageUrl',
-  price: 'v_unbxd_price',
-  productUrl: 'productUrl'
+    productName: 'title',
+    uniqueId: 'vId',
+    imageUrl: 'imageUrl',
+    price: 'v_unbxd_price',
+    productUrl: 'productUrl',
 };
-const BreadcrumbItemComponent = ({ itemData, onClick }) => {
-  const { value, filterField, level } = itemData;
-  return (
-    <div
-      data-unx_categoryname={value}
-      data-unx_multilevelfield={filterField}
-      data-unx_level={level}
-      className={'UNX-breadcrumbs-list-item'}
-      onClick={onClick}
-    >
-      {value} x
-    </div>
-  );
+const BreadcrumbItemComponent = ({
+    itemData,
+    Root,
+    separator,
+    onClick,
+    idx,
+}) => {
+    const { value } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
+    return (
+        <div className={'UNX-breadcrumb__item'} onClick={handleClick}>
+            {value} x
+        </div>
+    );
 };
 const Root = () => <span>Home</span>;
 const separator = <span>-</span>;
@@ -40,7 +43,7 @@ const separator = <span>-</span>;
 
 # Breadcrumbs
 
-### Component to display current page breadcrumb.
+### Widget to display current page breadcrumb.
 
 ```jsx
 const Root = () => <span>Home</span>;
@@ -50,56 +53,55 @@ const separator = <span>-</span>;
 
 ```jsx
 <Breadcrumbs
-  //...
-  Root={Root}
-  separator={separator}
-  //...
+    //...
+    Root={Root}
+    separator={separator}
+    //...
 />
 ```
 
 <Preview>
-  <Story name="default">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <Breadcrumbs Root={Root} separator={separator} />
-      <MultilevelFacets
-        categoryDisplayName={'category'}
-        categoryField={'categoryPath'}
-        defaultCategoryFilter={'All Products'}
-      />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={'Shoes'} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="default">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <Breadcrumbs Root={Root} separator={separator} />
+            <MultilevelFacets
+                categoryDisplayName={'category'}
+                categoryField={'categoryPath'}
+            />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={'Shoes'} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Custom component.
+### BreadcrumbItemComponent
 
 The default Breadcrumb item component can be overridden by passing `BreadcrumbItemComponent`.
 
 ```jsx
-const BreadcrumbItemComponent = ({ itemData, onClick }) => {
-  const { value, filterField, level } = itemData;
-  return (
-    <div
-      data-unx_categoryname={value}
-      data-unx_multilevelfield={filterField}
-      data-unx_level={level}
-      onClick={onClick}
-    >
-      {value} x
-    </div>
-  );
+const BreadcrumbItemComponent = ({
+    itemData,
+    Root,
+    separator,
+    onClick,
+    idx,
+}) => {
+    const { value } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
+    return <div onClick={handleClick}>{value} x</div>;
 };
 ```
 
@@ -108,35 +110,35 @@ const BreadcrumbItemComponent = ({ itemData, onClick }) => {
 ```
 
 <Preview>
-  <Story name="with custom component">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <Breadcrumbs BreadcrumbItemComponent={BreadcrumbItemComponent} />
-      <MultilevelFacets
-        categoryDisplayName={'category'}
-        categoryField={'categoryPath'}
-        defaultCategoryFilter={'All Products'}
-      />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={'Shoes'} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with BreadcrumbItemComponent">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <Breadcrumbs BreadcrumbItemComponent={BreadcrumbItemComponent} />
+            <MultilevelFacets
+                categoryDisplayName={'category'}
+                categoryField={'categoryPath'}
+                defaultCategoryFilter={'All Products'}
+            />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={'Shoes'} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Render Props.
+### Render Props
 
-- This approach gives the control of UI to the user.
-- The anonymous function will receive all the data and helpers needed to build the UI.
+-   This approach gives the total control of the widget to the user.
+-   The anonymous function will receive all the data and methods needed to build and manage the widget.
 
 #### Render prop parameters
 
@@ -149,37 +151,37 @@ const BreadcrumbItemComponent = ({ itemData, onClick }) => {
 | BreadcrumbItemComponent | element\|func       | Custom component                  |
 
 <Preview>
-  <Story name="with render props">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <Breadcrumbs>
-        {({
-          Root,
-          separator,
-          breadCrumbsList,
-          removeCategoryFilter,
-          BreadcrumbItemComponent
-        }) => {
-          return <div>render custom breadcrumbs</div>;
-        }}
-      </Breadcrumbs>
-      <MultilevelFacets
-        categoryDisplayName={'category'}
-        categoryField={'categoryPath'}
-        defaultCategoryFilter={'All Products'}
-      />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={'Shoes'} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with render props">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <Breadcrumbs>
+                {({
+                    Root,
+                    separator,
+                    breadCrumbsList,
+                    removeCategoryFilter,
+                    BreadcrumbItemComponent,
+                }) => {
+                    return <div>render Breadcrumbs</div>;
+                }}
+            </Breadcrumbs>
+            <MultilevelFacets
+                categoryDisplayName={'category'}
+                categoryField={'categoryPath'}
+                defaultCategoryFilter={'All Products'}
+            />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={'Shoes'} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---

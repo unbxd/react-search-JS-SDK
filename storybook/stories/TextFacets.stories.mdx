@@ -6,135 +6,114 @@ import TextFacets from '../../src/modules/textFacets';
 import SearchBox from '../../src/modules/searchBox';
 const defaultSearch = 'Shoes';
 const attributesMap = {
-  productName: 'title',
-  uniqueId: 'uniqueId',
-  imageUrl: 'imageUrl',
-  price: 'unbxd_price',
-  productUrl: 'productUrl'
+    productName: 'title',
+    uniqueId: 'uniqueId',
+    imageUrl: 'imageUrl',
+    price: 'unbxd_price',
+    productUrl: 'productUrl',
 };
 const variantAttributesMap = {
-  productName: 'title',
-  uniqueId: 'vId',
-  imageUrl: 'imageUrl',
-  price: 'v_unbxd_price',
-  productUrl: 'productUrl'
+    productName: 'title',
+    uniqueId: 'vId',
+    imageUrl: 'imageUrl',
+    price: 'v_unbxd_price',
+    productUrl: 'productUrl',
 };
-const FacetItemComponent = ({
-  itemData,
-  facetName,
-  onClick,
-  isFacetSelected,
-  selectedFacets
-}) => {
-  const { name, count, dataId } = itemData;
-  const isSelected = isFacetSelected(selectedFacets, facetName, dataId);
-  return (
-    <div>
-      <input
-        type="checkbox"
-        checked={isSelected}
-        data-unx_name={facetName}
-        data-unx_dataid={dataId}
-        onClick={onClick}
-      />
-      {name} - {count}
-    </div>
-  );
+const FacetItemComponent = ({ itemData, onClick }) => {
+    const { name, count, isSelected = false } = itemData;
+    const stateClass = `UNX-facet__item ${isSelected ? '-selected' : ''}`;
+    const handleClick = () => {
+        onClick(itemData);
+    };
+    return (
+        <Button className={stateClass} onClick={handleClick}>
+            {name} - {count}
+        </Button>
+    );
 };
 
 <Meta title="TextFacets" component={TextFacets} />
 
 # TextFacets
 
-### Component to display text facets.
+### Widget to display text facets.
 
 ```jsx
 <TextFacets />
 ```
 
 <Preview>
-  <Story name="default">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <TextFacets />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={defaultSearch} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="default">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <TextFacets />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Custom Component.
+### FacetItemComponent
 
 The default TextFacets item component can be overridden by passing `FacetItemComponent`.
 
 ```jsx
-const FacetItemComponent = ({
-  itemData,
-  facetName,
-  onClick,
-  isFacetSelected,
-  selectedFacets
-}) => {
-  const { name, count, dataId } = itemData;
-  const isSelected = isFacetSelected(selectedFacets, facetName, dataId);
-  return (
-    <div>
-      <input
-        type="checkbox"
-        checked={isSelected}
-        data-unx_name={facetName}
-        data-unx_dataid={dataId}
-        onClick={onClick}
-      />
-      {name} - {count}
-    </div>
-  );
+const FacetItemComponent = ({ itemData, onClick }) => {
+    const { name, count, isSelected = false } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
+    return (
+        <Button onClick={handleClick}>
+            {name} - {count}
+        </Button>
+    );
 };
 ```
 
 ```jsx
 <TextFacets
-  //...
-  FacetItemComponent={FacetItemComponent}
-  //...
+    //...
+    FacetItemComponent={FacetItemComponent}
+    //...
 />
 ```
 
 <Preview>
-  <Story name="with custom component">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <TextFacets FacetItemComponent={FacetItemComponent} />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={defaultSearch} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with FacetItemComponent">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <TextFacets FacetItemComponent={FacetItemComponent} />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Render Props.
+### Render Props
 
-- This approach gives the control of UI to the user.
-- The anonymous function will receive all the data and helpers needed to build the UI.
+-   This approach gives the total control of the widget to the user.
+-   The anonymous function will receive all the data and methods needed to build and manage the widget.
 
 #### Render prop parameters
 
@@ -152,37 +131,37 @@ const FacetItemComponent = ({
 | label              | node          | label for the component.          |
 
 <Preview>
-  <Story name="with render props">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <TextFacets>
-        {({
-          textFacets,
-          selectedFacets,
-          lastSelectedFacets,
-          setSelectedFacets,
-          enableApplyFilters,
-          unbxdCoreStatus,
-          onFacetClick,
-          onFacetObjectReset,
-          FacetItemComponent,
-          label
-        }) => {
-          return <div>render custom textFacets</div>;
-        }}
-      </TextFacets>
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={defaultSearch} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with render props">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <TextFacets>
+                {({
+                    textFacets,
+                    selectedFacets,
+                    lastSelectedFacets,
+                    setSelectedFacets,
+                    enableApplyFilters,
+                    unbxdCoreStatus,
+                    onFacetClick,
+                    onFacetObjectReset,
+                    FacetItemComponent,
+                    label,
+                }) => {
+                    return <div>render TextFacets</div>;
+                }}
+            </TextFacets>
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---

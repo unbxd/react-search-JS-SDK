@@ -5,33 +5,36 @@ import MultilevelFacets from '../../src/modules/multilevelFacets';
 import Breadcrumbs from '../../src/modules/breadcrumbs';
 import Products from '../../src/modules/products';
 import SearchBox from '../../src/modules/searchBox';
+import { Button } from '../../src/components';
 const attributesMap = {
-  productName: 'title',
-  uniqueId: 'uniqueId',
-  imageUrl: 'imageUrl',
-  price: 'unbxd_price',
-  productUrl: 'productUrl'
+    productName: 'title',
+    uniqueId: 'uniqueId',
+    imageUrl: 'imageUrl',
+    price: 'unbxd_price',
+    productUrl: 'productUrl',
 };
 const variantAttributesMap = {
-  productName: 'title',
-  uniqueId: 'vId',
-  imageUrl: 'imageUrl',
-  price: 'v_unbxd_price',
-  productUrl: 'productUrl'
+    productName: 'title',
+    uniqueId: 'vId',
+    imageUrl: 'imageUrl',
+    price: 'v_unbxd_price',
+    productUrl: 'productUrl',
 };
-const FacetItemComponent = ({ itemData, multiLevelField, level, onClick }) => {
-  const { name, count } = itemData;
-  return (
-    <div
-      data-unx_categoryname={name}
-      data-unx_multilevelfield={multiLevelField}
-      data-unx_level={level}
-      className="UNX-bucketed-facet-list-item"
-      onClick={onClick}
-    >
-      {name} - {count}
-    </div>
-  );
+const FacetItemComponent = ({ itemData, onClick }) => {
+    const { name, count, level, isSelected = false } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
+    return (
+        <Button
+            className={`UNX-facet__item -l${level} ${
+                isSelected ? '-selected' : ''
+            }`}
+            onClick={handleClick}
+        >
+            {name} {count && <span>-{count}</span>}
+        </Button>
+    );
 };
 const Root = () => <span>Home</span>;
 const separator = <span>-</span>;
@@ -40,138 +43,98 @@ const separator = <span>-</span>;
 
 # MultilevelFacets
 
-### Component to display Multilevel facets.
+### Widget to display Multilevel facets.
 
 ```jsx
 <MultilevelFacets
-  //...
-  categoryDisplayName={'category'}
-  categoryField={'categoryPath'}
-  //...
+    //...
+    categoryDisplayName={'category'}
+    categoryField={'categoryPath'}
+    //...
 />
 ```
 
 <Preview>
-  <Story name="default">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <Breadcrumbs Root={Root} separator={separator} />
-      <MultilevelFacets
-        categoryDisplayName={'category'}
-        categoryField={'categoryPath'}
-      />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={'shoes'} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="default">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <Breadcrumbs Root={Root} separator={separator} />
+            <MultilevelFacets
+                categoryDisplayName={'category'}
+                categoryField={'categoryPath'}
+            />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={'shoes'} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
----
-
-### Default Category Filter.
-
-Default category can be selected by passing `defaultCategoryFilter`.
-
-```jsx
-<MultilevelFacets
-  //...
-  defaultCategoryFilter={'All Products'}
-  //...
-/>
-```
-
-<Preview>
-  <Story name="with default category filter">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <Breadcrumbs Root={Root} separator={separator} />
-      <MultilevelFacets
-        categoryDisplayName={'category'}
-        categoryField={'categoryPath'}
-        defaultCategoryFilter={'All Products'}
-      />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={'shoes'} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
-</Preview>
-
----
-
-### Custom component.
+### FacetItemComponent
 
 The default Multilevel facet item can be overridden by passing `FacetItemComponent`.
 
 ```jsx
 const FacetItemComponent = ({ itemData, multiLevelField, level, onClick }) => {
-  const { name, count } = itemData;
-  return (
-    <div
-      data-unx_categoryname={name}
-      data-unx_multilevelfield={multiLevelField}
-      data-unx_level={level}
-      onClick={onClick}
-    >
-      {name} - {count}
-    </div>
-  );
+    const { name, count } = itemData;
+    return (
+        <div
+            data-unx_categoryname={name}
+            data-unx_multilevelfield={multiLevelField}
+            data-unx_level={level}
+            onClick={onClick}
+        >
+            {name} - {count}
+        </div>
+    );
 };
 ```
 
 ```jsx
 <MultilevelFacets
-  //...
-  FacetItemComponent={FacetItemComponent}
-  //...
+    //...
+    FacetItemComponent={FacetItemComponent}
+    //...
 />
 ```
 
 <Preview>
-  <Story name="with custom component">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <Breadcrumbs Root={Root} separator={separator} />
-      <MultilevelFacets
-        categoryDisplayName={'category'}
-        categoryField={'categoryPath'}
-        FacetItemComponent={FacetItemComponent}
-      />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={'shoes'} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with FacetItemComponent">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <Breadcrumbs Root={Root} separator={separator} />
+            <MultilevelFacets
+                categoryDisplayName={'category'}
+                categoryField={'categoryPath'}
+                FacetItemComponent={FacetItemComponent}
+            />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={'shoes'} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Render Props.
+### Render Props
 
-- This approach gives the control of UI to the user.
-- The anonymous function will receive all the data and helpers needed to build the UI.
+-   This approach gives the total control of the widget to the user.
+-   The anonymous function will receive all the data and methods needed to build and manage the widget.
 
 #### Render prop parameters
 
@@ -185,37 +148,37 @@ const FacetItemComponent = ({ itemData, multiLevelField, level, onClick }) => {
 | label                 | node          | label for the component.              |
 
 <Preview>
-  <Story name="with render props">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <Breadcrumbs Root={Root} separator={separator} />
-      <MultilevelFacets
-        categoryDisplayName={'category'}
-        categoryField={'categoryPath'}
-      >
-        {({
-          bucketedFacets,
-          selectedBucketedFacet,
-          breadCrumbsList,
-          addCategoryFilter,
-          FacetItemComponent,
-          label
-        }) => {
-          return <div>render custom multilevelFacets</div>;
-        }}
-      </MultilevelFacets>
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={'shoes'} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with render props">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <Breadcrumbs Root={Root} separator={separator} />
+            <MultilevelFacets
+                categoryDisplayName={'category'}
+                categoryField={'categoryPath'}
+            >
+                {({
+                    bucketedFacets,
+                    selectedBucketedFacet,
+                    breadCrumbsList,
+                    addCategoryFilter,
+                    FacetItemComponent,
+                    label,
+                }) => {
+                    return <div>render MultilevelFacets</div>;
+                }}
+            </MultilevelFacets>
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={'shoes'} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---

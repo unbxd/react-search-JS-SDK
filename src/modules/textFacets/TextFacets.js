@@ -40,7 +40,7 @@ TextFacets.defaultProps = {
     collapsible:false,
     searchable:false,
     minViewMore: 3,
-    enableViewMore: true
+    enableViewMore: false
 }
 
 TextFacets.propTypes = {

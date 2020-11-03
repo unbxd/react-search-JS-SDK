@@ -5,164 +5,176 @@ import Pagination from '../../src/modules/pagination';
 import Products from '../../src/modules/products';
 import SearchBox from '../../src/modules/searchBox';
 const attributesMap = {
-  productName: 'title',
-  uniqueId: 'uniqueId',
-  imageUrl: 'imageUrl',
-  price: 'unbxd_price',
-  productUrl: 'productUrl'
+    productName: 'title',
+    uniqueId: 'uniqueId',
+    imageUrl: 'imageUrl',
+    price: 'unbxd_price',
+    productUrl: 'productUrl',
 };
 const variantAttributesMap = {
-  productName: 'title',
-  uniqueId: 'vId',
-  imageUrl: 'imageUrl',
-  price: 'v_unbxd_price',
-  productUrl: 'productUrl'
+    productName: 'title',
+    uniqueId: 'vId',
+    imageUrl: 'imageUrl',
+    price: 'v_unbxd_price',
+    productUrl: 'productUrl',
 };
 const PaginationItemComponent = (props) => {
-  const { pagenumber, onClick, label, type, active } = props;
-  return (
-    <div data-pagenumber={pagenumber} onClick={onClick ? onClick : null}>
-      {type === 'NUMBER' && (
-        <button
-          className={`UNX-pageNavigation__button ${active ? '-active' : ''}`}
-        >
-          {label}
-        </button>
-      )}
-      {type === 'PREVIOUS' && (
-        <button className="UNX-pageNavigation__button -action">&lt;</button>
-      )}
-      {type === 'NEXT' && (
-        <button className="UNX-pageNavigation__button -action">&gt;</button>
-      )}
-    </div>
-  );
+    const { pagenumber, onClick, label, type, active } = props;
+    return (
+        <div data-pagenumber={pagenumber} onClick={onClick ? onClick : null}>
+            {type === 'NUMBER' && (
+                <button
+                    className={`UNX-pageNavigation__button ${
+                        active ? '-active' : ''
+                    }`}
+                >
+                    {label}
+                </button>
+            )}
+            {type === 'PREVIOUS' && (
+                <button className="UNX-pageNavigation__button -action">
+                    &lt;
+                </button>
+            )}
+            {type === 'NEXT' && (
+                <button className="UNX-pageNavigation__button -action">
+                    &gt;
+                </button>
+            )}
+        </div>
+    );
 };
 
 <Meta title="Pagination" component={Pagination} />
 
 # Pagination
 
-### Component to navigate across pages.
+### Widget to navigate across pages.
 
 ```jsx
 <Pagination />
 ```
 
 <Preview>
-  <Story name="default">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <Pagination />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={'shoes'} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="default">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <Pagination />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={'shoes'} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Padding.
+### padding
 
 Number of pages on either side of active page can be configured by passing `padding`.
 
 ```jsx
 <Pagination
-  //...
-  padding={3}
-  //...
+    //...
+    padding={3}
+    //...
 />
 ```
 
 <Preview>
-  <Story name="with padding">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <Pagination padding={3} />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={'shoes'} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with padding">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <Pagination padding={3} />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={'shoes'} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Custom component.
+### PaginationItemComponent
 
 The default Pagination item component can be overridden by passing `PaginationItemComponent`.
 
 ```jsx
 const PaginationItemComponent = (props) => {
-  const { pagenumber, onClick, label, type, active } = props;
-  return (
-    <div data-pagenumber={pagenumber} onClick={onClick ? onClick : null}>
-      {type === 'NUMBER' && (
-        <button
-          className={`UNX-pageNavigation__button ${active ? '-active' : ''}`}
-        >
-          {label}
-        </button>
-      )}
-      {type === 'PREVIOUS' && (
-        <button className="UNX-pageNavigation__button -action">&lt;</button>
-      )}
-      {type === 'NEXT' && (
-        <button className="UNX-pageNavigation__button -action">&gt;</button>
-      )}
-    </div>
-  );
+    const { pagenumber, onClick, label, type, active } = props;
+    return (
+        <div data-pagenumber={pagenumber} onClick={onClick ? onClick : null}>
+            {type === 'NUMBER' && (
+                <button
+                    className={`UNX-pageNavigation__button ${
+                        active ? '-active' : ''
+                    }`}
+                >
+                    {label}
+                </button>
+            )}
+            {type === 'PREVIOUS' && (
+                <button className="UNX-pageNavigation__button -action">
+                    &lt;
+                </button>
+            )}
+            {type === 'NEXT' && (
+                <button className="UNX-pageNavigation__button -action">
+                    &gt;
+                </button>
+            )}
+        </div>
+    );
 };
 ```
 
 ```jsx
 <Pagination
-  //..
-  PaginationItemComponent={PaginationItemComponent}
-  //...
+    //. . .
+    PaginationItemComponent={PaginationItemComponent}
+    //. . .
 />
 ```
 
 <Preview>
-  <Story name="with custom component">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <Pagination PaginationItemComponent={PaginationItemComponent} />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={'shoes'} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with PaginationItemComponent">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <Pagination PaginationItemComponent={PaginationItemComponent} />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={'shoes'} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Render Props.
+### Render Props
 
-- This approach gives the control of UI to the user.
-- The anonymous function will receive all the data and helpers needed to build the UI.
+-   This approach gives the total control of the widget to the user.
+-   The anonymous function will receive all the data and methods needed to build and manage the widget.
 
 #### Render prop parameters
 
@@ -180,37 +192,37 @@ const PaginationItemComponent = (props) => {
 | paginationType           | string        | INFINITE_SCROLL \| CLICK_N_SCROLL \| FIXED_PAGINATION |
 
 <Preview>
-  <Story name="with render props">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <Pagination>
-        {({
-          currentPage,
-          isNext,
-          isPrev,
-          noOfPages,
-          padding,
-          onNextPageClick,
-          onPreviousPageClick,
-          onPageClick,
-          PaginationItemComponent,
-          paginationType
-        }) => {
-          return <p>custom render pagination</p>;
-        }}
-      </Pagination>
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={'shoes'} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with render props">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <Pagination>
+                {({
+                    currentPage,
+                    isNext,
+                    isPrev,
+                    noOfPages,
+                    padding,
+                    onNextPageClick,
+                    onPreviousPageClick,
+                    onPageClick,
+                    PaginationItemComponent,
+                    paginationType,
+                }) => {
+                    return <div>render Pagination</div>;
+                }}
+            </Pagination>
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={'shoes'} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---

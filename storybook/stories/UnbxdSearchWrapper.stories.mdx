@@ -2,15 +2,38 @@ import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 
 import UnbxdSearchWrapper from '../../src/UnbxdSearchWrapper';
 const onPageLoad = (unbxdSearchObject) => {
-  //do things on pageLoad
+    //do things on pageLoad
 };
 const onIntialResultLoad = (unbxdSearchObject) => {
-  //do things on initial result load
+    //do things on initial result load
 };
 const getCategoryId = () => {
-  if (window.UnbxdAnalyticsConf) {
-    return encodeURIComponent(window.UnbxdAnalyticsConf['page']);
-  }
+    if (window.UnbxdAnalyticsConf) {
+        return encodeURIComponent(window.UnbxdAnalyticsConf['page']);
+    }
+};
+const setCategoryId = (param, self) => {
+    const { level, name } = param;
+    let page = ``;
+    let pathArr = [];
+    const l = Number(level);
+    if (l === 1) {
+        return;
+    }
+    const breadCrumbs = self.getBreadCrumbsList();
+    breadCrumbs.forEach((element, i) => {
+        const { value, level } = element;
+        if (l > level) {
+            pathArr.push(value);
+        }
+    });
+    if (l > breadCrumbs.length) {
+        pathArr.push(name);
+    }
+    page = pathArr.join('>');
+    if (window.UnbxdAnalyticsConf) {
+        window.UnbxdAnalyticsConf.page = page;
+    }
 };
 
 <Meta title="UnbxdSearchWrapper" component={UnbxdSearchWrapper} />
@@ -21,106 +44,132 @@ const getCategoryId = () => {
 
 ```jsx
 <UnbxdSearchWrapper
-  //...
-  siteKey="wildearthclone-neto-com-au808941566310465"
-  apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-  //...
+    //...
+    siteKey="..."
+    apiKey="..."
+    //...
 >
-  {/*modules*/}
+    {/*widgets*/}
 </UnbxdSearchWrapper>
 ```
 
 <Preview>
-  <Story name="default">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <div>
-        Wrap all the widgets in <strong>UnbxdSearchWrapper</strong>
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="default">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <div>
+                Wrap all the widgets in <strong>UnbxdSearchWrapper</strong>
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Callbacks.
+### Callbacks
 
 Pass callbacks to get notified on event such as `IntialResultLoad` and `PageLoad`.
 
 ```js
 const onPageLoad = (unbxdSearchObject) => {
-  //do things on pageLoad
+    //do things on pageLoad
 };
 
 const onIntialResultLoad = (unbxdSearchObject) => {
-  //do things on initial result load
+    //do things on initial result load
 };
 ```
 
 ```jsx
 <UnbxdSearchWrapper
-  //...
-  onIntialResultLoad={onIntialResultLoad}
-  onPageLoad={onPageLoad}
-  //...
+    //...
+    onIntialResultLoad={onIntialResultLoad}
+    onPageLoad={onPageLoad}
+    //...
 >
-  {/*modules*/}
+    {/*widgets*/}
 </UnbxdSearchWrapper>
 ```
 
 <Preview>
-  <Story name="with callbacks">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-      onIntialResultLoad={onIntialResultLoad}
-      onPageLoad={onPageLoad}
-    >
-      <div>
-        Wrap all the widgets in <strong>UnbxdSearchWrapper</strong>
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with callbacks">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            onIntialResultLoad={onIntialResultLoad}
+            onPageLoad={onPageLoad}
+        >
+            <div>
+                Wrap all the widgets in <strong>UnbxdSearchWrapper</strong>
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### CategoryId.
+### Category
 
-Pass `getCategoryId` which returns the category path, used on category pages.
+Pass `getCategoryId`, which returns the category path, and `setCategoryId`, which sets the category path, for category pages.
 
 ```js
 const getCategoryId = () => {
-  if (window.UnbxdAnalyticsConf) {
-    return encodeURIComponent(window.UnbxdAnalyticsConf['page']);
-  }
+    if (window.UnbxdAnalyticsConf) {
+        return encodeURIComponent(window.UnbxdAnalyticsConf['page']);
+    }
+};
+
+const setCategoryId = (param, self) => {
+    const { level, name } = param;
+    let page = ``;
+    let pathArr = [];
+    const l = Number(level);
+    if (l === 1) {
+        return;
+    }
+    const breadCrumbs = self.getBreadCrumbsList();
+    breadCrumbs.forEach((element, i) => {
+        const { value, level } = element;
+        if (l > level) {
+            pathArr.push(value);
+        }
+    });
+    if (l > breadCrumbs.length) {
+        pathArr.push(name);
+    }
+    page = pathArr.join('>');
+    if (window.UnbxdAnalyticsConf) {
+        window.UnbxdAnalyticsConf.page = page;
+    }
 };
 ```
 
 ```jsx
 <UnbxdSearchWrapper
-  //...
-  getCategoryId={getCategoryId}
-  //...
+    //...
+    getCategoryId={getCategoryId}
+    setCategoryId={setCategoryId}
+    //...
 >
-  {/*modules*/}
+    {/*widgets*/}
 </UnbxdSearchWrapper>
 ```
 
 <Preview>
-  <Story name="with category id">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-      getCategoryId={getCategoryId}
-    >
-      <div>
-        Wrap all the widgets in <strong>UnbxdSearchWrapper</strong>
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with category">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            getCategoryId={getCategoryId}
+            setCategoryId={setCategoryId}
+        >
+            <div>
+                Wrap all the widgets in <strong>UnbxdSearchWrapper</strong>
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
