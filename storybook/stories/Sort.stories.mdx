@@ -5,98 +5,101 @@ import Products from '../../src/modules/products';
 import UnbxdSearchWrapper from '../../src/UnbxdSearchWrapper';
 import SearchBox from '../../src/modules/searchBox';
 const sortOptions = [
-  {
-    label: 'Most Popular'
-  },
-  {
-    label: 'Newest',
-    field: 'Date_Added',
-    order: 'desc'
-  },
-  {
-    label: 'Lowest Price',
-    field: 'price',
-    order: 'asc'
-  },
-  {
-    label: 'Highest Price',
-    field: 'price',
-    order: 'desc'
-  },
-  {
-    label: 'Brand A-Z',
-    field: 'title',
-    order: 'asc'
-  },
-  {
-    label: 'Brand Z-A',
-    field: 'title',
-    order: 'desc'
-  }
+    {
+        label: 'Most Popular',
+    },
+    {
+        label: 'Newest',
+        field: 'Date_Added',
+        order: 'desc',
+    },
+    {
+        label: 'Lowest Price',
+        field: 'price',
+        order: 'asc',
+    },
+    {
+        label: 'Highest Price',
+        field: 'price',
+        order: 'desc',
+    },
+    {
+        label: 'Brand A-Z',
+        field: 'title',
+        order: 'asc',
+    },
+    {
+        label: 'Brand Z-A',
+        field: 'title',
+        order: 'desc',
+    },
 ];
 const attributesMap = {
-  productName: 'title',
-  uniqueId: 'uniqueId',
-  imageUrl: 'imageUrl',
-  price: 'unbxd_price',
-  productUrl: 'productUrl'
+    productName: 'title',
+    uniqueId: 'uniqueId',
+    imageUrl: 'imageUrl',
+    price: 'unbxd_price',
+    productUrl: 'productUrl',
 };
 const variantAttributesMap = {
-  productName: 'title',
-  uniqueId: 'vId',
-  imageUrl: 'imageUrl',
-  price: 'v_unbxd_price',
-  productUrl: 'productUrl'
+    productName: 'title',
+    uniqueId: 'vId',
+    imageUrl: 'imageUrl',
+    price: 'v_unbxd_price',
+    productUrl: 'productUrl',
 };
 const SortItemComponent = ({ itemData, onClick }) => {
-  const { value, isSelected = false } = itemData;
-  return (
-    <div
-      data-unxsortby={value}
-      className={`UNX-sortby__item ${isSelected ? '-selected' : ''}`}
-      onClick={onClick}
-    >
-      {itemData.label}
-    </div>
-  );
+    const { value, isSelected = false } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
+    return (
+        <div
+            data-testid={value.split('|').join(' ')}
+            className={`UNX-sortby__item ${isSelected ? '-selected' : ''}`}
+            onClick={handleClick}
+        >
+            {itemData.label}
+        </div>
+    );
 };
 
 <Meta title="Sort" component={Sort} />
 
 # Sort
 
-### Component to sort the products based on different attributes.
+### Widget to sort the products based on different attributes.
 
 ```js
 const sortOptions = [
-  {
-    label: 'Most Popular'
-  },
-  {
-    label: 'Newest',
-    field: 'Date_Added',
-    order: 'desc'
-  },
-  {
-    label: 'Lowest Price',
-    field: 'price',
-    order: 'asc'
-  },
-  {
-    label: 'Highest Price',
-    field: 'price',
-    order: 'desc'
-  },
-  {
-    label: 'Brand A-Z',
-    field: 'title',
-    order: 'asc'
-  },
-  {
-    label: 'Brand Z-A',
-    field: 'title',
-    order: 'desc'
-  }
+    {
+        label: 'Most Popular',
+    },
+    {
+        label: 'Newest',
+        field: 'Date_Added',
+        order: 'desc',
+    },
+    {
+        label: 'Lowest Price',
+        field: 'price',
+        order: 'asc',
+    },
+    {
+        label: 'Highest Price',
+        field: 'price',
+        order: 'desc',
+    },
+    {
+        label: 'Brand A-Z',
+        field: 'title',
+        order: 'asc',
+    },
+    {
+        label: 'Brand Z-A',
+        field: 'title',
+        order: 'desc',
+    },
 ];
 ```
 
@@ -105,155 +108,116 @@ const sortOptions = [
 ```
 
 <Preview>
-  <Story name="default">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <Sort sortOptions={sortOptions} />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={'boots'} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="default">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <Sort sortOptions={sortOptions} />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={'boots'} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Set a default sort
-
-Default sort can be added by passing `defaultSort`.
-
-```jsx
-<Sort
-  //...
-  defaultSort={sortOptions[4]}
-  sortOptions={sortOptions}
-  //...
-/>
-```
-
-<Preview>
-  <Story name="with defaultSort">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <Sort defaultSort={sortOptions[4]} sortOptions={sortOptions} />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={'boots'} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
-</Preview>
-
----
-
-### Custom list display
+### SortItemComponent
 
 To display sort in a list format, set `displayType` to `LIST` and pass a custom Sort item component.
 
 ```jsx
 const SortItemComponent = ({ itemData, onClick }) => {
-  const { value, isSelected = false } = itemData;
-  return (
-    <div
-      data-unxsortby={value}
-      className={`UNX-sortby__item ${isSelected ? '-selected' : ''}`}
-      onClick={onClick}
-    >
-      {itemData.label}
-    </div>
-  );
+    const { value, isSelected = false } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
+    return <div onClick={handleClick}>{itemData.label}</div>;
 };
 ```
 
 ```jsx
 <Sort
-  //...
-  displayType={'LIST'}
-  SortItemComponent={SortItemComponent}
-  //...
+    //...
+    displayType={'LIST'}
+    SortItemComponent={SortItemComponent}
+    //...
 />
 ```
 
 #### Note:
 
-- If `displayType` is set to `LIST`, passing `SortItemComponent` is mandatory.
+-   If `displayType` is set to `LIST`, passing `SortItemComponent` is mandatory.
 
 <Preview>
-  <Story name="with displayType">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <Sort
-        default={sortOptions[4]}
-        sortOptions={sortOptions}
-        displayType={'LIST'}
-        SortItemComponent={SortItemComponent}
-      />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={'boots'} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with displayType">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <Sort
+                default={sortOptions[4]}
+                sortOptions={sortOptions}
+                displayType={'LIST'}
+                SortItemComponent={SortItemComponent}
+            />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={'boots'} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Label
+### label
 
 A label for the component can be diplayed by passing `label`.
 
 ```jsx
 <Sort
-  //...
-  label={<span>Sort:</span>}
-  //...
+    //...
+    label={<span>Sort:</span>}
+    //...
 />
 ```
 
 <Preview>
-  <Story name="with label">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <Sort sortOptions={sortOptions} label={<span>Sort:</span>} />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={'boots'} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with label">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <Sort sortOptions={sortOptions} label={<span>Sort:</span>} />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={'boots'} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
 ### Render props
 
-- This approach gives the control of UI to the user.
-- The anonymous function will receive all the data and helpers needed to build the UI.
+-   This approach gives the total control of the widget to the user.
+-   The anonymous function will receive all the data and methods needed to build and manage the widget.
 
 #### Render prop parameters
 
@@ -268,34 +232,34 @@ A label for the component can be diplayed by passing `label`.
 | `label`             | node     | Label for the component.                       |
 
 <Preview>
-  <Story name="with render props">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <Sort sortOptions={sortOptions}>
-        {({
-          sortBy,
-          sortOptions,
-          displayType,
-          noOfPages,
-          onSortClick,
-          SortItemComponent,
-          label
-        }) => {
-          return <p>Render custom sort</p>;
-        }}
-      </Sort>
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={'boots'} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with render props">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <Sort sortOptions={sortOptions}>
+                {({
+                    sortBy,
+                    sortOptions,
+                    displayType,
+                    noOfPages,
+                    onSortClick,
+                    SortItemComponent,
+                    label,
+                }) => {
+                    return <p>render Sort</p>;
+                }}
+            </Sort>
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={'boots'} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---

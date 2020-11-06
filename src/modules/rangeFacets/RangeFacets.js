@@ -45,7 +45,7 @@ RangeFacets.displayName = 'RangeFacets';
 RangeFacets.defaultProps = {
     collapsible: true,
     minViewMore: 3,
-    enableViewMore: true,
+    enableViewMore: false,
 };
 
 RangeFacets.propTypes = {

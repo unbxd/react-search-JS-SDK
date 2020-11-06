@@ -45,7 +45,7 @@ MultilevelFacets.defaultProps = {
     collapsible: false,
     searchable: false,
     minViewMore: 3,
-    enableViewMore: true,
+    enableViewMore: false,
 };
 
 MultilevelFacets.propTypes = {

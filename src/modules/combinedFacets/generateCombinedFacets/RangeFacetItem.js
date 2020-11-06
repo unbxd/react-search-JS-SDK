@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const FacetItem = ({ itemData, facetName, onClick, priceUnit }) => {
-    const { from, to, isSelected = false } = itemData;
+    const { from, end, isSelected = false } = itemData;
     const { name: fromName, count, dataId: fromDataId } = from;
-    const { name: ToName, dataId: toDataId } = to;
+    const { name: ToName, dataId: toDataId } = end;
 
     const handleClick = () => {
         onClick(itemData);

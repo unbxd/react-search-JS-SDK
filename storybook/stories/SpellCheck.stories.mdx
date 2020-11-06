@@ -6,106 +6,140 @@ import Products from '../../src/modules/products';
 import SearchBox from '../../src/modules/searchBox';
 const defaultSearch = 'rde shirt';
 const attributesMap = {
-  productName: 'title',
-  uniqueId: 'uniqueId',
-  imageUrl: 'imageUrl',
-  price: 'min_cheapest_default_price',
-  productUrl: 'productUrl'
+    productName: 'title',
+    uniqueId: 'uniqueId',
+    imageUrl: 'imageUrl',
+    price: 'min_cheapest_default_price',
+    productUrl: 'productUrl',
 };
 const variantAttributesMap = {
-  productName: 'title',
-  uniqueId: 'variantId',
-  imageUrl: 'imageUrl',
-  price: 'v_unbxd_price'
+    productName: 'title',
+    uniqueId: 'variantId',
+    imageUrl: 'imageUrl',
+    price: 'v_unbxd_price',
 };
-const SpellCheckItemComponent = ({ itemData, onClick }) => {
-  const { suggestion } = itemData;
-  return (
-    <p data-suggestion={suggestion} onClick={onClick}>
-      Were you looking for {suggestion}
-    </p>
-  );
+const SpellCheckItemComponent = ({ itemData, currentQuery, onClick }) => {
+    const { suggestion } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
+    return (
+        <div className="UNX-spellCheck__item">
+            <div className="UNX-spellCheck__query">
+                Showing results for
+                <span className="-query"> {currentQuery}</span>
+            </div>
+            <div className="UNX-spellCheck__suggestion">
+                Did you mean
+                <span
+                    className="-suggestion"
+                    onClick={handleClick}
+                    data-testid={'UNX_spellCheck'}
+                >
+                    {' '}
+                    {suggestion}
+                </span>?
+            </div>
+        </div>
+    );
 };
 
 <Meta title="SpellCheck" component={SpellCheck} />
 
 # SpellCheck
 
-### Component to query spell check.
+### Widget to spell check the queries.
 
 ```jsx
 <SpellCheck />
 ```
 
 <Preview>
-  <Story name="default">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <SpellCheck />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={defaultSearch} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="default">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SpellCheck />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Custom Component.
+### SpellCheckItemComponent
 
 The default SpellCheck item component can be overridden by passing `SpellCheckItemComponent`.
 
 ```jsx
-const SpellCheckItemComponent = ({ itemData, onClick }) => {
-  const { suggestion } = itemData;
-  return (
-    <p data-suggestion={suggestion} onClick={onClick}>
-      Were you looking for {suggestion}
-    </p>
-  );
+const SpellCheckItemComponent = ({ itemData, currentQuery, onClick }) => {
+    const { suggestion } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
+    return (
+        <div className="UNX-spellCheck__item">
+            <div className="UNX-spellCheck__query">
+                Showing results for
+                <span className="-query"> {currentQuery}</span>
+            </div>
+            <div className="UNX-spellCheck__suggestion">
+                Did you mean
+                <span
+                    className="-suggestion"
+                    onClick={handleClick}
+                    data-testid={'UNX_spellCheck'}
+                >
+                    {' '}
+                    {suggestion}
+                </span>?
+            </div>
+        </div>
+    );
 };
 ```
 
 ```jsx
 <SpellCheck
-  //...
-  SpellCheckItemComponent={SpellCheckItemComponent}
-  //...
+    //...
+    SpellCheckItemComponent={SpellCheckItemComponent}
+    //...
 />
 ```
 
 <Preview>
-  <Story name="with custom component">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <SpellCheck SpellCheckItemComponent={SpellCheckItemComponent} />
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={defaultSearch} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with SpellCheckItemComponent">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SpellCheck SpellCheckItemComponent={SpellCheckItemComponent} />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
 
-### Render Props.
+### Render Props
 
-- This approach gives the control of UI to the user.
-- The anonymous function will receive all the data and helpers needed to build the UI.
+-   This approach gives the total control of the widget to the user.
+-   The anonymous function will receive all the data and methods needed to build and manage the widget.
 
 #### Render prop parameters
 
@@ -117,31 +151,31 @@ const SpellCheckItemComponent = ({ itemData, onClick }) => {
 | SpellCheckItemComponent | element\|func | custom spellcheck component. |
 
 <Preview>
-  <Story name="with render props">
-    <UnbxdSearchWrapper
-      siteKey="wildearthclone-neto-com-au808941566310465"
-      apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-    >
-      <SpellCheck>
-        {({
-          spellChecks,
-          currentQuery,
-          onSuggestionClick,
-          SpellCheckItemComponent
-        }) => {
-          return <div>render custom spellCheck</div>;
-        }}
-      </SpellCheck>
-      <Products
-        attributesMap={attributesMap}
-        showVariants={true}
-        variantAttributesMap={variantAttributesMap}
-      />
-      <div className="hidden">
-        <SearchBox defaultSearch={defaultSearch} />
-      </div>
-    </UnbxdSearchWrapper>
-  </Story>
+    <Story name="with render props">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SpellCheck>
+                {({
+                    spellChecks,
+                    currentQuery,
+                    onSuggestionClick,
+                    SpellCheckItemComponent,
+                }) => {
+                    return <div>render SpellCheck</div>;
+                }}
+            </SpellCheck>
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
 </Preview>
 
 ---
