@@ -27,13 +27,19 @@ class BreadcrumbsContainer extends React.PureComponent {
         const handleBreadCrumbClick = (currentItem) => {
             const { value, filterField, level } = currentItem;
             const categoryObject = { parent: filterField, level, name: value };
-            if (productType === productTypes.CATEGORY) {
-                unbxdCore.setCategoryId(categoryObject, unbxdCore);
+            const { setCategoryId } = unbxdCore;
+            if (
+                productType === productTypes.CATEGORY &&
+                typeof setCategoryId === 'function'
+            ) {
+                const getUpdatedResults = setCategoryId(categoryObject, unbxdCore);
+                if (getUpdatedResults) {
+                    getResults();
+                }
             } else {
                 deleteCategoryFilter(categoryObject);
+                getResults();
             }
-
-            getResults();
         };
 
         return {

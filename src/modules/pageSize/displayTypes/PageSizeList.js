@@ -13,7 +13,6 @@ const PageSizeList = ({
         <div className="UNX-pageSize__element">
             <List
                 items={sizeOptions}
-                activeItem={size}
                 ListItem={PageSizeItemComponent}
                 onClick={onPageSizeClick}
                 className={'UNX-pageSize__list'}

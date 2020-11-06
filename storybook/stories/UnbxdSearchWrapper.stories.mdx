@@ -1,17 +1,6 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 
 import UnbxdSearchWrapper from '../../src/UnbxdSearchWrapper';
-const onPageLoad = (unbxdSearchObject) => {
-    //do things on pageLoad
-};
-const onIntialResultLoad = (unbxdSearchObject) => {
-    //do things on initial result load
-};
-const getCategoryId = () => {
-    if (window.UnbxdAnalyticsConf) {
-        return encodeURIComponent(window.UnbxdAnalyticsConf['page']);
-    }
-};
 const setCategoryId = (param, self) => {
     const { level, name } = param;
     let page = ``;
@@ -58,48 +47,6 @@ const setCategoryId = (param, self) => {
         <UnbxdSearchWrapper
             siteKey="wildearthclone-neto-com-au808941566310465"
             apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
-            <div>
-                Wrap all the widgets in <strong>UnbxdSearchWrapper</strong>
-            </div>
-        </UnbxdSearchWrapper>
-    </Story>
-</Preview>
-
----
-
-### Callbacks
-
-Pass callbacks to get notified on event such as `IntialResultLoad` and `PageLoad`.
-
-```js
-const onPageLoad = (unbxdSearchObject) => {
-    //do things on pageLoad
-};
-
-const onIntialResultLoad = (unbxdSearchObject) => {
-    //do things on initial result load
-};
-```
-
-```jsx
-<UnbxdSearchWrapper
-    //...
-    onIntialResultLoad={onIntialResultLoad}
-    onPageLoad={onPageLoad}
-    //...
->
-    {/*widgets*/}
-</UnbxdSearchWrapper>
-```
-
-<Preview>
-    <Story name="with callbacks">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            onIntialResultLoad={onIntialResultLoad}
-            onPageLoad={onPageLoad}
         >
             <div>
                 Wrap all the widgets in <strong>UnbxdSearchWrapper</strong>

@@ -125,9 +125,15 @@ class MultilevelFacetsContainer extends React.PureComponent {
             const { getUpdatedResults } = helpers;
 
             const onFinish = () => {
-                if (productType === productTypes.CATEGORY) {
-                    unbxdCore.setCategoryId(categoryObject, unbxdCore);
-                    getUpdatedResults();
+                const { setCategoryId } = unbxdCore;
+                if (
+                    productType === productTypes.CATEGORY &&
+                    typeof setCategoryId === 'function'
+                ) {
+                    const getResults = setCategoryId(categoryObject, unbxdCore);
+                    if (getResults) {
+                        getUpdatedResults();
+                    }
                 } else {
                     if (highestBreadcrumbLevel === parseInt(level)) {
                         deleteCategoryFilter(categoryObject);
