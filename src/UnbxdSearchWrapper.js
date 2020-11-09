@@ -129,7 +129,6 @@ class UnbxdSearchWrapper extends Component {
     }
 
     componentDidMount() {
-        const { onPageLoad } = this.props;
         const { unbxdCore } = this.state;
         const categoryId =
             typeof unbxdCore.options.getCategoryId === 'function' &&
@@ -166,10 +165,6 @@ class UnbxdSearchWrapper extends Component {
             unbxdCore.options.productType = productTypes.CATEGORY;
             unbxdCore.getResults();
             trackCategory(window.UnbxdAnalyticsConf);
-        } else {
-            //call onPageLoad
-            typeof onPageLoad == 'function' &&
-                onPageLoad(unbxdCore.getResponseObj());
         }
 
         if (unbxdCore.options.hashMode) {
@@ -178,10 +173,9 @@ class UnbxdSearchWrapper extends Component {
     }
 
     componentDidUpdate() {
-        const { onPageLoad } = this.props;
         const { unbxdCore, categoryId } = this.state;
         const urlParams = unbxdCore.getQueryParams();
-        
+
         const currentCategoryId =
             typeof unbxdCore.options.getCategoryId === 'function' &&
             unbxdCore.options.getCategoryId();
@@ -201,14 +195,11 @@ class UnbxdSearchWrapper extends Component {
             this.resetSearch();
             unbxdCore.getResults();
             trackCategory(window.UnbxdAnalyticsConf);
-        }
-        else if(unbxdCore.getResponseObj() === null && urlParams[unbxdCore.options.searchQueryParam]) {
+        } else if (
+            unbxdCore.getResponseObj() === null &&
+            urlParams[unbxdCore.options.searchQueryParam]
+        ) {
             unbxdCore.renderFromUrl();
-        }
-        else {
-            //call onPageLoad
-            typeof onPageLoad == 'function' &&
-                onPageLoad(unbxdCore.getResponseObj());
         }
     }
 
@@ -244,14 +235,6 @@ UnbxdSearchWrapper.propTypes = {
      * API key of the site.
      */
     apiKey: PropTypes.string.isRequired,
-    /**
-     * Callback for results load.
-     */
-    onIntialResultLoad: PropTypes.func,
-    /**
-     * Callback for results mounted.
-     */
-    onPageLoad: PropTypes.func,
     /**
      * Custom function to return the Category Id.
      */

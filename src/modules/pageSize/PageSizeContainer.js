@@ -5,90 +5,103 @@ import { conditionalRenderer } from '../../common/utils';
 import PageSizeWrapper from './PageSizeWrapper';
 
 class PageSizeContainer extends React.PureComponent {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    const { size } = this.props;
-    this.state = {
-      size
-    };
-  }
+        const { size, sizeOptions } = this.props;
+        this.state = {
+            size,
+            sizeOptions,
+        };
+    }
 
-  componentDidMount() {
-    const {
-      size,
-      helpers: { setPageSizeConfiguration },
-      unbxdCore
-    } = this.props;
-    const { rows = false } = unbxdCore.getQueryParams();
-    if(!isNaN(rows))
-      this.setState({ size: parseInt(rows)|| parseInt(size)});
-    setPageSizeConfiguration({
-      size: parseInt(rows)|| parseInt(size)
-    });
-  }
+    componentDidMount() {
+        const {
+            size,
+            helpers: { setPageSizeConfiguration },
+            unbxdCore,
+        } = this.props;
+        const { sizeOptions } = this.state;
+        const { rows = false } = unbxdCore.getQueryParams();
+        const numberOfProducts = Number(rows);
+        if (!isNaN(numberOfProducts)) {
+            const updatedSizeOptions = sizeOptions.map((sizeOption) => ({
+                ...sizeOption,
+                isSelected: sizeOption.id === numberOfProducts,
+            }));
+            this.setState({
+                size: numberOfProducts || parseInt(size),
+                sizeOptions: updatedSizeOptions,
+            });
+            setPageSizeConfiguration({
+                size: numberOfProducts || parseInt(size),
+            });
+        }
+    }
 
-  getPageSizeProps() {
-    const {
-      unbxdCore,
-      PageSizeItemComponent,
-      sizeOptions,
-      displayType,
-      label,
-      helpers: { setPageSizeConfiguration }
-    } = this.props;
+    getPageSizeProps() {
+        const {
+            unbxdCore,
+            PageSizeItemComponent,
+            displayType,
+            label,
+            helpers: { setPageSizeConfiguration },
+        } = this.props;
 
-    const { noOfPages = 0 } = unbxdCore.getPaginationInfo() || {};
-    const onPageSizeClick = event => {
-      const size =
-        parseInt(event.target.dataset.unxpagesize) ||
-        parseInt(event.target.value);
+        const { noOfPages = 0 } = unbxdCore.getPaginationInfo() || {};
+        const onPageSizeClick = (pagesizeOption) => {
+            const size = pagesizeOption.target
+                ? parseInt(pagesizeOption.target.value)
+                : pagesizeOption.id;
+            const updatedSizeOptions = sizeOptions.map((sizeOption) => ({
+                ...sizeOption,
+                isSelected: sizeOption.id === size,
+            }));
+            this.setState({ size, sizeOptions: updatedSizeOptions });
+            setPageSizeConfiguration(
+                {
+                    size,
+                },
+                true
+            );
+        };
+        const { size, sizeOptions } = this.state;
+        return {
+            PageSizeItemComponent,
+            sizeOptions,
+            displayType,
+            onPageSizeClick,
+            size,
+            noOfPages,
+            label,
+        };
+    }
 
-      this.setState({ size });
-      setPageSizeConfiguration(
-        {
-          size
-        },
-        true
-      );
-    };
-    const { size } = this.state;
-    return {
-      PageSizeItemComponent,
-      sizeOptions,
-      displayType,
-      onPageSizeClick,
-      size,
-      noOfPages,
-      label
-    };
-  }
+    render() {
+        const DefaultRender = PageSizeWrapper;
 
-  render() {
-    const DefaultRender = PageSizeWrapper;
-
-    return conditionalRenderer(
-      this.props.children,
-      this.getPageSizeProps(),
-      DefaultRender
-    );
-  }
+        return conditionalRenderer(
+            this.props.children,
+            this.getPageSizeProps(),
+            DefaultRender
+        );
+    }
 }
 
 PageSizeContainer.propTypes = {
-  unbxdCore: PropTypes.object.isRequired,
-  unbxdCoreStatus: PropTypes.string.isRequired,
-  helpers: PropTypes.object.isRequired,
-  size: PropTypes.number,
-  sizeOptions: PropTypes.arrayOf(
-    PropTypes.shape({ id: PropTypes.number, value: PropTypes.string })
-  ).isRequired,
-  displayType: PropTypes.string,
-  PageSizeItemComponent: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.func
-  ]),
-  label:PropTypes.node
+    unbxdCore: PropTypes.object.isRequired,
+    unbxdCoreStatus: PropTypes.string.isRequired,
+    helpers: PropTypes.object.isRequired,
+    size: PropTypes.number,
+    sizeOptions: PropTypes.arrayOf(
+        PropTypes.shape({ id: PropTypes.number, value: PropTypes.string })
+    ).isRequired,
+    displayType: PropTypes.string,
+    PageSizeItemComponent: PropTypes.oneOfType([
+        PropTypes.element,
+        PropTypes.func,
+    ]),
+    label: PropTypes.node,
 };
 
 export default PageSizeContainer;

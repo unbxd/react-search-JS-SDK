@@ -18,15 +18,15 @@ const variantAttributesMap = {
     price: 'v_unbxd_price',
     productUrl: 'productUrl',
 };
-const PageSizeItemComponent = ({ itemData, isActive, onClick }) => {
-    const { value } = itemData;
+const PageSizeItemComponent = ({ itemData, onClick }) => {
+    const { value, isSelected } = itemData;
     const handleClick = () => {
         onClick(itemData);
     };
     return (
         <div
             data-unxpagesize={itemData.id}
-            className={`pageSize-item ${isActive ? '-active' : ''}`}
+            className={`pageSize-item ${isSelected ? '-selected' : ''}`}
             onClick={handleClick}
         >
             {value}
@@ -151,10 +151,14 @@ const sizeOptions = [
 The default PageSize item component can be overridden by setting `displayType` to `LIST` and passing `PageSizeItemComponent`.
 
 ```jsx
-const PageSizeItemComponent = ({ itemData, isActive, onClick }) => {
+const PageSizeItemComponent = ({ itemData, onClick }) => {
+    const { value, isSelected } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
     return (
-        <div data-unxpagesize={itemData.id} onClick={onClick}>
-            {itemData.value}
+        <div data-unxpagesize={itemData.id} onClick={handleClick}>
+            {value}
         </div>
     );
 };

@@ -46,6 +46,7 @@ const setCategoryId = (param, self) => {
     if (window.UnbxdAnalyticsConf) {
         window.UnbxdAnalyticsConf.page = page;
     }
+    return true;
 };
 
 const AppRoutes = () => {

@@ -88,8 +88,8 @@ class GenerateFacets extends React.Component {
         const facetName = event.target.dataset['unx_facetname'];
         const applyMutiple = true;
 
-        const { removeRangeFacet } = this.props;
-        removeRangeFacet({ facetName });
+        const { removeRangeFacet, enableApplyFilters } = this.props;
+        removeRangeFacet({ facetName }, !enableApplyFilters);
         this.setState((currentFacetState) => {
             const { rangeFacetsList } = currentFacetState;
             const updatedRangeFacets = rangeFacetsList.map((rangeValue) => {
