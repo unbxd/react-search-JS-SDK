@@ -178,7 +178,7 @@ class ProductsWrapper extends React.PureComponent {
             ZeroResultsComponent &&
             unbxdCoreStatus === searchStatus.READY
         ) {
-            return !ZeroResultsComponent.prototype.render ? (
+            return typeof ZeroResultsComponent === 'function' ? (
                 ZeroResultsComponent()
             ) : (
                 <ZeroResultsComponent />

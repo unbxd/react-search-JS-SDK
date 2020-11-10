@@ -1074,19 +1074,14 @@
     "@types/webpack-sources" "*"
     source-map "^0.6.0"
 
-"@unbxd-ui/react-search-sdk@file:../unbxd-ui-react-search-sdk-v0.0.17.tgz":
-  version "0.0.17"
-  resolved "file:../unbxd-ui-react-search-sdk-v0.0.17.tgz#1673cfe2260e053a324606f22ea3fd6964cabe8d"
-  dependencies:
-    "@unbxd-ui/unbxd-search-core" "^0.2.0"
-
-"@unbxd-ui/react-search-sdk@file:../unbxd-ui-react-search-sdk-v0.0.18.tgz":
-  version "0.0.18"
-  resolved "file:../unbxd-ui-react-search-sdk-v0.0.18.tgz#077ad9c6af8c7f0ddc003cea9c6ea1bb60901b72"
+"@unbxd-ui/react-search-sdk@0.0.20":
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/@unbxd-ui/react-search-sdk/-/react-search-sdk-0.0.20.tgz#b72d113afb2bb2bd7c5af9cd3565633434532080"
+  integrity sha512-FJ0LR5SPUOUgIKTGkjoERFqTtdiMBIAP+KI++6Q2yfbe6SyGUdXZ65pYSqIQ+1/iX3dtaoRCiAjK59LXsyI2vg==
   dependencies:
     "@unbxd-ui/unbxd-search-core" "^0.2.1"
 
-"@unbxd-ui/unbxd-search-core@^0.2.0", "@unbxd-ui/unbxd-search-core@^0.2.1":
+"@unbxd-ui/unbxd-search-core@^0.2.1":
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/@unbxd-ui/unbxd-search-core/-/unbxd-search-core-0.2.1.tgz#7b26d1c82183c0e00b04da1cecb2f62a1b1dfc70"
   integrity sha512-+wSCYUZcX0kvHx9kzY2MY/PItUCPcDAA6/6w2/Ep/TTv0hCEmBInzm26VxupXZyQ/yeDRF9eo3Nm0Tru+wFfZg==
