@@ -138,8 +138,6 @@ You can run the Storybook with NPM like so:
 
 ```bash
 cd <root>
-cd storybook
-yarn install
 yarn storybook
 ```
 
