@@ -175,7 +175,7 @@ class UnbxdSearchWrapper extends Component {
     componentDidUpdate() {
         const { unbxdCore, categoryId } = this.state;
         const urlParams = unbxdCore.getQueryParams();
-
+        const getResults = unbxdCore.getResults.bind(unbxdCore);
         const currentCategoryId =
             typeof unbxdCore.options.getCategoryId === 'function' &&
             unbxdCore.options.getCategoryId();
@@ -192,8 +192,7 @@ class UnbxdSearchWrapper extends Component {
                 };
             });
             unbxdCore.options.productType = productTypes.CATEGORY;
-            this.resetSearch();
-            unbxdCore.getResults();
+            getResults();
             trackCategory(window.UnbxdAnalyticsConf);
         } else if (
             unbxdCore.getResponseObj() === null &&
