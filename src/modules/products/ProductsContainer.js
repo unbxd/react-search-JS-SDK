@@ -80,7 +80,9 @@ class ProductsContainer extends React.PureComponent {
 
     const getNextPage = () => {
       const { currentPage } = getPaginationInfo();
-      const newStart = currentPage === 0 ? pageSize : currentPage * pageSize;
+      const currentPageSizeStr = unbxdCore.getPageSizeStr();
+      const currentPageSize = String(currentPageSizeStr).match(/\d+/g);
+      const newStart = currentPage === 0 ? currentPageSize[0] : currentPage * currentPageSize[0];
 
       setPageStart(newStart);
       getResults();

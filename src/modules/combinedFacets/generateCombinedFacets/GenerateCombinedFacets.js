@@ -374,7 +374,7 @@ class GenerateCombinedFacets extends React.Component {
                                     )}
                                     {enableViewMore &&
                                     isOpen &&
-                                    filteredValues.length > minViewMore ? (
+                                    filteredValues && filteredValues.length > minViewMore ? (
                                         <ViewMore
                                             facetName={facetName}
                                             toggleViewLess={this.toggleViewLess}
@@ -440,7 +440,7 @@ class GenerateCombinedFacets extends React.Component {
                                 )}
                                 {enableViewMore &&
                                 isOpen &&
-                                filteredValues.length > minViewMore ? (
+                                values && values.length > minViewMore ? (
                                     <ViewMore
                                         facetName={facetName}
                                         toggleViewLess={this.toggleViewLess}

@@ -7,7 +7,9 @@ import Sorter from '../components/Sorter';
 import MerchandizingBanner from '../components/MerchandizingBanner';
 import TextFilters from '../components/TextFilters';
 import RangeFilters from '../components/RangeFilters';
+import RangeViews from '../components/RangeView';
 import MultilevelFilters from '../components/MultilevelFilters';
+import CombinedFilters from '../components/CombinedFilters';
 import ActiveFilters from '../components/ActiveFilters';
 import Crumbs from '../components/Crumbs';
 import SearchDescription from '../components/SearchDescription';
@@ -38,7 +40,9 @@ const Shorts = () => {
                     <MultilevelFilters />
                     <FacetApplyClear />
                     <RangeFilters />
-                    <TextFilters />
+                    {/* <RangeViews/> */}
+                    <TextFilters /> 
+                    {/* <CombinedFilters/> */}
                     <FacetApplyClear />
                 </div>
 

@@ -67,7 +67,8 @@ class RangeFacetsContainer extends React.PureComponent {
             enableViewMore,
             onFacetClick,
             minViewMore,
-            applyMultiple,
+            unbxdCore,
+            applyMultiple
         };
     }
 
