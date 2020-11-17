@@ -46,9 +46,14 @@ RangeFacets.defaultProps = {
     collapsible: true,
     minViewMore: 3,
     enableViewMore: false,
+    applyMultiple: false,
 };
 
 RangeFacets.propTypes = {
+    /**
+     * apply multiple filters on the same facet
+     */
+    applyMultiple: PropTypes.bool,
     /**
      * Collapse facet values
      */

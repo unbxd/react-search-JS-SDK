@@ -5,7 +5,6 @@ import { getUpdatedRangeFacets } from './utils';
 import { List, ViewMore } from '../../components';
 import FacetItem from './FacetItem';
 import { executeCallback } from '../../common/utils';
-import { listItemTypes } from '../../components/utils';
 
 class GenerateFacets extends React.Component {
     constructor(props) {
@@ -18,9 +17,8 @@ class GenerateFacets extends React.Component {
     }
 
     setFacetValue(facetObj, getResults = false) {
-        const { onFacetClick } = this.props;
+        const { onFacetClick, applyMultiple } = this.props;
         const { facetName, valMin, valMax, isSelected } = facetObj;
-        const applyMutiple = true;
 
         const onFinish = () => {
             this.setState((existingState) => {
@@ -44,7 +42,12 @@ class GenerateFacets extends React.Component {
                                         isSelected: !isSelected,
                                     };
                                 } else {
-                                    return { ...facetValue };
+                                    return {
+                                        ...facetValue,
+                                        isSelected: applyMultiple
+                                            ? facetValue.isSelected
+                                            : false,
+                                    };
                                 }
                             }
                         );
@@ -67,7 +70,7 @@ class GenerateFacets extends React.Component {
             });
 
             const { addRangeFacet, removeRangeFacet } = this.props;
-            if (isSelected && !applyMutiple) {
+            if (isSelected && !applyMultiple) {
                 removeRangeFacet({ facetName }, getResults);
             } else {
                 addRangeFacet(
@@ -86,7 +89,7 @@ class GenerateFacets extends React.Component {
 
     onClearFilter = (event) => {
         const facetName = event.target.dataset['unx_facetname'];
-        const applyMutiple = true;
+        const { applyMultiple } = this.props;
 
         const { removeRangeFacet, enableApplyFilters } = this.props;
         removeRangeFacet({ facetName }, !enableApplyFilters);
@@ -117,7 +120,7 @@ class GenerateFacets extends React.Component {
             };
         });
 
-        !applyMutiple && this.onApplyFilter();
+        !applyMultiple && this.onApplyFilter();
     };
 
     handleFacetClick = (currentItem) => {
@@ -290,6 +293,7 @@ GenerateFacets.propTypes = {
     priceUnit: PropTypes.string.isRequired,
     label: PropTypes.node,
     collapsible: PropTypes.bool,
+    applyMultiple: PropTypes.bool,
 };
 
 export default GenerateFacets;

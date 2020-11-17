@@ -1,0 +1,365 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
+import FacetActions from '../src/modules/facetActions';
+import TextFacets from '../src/modules/textFacets';
+import Products from '../src/modules/products';
+import SearchBox from '../src/modules/searchBox';
+const defaultSearch = 'Boots';
+const attributesMap = {
+    productName: 'title',
+    uniqueId: 'uniqueId',
+    imageUrl: 'imageUrl',
+    price: 'unbxd_price',
+    productUrl: 'productUrl',
+};
+const variantAttributesMap = {
+    productName: 'title',
+    uniqueId: 'vId',
+    imageUrl: 'imageUrl',
+    price: 'v_unbxd_price',
+    productUrl: 'productUrl',
+};
+const ApplyFilterComponent = ({ onApplyFilter }) => (
+    <button className="-apply" onClick={onApplyFilter}>
+        Apply
+    </button>
+);
+const ClearFilterComponent = ({ onClearFilter }) => (
+    <button className="-clear" onClick={onClearFilter}>
+        Clear
+    </button>
+);
+const onApply = (facets) => {
+    console.log('Facets apply :', facets);
+    return true;
+};
+const onClear = () => {
+    console.log('Facets clear :');
+    return true;
+};
+
+<Meta title="FacetActions" component={FacetActions} />
+
+# FacetActions
+
+### Widget to display facet actions like apply and clear.
+
+##### Note:
+
+-   When `FacetActions` widget is included, `RangeFacets` and `TextFacets` will be applied only on actions `Apply` and `Clear`.
+
+```jsx
+<FacetActions />
+```
+
+<Preview>
+    <Story name="default">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <FacetActions />
+            <TextFacets />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### showApplyFilter
+
+The apply filter is enabled by default. It can be disabled by passing `showApplyFilter` as `false`.
+
+```jsx
+<FacetActions
+    //...
+    showApplyFilter={false}
+    //...
+/>
+```
+
+<Preview>
+    <Story name="with showApplyFilter">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <FacetActions showApplyFilter={false} />
+            <TextFacets />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### showClearFilter
+
+The clear filter is enabled by default. It can be disabled by passing `showClearFilter` as `false`.
+
+```jsx
+<FacetActions
+    //...
+    showClearFilter={false}
+    //...
+/>
+```
+
+<Preview>
+    <Story name="with showClearFilter">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <FacetActions showClearFilter={false} />
+            <TextFacets />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### ApplyFilterComponent
+
+The default Apply Filter component can be overridden by passing `ApplyFilterComponent`.
+
+```jsx
+const ApplyFilterComponent = ({ onApplyFilter }) => (
+    <button className="-apply" onClick={onApplyFilter}>
+        Apply
+    </button>
+);
+```
+
+```jsx
+<FacetActions
+    //...
+    ApplyFilterComponent={ApplyFilterComponent}
+    //...
+/>
+```
+
+<Preview>
+    <Story name="with ApplyFilterComponent">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <FacetActions ApplyFilterComponent={ApplyFilterComponent} />
+            <TextFacets />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### ClearFilterComponent
+
+The default Clear Filter component can be overridden by passing `ClearFilterComponent`.
+
+```jsx
+const ClearFilterComponent = ({ onClearFilter }) => (
+    <button className="-clear" onClick={onClearFilter}>
+        Clear
+    </button>
+);
+```
+
+```jsx
+<FacetActions
+    //...
+    ClearFilterComponent={ClearFilterComponent}
+    //...
+/>
+```
+
+<Preview>
+    <Story name="with ClearFilterComponent">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <FacetActions ClearFilterComponent={ClearFilterComponent} />
+            <TextFacets />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### onApply
+
+The callback on the click of apply filter. Return `true` to proceed with the apply or return `false` to abort.
+
+```jsx
+const onApply = (facets) => {
+    console.log('Facets apply :', facets);
+    return true;
+};
+```
+
+```jsx
+<FacetActions
+    //...
+    onApply={onApply}
+    //...
+/>
+```
+
+<Preview>
+    <Story name="with onApply">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <FacetActions onApply={onApply} />
+            <TextFacets />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### onClear
+
+The callback on the click of clear filter. Return `true` to proceed with the clear or return `false` to abort.
+
+```jsx
+const onClear = () => {
+    console.log('Facets clear :');
+    return true;
+};
+```
+
+```jsx
+<FacetActions
+    //...
+    onClear={onClear}
+    //...
+/>
+```
+
+<Preview>
+    <Story name="with onClear">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <FacetActions onClear={onClear} />
+            <TextFacets />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### Render Props
+
+-   This approach gives the total control of the widget to the user.
+-   The anonymous function will receive all the data and methods needed to build and manage the widget.
+
+#### Render prop parameters
+
+| Name                 | Type          | Description                        |
+| -------------------- | ------------- | ---------------------------------- |
+| showApplyFilter      | bool          | display apply filter.              |
+| showClearFilter      | bool          | display clear filter.              |
+| onApplyFilter        | func          | handle apply facets click.         |
+| onClearFilter        | func          | handle clear facets click.         |
+| noOfPages            | number        | number of pages for current query. |
+| ApplyFilterComponent | element\|func | custom apply filter component.     |
+| ClearFilterComponent | element\|func | custom clear filter component.     |
+
+<Preview>
+    <Story name="with render props">
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <FacetActions>
+                {({
+                    showApplyFilter,
+                    showClearFilter,
+                    onApplyFilter,
+                    onClearFilter,
+                    noOfPages,
+                    ApplyFilterComponent,
+                    ClearFilterComponent,
+                }) => {
+                    return <div>render FacetActions</div>;
+                }}
+            </FacetActions>
+            <TextFacets />
+            <Products
+                attributesMap={attributesMap}
+                showVariants={true}
+                variantAttributesMap={variantAttributesMap}
+            />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+# Props
+
+<Props of={FacetActions} />

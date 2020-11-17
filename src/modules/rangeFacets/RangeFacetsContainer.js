@@ -17,7 +17,8 @@ class RangeFacetsContainer extends React.PureComponent {
             onFacetClick,
             transform,
             enableViewMore,
-            minViewMore
+            minViewMore,
+            applyMultiple,
         } = this.props;
 
         const {
@@ -27,7 +28,7 @@ class RangeFacetsContainer extends React.PureComponent {
             clearARangeFacet,
             selectedRangeFacets,
         } = getRangeFacetCoreMethods(unbxdCore);
-        const applyMultiple = true;
+
         const rangeFacets = getRangeFacets();
 
         const formattedRangeFacets = getFormattedRangeFacets(
@@ -66,7 +67,8 @@ class RangeFacetsContainer extends React.PureComponent {
             enableViewMore,
             onFacetClick,
             minViewMore,
-            unbxdCore
+            unbxdCore,
+            applyMultiple
         };
     }
 
@@ -93,6 +95,7 @@ RangeFacetsContainer.propTypes = {
     priceUnit: PropTypes.string.isRequired,
     label: PropTypes.node,
     collapsible: PropTypes.bool,
+    applyMultiple: PropTypes.bool,
     onFacetClick: PropTypes.node,
 };
 
