@@ -1,9 +1,3 @@
-export const facetTypes = {
-    TEXT_FACET: 'TEXT_FACET',
-    RANGE_FACET: 'RANGE_FACET',
-    MULTILEVEL_FACET: 'MULTILEVEL_FACET',
-};
-
 export const getSelectedRangeFacets = (rangeFilterObject) => {
     const selectedRangeFacets = {};
 

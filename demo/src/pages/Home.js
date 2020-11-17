@@ -31,8 +31,8 @@ const Home = () => {
                 <div className="UNX-searchFacet__container">
                     <MultilevelFilters />
                     <FacetApplyClear />
-                    {/* <RangeFilters /> */}
-                    <RangeViews/>
+                    <RangeFilters />
+                    {/* <RangeViews/> */}
                     <TextFilters />
                     {/* <CombinedFilters/> */}
                     <FacetApplyClear />

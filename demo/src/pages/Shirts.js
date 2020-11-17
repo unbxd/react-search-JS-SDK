@@ -8,6 +8,7 @@ import MerchandizingBanner from '../components/MerchandizingBanner';
 import TextFilters from '../components/TextFilters';
 import RangeFilters from '../components/RangeFilters';
 import RangeViews from '../components/RangeView';
+import CombinedFilters from '../components/CombinedFilters';
 import MultilevelFilters from '../components/MultilevelFilters';
 import ActiveFilters from '../components/ActiveFilters';
 import Crumbs from '../components/Crumbs';
@@ -41,6 +42,7 @@ const Shirts = () => {
                     <RangeFilters /> 
                     {/* <RangeViews /> */}
                     <TextFilters />
+                    {/* <CombinedFilters/> */}
                     <FacetApplyClear />
                 </div>
 

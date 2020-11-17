@@ -1,9 +1,7 @@
 import React from 'react';
-import RangeSlider from './RangeSlider';
+import RangeSlider from './Range/RangeSlider';
 import { RangeFacets } from '@unbxd-ui/react-search-sdk';
-import {executeCallback} from './RangeFacetsUtils';
-import { getUpdatedRangeFacets } from './RangeFacetsUtils';
-import { scrollTop } from '../utils';
+import { executeCallback } from './Range/RangeFacetsUtils';
 
 const transform = function () {
     console.log(this);
@@ -75,43 +73,6 @@ class RangeView extends React.Component{
         applyRangeFacet();
     };
 
-    onClearFilter = (event, applyRangeFacet, removeRangeFacet, rangeFacetsListCopy) => {
-        const facetName = event.target.dataset['unx_facetname'];
-        const applyMutiple = true;
-        removeRangeFacet({ facetName });
-        this.setState((currentFacetState) => {
-            let { rangeFacetsList } = currentFacetState;
-            if(Object.keys(rangeFacetsList).length === 0){
-                rangeFacetsList = [...rangeFacetsListCopy]
-            }
-            const updatedRangeFacets = rangeFacetsList.map((rangeValue) => {
-                if (rangeValue.facetName === facetName) {
-                    const updatedValues = rangeValue.values.map(
-                        (facetValue) => {
-                            return { ...facetValue, isSelected: false };
-                        }
-                    );
-                    return {
-                        ...rangeValue,
-                        isSelected: false,
-                        valMin: rangeValue.sliderMin,
-                        valMax: rangeValue.sliderMax,
-                        values: updatedValues,
-                    };
-                } else {
-                    return { ...rangeValue };
-                }
-            });
-
-            return {
-                ...currentFacetState,
-                rangeFacetsList: updatedRangeFacets,
-                facetChange: true
-            };
-        });
-
-        !applyMutiple && this.onApplyFilter(applyRangeFacet);
-    };
 
     handleFacetChange = (event, facetObj, rangeFacetsListCopy, removeRangeFacet, enableApplyFilters, onFacetClick, addRangeFacet) => {
         const facetName = facetObj.facetName;
@@ -151,32 +112,6 @@ class RangeView extends React.Component{
         const facetObjNew = { facetName, valMin, valMax, isSelected };
         this.setFacetValue(facetObjNew, !enableApplyFilters, onFacetClick, removeRangeFacet, addRangeFacet);
 
-    };
-
-    handleCollapseToggle = (event, rangeFacetsListCopy) => {
-        const facetName = event.target.dataset['unx_name'];
-        this.setState((existingState) => {
-            let { rangeFacetsList } = existingState;
-            if(Object.keys(rangeFacetsList).length === 0){
-                rangeFacetsList = [...rangeFacetsListCopy]
-            }
-            const updatedRangeValues = rangeFacetsList.map((rangeValue) => {
-                if (rangeValue.facetName === facetName) {
-                    return {
-                        ...rangeValue,
-                        isOpen: !rangeValue.isOpen,
-                    };
-                } else {
-                    return { ...rangeValue };
-                }
-            });
-
-            return {
-                ...existingState,
-                rangeFacetsList: updatedRangeValues,
-                facetChange: false
-            };
-        });
     };
 
     render(){
