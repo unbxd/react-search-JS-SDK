@@ -1,5 +1,5 @@
 import React from 'react';
-import { Range, SliderTooltip } from 'rc-slider';
+import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import {debounce} from './RangeFacetsUtils'
 

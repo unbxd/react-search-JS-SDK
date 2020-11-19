@@ -288,7 +288,7 @@ class GenerateCombinedFacets extends React.Component {
 
         const { combinedFacetsList } = this.state;
 
-        if (combinedFacetsList.length === 0) {
+        if (combinedFacetsList && combinedFacetsList.length === 0) {
             return null;
         }
 
@@ -309,7 +309,7 @@ class GenerateCombinedFacets extends React.Component {
                             ? true
                             : false;
                         let filteredValues = values;
-                        if (filter.length > 0) {
+                        if (filter && filter.length > 0) {
                             filteredValues = values.filter((value) => {
                                 return value.name
                                     .toLowerCase()
