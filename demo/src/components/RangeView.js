@@ -149,8 +149,17 @@ class RangeView extends React.Component{
                         rangeFacetsList = [...this.state.rangeFacetsList]
                     }
                     const {filter} = unbxdCore.getQueryParams();
-                    const ranges = unbxdCore.getSelectedRanges();
-                    const matches = String(ranges && ranges.price).match(/\d+/g);
+                    const priceRange = [];
+                    if(rangeFacets && rangeFacets.length){
+                        rangeFacets.forEach((range) => {
+                            if(range.facetName === 'price') {
+                                priceRange.push(range.rangeMax);
+                                priceRange.push(range.rangeMin)
+                            }
+                        });
+                    }
+                    //const ranges = unbxdCore.getSelectedRanges();
+                    //const priceRange = String(ranges && ranges.price).match(/\d+/g);
 
                     if (rangeFacetsList.length === 0) {
                         return null;
@@ -171,11 +180,11 @@ class RangeView extends React.Component{
                         } = facetObj;
     
                         let {start, end}=facetObj
-                        if(matches && matches.length ){
-                            start = matches[0];
-                            end = matches[1];
+                        if(priceRange && priceRange.length ){
+                            start = priceRange[0];
+                            end = priceRange[1];
                         }
-                        if(!ranges || !ranges.price){
+                        if(!priceRange || !priceRange.length){
                             start = sliderMin;
                             end = sliderMax;
                         }
