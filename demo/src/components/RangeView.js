@@ -3,11 +3,6 @@ import RangeSlider from './Range/RangeSlider';
 import { RangeFacets } from '@unbxd-ui/react-search-sdk';
 import { executeCallback } from './Range/RangeFacetsUtils';
 
-const transform = function () {
-    console.log(this);
-    return this;
-};
-
 class RangeView extends React.Component{
 
     constructor(props){
@@ -117,7 +112,6 @@ class RangeView extends React.Component{
     render(){
         return (
             <RangeFacets
-                transform={transform}
                 collapsible={true}
                 enableViewMore={true}
                 minViewMore={3}
@@ -133,7 +127,6 @@ class RangeView extends React.Component{
                     priceUnit,
                     label,
                     collapsible,
-                    transform,
                     enableViewMore,
                     onFacetClick,
                     minViewMore,
