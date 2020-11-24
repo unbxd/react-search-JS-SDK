@@ -301,7 +301,7 @@ class GenerateCombinedFacets extends React.Component {
                             facetName,
                             values,
                             isOpen = true,
-                            filter,
+                            filter = '',
                             viewLess,
                             className,
                         } = combinedFacet;
