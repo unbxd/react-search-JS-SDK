@@ -1,11 +1,70 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { RangeFacets } from '@unbxd-ui/react-search-sdk';
-import { scrollTop } from '../utils';
+import { RangeSlider } from '../common/components';
 
-const transform = function () {
-    console.log(this);
-    return this;
+const RangeFacetsRender = (props) => {
+    const { rangeFacets, addRangeFacet, applyRangeFacet } = props;
+    const [rangeValues, setRangeValues] = useState(rangeFacets);
+
+    useEffect(() => {
+        setRangeValues(rangeFacets);
+    }, [rangeFacets]);
+
+    function handleSliderChange(facetName, values) {
+        const [valMin, valMax] = values;
+        const updatedRangeValues = rangeValues.map((facet) => {
+            if (facetName === facet.facetName) {
+                return { ...facet, rangeMin: valMin, rangeMax: valMax };
+            }
+        });
+        setRangeValues(updatedRangeValues);
+        addRangeFacet({
+            facetName,
+            start: valMin,
+            end: valMax,
+        });
+        //don't call in case of apply
+        //applyRangeFacet();
+        //scrollTop();
+    }
+
+    return (
+        <div>
+            {rangeValues.map((facet) => {
+                const {
+                    facetName,
+                    displayName,
+                    sliderMin,
+                    sliderMax,
+                    rangeMin,
+                    rangeMax,
+                } = facet;
+                const onChangeHandler = handleSliderChange.bind(
+                    null,
+                    facetName
+                );
+                return (
+                    <div className="UNX-rangeFacet__container">
+                        <div class="UNX-facet__element rangeSlider">
+                            <div
+                                class="UNX-facet__header"
+                                data-unx_name={facetName}
+                            >
+                                {displayName}
+                            </div>
+                            <RangeSlider
+                                min={sliderMin}
+                                max={sliderMax}
+                                value={[rangeMin, rangeMax]}
+                                handleAfterChange={onChangeHandler}
+                            />
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+    );
 };
 
 export const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
@@ -34,10 +93,15 @@ export const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
     );
 };
 
-const onFacetClick = (facet, isSelected) => {
-    console.log('Facet change :', facet, isSelected);
-    scrollTop();
-    return true;
+const transform = function () {
+    console.log(this);
+    return this;
+};
+
+const RangeFiltersRenderProps = () => {
+    return (
+        <RangeFacets>{(props) => <RangeFacetsRender {...props} />}</RangeFacets>
+    );
 };
 
 const RangeFilters = () => {
@@ -48,6 +112,7 @@ const RangeFilters = () => {
             collapsible={true}
             enableViewMore={true}
             minViewMore={3}
+            applyMultiple={true}
             //onFacetClick={onFacetClick}
         />
     );

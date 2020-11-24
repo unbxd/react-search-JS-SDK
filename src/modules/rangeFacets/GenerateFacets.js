@@ -26,26 +26,31 @@ class GenerateFacets extends React.Component {
                 const updatedRangeFacets = rangeFacetsList.map((rangeValue) => {
                     if (rangeValue.facetName === facetName) {
                         //also go into values and set the specific from to as is selected
+                        let isFacetSelected = false;
                         const updatedValues = rangeValue.values.map(
                             (facetValue) => {
-                                const {
-                                    from,
-                                    end,
-                                    isSelected = false,
-                                } = facetValue;
+                                const { from, end } = facetValue;
                                 const { dataId: fromValue } = from;
                                 const { dataId: toValue } = end;
 
                                 if (valMin >= fromValue && valMax <= toValue) {
+                                    const { isSelected } = facetValue;
+                                    if (!isSelected) {
+                                        isFacetSelected = true;
+                                    }
                                     return {
                                         ...facetValue,
                                         isSelected: !isSelected,
                                     };
                                 } else {
+                                    const { isSelected } = facetValue;
+                                    if (applyMultiple && isSelected) {
+                                        isFacetSelected = true;
+                                    }
                                     return {
                                         ...facetValue,
                                         isSelected: applyMultiple
-                                            ? facetValue.isSelected
+                                            ? isSelected
                                             : false,
                                     };
                                 }
@@ -54,6 +59,7 @@ class GenerateFacets extends React.Component {
 
                         return {
                             ...rangeValue,
+                            isSelected: isFacetSelected,
                             valMin,
                             valMax,
                             values: updatedValues,
