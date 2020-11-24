@@ -52,6 +52,7 @@ const setCategoryId = (param, self) => {
 const AppRoutes = () => {
     const [categoryPathLinks, setCategoryPathLinks] = useState(categoryLinks);
     const [productType, setProductType] = useState('SEARCH');
+    const [refreshId, setRefreshId] = useState(1);
     const [showFilters, setShowFilters] = useState(false);
 
     const handleClose = () => setShowFilters(false);
@@ -70,6 +71,7 @@ const AppRoutes = () => {
         window.UnbxdAnalyticsConf['page'] = path;
         window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         setProductType('CATEGORY');
+        setRefreshId(refreshId + 1);
     };
 
     return (
@@ -84,6 +86,7 @@ const AppRoutes = () => {
                         getCategoryId={getCategoryId}
                         setCategoryId={setCategoryId}
                         productType={productType}
+                        refreshId={refreshId}
                     >
                         <MobileModal
                             showFilters={showFilters}
