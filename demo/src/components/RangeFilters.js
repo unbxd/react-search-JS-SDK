@@ -112,9 +112,10 @@ const RangeFilters = () => {
             collapsible={true}
             enableViewMore={true}
             minViewMore={3}
+            applyMultiple={true}
             //onFacetClick={onFacetClick}
         />
     );
 };
 
-export default RangeFiltersRenderProps;
+export default RangeFilters;
