@@ -23,10 +23,9 @@
         text-decoration: none;
 
         .-image{
-            min-height: 290px;
+            height: 290px;
             object-fit: contain;
             max-width: 100%;
-            height: auto;
         }
     }
     position: relative;
