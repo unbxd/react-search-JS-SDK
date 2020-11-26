@@ -30,7 +30,7 @@ const ViewTypesDropdown = ({ viewType, viewTypes, onViewTypeClick }) => {
 ViewTypesDropdown.propTypes = {
     viewType: PropTypes.string,
     viewTypes: PropTypes.arrayOf(PropTypes.string),
-    onViewTypeClick: PropTypes.func.isRequired,
+    onViewTypeClick: PropTypes.func.isRequired
 };
 
 export default ViewTypesDropdown;

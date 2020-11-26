@@ -19,7 +19,7 @@ class ProductsWrapper extends React.PureComponent {
         this.state = {
             products,
             hasMoreResults: true,
-            start: 0,
+            start: 0
         };
 
         this.productsContainerRef = createRef();
@@ -64,7 +64,7 @@ class ProductsWrapper extends React.PureComponent {
             productIdAttribute,
             viewType,
             unbxdCoreStatus,
-            numberOfProducts,
+            numberOfProducts
         } = this.props;
 
         if (
@@ -124,7 +124,7 @@ class ProductsWrapper extends React.PureComponent {
                     : this.setState({
                           products: [...prevState.products, ...products],
                           start,
-                          hasMoreResults: !loadedAllResults,
+                          hasMoreResults: !loadedAllResults
                       });
 
                 return;
@@ -168,7 +168,7 @@ class ProductsWrapper extends React.PureComponent {
             showLoader,
             numberOfProducts,
             ZeroResultsComponent,
-            priceUnit,
+            priceUnit
         } = this.props;
         const { products, hasMoreResults } = this.state;
 
@@ -210,7 +210,7 @@ class ProductsWrapper extends React.PureComponent {
             groupBy,
             swatchItemComponent,
             viewType,
-            priceUnit,
+            priceUnit
         };
 
         const productViewsRender = (
@@ -227,7 +227,9 @@ class ProductsWrapper extends React.PureComponent {
 
                 {displayClickNScrollTrigger &&
                     (loadMoreComponent ? (
-                        cloneElement(loadMoreComponent,{loadMoreProducts:this.loadMoreProducts})
+                        cloneElement(loadMoreComponent, {
+                            loadMoreProducts: this.loadMoreProducts
+                        })
                     ) : (
                         <div
                             className="UNX-productLoadMore"
@@ -264,7 +266,7 @@ ProductsWrapper.propTypes = {
     start: PropTypes.number.isRequired,
     ZeroResultsComponent: PropTypes.element,
     priceUnit: PropTypes.string.isRequired,
-    loaderComponent:PropTypes.element
+    loaderComponent: PropTypes.element
 };
 
 export default ProductsWrapper;

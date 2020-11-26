@@ -24,7 +24,7 @@ addParameters({
                 SpellCheck: 14,
                 ViewTypes: 15,
                 Banners: 16,
-                SearchTitle: 17,
+                SearchTitle: 17
             };
 
             if (rootStoriesOrder[a[1].kind] < rootStoriesOrder[b[1].kind]) {
@@ -36,6 +36,6 @@ addParameters({
             }
 
             return 0;
-        },
-    },
+        }
+    }
 });

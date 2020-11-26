@@ -16,7 +16,7 @@ class ListProductCard extends React.Component {
             variantAttributesMap,
             showSwatches,
             swatchAttributesMap,
-            groupBy,
+            groupBy
         } = this.props;
 
         //Get the datas from the product bases on attributesMap and create the card
@@ -27,7 +27,7 @@ class ListProductCard extends React.Component {
             variantAttributesMap,
             showSwatches,
             swatchAttributesMap,
-            groupBy,
+            groupBy
         });
 
         this.state = { productValues };
@@ -48,8 +48,8 @@ class ListProductCard extends React.Component {
                                 return { ...swatchObject, isSelected: false };
                             }
                         }
-                    ),
-                },
+                    )
+                }
             };
         });
     };
@@ -69,7 +69,7 @@ class ListProductCard extends React.Component {
             productUrl,
             price,
             sellingPrice,
-            swatches,
+            swatches
         } = product;
 
         const prank = idx + 1;
@@ -142,7 +142,7 @@ ListProductCard.propTypes = {
     swatchItemComponent: PropTypes.element,
     idx: PropTypes.number,
     onClick: PropTypes.func.isRequired,
-    priceUnit: PropTypes.string.isRequired,
+    priceUnit: PropTypes.string.isRequired
 };
 
 export default ListProductCard;

@@ -1,6 +1,6 @@
 const displayTypes = {
-    LIST: "LIST",
-    DROPDOWN: "DROPDOWN"
-}
+    LIST: 'LIST',
+    DROPDOWN: 'DROPDOWN'
+};
 
-export {displayTypes}
+export { displayTypes };

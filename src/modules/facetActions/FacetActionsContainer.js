@@ -10,7 +10,7 @@ import { executeCallback } from '../../common/utils';
 class FacetActionsContainer extends React.PureComponent {
     componentDidMount() {
         const {
-            helpers: { setFacetsActionConfiguration },
+            helpers: { setFacetsActionConfiguration }
         } = this.props;
         setFacetsActionConfiguration({ enable: true });
     }
@@ -26,7 +26,7 @@ class FacetActionsContainer extends React.PureComponent {
             selectedFacets,
             helpers: { manageTextFacets },
             onApply,
-            onClear,
+            onClear
         } = this.props;
 
         const {
@@ -34,7 +34,7 @@ class FacetActionsContainer extends React.PureComponent {
             clearFacets,
             selectedRangeFacets,
             clearARangeFacet,
-            getPaginationInfo,
+            getPaginationInfo
         } = getFacetCoreMethods(unbxdCore);
 
         const { noOfPages = 0 } = getPaginationInfo() || {};
@@ -42,7 +42,7 @@ class FacetActionsContainer extends React.PureComponent {
         const handleApplyFilter = () => {
             const onFinish = () => {
                 //does not work if we pass it as it is.
-                applyFacets({...selectedFacets});
+                applyFacets({ ...selectedFacets });
             };
             executeCallback(onApply, [selectedFacets], onFinish);
         };
@@ -65,7 +65,7 @@ class FacetActionsContainer extends React.PureComponent {
             onClearFilter: handleClearFilter,
             noOfPages,
             applyFilterComponent,
-            clearFilterComponent,
+            clearFilterComponent
         };
     }
 
@@ -90,7 +90,7 @@ FacetActionsContainer.propTypes = {
     applyFilterComponent: PropTypes.element,
     clearFilterComponent: PropTypes.element,
     onApply: PropTypes.func,
-    onClear: PropTypes.func,
+    onClear: PropTypes.func
 };
 
 export default FacetActionsContainer;

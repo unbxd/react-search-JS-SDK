@@ -20,7 +20,7 @@ const MultilevelFacets = (props) => {
                     unbxdCore,
                     unbxdCoreStatus,
                     helpers,
-                    productType,
+                    productType
                 } = appState;
 
                 return (
@@ -45,7 +45,7 @@ MultilevelFacets.defaultProps = {
     collapsible: false,
     searchable: false,
     minViewMore: 3,
-    enableViewMore: false,
+    enableViewMore: false
 };
 
 MultilevelFacets.propTypes = {
@@ -91,8 +91,8 @@ MultilevelFacets.propTypes = {
     minViewMore: PropTypes.number,
     /**
      * Bool value to enable disable viewMore.
-     */ 
-    enableViewMore: PropTypes.bool,
+     */
+    enableViewMore: PropTypes.bool
 };
 
 export default MultilevelFacets;

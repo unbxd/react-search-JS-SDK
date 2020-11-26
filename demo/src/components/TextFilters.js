@@ -35,7 +35,7 @@ const onFacetClick = (facet, isSelected) => {
 const TextFilters = () => {
     return (
         <TextFacets
-            facetItemComponent={<FacetItemComponent/>}
+            facetItemComponent={<FacetItemComponent />}
             collapsible={true}
             enableViewMore={true}
             searchable={true}

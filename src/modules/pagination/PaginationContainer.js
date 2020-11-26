@@ -18,7 +18,7 @@ class PaginationContainer extends React.PureComponent {
             isNext = false,
             isPrev = false,
             noOfPages = 0,
-            rows = 0,
+            rows = 0
         } = unbxdCore.getPaginationInfo() || {};
 
         const handleNextPageClick = () => {
@@ -57,14 +57,14 @@ class PaginationContainer extends React.PureComponent {
             noOfPages,
             currentPage,
             padding,
-            paginationType,
+            paginationType
         };
 
         const helpers = {
             onNextPageClick: handleNextPageClick,
             onPreviousPageClick: handlePreviousPageClick,
             onPageClick: handlePageClick,
-            paginationItemComponent,
+            paginationItemComponent
         };
 
         return { ...data, ...helpers };
@@ -99,7 +99,7 @@ PaginationContainer.propTypes = {
     padding: PropTypes.number,
     paginationItemComponent: PropTypes.element,
     paginationType: PropTypes.string.isRequired,
-    onPageChange: PropTypes.func,
+    onPageChange: PropTypes.func
 };
 
 export default PaginationContainer;

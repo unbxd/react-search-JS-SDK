@@ -6,7 +6,7 @@ import { List } from '../../../components';
 const PageSizeList = ({
     sizeOptions,
     onPageSizeClick,
-    pageSizeItemComponent,
+    pageSizeItemComponent
 }) => {
     return (
         <div className="UNX-pageSize__element">
@@ -26,7 +26,7 @@ PageSizeList.propTypes = {
         PropTypes.shape({ id: PropTypes.number, value: PropTypes.string })
     ).isRequired,
     onPageSizeClick: PropTypes.func.isRequired,
-    pageSizeItemComponent: PropTypes.element.isRequired,
+    pageSizeItemComponent: PropTypes.element.isRequired
 };
 
 export default PageSizeList;

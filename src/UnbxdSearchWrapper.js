@@ -7,7 +7,7 @@ import {
     searchConfigurations as defaultSearchConfigurations,
     productTypes,
     searchStatus,
-    paginationTypes,
+    paginationTypes
 } from './config';
 import {
     setProductConfiguration,
@@ -24,7 +24,7 @@ import {
     handleViewTypeClick,
     getUpdatedResults,
     setSelectedFacets,
-    resetSearch,
+    resetSearch
 } from './utils';
 import '../public/css/core/index.scss';
 import { viewTypes } from './config/constants';
@@ -37,7 +37,7 @@ const initialUnbxdState = {
     viewType: 'GRID',
     paginationType: paginationTypes.FIXED_PAGINATION,
     enableApplyFilters: false,
-    selectedFacets: {},
+    selectedFacets: {}
 };
 
 class UnbxdSearchWrapper extends Component {
@@ -50,7 +50,7 @@ class UnbxdSearchWrapper extends Component {
             getCategoryId,
             setCategoryId,
             productType,
-            priceUnit,
+            priceUnit
         } = this.props;
 
         this.unbxdCallBack = unbxdCallBack.bind(this);
@@ -80,7 +80,7 @@ class UnbxdSearchWrapper extends Component {
                 apiKey,
                 onEvent: this.unbxdCallBack,
                 getCategoryId,
-                setCategoryId,
+                setCategoryId
             }),
             productType,
             categoryId: '',
@@ -101,9 +101,9 @@ class UnbxdSearchWrapper extends Component {
                 handleViewTypeClick: this.handleViewTypeClick,
                 getUpdatedResults: this.getUpdatedResults,
                 resetSearch: this.resetSearch,
-                getActiveFacets,
+                getActiveFacets
             },
-            priceUnit,
+            priceUnit
         };
 
         this.initialResultLoad = true;
@@ -116,7 +116,7 @@ class UnbxdSearchWrapper extends Component {
             unbxdState,
             helpers,
             priceUnit,
-            productType,
+            productType
         } = this.state;
         return {
             unbxdCore,
@@ -124,7 +124,7 @@ class UnbxdSearchWrapper extends Component {
             unbxdState,
             helpers,
             priceUnit,
-            productType,
+            productType
         };
     }
 
@@ -144,8 +144,8 @@ class UnbxdSearchWrapper extends Component {
                     ...currentState,
                     unbxdState: {
                         ...currentState.unbxdState,
-                        enableApplyFilters: true,
-                    },
+                        enableApplyFilters: true
+                    }
                 };
             });
         }
@@ -159,7 +159,7 @@ class UnbxdSearchWrapper extends Component {
                 return {
                     ...currentState,
                     categoryId,
-                    productType: productTypes.CATEGORY,
+                    productType: productTypes.CATEGORY
                 };
             });
             unbxdCore.options.productType = productTypes.CATEGORY;
@@ -191,7 +191,7 @@ class UnbxdSearchWrapper extends Component {
                 return {
                     ...currentState,
                     categoryId: currentCategoryId,
-                    productType: productTypes.CATEGORY,
+                    productType: productTypes.CATEGORY
                 };
             });
             unbxdCore.options.productType = productTypes.CATEGORY;
@@ -233,7 +233,7 @@ class UnbxdSearchWrapper extends Component {
 UnbxdSearchWrapper.defaultProps = {
     productType: 'SEARCH',
     priceUnit: '$',
-    searchConfigurations: {},
+    searchConfigurations: {}
 };
 
 UnbxdSearchWrapper.propTypes = {
@@ -260,7 +260,7 @@ UnbxdSearchWrapper.propTypes = {
     /**
      * Price unit.
      */
-    priceUnit: PropTypes.string,
+    priceUnit: PropTypes.string
 };
 
 export default UnbxdSearchWrapper;

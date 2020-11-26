@@ -12,7 +12,7 @@ const SelectedFacetsWrapper = (props) => {
         onMultilevelFacetClick,
         facetItemComponent,
         priceUnit,
-        label,
+        label
     } = props;
 
     const { textFacets, rangeFacets, multilevelFacets } = activeFacets;
@@ -83,7 +83,7 @@ SelectedFacetsWrapper.propTypes = {
     onMultilevelFacetClick: PropTypes.func.isRequired,
     facetItemComponent: PropTypes.element,
     priceUnit: PropTypes.string.isRequired,
-    label: PropTypes.node,
+    label: PropTypes.node
 };
 
 export default SelectedFacetsWrapper;

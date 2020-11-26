@@ -15,7 +15,6 @@ In return, they should reciprocate that respect in addressing your issue or asse
 
 Install [npm](https://www.npmjs.com/get-npm)
 
-
 <a name="bugs"></a>
 
 ## Bug reports
@@ -78,34 +77,34 @@ Follow this process if you'd like your work considered for inclusion in the proj
 
 1. [Fork](http://help.github.com/fork-a-repo/) the project, clone your fork, and configure the remotes:
 
-   ```bash
-   # Clone your fork of the repo into the current directory
-   git clone https://github.com/<your-username>/react-search-JS-SDK
-   # Navigate to the newly cloned directory
-   cd react-search-JS-SDK
-   # Assign the original repo to a remote called "upstream"
-   git remote add upstream https://github.com/unbxd/react-search-JS-SDK
-   ```
+    ```bash
+    # Clone your fork of the repo into the current directory
+    git clone https://github.com/<your-username>/react-search-JS-SDK
+    # Navigate to the newly cloned directory
+    cd react-search-JS-SDK
+    # Assign the original repo to a remote called "upstream"
+    git remote add upstream https://github.com/unbxd/react-search-JS-SDK
+    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:
 
-   ```bash
-   git checkout master
-   git pull upstream master
-   ```
+    ```bash
+    git checkout master
+    git pull upstream master
+    ```
 
 3. Install/update dependencies:
 
-   ```bash
-   yarn install
-   ```
+    ```bash
+    yarn install
+    ```
 
 4. Create a new topic branch (off the main project development branch) to
    contain your feature, change, or fix:
 
-   ```bash
-   git checkout -b <topic-branch-name>
-   ```
+    ```bash
+    git checkout -b <topic-branch-name>
+    ```
 
 5. Commit your changes in logical chunks.
    Please adhere to these [git commit message guidelines](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
@@ -115,15 +114,15 @@ Follow this process if you'd like your work considered for inclusion in the proj
 
 6. Locally merge (or rebase) the upstream development branch into your topic branch:
 
-   ```bash
-   git pull [--rebase] upstream master
-   ```
+    ```bash
+    git pull [--rebase] upstream master
+    ```
 
 7. Push your topic branch up to your fork:
 
-   ```bash
-   git push origin <topic-branch-name>
-   ```
+    ```bash
+    git push origin <topic-branch-name>
+    ```
 
 8. [Open a Pull Request](https://help.github.com/articles/using-pull-requests/)
    with a clear title and description.

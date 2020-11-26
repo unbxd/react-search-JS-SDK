@@ -22,7 +22,7 @@ class SearchBoxContainer extends React.PureComponent {
 
     componentDidMount() {
         const {
-            helpers: { setSearchBoxConfiguration },
+            helpers: { setSearchBoxConfiguration }
         } = this.props;
         const { defaultSearch = '' } = this.props;
         if (typeof defaultSearch === 'string' && defaultSearch.length) {
@@ -56,10 +56,10 @@ class SearchBoxContainer extends React.PureComponent {
         const { query } = this.state;
         const {
             onSubmit,
-            helpers: { resetSearch },
+            helpers: { resetSearch }
         } = this.props;
         const {
-            helpers: { setSearchBoxConfiguration },
+            helpers: { setSearchBoxConfiguration }
         } = this.props;
         if (!query.replace(/\s/g, '').length) {
             return false;
@@ -96,7 +96,7 @@ class SearchBoxContainer extends React.PureComponent {
             inputComponent,
             submitComponent,
             clearComponent,
-            placeholder,
+            placeholder
         } = this.props;
 
         const lastSearchedQuery = unbxdCore.getSearchQuery() || '';
@@ -109,7 +109,7 @@ class SearchBoxContainer extends React.PureComponent {
             lastSearchedQuery,
             placeholder,
             productType,
-            ...this.state,
+            ...this.state
         };
 
         const helpers = {
@@ -119,7 +119,7 @@ class SearchBoxContainer extends React.PureComponent {
             setSearchBoxQuery: this.setSearchBoxQuery,
             inputComponent,
             submitComponent,
-            clearComponent,
+            clearComponent
         };
 
         return { ...data, ...helpers };
@@ -150,7 +150,7 @@ SearchBoxContainer.propTypes = {
     clearComponent: PropTypes.element,
     defaultSearch: PropTypes.string,
     placeholder: PropTypes.string,
-    productType: PropTypes.string,
+    productType: PropTypes.string
 };
 
 export default SearchBoxContainer;

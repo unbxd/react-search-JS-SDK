@@ -23,47 +23,46 @@ import { Products } from '@unbxd-ui/react-search-sdk';
 // };
 
 const attributesMap = {
-  productName: "title",
-  uniqueId: "uniqueId",
-  imageUrl: "imageUrl",
-  price: "RRP_Price",
-  sellingPrice: "unbxd_price",
-  productUrl: "productUrl"
+    productName: 'title',
+    uniqueId: 'uniqueId',
+    imageUrl: 'imageUrl',
+    price: 'RRP_Price',
+    sellingPrice: 'unbxd_price',
+    productUrl: 'productUrl'
 };
 
 const variantAttributesMap = {
-  productName: "v_title",
-  uniqueId: "vId",
-  imageUrl: "imageUrl",
-  price: "v_RRP_Price",
-  sellingPrice: "v_unbxd_price",
-  productUrl: "productUrl"
+    productName: 'v_title',
+    uniqueId: 'vId',
+    imageUrl: 'imageUrl',
+    price: 'v_RRP_Price',
+    sellingPrice: 'v_unbxd_price',
+    productUrl: 'productUrl'
 };
 
-
 const swatchAttributesMap = {
-  swatchId: 'variantId',
-  swatchImageUrl: 'variant_overhead_swatch',
-  imageUrl: 'variant_image_array',
-  price: 'variant_cheapest_default_price',
-  sellingPrice: 'variant_min_cheapest_msrp',
-  productUrl: 'variant_productUrl'
+    swatchId: 'variantId',
+    swatchImageUrl: 'variant_overhead_swatch',
+    imageUrl: 'variant_image_array',
+    price: 'variant_cheapest_default_price',
+    sellingPrice: 'variant_min_cheapest_msrp',
+    productUrl: 'variant_productUrl'
 };
 
 const ProductsListing = () => {
-  return (
-    <Products
-      attributesMap={attributesMap}
-      pageSize={20}
-      showVariants={true}
-      variantsCount={4}
-      variantAttributesMap={variantAttributesMap}
-      showSwatches={true}
-      groupBy={'variant_color'}
-      swatchAttributesMap={swatchAttributesMap}
-      paginationType={'FIXED_PAGINATION'}
-    />
-  );
+    return (
+        <Products
+            attributesMap={attributesMap}
+            pageSize={20}
+            showVariants={true}
+            variantsCount={4}
+            variantAttributesMap={variantAttributesMap}
+            showSwatches={true}
+            groupBy={'variant_color'}
+            swatchAttributesMap={swatchAttributesMap}
+            paginationType={'FIXED_PAGINATION'}
+        />
+    );
 };
 
 export default ProductsListing;

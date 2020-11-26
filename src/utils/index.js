@@ -31,5 +31,5 @@ export {
     setSelectedFacets,
     setCategoryPath,
     getUpdatedResults,
-    resetSearch,
+    resetSearch
 };

@@ -23,14 +23,14 @@ const attributesMap = {
     imageUrl: 'imageUrl',
     price: 'RRP_Price',
     sellingPrice: 'unbxd_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 const variantAttributesMap = {
     productName: 'v_title',
     uniqueId: 'vId',
     imageUrl: 'v_imageUrl',
     price: 'v_RRP_Price',
-    sellingPrice: 'v_unbxd_price',
+    sellingPrice: 'v_unbxd_price'
 };
 const getCategoryId = () => {
     if (window.UnbxdAnalyticsConf) {
@@ -63,50 +63,50 @@ const setCategoryId = (param, self) => {
 const pageSizeOptions = [
     {
         id: 5,
-        value: '5',
+        value: '5'
     },
     {
         id: 10,
-        value: '10',
+        value: '10'
     },
     {
         id: 15,
-        value: '15',
+        value: '15'
     },
     {
         id: 20,
-        value: '20',
-    },
+        value: '20'
+    }
 ];
 const sortOptions = [
     {
-        label: 'Most Popular',
+        label: 'Most Popular'
     },
     {
         label: 'Newest',
         field: 'Date_Added',
-        order: 'desc',
+        order: 'desc'
     },
     {
         label: 'Lowest Price',
         field: 'price',
-        order: 'asc',
+        order: 'asc'
     },
     {
         label: 'Highest Price',
         field: 'price',
-        order: 'desc',
+        order: 'desc'
     },
     {
         label: 'Brand A-Z',
         field: 'title',
-        order: 'asc',
+        order: 'asc'
     },
     {
         label: 'Brand Z-A',
         field: 'title',
-        order: 'desc',
-    },
+        order: 'desc'
+    }
 ];
 const Root = () => <span>Home</span>;
 const separator = <span>-</span>;
@@ -195,7 +195,7 @@ By default, `productType` is set to `SEARCH`.
                 default={{
                     label: 'Brand A-Z',
                     field: 'title',
-                    order: 'asc',
+                    order: 'asc'
                 }}
                 sortOptions={sortOptions}
             />
@@ -277,7 +277,7 @@ const getCategoryId = () => {
                 default={{
                     label: 'Brand A-Z',
                     field: 'title',
-                    order: 'asc',
+                    order: 'asc'
                 }}
                 sortOptions={sortOptions}
             />

@@ -31,7 +31,7 @@ class GenerateFacets extends React.Component {
                             : true,
                         filter: matchBucketedFacet
                             ? matchBucketedFacet.filter
-                            : '',
+                            : ''
                     };
                 }
             );
@@ -44,7 +44,7 @@ class GenerateFacets extends React.Component {
             this.setState((existingState) => {
                 return {
                     ...existingState,
-                    multilevelFacetsList: multiFacets,
+                    multilevelFacetsList: multiFacets
                 };
             });
         }
@@ -59,7 +59,7 @@ class GenerateFacets extends React.Component {
                     if (facetId === multilevelFacet.facetDisplayName) {
                         return {
                             ...multilevelFacet,
-                            isOpen: !multilevelFacet.isOpen,
+                            isOpen: !multilevelFacet.isOpen
                         };
                     }
                     return { ...multilevelFacet };
@@ -68,7 +68,7 @@ class GenerateFacets extends React.Component {
 
             return {
                 ...existingState,
-                multilevelFacetsList: updatedTextFacets,
+                multilevelFacetsList: updatedTextFacets
             };
         });
     };
@@ -83,7 +83,7 @@ class GenerateFacets extends React.Component {
                     if (facetId === bucketedFacet.facetDisplayName) {
                         return {
                             ...bucketedFacet,
-                            filter: value.toLowerCase(),
+                            filter: value.toLowerCase()
                         };
                     }
                     return { ...bucketedFacet };
@@ -92,7 +92,7 @@ class GenerateFacets extends React.Component {
 
             return {
                 ...existingState,
-                multilevelFacetsList: updatedMultilevelFacets,
+                multilevelFacetsList: updatedMultilevelFacets
             };
         });
     };
@@ -106,7 +106,7 @@ class GenerateFacets extends React.Component {
                     if (multiFacet.facetDisplayName === facetName) {
                         return {
                             ...multiFacet,
-                            viewLess: !multiFacet['viewLess'],
+                            viewLess: !multiFacet['viewLess']
                         };
                     }
                     return { ...multiFacet };
@@ -114,7 +114,7 @@ class GenerateFacets extends React.Component {
             );
             return {
                 ...existingState,
-                multilevelFacetsList: interimCombinedFacets,
+                multilevelFacetsList: interimCombinedFacets
             };
         });
     };
@@ -146,7 +146,7 @@ class GenerateFacets extends React.Component {
                         values = [],
                         isOpen = true,
                         filter = '',
-                        viewLess,
+                        viewLess
                     } = multilevelFacet;
 
                     let filteredValues = values;
@@ -195,8 +195,15 @@ class GenerateFacets extends React.Component {
                                     viewLess ? 'UNX-facet__listShowLimited' : ''
                                 }`}
                             />
-                            {enableViewMore && isOpen && filteredValues.length > minViewMore? 
-                                <ViewMore  facetName={facetDisplayName} toggleViewLess={this.toggleViewLess} viewLess={viewLess}/>: null }
+                            {enableViewMore &&
+                            isOpen &&
+                            filteredValues.length > minViewMore ? (
+                                <ViewMore
+                                    facetName={facetDisplayName}
+                                    toggleViewLess={this.toggleViewLess}
+                                    viewLess={viewLess}
+                                />
+                            ) : null}
                         </div>
                     );
                 })}
@@ -211,7 +218,7 @@ GenerateFacets.propTypes = {
     facetItemComponent: PropTypes.element,
     label: PropTypes.node,
     collapsible: PropTypes.bool,
-    searchable: PropTypes.bool,
+    searchable: PropTypes.bool
 };
 
 export default GenerateFacets;

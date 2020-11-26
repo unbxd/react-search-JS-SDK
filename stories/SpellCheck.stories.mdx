@@ -10,13 +10,13 @@ const attributesMap = {
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'min_cheapest_default_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 const variantAttributesMap = {
     productName: 'title',
     uniqueId: 'variantId',
     imageUrl: 'imageUrl',
-    price: 'v_unbxd_price',
+    price: 'v_unbxd_price'
 };
 const SpellCheckItemComponent = ({ itemData, currentQuery, onClick }) => {
     const { suggestion } = itemData;
@@ -161,7 +161,7 @@ const SpellCheckItemComponent = ({ itemData, currentQuery, onClick }) => {
                     spellChecks,
                     currentQuery,
                     onSuggestionClick,
-                    SpellCheckItemComponent,
+                    SpellCheckItemComponent
                 }) => {
                     return <div>render SpellCheck</div>;
                 }}

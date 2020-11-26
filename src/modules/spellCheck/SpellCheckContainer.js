@@ -10,7 +10,7 @@ import { conditionalRenderer } from '../../common/utils';
 class SpellCheck extends React.PureComponent {
     componentDidMount() {
         const {
-            helpers: { setSpellCheckConfiguration },
+            helpers: { setSpellCheckConfiguration }
         } = this.props;
         setSpellCheckConfiguration({ enable: true });
     }
@@ -18,7 +18,7 @@ class SpellCheck extends React.PureComponent {
     getSpellCheckProps() {
         const {
             unbxdCore,
-            helpers: { setSearchBoxConfiguration },
+            helpers: { setSearchBoxConfiguration }
         } = this.props;
 
         const { spellCheckItemComponent } = this.props;
@@ -33,7 +33,7 @@ class SpellCheck extends React.PureComponent {
             spellChecks,
             currentQuery,
             onSuggestionClick: handleSuggestionClick,
-            spellCheckItemComponent,
+            spellCheckItemComponent
         };
     }
 

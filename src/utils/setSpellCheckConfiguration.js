@@ -1,8 +1,8 @@
 function setSpellCheckConfiguration(config) {
-  const { enable = false } = config;
-  const { unbxdCore } = this.state;
+    const { enable = false } = config;
+    const { unbxdCore } = this.state;
 
-  unbxdCore.setSpellCheck(enable);
+    unbxdCore.setSpellCheck(enable);
 }
 
 export default setSpellCheckConfiguration;

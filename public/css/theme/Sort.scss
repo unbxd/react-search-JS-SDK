@@ -1,84 +1,84 @@
 .UNX-sortby__container {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .result-sort-options {
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  color: #7e818c;
-  cursor: pointer;
-  font-size: 14px;
-  height: 35px;
-  position: relative;
-  text-align: left;
-  width: 185px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    color: #7e818c;
+    cursor: pointer;
+    font-size: 14px;
+    height: 35px;
+    position: relative;
+    text-align: left;
+    width: 185px;
 }
 
 .UNX-sortby__dropdown {
-  border: 1px solid hsla(0, 0%, 76%, 0.38);
-  margin-left: 10px;
-  height: 30px;
-  padding: 4px 8px;
-  color: rgba(0, 0, 0, 0.75);
-  font-weight: 400;
-  background: 0 0;
+    border: 1px solid hsla(0, 0%, 76%, 0.38);
+    margin-left: 10px;
+    height: 30px;
+    padding: 4px 8px;
+    color: rgba(0, 0, 0, 0.75);
+    font-weight: 400;
+    background: 0 0;
 }
 
 .sort-list {
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
-  display: none;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  right: 0;
-  top: 33px;
-  width: 183px;
-  z-index: 2;
-  background-color: #fff;
-  border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+    display: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 33px;
+    width: 183px;
+    z-index: 2;
+    background-color: #fff;
+    border-radius: 5px;
 }
 
 .sort-list li {
-  width: 100%;
+    width: 100%;
 }
 
 .sort-by-container:hover ul {
-  display: block;
+    display: block;
 }
 
 .sort-by-container li {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 .sort-by-container .sort-option {
-  color: #282c3f;
-  cursor: pointer;
-  display: block;
-  font-size: 14px;
-  padding: 10px 20px;
-  font-weight: 400;
+    color: #282c3f;
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    padding: 10px 20px;
+    font-weight: 400;
 }
 
 .sort-option.sort-selected-option {
-  background-color: #f2f3f7;
-  color: #28b5cb;
+    background-color: #f2f3f7;
+    color: #28b5cb;
 }
 
 .sort-option input {
-  box-sizing: border-box;
-  display: none;
-  padding: 0;
-  visibility: hidden;
+    box-sizing: border-box;
+    display: none;
+    padding: 0;
+    visibility: hidden;
 }
 
 .sort-option:hover {
-  background-color: #eef1fa;
+    background-color: #eef1fa;
 }
 
 .UNX-sortby__item {
-  &.-selected {
-    font-weight: 700;
-  }
+    &.-selected {
+        font-weight: 700;
+    }
 }

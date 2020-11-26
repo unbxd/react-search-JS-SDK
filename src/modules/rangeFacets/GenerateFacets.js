@@ -12,7 +12,7 @@ class GenerateFacets extends React.Component {
 
         const { rangeFacets } = this.props;
         this.state = {
-            rangeFacetsList: rangeFacets,
+            rangeFacetsList: rangeFacets
         };
     }
 
@@ -40,7 +40,7 @@ class GenerateFacets extends React.Component {
                                     }
                                     return {
                                         ...facetValue,
-                                        isSelected: !isSelected,
+                                        isSelected: !isSelected
                                     };
                                 } else {
                                     const { isSelected } = facetValue;
@@ -51,7 +51,7 @@ class GenerateFacets extends React.Component {
                                         ...facetValue,
                                         isSelected: applyMultiple
                                             ? isSelected
-                                            : false,
+                                            : false
                                     };
                                 }
                             }
@@ -62,7 +62,7 @@ class GenerateFacets extends React.Component {
                             isSelected: isFacetSelected,
                             valMin,
                             valMax,
-                            values: updatedValues,
+                            values: updatedValues
                         };
                     } else {
                         return { ...rangeValue };
@@ -71,7 +71,7 @@ class GenerateFacets extends React.Component {
 
                 return {
                     ...existingState,
-                    rangeFacetsList: updatedRangeFacets,
+                    rangeFacetsList: updatedRangeFacets
                 };
             });
 
@@ -113,7 +113,7 @@ class GenerateFacets extends React.Component {
                         isSelected: false,
                         valMin: rangeValue.sliderMin,
                         valMax: rangeValue.sliderMax,
-                        values: updatedValues,
+                        values: updatedValues
                     };
                 } else {
                     return { ...rangeValue };
@@ -122,7 +122,7 @@ class GenerateFacets extends React.Component {
 
             return {
                 ...currentFacetState,
-                rangeFacetsList: updatedRangeFacets,
+                rangeFacetsList: updatedRangeFacets
             };
         });
 
@@ -148,7 +148,7 @@ class GenerateFacets extends React.Component {
                 if (rangeValue.facetName === facetName) {
                     return {
                         ...rangeValue,
-                        isOpen: !rangeValue.isOpen,
+                        isOpen: !rangeValue.isOpen
                     };
                 } else {
                     return { ...rangeValue };
@@ -157,7 +157,7 @@ class GenerateFacets extends React.Component {
 
             return {
                 ...existingState,
-                rangeFacetsList: updatedRangeValues,
+                rangeFacetsList: updatedRangeValues
             };
         });
     };
@@ -189,7 +189,7 @@ class GenerateFacets extends React.Component {
                 if (rangeValue.facetName === facetName) {
                     return {
                         ...rangeValue,
-                        viewLess: !rangeValue.viewLess,
+                        viewLess: !rangeValue.viewLess
                     };
                 } else {
                     return { ...rangeValue };
@@ -198,7 +198,7 @@ class GenerateFacets extends React.Component {
 
             return {
                 ...existingState,
-                rangeFacetsList: updatedRangeFacets,
+                rangeFacetsList: updatedRangeFacets
             };
         });
     };
@@ -211,7 +211,7 @@ class GenerateFacets extends React.Component {
             label,
             collapsible,
             enableViewMore,
-            minViewMore,
+            minViewMore
         } = this.props;
 
         if (rangeFacetsList.length === 0) {
@@ -229,7 +229,7 @@ class GenerateFacets extends React.Component {
                         displayName,
                         isSelected,
                         isOpen = true,
-                        viewLess,
+                        viewLess
                     } = facetObj;
 
                     return (
@@ -296,7 +296,7 @@ GenerateFacets.propTypes = {
     priceUnit: PropTypes.string.isRequired,
     label: PropTypes.node,
     collapsible: PropTypes.bool,
-    applyMultiple: PropTypes.bool,
+    applyMultiple: PropTypes.bool
 };
 
 export default GenerateFacets;

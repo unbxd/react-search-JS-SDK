@@ -23,7 +23,7 @@ const SpellCheckItemComponent = ({ itemData, onClick }) => {
 };
 
 const SpellChecker = () => {
-    return <SpellCheck spellCheckItemComponent={<SpellCheckItemComponent/>} />;
+    return <SpellCheck spellCheckItemComponent={<SpellCheckItemComponent />} />;
 };
 
 export default SpellChecker;

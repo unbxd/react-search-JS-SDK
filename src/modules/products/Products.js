@@ -23,7 +23,7 @@ const Products = (props) => {
                     unbxdCoreStatus,
                     helpers,
                     unbxdState,
-                    priceUnit,
+                    priceUnit
                 } = appState;
                 const { viewType } = unbxdState;
 
@@ -52,7 +52,7 @@ Products.defaultProps = {
     heightDiffToTriggerNextPage: 300,
     showVariants: false,
     showLoader: false,
-    productIdAttribute: 'uniqueId',
+    productIdAttribute: 'uniqueId'
 };
 
 Products.propTypes = {
@@ -135,7 +135,7 @@ Products.propTypes = {
     /**
      *  Component to be shown in case of zero results.
      */
-    ZeroResultsComponent: PropTypes.element,
+    ZeroResultsComponent: PropTypes.element
 };
 
 export default Products;

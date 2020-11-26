@@ -6,14 +6,14 @@ function unbxdCallBack(unbxdSearchObj, eventName, data) {
     if (eventName === searchEvents.AFTER_API_CALL) {
         this.setState({
             unbxdCore: unbxdSearchObj,
-            unbxdCoreStatus: searchStatus.READY,
+            unbxdCoreStatus: searchStatus.READY
         });
     }
 
     if (eventName === searchEvents.BEFORE_API_CALL) {
         this.setState({
             unbxdCore: unbxdSearchObj,
-            unbxdCoreStatus: searchStatus.LOADING,
+            unbxdCoreStatus: searchStatus.LOADING
         });
     }
 

@@ -9,46 +9,51 @@ import BannersContainer from './BannersContainer';
  * Component to display merchandising banners.
  */
 const Banners = (props) => {
-  return (
-    <AppContextConsumer>
-      {(appState) => {
-        if (appState === undefined) {
-          hasUnbxdSearchWrapperContext(Banners.displayName);
-        }
+    return (
+        <AppContextConsumer>
+            {(appState) => {
+                if (appState === undefined) {
+                    hasUnbxdSearchWrapperContext(Banners.displayName);
+                }
 
-        const { unbxdCore, unbxdCoreStatus, helpers, unbxdState } = appState;
-        const { enableApplyFilters, selectedFacets } = unbxdState;
+                const {
+                    unbxdCore,
+                    unbxdCoreStatus,
+                    helpers,
+                    unbxdState
+                } = appState;
+                const { enableApplyFilters, selectedFacets } = unbxdState;
 
-        return (
-          <BannersContainer
-            unbxdCore={unbxdCore}
-            unbxdCoreStatus={unbxdCoreStatus}
-            helpers={helpers}
-            enableApplyFilters={enableApplyFilters}
-            selectedFacets={selectedFacets}
-            {...props}
-          />
-        );
-      }}
-    </AppContextConsumer>
-  );
+                return (
+                    <BannersContainer
+                        unbxdCore={unbxdCore}
+                        unbxdCoreStatus={unbxdCoreStatus}
+                        helpers={helpers}
+                        enableApplyFilters={enableApplyFilters}
+                        selectedFacets={selectedFacets}
+                        {...props}
+                    />
+                );
+            }}
+        </AppContextConsumer>
+    );
 };
 
 Banners.displayName = 'Banners';
 
 Banners.defaultProps = {
-  altText: 'banner image'
+    altText: 'banner image'
 };
 
 Banners.propTypes = {
-  /**
-   * Image alt text
-   */
-  altText: PropTypes.string,
-  /**
-   * Banner custom element
-   */
-  bannerItemComponent: PropTypes.element
+    /**
+     * Image alt text
+     */
+    altText: PropTypes.string,
+    /**
+     * Banner custom element
+     */
+    bannerItemComponent: PropTypes.element
 };
 
 export default Banners;

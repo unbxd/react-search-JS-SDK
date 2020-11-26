@@ -13,13 +13,13 @@ class BreadcrumbsContainer extends React.PureComponent {
             root,
             separator,
             breadcrumbItemComponent,
-            productType,
+            productType
         } = this.props;
 
         const {
             getBreadCrumbsList,
             deleteCategoryFilter,
-            getResults,
+            getResults
         } = getFacetCoreMethods(unbxdCore);
 
         const breadCrumbsList = getBreadCrumbsList();
@@ -32,7 +32,10 @@ class BreadcrumbsContainer extends React.PureComponent {
                 productType === productTypes.CATEGORY &&
                 typeof setCategoryId === 'function'
             ) {
-                const getUpdatedResults = setCategoryId(categoryObject, unbxdCore);
+                const getUpdatedResults = setCategoryId(
+                    categoryObject,
+                    unbxdCore
+                );
                 if (getUpdatedResults) {
                     getResults();
                 }
@@ -47,7 +50,7 @@ class BreadcrumbsContainer extends React.PureComponent {
             breadCrumbsList,
             root,
             separator,
-            breadcrumbItemComponent,
+            breadcrumbItemComponent
         };
     }
 
@@ -66,13 +69,10 @@ BreadcrumbsContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
     unbxdCoreStatus: PropTypes.string.isRequired,
     helpers: PropTypes.object.isRequired,
-    root: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.node,
-    ]),
+    root: PropTypes.oneOfType([PropTypes.element, PropTypes.node]),
     separator: PropTypes.node,
     breadcrumbItemComponent: PropTypes.element,
-    productType: PropTypes.string.isRequired,
+    productType: PropTypes.string.isRequired
 };
 
 export default BreadcrumbsContainer;

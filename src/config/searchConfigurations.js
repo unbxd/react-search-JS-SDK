@@ -21,7 +21,7 @@ const searchConfigurations = {
         groupBy: ''
     },
     extraParams: {
-        "version": "V2",
+        version: 'V2'
         //"f.categoryPath.facet.version": "V2",
     },
     facetMultilevel: true,
@@ -29,10 +29,10 @@ const searchConfigurations = {
     productIdAttribute: 'uniqueId',
     showSwatches: true,
     swatchMap: {},
-    onEvent: () => { },
-    getCategoryId: () => { },
+    onEvent: () => {},
+    getCategoryId: () => {},
     applyMultipleFilters: false,
     hashMode: true
-}
+};
 
 export default searchConfigurations;

@@ -14,7 +14,6 @@ const List = ({
     testId,
     ...props
 }) => {
-    
     return (
         <div className={className} data-testid={testId}>
             {items.map((item, idx) => {
@@ -22,13 +21,15 @@ const List = ({
                     itemsType === listItemTypes.PRIMITIVE
                         ? item
                         : item[idAttribute];
-                if(isElement(ListItem)){
-                    return cloneElement(ListItem,{itemData:item,
-                        idAttribute:key,
-                        onClick:onClick ? onClick : null,
+                if (isElement(ListItem)) {
+                    return cloneElement(ListItem, {
+                        itemData: item,
+                        idAttribute: key,
+                        onClick: onClick ? onClick : null,
                         idx,
                         ...props,
-                        key});
+                        key
+                    });
                 }
 
                 return (
@@ -53,7 +54,7 @@ List.propTypes = {
     className: PropTypes.string,
     onClick: PropTypes.func,
     idAttribute: PropTypes.string,
-    testId: PropTypes.string,
+    testId: PropTypes.string
 };
 
 export default List;

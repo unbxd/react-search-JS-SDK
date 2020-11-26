@@ -6,47 +6,47 @@ import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import SearchBox from '../src/modules/searchBox';
 const sortOptions = [
     {
-        label: 'Most Popular',
+        label: 'Most Popular'
     },
     {
         label: 'Newest',
         field: 'Date_Added',
-        order: 'desc',
+        order: 'desc'
     },
     {
         label: 'Lowest Price',
         field: 'price',
-        order: 'asc',
+        order: 'asc'
     },
     {
         label: 'Highest Price',
         field: 'price',
-        order: 'desc',
+        order: 'desc'
     },
     {
         label: 'Brand A-Z',
         field: 'title',
-        order: 'asc',
+        order: 'asc'
     },
     {
         label: 'Brand Z-A',
         field: 'title',
-        order: 'desc',
-    },
+        order: 'desc'
+    }
 ];
 const attributesMap = {
     productName: 'title',
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'unbxd_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 const variantAttributesMap = {
     productName: 'title',
     uniqueId: 'vId',
     imageUrl: 'imageUrl',
     price: 'v_unbxd_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 const SortItemComponent = ({ itemData, onClick }) => {
     const { value, isSelected = false } = itemData;
@@ -73,33 +73,33 @@ const SortItemComponent = ({ itemData, onClick }) => {
 ```js
 const sortOptions = [
     {
-        label: 'Most Popular',
+        label: 'Most Popular'
     },
     {
         label: 'Newest',
         field: 'Date_Added',
-        order: 'desc',
+        order: 'desc'
     },
     {
         label: 'Lowest Price',
         field: 'price',
-        order: 'asc',
+        order: 'asc'
     },
     {
         label: 'Highest Price',
         field: 'price',
-        order: 'desc',
+        order: 'desc'
     },
     {
         label: 'Brand A-Z',
         field: 'title',
-        order: 'asc',
+        order: 'asc'
     },
     {
         label: 'Brand Z-A',
         field: 'title',
-        order: 'desc',
-    },
+        order: 'desc'
+    }
 ];
 ```
 
@@ -245,7 +245,7 @@ A label for the component can be diplayed by passing `label`.
                     noOfPages,
                     onSortClick,
                     SortItemComponent,
-                    label,
+                    label
                 }) => {
                     return <p>render Sort</p>;
                 }}

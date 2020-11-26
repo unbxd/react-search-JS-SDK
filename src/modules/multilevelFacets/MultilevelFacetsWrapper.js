@@ -33,7 +33,7 @@ MultilevelFacetsWrapper.propTypes = {
     facetItemComponent: PropTypes.element,
     label: PropTypes.node,
     collapsible: PropTypes.bool,
-    searchable: PropTypes.bool,
+    searchable: PropTypes.bool
 };
 
 export default MultilevelFacetsWrapper;

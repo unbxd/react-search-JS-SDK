@@ -29,7 +29,7 @@ const getActiveFacets = (unbxdSearchObj) => {
     const activeFacetsObj = {
         ...activeTextFacets,
         ...activeRangeFacets,
-        ...activeCategoryFacets,
+        ...activeCategoryFacets
     };
 
     return activeFacetsObj;

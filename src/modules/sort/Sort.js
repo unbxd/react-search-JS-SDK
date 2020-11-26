@@ -20,7 +20,7 @@ const Sort = (props) => {
                     unbxdCore,
                     unbxdCoreStatus,
                     helpers,
-                    unbxdState,
+                    unbxdState
                 } = appState;
                 const { viewType } = unbxdState;
 
@@ -41,7 +41,7 @@ const Sort = (props) => {
 Sort.displayName = 'Sort';
 
 Sort.defaultProps = {
-    displayType: 'DROPDOWN',
+    displayType: 'DROPDOWN'
 };
 
 Sort.propTypes = {
@@ -52,7 +52,7 @@ Sort.propTypes = {
         PropTypes.shape({
             label: PropTypes.string,
             field: PropTypes.string,
-            order: PropTypes.string,
+            order: PropTypes.string
         })
     ).isRequired,
     /**
@@ -70,7 +70,7 @@ Sort.propTypes = {
     /**
      * Callback for sort change.
      */
-    onSortChange: PropTypes.func,
+    onSortChange: PropTypes.func
 };
 
 export default Sort;

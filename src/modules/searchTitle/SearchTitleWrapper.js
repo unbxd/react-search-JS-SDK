@@ -11,7 +11,7 @@ const SearchTitleWrapper = (props) => {
         searchTitleItem,
         numberOfProducts,
         productType,
-        paginationType,
+        paginationType
     } = props;
 
     if (searchQuery.length === 0 && numberOfProducts === 0) {
@@ -53,7 +53,7 @@ SearchTitleWrapper.propTypes = {
     numberOfProducts: PropTypes.number.isRequired,
     searchTitleItem: PropTypes.element,
     productType: PropTypes.string.isRequired,
-    paginationType: PropTypes.string.isRequired,
+    paginationType: PropTypes.string.isRequired
 };
 
 export default SearchTitleWrapper;

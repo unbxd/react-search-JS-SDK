@@ -19,21 +19,21 @@ import UnbxdSearchWrapper from './UnbxdSearchWrapper';
 
 export default UnbxdSearchWrapper;
 export {
-  Banners,
-  Breadcrumbs,
-  FacetActions,
-  MultilevelFacets,
-  PageSize,
-  Pagination,
-  Products,
-  RangeFacets,
-  SearchBox,
-  SearchTitle,
-  SelectedFacets,
-  Sort,
-  SpellCheck,
-  TextFacets,
-  CombinedFacets,
-  ViewTypes,
-  UnbxdSearchWrapper
+    Banners,
+    Breadcrumbs,
+    FacetActions,
+    MultilevelFacets,
+    PageSize,
+    Pagination,
+    Products,
+    RangeFacets,
+    SearchBox,
+    SearchTitle,
+    SelectedFacets,
+    Sort,
+    SpellCheck,
+    TextFacets,
+    CombinedFacets,
+    ViewTypes,
+    UnbxdSearchWrapper
 };

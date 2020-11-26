@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import React from 'react';
 import { searchStatus } from '../config';
 
@@ -7,7 +8,7 @@ export const conditionalRenderer = (
     DefaultComponent,
     LoaderRender
 ) => {
-    const isChildren = children ? true : false;
+    const isChildren = !!children;
     const { unbxdCoreStatus = searchStatus.READY, showLoader } = state;
 
     if (
@@ -50,7 +51,7 @@ export const debounce = (func, wait, immediate) => {
         };
         const callNow = immediate && !timeout;
         clearTimeout(timeout);
-        timeout = setTimeout(later,wait);
+        timeout = setTimeout(later, wait);
         if (callNow) func.apply(context, args);
     };
 };
@@ -71,8 +72,8 @@ export const tryCatchHandler = function (func, onCatch) {
 
 export const isElement = (element) => {
     return React.isValidElement(element);
-}
+};
 
-export const cloneElement = (elements, props)=> {
+export const cloneElement = (elements, props) => {
     return React.cloneElement(elements, props);
-}
+};

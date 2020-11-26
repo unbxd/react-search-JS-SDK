@@ -1,11 +1,11 @@
 import {
     getTextFacetItem,
     getTextFacetFacetCoreMethods,
-    getFormattedTextFacets,
+    getFormattedTextFacets
 } from './utils';
 
 export {
     getTextFacetItem,
     getTextFacetFacetCoreMethods,
-    getFormattedTextFacets,
+    getFormattedTextFacets
 };

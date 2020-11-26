@@ -19,7 +19,7 @@ class GenerateFacets extends React.Component {
             lastSelectedFacets,
             setSelectedFacets,
             unbxdCoreStatus,
-            transform,
+            transform
         } = this.props;
         if (textFacets !== prevProps.textFacets) {
             const formattedTextFacets = textFacets.map((textFacet) => {
@@ -32,7 +32,7 @@ class GenerateFacets extends React.Component {
                     isOpen: matchTextFacet ? matchTextFacet.isOpen : true,
                     filter: matchTextFacet ? matchTextFacet.filter : '',
                     viewLess: false,
-                    className: 'UNX-facet__list',
+                    className: 'UNX-facet__list'
                 };
             });
 
@@ -96,7 +96,7 @@ class GenerateFacets extends React.Component {
                 if (textFacet.facetName === facetName) {
                     return {
                         ...textFacet,
-                        viewLess: !textFacet['viewLess'],
+                        viewLess: !textFacet['viewLess']
                     };
                 }
                 return { ...textFacet };
@@ -114,7 +114,7 @@ class GenerateFacets extends React.Component {
             collapsible,
             searchable,
             enableViewMore,
-            minViewMore,
+            minViewMore
         } = this.props;
 
         const { textFacetsList } = this.state;
@@ -134,7 +134,7 @@ class GenerateFacets extends React.Component {
                         isOpen = true,
                         filter = '',
                         viewLess,
-                        isSelected = false,
+                        isSelected = false
                     } = facet;
 
                     let filteredValues = values;
@@ -222,7 +222,7 @@ GenerateFacets.propTypes = {
     facetItemComponent: PropTypes.element,
     label: PropTypes.node,
     collapsible: PropTypes.bool.isRequired,
-    searchable: PropTypes.bool.isRequired,
+    searchable: PropTypes.bool.isRequired
 };
 
 export default GenerateFacets;

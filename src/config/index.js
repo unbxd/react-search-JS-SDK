@@ -7,7 +7,7 @@ import {
     viewTypes,
     manageStateTypes,
     paginationTypes,
-    facetTypes,
+    facetTypes
 } from './constants';
 
 export {
@@ -19,5 +19,5 @@ export {
     viewTypes,
     manageStateTypes,
     paginationTypes,
-    facetTypes,
+    facetTypes
 };

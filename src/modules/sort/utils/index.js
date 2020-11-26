@@ -1,3 +1,3 @@
 import { getFormattedSort, getSelectedSort } from './utils';
 
-export { getFormattedSort, getSelectedSort }
+export { getFormattedSort, getSelectedSort };

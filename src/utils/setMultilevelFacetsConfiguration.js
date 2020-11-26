@@ -3,7 +3,7 @@ function setMultilevelFacetsConfiguration(config) {
         categoryDisplayName,
         categoryField,
         facetDepth,
-        facetLimit,
+        facetLimit
     } = config;
 
     if (categoryDisplayName.length > 0) {

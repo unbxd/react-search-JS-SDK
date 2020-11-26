@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {cloneElement} from '../../common/utils';
+import { cloneElement } from '../../common/utils';
 import { Button } from '../../components';
 
 const BreadCrumbItem = ({ itemData, root, separator, onClick, idx }) => {
@@ -25,16 +25,16 @@ BreadCrumbItem.propTypes = {
     itemData: PropTypes.shape({
         value: PropTypes.string,
         level: PropTypes.number,
-        filterField: PropTypes.string,
+        filterField: PropTypes.string
     }).isRequired,
     root: PropTypes.oneOfType([
         PropTypes.element,
         PropTypes.func,
-        PropTypes.node,
+        PropTypes.node
     ]),
     separator: PropTypes.node,
     onClick: PropTypes.func.isRequired,
-    idx: PropTypes.number,
+    idx: PropTypes.number
 };
 
 export default BreadCrumbItem;

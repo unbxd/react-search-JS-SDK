@@ -18,7 +18,7 @@ class RangeFacetsContainer extends React.PureComponent {
             transform,
             enableViewMore,
             minViewMore,
-            applyMultiple,
+            applyMultiple
         } = this.props;
 
         const {
@@ -26,7 +26,7 @@ class RangeFacetsContainer extends React.PureComponent {
             setRangeFacet,
             applyRangeFacet,
             clearARangeFacet,
-            selectedRangeFacets,
+            selectedRangeFacets
         } = getRangeFacetCoreMethods(unbxdCore);
 
         const rangeFacets = getRangeFacets();
@@ -93,7 +93,7 @@ RangeFacetsContainer.propTypes = {
     label: PropTypes.node,
     collapsible: PropTypes.bool,
     applyMultiple: PropTypes.bool,
-    onFacetClick: PropTypes.node,
+    onFacetClick: PropTypes.node
 };
 
 export default RangeFacetsContainer;

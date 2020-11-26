@@ -41,7 +41,7 @@ const Jackets = () => {
                     <FacetApplyClear />
                     <RangeFilters />
                     {/* <RangeViews/> */}
-                    <TextFilters /> 
+                    <TextFilters />
                     {/* <CombinedFilters/> */}
                     <FacetApplyClear />
                 </div>

@@ -12,7 +12,7 @@ const ViewTypesWrapper = (props) => {
         viewItemComponent,
         numberOfProducts,
         validViewTypes,
-        handleViewTypeClick,
+        handleViewTypeClick
     } = props;
 
     if (validViewTypes.length < 2 || numberOfProducts === 0) {
@@ -45,14 +45,14 @@ ViewTypesWrapper.propTypes = {
     viewTypes: PropTypes.arrayOf(
         PropTypes.shape({
             viewType: PropTypes.string.isRequired,
-            isSelected: PropTypes.bool.isRequired,
+            isSelected: PropTypes.bool.isRequired
         })
     ),
     displayType: PropTypes.string,
     numberOfProducts: PropTypes.number.isRequired,
     validViewTypes: PropTypes.array.isRequired,
     handleViewTypeClick: PropTypes.func.isRequired,
-    viewItemComponent: PropTypes.element,
+    viewItemComponent: PropTypes.element
 };
 
 export default ViewTypesWrapper;

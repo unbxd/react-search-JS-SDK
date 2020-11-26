@@ -16,19 +16,24 @@ const PageNavigationOptions = (
         .slice(lowestIndex, currentPage)
         .map((item) => {
             return item > 0 ? (
-                isElement(PageElement) ? cloneElement(PageElement,{itemData:{ pageNumber: item, type },
-                    onClick:onClick,
-                    key:item}):
-                <PageElement
-                    className="UNX-pageNavigation__button"
-                    itemData={{ pageNumber: item, type }}
-                    onClick={onClick}
-                    data-pagenumber={item}
-                    key={item}
-                    data-testid={`UNX_pageNumber${item}`}
-                >
-                    {item}
-                </PageElement>
+                isElement(PageElement) ? (
+                    cloneElement(PageElement, {
+                        itemData: { pageNumber: item, type },
+                        onClick: onClick,
+                        key: item
+                    })
+                ) : (
+                    <PageElement
+                        className="UNX-pageNavigation__button"
+                        itemData={{ pageNumber: item, type }}
+                        onClick={onClick}
+                        data-pagenumber={item}
+                        key={item}
+                        data-testid={`UNX_pageNumber${item}`}
+                    >
+                        {item}
+                    </PageElement>
+                )
             ) : null;
         });
 
@@ -36,10 +41,13 @@ const PageNavigationOptions = (
         .slice(1)
         .slice(currentPage, currentPage + padding)
         .map((item) => {
-            return (
-                isElement(PageElement) ? cloneElement(PageElement,{itemData:{ pageNumber: item, type },
-                    onClick:onClick,
-                    key:item}):
+            return isElement(PageElement) ? (
+                cloneElement(PageElement, {
+                    itemData: { pageNumber: item, type },
+                    onClick: onClick,
+                    key: item
+                })
+            ) : (
                 <PageElement
                     className="UNX-pageNavigation__button"
                     itemData={{ pageNumber: item, type }}

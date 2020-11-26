@@ -9,11 +9,11 @@ const searchConfigurations = {
         'imageUrl',
         'RRP_Price',
         'unbxd_price',
-        'productUrl',
+        'productUrl'
     ],
     defaultFilters: null,
     spellCheck: {
-        enabled: false,
+        enabled: false
     },
     pageSize: 10,
     startPageNo: 0,
@@ -29,17 +29,17 @@ const searchConfigurations = {
             'imageUrl',
             'v_RRP_Price',
             'v_unbxd_price',
-            'productUrl',
+            'productUrl'
         ],
         mapping: {},
-        groupBy: '',
+        groupBy: ''
     },
     extraParams: {
         version: 'V2',
         'f.categoryPath.displayName': 'category',
         'facet.multilevel': 'categoryPath',
         'f.categoryPath.max.depth': '',
-        'f.categoryPath.facet.limit': '',
+        'f.categoryPath.facet.limit': ''
         //"f.categoryPath.facet.version": "V2",
         //'category-filter': 'All Products',
     },
@@ -72,7 +72,7 @@ const searchConfigurations = {
         }
     },
     applyMultipleFilters: false,
-    hashMode: true,
+    hashMode: true
 };
 
 export default searchConfigurations;

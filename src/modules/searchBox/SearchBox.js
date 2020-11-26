@@ -8,79 +8,84 @@ import SearchBoxContainer from './SearchBoxContainer';
 /**
  * Component to display merchandising banners.
  */
-const SearchBox = props => {
-  return (
-    <AppContextConsumer>
-      {appState => {
-        if (appState === undefined) {
-          hasUnbxdSearchWrapperContext(SearchBox.displayName);
-        }
+const SearchBox = (props) => {
+    return (
+        <AppContextConsumer>
+            {(appState) => {
+                if (appState === undefined) {
+                    hasUnbxdSearchWrapperContext(SearchBox.displayName);
+                }
 
-        const { unbxdCore, unbxdCoreStatus, helpers, productType } = appState;
+                const {
+                    unbxdCore,
+                    unbxdCoreStatus,
+                    helpers,
+                    productType
+                } = appState;
 
-        return (
-          <SearchBoxContainer
-            unbxdCore={unbxdCore}
-            unbxdCoreStatus={unbxdCoreStatus}
-            helpers={helpers}
-            productType={productType}
-            {...props}
-          />
-        );
-      }}
-    </AppContextConsumer>
-  );
+                return (
+                    <SearchBoxContainer
+                        unbxdCore={unbxdCore}
+                        unbxdCoreStatus={unbxdCoreStatus}
+                        helpers={helpers}
+                        productType={productType}
+                        {...props}
+                    />
+                );
+            }}
+        </AppContextConsumer>
+    );
 };
 
 SearchBox.displayName = 'SearchBox';
 
 SearchBox.defaultProps = {
-  autoFocus: false,
-  clearable: false,
-  showLoader: false
+    autoFocus: false,
+    clearable: false,
+    showLoader: false
 };
 
 SearchBox.propTypes = {
-  /**
-   * Should the searchbox be focused by default.
-   */
-  autoFocus: PropTypes.bool,
-  /**
-   * Should the searchbox be clearable.
-   */
-  clearable: PropTypes.bool,
-  /**
-   * Hook for search query. The function should return `true` if the search is to be triggered, false otherwise.
-   */
-  onSubmit: PropTypes.func,
-  /**
-   * Hook for clearing the search query. The function should return `true` if the searchbox is to be cleared, false otherwise.
-   */
-  onClear: PropTypes.func,
-  /**
-   * Should loader be shown
-   */
-  showLoader: PropTypes.bool,
-  /**
-   * Custom input component
-   */
-  inputComponent: PropTypes.element,
-  /**
-   * Custom submit component
-   */
-  submitComponent: PropTypes.element,
-  /**
-   * Custom reset component
-   */
-  clearComponent: PropTypes.element,
-  /**
-   * Default search query
-   */
-  defaultSearch: PropTypes.string,
-  /**
-   * SearchBox placeholder
-   */
-  placeholder: PropTypes.string
+    /**
+     * Should the searchbox be focused by default.
+     */
+    autoFocus: PropTypes.bool,
+    /**
+     * Should the searchbox be clearable.
+     */
+    clearable: PropTypes.bool,
+    /**
+     * Hook for search query. The function should return `true` if the search is to be triggered, false otherwise.
+     */
+    onSubmit: PropTypes.func,
+    /**
+     * Hook for clearing the search query. The function should return `true` if the searchbox is to be cleared, false otherwise.
+     */
+    onClear: PropTypes.func,
+    /**
+     * Should loader be shown
+     */
+    showLoader: PropTypes.bool,
+    /**
+     * Custom input component
+     */
+    inputComponent: PropTypes.element,
+    /**
+     * Custom submit component
+     */
+    submitComponent: PropTypes.element,
+    /**
+     * Custom reset component
+     */
+    clearComponent: PropTypes.element,
+    /**
+     * Default search query
+     */
+    defaultSearch: PropTypes.string,
+    /**
+     * SearchBox placeholder
+     */
+    placeholder: PropTypes.string
 };
 
 export default SearchBox;

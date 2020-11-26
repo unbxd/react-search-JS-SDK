@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 import { SelectedFacets } from '@unbxd-ui/react-search-sdk';
@@ -35,7 +36,10 @@ const label = <div className="-label">Selected Filters</div>;
 
 const ActiveFilters = () => {
     return (
-        <SelectedFacets facetItemComponent={<FacetItemComponent/>} label={label} />
+        <SelectedFacets
+            facetItemComponent={<FacetItemComponent />}
+            label={label}
+        />
     );
 };
 

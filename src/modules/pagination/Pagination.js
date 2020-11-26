@@ -20,7 +20,7 @@ const Pagination = (props) => {
                     unbxdCore,
                     unbxdCoreStatus,
                     helpers,
-                    unbxdState,
+                    unbxdState
                 } = appState;
                 const { paginationType } = unbxdState;
                 return (
@@ -40,7 +40,7 @@ const Pagination = (props) => {
 Pagination.displayName = 'Pagination';
 
 Pagination.defaultProps = {
-    padding: 2,
+    padding: 2
 };
 
 Pagination.propTypes = {
@@ -55,7 +55,7 @@ Pagination.propTypes = {
     /**
      * Callback for page change.
      */
-    onPageChange: PropTypes.func,
+    onPageChange: PropTypes.func
 };
 
 export default Pagination;

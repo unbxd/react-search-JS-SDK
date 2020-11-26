@@ -9,7 +9,7 @@ class ViewTypesContainer extends React.PureComponent {
     componentDidMount() {
         const {
             viewTypes,
-            helpers: { setViewTypeConfiguration },
+            helpers: { setViewTypeConfiguration }
         } = this.props;
         const viewType = getProductViewType(viewTypes)[0];
         setViewTypeConfiguration({ viewType });
@@ -22,7 +22,7 @@ class ViewTypesContainer extends React.PureComponent {
             viewTypes,
             displayType,
             viewItemComponent,
-            helpers: { handleViewTypeClick },
+            helpers: { handleViewTypeClick }
         } = this.props;
 
         const { numberOfProducts = 0 } = unbxdCore.getSearchResults() || {};
@@ -31,7 +31,7 @@ class ViewTypesContainer extends React.PureComponent {
         const formattedViewTypes = viewTypes.map((viewTypeOption) => {
             return {
                 viewType: viewTypeOption,
-                isSelected: viewTypeOption === viewType,
+                isSelected: viewTypeOption === viewType
             };
         });
 
@@ -42,7 +42,7 @@ class ViewTypesContainer extends React.PureComponent {
             viewItemComponent,
             handleViewTypeClick,
             numberOfProducts,
-            validViewTypes,
+            validViewTypes
         };
     }
 
@@ -50,7 +50,7 @@ class ViewTypesContainer extends React.PureComponent {
         const {
             unbxdCore,
             viewType,
-            helpers: { setViewTypeConfiguration },
+            helpers: { setViewTypeConfiguration }
         } = this.props;
         const { viewType: currentViewType } = unbxdCore.getQueryParams();
         if (currentViewType && viewType !== currentViewType) {
@@ -76,7 +76,7 @@ ViewTypesContainer.propTypes = {
     viewType: PropTypes.string,
     viewTypes: PropTypes.arrayOf(PropTypes.string),
     displayType: PropTypes.string,
-    viewItemComponent: PropTypes.element,
+    viewItemComponent: PropTypes.element
 };
 
 export default ViewTypesContainer;

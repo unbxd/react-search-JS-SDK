@@ -39,7 +39,7 @@ const Shirts = () => {
                 <div className="UNX-searchFacet__container">
                     <MultilevelFilters />
                     <FacetApplyClear />
-                    <RangeFilters /> 
+                    <RangeFilters />
                     {/* <RangeViews /> */}
                     <TextFilters />
                     {/* <CombinedFilters/> */}

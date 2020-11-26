@@ -19,11 +19,11 @@ ViewTypesList.propTypes = {
     viewTypes: PropTypes.arrayOf(
         PropTypes.shape({
             viewType: PropTypes.string.isRequired,
-            isSelected: PropTypes.bool.isRequired,
+            isSelected: PropTypes.bool.isRequired
         })
     ),
     onViewTypeClick: PropTypes.func.isRequired,
-    viewItemComponent: PropTypes.element,
+    viewItemComponent: PropTypes.element
 };
 
 export default ViewTypesList;
