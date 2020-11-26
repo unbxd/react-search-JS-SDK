@@ -12,7 +12,9 @@
     "storybook": "yarn build:tailwind:core && yarn build:tailwind:theme && start-storybook -p 6006 --ci",
     "deploy-storybook": "storybook-to-ghpages",
     "build:tailwind:core": "postcss public/css/core/base.scss -o public/css/core/index.scss",
-    "build:tailwind:theme": "postcss public/css/theme/base.scss -o public/css/theme/index.scss"
+    "build:tailwind:theme": "postcss public/css/theme/base.scss -o public/css/theme/index.scss",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
@@ -75,7 +77,12 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
-    "@unbxd-ui/unbxd-search-core": "^0.2.1"
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/react": "^11.1.2",
+    "@unbxd-ui/unbxd-search-core": "^0.2.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.6.3",
+    "react-test-renderer": "^17.0.1"
   },
   "keywords": [
     "React Search",
