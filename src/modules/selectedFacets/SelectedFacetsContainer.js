@@ -11,7 +11,7 @@ class SelectedFacetsContainer extends React.PureComponent {
     getSelectedFacetsProps = () => {
         const {
             unbxdCore,
-            FacetItemComponent,
+            facetItemComponent,
             priceUnit,
             label,
             getUpdatedResults,
@@ -135,7 +135,7 @@ class SelectedFacetsContainer extends React.PureComponent {
             onTextFacetClick: handleTextFacetClick,
             onRangeFacetClick: handleRangeFacetClick,
             onMultilevelFacetClick: handleMultilevelFacetClick,
-            FacetItemComponent,
+            facetItemComponent,
             priceUnit,
             label,
         };
@@ -154,10 +154,7 @@ class SelectedFacetsContainer extends React.PureComponent {
 
 SelectedFacetsContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
-    FacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    facetItemComponent: PropTypes.element,
     priceUnit: PropTypes.string.isRequired,
     label: PropTypes.node,
     getUpdatedResults: PropTypes.func.isRequired,

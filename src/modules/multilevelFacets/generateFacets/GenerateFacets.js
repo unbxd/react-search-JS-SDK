@@ -122,7 +122,7 @@ class GenerateFacets extends React.Component {
     render() {
         const {
             onFacetClick,
-            FacetItemComponent,
+            facetItemComponent,
             label,
             collapsible,
             searchable,
@@ -188,7 +188,7 @@ class GenerateFacets extends React.Component {
                             )}
                             <List
                                 items={filteredValues}
-                                ListItem={FacetItemComponent || FacetItem}
+                                ListItem={facetItemComponent || FacetItem}
                                 idAttribute={'name'}
                                 onClick={onFacetClick}
                                 className={`UNX-facet__list ${
@@ -208,10 +208,7 @@ class GenerateFacets extends React.Component {
 GenerateFacets.propTypes = {
     multilevelFacets: PropTypes.array.isRequired,
     onFacetClick: PropTypes.func.isRequired,
-    FacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    facetItemComponent: PropTypes.element,
     label: PropTypes.node,
     collapsible: PropTypes.bool,
     searchable: PropTypes.bool,

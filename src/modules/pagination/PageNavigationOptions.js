@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { isElement, cloneElement } from '../../common/utils';
 const PageNavigationOptions = (
     currentPage,
     padding,
@@ -16,6 +16,9 @@ const PageNavigationOptions = (
         .slice(lowestIndex, currentPage)
         .map((item) => {
             return item > 0 ? (
+                isElement(PageElement) ? cloneElement(PageElement,{itemData:{ pageNumber: item, type },
+                    onClick:onClick,
+                    key:item}):
                 <PageElement
                     className="UNX-pageNavigation__button"
                     itemData={{ pageNumber: item, type }}
@@ -34,6 +37,9 @@ const PageNavigationOptions = (
         .slice(currentPage, currentPage + padding)
         .map((item) => {
             return (
+                isElement(PageElement) ? cloneElement(PageElement,{itemData:{ pageNumber: item, type },
+                    onClick:onClick,
+                    key:item}):
                 <PageElement
                     className="UNX-pageNavigation__button"
                     itemData={{ pageNumber: item, type }}

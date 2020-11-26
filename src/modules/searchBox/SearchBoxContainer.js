@@ -93,9 +93,9 @@ class SearchBoxContainer extends React.PureComponent {
             autoFocus,
             clearable,
             showLoader,
-            InputComponent,
-            SubmitComponent,
-            ClearComponent,
+            inputComponent,
+            submitComponent,
+            clearComponent,
             placeholder,
         } = this.props;
 
@@ -117,9 +117,9 @@ class SearchBoxContainer extends React.PureComponent {
             onSearchBoxSubmit: this.onSearchBoxSubmit,
             onSearchBoxClear: this.onSearchBoxClear,
             setSearchBoxQuery: this.setSearchBoxQuery,
-            InputComponent,
-            SubmitComponent,
-            ClearComponent,
+            inputComponent,
+            submitComponent,
+            clearComponent,
         };
 
         return { ...data, ...helpers };
@@ -145,9 +145,9 @@ SearchBoxContainer.propTypes = {
     onSubmit: PropTypes.func,
     onClear: PropTypes.func,
     showLoader: PropTypes.bool,
-    InputComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-    SubmitComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-    ClearComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    inputComponent: PropTypes.element,
+    submitComponent: PropTypes.element,
+    clearComponent: PropTypes.element,
     defaultSearch: PropTypes.string,
     placeholder: PropTypes.string,
     productType: PropTypes.string,

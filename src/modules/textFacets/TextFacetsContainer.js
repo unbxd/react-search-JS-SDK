@@ -17,7 +17,7 @@ class TextFacetsContainer extends React.PureComponent {
         const {
             unbxdCore,
             unbxdCoreStatus,
-            FacetItemComponent,
+            facetItemComponent,
             enableApplyFilters,
             helpers: { manageTextFacets, setSelectedFacets },
             selectedFacets,
@@ -138,7 +138,7 @@ class TextFacetsContainer extends React.PureComponent {
             onFacetClick: handleFacetClick,
             onFacetObjectReset: handleFacetObjectReset,
             setSelectedFacets,
-            FacetItemComponent,
+            facetItemComponent,
             label,
             transform,
         };
@@ -161,10 +161,7 @@ TextFacetsContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
     unbxdCoreStatus: PropTypes.string.isRequired,
     helpers: PropTypes.object.isRequired,
-    FacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    facetItemComponent: PropTypes.element,
     enableApplyFilters: PropTypes.bool.isRequired,
     selectedFacets: PropTypes.object.isRequired,
     label: PropTypes.node,

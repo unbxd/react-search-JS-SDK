@@ -21,7 +21,7 @@ class ViewTypesContainer extends React.PureComponent {
             viewType,
             viewTypes,
             displayType,
-            ViewItemComponent,
+            viewItemComponent,
             helpers: { handleViewTypeClick },
         } = this.props;
 
@@ -39,7 +39,7 @@ class ViewTypesContainer extends React.PureComponent {
             viewType,
             viewTypes: formattedViewTypes,
             displayType,
-            ViewItemComponent,
+            viewItemComponent,
             handleViewTypeClick,
             numberOfProducts,
             validViewTypes,
@@ -76,7 +76,7 @@ ViewTypesContainer.propTypes = {
     viewType: PropTypes.string,
     viewTypes: PropTypes.arrayOf(PropTypes.string),
     displayType: PropTypes.string,
-    ViewItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    viewItemComponent: PropTypes.element,
 };
 
 export default ViewTypesContainer;

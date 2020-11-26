@@ -11,7 +11,7 @@ const SortWrapper = props => {
     sortBy,
     noOfPages,
     onSortClick,
-    SortItemComponent,
+    sortItemComponent,
     label
   } = props;
 
@@ -38,7 +38,7 @@ const SortWrapper = props => {
         <SortByList
           sortByOptions={sortByOptions}
           onSortClick={onSortClick}
-          SortItemComponent={SortItemComponent}
+          sortItemComponent={sortItemComponent}
         />
       )}
     </div>
@@ -57,7 +57,7 @@ SortWrapper.propTypes = {
     })
   ).isRequired,
   displayType: PropTypes.string,
-  SortItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  sortItemComponent: PropTypes.element,
   label:PropTypes.node
 };
 

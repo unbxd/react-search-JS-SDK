@@ -46,9 +46,9 @@ Banners.propTypes = {
    */
   altText: PropTypes.string,
   /**
-   * Banner custom component
+   * Banner custom element
    */
-  BannerItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
+  bannerItemComponent: PropTypes.element
 };
 
 export default Banners;

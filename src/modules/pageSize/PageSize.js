@@ -52,9 +52,9 @@ PageSize.propTypes = {
     */
     displayType: PropTypes.string,
     /**
-    * Custom size component. 
+    * Custom size element. 
     */
-    PageSizeItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    pageSizeItemComponent: PropTypes.element,
     /**
     * Label for the component. 
     */

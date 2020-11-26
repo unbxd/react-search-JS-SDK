@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import {cloneElement} from '../../../common/utils';
 
 import { Button } from '../../../components';
 
 const SearchButton = props => {
-  const { SubmitComponent, onSearchBoxSubmit } = props;
+  const { submitComponent, onSearchBoxSubmit } = props;
 
-  return SubmitComponent ? (
-    <SubmitComponent onSearchBoxSubmit={onSearchBoxSubmit} />
+  return submitComponent ? (
+    cloneElement(submitComponent,{onSearchBoxSubmit})
   ) : (
     <Button type="submit" className="UNX-searchbox__button">
       Search
@@ -17,7 +17,7 @@ const SearchButton = props => {
 };
 
 SearchButton.propTypes = {
-  SubmitComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  submitComponent: PropTypes.element,
   onSearchBoxSubmit: PropTypes.func.isRequired
 };
 

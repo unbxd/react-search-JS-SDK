@@ -38,10 +38,7 @@ SpellCheck.propTypes = {
   /**
    * Custom Spell check component
    */
-  SpellCheckItemComponent: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.func
-  ])
+  spellCheckItemComponent: PropTypes.element
 };
 
 export default SpellCheck;

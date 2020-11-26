@@ -21,8 +21,8 @@ class FacetActionsContainer extends React.PureComponent {
             unbxdCore,
             showApplyFilter,
             showClearFilter,
-            ApplyFilterComponent,
-            ClearFilterComponent,
+            applyFilterComponent,
+            clearFilterComponent,
             selectedFacets,
             helpers: { manageTextFacets },
             onApply,
@@ -64,8 +64,8 @@ class FacetActionsContainer extends React.PureComponent {
             onApplyFilter: handleApplyFilter,
             onClearFilter: handleClearFilter,
             noOfPages,
-            ApplyFilterComponent,
-            ClearFilterComponent,
+            applyFilterComponent,
+            clearFilterComponent,
         };
     }
 
@@ -87,14 +87,8 @@ FacetActionsContainer.propTypes = {
     selectedFacets: PropTypes.object,
     showApplyFilter: PropTypes.bool,
     showClearFilter: PropTypes.bool,
-    ApplyFilterComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
-    ClearFilterComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    applyFilterComponent: PropTypes.element,
+    clearFilterComponent: PropTypes.element,
     onApply: PropTypes.func,
     onClear: PropTypes.func,
 };

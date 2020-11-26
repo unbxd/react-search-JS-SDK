@@ -51,10 +51,7 @@ Pagination.propTypes = {
     /**
      * Custom product item component
      */
-    PaginationItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    paginationItemComponent: PropTypes.element,
     /**
      * Callback for page change.
      */

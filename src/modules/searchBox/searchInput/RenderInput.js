@@ -13,8 +13,9 @@ class RenderInput extends React.Component {
       setSearchBoxQuery
     } = this.props;
     if (
-      prevProps.lastSearchedQuery !== lastSearchedQuery &&
-      query !== lastSearchedQuery
+      (prevProps.lastSearchedQuery !== lastSearchedQuery &&
+      query !== lastSearchedQuery) ||
+      productType !== prevProps.productType
     ) {
       if (productType === productTypes.CATEGORY) {
         setSearchBoxQuery('');
@@ -32,7 +33,7 @@ class RenderInput extends React.Component {
       autoFocus,
       clearable,
       onSearchBoxClear,
-      ClearComponent
+      clearComponent
     } = this.props;
 
     return (
@@ -43,7 +44,7 @@ class RenderInput extends React.Component {
         autoFocus={autoFocus}
         clearable={clearable}
         onClear={onSearchBoxClear}
-        ClearComponent={ClearComponent}
+        clearComponent={clearComponent}
         placeholder={placeholder}
       />
     );
@@ -60,7 +61,7 @@ RenderInput.propTypes = {
   autoFocus: PropTypes.bool,
   clearable: PropTypes.bool,
   onSearchBoxClear: PropTypes.func.isRequired,
-  ClearComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
+  clearComponent: PropTypes.element
 };
 
 export default RenderInput;

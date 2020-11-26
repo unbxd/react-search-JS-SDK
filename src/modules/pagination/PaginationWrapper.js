@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import {cloneElement} from '../../common/utils';
 import { Button } from '../../components';
 import PageNavigationOptions from './PageNavigationOptions';
 import { paginationTypes } from '../../config';
@@ -21,7 +21,7 @@ const PaginationWrapper = (props) => {
     onNextPageClick,
     onPreviousPageClick,
     onPageClick,
-    PaginationItemComponent,
+    paginationItemComponent,
     paginationType
   } = props;
 
@@ -33,8 +33,8 @@ const PaginationWrapper = (props) => {
     return null;
   }
 
-  const activePage = PaginationItemComponent ? (
-    <PaginationItemComponent
+  const activePage = paginationItemComponent ? (
+    <paginationItemComponent
       pagenumber={currentPage}
       type={paginationButtonTypes.NUMBER}
       label={currentPage}
@@ -55,7 +55,7 @@ const PaginationWrapper = (props) => {
     currentPage,
     padding,
     noOfPages,
-    PaginationItemComponent ? PaginationItemComponent : Button,
+    paginationItemComponent ? paginationItemComponent : Button,
     onPageClick,
     paginationButtonTypes.NUMBER
   );
@@ -63,14 +63,12 @@ const PaginationWrapper = (props) => {
   return (
     <div className="UNX-pageNavigation__container">
       {isPrev &&
-        (PaginationItemComponent ? (
-          <PaginationItemComponent
-            onClick={onPreviousPageClick}
-            pagenumber={currentPage - 1}
-            type={paginationButtonTypes.PREVIOUS}
-            label={currentPage - 1}
-            active={false}
-          />
+        (paginationItemComponent ? (
+          cloneElement(paginationItemComponent,{onClick:onPreviousPageClick,
+            pagenumber:currentPage - 1,
+            type:paginationButtonTypes.PREVIOUS,
+            label:currentPage - 1,
+            active:false})
         ) : (
           <Button
             className="UNX-pageNavigation__button -action"
@@ -88,15 +86,12 @@ const PaginationWrapper = (props) => {
       {nextPages}
 
       {isNext &&
-        (PaginationItemComponent ? (
-          <PaginationItemComponent
-            onClick={onNextPageClick}
-            pagenumber={currentPage + 1}
-            type={paginationButtonTypes.NEXT}
-            label={currentPage + 1}
-            data-testid={`UNX_pageNumber${currentPage+1}`}
-            active={false}
-          />
+        (paginationItemComponent ? (
+          cloneElement(paginationItemComponent,{onClick:onNextPageClick,
+            pagenumber:currentPage + 1,
+            type:paginationButtonTypes.NEXT,
+            label:currentPage + 1,
+            active:false})
         ) : (
           <Button
             className="UNX-pageNavigation__button -action"
@@ -121,10 +116,7 @@ PaginationWrapper.propTypes = {
   onPreviousPageClick: PropTypes.func.isRequired,
   onPageClick: PropTypes.func.isRequired,
   padding: PropTypes.number,
-  PaginationItemComponent: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.func
-  ]),
+  paginationItemComponent: PropTypes.element,
   paginationType: PropTypes.string.isRequired
 };
 

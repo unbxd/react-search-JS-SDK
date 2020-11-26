@@ -55,7 +55,7 @@ TextFacets.propTypes = {
     /**
      * Custom Facet item component
      */
-    FacetItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    facetItemComponent: PropTypes.element,
     /**
     * Label for the component. 
     */

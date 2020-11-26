@@ -9,7 +9,7 @@ class RangeFacetsContainer extends React.PureComponent {
     getRangeFacetsProps() {
         const {
             unbxdCore,
-            FacetItemComponent,
+            facetItemComponent,
             enableApplyFilters,
             priceUnit,
             label,
@@ -58,7 +58,7 @@ class RangeFacetsContainer extends React.PureComponent {
             addRangeFacet,
             applyRangeFacet,
             removeRangeFacet,
-            FacetItemComponent,
+            facetItemComponent,
             enableApplyFilters,
             priceUnit,
             label,
@@ -87,10 +87,7 @@ RangeFacetsContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
     unbxdCoreStatus: PropTypes.string.isRequired,
     helpers: PropTypes.object.isRequired,
-    FacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    facetItemComponent: PropTypes.element,
     enableApplyFilters: PropTypes.bool.isRequired,
     priceUnit: PropTypes.string.isRequired,
     label: PropTypes.node,

@@ -32,8 +32,8 @@ const FacetApplyClear = (props) => {
 
     return (
         <FacetActions
-            ApplyFilterComponent={ApplyFilter}
-            ClearFilterComponent={ClearFilter}
+            applyFilterComponent={<ApplyFilter/>}
+            clearFilterComponent={<ClearFilter/>}
             onApply={onApply}
             onClear={onClear}
         />

@@ -12,11 +12,11 @@ const GridView = (props) => {
     showVariants,
     variantAttributesMap,
     onProductClick,
-    ProductItemComponent,
+    productItemComponent,
     showSwatches,
     swatchAttributesMap,
     groupBy,
-    SwatchItemComponent,
+    swatchItemComponent,
     viewType,
     priceUnit
   } = props;
@@ -26,7 +26,7 @@ const GridView = (props) => {
       <List
         idAttribute={'uniqueId'}
         items={products}
-        ListItem={ProductItemComponent || GridProductCard}
+        ListItem={productItemComponent || GridProductCard}
         viewType={viewType}
         onClick={onProductClick}
         attributesMap={attributesMap}
@@ -35,7 +35,7 @@ const GridView = (props) => {
         showSwatches={showSwatches}
         swatchAttributesMap={swatchAttributesMap}
         groupBy={groupBy}
-        SwatchItemComponent={SwatchItemComponent}
+        swatchItemComponent={swatchItemComponent}
         className={`UNX-products__list -grid grid-cols-${perRow}`}
         priceUnit={priceUnit}
       />
@@ -50,14 +50,11 @@ GridView.propTypes = {
   showVariants: PropTypes.bool.isRequired,
   variantAttributesMap: PropTypes.object.isRequired,
   onProductClick: PropTypes.func.isRequired,
-  ProductItemComponent: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.func
-  ]),
+  productItemComponent: PropTypes.element,
   showSwatches: PropTypes.bool,
   swatchAttributesMap: PropTypes.object,
   groupBy: PropTypes.string,
-  SwatchItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  swatchItemComponent: PropTypes.element,
   viewType: PropTypes.string.isRequired,
   priceUnit: PropTypes.string.isRequired
 };

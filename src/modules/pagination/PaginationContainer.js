@@ -7,7 +7,7 @@ import { executeCallback } from '../../common/utils';
 
 class PaginationContainer extends React.PureComponent {
     getPaginationProps() {
-        const { unbxdCore, PaginationItemComponent, onPageChange } = this.props;
+        const { unbxdCore, paginationItemComponent, onPageChange } = this.props;
         const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
         const getResults = unbxdCore.getResults.bind(unbxdCore);
 
@@ -64,7 +64,7 @@ class PaginationContainer extends React.PureComponent {
             onNextPageClick: handleNextPageClick,
             onPreviousPageClick: handlePreviousPageClick,
             onPageClick: handlePageClick,
-            PaginationItemComponent,
+            paginationItemComponent,
         };
 
         return { ...data, ...helpers };
@@ -97,10 +97,7 @@ PaginationContainer.propTypes = {
     unbxdCoreStatus: PropTypes.string.isRequired,
     helpers: PropTypes.object.isRequired,
     padding: PropTypes.number,
-    PaginationItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    paginationItemComponent: PropTypes.element,
     paginationType: PropTypes.string.isRequired,
     onPageChange: PropTypes.func,
 };

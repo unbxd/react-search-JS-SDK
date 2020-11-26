@@ -7,7 +7,7 @@ const MultilevelFacetsWrapper = (props) => {
     const {
         onFacetClick,
         multilevelFacets,
-        FacetItemComponent,
+        facetItemComponent,
         label,
         collapsible,
         searchable,
@@ -18,7 +18,7 @@ const MultilevelFacetsWrapper = (props) => {
         <GenerateFacets
             onFacetClick={onFacetClick}
             multilevelFacets={multilevelFacets}
-            FacetItemComponent={FacetItemComponent}
+            facetItemComponent={facetItemComponent}
             label={label}
             collapsible={collapsible}
             minViewMore={minViewMore}
@@ -30,10 +30,7 @@ const MultilevelFacetsWrapper = (props) => {
 
 MultilevelFacetsWrapper.propTypes = {
     onFacetClick: PropTypes.func.isRequired,
-    FacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    facetItemComponent: PropTypes.element,
     label: PropTypes.node,
     collapsible: PropTypes.bool,
     searchable: PropTypes.bool,

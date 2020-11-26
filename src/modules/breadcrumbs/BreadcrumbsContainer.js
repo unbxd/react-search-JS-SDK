@@ -10,9 +10,9 @@ class BreadcrumbsContainer extends React.PureComponent {
     getBreadcrumbProps() {
         const {
             unbxdCore,
-            Root,
+            root,
             separator,
-            BreadcrumbItemComponent,
+            breadcrumbItemComponent,
             productType,
         } = this.props;
 
@@ -45,9 +45,9 @@ class BreadcrumbsContainer extends React.PureComponent {
         return {
             onBreadCrumbClick: handleBreadCrumbClick,
             breadCrumbsList,
-            Root,
+            root,
             separator,
-            BreadcrumbItemComponent,
+            breadcrumbItemComponent,
         };
     }
 
@@ -66,16 +66,12 @@ BreadcrumbsContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
     unbxdCoreStatus: PropTypes.string.isRequired,
     helpers: PropTypes.object.isRequired,
-    Root: PropTypes.oneOfType([
+    root: PropTypes.oneOfType([
         PropTypes.element,
-        PropTypes.func,
         PropTypes.node,
     ]),
     separator: PropTypes.node,
-    BreadcrumbItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    breadcrumbItemComponent: PropTypes.element,
     productType: PropTypes.string.isRequired,
 };
 

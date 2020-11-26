@@ -60,7 +60,7 @@ const Sorter = () => {
             label={label}
             onSortChange={onSortChange}
             //displayType={'LIST'}
-            //SortItemComponent={SortItemComponent}
+            //sortItemComponent={<SortItemComponent/>}
         />
     );
 };

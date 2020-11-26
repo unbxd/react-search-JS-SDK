@@ -62,7 +62,7 @@ Sort.propTypes = {
     /**
      * Custom sort item component.
      */
-    SortItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    sortItemComponent: PropTypes.element,
     /**
      * Label for the component.
      */

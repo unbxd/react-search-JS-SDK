@@ -45,10 +45,7 @@ SelectedFacets.propTypes = {
     /**
      * Custom facet item component.
      */
-    FacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    facetItemComponent: PropTypes.element,
     /**
      * Label for the component.
      */

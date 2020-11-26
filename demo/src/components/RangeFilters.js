@@ -108,7 +108,7 @@ const RangeFilters = () => {
     return (
         <RangeFacets
             transform={transform}
-            FacetItemComponent={FacetItemComponent}
+            facetItemComponent={<FacetItemComponent/>}
             collapsible={true}
             enableViewMore={true}
             minViewMore={3}

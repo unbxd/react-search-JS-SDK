@@ -35,7 +35,7 @@ const label = <div className="-label">Selected Filters</div>;
 
 const ActiveFilters = () => {
     return (
-        <SelectedFacets FacetItemComponent={FacetItemComponent} label={label} />
+        <SelectedFacets facetItemComponent={<FacetItemComponent/>} label={label} />
     );
 };
 

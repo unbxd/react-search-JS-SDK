@@ -46,7 +46,7 @@ SearchTitle.propTypes = {
   /**
    * Custom search title item.
    */
-  SearchTitleItem: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
+  searchTitleItem: PropTypes.element
 };
 
 export default SearchTitle;

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import {cloneElement} from '../../../common/utils';
 import RenderInput from './RenderInput';
 
 const SearchInput = props => {
@@ -14,8 +14,8 @@ const SearchInput = props => {
     onSearchBoxChange,
     onSearchBoxClear,
     setSearchBoxQuery,
-    InputComponent,
-    ClearComponent
+    inputComponent,
+    clearComponent
   } = props;
 
   const searchInputProps = {
@@ -25,16 +25,16 @@ const SearchInput = props => {
     autoFocus,
     clearable,
     productType,
-    InputComponent,
+    inputComponent,
     onSearchBoxChange,
     onSearchBoxClear,
     setSearchBoxQuery,
-    ClearComponent,
+    clearComponent,
     className: 'UNX-searchbox__input'
   };
 
-  return InputComponent ? (
-    <InputComponent {...searchInputProps} />
+  return inputComponent ? (
+    cloneElement(inputComponent, {...searchInputProps})
   ) : (
     <RenderInput {...searchInputProps} />
   );
@@ -52,9 +52,9 @@ SearchInput.propTypes = {
   onSubmit: PropTypes.func,
   onClear: PropTypes.func,
   showLoader: PropTypes.bool,
-  InputComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  SubmitComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  ClearComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  inputComponent: PropTypes.element,
+  submitComponent: PropTypes.element,
+  clearComponent: PropTypes.element,
   defaultSearch: PropTypes.string,
   productType: PropTypes.string
 };

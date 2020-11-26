@@ -21,7 +21,7 @@ class SpellCheck extends React.PureComponent {
             helpers: { setSearchBoxConfiguration },
         } = this.props;
 
-        const { SpellCheckItemComponent } = this.props;
+        const { spellCheckItemComponent } = this.props;
         const spellChecks = unbxdCore.getDidYouMeanFromResponse();
         const currentQuery = unbxdCore.getSearchQuery() || '';
         const handleSuggestionClick = (currentItem) => {
@@ -33,7 +33,7 @@ class SpellCheck extends React.PureComponent {
             spellChecks,
             currentQuery,
             onSuggestionClick: handleSuggestionClick,
-            SpellCheckItemComponent,
+            spellCheckItemComponent,
         };
     }
 
@@ -51,10 +51,7 @@ class SpellCheck extends React.PureComponent {
 SpellCheck.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
     helpers: PropTypes.object.isRequired,
-    SpellCheckItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    spellCheckItemComponent: PropTypes.element
 };
 
 export default SpellCheck;

@@ -31,7 +31,7 @@ const ProductViewTypes = () => {
         <ViewTypes
             viewTypes={viewTypes}
             displayType={'LIST'}
-            ViewItemComponent={ProductsViewItemComponent}
+            viewItemComponent={<ProductsViewItemComponent/>}
         />
     );
 };

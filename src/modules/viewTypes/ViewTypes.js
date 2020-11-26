@@ -53,7 +53,7 @@ ViewTypes.propTypes = {
     /**
     * Custom `LIST` item component for product views.
     */
-    ViewItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    viewItemComponent: PropTypes.element,
 
 }
 

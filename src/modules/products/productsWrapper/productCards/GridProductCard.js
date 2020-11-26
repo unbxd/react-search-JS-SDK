@@ -55,7 +55,7 @@ class GridProductCard extends React.Component {
     };
 
     render() {
-        const { SwatchItemComponent, idx, onClick, priceUnit } = this.props;
+        const { swatchItemComponent, idx, onClick, priceUnit } = this.props;
         const { productValues } = this.state;
         const activeSwatch = productValues['swatches'].find((swatch) => {
             return swatch.isSelected;
@@ -95,7 +95,7 @@ class GridProductCard extends React.Component {
                 <div className="UNX-swatch__container">
                     <List
                         items={swatches}
-                        ListItem={SwatchItemComponent || SwatchItem}
+                        ListItem={swatchItemComponent || SwatchItem}
                         idAttribute={'swatchId'}
                         onClick={this.onSwatchClick}
                         className="UNX-swatch__list"
@@ -142,10 +142,7 @@ GridProductCard.propTypes = {
     showSwatches: PropTypes.bool,
     swatchAttributesMap: PropTypes.object,
     groupBy: PropTypes.string,
-    SwatchItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    swatchItemComponent: PropTypes.element,
     idx: PropTypes.number,
     onClick: PropTypes.func.isRequired,
     priceUnit: PropTypes.string.isRequired,

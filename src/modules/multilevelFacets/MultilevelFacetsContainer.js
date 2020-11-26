@@ -28,7 +28,7 @@ class MultilevelFacetsContainer extends React.PureComponent {
     getMultilevelFacetsProps() {
         const {
             unbxdCore,
-            FacetItemComponent,
+            facetItemComponent,
             label,
             collapsible,
             searchable,
@@ -158,7 +158,7 @@ class MultilevelFacetsContainer extends React.PureComponent {
         return {
             multilevelFacets,
             onFacetClick: handleFacetClick,
-            FacetItemComponent,
+            facetItemComponent,
             label,
             collapsible,
             searchable,
@@ -186,14 +186,11 @@ MultilevelFacetsContainer.propTypes = {
     categoryField: PropTypes.string.isRequired,
     facetDepth: PropTypes.number,
     facetLimit: PropTypes.number,
-    FacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    facetItemComponent: PropTypes.element,
     label: PropTypes.node,
     collapsible: PropTypes.bool,
     searchable: PropTypes.bool,
-    onFacetClick: PropTypes.node,
+    onFacetClick: PropTypes.func,
 };
 
 export default MultilevelFacetsContainer;

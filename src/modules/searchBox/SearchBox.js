@@ -64,15 +64,15 @@ SearchBox.propTypes = {
   /**
    * Custom input component
    */
-  InputComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  inputComponent: PropTypes.element,
   /**
    * Custom submit component
    */
-  SubmitComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  submitComponent: PropTypes.element,
   /**
    * Custom reset component
    */
-  ClearComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  clearComponent: PropTypes.element,
   /**
    * Default search query
    */

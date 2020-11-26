@@ -11,7 +11,7 @@ const PageSizeWrapper = (props) => {
     noOfPages,
     size,
     sizeOptions,
-    PageSizeItemComponent,
+    pageSizeItemComponent,
     label
   } = props;
 
@@ -35,7 +35,7 @@ const PageSizeWrapper = (props) => {
           size={size}
           sizeOptions={sizeOptions}
           onPageSizeClick={onPageSizeClick}
-          PageSizeItemComponent={PageSizeItemComponent}
+          pageSizeItemComponent={pageSizeItemComponent}
         />
       )}
     </div>
@@ -50,10 +50,7 @@ PageSizeWrapper.propTypes = {
   onPageSizeClick: PropTypes.func.isRequired,
   noOfPages: PropTypes.number.isRequired,
   displayType: PropTypes.string,
-  PageSizeItemComponent: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.func
-  ]),
+  pageSizeItemComponent: PropTypes.element,
   label: PropTypes.node
 };
 

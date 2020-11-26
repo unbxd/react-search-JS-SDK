@@ -32,7 +32,7 @@ const ProductsSize = () => {
             sizeOptions={sizeOptions}
             label={label}
             //displayType={'LIST'}
-            //PageSizeItemComponent={PageSizeItemComponent}
+            //pageSizeItemComponent={<PageSizeItemComponent/>}
         />
     );
 };

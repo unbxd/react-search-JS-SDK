@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import {cloneElement} from '../../common/utils';
 import { Button } from '../../components';
 
-const BreadCrumbItem = ({ itemData, Root, separator, onClick, idx }) => {
+const BreadCrumbItem = ({ itemData, root, separator, onClick, idx }) => {
     const { value } = itemData;
 
     const handleClick = () => {
@@ -12,7 +12,7 @@ const BreadCrumbItem = ({ itemData, Root, separator, onClick, idx }) => {
 
     return (
         <>
-            {idx === 0 && <Root />}
+            {idx === 0 && cloneElement(root)}
             {separator}
             <Button className={'UNX-breadcrumb__item'} onClick={handleClick}>
                 {value}
@@ -27,7 +27,7 @@ BreadCrumbItem.propTypes = {
         level: PropTypes.number,
         filterField: PropTypes.string,
     }).isRequired,
-    Root: PropTypes.oneOfType([
+    root: PropTypes.oneOfType([
         PropTypes.element,
         PropTypes.func,
         PropTypes.node,

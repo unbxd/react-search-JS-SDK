@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { listItemTypes } from './utils';
+import { isElement, cloneElement } from '../common/utils';
 
 const List = ({
     items,
@@ -13,6 +14,7 @@ const List = ({
     testId,
     ...props
 }) => {
+    
     return (
         <div className={className} data-testid={testId}>
             {items.map((item, idx) => {
@@ -20,6 +22,14 @@ const List = ({
                     itemsType === listItemTypes.PRIMITIVE
                         ? item
                         : item[idAttribute];
+                if(isElement(ListItem)){
+                    return cloneElement(ListItem,{itemData:item,
+                        idAttribute:key,
+                        onClick:onClick ? onClick : null,
+                        idx,
+                        ...props,
+                        key});
+                }
 
                 return (
                     <ListItem

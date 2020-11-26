@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import { List } from '../../../components';
 
-const SortByList = ({ sortByOptions, onSortClick, SortItemComponent }) => {
+const SortByList = ({ sortByOptions, onSortClick, sortItemComponent }) => {
 
     return (<List
         idAttribute={'value'}
         items={sortByOptions}
-        ListItem={SortItemComponent}
+        ListItem={sortItemComponent}
         onClick={onSortClick}
         className={'UNX-sortby__list'}
         testId={'UNX_unbxdSorter'} />)
@@ -23,7 +23,7 @@ SortByList.propTypes = {
         }))
         .isRequired,
     onSortClick: PropTypes.func.isRequired,
-    SortItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired
+    sortItemComponent: PropTypes.element.isRequired
 }
 
 export default SortByList;

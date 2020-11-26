@@ -49,12 +49,12 @@ class ProductsContainer extends React.PureComponent {
       pageSize,
       paginationType,
       heightDiffToTriggerNextPage,
-      LoaderComponent,
+      loaderComponent,
       showLoader,
       onProductClick: onProductClickCB,
-      LoadMoreComponent,
+      loadMoreComponent,
       onZeroResults,
-      ProductItemComponent,
+      productItemComponent,
       productIdAttribute,
       attributesMap = {},
       showVariants,
@@ -62,7 +62,7 @@ class ProductsContainer extends React.PureComponent {
       variantAttributesMap = {},
       showSwatches,
       swatchAttributesMap = {},
-      SwatchItemComponent,
+      swatchItemComponent,
       viewType,
       priceUnit
     } = this.props;
@@ -143,11 +143,11 @@ class ProductsContainer extends React.PureComponent {
       getOnProductsClickProps,
       getNextPage,
       onProductClick,
-      LoaderComponent,
+      loaderComponent,
       onZeroResults,
-      ProductItemComponent,
-      SwatchItemComponent,
-      LoadMoreComponent
+      productItemComponent,
+      swatchItemComponent,
+      loadMoreComponent
     };
 
     return { ...data, ...helpers };
@@ -175,28 +175,22 @@ ProductsContainer.propTypes = {
   pageSize: PropTypes.number,
   paginationType: PropTypes.string,
   heightDiffToTriggerNextPage: PropTypes.number,
-  LoadMoreComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  loadMoreComponent: PropTypes.element,
   productIdAttribute: PropTypes.string,
   attributesMap: PropTypes.object.isRequired,
   showVariants: PropTypes.bool,
   variantsCount: PropTypes.number,
   variantAttributesMap: PropTypes.object,
   showLoader: PropTypes.bool,
-  LoaderComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  loaderComponent: PropTypes.element,
   onProductClick: PropTypes.func,
   onZeroResults: PropTypes.func,
   showSwatches: PropTypes.bool,
   groupBy: PropTypes.string,
   swatchAttributesMap: PropTypes.object,
-  SwatchItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  ProductItemComponent: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.func
-  ]),
-  ZeroResultsComponent: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.func
-  ]),
+  swatchItemComponent: PropTypes.element,
+  productItemComponent: PropTypes.element,
+  ZeroResultsComponent: PropTypes.element,
   priceUnit: PropTypes.string.isRequired
 };
 

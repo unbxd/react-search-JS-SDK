@@ -87,7 +87,7 @@ class SortContainer extends React.Component {
 
         const { noOfPages = 0 } = getPaginationInfo() || {};
 
-        const { sortOptions = [], displayType, SortItemComponent } = this.props;
+        const { sortOptions = [], displayType, sortItemComponent } = this.props;
 
         //format datas for better handling.
         const formattedSortByOptions = sortOptions.map((sortByoption, idx) =>
@@ -147,7 +147,7 @@ class SortContainer extends React.Component {
             ...this.state,
         };
         const helpers = {
-            SortItemComponent,
+            sortItemComponent,
             onSortClick: handleSortClick,
             onSortResetClick,
             label,
@@ -178,7 +178,7 @@ SortContainer.propTypes = {
         })
     ).isRequired,
     displayType: PropTypes.string,
-    SortItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    sortItemComponent: PropTypes.element,
     label: PropTypes.node,
     onSortChange: PropTypes.func,
 };

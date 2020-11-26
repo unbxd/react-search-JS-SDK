@@ -10,8 +10,8 @@ const FacetActionsWrapper = props => {
     onApplyFilter,
     onClearFilter,
     noOfPages,
-    ApplyFilterComponent,
-    ClearFilterComponent
+    applyFilterComponent,
+    clearFilterComponent
   } = props;
 
   if (noOfPages === 0) {
@@ -23,12 +23,12 @@ const FacetActionsWrapper = props => {
       <ApplyFacets
         showApplyFilter={showApplyFilter}
         onApplyFilter={onApplyFilter}
-        ApplyFilterComponent={ApplyFilterComponent}
+        applyFilterComponent={applyFilterComponent}
       />
       <ClearFacets
         showClearFilter={showClearFilter}
         onClearFilter={onClearFilter}
-        ClearFilterComponent={ClearFilterComponent}
+        clearFilterComponent={clearFilterComponent}
       />
     </div>
   );
@@ -41,11 +41,8 @@ FacetActionsWrapper.propTypes = {
   selectedFacets: PropTypes.object,
   showApplyFilter: PropTypes.bool,
   showClearFilter: PropTypes.bool,
-  ApplyFilterComponent: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.func
-  ]),
-  ClearFilterComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
+  applyFilterComponent: PropTypes.element,
+  clearFilterComponent: PropTypes.element
 };
 
 export default FacetActionsWrapper;

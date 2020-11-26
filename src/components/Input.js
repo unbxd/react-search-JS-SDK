@@ -1,6 +1,6 @@
 import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
-
+import {cloneElement} from '../common/utils';
 class Input extends React.PureComponent {
   inputRef = createRef();
 
@@ -25,7 +25,7 @@ class Input extends React.PureComponent {
       onChange,
       className,
       clearable,
-      ClearComponent,
+      clearComponent,
       onClear,
       placeholder
     } = this.props;
@@ -43,7 +43,7 @@ class Input extends React.PureComponent {
         />
         {showClear &&
           (ClearComponent ? (
-            <ClearComponent onSearchBoxClear={onClear} />
+            cloneElement(clearComponent, {onSearchBoxClear:onClear})
           ) : (
             <div
               onClick={this.handleClickClear}

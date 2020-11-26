@@ -9,13 +9,13 @@ const GenerateSpellCheck = props => {
     spellChecks,
     currentQuery,
     onSuggestionClick,
-    SpellCheckItemComponent
+    spellCheckItemComponent
   } = props;
 
   return (
     <List
       items={spellChecks}
-      ListItem={SpellCheckItemComponent || SpellCheckItem}
+      ListItem={spellCheckItemComponent || SpellCheckItem}
       idAttribute={'suggestion'}
       onClick={onSuggestionClick}
       currentQuery={currentQuery}
@@ -28,10 +28,7 @@ GenerateSpellCheck.propTypes = {
   spellChecks: PropTypes.arrayOf(PropTypes.object),
   currentQuery: PropTypes.string,
   onSuggestionClick: PropTypes.func.isRequired,
-  SpellCheckItemComponent: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.func
-  ])
+  spellCheckItemComponent: PropTypes.element
 };
 
 export default GenerateSpellCheck;

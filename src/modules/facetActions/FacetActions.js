@@ -57,17 +57,11 @@ FacetActions.propTypes = {
     /**
      * Custom apply filter component.
      */
-    ApplyFilterComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    applyFilterComponent: PropTypes.element,
     /**
      * Custom clear filter component.
      */
-    ClearFilterComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    clearFilterComponent: PropTypes.element,
     /**
      * Callback for apply.
      */

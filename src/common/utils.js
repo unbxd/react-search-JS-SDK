@@ -68,3 +68,11 @@ export const tryCatchHandler = function (func, onCatch) {
         }
     };
 };
+
+export const isElement = (element) => {
+    return React.isValidElement(element);
+}
+
+export const cloneElement = (elements, props)=> {
+    return React.cloneElement(elements, props);
+}

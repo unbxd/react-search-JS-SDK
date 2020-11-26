@@ -74,12 +74,9 @@ MultilevelFacets.propTypes = {
      */
     searchable: PropTypes.bool,
     /**
-     * Custom Multilevel facet component
+     * Custom facet element
      */
-    FacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    facetItemComponent: PropTypes.element,
     /**
      * Label for the component.
      */
@@ -87,7 +84,7 @@ MultilevelFacets.propTypes = {
     /**
      * Callback for facet click.
      */
-    onFacetClick: PropTypes.node,
+    onFacetClick: PropTypes.func,
     /**
      * Min value for viewMore to be enabled.
      */

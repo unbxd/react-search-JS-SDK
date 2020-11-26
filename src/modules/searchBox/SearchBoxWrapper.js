@@ -16,9 +16,9 @@ const SearchBoxWrapper = props => {
     onSearchBoxSubmit,
     onSearchBoxClear,
     setSearchBoxQuery,
-    InputComponent,
-    SubmitComponent,
-    ClearComponent
+    inputComponent,
+    submitComponent,
+    clearComponent
   } = props;
   return (
     <div className="UNX-searchbox__container">
@@ -33,13 +33,13 @@ const SearchBoxWrapper = props => {
           onSearchBoxChange={onSearchBoxChange}
           onSearchBoxClear={onSearchBoxClear}
           setSearchBoxQuery={setSearchBoxQuery}
-          InputComponent={InputComponent}
-          ClearComponent={ClearComponent}
+          inputComponent={inputComponent}
+          clearComponent={clearComponent}
         />
 
         <SearchButton
           onSearchBoxSubmit={onSearchBoxSubmit}
-          SubmitComponent={SubmitComponent}
+          submitComponent={submitComponent}
         />
       </form>
     </div>
@@ -52,9 +52,9 @@ SearchBoxWrapper.propTypes = {
   onSubmit: PropTypes.func,
   onClear: PropTypes.func,
   showLoader: PropTypes.bool,
-  InputComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  SubmitComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  ClearComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  inputComponent: PropTypes.element,
+  submitComponent: PropTypes.element,
+  clearComponent: PropTypes.element,
   defaultSearch: PropTypes.string,
   productType: PropTypes.string,
   query: PropTypes.string.isRequired,

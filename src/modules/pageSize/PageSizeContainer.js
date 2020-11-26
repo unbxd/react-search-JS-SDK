@@ -42,7 +42,7 @@ class PageSizeContainer extends React.PureComponent {
     getPageSizeProps() {
         const {
             unbxdCore,
-            PageSizeItemComponent,
+            pageSizeItemComponent,
             displayType,
             label,
             helpers: { setPageSizeConfiguration },
@@ -70,7 +70,7 @@ class PageSizeContainer extends React.PureComponent {
         };
         const { size, sizeOptions } = this.state;
         return {
-            PageSizeItemComponent,
+            pageSizeItemComponent,
             sizeOptions,
             displayType,
             onPageSizeClick,
@@ -100,10 +100,7 @@ PageSizeContainer.propTypes = {
         PropTypes.shape({ id: PropTypes.number, value: PropTypes.string })
     ).isRequired,
     displayType: PropTypes.string,
-    PageSizeItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    pageSizeItemComponent: PropTypes.element,
     label: PropTypes.node,
 };
 

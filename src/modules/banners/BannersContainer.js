@@ -6,10 +6,10 @@ import GenerateBanners from './generateBanners';
 
 class BannersContainer extends React.PureComponent {
   getBannerProps() {
-    const { unbxdCore, altText, BannerItemComponent } = this.props;
+    const { unbxdCore, altText, bannerItemComponent } = this.props;
     const banners = unbxdCore.getBanners();
 
-    return { banners, altText, BannerItemComponent };
+    return { banners, altText, bannerItemComponent };
   }
 
   render() {
@@ -26,7 +26,7 @@ class BannersContainer extends React.PureComponent {
 BannersContainer.propTypes = {
   unbxdCore: PropTypes.object.isRequired,
   altText: PropTypes.string.isRequired,
-  BannerItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
+  bannerItemComponent: PropTypes.element
 };
 
 export default BannersContainer;

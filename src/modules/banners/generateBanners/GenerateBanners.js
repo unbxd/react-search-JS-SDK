@@ -8,11 +8,11 @@ import { List } from '../../../components';
 
 const GenerateBanners = (props) => {
 
-    const { banners, altText ,BannerItemComponent } = props;
+    const { banners, altText ,bannerItemComponent } = props;
     
             return (<List
                 items={banners}
-                ListItem={BannerItemComponent || BannerItem}
+                ListItem={bannerItemComponent || BannerItem}
                 idAttribute={'imageUrl'}
                 altText={altText}
                 className='UNX-banners__container' />);
@@ -22,7 +22,7 @@ const GenerateBanners = (props) => {
 GenerateBanners.propTypes = {
     banners: PropTypes.arrayOf(PropTypes.object),  
     altText:PropTypes.string.isRequired,
-    BannerItemComponent:PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    bannerItemComponent:PropTypes.element,
 }
 
 export default GenerateBanners;

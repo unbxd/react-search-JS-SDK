@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import { List } from '../../../components';
 
-const ViewTypesList = ({ viewTypes, onViewTypeClick, ViewItemComponent }) => {
+const ViewTypesList = ({ viewTypes, onViewTypeClick, viewItemComponent }) => {
     return (
         <List
             idAttribute={'viewType'}
             items={viewTypes}
-            ListItem={ViewItemComponent}
+            ListItem={viewItemComponent}
             onClick={onViewTypeClick}
             className={'UNX-viewTypes__list'}
         />
@@ -23,7 +23,7 @@ ViewTypesList.propTypes = {
         })
     ),
     onViewTypeClick: PropTypes.func.isRequired,
-    ViewItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    viewItemComponent: PropTypes.element,
 };
 
 export default ViewTypesList;

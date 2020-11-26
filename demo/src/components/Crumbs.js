@@ -4,7 +4,6 @@ import { Breadcrumbs } from '@unbxd-ui/react-search-sdk';
 
 const BreadcrumbItemComponent = ({
     itemData,
-    Root,
     separator,
     idx,
     onClick,
@@ -15,7 +14,7 @@ const BreadcrumbItemComponent = ({
     };
     return (
         <>
-            {idx === 0 && <Root />}
+            {idx === 0 && <Root/>}
             {''}
             {separator}
             {''}
@@ -32,9 +31,8 @@ const separator = <span className="UNX-breadcrumb__separator">/</span>;
 const Crumbs = () => {
     return (
         <Breadcrumbs
-            Root={Root}
             separator={separator}
-            BreadcrumbItemComponent={BreadcrumbItemComponent}
+            breadcrumbItemComponent={<BreadcrumbItemComponent/>}
         />
     );
 };

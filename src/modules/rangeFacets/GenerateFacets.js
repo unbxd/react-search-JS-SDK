@@ -206,7 +206,7 @@ class GenerateFacets extends React.Component {
     render() {
         const { rangeFacetsList } = this.state;
         const {
-            FacetItemComponent,
+            facetItemComponent,
             priceUnit,
             label,
             collapsible,
@@ -253,7 +253,7 @@ class GenerateFacets extends React.Component {
                             </div>
                             <List
                                 items={values}
-                                ListItem={FacetItemComponent || FacetItem}
+                                ListItem={facetItemComponent || FacetItem}
                                 onClick={this.handleFacetClick}
                                 className={`UNX-facet__list ${
                                     viewLess ? 'UNX-facet__listShowLimited' : ''
@@ -292,10 +292,7 @@ GenerateFacets.propTypes = {
     addRangeFacet: PropTypes.func.isRequired,
     applyRangeFacet: PropTypes.func.isRequired,
     removeRangeFacet: PropTypes.func.isRequired,
-    FacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    facetItemComponent: PropTypes.element,
     priceUnit: PropTypes.string.isRequired,
     label: PropTypes.node,
     collapsible: PropTypes.bool,

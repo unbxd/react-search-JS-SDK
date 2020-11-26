@@ -8,17 +8,17 @@ const BreadcrumbsWrapper = (props) => {
   const {
     onBreadCrumbClick,
     breadCrumbsList,
-    Root,
+    root,
     separator,
-    BreadcrumbItemComponent
+    breadcrumbItemComponent
   } = props;
   return (
     <div className={'UNX-breadcrumbs__container'}>
       <List
         items={breadCrumbsList}
         idAttribute={'value'}
-        ListItem={BreadcrumbItemComponent || BreadCrumbItem}
-        Root={Root}
+        ListItem={breadcrumbItemComponent || BreadCrumbItem}
+        root={root}
         separator={separator}
         onClick={onBreadCrumbClick}
         className={'UNX-breadcrumbs__list'}
@@ -30,16 +30,12 @@ const BreadcrumbsWrapper = (props) => {
 BreadcrumbsWrapper.propTypes = {
   breadCrumbsList: PropTypes.array,
   onBreadCrumbClick: PropTypes.func.isRequired,
-  Root: PropTypes.oneOfType([
+  root: PropTypes.oneOfType([
     PropTypes.element,
-    PropTypes.func,
     PropTypes.node
   ]),
   separator: PropTypes.node,
-  BreadcrumbItemComponent: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.func
-  ])
+  breadcrumbItemComponent: PropTypes.element
 };
 
 export default BreadcrumbsWrapper;
