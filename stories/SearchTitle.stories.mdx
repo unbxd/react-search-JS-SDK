@@ -10,13 +10,13 @@ const attributesMap = {
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'min_cheapest_default_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 const variantAttributesMap = {
     productName: 'title',
     uniqueId: 'variantId',
     imageUrl: 'imageUrl',
-    price: 'v_unbxd_price',
+    price: 'v_unbxd_price'
 };
 const SearchTitleItem = (props) => {
     const { searchQuery, start, productsLn, numberOfProducts } = props;
@@ -133,7 +133,7 @@ const SearchTitleItem = (props) => {
                     productsLn,
                     SearchTitleItem,
                     numberOfProducts,
-                    paginationType,
+                    paginationType
                 }) => {
                     return <div>render SearchTitle</div>;
                 }}

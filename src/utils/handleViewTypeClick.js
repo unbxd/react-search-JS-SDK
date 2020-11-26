@@ -12,16 +12,16 @@ function handleViewTypeClick(viewOption) {
                 ...currentState,
                 unbxdState: {
                     ...currentState.unbxdState,
-                    viewType: viewTypes.GRID,
-                },
+                    viewType: viewTypes.GRID
+                }
             };
         else
             return {
                 ...currentState,
                 unbxdState: {
                     ...currentState.unbxdState,
-                    viewType: viewTypes.LIST,
-                },
+                    viewType: viewTypes.LIST
+                }
             };
     });
 }

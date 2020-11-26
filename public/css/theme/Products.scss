@@ -1,15 +1,13 @@
-.UNX-products__list{
-
-    &.-list{
-
-        .UNX-productCard__container{
+.UNX-products__list {
+    &.-list {
+        .UNX-productCard__container {
             display: flex;
             flex-direction: row;
 
             .UNX-product-card {
                 flex: 0.4;
             }
-            .-details{
+            .-details {
                 flex: 0.6;
                 min-width: 0;
             }
@@ -17,12 +15,11 @@
     }
 }
 
-.UNX-productCard__container{
-
-    a{
+.UNX-productCard__container {
+    a {
         text-decoration: none;
 
-        .-image{
+        .-image {
             height: 290px;
             object-fit: contain;
             max-width: 100%;
@@ -30,9 +27,7 @@
     }
     position: relative;
 
-    
-
-    .-title{
+    .-title {
         color: #0a0b0c;
         font-size: 16px;
         font-weight: 600;
@@ -43,23 +38,23 @@
         margin-bottom: 10px;
     }
 
-    .-details{
+    .-details {
         display: flex;
         justify-content: center;
         flex-direction: column;
     }
 
-    .-price{
+    .-price {
         color: #0a0b0c;
         font-size: 14px;
         font-weight: 600;
         white-space: nowrap;
 
-        .-strike{
+        .-strike {
             color: #e75178;
             font-size: 14px;
             text-decoration: line-through;
-            display:inline-block;
+            display: inline-block;
             margin-left: 10px;
         }
     }

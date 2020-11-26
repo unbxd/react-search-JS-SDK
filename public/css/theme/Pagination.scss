@@ -1,22 +1,21 @@
-.UNX-pageNavigation__container{
+.UNX-pageNavigation__container {
     display: flex;
     justify-content: flex-end;
     font-size: 14px;
 
-    .UNX-pageNavigation__button{
-
+    .UNX-pageNavigation__button {
         padding: 3px 10px;
         margin: 0 5px;
 
-        &.-selected{
+        &.-selected {
             background-color: #1d2e44;
-            color: #fff
+            color: #fff;
         }
 
-        &.-action{
+        &.-action {
             background: #ddd;
             border-radius: 3px;
-            color: #837a7a
+            color: #837a7a;
         }
     }
 }

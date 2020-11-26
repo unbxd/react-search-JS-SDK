@@ -5,7 +5,7 @@ import { conditionalRenderer } from '../../common/utils';
 import {
     getTextFacetItem,
     getTextFacetFacetCoreMethods,
-    getFormattedTextFacets,
+    getFormattedTextFacets
 } from './utils';
 import { manageStateTypes } from '../../config';
 import GenerateFacets from './generateFacets';
@@ -17,7 +17,7 @@ class TextFacetsContainer extends React.PureComponent {
         const {
             unbxdCore,
             unbxdCoreStatus,
-            FacetItemComponent,
+            facetItemComponent,
             enableApplyFilters,
             helpers: { manageTextFacets, setSelectedFacets },
             selectedFacets,
@@ -37,7 +37,7 @@ class TextFacetsContainer extends React.PureComponent {
             getSelectedFacet,
             getSelectedFacets,
             setPageStart,
-            getResults,
+            getResults
         } = getTextFacetFacetCoreMethods(unbxdCore);
 
         const textFacets = getFacets() || [];
@@ -50,7 +50,7 @@ class TextFacetsContainer extends React.PureComponent {
         const addFacet = ({
             selectedFacetName,
             selectedFacetId,
-            facetData,
+            facetData
         }) => {
             updateFacets({ selectedFacetName, selectedFacetId, facetData });
         };
@@ -80,13 +80,13 @@ class TextFacetsContainer extends React.PureComponent {
                     addFacet({
                         selectedFacetName: facetName,
                         selectedFacetId: dataId,
-                        facetData,
+                        facetData
                     });
                 isSelected &&
                     !enableApplyFilters &&
                     removeFacet({
                         selectedFacetName: facetName,
-                        selectedFacetId: dataId,
+                        selectedFacetId: dataId
                     });
             };
             executeCallback(onFacetClick, [facetName, !isSelected], onFinish);
@@ -138,9 +138,9 @@ class TextFacetsContainer extends React.PureComponent {
             onFacetClick: handleFacetClick,
             onFacetObjectReset: handleFacetObjectReset,
             setSelectedFacets,
-            FacetItemComponent,
+            facetItemComponent,
             label,
-            transform,
+            transform
         };
 
         return { ...data, ...helpers };
@@ -161,16 +161,13 @@ TextFacetsContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
     unbxdCoreStatus: PropTypes.string.isRequired,
     helpers: PropTypes.object.isRequired,
-    FacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    facetItemComponent: PropTypes.element,
     enableApplyFilters: PropTypes.bool.isRequired,
     selectedFacets: PropTypes.object.isRequired,
     label: PropTypes.node,
     collapsible: PropTypes.bool.isRequired,
     searchable: PropTypes.bool.isRequired,
-    onFacetClick: PropTypes.node,
+    onFacetClick: PropTypes.node
 };
 
 export default TextFacetsContainer;

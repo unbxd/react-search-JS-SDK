@@ -1,31 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { cloneElement } from '../../../common/utils';
 import { Button } from '../../../components';
 
-const ApplyFacets = props => {
-  const { showApplyFilter, onApplyFilter, ApplyFilterComponent } = props;
+const ApplyFacets = (props) => {
+    const { showApplyFilter, onApplyFilter, applyFilterComponent } = props;
 
-  if (!showApplyFilter) {
-    return null;
-  }
+    if (!showApplyFilter) {
+        return null;
+    }
 
-  return ApplyFilterComponent ? (
-    <ApplyFilterComponent onApplyFilter={onApplyFilter} />
-  ) : (
-    <Button
-      className="UNX-facet__action -applyFilters"
-      onClick={onApplyFilter}
-    >
-      Apply Facets
-    </Button>
-  );
+    return applyFilterComponent ? (
+        cloneElement(applyFilterComponent, { onApplyFilter })
+    ) : (
+        <Button
+            className="UNX-facet__action -applyFilters"
+            onClick={onApplyFilter}
+        >
+            Apply Facets
+        </Button>
+    );
 };
 
 ApplyFacets.propTypes = {
-  showApplyFilter: PropTypes.bool.isRequired,
-  onApplyFilter: PropTypes.func.isRequired,
-  ApplyFilterComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
+    showApplyFilter: PropTypes.bool.isRequired,
+    onApplyFilter: PropTypes.func.isRequired,
+    applyFilterComponent: PropTypes.oneOfType([
+        PropTypes.element,
+        PropTypes.func
+    ])
 };
 
 export default ApplyFacets;

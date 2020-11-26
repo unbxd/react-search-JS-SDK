@@ -22,7 +22,7 @@ const CombinedFacets = (props) => {
                     unbxdCoreStatus,
                     helpers,
                     unbxdState,
-                    priceUnit,
+                    priceUnit
                 } = appState;
                 const { enableApplyFilters, selectedFacets } = unbxdState;
 
@@ -74,14 +74,14 @@ CombinedFacets.propTypes = {
      */
     TextFacetItemComponent: PropTypes.oneOfType([
         PropTypes.element,
-        PropTypes.func,
+        PropTypes.func
     ]),
     /**
      * Custom Range Facet item component
      */
     RangeFacetItemComponent: PropTypes.oneOfType([
         PropTypes.element,
-        PropTypes.func,
+        PropTypes.func
     ]),
     /**
      * Custom transform method
@@ -94,7 +94,7 @@ CombinedFacets.propTypes = {
     /**
      * Callback for facet click.
      */
-    onFacetClick: PropTypes.node,
+    onFacetClick: PropTypes.node
 };
 
 export default CombinedFacets;

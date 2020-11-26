@@ -3,7 +3,7 @@ export const getFormattedSort = (sortBy, activeSort, idx) => {
         activeSort === undefined
             ? false
             : `${sortBy.field}|${sortBy.order}` === activeSort.value;
-    isSelected = idx === 0 && activeSort.value === "" ? true : isSelected;
+    isSelected = idx === 0 && activeSort.value === '' ? true : isSelected;
     return { ...sortBy, value: `${sortBy.field}|${sortBy.order}`, isSelected };
 };
 

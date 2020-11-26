@@ -4,11 +4,11 @@ import { conditionalRenderer } from '../../common/utils';
 import {
     getTextFacetItem,
     getTextFacetFacetCoreMethods,
-    getFormattedTextFacets,
+    getFormattedTextFacets
 } from '../textFacets/utils';
 import {
     getRangeFacetCoreMethods,
-    getFormattedRangeFacets,
+    getFormattedRangeFacets
 } from '../rangeFacets/utils';
 import { manageStateTypes } from '../../config';
 import GenerateCombinedFacets from './generateCombinedFacets';
@@ -32,7 +32,7 @@ class CombinedFacetsContainer extends React.PureComponent {
             enableViewMore,
             minViewMore,
             label,
-            onFacetClick,
+            onFacetClick
         } = this.props;
 
         const {
@@ -42,7 +42,7 @@ class CombinedFacetsContainer extends React.PureComponent {
             getSelectedFacet,
             getSelectedFacets,
             setPageStart,
-            getResults,
+            getResults
         } = getTextFacetFacetCoreMethods(unbxdCore);
 
         const {
@@ -50,7 +50,7 @@ class CombinedFacetsContainer extends React.PureComponent {
             setRangeFacet,
             applyRangeFacet,
             clearARangeFacet,
-            selectedRangeFacets,
+            selectedRangeFacets
         } = getRangeFacetCoreMethods(unbxdCore);
 
         const textFacets = getFacets() || [];
@@ -70,7 +70,7 @@ class CombinedFacetsContainer extends React.PureComponent {
 
         const combinedFacets = [
             ...formattedTextFacets,
-            ...formattedRangeFacets,
+            ...formattedRangeFacets
         ];
 
         combinedFacets &&
@@ -82,7 +82,7 @@ class CombinedFacetsContainer extends React.PureComponent {
         //Methods to handle click on facets
         const removeTextFacet = ({
             selectedFacetName,
-            selectedFacetId = null,
+            selectedFacetId = null
         }) => {
             deleteAFacet(selectedFacetName, selectedFacetId);
         };
@@ -90,7 +90,7 @@ class CombinedFacetsContainer extends React.PureComponent {
         const addTextFacet = ({
             selectedFacetName,
             selectedFacetId,
-            facetData,
+            facetData
         }) => {
             updateFacets({ selectedFacetName, selectedFacetId, facetData });
         };
@@ -120,13 +120,13 @@ class CombinedFacetsContainer extends React.PureComponent {
                     addFacet({
                         selectedFacetName: facetName,
                         selectedFacetId: dataId,
-                        facetData,
+                        facetData
                     });
                 isSelected &&
                     !enableApplyFilters &&
                     removeFacet({
                         selectedFacetName: facetName,
-                        selectedFacetId: dataId,
+                        selectedFacetId: dataId
                     });
             };
             executeCallback(onFacetClick, [facetName, !isSelected], onFinish);
@@ -195,7 +195,7 @@ class CombinedFacetsContainer extends React.PureComponent {
             removeRangeFacet,
             selectedRangeFacets,
             RangeFacetItemComponent,
-            transform,
+            transform
         };
 
         return { ...data, ...helpers };
@@ -221,15 +221,15 @@ CombinedFacetsContainer.propTypes = {
     searchable: PropTypes.bool,
     TextFacetItemComponent: PropTypes.oneOfType([
         PropTypes.element,
-        PropTypes.func,
+        PropTypes.func
     ]),
     RangeFacetItemComponent: PropTypes.oneOfType([
         PropTypes.element,
-        PropTypes.func,
+        PropTypes.func
     ]),
     transform: PropTypes.func,
     label: PropTypes.node,
-    onFacetClick: PropTypes.node,
+    onFacetClick: PropTypes.node
 };
 
 export default CombinedFacetsContainer;

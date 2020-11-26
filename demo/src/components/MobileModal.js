@@ -22,11 +22,11 @@ const MobileModal = (props) => {
             <Modal.Body>
                 <Sorter />
                 <ProductsSize />
-                <FacetApplyClear handleClose={handleClose}/>
+                <FacetApplyClear handleClose={handleClose} />
                 <MultilevelFilters showLabel={false} />
                 <RangeFilters />
                 <TextFilters />
-                <FacetApplyClear handleClose={handleClose}/>
+                <FacetApplyClear handleClose={handleClose} />
             </Modal.Body>
         </Modal>
     );

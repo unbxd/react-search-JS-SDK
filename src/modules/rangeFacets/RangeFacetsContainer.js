@@ -9,7 +9,7 @@ class RangeFacetsContainer extends React.PureComponent {
     getRangeFacetsProps() {
         const {
             unbxdCore,
-            FacetItemComponent,
+            facetItemComponent,
             enableApplyFilters,
             priceUnit,
             label,
@@ -18,7 +18,7 @@ class RangeFacetsContainer extends React.PureComponent {
             transform,
             enableViewMore,
             minViewMore,
-            applyMultiple,
+            applyMultiple
         } = this.props;
 
         const {
@@ -26,7 +26,7 @@ class RangeFacetsContainer extends React.PureComponent {
             setRangeFacet,
             applyRangeFacet,
             clearARangeFacet,
-            selectedRangeFacets,
+            selectedRangeFacets
         } = getRangeFacetCoreMethods(unbxdCore);
 
         const rangeFacets = getRangeFacets();
@@ -58,7 +58,7 @@ class RangeFacetsContainer extends React.PureComponent {
             addRangeFacet,
             applyRangeFacet,
             removeRangeFacet,
-            FacetItemComponent,
+            facetItemComponent,
             enableApplyFilters,
             priceUnit,
             label,
@@ -87,16 +87,13 @@ RangeFacetsContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
     unbxdCoreStatus: PropTypes.string.isRequired,
     helpers: PropTypes.object.isRequired,
-    FacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    facetItemComponent: PropTypes.element,
     enableApplyFilters: PropTypes.bool.isRequired,
     priceUnit: PropTypes.string.isRequired,
     label: PropTypes.node,
     collapsible: PropTypes.bool,
     applyMultiple: PropTypes.bool,
-    onFacetClick: PropTypes.node,
+    onFacetClick: PropTypes.node
 };
 
 export default RangeFacetsContainer;

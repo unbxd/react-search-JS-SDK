@@ -10,7 +10,7 @@ export const getFormattedTextFacets = (textFacets, selectedFacets) => {
             const currentFacetObj = {
                 facetType: facetTypes.TEXT_FACET,
                 ...facetObj,
-                isSelected: true,
+                isSelected: true
             };
 
             const activeFacets = selectedFacets[facetName];
@@ -22,12 +22,12 @@ export const getFormattedTextFacets = (textFacets, selectedFacets) => {
                     return {
                         ...hit,
                         facetName,
-                        isSelected: true,
+                        isSelected: true
                     };
                 } else {
                     return {
                         ...facetitem,
-                        facetName,
+                        facetName
                     };
                 }
             });
@@ -36,12 +36,12 @@ export const getFormattedTextFacets = (textFacets, selectedFacets) => {
         } else {
             const currentFacetObj = {
                 ...facetObj,
-                facetType: facetTypes.TEXT_FACET,
+                facetType: facetTypes.TEXT_FACET
             };
             const values = currentFacetObj.values.map((facetitem) => {
                 return {
                     ...facetitem,
-                    facetName,
+                    facetName
                 };
             });
             currentFacetObj['values'] = values;
@@ -72,6 +72,6 @@ export const getTextFacetFacetCoreMethods = (unbxdCore) => {
         getSelectedFacets,
         getFacets,
         setPageStart,
-        getResults,
+        getResults
     };
 };

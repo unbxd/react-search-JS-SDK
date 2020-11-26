@@ -4,33 +4,33 @@ import { Sort } from '@unbxd-ui/react-search-sdk';
 
 const sortOptions = [
     {
-        label: 'Most Relevant',
+        label: 'Most Relevant'
     },
     {
         label: 'Newest',
         field: 'Date_Added',
-        order: 'desc',
+        order: 'desc'
     },
     {
         label: 'Lowest Price',
         field: 'price',
-        order: 'asc',
+        order: 'asc'
     },
     {
         label: 'Highest Price',
         field: 'price',
-        order: 'desc',
+        order: 'desc'
     },
     {
         label: 'Brand A-Z',
         field: 'title',
-        order: 'asc',
+        order: 'asc'
     },
     {
         label: 'Brand Z-A',
         field: 'title',
-        order: 'desc',
-    },
+        order: 'desc'
+    }
 ];
 const label = <div className="-label">Sort by</div>;
 const onSortChange = (field, order) => {
@@ -60,7 +60,7 @@ const Sorter = () => {
             label={label}
             onSortChange={onSortChange}
             //displayType={'LIST'}
-            //SortItemComponent={SortItemComponent}
+            //sortItemComponent={<SortItemComponent/>}
         />
     );
 };

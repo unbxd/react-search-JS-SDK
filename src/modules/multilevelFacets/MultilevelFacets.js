@@ -20,7 +20,7 @@ const MultilevelFacets = (props) => {
                     unbxdCore,
                     unbxdCoreStatus,
                     helpers,
-                    productType,
+                    productType
                 } = appState;
 
                 return (
@@ -45,7 +45,7 @@ MultilevelFacets.defaultProps = {
     collapsible: false,
     searchable: false,
     minViewMore: 3,
-    enableViewMore: false,
+    enableViewMore: false
 };
 
 MultilevelFacets.propTypes = {
@@ -74,12 +74,9 @@ MultilevelFacets.propTypes = {
      */
     searchable: PropTypes.bool,
     /**
-     * Custom Multilevel facet component
+     * Custom facet element
      */
-    FacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    facetItemComponent: PropTypes.element,
     /**
      * Label for the component.
      */
@@ -87,15 +84,15 @@ MultilevelFacets.propTypes = {
     /**
      * Callback for facet click.
      */
-    onFacetClick: PropTypes.node,
+    onFacetClick: PropTypes.func,
     /**
      * Min value for viewMore to be enabled.
      */
     minViewMore: PropTypes.number,
     /**
      * Bool value to enable disable viewMore.
-     */ 
-    enableViewMore: PropTypes.bool,
+     */
+    enableViewMore: PropTypes.bool
 };
 
 export default MultilevelFacets;

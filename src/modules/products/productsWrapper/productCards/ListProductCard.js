@@ -16,7 +16,7 @@ class ListProductCard extends React.Component {
             variantAttributesMap,
             showSwatches,
             swatchAttributesMap,
-            groupBy,
+            groupBy
         } = this.props;
 
         //Get the datas from the product bases on attributesMap and create the card
@@ -27,7 +27,7 @@ class ListProductCard extends React.Component {
             variantAttributesMap,
             showSwatches,
             swatchAttributesMap,
-            groupBy,
+            groupBy
         });
 
         this.state = { productValues };
@@ -48,14 +48,14 @@ class ListProductCard extends React.Component {
                                 return { ...swatchObject, isSelected: false };
                             }
                         }
-                    ),
-                },
+                    )
+                }
             };
         });
     };
 
     render() {
-        const { SwatchItemComponent, idx, onClick, priceUnit } = this.props;
+        const { swatchItemComponent, idx, onClick, priceUnit } = this.props;
         const { productValues } = this.state;
         const activeSwatch = productValues['swatches'].find((swatch) => {
             return swatch.isSelected;
@@ -69,7 +69,7 @@ class ListProductCard extends React.Component {
             productUrl,
             price,
             sellingPrice,
-            swatches,
+            swatches
         } = product;
 
         const prank = idx + 1;
@@ -94,7 +94,7 @@ class ListProductCard extends React.Component {
                     <div className="UNX-swatch__container">
                         <List
                             items={swatches}
-                            ListItem={SwatchItemComponent || SwatchItem}
+                            ListItem={swatchItemComponent || SwatchItem}
                             idAttribute={'swatchId'}
                             onClick={this.onSwatchClick}
                             className="UNX-swatch__list"
@@ -139,13 +139,10 @@ ListProductCard.propTypes = {
     showSwatches: PropTypes.bool,
     swatchAttributesMap: PropTypes.object,
     groupBy: PropTypes.string,
-    SwatchItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    swatchItemComponent: PropTypes.element,
     idx: PropTypes.number,
     onClick: PropTypes.func.isRequired,
-    priceUnit: PropTypes.string.isRequired,
+    priceUnit: PropTypes.string.isRequired
 };
 
 export default ListProductCard;

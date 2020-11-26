@@ -41,7 +41,7 @@ const Shorts = () => {
                     <FacetApplyClear />
                     <RangeFilters />
                     {/* <RangeViews/> */}
-                    <TextFilters /> 
+                    <TextFilters />
                     {/* <CombinedFilters/> */}
                     <FacetApplyClear />
                 </div>

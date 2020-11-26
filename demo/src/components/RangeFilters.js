@@ -22,7 +22,7 @@ const RangeFacetsRender = (props) => {
         addRangeFacet({
             facetName,
             start: valMin,
-            end: valMax,
+            end: valMax
         });
         //don't call in case of apply
         //applyRangeFacet();
@@ -38,7 +38,7 @@ const RangeFacetsRender = (props) => {
                     sliderMin,
                     sliderMax,
                     rangeMin,
-                    rangeMax,
+                    rangeMax
                 } = facet;
                 const onChangeHandler = handleSliderChange.bind(
                     null,
@@ -108,7 +108,7 @@ const RangeFilters = () => {
     return (
         <RangeFacets
             transform={transform}
-            FacetItemComponent={FacetItemComponent}
+            facetItemComponent={<FacetItemComponent />}
             collapsible={true}
             enableViewMore={true}
             minViewMore={3}

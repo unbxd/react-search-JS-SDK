@@ -6,7 +6,7 @@ import ListView from './views/ListView';
 import NoProducts from './NoProducts';
 import { getProductPids } from '../utils';
 import { paginationTypes } from '../../../config';
-import { debounce } from '../../../common/utils';
+import { debounce, cloneElement } from '../../../common/utils';
 import { DEBOUNCE_TIME } from '../utils';
 import { searchStatus, viewTypes } from '../../../config';
 import { trackProductImpressions } from '../../analytics';
@@ -19,7 +19,7 @@ class ProductsWrapper extends React.PureComponent {
         this.state = {
             products,
             hasMoreResults: true,
-            start: 0,
+            start: 0
         };
 
         this.productsContainerRef = createRef();
@@ -64,7 +64,7 @@ class ProductsWrapper extends React.PureComponent {
             productIdAttribute,
             viewType,
             unbxdCoreStatus,
-            numberOfProducts,
+            numberOfProducts
         } = this.props;
 
         if (
@@ -124,7 +124,7 @@ class ProductsWrapper extends React.PureComponent {
                     : this.setState({
                           products: [...prevState.products, ...products],
                           start,
-                          hasMoreResults: !loadedAllResults,
+                          hasMoreResults: !loadedAllResults
                       });
 
                 return;
@@ -157,18 +157,18 @@ class ProductsWrapper extends React.PureComponent {
             variantAttributesMap,
             paginationType,
             showVariants,
-            ProductItemComponent,
+            productItemComponent,
             showSwatches,
             swatchAttributesMap,
             groupBy,
-            SwatchItemComponent,
-            LoadMoreComponent,
+            swatchItemComponent,
+            loadMoreComponent,
             unbxdCoreStatus,
-            LoaderComponent,
+            loaderComponent,
             showLoader,
             numberOfProducts,
             ZeroResultsComponent,
-            priceUnit,
+            priceUnit
         } = this.props;
         const { products, hasMoreResults } = this.state;
 
@@ -204,13 +204,13 @@ class ProductsWrapper extends React.PureComponent {
             onProductClick,
             showVariants,
             variantAttributesMap,
-            ProductItemComponent,
+            productItemComponent,
             showSwatches,
             swatchAttributesMap,
             groupBy,
-            SwatchItemComponent,
+            swatchItemComponent,
             viewType,
-            priceUnit,
+            priceUnit
         };
 
         const productViewsRender = (
@@ -226,10 +226,10 @@ class ProductsWrapper extends React.PureComponent {
                 {productViewsRender}
 
                 {displayClickNScrollTrigger &&
-                    (LoadMoreComponent ? (
-                        <LoadMoreComponent
-                            loadMoreProducts={this.loadMoreProducts}
-                        />
+                    (loadMoreComponent ? (
+                        cloneElement(loadMoreComponent, {
+                            loadMoreProducts: this.loadMoreProducts
+                        })
                     ) : (
                         <div
                             className="UNX-productLoadMore"
@@ -240,7 +240,7 @@ class ProductsWrapper extends React.PureComponent {
                         </div>
                     ))}
 
-                {displayLoader && <LoaderComponent />}
+                {displayLoader && loaderComponent}
             </div>
         );
     }
@@ -257,24 +257,16 @@ ProductsWrapper.propTypes = {
     paginationType: PropTypes.string,
     heightDiffToTriggerNextPage: PropTypes.number,
     showVariants: PropTypes.bool.isRequired,
-    ProductItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    productItemComponent: PropTypes.element,
     showSwatches: PropTypes.bool,
     swatchAttributesMap: PropTypes.object,
     groupBy: PropTypes.string,
-    SwatchItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    swatchItemComponent: PropTypes.element,
     numberOfProducts: PropTypes.number.isRequired,
     start: PropTypes.number.isRequired,
-    ZeroResultsComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    ZeroResultsComponent: PropTypes.element,
     priceUnit: PropTypes.string.isRequired,
+    loaderComponent: PropTypes.element
 };
 
 export default ProductsWrapper;

@@ -22,7 +22,7 @@ class SearchBoxContainer extends React.PureComponent {
 
     componentDidMount() {
         const {
-            helpers: { setSearchBoxConfiguration },
+            helpers: { setSearchBoxConfiguration }
         } = this.props;
         const { defaultSearch = '' } = this.props;
         if (typeof defaultSearch === 'string' && defaultSearch.length) {
@@ -56,10 +56,10 @@ class SearchBoxContainer extends React.PureComponent {
         const { query } = this.state;
         const {
             onSubmit,
-            helpers: { resetSearch },
+            helpers: { resetSearch }
         } = this.props;
         const {
-            helpers: { setSearchBoxConfiguration },
+            helpers: { setSearchBoxConfiguration }
         } = this.props;
         if (!query.replace(/\s/g, '').length) {
             return false;
@@ -93,10 +93,10 @@ class SearchBoxContainer extends React.PureComponent {
             autoFocus,
             clearable,
             showLoader,
-            InputComponent,
-            SubmitComponent,
-            ClearComponent,
-            placeholder,
+            inputComponent,
+            submitComponent,
+            clearComponent,
+            placeholder
         } = this.props;
 
         const lastSearchedQuery = unbxdCore.getSearchQuery() || '';
@@ -109,7 +109,7 @@ class SearchBoxContainer extends React.PureComponent {
             lastSearchedQuery,
             placeholder,
             productType,
-            ...this.state,
+            ...this.state
         };
 
         const helpers = {
@@ -117,9 +117,9 @@ class SearchBoxContainer extends React.PureComponent {
             onSearchBoxSubmit: this.onSearchBoxSubmit,
             onSearchBoxClear: this.onSearchBoxClear,
             setSearchBoxQuery: this.setSearchBoxQuery,
-            InputComponent,
-            SubmitComponent,
-            ClearComponent,
+            inputComponent,
+            submitComponent,
+            clearComponent
         };
 
         return { ...data, ...helpers };
@@ -145,12 +145,12 @@ SearchBoxContainer.propTypes = {
     onSubmit: PropTypes.func,
     onClear: PropTypes.func,
     showLoader: PropTypes.bool,
-    InputComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-    SubmitComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-    ClearComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    inputComponent: PropTypes.element,
+    submitComponent: PropTypes.element,
+    clearComponent: PropTypes.element,
     defaultSearch: PropTypes.string,
     placeholder: PropTypes.string,
-    productType: PropTypes.string,
+    productType: PropTypes.string
 };
 
 export default SearchBoxContainer;

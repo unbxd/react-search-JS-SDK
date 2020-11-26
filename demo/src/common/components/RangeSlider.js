@@ -12,7 +12,7 @@ const RangeSlider = (props) => {
 
     const marks = {
         [min]: <strong>{min}$</strong>,
-        [max]: <strong>{max}$</strong>,
+        [max]: <strong>{max}$</strong>
     };
 
     return (

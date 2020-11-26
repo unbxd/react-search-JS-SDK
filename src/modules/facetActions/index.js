@@ -1,3 +1,3 @@
 import FacetActions from './FacetActions';
 
-export default FacetActions
+export default FacetActions;

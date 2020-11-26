@@ -25,7 +25,7 @@ FacetItem.propTypes = {
     itemData: PropTypes.object.isRequired,
     facetName: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
-    priceUnit: PropTypes.string.isRequired,
+    priceUnit: PropTypes.string.isRequired
 };
 
 export default FacetItem;

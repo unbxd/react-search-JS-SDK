@@ -1,6 +1,4 @@
 export const getFacetCoreMethods = (unbxdCore) => {
-
-
     const deleteAFacet = unbxdCore.deleteAFacet.bind(unbxdCore);
     const getSelectedFacets = unbxdCore.getSelectedFacets.bind(unbxdCore);
     const getFacets = unbxdCore.getFacets.bind(unbxdCore);
@@ -21,5 +19,5 @@ export const getFacetCoreMethods = (unbxdCore) => {
         selectedRangeFacets,
         getBreadCrumbsList,
         deleteCategoryFilter
-    }
-}
+    };
+};

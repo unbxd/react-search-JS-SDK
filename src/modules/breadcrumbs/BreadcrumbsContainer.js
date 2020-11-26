@@ -10,16 +10,16 @@ class BreadcrumbsContainer extends React.PureComponent {
     getBreadcrumbProps() {
         const {
             unbxdCore,
-            Root,
+            root,
             separator,
-            BreadcrumbItemComponent,
-            productType,
+            breadcrumbItemComponent,
+            productType
         } = this.props;
 
         const {
             getBreadCrumbsList,
             deleteCategoryFilter,
-            getResults,
+            getResults
         } = getFacetCoreMethods(unbxdCore);
 
         const breadCrumbsList = getBreadCrumbsList();
@@ -32,7 +32,10 @@ class BreadcrumbsContainer extends React.PureComponent {
                 productType === productTypes.CATEGORY &&
                 typeof setCategoryId === 'function'
             ) {
-                const getUpdatedResults = setCategoryId(categoryObject, unbxdCore);
+                const getUpdatedResults = setCategoryId(
+                    categoryObject,
+                    unbxdCore
+                );
                 if (getUpdatedResults) {
                     getResults();
                 }
@@ -45,9 +48,9 @@ class BreadcrumbsContainer extends React.PureComponent {
         return {
             onBreadCrumbClick: handleBreadCrumbClick,
             breadCrumbsList,
-            Root,
+            root,
             separator,
-            BreadcrumbItemComponent,
+            breadcrumbItemComponent
         };
     }
 
@@ -66,17 +69,10 @@ BreadcrumbsContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
     unbxdCoreStatus: PropTypes.string.isRequired,
     helpers: PropTypes.object.isRequired,
-    Root: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-        PropTypes.node,
-    ]),
+    root: PropTypes.oneOfType([PropTypes.element, PropTypes.node]),
     separator: PropTypes.node,
-    BreadcrumbItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
-    productType: PropTypes.string.isRequired,
+    breadcrumbItemComponent: PropTypes.element,
+    productType: PropTypes.string.isRequired
 };
 
 export default BreadcrumbsContainer;

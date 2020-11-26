@@ -1,12 +1,12 @@
 export const scrollTop = () => {
     window.scrollTo({
         top: 0,
-        behavior: 'smooth',
+        behavior: 'smooth'
     });
 };
 
 export const srollTopIE = () => {
-    document.documentElement.scrollTop = x
+    document.documentElement.scrollTop = x;
 };
 
 export const debounce = (func, wait, immediate) => {

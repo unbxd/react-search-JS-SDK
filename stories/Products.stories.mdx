@@ -16,7 +16,7 @@ class ProductItemComponent extends React.Component {
             idAttribute,
             showVariants,
             showSwatches,
-            swatchAttributesMap,
+            swatchAttributesMap
         } = this.props;
         this.handleSwatchClick = this.handleSwatchClick.bind(this);
         this.state = {
@@ -25,8 +25,8 @@ class ProductItemComponent extends React.Component {
                 showVariants,
                 showSwatches,
                 swatchAttributesMap,
-                idAttribute,
-            }),
+                idAttribute
+            })
         };
     }
     getParsedProduct({ itemData, idAttribute }) {
@@ -36,7 +36,7 @@ class ProductItemComponent extends React.Component {
                 swatchId: variant.variantId,
                 imageUrl: variant.variant_image_array[0],
                 swatchImageUrl: variant.variant_overhead_swatch,
-                active: index === 0 ? true : false,
+                active: index === 0 ? true : false
             };
         });
         const productValues = {
@@ -44,7 +44,7 @@ class ProductItemComponent extends React.Component {
             imageUrl,
             title,
             productUrl,
-            swatchValues,
+            swatchValues
         };
         return productValues;
     }
@@ -60,8 +60,8 @@ class ProductItemComponent extends React.Component {
                         } else {
                             return { ...swatch, active: false };
                         }
-                    }),
-                },
+                    })
+                }
             };
         });
     }
@@ -140,7 +140,7 @@ const attributesMap = {
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'min_cheapest_default_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 const variantAttributesMap = {
     productName: 'title',
@@ -149,14 +149,14 @@ const variantAttributesMap = {
     price: 'v_default_price',
     productUrl: 'variant_productUrl',
     swatchImage: 'variant_overhead_swatch',
-    variant_color: 'variant_color',
+    variant_color: 'variant_color'
 };
 const swatchAttributesMap = {
     swatchId: 'variantId',
     swatchImageUrl: 'variant_overhead_swatch',
     imageUrl: 'variant_image_array',
     price: 'v_default_price',
-    productUrl: 'variant_productUrl',
+    productUrl: 'variant_productUrl'
 };
 const SwatchItemComponent = ({ itemData, onClick }) => {
     const { swatchImageUrl, swatchId, active } = itemData;
@@ -192,7 +192,7 @@ const attributesMap = {
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'min_cheapest_default_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 ```
 
@@ -292,7 +292,7 @@ const variantAttributesMap = {
     price: 'v_default_price',
     productUrl: 'variant_productUrl',
     swatchImage: 'variant_overhead_swatch',
-    variant_color: 'variant_color',
+    variant_color: 'variant_color'
 };
 ```
 
@@ -640,7 +640,7 @@ const swatchAttributesMap = {
     swatchImageUrl: 'variant_overhead_swatch',
     imageUrl: 'variant_image_array',
     price: 'v_default_price',
-    productUrl: 'variant_productUrl',
+    productUrl: 'variant_productUrl'
 };
 ```
 
@@ -754,7 +754,7 @@ class ProductItemComponent extends React.Component {
             idAttribute,
             showVariants,
             showSwatches,
-            swatchAttributesMap,
+            swatchAttributesMap
         } = this.props;
         this.handleSwatchClick = this.handleSwatchClick.bind(this);
         this.state = {
@@ -763,8 +763,8 @@ class ProductItemComponent extends React.Component {
                 showVariants,
                 showSwatches,
                 swatchAttributesMap,
-                idAttribute,
-            }),
+                idAttribute
+            })
         };
     }
     getParsedProduct({ itemData, idAttribute }) {
@@ -774,7 +774,7 @@ class ProductItemComponent extends React.Component {
                 swatchId: variant.variantId,
                 imageUrl: variant.variant_image_array[0],
                 swatchImageUrl: variant.variant_overhead_swatch,
-                active: index === 0 ? true : false,
+                active: index === 0 ? true : false
             };
         });
         const productValues = {
@@ -782,7 +782,7 @@ class ProductItemComponent extends React.Component {
             imageUrl,
             title,
             productUrl,
-            swatchValues,
+            swatchValues
         };
         return productValues;
     }
@@ -798,8 +798,8 @@ class ProductItemComponent extends React.Component {
                         } else {
                             return { ...swatch, active: false };
                         }
-                    }),
-                },
+                    })
+                }
             };
         });
     }
@@ -963,7 +963,7 @@ class ProductItemComponent extends React.Component {
                     LoadMoreComponent,
                     ZeroResultsComponent,
                     LoaderComponent,
-                    priceUnit,
+                    priceUnit
                 }) => {
                     return <div>render Products</div>;
                 }}

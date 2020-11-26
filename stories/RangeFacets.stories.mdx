@@ -10,14 +10,14 @@ const attributesMap = {
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'unbxd_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 const variantAttributesMap = {
     productName: 'title',
     uniqueId: 'vId',
     imageUrl: 'imageUrl',
     price: 'v_unbxd_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 const FacetItemComponent = ({ itemData, facetName, onClick, priceUnit }) => {
     const { from, end, isSelected = false } = itemData;
@@ -161,7 +161,7 @@ The custom component will receive the following props
                     priceUnit,
                     FacetSliderItemComponent,
                     FacetItemComponent,
-                    label,
+                    label
                 }) => {
                     return <div>render RangeFacets</div>;
                 }}

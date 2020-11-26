@@ -21,7 +21,7 @@ const RangeFacets = (props) => {
                     unbxdCoreStatus,
                     helpers,
                     unbxdState,
-                    priceUnit,
+                    priceUnit
                 } = appState;
                 const { enableApplyFilters } = unbxdState;
 
@@ -46,7 +46,7 @@ RangeFacets.defaultProps = {
     collapsible: true,
     minViewMore: 3,
     enableViewMore: false,
-    applyMultiple: false,
+    applyMultiple: false
 };
 
 RangeFacets.propTypes = {
@@ -77,10 +77,7 @@ RangeFacets.propTypes = {
     /**
      * Custom facet item component.
      */
-    FacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    facetItemComponent: PropTypes.element
 };
 
 export default RangeFacets;

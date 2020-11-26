@@ -10,13 +10,13 @@ const attributesMap = {
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'min_cheapest_default_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 const variantAttributesMap = {
     productName: 'title',
     uniqueId: 'variantId',
     imageUrl: 'imageUrl',
-    price: 'v_unbxd_price',
+    price: 'v_unbxd_price'
 };
 const ViewItemComponent = ({ itemData, onClick }) => {
     const { viewType, isSelected } = itemData;
@@ -187,7 +187,7 @@ const ViewItemComponent = ({ itemData, onClick }) => {
                     ViewItemComponent,
                     numberOfProducts,
                     validViewTypes,
-                    handleViewTypeClick,
+                    handleViewTypeClick
                 }) => {
                     return <div>render ViewTypes</div>;
                 }}

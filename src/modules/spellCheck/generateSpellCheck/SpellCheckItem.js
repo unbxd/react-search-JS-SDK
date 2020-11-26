@@ -31,9 +31,9 @@ const SpellCheckItem = ({ itemData, currentQuery, onClick }) => {
 SpellCheckItem.propTypes = {
     itemData: PropTypes.shape({
         suggestion: PropTypes.string,
-        frequency: PropTypes.string,
+        frequency: PropTypes.string
     }),
-    currentQuery: PropTypes.string.isRequired,
+    currentQuery: PropTypes.string.isRequired
 };
 
 export default SpellCheckItem;

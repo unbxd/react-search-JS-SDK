@@ -9,44 +9,44 @@ import { hasUnbxdSearchWrapperContext } from '../../common/utils';
  * Component to display search meta data.
  */
 const SearchTitle = (props) => {
-  return (
-    <AppContextConsumer>
-      {(appState) => {
-        if (appState === undefined) {
-          hasUnbxdSearchWrapperContext(SearchTitle.displayName);
-        }
+    return (
+        <AppContextConsumer>
+            {(appState) => {
+                if (appState === undefined) {
+                    hasUnbxdSearchWrapperContext(SearchTitle.displayName);
+                }
 
-        const {
-          unbxdCore,
-          unbxdCoreStatus,
-          helpers,
-          unbxdState,
-          productType
-        } = appState;
-        const { paginationType } = unbxdState;
+                const {
+                    unbxdCore,
+                    unbxdCoreStatus,
+                    helpers,
+                    unbxdState,
+                    productType
+                } = appState;
+                const { paginationType } = unbxdState;
 
-        return (
-          <SearchTitleContainer
-            unbxdCore={unbxdCore}
-            unbxdCoreStatus={unbxdCoreStatus}
-            helpers={helpers}
-            productType={productType}
-            paginationType={paginationType}
-            {...props}
-          />
-        );
-      }}
-    </AppContextConsumer>
-  );
+                return (
+                    <SearchTitleContainer
+                        unbxdCore={unbxdCore}
+                        unbxdCoreStatus={unbxdCoreStatus}
+                        helpers={helpers}
+                        productType={productType}
+                        paginationType={paginationType}
+                        {...props}
+                    />
+                );
+            }}
+        </AppContextConsumer>
+    );
 };
 
 SearchTitle.displayName = 'SearchTitle';
 
 SearchTitle.propTypes = {
-  /**
-   * Custom search title item.
-   */
-  SearchTitleItem: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
+    /**
+     * Custom search title item.
+     */
+    searchTitleItem: PropTypes.element
 };
 
 export default SearchTitle;

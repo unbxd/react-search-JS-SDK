@@ -11,11 +11,11 @@ class SelectedFacetsContainer extends React.PureComponent {
     getSelectedFacetsProps = () => {
         const {
             unbxdCore,
-            FacetItemComponent,
+            facetItemComponent,
             priceUnit,
             label,
             getUpdatedResults,
-            productType,
+            productType
         } = this.props;
 
         const {
@@ -27,7 +27,7 @@ class SelectedFacetsContainer extends React.PureComponent {
             setRangeFacet,
             applyRangeFacet,
             getBreadCrumbsList,
-            deleteCategoryFilter,
+            deleteCategoryFilter
         } = getFacetCoreMethods(unbxdCore);
 
         const textFacets = getFacets();
@@ -97,7 +97,7 @@ class SelectedFacetsContainer extends React.PureComponent {
                             activeFacets['textFacets'].push({
                                 ...selectedFacet,
                                 facetName,
-                                type: facetTypes.TEXT_FACET,
+                                type: facetTypes.TEXT_FACET
                             });
                             return true;
                         }
@@ -114,7 +114,7 @@ class SelectedFacetsContainer extends React.PureComponent {
                 activeFacets['rangeFacets'].push({
                     facetName,
                     dataId: name,
-                    type: facetTypes.RANGE_FACET,
+                    type: facetTypes.RANGE_FACET
                 });
             });
         });
@@ -126,7 +126,7 @@ class SelectedFacetsContainer extends React.PureComponent {
                 name,
                 filterField,
                 level,
-                type: facetTypes.MULTILEVEL_FACET,
+                type: facetTypes.MULTILEVEL_FACET
             });
         });
 
@@ -135,9 +135,9 @@ class SelectedFacetsContainer extends React.PureComponent {
             onTextFacetClick: handleTextFacetClick,
             onRangeFacetClick: handleRangeFacetClick,
             onMultilevelFacetClick: handleMultilevelFacetClick,
-            FacetItemComponent,
+            facetItemComponent,
             priceUnit,
-            label,
+            label
         };
     };
 
@@ -154,14 +154,11 @@ class SelectedFacetsContainer extends React.PureComponent {
 
 SelectedFacetsContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
-    FacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    facetItemComponent: PropTypes.element,
     priceUnit: PropTypes.string.isRequired,
     label: PropTypes.node,
     getUpdatedResults: PropTypes.func.isRequired,
-    productType: PropTypes.string.isRequired,
+    productType: PropTypes.string.isRequired
 };
 
 export default SelectedFacetsContainer;

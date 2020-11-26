@@ -11,14 +11,14 @@ const attributesMap = {
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'unbxd_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 const variantAttributesMap = {
     productName: 'title',
     uniqueId: 'vId',
     imageUrl: 'imageUrl',
     price: 'v_unbxd_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 const FacetItemComponent = ({ itemData, onClick }) => {
     const { name, count, isSelected = false } = itemData;
@@ -148,7 +148,7 @@ const FacetItemComponent = ({ itemData, onClick }) => {
                     onFacetClick,
                     onFacetObjectReset,
                     FacetItemComponent,
-                    label,
+                    label
                 }) => {
                     return <div>render TextFacets</div>;
                 }}

@@ -1,4 +1,4 @@
-function getUpdatedResults(config={}) {
+function getUpdatedResults(config = {}) {
     const { query } = config;
     const { unbxdCore } = this.state;
     unbxdCore.setPageStart(0);
