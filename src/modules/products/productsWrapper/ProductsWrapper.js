@@ -139,6 +139,16 @@ class ProductsWrapper extends React.PureComponent {
                 return;
             }
         }
+
+        if (viewType !== prevProps.viewType) {
+            if (paginationType === paginationTypes.INFINITE_SCROLL) {
+                window.removeEventListener('scroll', this.nextPageCallback);
+                window.addEventListener('scroll', this.nextPageCallback);
+            }
+            this.setState({
+                hasMoreResults: true
+            });
+        }
     }
 
     componentWillUnmount() {

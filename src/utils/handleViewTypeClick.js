@@ -5,6 +5,7 @@ function handleViewTypeClick(viewOption) {
         ? viewOption.target.value
         : viewOption.viewType;
     this.state.unbxdCore.options.extraParams['viewType'] = viewType;
+    this.state.unbxdCore.setPageStart(0);
     this.state.unbxdCore.getResults();
     this.setState((currentState) => {
         if (viewType === viewTypes.GRID)

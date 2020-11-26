@@ -53,7 +53,7 @@ const ProductsListing = () => {
     return (
         <Products
             attributesMap={attributesMap}
-            pageSize={20}
+            pageSize={10}
             showVariants={true}
             variantsCount={4}
             variantAttributesMap={variantAttributesMap}
