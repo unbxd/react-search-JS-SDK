@@ -1,13 +1,13 @@
-.UNX-selectedFacets__container{
+.UNX-selectedFacets__container {
     display: flex;
     align-items: baseline;
 
-    .-label{
+    .-label {
         color: #333;
         font-size: 15px;
     }
 
-    .UNX-selectedFacets__item{
+    .UNX-selectedFacets__item {
         background-color: #e1e6e9;
         border-radius: 25px;
         color: #717989;
@@ -26,8 +26,8 @@
         display: inline-block;
         margin-bottom: 5px;
         font-weight: bold;
-    
-        .-cross{
+
+        .-cross {
             cursor: pointer;
             height: 15px;
             position: absolute;
@@ -37,9 +37,9 @@
             width: 15px;
             z-index: 1;
             margin-right: 3px;
-    
+
             &::before {
-                content: " ";
+                content: ' ';
                 display: block;
                 background-image: url(https://demo.unbxd.com/static/demo-express/images/close.svg);
                 pointer-events: none;

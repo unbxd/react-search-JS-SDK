@@ -11,14 +11,14 @@ const attributesMap = {
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'unbxd_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 const variantAttributesMap = {
     productName: 'title',
     uniqueId: 'vId',
     imageUrl: 'imageUrl',
     price: 'v_unbxd_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 const ApplyFilterComponent = ({ onApplyFilter }) => (
     <button className="-apply" onClick={onApplyFilter}>
@@ -340,7 +340,7 @@ const onClear = () => {
                     onClearFilter,
                     noOfPages,
                     ApplyFilterComponent,
-                    ClearFilterComponent,
+                    ClearFilterComponent
                 }) => {
                     return <div>render FacetActions</div>;
                 }}

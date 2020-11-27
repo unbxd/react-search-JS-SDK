@@ -7,7 +7,7 @@ const MobileMenu = (props) => {
         categoryPathLinks,
         handleCategoryLinkClick,
         handleShow,
-        productType,
+        productType
     } = props;
     return (
         <div className="UNX-mobileMenu UNX-mobileView">

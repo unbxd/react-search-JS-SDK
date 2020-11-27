@@ -10,21 +10,21 @@ const attributesMap = {
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'unbxd_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 const variantAttributesMap = {
     productName: 'title',
     uniqueId: 'vId',
     imageUrl: 'imageUrl',
     price: 'v_unbxd_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 const BreadcrumbItemComponent = ({
     itemData,
     Root,
     separator,
     onClick,
-    idx,
+    idx
 }) => {
     const { value } = itemData;
     const handleClick = () => {
@@ -95,7 +95,7 @@ const BreadcrumbItemComponent = ({
     Root,
     separator,
     onClick,
-    idx,
+    idx
 }) => {
     const { value } = itemData;
     const handleClick = () => {
@@ -162,7 +162,7 @@ const BreadcrumbItemComponent = ({
                     separator,
                     breadCrumbsList,
                     removeCategoryFilter,
-                    BreadcrumbItemComponent,
+                    BreadcrumbItemComponent
                 }) => {
                     return <div>render Breadcrumbs</div>;
                 }}

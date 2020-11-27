@@ -5,6 +5,7 @@ function handleViewTypeClick(viewOption) {
         ? viewOption.target.value
         : viewOption.viewType;
     this.state.unbxdCore.options.extraParams['viewType'] = viewType;
+    this.state.unbxdCore.setPageStart(0);
     this.state.unbxdCore.getResults();
     this.setState((currentState) => {
         if (viewType === viewTypes.GRID)
@@ -12,16 +13,16 @@ function handleViewTypeClick(viewOption) {
                 ...currentState,
                 unbxdState: {
                     ...currentState.unbxdState,
-                    viewType: viewTypes.GRID,
-                },
+                    viewType: viewTypes.GRID
+                }
             };
         else
             return {
                 ...currentState,
                 unbxdState: {
                     ...currentState.unbxdState,
-                    viewType: viewTypes.LIST,
-                },
+                    viewType: viewTypes.LIST
+                }
             };
     });
 }

@@ -3,7 +3,9 @@
 
 const whiteListClasses = [];
 
-const gridCols = [...Array(13).keys()].slice(1).map(item => (`grid-cols-${item}`))
+const gridCols = [...Array(13).keys()]
+    .slice(1)
+    .map((item) => `grid-cols-${item}`);
 whiteListClasses.push(...gridCols);
 
 module.exports = whiteListClasses;

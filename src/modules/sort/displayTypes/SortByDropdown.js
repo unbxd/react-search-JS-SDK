@@ -29,16 +29,16 @@ SortByDropdown.propTypes = {
         label: PropTypes.string,
         field: PropTypes.string,
         order: PropTypes.string,
-        value: PropTypes.string,
+        value: PropTypes.string
     }),
     sortByOptions: PropTypes.arrayOf(
         PropTypes.shape({
             label: PropTypes.string,
             field: PropTypes.string,
-            order: PropTypes.string,
+            order: PropTypes.string
         })
     ).isRequired,
-    onSortClick: PropTypes.func.isRequired,
+    onSortClick: PropTypes.func.isRequired
 };
 
 export default SortByDropdown;

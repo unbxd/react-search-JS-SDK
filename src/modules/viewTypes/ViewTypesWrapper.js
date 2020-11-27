@@ -9,10 +9,10 @@ const ViewTypesWrapper = (props) => {
         viewType,
         viewTypes,
         displayType,
-        ViewItemComponent,
+        viewItemComponent,
         numberOfProducts,
         validViewTypes,
-        handleViewTypeClick,
+        handleViewTypeClick
     } = props;
 
     if (validViewTypes.length < 2 || numberOfProducts === 0) {
@@ -33,7 +33,7 @@ const ViewTypesWrapper = (props) => {
                     viewType={viewType}
                     viewTypes={viewTypes}
                     onViewTypeClick={handleViewTypeClick}
-                    ViewItemComponent={ViewItemComponent}
+                    viewItemComponent={viewItemComponent}
                 />
             )}
         </div>
@@ -45,14 +45,14 @@ ViewTypesWrapper.propTypes = {
     viewTypes: PropTypes.arrayOf(
         PropTypes.shape({
             viewType: PropTypes.string.isRequired,
-            isSelected: PropTypes.bool.isRequired,
+            isSelected: PropTypes.bool.isRequired
         })
     ),
     displayType: PropTypes.string,
     numberOfProducts: PropTypes.number.isRequired,
     validViewTypes: PropTypes.array.isRequired,
     handleViewTypeClick: PropTypes.func.isRequired,
-    ViewItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    viewItemComponent: PropTypes.element
 };
 
 export default ViewTypesWrapper;

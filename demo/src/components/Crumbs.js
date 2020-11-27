@@ -2,13 +2,7 @@ import React from 'react';
 
 import { Breadcrumbs } from '@unbxd-ui/react-search-sdk';
 
-const BreadcrumbItemComponent = ({
-    itemData,
-    Root,
-    separator,
-    idx,
-    onClick,
-}) => {
+const BreadcrumbItemComponent = ({ itemData, separator, idx, onClick }) => {
     const { value } = itemData;
     const handleClick = () => {
         onClick(itemData);
@@ -32,9 +26,8 @@ const separator = <span className="UNX-breadcrumb__separator">/</span>;
 const Crumbs = () => {
     return (
         <Breadcrumbs
-            Root={Root}
             separator={separator}
-            BreadcrumbItemComponent={BreadcrumbItemComponent}
+            breadcrumbItemComponent={<BreadcrumbItemComponent />}
         />
     );
 };

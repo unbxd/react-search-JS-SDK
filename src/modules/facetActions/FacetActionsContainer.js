@@ -10,7 +10,7 @@ import { executeCallback } from '../../common/utils';
 class FacetActionsContainer extends React.PureComponent {
     componentDidMount() {
         const {
-            helpers: { setFacetsActionConfiguration },
+            helpers: { setFacetsActionConfiguration }
         } = this.props;
         setFacetsActionConfiguration({ enable: true });
     }
@@ -21,12 +21,12 @@ class FacetActionsContainer extends React.PureComponent {
             unbxdCore,
             showApplyFilter,
             showClearFilter,
-            ApplyFilterComponent,
-            ClearFilterComponent,
+            applyFilterComponent,
+            clearFilterComponent,
             selectedFacets,
             helpers: { manageTextFacets },
             onApply,
-            onClear,
+            onClear
         } = this.props;
 
         const {
@@ -34,7 +34,7 @@ class FacetActionsContainer extends React.PureComponent {
             clearFacets,
             selectedRangeFacets,
             clearARangeFacet,
-            getPaginationInfo,
+            getPaginationInfo
         } = getFacetCoreMethods(unbxdCore);
 
         const { noOfPages = 0 } = getPaginationInfo() || {};
@@ -42,7 +42,7 @@ class FacetActionsContainer extends React.PureComponent {
         const handleApplyFilter = () => {
             const onFinish = () => {
                 //does not work if we pass it as it is.
-                applyFacets({...selectedFacets});
+                applyFacets({ ...selectedFacets });
             };
             executeCallback(onApply, [selectedFacets], onFinish);
         };
@@ -64,8 +64,8 @@ class FacetActionsContainer extends React.PureComponent {
             onApplyFilter: handleApplyFilter,
             onClearFilter: handleClearFilter,
             noOfPages,
-            ApplyFilterComponent,
-            ClearFilterComponent,
+            applyFilterComponent,
+            clearFilterComponent
         };
     }
 
@@ -87,16 +87,10 @@ FacetActionsContainer.propTypes = {
     selectedFacets: PropTypes.object,
     showApplyFilter: PropTypes.bool,
     showClearFilter: PropTypes.bool,
-    ApplyFilterComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
-    ClearFilterComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    applyFilterComponent: PropTypes.element,
+    clearFilterComponent: PropTypes.element,
     onApply: PropTypes.func,
-    onClear: PropTypes.func,
+    onClear: PropTypes.func
 };
 
 export default FacetActionsContainer;

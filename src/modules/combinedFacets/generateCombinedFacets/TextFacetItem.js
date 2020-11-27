@@ -22,9 +22,9 @@ FacetItem.propTypes = {
         name: PropTypes.string,
         count: PropTypes.number,
         dataId: PropTypes.string,
-        isSelected: PropTypes.bool,
+        isSelected: PropTypes.bool
     }).isRequired,
-    onClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired
 };
 
 export default FacetItem;

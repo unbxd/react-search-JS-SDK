@@ -36,7 +36,7 @@ const MultilevelFilters = ({ showLabel = true }) => {
             categoryField={'categoryPath'}
             collapsible={true}
             searchable={true}
-            FacetItemComponent={FacetItemComponent}
+            facetItemComponent={<FacetItemComponent />}
             label={showLabel ? label : undefined}
             minViewMore={3}
             onFacetClick={onFacetClick}

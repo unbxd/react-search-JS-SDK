@@ -19,7 +19,7 @@ class GenerateFacets extends React.Component {
             lastSelectedFacets,
             setSelectedFacets,
             unbxdCoreStatus,
-            transform,
+            transform
         } = this.props;
         if (textFacets !== prevProps.textFacets) {
             const formattedTextFacets = textFacets.map((textFacet) => {
@@ -32,7 +32,7 @@ class GenerateFacets extends React.Component {
                     isOpen: matchTextFacet ? matchTextFacet.isOpen : true,
                     filter: matchTextFacet ? matchTextFacet.filter : '',
                     viewLess: false,
-                    className: 'UNX-facet__list',
+                    className: 'UNX-facet__list'
                 };
             });
 
@@ -96,7 +96,7 @@ class GenerateFacets extends React.Component {
                 if (textFacet.facetName === facetName) {
                     return {
                         ...textFacet,
-                        viewLess: !textFacet['viewLess'],
+                        viewLess: !textFacet['viewLess']
                     };
                 }
                 return { ...textFacet };
@@ -109,12 +109,12 @@ class GenerateFacets extends React.Component {
         const {
             onFacetClick,
             onFacetObjectReset,
-            FacetItemComponent,
+            facetItemComponent,
             label,
             collapsible,
             searchable,
             enableViewMore,
-            minViewMore,
+            minViewMore
         } = this.props;
 
         const { textFacetsList } = this.state;
@@ -134,7 +134,7 @@ class GenerateFacets extends React.Component {
                         isOpen = true,
                         filter = '',
                         viewLess,
-                        isSelected = false,
+                        isSelected = false
                     } = facet;
 
                     let filteredValues = values;
@@ -178,7 +178,7 @@ class GenerateFacets extends React.Component {
                             <List
                                 items={filteredValues}
                                 idAttribute={'dataId'}
-                                ListItem={FacetItemComponent || FacetItem}
+                                ListItem={facetItemComponent || FacetItem}
                                 onClick={onFacetClick}
                                 className={`UNX-facet__list ${
                                     viewLess ? 'UNX-facet__listShowLimited' : ''
@@ -219,13 +219,10 @@ GenerateFacets.propTypes = {
     setSelectedFacets: PropTypes.func.isRequired,
     enableApplyFilters: PropTypes.bool.isRequired,
     unbxdCoreStatus: PropTypes.string.isRequired,
-    FacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    facetItemComponent: PropTypes.element,
     label: PropTypes.node,
     collapsible: PropTypes.bool.isRequired,
-    searchable: PropTypes.bool.isRequired,
+    searchable: PropTypes.bool.isRequired
 };
 
 export default GenerateFacets;

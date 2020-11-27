@@ -20,7 +20,7 @@ const Breadcrumbs = (props) => {
                     unbxdCore,
                     unbxdCoreStatus,
                     helpers,
-                    productType,
+                    productType
                 } = appState;
 
                 return (
@@ -43,24 +43,17 @@ Breadcrumbs.defaultProps = {};
 
 Breadcrumbs.propTypes = {
     /**
-     * Root component of the breadcrumb.
+     * root of the breadcrumb.
      */
-    Root: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-        PropTypes.node,
-    ]),
+    root: PropTypes.oneOfType([PropTypes.element, PropTypes.node]),
     /**
-     * Separator node of the breadcrumb.
+     * Separator of the breadcrumb.
      */
     separator: PropTypes.node,
     /**
-     * Custom breadcrumb component.
+     * Custom breadcrumb element.
      */
-    BreadcrumbItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    breadcrumbItemComponent: PropTypes.element
 };
 
 export default Breadcrumbs;

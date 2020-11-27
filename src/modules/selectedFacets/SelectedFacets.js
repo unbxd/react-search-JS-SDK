@@ -21,7 +21,7 @@ const SelectedFacets = (props) => {
                     unbxdCoreStatus,
                     priceUnit,
                     helpers: { getUpdatedResults },
-                    productType,
+                    productType
                 } = appState;
 
                 return (
@@ -45,14 +45,11 @@ SelectedFacets.propTypes = {
     /**
      * Custom facet item component.
      */
-    FacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    facetItemComponent: PropTypes.element,
     /**
      * Label for the component.
      */
-    label: PropTypes.node,
+    label: PropTypes.node
 };
 
 export default SelectedFacets;

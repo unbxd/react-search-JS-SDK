@@ -3,7 +3,7 @@ import {
     trackCategory,
     trackProductClick,
     trackProductImpressions,
-    trackFacetClick,
+    trackFacetClick
 } from './analytics';
 
 export {
@@ -11,5 +11,5 @@ export {
     trackCategory,
     trackProductClick,
     trackProductImpressions,
-    trackFacetClick,
+    trackFacetClick
 };

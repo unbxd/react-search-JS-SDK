@@ -29,7 +29,7 @@ const SearchBar = (props) => {
             </a>
             <div className="UNX-header__search">
                 <SearchBox
-                    SubmitComponent={SearchButton}
+                    submitComponent={<SearchButton />}
                     placeholder={'Search Wildearth'}
                     onSubmit={handleSubmit}
                 />

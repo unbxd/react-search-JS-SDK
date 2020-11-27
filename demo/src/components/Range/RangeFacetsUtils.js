@@ -38,7 +38,7 @@ export const getFormattedRangeFacets = (rangeFacets, selectedRangeFacets) => {
                 sliderMin,
                 isSelected: true,
                 viewLess: false,
-                className: 'UNX-facet__list',
+                className: 'UNX-facet__list'
             };
             const activeFacets = selectedFacets[facetName];
             const values = currentFacetObj.values.map((facetitem) => {
@@ -62,7 +62,7 @@ export const getFormattedRangeFacets = (rangeFacets, selectedRangeFacets) => {
                         ...facetitem,
                         facetName,
                         isSelected: true,
-                        id,
+                        id
                     };
                 } else {
                     return { ...facetitem, facetName, id };
@@ -81,7 +81,7 @@ export const getFormattedRangeFacets = (rangeFacets, selectedRangeFacets) => {
                 sliderMin,
                 sliderMax,
                 viewLess: false,
-                className: 'UNX-facet__list',
+                className: 'UNX-facet__list'
             };
             const values = currentFacetObj.values.map((facetitem) => {
                 const { from, end } = facetitem;
@@ -91,7 +91,7 @@ export const getFormattedRangeFacets = (rangeFacets, selectedRangeFacets) => {
                 return {
                     ...facetitem,
                     facetName,
-                    id,
+                    id
                 };
             });
             currentFacetObj['values'] = values;
@@ -128,7 +128,7 @@ export const debounce = (func, wait, immediate) => {
         };
         const callNow = immediate && !timeout;
         clearTimeout(timeout);
-        timeout = setTimeout(later,wait);
+        timeout = setTimeout(later, wait);
         if (callNow) func.apply(context, args);
     };
 };
@@ -155,6 +155,6 @@ export const getRangeFacetCoreMethods = (unbxdCore) => {
         setRangeFacet,
         applyRangeFacet,
         clearARangeFacet,
-        selectedRangeFacets,
+        selectedRangeFacets
     };
 };

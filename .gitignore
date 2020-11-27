@@ -10,5 +10,4 @@ public/dist
 public/css/core/index.scss
 public/css/theme/index.scss
 storybook/node_modules
-.prettierrc
 out*

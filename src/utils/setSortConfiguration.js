@@ -1,11 +1,11 @@
 function setSortConfiguration(config, triggerResults = false) {
-  const { sortBy } = config;
+    const { sortBy } = config;
 
-  if (triggerResults) {
-    this.state.unbxdCore.applySort(sortBy);
-  } else {
-    this.state.unbxdCore.setSort(sortBy);
-  }
+    if (triggerResults) {
+        this.state.unbxdCore.applySort(sortBy);
+    } else {
+        this.state.unbxdCore.setSort(sortBy);
+    }
 }
 
 export default setSortConfiguration;

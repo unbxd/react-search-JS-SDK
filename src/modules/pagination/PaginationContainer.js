@@ -7,7 +7,7 @@ import { executeCallback } from '../../common/utils';
 
 class PaginationContainer extends React.PureComponent {
     getPaginationProps() {
-        const { unbxdCore, PaginationItemComponent, onPageChange } = this.props;
+        const { unbxdCore, paginationItemComponent, onPageChange } = this.props;
         const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
         const getResults = unbxdCore.getResults.bind(unbxdCore);
 
@@ -18,7 +18,7 @@ class PaginationContainer extends React.PureComponent {
             isNext = false,
             isPrev = false,
             noOfPages = 0,
-            rows = 0,
+            rows = 0
         } = unbxdCore.getPaginationInfo() || {};
 
         const handleNextPageClick = () => {
@@ -57,14 +57,14 @@ class PaginationContainer extends React.PureComponent {
             noOfPages,
             currentPage,
             padding,
-            paginationType,
+            paginationType
         };
 
         const helpers = {
             onNextPageClick: handleNextPageClick,
             onPreviousPageClick: handlePreviousPageClick,
             onPageClick: handlePageClick,
-            PaginationItemComponent,
+            paginationItemComponent
         };
 
         return { ...data, ...helpers };
@@ -97,12 +97,9 @@ PaginationContainer.propTypes = {
     unbxdCoreStatus: PropTypes.string.isRequired,
     helpers: PropTypes.object.isRequired,
     padding: PropTypes.number,
-    PaginationItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    paginationItemComponent: PropTypes.element,
     paginationType: PropTypes.string.isRequired,
-    onPageChange: PropTypes.func,
+    onPageChange: PropTypes.func
 };
 
 export default PaginationContainer;

@@ -2,26 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const PageSizeDropdown = ({ size, sizeOptions, onPageSizeClick }) => {
-
     return (
-        <select name="pageSize"
+        <select
+            name="pageSize"
             className="UNX-pageSize__dropdown"
             value={size}
-            onChange={onPageSizeClick}>
-            {sizeOptions.map(item => (<option value={item.id}
-                key={item.id}>
-                {item.value}
-            </option>))}
+            onChange={onPageSizeClick}
+        >
+            {sizeOptions.map((item) => (
+                <option value={item.id} key={item.id}>
+                    {item.value}
+                </option>
+            ))}
         </select>
-    )
-}
+    );
+};
 
 PageSizeDropdown.propTypes = {
     size: PropTypes.number.isRequired,
     sizeOptions: PropTypes.arrayOf(
-        PropTypes.shape({ id: PropTypes.number, value: PropTypes.string }))
-        .isRequired,
+        PropTypes.shape({ id: PropTypes.number, value: PropTypes.string })
+    ).isRequired,
     onPageSizeClick: PropTypes.func.isRequired
-}
+};
 
 export default PageSizeDropdown;

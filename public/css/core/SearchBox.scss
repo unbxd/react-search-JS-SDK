@@ -1,21 +1,18 @@
-.UNX-searchbox__container{
-
+.UNX-searchbox__container {
     display: inline-block;
     position: relative;
 
-    .UNX-searchbox__input{
-            @apply border border-gray-600;
-        }
-
-    .UNX-searchbox__button{
-            @apply p-1 m-2;
+    .UNX-searchbox__input {
+        @apply border border-gray-600;
     }
 
+    .UNX-searchbox__button {
+        @apply p-1 m-2;
+    }
 
-    .UNX-searchbox__clearIcon{
+    .UNX-searchbox__clearIcon {
         position: absolute;
         right: 70px;
         top: 12px;
     }
-     
 }

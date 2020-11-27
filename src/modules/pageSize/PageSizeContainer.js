@@ -11,7 +11,7 @@ class PageSizeContainer extends React.PureComponent {
         const { size, sizeOptions } = this.props;
         this.state = {
             size,
-            sizeOptions,
+            sizeOptions
         };
     }
 
@@ -19,7 +19,7 @@ class PageSizeContainer extends React.PureComponent {
         const {
             size,
             helpers: { setPageSizeConfiguration },
-            unbxdCore,
+            unbxdCore
         } = this.props;
         const { sizeOptions } = this.state;
         const { rows = false } = unbxdCore.getQueryParams();
@@ -27,14 +27,14 @@ class PageSizeContainer extends React.PureComponent {
         if (!isNaN(numberOfProducts)) {
             const updatedSizeOptions = sizeOptions.map((sizeOption) => ({
                 ...sizeOption,
-                isSelected: sizeOption.id === numberOfProducts,
+                isSelected: sizeOption.id === numberOfProducts
             }));
             this.setState({
                 size: numberOfProducts || parseInt(size),
-                sizeOptions: updatedSizeOptions,
+                sizeOptions: updatedSizeOptions
             });
             setPageSizeConfiguration({
-                size: numberOfProducts || parseInt(size),
+                size: numberOfProducts || parseInt(size)
             });
         }
     }
@@ -42,10 +42,10 @@ class PageSizeContainer extends React.PureComponent {
     getPageSizeProps() {
         const {
             unbxdCore,
-            PageSizeItemComponent,
+            pageSizeItemComponent,
             displayType,
             label,
-            helpers: { setPageSizeConfiguration },
+            helpers: { setPageSizeConfiguration }
         } = this.props;
         const setPageSize = unbxdCore.setPageStart.bind(unbxdCore);
         const getResults = unbxdCore.getResults.bind(unbxdCore);
@@ -57,26 +57,28 @@ class PageSizeContainer extends React.PureComponent {
                 : pagesizeOption.id;
             const updatedSizeOptions = sizeOptions.map((sizeOption) => ({
                 ...sizeOption,
-                isSelected: sizeOption.id === size,
+                isSelected: sizeOption.id === size
             }));
             this.setState({ size, sizeOptions: updatedSizeOptions });
             setPageSizeConfiguration(
                 {
-                    size,
+                    size
                 },
                 true
             );
-            parseInt(pageSize)? setPageSize(parseInt(pageSize)): setPageSize(pagesizeOption.id);
+            parseInt(pageSize)
+                ? setPageSize(parseInt(pageSize))
+                : setPageSize(pagesizeOption.id);
         };
         const { size, sizeOptions } = this.state;
         return {
-            PageSizeItemComponent,
+            pageSizeItemComponent,
             sizeOptions,
             displayType,
             onPageSizeClick,
             size,
             noOfPages,
-            label,
+            label
         };
     }
 
@@ -100,11 +102,8 @@ PageSizeContainer.propTypes = {
         PropTypes.shape({ id: PropTypes.number, value: PropTypes.string })
     ).isRequired,
     displayType: PropTypes.string,
-    PageSizeItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
-    label: PropTypes.node,
+    pageSizeItemComponent: PropTypes.element,
+    label: PropTypes.node
 };
 
 export default PageSizeContainer;

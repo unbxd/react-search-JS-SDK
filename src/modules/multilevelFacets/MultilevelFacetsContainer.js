@@ -14,28 +14,28 @@ class MultilevelFacetsContainer extends React.PureComponent {
             categoryField = '',
             facetDepth,
             facetLimit,
-            helpers: { setMultilevelFacetsConfiguration },
+            helpers: { setMultilevelFacetsConfiguration }
         } = this.props;
 
         setMultilevelFacetsConfiguration({
             categoryDisplayName,
             categoryField,
             facetDepth,
-            facetLimit,
+            facetLimit
         });
     }
 
     getMultilevelFacetsProps() {
         const {
             unbxdCore,
-            FacetItemComponent,
+            facetItemComponent,
             label,
             collapsible,
             searchable,
             onFacetClick,
             enableViewMore,
             minViewMore,
-            productType,
+            productType
         } = this.props;
 
         const {
@@ -43,7 +43,7 @@ class MultilevelFacetsContainer extends React.PureComponent {
             getBreadCrumbsList,
             setCategoryFilter,
             deleteCategoryFilter,
-            getResults,
+            getResults
         } = getFacetCoreMethods(unbxdCore);
 
         const bucketedFacets = getBucketedFacets();
@@ -60,7 +60,7 @@ class MultilevelFacetsContainer extends React.PureComponent {
                 fieldName: filterField,
                 level,
                 name: value,
-                isSelected: true,
+                isSelected: true
             };
         });
 
@@ -71,7 +71,7 @@ class MultilevelFacetsContainer extends React.PureComponent {
                 displayName,
                 level,
                 multiLevelField,
-                values = [],
+                values = []
             } = bucketedFacet;
             facetDisplayName = displayName;
             fieldName = multiLevelField;
@@ -93,8 +93,8 @@ class MultilevelFacetsContainer extends React.PureComponent {
                         ...hit,
                         fieldName: multiLevelField,
                         level,
-                        isSelected: true,
-                    },
+                        isSelected: true
+                    }
                 ];
                 breadCrumbFacets.pop();
             } else {
@@ -105,7 +105,7 @@ class MultilevelFacetsContainer extends React.PureComponent {
                         level,
                         name,
                         count,
-                        dataId,
+                        dataId
                     };
                 });
             }
@@ -113,7 +113,7 @@ class MultilevelFacetsContainer extends React.PureComponent {
             const facet = {
                 facetDisplayName,
                 multiLevelField: fieldName,
-                values: [...breadCrumbFacets, ...formattedBucketedFacets],
+                values: [...breadCrumbFacets, ...formattedBucketedFacets]
             };
             multilevelFacets.push(facet);
         });
@@ -158,12 +158,12 @@ class MultilevelFacetsContainer extends React.PureComponent {
         return {
             multilevelFacets,
             onFacetClick: handleFacetClick,
-            FacetItemComponent,
+            facetItemComponent,
             label,
             collapsible,
             searchable,
             enableViewMore,
-            minViewMore,
+            minViewMore
         };
     }
 
@@ -186,14 +186,11 @@ MultilevelFacetsContainer.propTypes = {
     categoryField: PropTypes.string.isRequired,
     facetDepth: PropTypes.number,
     facetLimit: PropTypes.number,
-    FacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    facetItemComponent: PropTypes.element,
     label: PropTypes.node,
     collapsible: PropTypes.bool,
     searchable: PropTypes.bool,
-    onFacetClick: PropTypes.node,
+    onFacetClick: PropTypes.func
 };
 
 export default MultilevelFacetsContainer;

@@ -33,7 +33,7 @@ const FacetItem = ({ itemData, onClick, priceUnit }) => {
 FacetItem.propTypes = {
     itemData: PropTypes.object,
     onClick: PropTypes.func.isRequired,
-    priceUnit: PropTypes.string,
+    priceUnit: PropTypes.string
 };
 
 export default FacetItem;

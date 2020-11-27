@@ -4,4 +4,4 @@ import Loader from './Loader';
 import Input from './Input';
 import ViewMore from './ViewMore';
 
-export { List, Input, Button, Loader, ViewMore};
+export { List, Input, Button, Loader, ViewMore };

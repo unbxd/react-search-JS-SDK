@@ -4,16 +4,15 @@ import PropTypes from 'prop-types';
 import { List } from '../../../components';
 
 const PageSizeList = ({
-    size,
     sizeOptions,
     onPageSizeClick,
-    PageSizeItemComponent,
+    pageSizeItemComponent
 }) => {
     return (
         <div className="UNX-pageSize__element">
             <List
                 items={sizeOptions}
-                ListItem={PageSizeItemComponent}
+                ListItem={pageSizeItemComponent}
                 onClick={onPageSizeClick}
                 className={'UNX-pageSize__list'}
             />
@@ -27,10 +26,7 @@ PageSizeList.propTypes = {
         PropTypes.shape({ id: PropTypes.number, value: PropTypes.string })
     ).isRequired,
     onPageSizeClick: PropTypes.func.isRequired,
-    PageSizeItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]).isRequired,
+    pageSizeItemComponent: PropTypes.element.isRequired
 };
 
 export default PageSizeList;

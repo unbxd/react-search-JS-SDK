@@ -31,7 +31,7 @@ class GenerateCombinedFacets extends React.Component {
                                     const {
                                         from,
                                         end,
-                                        isSelected = false,
+                                        isSelected = false
                                     } = facetValue;
                                     const { dataId: fromValue } = from;
                                     const { dataId: toValue } = end;
@@ -42,7 +42,7 @@ class GenerateCombinedFacets extends React.Component {
                                     ) {
                                         return {
                                             ...facetValue,
-                                            isSelected: !isSelected,
+                                            isSelected: !isSelected
                                         };
                                     } else {
                                         return { ...facetValue };
@@ -54,7 +54,7 @@ class GenerateCombinedFacets extends React.Component {
                                 ...rangeValue,
                                 valMin,
                                 valMax,
-                                values: updatedValues,
+                                values: updatedValues
                             };
                         } else {
                             return { ...rangeValue };
@@ -64,7 +64,7 @@ class GenerateCombinedFacets extends React.Component {
 
                 return {
                     ...existingState,
-                    combinedFacetsList: updatedRangeValues,
+                    combinedFacetsList: updatedRangeValues
                 };
             });
 
@@ -88,7 +88,7 @@ class GenerateCombinedFacets extends React.Component {
             lastSelectedFacets,
             selectedFacets,
             setSelectedFacets,
-            transform,
+            transform
         } = this.props;
         if (combinedFacets !== prevProps.combinedFacets) {
             // sorting the array
@@ -150,7 +150,7 @@ class GenerateCombinedFacets extends React.Component {
                     if (facetId === combinedFacet.facetName) {
                         return {
                             ...combinedFacet,
-                            isOpen: !combinedFacet.isOpen,
+                            isOpen: !combinedFacet.isOpen
                         };
                     }
                     return { ...combinedFacet };
@@ -159,7 +159,7 @@ class GenerateCombinedFacets extends React.Component {
 
             return {
                 ...existingState,
-                combinedFacetsList: updatedCombinedFacets,
+                combinedFacetsList: updatedCombinedFacets
             };
         });
     };
@@ -174,7 +174,7 @@ class GenerateCombinedFacets extends React.Component {
                     if (facetId === combinedFacet.facetName) {
                         return {
                             ...combinedFacet,
-                            filter: value.toLowerCase(),
+                            filter: value.toLowerCase()
                         };
                     }
                     return { ...combinedFacet };
@@ -183,7 +183,7 @@ class GenerateCombinedFacets extends React.Component {
 
             return {
                 ...existingState,
-                combinedFacetsList: updatedCombinedFacets,
+                combinedFacetsList: updatedCombinedFacets
             };
         });
     };
@@ -215,7 +215,7 @@ class GenerateCombinedFacets extends React.Component {
                         isSelected: false,
                         valMin: rangeValue.sliderMin,
                         valMax: rangeValue.sliderMax,
-                        values: updatedValues,
+                        values: updatedValues
                     };
                 } else {
                     return { ...rangeValue };
@@ -224,7 +224,7 @@ class GenerateCombinedFacets extends React.Component {
 
             return {
                 ...existingState,
-                combinedFacetsList: updatedRangeValues,
+                combinedFacetsList: updatedRangeValues
             };
         });
 
@@ -259,7 +259,7 @@ class GenerateCombinedFacets extends React.Component {
                         return {
                             ...combinedFacet,
                             viewLess: currentFacet['viewLess'],
-                            className: currentFacet['className'],
+                            className: currentFacet['className']
                         };
                     }
                     return { ...combinedFacet };
@@ -267,7 +267,7 @@ class GenerateCombinedFacets extends React.Component {
             );
             return {
                 ...existingState,
-                combinedFacetsList: updatedCombinedFacets,
+                combinedFacetsList: updatedCombinedFacets
             };
         });
     };
@@ -283,7 +283,7 @@ class GenerateCombinedFacets extends React.Component {
             RangeFacetItemComponent,
             priceUnit,
             enableViewMore,
-            minViewMore,
+            minViewMore
         } = this.props;
 
         const { combinedFacetsList } = this.state;
@@ -303,7 +303,7 @@ class GenerateCombinedFacets extends React.Component {
                             isOpen = true,
                             filter = '',
                             viewLess,
-                            className,
+                            className
                         } = combinedFacet;
                         const hasActiveFacets = selectedFacets[facetName]
                             ? true
@@ -374,7 +374,8 @@ class GenerateCombinedFacets extends React.Component {
                                     )}
                                     {enableViewMore &&
                                     isOpen &&
-                                    filteredValues && filteredValues.length > minViewMore ? (
+                                    filteredValues &&
+                                    filteredValues.length > minViewMore ? (
                                         <ViewMore
                                             facetName={facetName}
                                             toggleViewLess={this.toggleViewLess}
@@ -392,7 +393,7 @@ class GenerateCombinedFacets extends React.Component {
                         values,
                         isSelected,
                         viewLess,
-                        className,
+                        className
                     } = combinedFacet;
 
                     return (
@@ -440,7 +441,8 @@ class GenerateCombinedFacets extends React.Component {
                                 )}
                                 {enableViewMore &&
                                 isOpen &&
-                                values && values.length > minViewMore ? (
+                                values &&
+                                values.length > minViewMore ? (
                                     <ViewMore
                                         facetName={facetName}
                                         toggleViewLess={this.toggleViewLess}

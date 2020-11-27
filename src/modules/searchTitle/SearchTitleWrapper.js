@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { cloneElement } from '../../common/utils';
 import { paginationTypes, productTypes } from '../../config';
 
 const SearchTitleWrapper = (props) => {
@@ -8,10 +8,10 @@ const SearchTitleWrapper = (props) => {
         searchQuery,
         start,
         productsLn,
-        SearchTitleItem,
+        searchTitleItem,
         numberOfProducts,
         productType,
-        paginationType,
+        paginationType
     } = props;
 
     if (searchQuery.length === 0 && numberOfProducts === 0) {
@@ -30,8 +30,8 @@ const SearchTitleWrapper = (props) => {
     const startProduct =
         paginationType === paginationTypes.FIXED_PAGINATION ? start + 1 : 1;
 
-    return SearchTitleItem ? (
-        <SearchTitleItem {...props} />
+    return searchTitleItem ? (
+        cloneElement(searchTitleItem, { ...props })
     ) : (
         <div className="UNBXD-searchTitle__container">
             Showing results for
@@ -51,9 +51,9 @@ SearchTitleWrapper.propTypes = {
     start: PropTypes.number,
     productsLn: PropTypes.number,
     numberOfProducts: PropTypes.number.isRequired,
-    SearchTitleItem: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    searchTitleItem: PropTypes.element,
     productType: PropTypes.string.isRequired,
-    paginationType: PropTypes.string.isRequired,
+    paginationType: PropTypes.string.isRequired
 };
 
 export default SearchTitleWrapper;

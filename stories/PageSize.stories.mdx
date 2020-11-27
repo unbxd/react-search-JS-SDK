@@ -9,14 +9,14 @@ const attributesMap = {
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'unbxd_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 const variantAttributesMap = {
     productName: 'title',
     uniqueId: 'vId',
     imageUrl: 'imageUrl',
     price: 'v_unbxd_price',
-    productUrl: 'productUrl',
+    productUrl: 'productUrl'
 };
 const PageSizeItemComponent = ({ itemData, onClick }) => {
     const { value, isSelected } = itemData;
@@ -37,7 +37,7 @@ const sizeOptions = [
     { id: 5, value: '5' },
     { id: 10, value: '10' },
     { id: 15, value: '15' },
-    { id: 20, value: '20' },
+    { id: 20, value: '20' }
 ];
 
 <Meta title="PageSize" component={PageSize} />
@@ -113,7 +113,7 @@ const sizeOptions = [
     { id: 5, value: '5' },
     { id: 10, value: '10' },
     { id: 15, value: '15' },
-    { id: 20, value: '20' },
+    { id: 20, value: '20' }
 ];
 ```
 
@@ -269,7 +269,7 @@ A label for the component can be diplayed by passing `label`.
                     displayType,
                     onPageSizeClick,
                     PageSizeItemComponent,
-                    label,
+                    label
                 }) => {
                     return <div>render PageSize</div>;
                 }}

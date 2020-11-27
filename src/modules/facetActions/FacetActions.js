@@ -20,7 +20,7 @@ const FacetActions = (props) => {
                     unbxdCore,
                     unbxdCoreStatus,
                     helpers,
-                    unbxdState,
+                    unbxdState
                 } = appState;
                 const { selectedFacets } = unbxdState;
 
@@ -42,7 +42,7 @@ FacetActions.displayName = 'FacetActions';
 
 FacetActions.defaultProps = {
     showApplyFilter: true,
-    showClearFilter: true,
+    showClearFilter: true
 };
 
 FacetActions.propTypes = {
@@ -57,17 +57,11 @@ FacetActions.propTypes = {
     /**
      * Custom apply filter component.
      */
-    ApplyFilterComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    applyFilterComponent: PropTypes.element,
     /**
      * Custom clear filter component.
      */
-    ClearFilterComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    clearFilterComponent: PropTypes.element,
     /**
      * Callback for apply.
      */
@@ -75,7 +69,7 @@ FacetActions.propTypes = {
     /**
      * Callback for clear.
      */
-    onClear: PropTypes.func,
+    onClear: PropTypes.func
 };
 
 export default FacetActions;

@@ -20,7 +20,7 @@ const Pagination = (props) => {
                     unbxdCore,
                     unbxdCoreStatus,
                     helpers,
-                    unbxdState,
+                    unbxdState
                 } = appState;
                 const { paginationType } = unbxdState;
                 return (
@@ -40,7 +40,7 @@ const Pagination = (props) => {
 Pagination.displayName = 'Pagination';
 
 Pagination.defaultProps = {
-    padding: 2,
+    padding: 2
 };
 
 Pagination.propTypes = {
@@ -51,14 +51,11 @@ Pagination.propTypes = {
     /**
      * Custom product item component
      */
-    PaginationItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func,
-    ]),
+    paginationItemComponent: PropTypes.element,
     /**
      * Callback for page change.
      */
-    onPageChange: PropTypes.func,
+    onPageChange: PropTypes.func
 };
 
 export default Pagination;

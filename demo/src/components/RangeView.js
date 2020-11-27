@@ -8,9 +8,8 @@ const transform = function () {
     return this;
 };
 
-class RangeView extends React.Component{
-
-    constructor(props){
+class RangeView extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
             rangeFacetsList: [],
@@ -18,15 +17,21 @@ class RangeView extends React.Component{
         };
     }
 
-    setFacetValue(facetObj, getResults = false, onFacetClick, removeRangeFacet, addRangeFacet) {
+    setFacetValue(
+        facetObj,
+        getResults = false,
+        onFacetClick,
+        removeRangeFacet,
+        addRangeFacet
+    ) {
         const { facetName, valMin, valMax, isSelected } = facetObj;
         const applyMutiple = true;
 
         const onFinish = () => {
             this.setState((existingState) => {
                 let { rangeFacetsList } = existingState;
-                if(Object.keys(rangeFacetsList).length === 0){
-                    rangeFacetsList = [...rangeFacetsListCopy]
+                if (Object.keys(rangeFacetsList).length === 0) {
+                    rangeFacetsList = [...rangeFacetsListCopy];
                 }
                 const updatedRangeFacets = rangeFacetsList.map((rangeValue) => {
                     if (rangeValue.facetName === facetName) {
@@ -35,7 +40,7 @@ class RangeView extends React.Component{
                             (facetValue) => {
                                 return {
                                     ...facetValue,
-                                    isSelected: !isSelected,
+                                    isSelected: !isSelected
                                 };
                             }
                         );
@@ -44,7 +49,7 @@ class RangeView extends React.Component{
                             ...rangeValue,
                             valMin,
                             valMax,
-                            values: updatedValues,
+                            values: updatedValues
                         };
                     } else {
                         return { ...rangeValue };
@@ -53,7 +58,7 @@ class RangeView extends React.Component{
 
                 return {
                     ...existingState,
-                    rangeFacetsList: updatedRangeFacets,
+                    rangeFacetsList: updatedRangeFacets
                 };
             });
 
@@ -73,19 +78,26 @@ class RangeView extends React.Component{
         applyRangeFacet();
     };
 
-
-    handleFacetChange = (event, facetObj, rangeFacetsListCopy, removeRangeFacet, enableApplyFilters, onFacetClick, addRangeFacet) => {
+    handleFacetChange = (
+        event,
+        facetObj,
+        rangeFacetsListCopy,
+        removeRangeFacet,
+        enableApplyFilters,
+        onFacetClick,
+        addRangeFacet
+    ) => {
         const facetName = facetObj.facetName;
         removeRangeFacet({ facetName });
-        
-        let valMin=event[0],valMax = event[1];
+
+        let valMin = event[0],
+            valMax = event[1];
         let isSelected = false;
 
-        
         this.setState((existingState) => {
             let { rangeFacetsList } = existingState;
-            if(Object.keys(rangeFacetsList).length === 0){
-                rangeFacetsList = [...rangeFacetsListCopy]
+            if (Object.keys(rangeFacetsList).length === 0) {
+                rangeFacetsList = [...rangeFacetsListCopy];
             }
 
             const updatedRangeValues = rangeFacetsList.map((rangeValue) => {
@@ -97,7 +109,6 @@ class RangeView extends React.Component{
                         start: event[0],
                         end: event[1]
                     };
-
                 } else {
                     return { ...rangeValue };
                 }
@@ -110,11 +121,16 @@ class RangeView extends React.Component{
             };
         });
         const facetObjNew = { facetName, valMin, valMax, isSelected };
-        this.setFacetValue(facetObjNew, !enableApplyFilters, onFacetClick, removeRangeFacet, addRangeFacet);
-
+        this.setFacetValue(
+            facetObjNew,
+            !enableApplyFilters,
+            onFacetClick,
+            removeRangeFacet,
+            addRangeFacet
+        );
     };
 
-    render(){
+    render() {
         return (
             <RangeFacets
                 transform={transform}
@@ -122,7 +138,7 @@ class RangeView extends React.Component{
                 enableViewMore={true}
                 minViewMore={3}
                 //onFacetClick={onFacetClick}
-                >
+            >
                 {({
                     rangeFacets,
                     addRangeFacet,
@@ -137,84 +153,95 @@ class RangeView extends React.Component{
                     enableViewMore,
                     onFacetClick,
                     minViewMore,
-                    unbxdCore,
-
+                    unbxdCore
                 }) => {
-
                     const { facetChange } = this.state;
                     let rangeFacetsList = [];
-                    if(this.state.rangeFacetsList && this.state.rangeFacetsList.length === 0){
-                        rangeFacetsList = [...rangeFacets]
-                    }else{
-                        rangeFacetsList = [...this.state.rangeFacetsList]
+                    if (
+                        this.state.rangeFacetsList &&
+                        this.state.rangeFacetsList.length === 0
+                    ) {
+                        rangeFacetsList = [...rangeFacets];
+                    } else {
+                        rangeFacetsList = [...this.state.rangeFacetsList];
                     }
-                    const {filter} = unbxdCore.getQueryParams();
+                    const { filter } = unbxdCore.getQueryParams();
                     const ranges = unbxdCore.getSelectedRanges();
-                    const matches = String(ranges && ranges.price).match(/\d+/g);
+                    const matches = String(ranges && ranges.price).match(
+                        /\d+/g
+                    );
 
                     if (rangeFacetsList.length === 0) {
                         return null;
                     }
-                    return (<div className="UNX-rangefacet__container">
-                    {label ? label : null}
-    
-                    {rangeFacetsList.map((facetObj) => {
-                        const {
-                            facetName,
-                            values,
-                            displayName,
-                            isSelected,
-                            isOpen = true,
-                            viewLess,
-                            sliderMax,
-                            sliderMin, 
-                        } = facetObj;
-    
-                        let {start, end}=facetObj
-                        if(matches && matches.length ){
-                            start = matches[0];
-                            end = matches[1];
-                        }
-                        if(!ranges || !ranges.price){
-                            start = sliderMin;
-                            end = sliderMax;
-                        }
-                        
-    
-                        return (
-                            <div
-                                className={`UNX-facet__element ${
-                                    isOpen ? 'open' : ''
-                                }`}
-                                key={facetName}
-                            >
-                                <div className="UNX-facet__headerContainer">
-                                    <div className="UNX-facet__header">
-                                        {displayName}
+                    return (
+                        <div className="UNX-rangefacet__container">
+                            {label ? label : null}
+
+                            {rangeFacetsList.map((facetObj) => {
+                                const {
+                                    facetName,
+                                    values,
+                                    displayName,
+                                    isSelected,
+                                    isOpen = true,
+                                    viewLess,
+                                    sliderMax,
+                                    sliderMin
+                                } = facetObj;
+
+                                let { start, end } = facetObj;
+                                if (matches && matches.length) {
+                                    start = matches[0];
+                                    end = matches[1];
+                                }
+                                if (!ranges || !ranges.price) {
+                                    start = sliderMin;
+                                    end = sliderMax;
+                                }
+
+                                return (
+                                    <div
+                                        className={`UNX-facet__element ${
+                                            isOpen ? 'open' : ''
+                                        }`}
+                                        key={facetName}
+                                    >
+                                        <div className="UNX-facet__headerContainer">
+                                            <div className="UNX-facet__header">
+                                                {displayName}
+                                            </div>
+                                        </div>
+                                        <div data-unx_name={facetName}>
+                                            <RangeSlider
+                                                min={sliderMin}
+                                                max={sliderMax}
+                                                value={[start, end]}
+                                                facetName={facetName}
+                                                facetObj={facetObj}
+                                                handleAfterChange={(
+                                                    event,
+                                                    facetObj
+                                                ) => {
+                                                    this.handleFacetChange(
+                                                        event,
+                                                        facetObj,
+                                                        rangeFacetsList,
+                                                        removeRangeFacet,
+                                                        enableApplyFilters,
+                                                        onFacetClick,
+                                                        addRangeFacet
+                                                    );
+                                                }}
+                                            />
+                                        </div>
                                     </div>
-                                </div>
-                                <div data-unx_name={facetName}>
-                                <RangeSlider
-                                    min={sliderMin}
-                                    max={sliderMax}
-                                    value={[start,end]}
-                                    facetName={facetName}
-                                    facetObj={facetObj}
-                                    handleAfterChange={((event, facetObj)=>{
-                                        this.handleFacetChange(event, facetObj,rangeFacetsList, removeRangeFacet, 
-                                            enableApplyFilters, onFacetClick, addRangeFacet)
-                                    })}
-                                    
-                                />
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
-            );
-                }}    
+                                );
+                            })}
+                        </div>
+                    );
+                }}
             </RangeFacets>
-                
         );
     }
 }
