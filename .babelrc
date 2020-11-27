@@ -16,6 +16,11 @@
                 "loose": true
             }
         ],
-        "@babel/plugin-syntax-class-properties"
+        "@babel/plugin-syntax-class-properties",
+        ["@babel/plugin-transform-runtime",
+            {
+              "regenerator": true
+            }
+        ]
     ]
 }
