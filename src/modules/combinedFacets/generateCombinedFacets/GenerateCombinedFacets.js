@@ -12,9 +12,9 @@ class GenerateCombinedFacets extends React.Component {
     }
 
     setFacetValue(facetObj, getResults = false) {
-        const { onFacetClick } = this.props;
+        const { onFacetClick} = this.props;
         const { facetName, valMin, valMax, isSelected } = facetObj;
-        const applyMutiple = true;
+        const applyMultiple = true;
 
         const onFinish = () => {
             this.setState((existingState) => {
@@ -26,6 +26,7 @@ class GenerateCombinedFacets extends React.Component {
                             rangeValue.facetName === facetName
                         ) {
                             //also go into values and set the specific from to as is selected
+                            let isFacetSelected = false;
                             const updatedValues = rangeValue.values.map(
                                 (facetValue) => {
                                     const {
@@ -36,22 +37,31 @@ class GenerateCombinedFacets extends React.Component {
                                     const { dataId: fromValue } = from;
                                     const { dataId: toValue } = end;
 
-                                    if (
-                                        valMin >= fromValue &&
-                                        valMax <= toValue
-                                    ) {
+                                    if (valMin >= fromValue && valMax <= toValue) {
+                                        if (!isSelected) {
+                                            isFacetSelected = true;
+                                        }
                                         return {
                                             ...facetValue,
                                             isSelected: !isSelected
                                         };
                                     } else {
-                                        return { ...facetValue };
+                                        if (applyMultiple && isSelected) {
+                                            isFacetSelected = true;
+                                        }
+                                        return {
+                                            ...facetValue,
+                                            isSelected: applyMultiple
+                                                ? isSelected
+                                                : false
+                                        };
                                     }
                                 }
                             );
 
                             return {
                                 ...rangeValue,
+                                isSelected: isFacetSelected,
                                 valMin,
                                 valMax,
                                 values: updatedValues
@@ -277,10 +287,10 @@ class GenerateCombinedFacets extends React.Component {
             selectedFacets,
             onTextFacetClick,
             onTextFacetClear,
-            TextFacetItemComponent,
+            textFacetItemComponent,
             collapsible,
             searchable,
-            RangeFacetItemComponent,
+            rangeFacetItemComponent,
             priceUnit,
             enableViewMore,
             minViewMore
@@ -355,7 +365,7 @@ class GenerateCombinedFacets extends React.Component {
                                     <List
                                         items={filteredValues}
                                         ListItem={
-                                            TextFacetItemComponent ||
+                                            textFacetItemComponent ||
                                             TextFacetItem
                                         }
                                         onClick={onTextFacetClick}
@@ -395,7 +405,6 @@ class GenerateCombinedFacets extends React.Component {
                         viewLess,
                         className
                     } = combinedFacet;
-
                     return (
                         <div className="UNX-rangefacet__container">
                             <div
@@ -421,7 +430,7 @@ class GenerateCombinedFacets extends React.Component {
                                 <List
                                     items={values}
                                     ListItem={
-                                        RangeFacetItemComponent ||
+                                        rangeFacetItemComponent ||
                                         RangeFacetItem
                                     }
                                     onClick={this.handleRangeFacetClick}

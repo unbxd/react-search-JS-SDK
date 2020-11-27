@@ -72,17 +72,11 @@ CombinedFacets.propTypes = {
     /**
      * Custom Text Facet item component
      */
-    TextFacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func
-    ]),
+    textFacetItemComponent: PropTypes.element,
     /**
      * Custom Range Facet item component
      */
-    RangeFacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func
-    ]),
+    rangeFacetItemComponent: PropTypes.element,
     /**
      * Custom transform method
      */
