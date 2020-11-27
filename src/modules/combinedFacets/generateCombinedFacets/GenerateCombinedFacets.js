@@ -287,10 +287,10 @@ class GenerateCombinedFacets extends React.Component {
             selectedFacets,
             onTextFacetClick,
             onTextFacetClear,
-            TextFacetItemComponent,
+            textFacetItemComponent,
             collapsible,
             searchable,
-            RangeFacetItemComponent,
+            rangeFacetItemComponent,
             priceUnit,
             enableViewMore,
             minViewMore
@@ -365,7 +365,7 @@ class GenerateCombinedFacets extends React.Component {
                                     <List
                                         items={filteredValues}
                                         ListItem={
-                                            TextFacetItemComponent ||
+                                            textFacetItemComponent ||
                                             TextFacetItem
                                         }
                                         onClick={onTextFacetClick}
@@ -430,7 +430,7 @@ class GenerateCombinedFacets extends React.Component {
                                 <List
                                     items={values}
                                     ListItem={
-                                        RangeFacetItemComponent ||
+                                        rangeFacetItemComponent ||
                                         RangeFacetItem
                                     }
                                     onClick={this.handleRangeFacetClick}

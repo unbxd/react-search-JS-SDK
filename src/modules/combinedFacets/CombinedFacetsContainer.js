@@ -22,9 +22,9 @@ class CombinedFacetsContainer extends React.PureComponent {
             unbxdCoreStatus,
             helpers: { manageTextFacets, setSelectedFacets },
             selectedFacets,
-            TextFacetItemComponent,
+            textFacetItemComponent,
             enableApplyFilters,
-            RangeFacetItemComponent,
+            rangeFacetItemComponent,
             priceUnit,
             transform,
             collapsible,
@@ -188,13 +188,13 @@ class CombinedFacetsContainer extends React.PureComponent {
             onTextFacetClick: handleTextFacetClick,
             onTextFacetClear: handleTextFacetClear,
             setSelectedFacets,
-            TextFacetItemComponent,
+            textFacetItemComponent,
             label,
             addRangeFacet,
             applyRangeFacet,
             removeRangeFacet,
             selectedRangeFacets,
-            RangeFacetItemComponent,
+            rangeFacetItemComponent,
             transform
         };
 
@@ -219,14 +219,8 @@ CombinedFacetsContainer.propTypes = {
     enableApplyFilters: PropTypes.bool.isRequired,
     collapsible: PropTypes.bool,
     searchable: PropTypes.bool,
-    TextFacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func
-    ]),
-    RangeFacetItemComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func
-    ]),
+    textFacetItemComponent: PropTypes.element,
+    rangeFacetItemComponent: PropTypes.element,
     transform: PropTypes.func,
     label: PropTypes.node,
     onFacetClick: PropTypes.node
