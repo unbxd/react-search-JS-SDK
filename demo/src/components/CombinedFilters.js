@@ -13,8 +13,8 @@ const CombinedFilters = () => {
     return (
         <CombinedFacets
             transform={transform}
-            RangeFacetItemComponent={RangeFacetItemComponent}
-            TextFacetItemComponent={TextFacetItemComponent}
+            RangeFacetItemComponent={<RangeFacetItemComponent />}
+            TextFacetItemComponent={<TextFacetItemComponent />}
             collapsible={true}
             enableViewMore={true}
             searchable={true}

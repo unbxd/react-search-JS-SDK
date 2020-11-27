@@ -98,7 +98,7 @@ const transform = function () {
     return this;
 };
 
-const RangeFiltersRenderProps = () => {
+export const RangeFiltersRenderProps = () => {
     return (
         <RangeFacets>{(props) => <RangeFacetsRender {...props} />}</RangeFacets>
     );

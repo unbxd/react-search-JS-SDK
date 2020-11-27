@@ -7,7 +7,6 @@ import Sorter from '../components/Sorter';
 import MerchandizingBanner from '../components/MerchandizingBanner';
 import TextFilters from '../components/TextFilters';
 import RangeFilters from '../components/RangeFilters';
-import RangeViews from '../components/RangeView';
 import CombinedFilters from '../components/CombinedFilters';
 import MultilevelFilters from '../components/MultilevelFilters';
 import ActiveFilters from '../components/ActiveFilters';
@@ -39,9 +38,8 @@ const Jackets = () => {
                 <div className="UNX-searchFacet__container">
                     <MultilevelFilters />
                     <FacetApplyClear />
-                    <RangeFilters />
-                    {/* <RangeViews/> */}
-                    <TextFilters />
+                     <RangeFilters />
+                    <TextFilters /> 
                     {/* <CombinedFilters/> */}
                     <FacetApplyClear />
                 </div>
