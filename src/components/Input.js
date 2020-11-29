@@ -42,7 +42,7 @@ class Input extends React.PureComponent {
                     ref={this.inputRef}
                 />
                 {showClear &&
-                    (ClearComponent ? (
+                    (clearComponent ? (
                         cloneElement(clearComponent, {
                             onSearchBoxClear: onClear
                         })
