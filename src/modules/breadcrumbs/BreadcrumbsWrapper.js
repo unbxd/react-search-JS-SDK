@@ -12,19 +12,22 @@ const BreadcrumbsWrapper = (props) => {
         separator,
         breadcrumbItemComponent
     } = props;
-    return (
-        <div className={'UNX-breadcrumbs__container'}>
-            <List
-                items={breadCrumbsList}
-                idAttribute={'value'}
-                ListItem={breadcrumbItemComponent || BreadCrumbItem}
-                root={root}
-                separator={separator}
-                onClick={onBreadCrumbClick}
-                className={'UNX-breadcrumbs__list'}
-            />
-        </div>
-    );
+
+    return breadCrumbsList.map((breadCrumbList) => {
+        return (
+            <div className={'UNX-breadcrumbs__container'}>
+                <List
+                    items={breadCrumbList}
+                    idAttribute={'value'}
+                    ListItem={breadcrumbItemComponent || BreadCrumbItem}
+                    root={root}
+                    separator={separator}
+                    onClick={onBreadCrumbClick}
+                    className={'UNX-breadcrumbs__list'}
+                />
+            </div>
+        );
+    });
 };
 
 BreadcrumbsWrapper.propTypes = {

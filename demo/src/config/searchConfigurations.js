@@ -1,7 +1,7 @@
 const searchConfigurations = {
     siteName: 'wildearthclone-neto-com-au808941566310465',
     siteKey: 'e6959ae0b643d51b565dc3e01bf41ec1',
-    searchEndPoint: 'https://search.unbxd.io/',
+    searchEndPoint: 'https://console-nam.unbxd.io/ss/searchPreview/',
     searchQueryParam: 'q',
     productAttributes: [
         'title',
@@ -36,8 +36,8 @@ const searchConfigurations = {
     },
     extraParams: {
         version: 'V2',
-        'f.categoryPath.displayName': 'category',
-        'facet.multilevel': 'categoryPath',
+        // 'f.categoryPath.displayName': 'category',
+        // 'facet.multilevel': 'categoryPath',
         'f.categoryPath.max.depth': '',
         'f.categoryPath.facet.limit': ''
         //"f.categoryPath.facet.version": "V2",
