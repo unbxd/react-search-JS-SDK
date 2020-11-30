@@ -96,10 +96,11 @@ const AppRoutes = () => {
                     value={[productType, setProductType]}
                 >
                     <UnbxdSearchWrapper
-                        siteKey="wildearthclone-neto-com-au808941566310465"
-                        apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+                        siteKey="ss-unbxd-anu-25-11-prod-1813071606318149"
+                        apiKey="82418d9335e92ca5f3208b8fbf58f71a"
                         getCategoryId={getCategoryId}
                         setCategoryId={setCategoryId}
+                        searchConfigurations={searchConfigurations}
                         productType={productType}
                         refreshId={refreshId}
                         loaderComponent={<Loader />}

@@ -32,8 +32,6 @@ const MultilevelFilters = ({ showLabel = true }) => {
     return (
         <MultilevelFacets
             enableViewMore
-            categoryDisplayName="category"
-            categoryField="categoryPath"
             collapsible
             searchable
             facetItemComponent={<FacetItemComponent />}
