@@ -1,6 +1,6 @@
 {
     "name": "@unbxd-ui/react-search-sdk",
-    "version": "0.0.25",
+    "version": "0.0.28",
     "description": "Unbxd React Search JS SDK",
     "main": "public/dist/js/react-search-sdk.js",
     "files": [
@@ -12,7 +12,10 @@
         "storybook": "yarn build:tailwind:core && yarn build:tailwind:theme && start-storybook -p 6006 --ci",
         "deploy-storybook": "storybook-to-ghpages",
         "build:tailwind:core": "postcss public/css/core/base.scss -o public/css/core/index.scss",
-        "build:tailwind:theme": "postcss public/css/theme/base.scss -o public/css/theme/index.scss"
+        "build:tailwind:theme": "postcss public/css/theme/base.scss -o public/css/theme/index.scss",
+        "commit": "cz",
+        "pre-pack": "yarn build && yarn pack",
+        "release": "yarn standard-version && git push --follow-tags origin master && npm publish && npm publish"
     },
     "devDependencies": {
         "@babel/core": "^7.12.3",
@@ -34,8 +37,10 @@
         "autoprefixer": "^9.7.6",
         "babel-eslint": "^10.1.0",
         "babel-loader": "^8.0.6",
+        "commitizen": "^4.2.2",
         "compression-webpack-plugin": "^3.1.0",
         "css-loader": "^3.4.2",
+        "cz-conventional-changelog": "3.3.0",
         "eslint": "7.2.0",
         "eslint-config-airbnb": "18.2.1",
         "eslint-config-airbnb-base": "^14.0.0",
@@ -67,6 +72,7 @@
         "react-dom": "^16.13.0",
         "remove-files-webpack-plugin": "^1.4.3",
         "sass-loader": "^8.0.2",
+        "standard-version": "^9.0.0",
         "storybook-addon-react-docgen": "^1.2.42",
         "tailwindcss": "^1.4.6",
         "terser-webpack-plugin": "^3.0.1",
@@ -93,5 +99,10 @@
     "bugs": {
         "url": "https://github.com/unbxd/react-search-JS-SDK/issues"
     },
-    "homepage": "https://github.com/unbxd/react-search-JS-SDK#readme"
+    "homepage": "https://github.com/unbxd/react-search-JS-SDK#readme",
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    }
 }
