@@ -1,6 +1,6 @@
 import { searchEvents, searchStatus } from '../config';
 import { trackFacetClick } from '../modules/analytics';
-import { getActiveFacets } from '../utils';
+import getActiveFacets from './getActiveFacets';
 
 function unbxdCallBack(unbxdSearchObj, eventName, data) {
     if (eventName === searchEvents.AFTER_API_CALL) {
