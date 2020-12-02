@@ -49,6 +49,18 @@ const setCategoryId = (param, self) => {
     return true;
 };
 
+const Loader = () => {
+    return (
+        <div className="overlay">
+            <div className="overlay__inner">
+                <div className="overlay__content">
+                    <span className="spinner" />
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const AppRoutes = () => {
     const [categoryPathLinks, setCategoryPathLinks] = useState(categoryLinks);
     const [productType, setProductType] = useState('SEARCH');
@@ -74,6 +86,10 @@ const AppRoutes = () => {
         setRefreshId(refreshId + 1);
     };
 
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+
     return (
         <div>
             <Router>
@@ -87,6 +103,7 @@ const AppRoutes = () => {
                         setCategoryId={setCategoryId}
                         productType={productType}
                         refreshId={refreshId}
+                        loaderComponent={<Loader />}
                     >
                         <MobileModal
                             showFilters={showFilters}

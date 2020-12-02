@@ -26,6 +26,7 @@ import {
     setSelectedFacets,
     resetSearch
 } from './utils';
+import { cloneElement } from './common/utils';
 import '../public/css/core/index.scss';
 import { viewTypes } from './config/constants';
 import { trackCategory } from './modules/analytics';
@@ -50,7 +51,8 @@ class UnbxdSearchWrapper extends Component {
             getCategoryId,
             setCategoryId,
             productType,
-            priceUnit
+            priceUnit,
+            loaderComponent
         } = this.props;
 
         this.unbxdCallBack = unbxdCallBack.bind(this);
@@ -222,10 +224,17 @@ class UnbxdSearchWrapper extends Component {
     }
 
     render() {
+        const { unbxdCoreStatus } = this.state;
+        const { loaderComponent } = this.props;
         return (
-            <AppContextProvider value={this.getProps()}>
-                {this.props.children}
-            </AppContextProvider>
+            <>
+                {unbxdCoreStatus === 'LOADING' &&
+                    loaderComponent &&
+                    cloneElement(loaderComponent)}
+                <AppContextProvider value={this.getProps()}>
+                    {this.props.children}
+                </AppContextProvider>
+            </>
         );
     }
 }
@@ -260,7 +269,19 @@ UnbxdSearchWrapper.propTypes = {
     /**
      * Price unit.
      */
-    priceUnit: PropTypes.string
+    priceUnit: PropTypes.string,
+    /**
+     * custom loader component.
+     */
+    loaderComponent: PropTypes.string,
+    /**
+     * id to trigger a refresh.
+     */
+    refreshId: PropTypes.string,
+    /**
+     * search configurations object.
+     */
+    searchConfigurations: PropTypes.object
 };
 
 export default UnbxdSearchWrapper;
