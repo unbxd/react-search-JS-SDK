@@ -8,24 +8,19 @@ const CategoryLinks = (props) => {
             <div className="UNX-categoryLink__Header">
                 {categoryPathLinks.map(({ path, id, label, isSelected }) => {
                     return (
-                        <div
+                        <Link
                             className={`menu-items ${
                                 isSelected && productType === 'CATEGORY'
                                     ? 'active'
                                     : ''
                             }`}
+                            to={`/${id}`}
                             data-unx_path={path}
                             key={id}
                             onClick={handleCategoryLinkClick}
                         >
-                            <Link
-                                className="menu-item-link"
-                                data-unx_path={path}
-                                to={`/${id}`}
-                            >
-                                {label}
-                            </Link>
-                        </div>
+                            {label}
+                        </Link>
                     );
                 })}
             </div>

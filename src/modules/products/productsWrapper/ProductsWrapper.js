@@ -41,7 +41,6 @@ class ProductsWrapper extends React.PureComponent {
             getNextPage();
         }
     }, DEBOUNCE_TIME);
-    //Does it make sense to add DEBOUNCE_TIME to component props
 
     loadMoreProducts = () => {
         const { getNextPage } = this.props;
@@ -145,9 +144,15 @@ class ProductsWrapper extends React.PureComponent {
                 window.removeEventListener('scroll', this.nextPageCallback);
                 window.addEventListener('scroll', this.nextPageCallback);
             }
-            this.setState({
-                hasMoreResults: true
-            });
+
+            if (
+                paginationType === paginationTypes.INFINITE_SCROLL ||
+                paginationType === paginationTypes.CLICK_N_SCROLL
+            ) {
+                this.setState({
+                    hasMoreResults: true
+                });
+            }
         }
     }
 
