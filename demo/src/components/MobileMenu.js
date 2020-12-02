@@ -25,22 +25,18 @@ const MobileMenu = (props) => {
                         ({ path, id, label, isSelected }) => {
                             return (
                                 <Dropdown.Item
+                                    as={Link}
                                     className={`menu-items ${
                                         isSelected && productType === 'CATEGORY'
                                             ? 'active'
                                             : ''
                                     }`}
+                                    to={`/${id}`}
                                     data-unx_path={path}
                                     key={id}
                                     onClick={handleCategoryLinkClick}
                                 >
-                                    <Link
-                                        className="menu-item-link"
-                                        data-unx_path={path}
-                                        to={`/${id}`}
-                                    >
-                                        {label}
-                                    </Link>
+                                    {label}
                                 </Dropdown.Item>
                             );
                         }
