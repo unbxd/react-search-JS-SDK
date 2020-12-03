@@ -48,12 +48,11 @@ class PageSizeContainer extends React.PureComponent {
             helpers: { setPageSizeConfiguration }
         } = this.props;
         const setPageSize = unbxdCore.setPageStart.bind(unbxdCore);
-        const getResults = unbxdCore.getResults.bind(unbxdCore);
         const { noOfPages = 0 } = unbxdCore.getPaginationInfo() || {};
         const onPageSizeClick = (pagesizeOption) => {
-            const pageSize = pagesizeOption.target.value;
-            const size = pagesizeOption.target
-                ? parseInt(pageSize)
+            const pageSize = pagesizeOption.target && parseInt(pagesizeOption.target.value);
+            const size = pageSize
+                ? pageSize
                 : pagesizeOption.id;
             const updatedSizeOptions = sizeOptions.map((sizeOption) => ({
                 ...sizeOption,
@@ -66,9 +65,10 @@ class PageSizeContainer extends React.PureComponent {
                 },
                 true
             );
-            parseInt(pageSize)
-                ? setPageSize(parseInt(pageSize))
-                : setPageSize(pagesizeOption.id);
+            setPageSize(size)
+            // parseInt(pageSize)
+            //     ? setPageSize(parseInt(pageSize))
+            //     : setPageSize(pagesizeOption.id);
         };
         const { size, sizeOptions } = this.state;
         return {
