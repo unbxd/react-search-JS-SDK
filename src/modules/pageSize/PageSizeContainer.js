@@ -66,9 +66,6 @@ class PageSizeContainer extends React.PureComponent {
                 true
             );
             setPageSize(size)
-            // parseInt(pageSize)
-            //     ? setPageSize(parseInt(pageSize))
-            //     : setPageSize(pagesizeOption.id);
         };
         const { size, sizeOptions } = this.state;
         return {
