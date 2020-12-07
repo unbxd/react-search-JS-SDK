@@ -12,7 +12,8 @@ module.exports = {
     // Test spec file resolution pattern
     // Matches parent folder `__tests__` and filename
     // should contain `test` or `spec`.
-    // testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.js?$",
+    // testRegex: "(/__tests__/.*|(\\.|/)(test|spec)).js?$",
+    testMatch: ['**/?(*.)+(spec|test).js'],
 
     // Module file extensions for importing
     moduleFileExtensions: ["js", "json"],
