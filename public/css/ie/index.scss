@@ -4,6 +4,10 @@ html {
 
 .UNX-products__container {
     margin-bottom: 20px;
+
+    .UNX-product-card {
+        height: 100%;
+    }
     .grid-cols-1 {
         display: flex;
         flex-direction: row;
@@ -38,10 +42,10 @@ html {
         flex-wrap: wrap;
 
         .UNX-productCard__container {
-            margin: 30px;
+            margin: 20px;
             margin-bottom: 40px;
             min-width: 205px;
-            width: calc((100% / 3) - 30px);
+            width: calc((100% / 3) - 50px);
             height: 300px;
         }
     }

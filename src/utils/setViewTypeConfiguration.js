@@ -7,8 +7,9 @@ function setViewTypeConfiguration(config, triggerResults = false) {
         };
     });
     if (triggerResults) {
-        this.state.unbxdCore.options.extraParams['viewType'] = viewType;
-        this.state.unbxdCore.getResults();
+        const { unbxdCore } = this.state;
+        unbxdCore.options.extraParams['viewType'] = viewType;
+        unbxdCore.getResults();
     }
 }
 

@@ -32,7 +32,8 @@ class CombinedFacetsContainer extends React.PureComponent {
             enableViewMore,
             minViewMore,
             label,
-            onFacetClick
+            onFacetClick,
+            applyMultiple
         } = this.props;
 
         const {
@@ -55,7 +56,6 @@ class CombinedFacetsContainer extends React.PureComponent {
 
         const textFacets = getFacets() || [];
         const lastSelectedFacets = getSelectedFacets();
-        const applyMultiple = true;
         const rangeFacets = getRangeFacets() || [];
 
         const formattedTextFacets = getFormattedTextFacets(
@@ -181,7 +181,8 @@ class CombinedFacetsContainer extends React.PureComponent {
             collapsible,
             searchable,
             enableViewMore,
-            minViewMore
+            minViewMore,
+            applyMultiple
         };
 
         const helpers = {
@@ -223,7 +224,8 @@ CombinedFacetsContainer.propTypes = {
     rangeFacetItemComponent: PropTypes.element,
     transform: PropTypes.func,
     label: PropTypes.node,
-    onFacetClick: PropTypes.node
+    onFacetClick: PropTypes.node,
+    applyMultiple: PropTypes.bool
 };
 
 export default CombinedFacetsContainer;

@@ -19,6 +19,7 @@ const CombinedFilters = () => {
             enableViewMore={true}
             searchable={true}
             minViewMore={3}
+            applyMultiple={true}
         />
     );
 };
