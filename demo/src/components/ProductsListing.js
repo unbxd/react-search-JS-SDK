@@ -57,8 +57,6 @@ const ProductsListing = () => {
             showVariants={true}
             variantsCount={4}
             variantAttributesMap={variantAttributesMap}
-            showSwatches={true}
-            groupBy={'variant_color'}
             swatchAttributesMap={swatchAttributesMap}
             paginationType={'FIXED_PAGINATION'}
         />

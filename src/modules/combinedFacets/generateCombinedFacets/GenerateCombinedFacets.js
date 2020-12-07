@@ -12,9 +12,8 @@ class GenerateCombinedFacets extends React.Component {
     }
 
     setFacetValue(facetObj, getResults = false) {
-        const { onFacetClick} = this.props;
+        const { onFacetClick, applyMultiple } = this.props;
         const { facetName, valMin, valMax, isSelected } = facetObj;
-        const applyMultiple = true;
 
         const onFinish = () => {
             this.setState((existingState) => {
@@ -37,7 +36,10 @@ class GenerateCombinedFacets extends React.Component {
                                     const { dataId: fromValue } = from;
                                     const { dataId: toValue } = end;
 
-                                    if (valMin >= fromValue && valMax <= toValue) {
+                                    if (
+                                        valMin >= fromValue &&
+                                        valMax <= toValue
+                                    ) {
                                         if (!isSelected) {
                                             isFacetSelected = true;
                                         }
@@ -79,7 +81,7 @@ class GenerateCombinedFacets extends React.Component {
             });
 
             const { addRangeFacet, removeRangeFacet } = this.props;
-            if (isSelected && !applyMutiple) {
+            if (isSelected && !applyMultiple) {
                 removeRangeFacet({ facetName }, getResults);
             } else {
                 addRangeFacet(
@@ -238,7 +240,7 @@ class GenerateCombinedFacets extends React.Component {
             };
         });
 
-        !applyMutiple && this.onApplyFilter();
+        !applyMultiple && this.onApplyFilter();
     };
 
     handleRangeFacetClick = (currentItem) => {

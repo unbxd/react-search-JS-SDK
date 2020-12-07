@@ -55,7 +55,7 @@ class ViewTypesContainer extends React.PureComponent {
         } = this.props;
 
         const { viewType: currentViewType } = unbxdCore.getQueryParams();
-        if (viewType !== prevProps.viewType) {
+        if (viewType !== prevProps.viewType && viewType !== currentViewType) {
             setViewTypeConfiguration({ viewType });
         } else if (
             currentViewType &&
@@ -63,7 +63,7 @@ class ViewTypesContainer extends React.PureComponent {
             viewType === prevProps.viewType &&
             viewType !== currentViewType
         ) {
-            setViewTypeConfiguration({ viewType: currentViewType });
+            setViewTypeConfiguration({ viewType: currentViewType },true);
         }
     }
 

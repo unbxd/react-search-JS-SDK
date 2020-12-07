@@ -6,6 +6,17 @@ import PaginationWrapper from './PaginationWrapper';
 import { executeCallback } from '../../common/utils';
 
 class PaginationContainer extends React.PureComponent {
+    componentDidMount() {
+        const { unbxdCore } = this.props;
+        const queryParams = unbxdCore.getQueryParams();
+        const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
+        if (queryParams.start) {
+            setPageStart(parseInt(queryParams.start));
+        } else {
+            setPageStart(0);
+        }
+    }
+
     getPaginationProps() {
         const { unbxdCore, paginationItemComponent, onPageChange } = this.props;
         const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
@@ -41,7 +52,7 @@ class PaginationContainer extends React.PureComponent {
 
         const handlePageClick = (pageNumberOption) => {
             const pageNo = pageNumberOption.target
-                ? parseInt(event.target.dataset.pagenumber)
+                ? parseInt(pageNumberOption.target.dataset.pagenumber)
                 : pageNumberOption.pageNumber;
             const newPageNumber = (pageNo - 1) * rows;
             const onFinish = () => {
@@ -68,17 +79,6 @@ class PaginationContainer extends React.PureComponent {
         };
 
         return { ...data, ...helpers };
-    }
-
-    componentDidMount() {
-        const { unbxdCore } = this.props;
-        const queryParams = unbxdCore.getQueryParams();
-        const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
-        if (queryParams.start) {
-            setPageStart(parseInt(queryParams.start));
-        } else {
-            setPageStart(0);
-        }
     }
 
     render() {

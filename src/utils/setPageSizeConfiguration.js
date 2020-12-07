@@ -1,13 +1,11 @@
 function setPageSizeConfiguration(config, triggerResults = false) {
     const { size } = config;
-    const {
-        unbxdCore,
-        helpers: { getUpdatedResults }
-    } = this.state;
+    const { unbxdCore } = this.state;
     unbxdCore.setPageSize(size);
 
     if (triggerResults) {
-        getUpdatedResults();
+        unbxdCore.setPageStart(0);
+        unbxdCore.getResults();
     } else {
         unbxdCore.setPageStart(0);
     }

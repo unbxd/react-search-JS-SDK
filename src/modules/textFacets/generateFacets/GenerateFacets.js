@@ -17,6 +17,7 @@ class GenerateFacets extends React.Component {
             textFacets,
             selectedFacets,
             lastSelectedFacets,
+            enableApplyFilters,
             setSelectedFacets,
             unbxdCoreStatus,
             transform
@@ -53,7 +54,9 @@ class GenerateFacets extends React.Component {
             unbxdCoreStatus === searchStatus.READY &&
             selectedFacets !== lastSelectedFacets
         ) {
-            setSelectedFacets(lastSelectedFacets);
+            setSelectedFacets(
+                enableApplyFilters ? selectedFacets : lastSelectedFacets
+            );
         }
     }
 

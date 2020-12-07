@@ -190,7 +190,6 @@ body {
         &:first-child {
             margin-left: 0;
         }
-
     }
 }
 
@@ -295,10 +294,6 @@ body {
     display: none;
 }
 
-.rc-slider-mark {
-    top: 11px;
-}
-
 .UNX-rangeFacet__container {
     .rangeSlider {
         padding-bottom: 25px;
@@ -350,3 +345,18 @@ body {
 }
 
 //Loader ends
+
+//slider starts
+.rc-slider-mark {
+    top: 14px;
+}
+
+.rc-slider-mark-text:first-child {
+    left: 3% !important;
+    width:40px;
+}
+.rc-slider-mark-text:last-child {
+    left: 97% !important;
+    width:40px;
+}
+//slider starts

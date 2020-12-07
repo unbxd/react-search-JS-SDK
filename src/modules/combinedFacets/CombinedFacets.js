@@ -78,6 +78,10 @@ CombinedFacets.propTypes = {
      */
     rangeFacetItemComponent: PropTypes.element,
     /**
+     * Enable mutiple range facets
+     */
+    applyMultiple: PropTypes.bool,
+    /**
      * Custom transform method
      */
     transform: PropTypes.func,
