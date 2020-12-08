@@ -65,23 +65,21 @@ class SearchBoxContainer extends React.PureComponent {
             return false;
         }
         const queryString = encodeURIComponent(query);
-        //check for empty string
-        //dont call search if the query is empty.
+        // check for empty string
+        // dont call search if the query is empty.
 
         if (onSubmit) {
             if (onSubmit(query) && query.length) {
                 resetSearch();
                 setSearchBoxConfiguration({ query: queryString });
-                //track for search hit here
+                // track for search hit here
                 trackSearch(query);
             }
-        } else {
-            if (query.length) {
-                resetSearch();
-                setSearchBoxConfiguration({ query: queryString });
-                //track for search hit here
-                trackSearch(query);
-            }
+        } else if (query.length) {
+            resetSearch();
+            setSearchBoxConfiguration({ query: queryString });
+            // track for search hit here
+            trackSearch(query);
         }
     }
 

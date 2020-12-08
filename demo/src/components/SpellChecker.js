@@ -13,7 +13,7 @@ const SpellCheckItemComponent = ({ itemData, onClick }) => {
             <span
                 className="-suggestion"
                 onClick={handleClick}
-                data-testid={'UNX_spellCheck'}
+                data-testid="UNX_spellCheck"
             >
                 {suggestion}
             </span>

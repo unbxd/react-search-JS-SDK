@@ -26,9 +26,9 @@ const SelectedFacetsWrapper = (props) => {
             <List
                 items={textFacets}
                 ListItem={facetItemComponent || FacetItem}
-                idAttribute={'dataId'}
+                idAttribute="dataId"
                 onClick={onTextFacetClick}
-                className={'UNX-selectedFacets__list'}
+                className="UNX-selectedFacets__list"
             />
         );
     }
@@ -38,9 +38,9 @@ const SelectedFacetsWrapper = (props) => {
             <List
                 items={rangeFacets}
                 ListItem={facetItemComponent || FacetItem}
-                idAttribute={'facetName'}
+                idAttribute="facetName"
                 onClick={onRangeFacetClick}
-                className={'UNX-selectedFacets__list'}
+                className="UNX-selectedFacets__list"
                 priceUnit={priceUnit}
             />
         );
@@ -51,9 +51,9 @@ const SelectedFacetsWrapper = (props) => {
             <List
                 items={multilevelFacets}
                 ListItem={facetItemComponent || FacetItem}
-                idAttribute={'name'}
+                idAttribute="name"
                 onClick={onMultilevelFacetClick}
-                className={'UNX-selectedFacets__list'}
+                className="UNX-selectedFacets__list"
             />
         );
     }
@@ -68,7 +68,7 @@ const SelectedFacetsWrapper = (props) => {
 
     return (
         <div className="UNX-selectedFacets__container">
-            {label ? label : null}
+            {label || null}
             {activeTextFacetsMarkup}
             {activeRangeFacetsMarkup}
             {activeMultilevelFacetsMarkup}

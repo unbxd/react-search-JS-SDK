@@ -45,7 +45,7 @@ const MobileMenu = (props) => {
             </Dropdown>
 
             <div className="UNX-fiterIcon" onClick={handleShow}>
-                <i className="fa fa-filter" aria-hidden="true"></i>
+                <i className="fa fa-filter" aria-hidden="true" />
             </div>
         </div>
     );

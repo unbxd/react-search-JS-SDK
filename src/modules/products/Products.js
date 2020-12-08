@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ProductsContainer from './ProductsContainer';
-import { Loader as defaultLoader } from '../../components';
 import { AppContextConsumer } from '../../common/context';
 import { hasUnbxdSearchWrapperContext } from '../../common/utils';
 

@@ -24,7 +24,7 @@ const TextFacets = (props) => {
                     helpers,
                     unbxdState
                 } = appState;
-                const { enableApplyFilters, selectedFacets } = unbxdState;
+                const { enableApplyFilters, selectedTextFacets } = unbxdState;
 
                 return (
                     <TextFacetsContainer
@@ -32,7 +32,7 @@ const TextFacets = (props) => {
                         unbxdCoreStatus={unbxdCoreStatus}
                         helpers={helpers}
                         enableApplyFilters={enableApplyFilters}
-                        selectedFacets={selectedFacets}
+                        selectedTextFacets={selectedTextFacets}
                         {...props}
                     />
                 );

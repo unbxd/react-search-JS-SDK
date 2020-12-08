@@ -4,13 +4,14 @@ import setSpellCheckConfiguration from './setSpellCheckConfiguration';
 import setPageSizeConfiguration from './setPageSizeConfiguration';
 import setSortConfiguration from './setSortConfiguration';
 import setMultilevelFacetsConfiguration from './setMultilevelFacetsConfiguration';
+import setRangeFacetsConfiguration from './setRangeFacetsConfiguration';
 import setFacetsActionConfiguration from './setFacetsActionConfiguration';
 import setViewTypeConfiguration from './setViewTypeConfiguration';
 import manageTextFacets from './manageTextFacets';
+import manageRangeFacets from './manageRangeFacets';
 import unbxdCallBack from './unbxdCallBack';
 import getActiveFacets from './getActiveFacets';
 import handleViewTypeClick from './handleViewTypeClick';
-import setSelectedFacets from './setSelectedFacets';
 import setCategoryPath from './setCategoryPath';
 import getUpdatedResults from './getUpdatedResults';
 import resetSearch from './resetSearch';
@@ -22,13 +23,14 @@ export {
     setPageSizeConfiguration,
     setSortConfiguration,
     setMultilevelFacetsConfiguration,
+    setRangeFacetsConfiguration,
     setFacetsActionConfiguration,
     setViewTypeConfiguration,
     manageTextFacets,
+    manageRangeFacets,
     unbxdCallBack,
     getActiveFacets,
     handleViewTypeClick,
-    setSelectedFacets,
     setCategoryPath,
     getUpdatedResults,
     resetSearch

@@ -14,14 +14,13 @@ const PageSizeList = ({
                 items={sizeOptions}
                 ListItem={pageSizeItemComponent}
                 onClick={onPageSizeClick}
-                className={'UNX-pageSize__list'}
+                className="UNX-pageSize__list"
             />
         </div>
     );
 };
 
 PageSizeList.propTypes = {
-    size: PropTypes.number.isRequired,
     sizeOptions: PropTypes.arrayOf(
         PropTypes.shape({ id: PropTypes.number, value: PropTypes.string })
     ).isRequired,

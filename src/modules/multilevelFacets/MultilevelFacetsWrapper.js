@@ -31,9 +31,12 @@ const MultilevelFacetsWrapper = (props) => {
 MultilevelFacetsWrapper.propTypes = {
     onFacetClick: PropTypes.func.isRequired,
     facetItemComponent: PropTypes.element,
+    multilevelFacets: PropTypes.array,
     label: PropTypes.node,
     collapsible: PropTypes.bool,
-    searchable: PropTypes.bool
+    searchable: PropTypes.bool,
+    enableViewMore: PropTypes.bool,
+    minViewMore: PropTypes.number
 };
 
 export default MultilevelFacetsWrapper;

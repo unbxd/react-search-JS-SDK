@@ -1,19 +1,20 @@
 import { facetTypes } from '../../../config';
+
 export const getTextFacetItem = (facetObjectValues, dataId) => {
     return facetObjectValues.find((facetItem) => facetItem.dataId == dataId);
 };
 
-export const getFormattedTextFacets = (textFacets, selectedFacets) => {
+export const getFormattedTextFacets = (textFacets, selectedTextFacets) => {
     const formattedFacets = textFacets.map((facetObj) => {
         const { facetName } = facetObj;
-        if (selectedFacets[facetName]) {
+        if (selectedTextFacets[facetName]) {
             const currentFacetObj = {
                 facetType: facetTypes.TEXT_FACET,
                 ...facetObj,
                 isSelected: true
             };
 
-            const activeFacets = selectedFacets[facetName];
+            const activeFacets = selectedTextFacets[facetName];
             const values = currentFacetObj.values.map((facetitem) => {
                 const hit = activeFacets.find(
                     (val) => facetitem.dataId === val.dataId
@@ -24,21 +25,7 @@ export const getFormattedTextFacets = (textFacets, selectedFacets) => {
                         facetName,
                         isSelected: true
                     };
-                } else {
-                    return {
-                        ...facetitem,
-                        facetName
-                    };
                 }
-            });
-            currentFacetObj['values'] = values;
-            return currentFacetObj;
-        } else {
-            const currentFacetObj = {
-                ...facetObj,
-                facetType: facetTypes.TEXT_FACET
-            };
-            const values = currentFacetObj.values.map((facetitem) => {
                 return {
                     ...facetitem,
                     facetName
@@ -47,6 +34,18 @@ export const getFormattedTextFacets = (textFacets, selectedFacets) => {
             currentFacetObj['values'] = values;
             return currentFacetObj;
         }
+        const currentFacetObj = {
+            ...facetObj,
+            facetType: facetTypes.TEXT_FACET
+        };
+        const values = currentFacetObj.values.map((facetitem) => {
+            return {
+                ...facetitem,
+                facetName
+            };
+        });
+        currentFacetObj['values'] = values;
+        return currentFacetObj;
     });
 
     return formattedFacets;

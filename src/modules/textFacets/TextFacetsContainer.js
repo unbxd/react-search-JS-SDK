@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { conditionalRenderer } from '../../common/utils';
+import {
+    conditionalRenderer,
+    mergeFacets,
+    executeCallback
+} from '../../common/utils';
 import {
     getTextFacetItem,
     getTextFacetFacetCoreMethods,
@@ -9,18 +13,17 @@ import {
 } from './utils';
 import { manageStateTypes } from '../../config';
 import GenerateFacets from './generateFacets';
-import { executeCallback } from '../../common/utils';
 
 class TextFacetsContainer extends React.PureComponent {
-    //a way to pass data to render props and our component
+    // a way to pass data to render props and our component
     getTextFacetsProps() {
         const {
             unbxdCore,
             unbxdCoreStatus,
             facetItemComponent,
             enableApplyFilters,
-            helpers: { manageTextFacets, setSelectedFacets },
-            selectedFacets,
+            helpers: { manageTextFacets },
+            selectedTextFacets,
             label,
             collapsible,
             searchable,
@@ -42,7 +45,7 @@ class TextFacetsContainer extends React.PureComponent {
 
         const textFacets = getFacets() || [];
 
-        //Methods to handle click on facets
+        // Methods to handle click on facets
         const removeFacet = ({ selectedFacetName, selectedFacetId = null }) => {
             deleteAFacet(selectedFacetName, selectedFacetId);
         };
@@ -61,19 +64,14 @@ class TextFacetsContainer extends React.PureComponent {
             const facetData = getSelectedFacet(facetName);
             const { values: facetValues = [] } = facetData;
 
-            //add or delete from state
+            // add or delete from state
             const facetRow = getTextFacetItem(facetValues, dataId);
-
+            const eventType = isSelected
+                ? manageStateTypes.REMOVE
+                : manageStateTypes.ADD;
             const onFinish = () => {
                 enableApplyFilters &&
-                    manageTextFacets(
-                        facetRow,
-                        facetName,
-                        dataId,
-                        isSelected
-                            ? manageStateTypes.REMOVE
-                            : manageStateTypes.ADD
-                    );
+                    manageTextFacets(facetRow, facetName, dataId, eventType);
 
                 !isSelected &&
                     !enableApplyFilters &&
@@ -89,45 +87,43 @@ class TextFacetsContainer extends React.PureComponent {
                         selectedFacetId: dataId
                     });
             };
-            executeCallback(onFacetClick, [facetName, !isSelected], onFinish);
+            executeCallback(onFacetClick, [facetRow, eventType], onFinish);
         };
 
         const handleFacetObjectReset = (event) => {
-            const { unx_name } = event.target.dataset;
-
+            const { unx_name: facetName } = event.target.dataset;
+            const eventType = manageStateTypes.CLEAR;
             const onFinish = () => {
                 if (enableApplyFilters) {
                     manageTextFacets(
                         null,
-                        unx_name,
+                        facetName,
                         null,
                         manageStateTypes.RESET
                     );
                 }
 
-                if (!enableApplyFilters) {
-                    removeFacet({ selectedFacetName: unx_name });
-                    setPageStart(0);
-                    getResults();
-                }
+                removeFacet({ selectedFacetName: facetName });
+                setPageStart(0);
+                getResults();
             };
-            executeCallback(onFacetClick, [unx_name], onFinish);
+            executeCallback(onFacetClick, [{ facetName }, eventType], onFinish);
         };
 
-        const lastSelectedFacets = getSelectedFacets();
+        const lastSelectedTextFacets = getSelectedFacets();
 
-        //merge lastSelectedFacets and textFacets
+        // merge lastSelectedTextFacets and textFacets
         const formattedTextFacets = getFormattedTextFacets(
             textFacets,
-            selectedFacets
+            mergeFacets(selectedTextFacets, lastSelectedTextFacets)
         );
 
         const data = {
             unbxdCoreStatus,
             textFacets: formattedTextFacets,
             enableApplyFilters,
-            lastSelectedFacets,
-            selectedFacets,
+            lastSelectedTextFacets,
+            selectedTextFacets,
             collapsible,
             searchable,
             enableViewMore,
@@ -137,7 +133,6 @@ class TextFacetsContainer extends React.PureComponent {
         const helpers = {
             onFacetClick: handleFacetClick,
             onFacetObjectReset: handleFacetObjectReset,
-            setSelectedFacets,
             facetItemComponent,
             label,
             transform
@@ -163,7 +158,7 @@ TextFacetsContainer.propTypes = {
     helpers: PropTypes.object.isRequired,
     facetItemComponent: PropTypes.element,
     enableApplyFilters: PropTypes.bool.isRequired,
-    selectedFacets: PropTypes.object.isRequired,
+    selectedTextFacets: PropTypes.object.isRequired,
     label: PropTypes.node,
     collapsible: PropTypes.bool.isRequired,
     searchable: PropTypes.bool.isRequired,

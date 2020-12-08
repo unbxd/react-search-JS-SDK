@@ -15,10 +15,9 @@ class GenerateFacets extends React.Component {
     componentDidUpdate(prevProps) {
         const {
             textFacets,
-            selectedFacets,
-            lastSelectedFacets,
+            selectedTextFacets,
+            lastSelectedTextFacets,
             enableApplyFilters,
-            setSelectedFacets,
             unbxdCoreStatus,
             transform
         } = this.props;
@@ -47,16 +46,6 @@ class GenerateFacets extends React.Component {
                     return { textFacetsList: formattedTextFacets };
                 });
             }
-        }
-
-        if (
-            prevProps.unbxdCoreStatus !== unbxdCoreStatus &&
-            unbxdCoreStatus === searchStatus.READY &&
-            selectedFacets !== lastSelectedFacets
-        ) {
-            setSelectedFacets(
-                enableApplyFilters ? selectedFacets : lastSelectedFacets
-            );
         }
     }
 
@@ -215,11 +204,10 @@ class GenerateFacets extends React.Component {
 
 GenerateFacets.propTypes = {
     textFacets: PropTypes.arrayOf(PropTypes.object),
-    selectedFacets: PropTypes.object,
-    lastSelectedFacets: PropTypes.object,
+    selectedTextFacets: PropTypes.object,
+    lastSelectedTextFacets: PropTypes.object,
     onFacetClick: PropTypes.func.isRequired,
     onFacetObjectReset: PropTypes.func.isRequired,
-    setSelectedFacets: PropTypes.func.isRequired,
     enableApplyFilters: PropTypes.bool.isRequired,
     unbxdCoreStatus: PropTypes.string.isRequired,
     facetItemComponent: PropTypes.element,

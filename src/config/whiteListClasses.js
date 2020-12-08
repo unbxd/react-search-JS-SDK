@@ -1,5 +1,5 @@
-//implemented commonJs export because this file is used for css builds./
-//usage - postcss.config.js
+// implemented commonJs export because this file is used for css builds./
+// usage - postcss.config.js
 
 const whiteListClasses = [];
 

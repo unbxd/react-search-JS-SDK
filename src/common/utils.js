@@ -43,8 +43,8 @@ export const executeCallback = (callback, parameters, onFinish) => {
 export const debounce = (func, wait, immediate) => {
     let timeout;
     return function () {
-        const context = this,
-            args = arguments;
+        const context = this;
+        const args = arguments;
         const later = function () {
             timeout = null;
             if (!immediate) func.apply(context, args);
@@ -76,4 +76,32 @@ export const isElement = (element) => {
 
 export const cloneElement = (elements, props) => {
     return React.cloneElement(elements, props);
+};
+
+export const mergeFacets = (selectedFacets, lastSelectedFacets) => {
+    const modifiedSelectedFacets = { ...lastSelectedFacets };
+    // remove from modifiedSelectedFacets
+    Object.keys(lastSelectedFacets).map((facetName) => {
+        const removeFacetItems = selectedFacets.remove[facetName] || [];
+
+        modifiedSelectedFacets[facetName] = lastSelectedFacets[
+            facetName
+        ].filter(
+            (fValue) =>
+                !removeFacetItems.find(
+                    (fValueRemove) => fValue.dataId === fValueRemove.dataId
+                )
+        );
+    });
+
+    // add to modifiedSelectedFacets
+    Object.keys(selectedFacets.add).map((fName) => {
+        const addFacetItems = selectedFacets.add[fName] || [];
+        modifiedSelectedFacets[fName] = [
+            ...(modifiedSelectedFacets[fName] || []),
+            ...addFacetItems
+        ];
+    });
+
+    return modifiedSelectedFacets;
 };

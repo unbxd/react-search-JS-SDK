@@ -16,10 +16,10 @@ const GenerateSpellCheck = (props) => {
         <List
             items={spellChecks}
             ListItem={spellCheckItemComponent || SpellCheckItem}
-            idAttribute={'suggestion'}
+            idAttribute="suggestion"
             onClick={onSuggestionClick}
             currentQuery={currentQuery}
-            className={'UNX-spellCheck__list'}
+            className="UNX-spellCheck__list"
         />
     );
 };

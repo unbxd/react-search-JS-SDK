@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer, executeCallback } from '../../common/utils';
 import { getFacetCoreMethods } from './utils';
 import { manageStateTypes } from '../../config';
 import FacetActionsWrapper from './FacetActionsWrapper';
-import { executeCallback } from '../../common/utils';
 
 class FacetActionsContainer extends React.PureComponent {
     componentDidMount() {
@@ -15,7 +14,7 @@ class FacetActionsContainer extends React.PureComponent {
         setFacetsActionConfiguration({ enable: true });
     }
 
-    //a way to pass data to render props and our component
+    // a way to pass data to render props and our component
     getFacetActionsProps() {
         const {
             unbxdCore,
@@ -23,8 +22,10 @@ class FacetActionsContainer extends React.PureComponent {
             showClearFilter,
             applyFilterComponent,
             clearFilterComponent,
-            selectedFacets,
-            helpers: { manageTextFacets },
+            selectedTextFacets,
+            selectedRangeFacets,
+            applyMultiple,
+            helpers: { manageTextFacets, manageRangeFacets },
             onApply,
             onClear
         } = this.props;
@@ -32,30 +33,70 @@ class FacetActionsContainer extends React.PureComponent {
         const {
             applyFacets,
             clearFacets,
-            selectedRangeFacets,
+            lastSelectedRangeFacets,
+            setRangeFacet,
             clearARangeFacet,
             getPaginationInfo
         } = getFacetCoreMethods(unbxdCore);
 
         const { noOfPages = 0 } = getPaginationInfo() || {};
 
+        const applyFacetState = () => {
+            manageTextFacets(null, null, null, manageStateTypes.APPLY);
+            manageRangeFacets(null, null, null, manageStateTypes.APPLY);
+        };
+
+        const clearFacetState = () => {
+            manageTextFacets(null, null, null, manageStateTypes.CLEAR);
+            manageRangeFacets(null, null, null, manageStateTypes.CLEAR);
+        };
+
         const handleApplyFilter = () => {
             const onFinish = () => {
-                //does not work if we pass it as it is.
-                applyFacets({ ...selectedFacets });
+                // apply range facets one by one
+                const { list: applyRangeFacets } = selectedRangeFacets;
+                const { list: applyTextFacets } = selectedTextFacets;
+
+                Object.keys(applyRangeFacets).map((facetName) => {
+                    unbxdCore.state.rangeFacet = {};
+                    applyRangeFacets[facetName].map((facetItem) => {
+                        const { valMin, valMax } = facetItem;
+                        setRangeFacet({
+                            facetName,
+                            start: valMin,
+                            end: valMax,
+                            applyMultiple
+                        });
+                    });
+                });
+                // does not work if we pass it as it is.
+                applyFacets({ ...applyTextFacets });
+
+                // remove everything from the state
+                applyFacetState();
             };
-            executeCallback(onApply, [selectedFacets], onFinish);
+            executeCallback(
+                onApply,
+                [selectedTextFacets, selectedRangeFacets],
+                onFinish
+            );
         };
 
         const handleClearFilter = () => {
             const onFinish = () => {
-                Object.keys(selectedRangeFacets).map((rangeFacetName) => {
+                Object.keys(lastSelectedRangeFacets).map((rangeFacetName) => {
                     clearARangeFacet(rangeFacetName);
                 });
                 clearFacets();
-                manageTextFacets(null, null, null, manageStateTypes.CLEAR);
+
+                // remove everything from the state
+                clearFacetState();
             };
-            executeCallback(onClear, [selectedFacets], onFinish);
+            executeCallback(
+                onClear,
+                [selectedTextFacets, selectedRangeFacets],
+                onFinish
+            );
         };
 
         return {
@@ -82,11 +123,12 @@ class FacetActionsContainer extends React.PureComponent {
 
 FacetActionsContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
-    unbxdCoreStatus: PropTypes.string.isRequired,
     helpers: PropTypes.object.isRequired,
-    selectedFacets: PropTypes.object,
+    selectedTextFacets: PropTypes.object,
+    selectedRangeFacets: PropTypes.object,
     showApplyFilter: PropTypes.bool,
     showClearFilter: PropTypes.bool,
+    applyMultiple: PropTypes.bool,
     applyFilterComponent: PropTypes.element,
     clearFilterComponent: PropTypes.element,
     onApply: PropTypes.func,

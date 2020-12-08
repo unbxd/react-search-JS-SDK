@@ -1,4 +1,5 @@
 import { facetTypes } from '../../../config';
+
 export const getSelectedRangeFacets = (rangeFilterObject) => {
     const selectedRangeFacets = {};
 
@@ -12,7 +13,11 @@ export const getSelectedRangeFacets = (rangeFilterObject) => {
             if (!selectedRangeFacets[facetName]) {
                 selectedRangeFacets[facetName] = [];
             }
-            selectedRangeFacets[facetName].push({ valMin, valMax });
+            selectedRangeFacets[facetName].push({
+                valMin,
+                valMax,
+                dataId: `${facetName}_${valMin}_${valMax}`
+            });
         });
     });
 
@@ -20,20 +25,15 @@ export const getSelectedRangeFacets = (rangeFilterObject) => {
 };
 
 export const getFormattedRangeFacets = (rangeFacets, selectedRangeFacets) => {
-    let selectedFacets = {};
-    if (Object.keys(selectedRangeFacets).length) {
-        selectedFacets = getSelectedRangeFacets(selectedRangeFacets);
-    }
-
     const formattedFacets = rangeFacets.map((facetObj) => {
         const { facetName } = facetObj;
 
-        if (selectedFacets[facetName]) {
+        if (selectedRangeFacets[facetName]) {
             const { start, end } = facetObj;
             const sliderMin = start;
             const sliderMax = end;
             const { valMin = sliderMin, valMax = sliderMax } =
-                selectedFacets[facetName][0] || {};
+                selectedRangeFacets[facetName][0] || {};
             const currentFacetObj = {
                 ...facetObj,
                 facetType: facetTypes.RANGE_FACET,
@@ -45,12 +45,12 @@ export const getFormattedRangeFacets = (rangeFacets, selectedRangeFacets) => {
                 viewLess: false,
                 className: 'UNX-facet__list'
             };
-            const activeFacets = selectedFacets[facetName];
+            const activeFacets = selectedRangeFacets[facetName];
             const values = currentFacetObj.values.map((facetitem) => {
                 const { from, end } = facetitem;
                 const { dataId: fromValue } = from;
                 const { dataId: toValue } = end;
-                const id = `${facetName}_${fromValue}_${toValue}`;
+                const dataId = `${facetName}_${fromValue}_${toValue}`;
 
                 const hit = activeFacets.find((val) => {
                     const { valMin, valMax } = val;
@@ -67,43 +67,41 @@ export const getFormattedRangeFacets = (rangeFacets, selectedRangeFacets) => {
                         ...facetitem,
                         facetName,
                         isSelected: true,
-                        id
+                        dataId
                     };
-                } else {
-                    return { ...facetitem, facetName, id };
                 }
-            });
-            currentFacetObj['values'] = values;
-            return currentFacetObj;
-        } else {
-            const { start, end } = facetObj;
-            const sliderMin = start;
-            const sliderMax = end;
-            const currentFacetObj = {
-                ...facetObj,
-                isOpen: true,
-                facetType: facetTypes.RANGE_FACET,
-                sliderMin,
-                sliderMax,
-                rangeMin: sliderMin,
-                rangeMax: sliderMax,
-                viewLess: false,
-                className: 'UNX-facet__list'
-            };
-            const values = currentFacetObj.values.map((facetitem) => {
-                const { from, end } = facetitem;
-                const { dataId: fromValue } = from;
-                const { dataId: toValue } = end;
-                const id = `${fromValue}_${toValue}`;
-                return {
-                    ...facetitem,
-                    facetName,
-                    id
-                };
+                return { ...facetitem, facetName, dataId };
             });
             currentFacetObj['values'] = values;
             return currentFacetObj;
         }
+        const { start, end } = facetObj;
+        const sliderMin = start;
+        const sliderMax = end;
+        const currentFacetObj = {
+            ...facetObj,
+            isOpen: true,
+            facetType: facetTypes.RANGE_FACET,
+            sliderMin,
+            sliderMax,
+            rangeMin: sliderMin,
+            rangeMax: sliderMax,
+            viewLess: false,
+            className: 'UNX-facet__list'
+        };
+        const values = currentFacetObj.values.map((facetitem) => {
+            const { from, end } = facetitem;
+            const { dataId: fromValue } = from;
+            const { dataId: toValue } = end;
+            const dataId = `${facetName}_${fromValue}_${toValue}`;
+            return {
+                ...facetitem,
+                facetName,
+                dataId
+            };
+        });
+        currentFacetObj['values'] = values;
+        return currentFacetObj;
     });
 
     return formattedFacets;
@@ -129,13 +127,17 @@ export const getRangeFacetCoreMethods = (unbxdCore) => {
     const setRangeFacet = unbxdCore.setRangeFacet.bind(unbxdCore);
     const applyRangeFacet = unbxdCore.applyRangeFacet.bind(unbxdCore);
     const clearARangeFacet = unbxdCore.clearARangeFacet.bind(unbxdCore);
-    const selectedRangeFacets = unbxdCore.state.rangeFacet;
+    const lastSelectedRangeFacets = unbxdCore.state.rangeFacet;
+    const setPageStart = unbxdCore.setPageStart.bind(unbxdCore);
+    const getResults = unbxdCore.getResults.bind(unbxdCore);
 
     return {
         getRangeFacets,
         setRangeFacet,
         applyRangeFacet,
         clearARangeFacet,
-        selectedRangeFacets
+        lastSelectedRangeFacets,
+        setPageStart,
+        getResults
     };
 };

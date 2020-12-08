@@ -16,14 +16,15 @@ import {
     setPageSizeConfiguration,
     setSortConfiguration,
     setMultilevelFacetsConfiguration,
+    setRangeFacetsConfiguration,
     setFacetsActionConfiguration,
     setViewTypeConfiguration,
     manageTextFacets,
+    manageRangeFacets,
     unbxdCallBack,
     getActiveFacets,
     handleViewTypeClick,
     getUpdatedResults,
-    setSelectedFacets,
     resetSearch
 } from './utils';
 import { cloneElement } from './common/utils';
@@ -38,7 +39,9 @@ const initialUnbxdState = {
     viewType: 'GRID',
     paginationType: paginationTypes.FIXED_PAGINATION,
     enableApplyFilters: false,
-    selectedFacets: {}
+    selectedTextFacets: { add: {}, remove: {}, list: {} },
+    selectedRangeFacets: { add: {}, remove: {}, list: {} },
+    applyMultiple: false
 };
 
 class UnbxdSearchWrapper extends Component {
@@ -61,6 +64,9 @@ class UnbxdSearchWrapper extends Component {
         this.setMultilevelFacetsConfiguration = setMultilevelFacetsConfiguration.bind(
             this
         );
+        this.setRangeFacetsConfiguration = setRangeFacetsConfiguration.bind(
+            this
+        );
         this.setFacetsActionConfiguration = setFacetsActionConfiguration.bind(
             this
         );
@@ -69,7 +75,7 @@ class UnbxdSearchWrapper extends Component {
         this.setSpellCheckConfiguration = setSpellCheckConfiguration.bind(this);
         this.setViewTypeConfiguration = setViewTypeConfiguration.bind(this);
         this.manageTextFacets = manageTextFacets.bind(this);
-        this.setSelectedFacets = setSelectedFacets.bind(this);
+        this.manageRangeFacets = manageRangeFacets.bind(this);
         this.handleViewTypeClick = handleViewTypeClick.bind(this);
         this.getUpdatedResults = getUpdatedResults.bind(this);
         this.resetSearch = resetSearch.bind(this);
@@ -95,11 +101,12 @@ class UnbxdSearchWrapper extends Component {
                 setSortConfiguration: this.setSortConfiguration,
                 setMultilevelFacetsConfiguration: this
                     .setMultilevelFacetsConfiguration,
+                setRangeFacetsConfiguration: this.setRangeFacetsConfiguration,
                 setFacetsActionConfiguration: this.setFacetsActionConfiguration,
                 setSpellCheckConfiguration: this.setSpellCheckConfiguration,
                 setViewTypeConfiguration: this.setViewTypeConfiguration,
                 manageTextFacets: this.manageTextFacets,
-                setSelectedFacets: this.setSelectedFacets,
+                manageRangeFacets: this.manageRangeFacets,
                 handleViewTypeClick: this.handleViewTypeClick,
                 getUpdatedResults: this.getUpdatedResults,
                 resetSearch: this.resetSearch,
@@ -109,25 +116,6 @@ class UnbxdSearchWrapper extends Component {
         };
 
         this.initialResultLoad = true;
-    }
-
-    getProps() {
-        const {
-            unbxdCore,
-            unbxdCoreStatus,
-            unbxdState,
-            helpers,
-            priceUnit,
-            productType
-        } = this.state;
-        return {
-            unbxdCore,
-            unbxdCoreStatus,
-            unbxdState,
-            helpers,
-            priceUnit,
-            productType
-        };
     }
 
     componentDidMount() {
@@ -213,6 +201,25 @@ class UnbxdSearchWrapper extends Component {
             this.resetSearch();
             getResults();
         }
+    }
+
+    getProps() {
+        const {
+            unbxdCore,
+            unbxdCoreStatus,
+            unbxdState,
+            helpers,
+            priceUnit,
+            productType
+        } = this.state;
+        return {
+            unbxdCore,
+            unbxdCoreStatus,
+            unbxdState,
+            helpers,
+            priceUnit,
+            productType
+        };
     }
 
     static getDerivedStateFromProps(props, state) {

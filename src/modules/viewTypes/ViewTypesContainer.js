@@ -63,7 +63,8 @@ class ViewTypesContainer extends React.PureComponent {
             viewType === prevProps.viewType &&
             viewType !== currentViewType
         ) {
-            setViewTypeConfiguration({ viewType: currentViewType },true);
+            setViewTypeConfiguration({ viewType: currentViewType },
+true);
         }
     }
 

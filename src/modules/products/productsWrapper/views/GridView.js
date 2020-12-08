@@ -24,7 +24,7 @@ const GridView = (props) => {
     return (
         <div className="UNX-products__container">
             <List
-                idAttribute={'uniqueId'}
+                idAttribute="uniqueId"
                 items={products}
                 ListItem={productItemComponent || GridProductCard}
                 viewType={viewType}

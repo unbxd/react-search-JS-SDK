@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer, executeCallback } from '../../common/utils';
 import { getFacetCoreMethods } from './utils';
 import MultilevelFacetsWrapper from './MultilevelFacetsWrapper';
 import { productTypes } from '../../config';
-import { executeCallback } from '../../common/utils';
 
 class MultilevelFacetsContainer extends React.PureComponent {
     componentDidMount() {
@@ -138,7 +137,7 @@ class MultilevelFacetsContainer extends React.PureComponent {
                     if (highestBreadcrumbLevel === parseInt(level)) {
                         deleteCategoryFilter(categoryObject);
                     } else {
-                        //check if it is a breadcrumb
+                        // check if it is a breadcrumb
                         const hit = breadCrumbsList.find(({ value }) => {
                             return name === value;
                         });
@@ -184,12 +183,15 @@ MultilevelFacetsContainer.propTypes = {
     helpers: PropTypes.object.isRequired,
     categoryDisplayName: PropTypes.string.isRequired,
     categoryField: PropTypes.string.isRequired,
+    productType: PropTypes.string,
     facetDepth: PropTypes.number,
     facetLimit: PropTypes.number,
     facetItemComponent: PropTypes.element,
     label: PropTypes.node,
     collapsible: PropTypes.bool,
     searchable: PropTypes.bool,
+    enableViewMore: PropTypes.bool,
+    minViewMore: PropTypes.number,
     onFacetClick: PropTypes.func
 };
 

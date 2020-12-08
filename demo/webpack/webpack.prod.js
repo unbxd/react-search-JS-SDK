@@ -3,8 +3,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-    .BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const htmlPlugin = new HtmlWebPackPlugin({
     template: Path.resolve(__dirname, '../public/index.html'),
@@ -72,7 +71,7 @@ module.exports = {
             }
         ]
     },
-    plugins: [/*bundleAnalyzerPlugin,*/ miniCssExtractPlugin, htmlPlugin],
+    plugins: [/* bundleAnalyzerPlugin, */ miniCssExtractPlugin, htmlPlugin],
     optimization: {
         minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
     },

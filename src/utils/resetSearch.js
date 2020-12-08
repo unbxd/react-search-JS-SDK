@@ -7,10 +7,6 @@ function resetSearch() {
     unbxdCore.state.rangeFacet = {};
     unbxdCore.state.categoryFilter = {};
     unbxdCore.state.breadcrumbs = {};
-    //unbxdCore.state.didYouMean = null;
-    //unbxdCore.state.startPageNo = 0;
-    //unbxdCore.state.selectedSort = '';
-    //unbxdCore.state.responseObj = null;
 }
 
 export default resetSearch;

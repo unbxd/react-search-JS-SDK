@@ -10,10 +10,10 @@ const BreadcrumbItemComponent = ({ itemData, separator, idx, onClick }) => {
     return (
         <>
             {idx === 0 && <Root />}
-            {''}
+
             {separator}
-            {''}
-            <div className={'UNX-breadcrumbs-list-item'} onClick={handleClick}>
+
+            <div className="UNX-breadcrumbs-list-item" onClick={handleClick}>
                 {value}
             </div>
         </>

@@ -15,11 +15,11 @@ const CombinedFilters = () => {
             transform={transform}
             rangeFacetItemComponent={<RangeFacetItemComponent />}
             textFacetItemComponent={<TextFacetItemComponent />}
-            collapsible={true}
-            enableViewMore={true}
-            searchable={true}
+            collapsible
+            enableViewMore
+            searchable
             minViewMore={3}
-            applyMultiple={true}
+            applyMultiple
         />
     );
 };

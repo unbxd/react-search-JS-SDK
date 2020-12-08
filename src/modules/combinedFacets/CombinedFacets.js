@@ -24,7 +24,7 @@ const CombinedFacets = (props) => {
                     unbxdState,
                     priceUnit
                 } = appState;
-                const { enableApplyFilters, selectedFacets } = unbxdState;
+                const { enableApplyFilters, selectedTextFacets } = unbxdState;
 
                 return (
                     <CombinedFacetsContainer
@@ -32,7 +32,7 @@ const CombinedFacets = (props) => {
                         unbxdCoreStatus={unbxdCoreStatus}
                         helpers={helpers}
                         enableApplyFilters={enableApplyFilters}
-                        selectedFacets={selectedFacets}
+                        selectedTextFacets={selectedTextFacets}
                         priceUnit={priceUnit}
                         {...props}
                     />
@@ -47,9 +47,8 @@ CombinedFacets.displayName = 'CombinedFacets';
 CombinedFacets.defaultProps = {
     collapsible: false,
     searchable: false,
-    enableViewMore: false,
-    minViewMore: 3,
-    enableViewMore: true
+    enableViewMore: true,
+    minViewMore: 3
 };
 
 CombinedFacets.propTypes = {

@@ -8,7 +8,7 @@ const SortByDropdown = ({ sortBy, sortByOptions, onSortClick }) => {
             className="UNX-sortby__dropdown"
             value={sortBy.value}
             onChange={onSortClick}
-            data-testid={'UNX_unbxdSorter'}
+            data-testid="UNX_unbxdSorter"
         >
             {sortByOptions.map((item) => (
                 <option

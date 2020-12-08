@@ -22,14 +22,13 @@ function handleViewTypeClick(viewOption) {
                     viewType: viewTypes.GRID
                 }
             };
-        else
-            return {
-                ...currentState,
-                unbxdState: {
-                    ...currentState.unbxdState,
-                    viewType: viewTypes.LIST
-                }
-            };
+        return {
+            ...currentState,
+            unbxdState: {
+                ...currentState.unbxdState,
+                viewType: viewTypes.LIST
+            }
+        };
     });
 }
 

@@ -38,7 +38,7 @@ const PaginationWrapper = (props) => {
             pagenumber={currentPage}
             type={paginationButtonTypes.NUMBER}
             label={currentPage}
-            isSelected={true}
+            isSelected
         />
     ) : (
         <Button
@@ -55,7 +55,7 @@ const PaginationWrapper = (props) => {
         currentPage,
         padding,
         noOfPages,
-        paginationItemComponent ? paginationItemComponent : Button,
+        paginationItemComponent || Button,
         onPageClick,
         paginationButtonTypes.NUMBER
     );

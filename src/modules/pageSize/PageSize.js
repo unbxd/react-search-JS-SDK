@@ -52,7 +52,7 @@ PageSize.propTypes = {
      */
     sizeOptions: PropTypes.arrayOf(
         PropTypes.shape({ id: PropTypes.number, value: PropTypes.string })
-    ).isRequired,
+    ),
     /**
      * Display type of `DROPDOWN` or `LIST` for pageSize.
      */

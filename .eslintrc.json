@@ -26,6 +26,8 @@
             }
         ],
         "dot-notation":[0],
-        "import/no-extraneous-dependencies": ["error", {"devDependencies": true, "optionalDependencies": false, "peerDependencies": false}]
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true, "optionalDependencies": false, "peerDependencies": false}],
+        "quotes": [2, "single", "avoid-escape"],
+        "radix": ["error", "as-needed"]
     }
 }

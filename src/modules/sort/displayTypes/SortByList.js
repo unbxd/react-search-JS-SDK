@@ -6,12 +6,12 @@ import { List } from '../../../components';
 const SortByList = ({ sortByOptions, onSortClick, sortItemComponent }) => {
     return (
         <List
-            idAttribute={'value'}
+            idAttribute="value"
             items={sortByOptions}
             ListItem={sortItemComponent}
             onClick={onSortClick}
-            className={'UNX-sortby__list'}
-            testId={'UNX_unbxdSorter'}
+            className="UNX-sortby__list"
+            testId="UNX_unbxdSorter"
         />
     );
 };

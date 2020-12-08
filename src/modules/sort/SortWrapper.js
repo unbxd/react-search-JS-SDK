@@ -25,7 +25,7 @@ const SortWrapper = (props) => {
 
     return (
         <div className="UNX-sortby__container">
-            {label ? label : null}
+            {label || null}
             {displayType === displayTypes.DROPDOWN && (
                 <SortByDropdown
                     sortBy={sortBy}
