@@ -167,13 +167,13 @@ class GenerateFacets extends React.Component {
         if (prevProps.rangeFacets !== rangeFacets) {
             this.setState((existingState) => {
                 const { rangeFacetsList } = existingState;
-                const updatedFacetState = getUpdatedRangeFacets(
+                const formattedRangeFacets = getUpdatedRangeFacets(
                     rangeFacets,
                     rangeFacetsList
                 );
 
                 if (transform && typeof transform === 'function') {
-                    let returnedFacets = transform.call(updatedFacetState);
+                    let returnedFacets = transform.call(formattedRangeFacets);
                     return { rangeFacetsList: returnedFacets };
                 }
                 return { rangeFacetsList: updatedFacetState };
@@ -207,6 +207,8 @@ class GenerateFacets extends React.Component {
         const { rangeFacetsList } = this.state;
         const {
             facetItemComponent,
+            onFacetClick,
+            onFacetObjectReset,
             priceUnit,
             label,
             collapsible,
@@ -254,7 +256,7 @@ class GenerateFacets extends React.Component {
                             <List
                                 items={values}
                                 ListItem={facetItemComponent || FacetItem}
-                                onClick={this.handleFacetClick}
+                                onClick={onFacetClick}
                                 className={`UNX-facet__list ${
                                     viewLess ? 'UNX-facet__listShowLimited' : ''
                                 }`}
@@ -262,7 +264,7 @@ class GenerateFacets extends React.Component {
                             />
                             {isSelected && (
                                 <div
-                                    onClick={this.onClearFilter}
+                                    onClick={onFacetObjectReset}
                                     data-unx_facetname={facetName}
                                     className="-clear"
                                 >

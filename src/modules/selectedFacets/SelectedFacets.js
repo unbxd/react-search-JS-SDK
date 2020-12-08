@@ -19,17 +19,23 @@ const SelectedFacets = (props) => {
                 const {
                     unbxdCore,
                     unbxdCoreStatus,
+                    unbxdState,
                     priceUnit,
                     helpers: { getUpdatedResults },
-                    productType
+                    productType,
+                    helpers
                 } = appState;
+
+                const { applyMultiple } = unbxdState;
 
                 return (
                     <SelectedFacetsContainer
                         unbxdCore={unbxdCore}
                         unbxdCoreStatus={unbxdCoreStatus}
+                        helpers={helpers}
                         priceUnit={priceUnit}
                         getUpdatedResults={getUpdatedResults}
+                        applyMultiple={applyMultiple}
                         productType={productType}
                         {...props}
                     />

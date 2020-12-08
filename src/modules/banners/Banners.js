@@ -22,7 +22,7 @@ const Banners = (props) => {
                     helpers,
                     unbxdState
                 } = appState;
-                const { enableApplyFilters, selectedFacets } = unbxdState;
+                const { enableApplyFilters } = unbxdState;
 
                 return (
                     <BannersContainer
@@ -30,7 +30,6 @@ const Banners = (props) => {
                         unbxdCoreStatus={unbxdCoreStatus}
                         helpers={helpers}
                         enableApplyFilters={enableApplyFilters}
-                        selectedFacets={selectedFacets}
                         {...props}
                     />
                 );

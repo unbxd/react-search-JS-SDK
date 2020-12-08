@@ -29,7 +29,8 @@ export const manageStateTypes = {
     ADD: 'ADD',
     REMOVE: 'REMOVE',
     RESET: 'RESET',
-    CLEAR: 'CLEAR'
+    CLEAR: 'CLEAR',
+    APPLY: 'APPLY'
 };
 
 export const paginationTypes = {

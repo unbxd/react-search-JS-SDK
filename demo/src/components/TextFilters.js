@@ -26,9 +26,11 @@ export const FacetItemComponent = ({ itemData, onClick }) => {
     );
 };
 
-const onFacetClick = (facet, isSelected) => {
-    console.log('Facet change :', facet, isSelected);
-    scrollTop();
+const onFacetClick = (facetObj, eventType) => {
+    console.log('Facet change :', facetObj, eventType);
+    if (eventType === 'CLEAR') {
+        scrollTop();
+    }
     return true;
 };
 
@@ -41,7 +43,7 @@ const TextFilters = () => {
             searchable={true}
             transform={transform}
             minViewMore={3}
-            //onFacetClick={onFacetClick}
+            onFacetClick={onFacetClick}
         />
     );
 };

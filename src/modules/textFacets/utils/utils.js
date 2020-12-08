@@ -3,17 +3,17 @@ export const getTextFacetItem = (facetObjectValues, dataId) => {
     return facetObjectValues.find((facetItem) => facetItem.dataId == dataId);
 };
 
-export const getFormattedTextFacets = (textFacets, selectedFacets) => {
+export const getFormattedTextFacets = (textFacets, selectedTextFacets) => {
     const formattedFacets = textFacets.map((facetObj) => {
         const { facetName } = facetObj;
-        if (selectedFacets[facetName]) {
+        if (selectedTextFacets[facetName]) {
             const currentFacetObj = {
                 facetType: facetTypes.TEXT_FACET,
                 ...facetObj,
                 isSelected: true
             };
 
-            const activeFacets = selectedFacets[facetName];
+            const activeFacets = selectedTextFacets[facetName];
             const values = currentFacetObj.values.map((facetitem) => {
                 const hit = activeFacets.find(
                     (val) => facetitem.dataId === val.dataId

@@ -38,7 +38,7 @@ FacetActionsWrapper.propTypes = {
     onApplyFilter: PropTypes.func.isRequired,
     onClearFilter: PropTypes.func.isRequired,
     noOfPages: PropTypes.number.isRequired,
-    selectedFacets: PropTypes.object,
+    selectedTextFacets: PropTypes.object,
     showApplyFilter: PropTypes.bool,
     showClearFilter: PropTypes.bool,
     applyFilterComponent: PropTypes.element,

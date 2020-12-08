@@ -6,6 +6,7 @@ import { getFacetCoreMethods } from './utils';
 import SelectedFacetsWrapper from './SelectedFacetsWrapper';
 import { productTypes } from '../../config';
 import { facetTypes } from '../../config';
+import { manageStateTypes } from '../../config/constants';
 
 class SelectedFacetsContainer extends React.PureComponent {
     getSelectedFacetsProps = () => {
@@ -15,7 +16,9 @@ class SelectedFacetsContainer extends React.PureComponent {
             priceUnit,
             label,
             getUpdatedResults,
-            productType
+            productType,
+            helpers,
+            applyMultiple
         } = this.props;
 
         const {
@@ -34,6 +37,8 @@ class SelectedFacetsContainer extends React.PureComponent {
         const selectedTextFacets = getSelectedFacets();
         const multilevelFacets = getBreadCrumbsList();
 
+        const { manageTextFacets, manageRangeFacets } = helpers;
+
         const removeTextFacet = (facetName, dataId) => {
             deleteAFacet(facetName, dataId);
             getUpdatedResults();
@@ -45,16 +50,6 @@ class SelectedFacetsContainer extends React.PureComponent {
             applyRangeFacet();
         };
 
-        const addRangeFacet = (facetName, dataid) => {
-            const [from, to] =
-                typeof dataid === 'string' ? dataid.split(' TO ') : '';
-            const start = parseInt(from);
-            const end = parseInt(to);
-            const applyMultiple = true;
-            setRangeFacet({ facetName, start, end, applyMultiple });
-            applyRangeFacet();
-        };
-
         const removeMultilevelFacet = (parent, name, level) => {
             deleteCategoryFilter({ parent, name, level });
             getUpdatedResults();
@@ -63,11 +58,28 @@ class SelectedFacetsContainer extends React.PureComponent {
         const handleTextFacetClick = (currentItem) => {
             const { facetName, dataId } = currentItem;
             removeTextFacet(facetName, dataId);
+            manageTextFacets(
+                currentItem,
+                facetName,
+                dataId,
+                manageStateTypes.REMOVE
+            );
         };
 
         const handleRangeFacetClick = (currentItem) => {
             const { facetName, dataId } = currentItem;
-            addRangeFacet(facetName, dataId);
+            const [from, to] =
+                typeof dataId === 'string' ? dataId.split(' TO ') : '';
+            const start = parseInt(from);
+            const end = parseInt(to);
+            setRangeFacet({ facetName, start, end, applyMultiple });
+            manageRangeFacets(
+                currentItem,
+                facetName,
+                dataId,
+                manageStateTypes.REMOVE
+            );
+            applyRangeFacet();
         };
 
         const handleMultilevelFacetClick = (currentItem) => {

@@ -16,15 +16,15 @@ const ClearFilter = ({ onClearFilter }) => (
 
 const FacetApplyClear = (props) => {
     const { handleClose } = props;
-    const onApply = (facets) => {
-        console.log('Facets apply :', facets);
+    const onApply = (textFacets, rangeFacets) => {
+        console.log('Facets apply :', textFacets, rangeFacets);
         scrollTop();
         handleClose && handleClose();
         return true;
     };
 
-    const onClear = () => {
-        console.log('Facets clear :');
+    const onClear = (textFacets, rangeFacets) => {
+        console.log('Facets clear :', textFacets, rangeFacets);
         scrollTop();
         handleClose && handleClose();
         return true;

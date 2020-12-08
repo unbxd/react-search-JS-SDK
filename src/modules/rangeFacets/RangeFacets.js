@@ -23,7 +23,7 @@ const RangeFacets = (props) => {
                     unbxdState,
                     priceUnit
                 } = appState;
-                const { enableApplyFilters } = unbxdState;
+                const { enableApplyFilters, selectedRangeFacets } = unbxdState;
 
                 return (
                     <RangeFacetsContainer
@@ -31,6 +31,7 @@ const RangeFacets = (props) => {
                         unbxdCoreStatus={unbxdCoreStatus}
                         helpers={helpers}
                         enableApplyFilters={enableApplyFilters}
+                        selectedRangeFacets={selectedRangeFacets}
                         priceUnit={priceUnit}
                         {...props}
                     />

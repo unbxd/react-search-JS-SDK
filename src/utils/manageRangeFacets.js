@@ -1,8 +1,11 @@
 import { mergeFacets } from '../common/utils';
 import { manageStateTypes } from '../config';
-import { getTextFacetFacetCoreMethods } from '../modules/textFacets/utils';
+import {
+    getSelectedRangeFacets,
+    getRangeFacetCoreMethods
+} from '../modules/rangeFacets/utils';
 
-function manageTextFacets(
+function manageRangeFacets(
     currentFacet = {},
     selectedFacetName = '',
     selectedFacetId = 0,
@@ -10,11 +13,13 @@ function manageTextFacets(
 ) {
     this.setState((appState) => {
         const { unbxdState, ...remaningState } = appState;
-        const { selectedTextFacets } = unbxdState;
-        const { add, remove } = selectedTextFacets;
+        const { selectedRangeFacets } = unbxdState;
+        const { add, remove } = selectedRangeFacets;
         const { unbxdCore } = this.state;
-        const { getSelectedFacets } = getTextFacetFacetCoreMethods(unbxdCore);
-        const lastSelectedTextFacets = getSelectedFacets();
+        const { lastSelectedRangeFacets } = getRangeFacetCoreMethods(unbxdCore);
+        const formattedLastSelectedRangeFacets = getSelectedRangeFacets(
+            lastSelectedRangeFacets
+        );
         let updatedSelectedFacets;
         switch (action) {
             case manageStateTypes.ADD:
@@ -116,7 +121,10 @@ function manageTextFacets(
                 return null;
         }
 
-        const list = mergeFacets(updatedSelectedFacets, lastSelectedTextFacets);
+        const list = mergeFacets(
+            updatedSelectedFacets,
+            formattedLastSelectedRangeFacets
+        );
 
         updatedSelectedFacets = { ...updatedSelectedFacets, list };
 
@@ -124,10 +132,10 @@ function manageTextFacets(
             ...remaningState,
             unbxdState: {
                 ...unbxdState,
-                selectedTextFacets: updatedSelectedFacets
+                selectedRangeFacets: updatedSelectedFacets
             }
         };
     });
 }
 
-export default manageTextFacets;
+export default manageRangeFacets;

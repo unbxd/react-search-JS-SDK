@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { RangeFacets } from '@unbxd-ui/react-search-sdk';
 import { RangeSlider } from '../common/components';
+import { scrollTop } from '../utils';
 
 const RangeFacetsRender = (props) => {
     const { rangeFacets, addRangeFacet, applyRangeFacet } = props;
@@ -104,6 +105,14 @@ export const RangeFiltersRenderProps = () => {
     );
 };
 
+const onFacetClick = (facetObj, eventType) => {
+    console.log('Facet change :', facetObj, eventType);
+    if (eventType === 'CLEAR') {
+        scrollTop();
+    }
+    return true;
+};
+
 const RangeFilters = () => {
     return (
         <RangeFacets
@@ -113,7 +122,7 @@ const RangeFilters = () => {
             enableViewMore={true}
             minViewMore={3}
             applyMultiple={true}
-            //onFacetClick={onFacetClick}
+            onFacetClick={onFacetClick}
         />
     );
 };

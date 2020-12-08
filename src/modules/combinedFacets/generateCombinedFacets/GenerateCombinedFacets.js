@@ -97,9 +97,8 @@ class GenerateCombinedFacets extends React.Component {
         const {
             unbxdCoreStatus,
             combinedFacets,
-            lastSelectedFacets,
-            selectedFacets,
-            setSelectedFacets,
+            lastSelectedTextFacets,
+            selectedTextFacets,
             transform
         } = this.props;
         if (combinedFacets !== prevProps.combinedFacets) {
@@ -142,14 +141,6 @@ class GenerateCombinedFacets extends React.Component {
                     return { combinedFacetsList: formattedCombinedFacets };
                 });
             }
-        }
-
-        if (
-            prevProps.unbxdCoreStatus !== unbxdCoreStatus &&
-            unbxdCoreStatus === searchStatus.READY &&
-            selectedFacets !== lastSelectedFacets
-        ) {
-            setSelectedFacets(lastSelectedFacets);
         }
     }
 
@@ -286,7 +277,7 @@ class GenerateCombinedFacets extends React.Component {
 
     render() {
         const {
-            selectedFacets,
+            selectedTextFacets,
             onTextFacetClick,
             onTextFacetClear,
             textFacetItemComponent,
@@ -317,7 +308,7 @@ class GenerateCombinedFacets extends React.Component {
                             viewLess,
                             className
                         } = combinedFacet;
-                        const hasActiveFacets = selectedFacets[facetName]
+                        const hasActiveFacets = selectedTextFacets[facetName]
                             ? true
                             : false;
                         let filteredValues = values;
