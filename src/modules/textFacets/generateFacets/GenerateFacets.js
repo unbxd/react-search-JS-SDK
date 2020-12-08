@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { List, Input, ViewMore } from '../../../components';
 import FacetItem from './FacetItem';
-import { searchStatus } from './../../../config';
 
 class GenerateFacets extends React.Component {
     constructor(props) {
@@ -13,14 +12,7 @@ class GenerateFacets extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        const {
-            textFacets,
-            selectedTextFacets,
-            lastSelectedTextFacets,
-            enableApplyFilters,
-            unbxdCoreStatus,
-            transform
-        } = this.props;
+        const { textFacets, transform } = this.props;
         if (textFacets !== prevProps.textFacets) {
             const formattedTextFacets = textFacets.map((textFacet) => {
                 const { textFacetsList } = this.state;

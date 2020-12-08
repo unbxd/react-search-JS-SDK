@@ -176,7 +176,7 @@ class GenerateFacets extends React.Component {
                     let returnedFacets = transform.call(formattedRangeFacets);
                     return { rangeFacetsList: returnedFacets };
                 }
-                return { rangeFacetsList: updatedFacetState };
+                return { rangeFacetsList: formattedRangeFacets };
             });
         }
     }
