@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.30](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.29...v0.0.30) (2020-12-08)
+
+
+### Features
+
+* **textfacets and rangefacets:** introduce state to text and range facets ([a62e193](https://github.com/unbxd/react-search-JS-SDK/commit/a62e1939383e722190f0f22ba1d10cf82ab98991))
+
+
+### Bug Fixes
+
+* **combined facets:** add applymultiple prop ([e55bfc7](https://github.com/unbxd/react-search-JS-SDK/commit/e55bfc7170cce8ff1fa894de3b0ede334bb13471))
+* **pagesizecontainer:** handelling page size bug fixes ([99a87f7](https://github.com/unbxd/react-search-JS-SDK/commit/99a87f7df61ef6e8e14fac54401f2c3f585a699d))
+* **textfacets, pagesize and pagination:** typo in pagination, retain facets on change and code clean ([9215069](https://github.com/unbxd/react-search-JS-SDK/commit/92150696cb9a038a7f20d7acd13a1eb11c069af9))
+
 ### [0.0.29](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.17...v0.0.29) (2020-12-02)
 
 
