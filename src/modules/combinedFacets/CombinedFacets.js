@@ -47,9 +47,8 @@ CombinedFacets.displayName = 'CombinedFacets';
 CombinedFacets.defaultProps = {
     collapsible: false,
     searchable: false,
-    enableViewMore: false,
-    minViewMore: 3,
-    enableViewMore: true
+    enableViewMore: true,
+    minViewMore: 3
 };
 
 CombinedFacets.propTypes = {

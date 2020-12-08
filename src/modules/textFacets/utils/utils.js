@@ -1,4 +1,5 @@
 import { facetTypes } from '../../../config';
+
 export const getTextFacetItem = (facetObjectValues, dataId) => {
     return facetObjectValues.find((facetItem) => facetItem.dataId == dataId);
 };
@@ -24,21 +25,7 @@ export const getFormattedTextFacets = (textFacets, selectedTextFacets) => {
                         facetName,
                         isSelected: true
                     };
-                } else {
-                    return {
-                        ...facetitem,
-                        facetName
-                    };
                 }
-            });
-            currentFacetObj['values'] = values;
-            return currentFacetObj;
-        } else {
-            const currentFacetObj = {
-                ...facetObj,
-                facetType: facetTypes.TEXT_FACET
-            };
-            const values = currentFacetObj.values.map((facetitem) => {
                 return {
                     ...facetitem,
                     facetName
@@ -47,6 +34,18 @@ export const getFormattedTextFacets = (textFacets, selectedTextFacets) => {
             currentFacetObj['values'] = values;
             return currentFacetObj;
         }
+        const currentFacetObj = {
+            ...facetObj,
+            facetType: facetTypes.TEXT_FACET
+        };
+        const values = currentFacetObj.values.map((facetitem) => {
+            return {
+                ...facetitem,
+                facetName
+            };
+        });
+        currentFacetObj['values'] = values;
+        return currentFacetObj;
     });
 
     return formattedFacets;

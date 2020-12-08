@@ -31,8 +31,8 @@ const ProductsSize = () => {
         <PageSize
             sizeOptions={sizeOptions}
             label={label}
-            //displayType={'LIST'}
-            //pageSizeItemComponent={<PageSizeItemComponent/>}
+            // displayType={'LIST'}
+            // pageSizeItemComponent={<PageSizeItemComponent/>}
         />
     );
 };

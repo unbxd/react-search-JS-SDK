@@ -13,15 +13,15 @@ const BreadcrumbsWrapper = (props) => {
         breadcrumbItemComponent
     } = props;
     return (
-        <div className={'UNX-breadcrumbs__container'}>
+        <div className="UNX-breadcrumbs__container">
             <List
                 items={breadCrumbsList}
-                idAttribute={'value'}
+                idAttribute="value"
                 ListItem={breadcrumbItemComponent || BreadCrumbItem}
                 root={root}
                 separator={separator}
                 onClick={onBreadCrumbClick}
-                className={'UNX-breadcrumbs__list'}
+                className="UNX-breadcrumbs__list"
             />
         </div>
     );

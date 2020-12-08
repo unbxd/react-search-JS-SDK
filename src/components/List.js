@@ -25,7 +25,7 @@ const List = ({
                     return cloneElement(ListItem, {
                         itemData: item,
                         idAttribute: key,
-                        onClick: onClick ? onClick : null,
+                        onClick: onClick || null,
                         idx,
                         ...props,
                         key
@@ -36,7 +36,7 @@ const List = ({
                     <ListItem
                         itemData={item}
                         idAttribute={key}
-                        onClick={onClick ? onClick : null}
+                        onClick={onClick || null}
                         idx={idx}
                         {...props}
                         key={key}

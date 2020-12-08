@@ -8,7 +8,7 @@ const getActiveFacets = (unbxdSearchObj) => {
     const activeTextFacets = {};
     textFacetsArr.forEach((facet) => {
         const valObj = textFacets[facet];
-        let arr = [];
+        const arr = [];
         valObj.forEach((val) => {
             arr.push(val.name);
         });

@@ -38,8 +38,8 @@ const Jackets = () => {
                 <div className="UNX-searchFacet__container">
                     <MultilevelFilters />
                     <FacetApplyClear />
-                     <RangeFilters />
-                    <TextFilters /> 
+                    <RangeFilters />
+                    <TextFilters />
                     {/* <CombinedFilters/> */}
                     <FacetApplyClear />
                 </div>

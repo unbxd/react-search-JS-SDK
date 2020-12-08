@@ -1,5 +1,6 @@
 import React from 'react';
 import { isElement, cloneElement } from '../../common/utils';
+
 const PageNavigationOptions = (
     currentPage,
     padding,
@@ -8,8 +9,8 @@ const PageNavigationOptions = (
     onClick,
     type
 ) => {
-    //init an array with noOfPages
-    //slice it according to requirements
+    // init an array with noOfPages
+    // slice it according to requirements
     const calcIndex = currentPage - padding;
     const lowestIndex = calcIndex < 0 ? 0 : calcIndex;
     const prevPages = [...Array(noOfPages).keys()]

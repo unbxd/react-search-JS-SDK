@@ -59,8 +59,8 @@ const Sorter = () => {
             sortOptions={sortOptions}
             label={label}
             onSortChange={onSortChange}
-            //displayType={'LIST'}
-            //sortItemComponent={<SortItemComponent/>}
+            // displayType={'LIST'}
+            // sortItemComponent={<SortItemComponent/>}
         />
     );
 };

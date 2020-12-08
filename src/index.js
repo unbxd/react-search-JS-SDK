@@ -1,4 +1,4 @@
-//sdk exports
+// sdk exports
 import Banners from './modules/banners';
 import Breadcrumbs from './modules/breadcrumbs';
 import FacetActions from './modules/facetActions';

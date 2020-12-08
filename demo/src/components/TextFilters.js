@@ -19,7 +19,7 @@ export const FacetItemComponent = ({ itemData, onClick }) => {
             className={`UNX-facet__item ${isSelected ? '-selected' : ''}`}
             onClick={handleClick}
         >
-            <div className="-checkbox"></div>
+            <div className="-checkbox" />
             <div className="-label">{name}</div>
             <div className="-count">({count})</div>
         </div>
@@ -38,9 +38,9 @@ const TextFilters = () => {
     return (
         <TextFacets
             facetItemComponent={<FacetItemComponent />}
-            collapsible={true}
-            enableViewMore={true}
-            searchable={true}
+            collapsible
+            enableViewMore
+            searchable
             transform={transform}
             minViewMore={3}
             onFacetClick={onFacetClick}

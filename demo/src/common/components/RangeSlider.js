@@ -23,9 +23,9 @@ const RangeSlider = (props) => {
             onChange={handleAfterChange}
             marks={marks}
             allowCross={false}
-            tooltip={true}
+            tooltip
             tabIndex={value}
-            pushable={true}
+            pushable
             tipFormatter={tipFormatter}
         />
     );

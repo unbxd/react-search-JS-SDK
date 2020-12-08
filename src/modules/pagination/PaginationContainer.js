@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer, executeCallback } from '../../common/utils';
 import PaginationWrapper from './PaginationWrapper';
-import { executeCallback } from '../../common/utils';
 
 class PaginationContainer extends React.PureComponent {
     componentDidMount() {
@@ -94,8 +93,6 @@ class PaginationContainer extends React.PureComponent {
 
 PaginationContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
-    unbxdCoreStatus: PropTypes.string.isRequired,
-    helpers: PropTypes.object.isRequired,
     padding: PropTypes.number,
     paginationItemComponent: PropTypes.element,
     paginationType: PropTypes.string.isRequired,

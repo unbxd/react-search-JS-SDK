@@ -19,7 +19,7 @@ class ProductsContainer extends React.PureComponent {
             helpers: { setProductConfiguration }
         } = this.props;
 
-        //generate required fields here based on attributesMap and variantAttributesMap
+        // generate required fields here based on attributesMap and variantAttributesMap
         const requiredFields = Object.values(attributesMap);
         const variantFields = [
             ...Object.values(variantAttributesMap),
@@ -27,8 +27,8 @@ class ProductsContainer extends React.PureComponent {
         ];
         const variantRequiredFields = [...new Set(variantFields)];
 
-        //Set the main config
-        //Do not set pageSize if pagination type is FIXED_SCROLLING
+        // Set the main config
+        // Do not set pageSize if pagination type is FIXED_SCROLLING
         setProductConfiguration({
             pageSize,
             requiredFields,
@@ -95,7 +95,7 @@ class ProductsContainer extends React.PureComponent {
         const onProductClick = (event) => {
             const productUniqueId = event.target.dataset.uniqueid;
             if (productUniqueId) {
-                const prank = event.target.dataset.prank;
+                const { prank } = event.target.dataset;
                 const clickedProduct = getProductByPropValue(
                     productIdAttribute,
                     productUniqueId

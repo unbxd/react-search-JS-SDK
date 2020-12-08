@@ -20,6 +20,7 @@ class RangeFacetsContainer extends React.PureComponent {
         const { setRangeFacetsConfiguration } = helpers;
         setRangeFacetsConfiguration({ applyMultiple });
     }
+
     getRangeFacetsProps() {
         const {
             unbxdCore,
@@ -182,7 +183,6 @@ class RangeFacetsContainer extends React.PureComponent {
 
 RangeFacetsContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
-    unbxdCoreStatus: PropTypes.string.isRequired,
     helpers: PropTypes.object.isRequired,
     facetItemComponent: PropTypes.element,
     enableApplyFilters: PropTypes.bool.isRequired,

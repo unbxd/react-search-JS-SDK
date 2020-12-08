@@ -27,7 +27,7 @@ const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
 
     return (
         <div className="UNX-selectedFacets__item" onClick={handleClick}>
-            {selectedFacetMarkup} <span className="-cross"></span>
+            {selectedFacetMarkup} <span className="-cross" />
         </div>
     );
 };

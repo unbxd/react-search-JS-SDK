@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { conditionalRenderer, mergeFacets } from '../../common/utils';
+import {
+    conditionalRenderer,
+    mergeFacets,
+    executeCallback
+} from '../../common/utils';
 import {
     getTextFacetItem,
     getTextFacetFacetCoreMethods,
@@ -9,10 +13,9 @@ import {
 } from './utils';
 import { manageStateTypes } from '../../config';
 import GenerateFacets from './generateFacets';
-import { executeCallback } from '../../common/utils';
 
 class TextFacetsContainer extends React.PureComponent {
-    //a way to pass data to render props and our component
+    // a way to pass data to render props and our component
     getTextFacetsProps() {
         const {
             unbxdCore,
@@ -42,7 +45,7 @@ class TextFacetsContainer extends React.PureComponent {
 
         const textFacets = getFacets() || [];
 
-        //Methods to handle click on facets
+        // Methods to handle click on facets
         const removeFacet = ({ selectedFacetName, selectedFacetId = null }) => {
             deleteAFacet(selectedFacetName, selectedFacetId);
         };
@@ -61,7 +64,7 @@ class TextFacetsContainer extends React.PureComponent {
             const facetData = getSelectedFacet(facetName);
             const { values: facetValues = [] } = facetData;
 
-            //add or delete from state
+            // add or delete from state
             const facetRow = getTextFacetItem(facetValues, dataId);
             const eventType = isSelected
                 ? manageStateTypes.REMOVE
@@ -109,7 +112,7 @@ class TextFacetsContainer extends React.PureComponent {
 
         const lastSelectedTextFacets = getSelectedFacets();
 
-        //merge lastSelectedTextFacets and textFacets
+        // merge lastSelectedTextFacets and textFacets
         const formattedTextFacets = getFormattedTextFacets(
             textFacets,
             mergeFacets(selectedTextFacets, lastSelectedTextFacets)

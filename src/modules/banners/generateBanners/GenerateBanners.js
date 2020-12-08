@@ -11,7 +11,7 @@ const GenerateBanners = (props) => {
         <List
             items={banners}
             ListItem={bannerItemComponent || BannerItem}
-            idAttribute={'imageUrl'}
+            idAttribute="imageUrl"
             altText={altText}
             className="UNX-banners__container"
         />

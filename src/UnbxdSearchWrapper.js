@@ -118,25 +118,6 @@ class UnbxdSearchWrapper extends Component {
         this.initialResultLoad = true;
     }
 
-    getProps() {
-        const {
-            unbxdCore,
-            unbxdCoreStatus,
-            unbxdState,
-            helpers,
-            priceUnit,
-            productType
-        } = this.state;
-        return {
-            unbxdCore,
-            unbxdCoreStatus,
-            unbxdState,
-            helpers,
-            priceUnit,
-            productType
-        };
-    }
-
     componentDidMount() {
         const { unbxdCore } = this.state;
         const categoryId =
@@ -220,6 +201,25 @@ class UnbxdSearchWrapper extends Component {
             this.resetSearch();
             getResults();
         }
+    }
+
+    getProps() {
+        const {
+            unbxdCore,
+            unbxdCoreStatus,
+            unbxdState,
+            helpers,
+            priceUnit,
+            productType
+        } = this.state;
+        return {
+            unbxdCore,
+            unbxdCoreStatus,
+            unbxdState,
+            helpers,
+            priceUnit,
+            productType
+        };
     }
 
     static getDerivedStateFromProps(props, state) {

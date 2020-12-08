@@ -54,11 +54,11 @@ const ProductsListing = () => {
         <Products
             attributesMap={attributesMap}
             pageSize={10}
-            showVariants={true}
+            showVariants
             variantsCount={4}
             variantAttributesMap={variantAttributesMap}
             swatchAttributesMap={swatchAttributesMap}
-            paginationType={'FIXED_PAGINATION'}
+            paginationType="FIXED_PAGINATION"
         />
     );
 };

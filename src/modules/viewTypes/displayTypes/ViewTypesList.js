@@ -6,11 +6,11 @@ import { List } from '../../../components';
 const ViewTypesList = ({ viewTypes, onViewTypeClick, viewItemComponent }) => {
     return (
         <List
-            idAttribute={'viewType'}
+            idAttribute="viewType"
             items={viewTypes}
             ListItem={viewItemComponent}
             onClick={onViewTypeClick}
-            className={'UNX-viewTypes__list'}
+            className="UNX-viewTypes__list"
         />
     );
 };

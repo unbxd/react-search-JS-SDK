@@ -67,8 +67,6 @@ class BreadcrumbsContainer extends React.PureComponent {
 
 BreadcrumbsContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
-    unbxdCoreStatus: PropTypes.string.isRequired,
-    helpers: PropTypes.object.isRequired,
     root: PropTypes.oneOfType([PropTypes.element, PropTypes.node]),
     separator: PropTypes.node,
     breadcrumbItemComponent: PropTypes.element,

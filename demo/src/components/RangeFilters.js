@@ -25,9 +25,9 @@ const RangeFacetsRender = (props) => {
             start: valMin,
             end: valMax
         });
-        //don't call in case of apply
-        //applyRangeFacet();
-        //scrollTop();
+        // don't call in case of apply
+        // applyRangeFacet();
+        // scrollTop();
     }
 
     return (
@@ -47,9 +47,9 @@ const RangeFacetsRender = (props) => {
                 );
                 return (
                     <div className="UNX-rangeFacet__container">
-                        <div class="UNX-facet__element rangeSlider">
+                        <div className="UNX-facet__element rangeSlider">
                             <div
-                                class="UNX-facet__header"
+                                className="UNX-facet__header"
                                 data-unx_name={facetName}
                             >
                                 {displayName}
@@ -118,10 +118,10 @@ const RangeFilters = () => {
         <RangeFacets
             transform={transform}
             facetItemComponent={<FacetItemComponent />}
-            collapsible={true}
-            enableViewMore={true}
+            collapsible
+            enableViewMore
             minViewMore={3}
-            applyMultiple={true}
+            applyMultiple
             onFacetClick={onFacetClick}
         />
     );

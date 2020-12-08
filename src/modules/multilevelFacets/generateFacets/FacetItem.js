@@ -23,9 +23,10 @@ const FacetItem = ({ itemData, onClick }) => {
 FacetItem.propTypes = {
     itemData: PropTypes.shape({
         name: PropTypes.string,
-        count: PropTypes.number
+        count: PropTypes.number,
+        level: PropTypes.number,
+        isSelected: PropTypes.bool
     }).isRequired,
-    multiLevelField: PropTypes.string.isRequired,
     level: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired
 };

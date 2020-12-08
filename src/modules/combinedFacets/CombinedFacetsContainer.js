@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer, executeCallback } from '../../common/utils';
 import {
     getTextFacetItem,
     getTextFacetFacetCoreMethods,
@@ -12,10 +12,9 @@ import {
 } from '../rangeFacets/utils';
 import { manageStateTypes } from '../../config';
 import GenerateCombinedFacets from './generateCombinedFacets';
-import { executeCallback } from '../../common/utils';
 
 class CombinedFacetsContainer extends React.PureComponent {
-    //a way to pass data to render props and our component
+    // a way to pass data to render props and our component
     getCombinedFacetsProps() {
         const {
             unbxdCore,
@@ -79,29 +78,13 @@ class CombinedFacetsContainer extends React.PureComponent {
                 return a.position - b.position;
             });
 
-        //Methods to handle click on facets
-        const removeTextFacet = ({
-            selectedFacetName,
-            selectedFacetId = null
-        }) => {
-            deleteAFacet(selectedFacetName, selectedFacetId);
-        };
-
-        const addTextFacet = ({
-            selectedFacetName,
-            selectedFacetId,
-            facetData
-        }) => {
-            updateFacets({ selectedFacetName, selectedFacetId, facetData });
-        };
-
         const handleTextFacetClick = (currentItem) => {
             const { facetName, dataId, isSelected = false } = currentItem;
 
             const facetData = getSelectedFacet(facetName);
             const { values: facetValues = [] } = facetData;
 
-            //add or delete from state
+            // add or delete from state
             const facetRow = getTextFacetItem(facetValues, dataId);
 
             const onFinish = () => {
@@ -216,6 +199,7 @@ CombinedFacetsContainer.propTypes = {
     unbxdCoreStatus: PropTypes.string.isRequired,
     helpers: PropTypes.object.isRequired,
     priceUnit: PropTypes.string.isRequired,
+    selectedTextFacets: PropTypes.object,
     enableApplyFilters: PropTypes.bool.isRequired,
     collapsible: PropTypes.bool,
     searchable: PropTypes.bool,
@@ -224,7 +208,9 @@ CombinedFacetsContainer.propTypes = {
     transform: PropTypes.func,
     label: PropTypes.node,
     onFacetClick: PropTypes.node,
-    applyMultiple: PropTypes.bool
+    applyMultiple: PropTypes.bool,
+    enableViewMore: PropTypes.bool,
+    minViewMore: PropTypes.number
 };
 
 export default CombinedFacetsContainer;

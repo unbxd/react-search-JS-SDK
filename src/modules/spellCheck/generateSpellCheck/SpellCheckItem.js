@@ -17,7 +17,7 @@ const SpellCheckItem = ({ itemData, currentQuery, onClick }) => {
                 <span
                     className="-suggestion"
                     onClick={handleClick}
-                    data-testid={'UNX_spellCheck'}
+                    data-testid="UNX_spellCheck"
                 >
                     {' '}
                     {suggestion}

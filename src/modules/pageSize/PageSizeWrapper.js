@@ -21,7 +21,7 @@ const PageSizeWrapper = (props) => {
 
     return (
         <div className="UNX-pageSize__container">
-            {label ? label : null}
+            {label || null}
             {displayType === displayTypes.DROPDOWN && (
                 <PageSizeDropdown
                     size={size}

@@ -40,8 +40,8 @@ const searchConfigurations = {
         'facet.multilevel': 'categoryPath',
         'f.categoryPath.max.depth': '',
         'f.categoryPath.facet.limit': ''
-        //"f.categoryPath.facet.version": "V2",
-        //'category-filter': 'All Products',
+        // "f.categoryPath.facet.version": "V2",
+        // 'category-filter': 'All Products',
     },
     facetMultilevel: true,
     facetDepth: 6,
@@ -52,8 +52,8 @@ const searchConfigurations = {
     getCategoryId: () => {},
     setCategoryId: (param, self) => {
         const { level, name } = param;
-        let page = ``;
-        let pathArr = [];
+        let page = '';
+        const pathArr = [];
         const l = Number(level);
         const breadCrumbs = self.getBreadCrumbsList();
         breadCrumbs.forEach((element, i) => {

@@ -22,24 +22,22 @@ const ListView = (props) => {
 
     return (
         <div className="UNX-products__container">
-            {
-                <List
-                    idAttribute={'uniqueId'}
-                    items={products}
-                    ListItem={productItemComponent || ListProductCard}
-                    viewType={viewType}
-                    onClick={onProductClick}
-                    attributesMap={attributesMap}
-                    showVariants={showVariants}
-                    variantAttributesMap={variantAttributesMap}
-                    showSwatches={showSwatches}
-                    swatchAttributesMap={swatchAttributesMap}
-                    groupBy={groupBy}
-                    swatchItemComponent={swatchItemComponent}
-                    className="UNX-products__list -list grid-cols-1"
-                    priceUnit={priceUnit}
-                />
-            }
+            <List
+                idAttribute="uniqueId"
+                items={products}
+                ListItem={productItemComponent || ListProductCard}
+                viewType={viewType}
+                onClick={onProductClick}
+                attributesMap={attributesMap}
+                showVariants={showVariants}
+                variantAttributesMap={variantAttributesMap}
+                showSwatches={showSwatches}
+                swatchAttributesMap={swatchAttributesMap}
+                groupBy={groupBy}
+                swatchItemComponent={swatchItemComponent}
+                className="UNX-products__list -list grid-cols-1"
+                priceUnit={priceUnit}
+            />
         </div>
     );
 };

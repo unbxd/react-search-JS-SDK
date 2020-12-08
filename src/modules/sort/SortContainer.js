@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer, executeCallback } from '../../common/utils';
 import { getFormattedSort, getSelectedSort } from './utils';
 import SortWrapper from './SortWrapper';
-import { executeCallback } from '../../common/utils';
 
 class SortContainer extends React.Component {
     constructor(props) {
         super(props);
 
-        //we will maintain the sort field here
+        // we will maintain the sort field here
         const { unbxdCore } = this.props;
 
         if (unbxdCore.state.responseObj !== null) {
@@ -89,7 +88,7 @@ class SortContainer extends React.Component {
 
         const { sortOptions = [], displayType, sortItemComponent } = this.props;
 
-        //format datas for better handling.
+        // format datas for better handling.
         const formattedSortByOptions = sortOptions.map((sortByoption, idx) =>
             getFormattedSort(sortByoption, this.state.sortBy, idx)
         );
@@ -109,7 +108,7 @@ class SortContainer extends React.Component {
             const { field = '', order = '' } = selectedSort;
 
             if (field.length && order.length) {
-                //we pass `price desc` format to set Configuration
+                // we pass `price desc` format to set Configuration
 
                 const onFinish = () => {
                     this.setState({ sortBy: selectedSort });

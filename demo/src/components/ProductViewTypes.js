@@ -6,8 +6,8 @@ const viewTypes = ['GRID', 'LIST'];
 
 const ProductsViewItemComponent = ({ itemData, onClick }) => {
     const { viewType, isSelected } = itemData;
-    const iconClassName = viewType === 'GRID' ? `fa fa-th` : `fa fa-th-list`;
-    const dataTestId = viewType === 'GRID' ? `UNX_gridBtn` : `UNX_listBtn`;
+    const iconClassName = viewType === 'GRID' ? 'fa fa-th' : 'fa fa-th-list';
+    const dataTestId = viewType === 'GRID' ? 'UNX_gridBtn' : 'UNX_listBtn';
     const handleClick = () => {
         onClick(itemData);
     };
@@ -20,7 +20,7 @@ const ProductsViewItemComponent = ({ itemData, onClick }) => {
                 data-testid={dataTestId}
                 onClick={handleClick}
             >
-                <i className={iconClassName}></i>
+                <i className={iconClassName} />
             </span>
         </div>
     );
@@ -30,7 +30,7 @@ const ProductViewTypes = () => {
     return (
         <ViewTypes
             viewTypes={viewTypes}
-            displayType={'LIST'}
+            displayType="LIST"
             viewItemComponent={<ProductsViewItemComponent />}
         />
     );

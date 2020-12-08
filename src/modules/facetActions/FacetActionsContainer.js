@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer, executeCallback } from '../../common/utils';
 import { getFacetCoreMethods } from './utils';
 import { manageStateTypes } from '../../config';
 import FacetActionsWrapper from './FacetActionsWrapper';
-import { executeCallback } from '../../common/utils';
 
 class FacetActionsContainer extends React.PureComponent {
     componentDidMount() {
@@ -15,7 +14,7 @@ class FacetActionsContainer extends React.PureComponent {
         setFacetsActionConfiguration({ enable: true });
     }
 
-    //a way to pass data to render props and our component
+    // a way to pass data to render props and our component
     getFacetActionsProps() {
         const {
             unbxdCore,
@@ -36,7 +35,6 @@ class FacetActionsContainer extends React.PureComponent {
             clearFacets,
             lastSelectedRangeFacets,
             setRangeFacet,
-            applyRangeFacet,
             clearARangeFacet,
             getPaginationInfo
         } = getFacetCoreMethods(unbxdCore);
@@ -55,7 +53,7 @@ class FacetActionsContainer extends React.PureComponent {
 
         const handleApplyFilter = () => {
             const onFinish = () => {
-                //apply range facets one by one
+                // apply range facets one by one
                 const { list: applyRangeFacets } = selectedRangeFacets;
                 const { list: applyTextFacets } = selectedTextFacets;
 
@@ -71,7 +69,7 @@ class FacetActionsContainer extends React.PureComponent {
                         });
                     });
                 });
-                //does not work if we pass it as it is.
+                // does not work if we pass it as it is.
                 applyFacets({ ...applyTextFacets });
 
                 // remove everything from the state
@@ -125,11 +123,12 @@ class FacetActionsContainer extends React.PureComponent {
 
 FacetActionsContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
-    unbxdCoreStatus: PropTypes.string.isRequired,
     helpers: PropTypes.object.isRequired,
     selectedTextFacets: PropTypes.object,
+    selectedRangeFacets: PropTypes.object,
     showApplyFilter: PropTypes.bool,
     showClearFilter: PropTypes.bool,
+    applyMultiple: PropTypes.bool,
     applyFilterComponent: PropTypes.element,
     clearFilterComponent: PropTypes.element,
     onApply: PropTypes.func,

@@ -5,10 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 const SearchButton = ({ onSearchBoxSubmit }) => {
     return (
-        <button
-            onClick={onSearchBoxSubmit}
-            className={'UNX-searchbox__button'}
-        ></button>
+        <button onClick={onSearchBoxSubmit} className="UNX-searchbox__button" />
     );
 };
 
@@ -25,12 +22,12 @@ const SearchBar = (props) => {
     return (
         <div className="UNX-header__container">
             <a href="/">
-                <span className="UNX-header__logo"></span>
+                <span className="UNX-header__logo" />
             </a>
             <div className="UNX-header__search">
                 <SearchBox
                     submitComponent={<SearchButton />}
-                    placeholder={'Search Wildearth'}
+                    placeholder="Search Wildearth"
                     onSubmit={handleSubmit}
                 />
             </div>

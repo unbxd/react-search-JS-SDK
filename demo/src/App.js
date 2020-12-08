@@ -14,7 +14,7 @@ import SearchBar from './components/SearchBar';
 
 import '@unbxd-ui/react-search-sdk/public/dist/css/theme.css';
 import '@unbxd-ui/react-search-sdk/public/dist/css/core.css';
-//import '@unbxd-ui/react-search-sdk/public/dist/css/ie.css';
+// import '@unbxd-ui/react-search-sdk/public/dist/css/ie.css';
 import '../public/css/index.scss';
 
 const getCategoryId = () => {
@@ -25,8 +25,8 @@ const getCategoryId = () => {
 
 const setCategoryId = (param, self) => {
     const { level, name } = param;
-    let page = ``;
-    let pathArr = [];
+    let page = '';
+    const pathArr = [];
     const l = Number(level);
     if (l === 1) {
         return;
@@ -74,9 +74,8 @@ const AppRoutes = () => {
         const updatedPathLinks = categoryPathLinks.map((links) => {
             if (links.path === path) {
                 return { ...links, isSelected: true };
-            } else {
-                return { ...links, isSelected: false };
             }
+            return { ...links, isSelected: false };
         });
         setCategoryPathLinks(updatedPathLinks);
         window.UnbxdAnalyticsConf = {};

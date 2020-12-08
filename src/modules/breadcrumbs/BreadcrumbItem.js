@@ -14,7 +14,7 @@ const BreadCrumbItem = ({ itemData, root, separator, onClick, idx }) => {
         <>
             {idx === 0 && cloneElement(root)}
             {separator}
-            <Button className={'UNX-breadcrumb__item'} onClick={handleClick}>
+            <Button className="UNX-breadcrumb__item" onClick={handleClick}>
                 {value}
             </Button>
         </>
