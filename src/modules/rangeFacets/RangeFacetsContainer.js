@@ -56,7 +56,11 @@ class RangeFacetsContainer extends React.PureComponent {
         );
         const formattedRangeFacets = getFormattedRangeFacets(
             rangeFacets,
-            mergeFacets(selectedRangeFacets, formattedLastSelectedRangeFacets)
+            mergeFacets(
+                selectedRangeFacets,
+                formattedLastSelectedRangeFacets,
+                applyMultiple
+            )
         );
 
         const handleFacetClick = (currentItem) => {
@@ -89,8 +93,9 @@ class RangeFacetsContainer extends React.PureComponent {
                         },
                         true
                     );
-                isSelected && applyMultiple;
-                !enableApplyFilters &&
+                isSelected &&
+                    applyMultiple &&
+                    !enableApplyFilters &&
                     addRangeFacet(
                         {
                             facetName,
@@ -101,19 +106,15 @@ class RangeFacetsContainer extends React.PureComponent {
                         true
                     );
 
-                isSelected && !applyMultiple;
-                !enableApplyFilters &&
-                    removeRangeFacet(
-                        {
-                            facetName
-                        },
-                        true
-                    );
+                isSelected &&
+                    !applyMultiple &&
+                    !enableApplyFilters &&
+                    removeRangeFacet(facetName, true);
             };
             executeCallback(onFacetClick, [facetObj, eventType], onFinish);
         };
 
-        const handleFacetObjectReset = (event) => {
+        const handleFacetClear = (event) => {
             const { unx_facetname: facetName } = event.target.dataset;
 
             const eventType = manageStateTypes.CLEAR;
@@ -122,15 +123,11 @@ class RangeFacetsContainer extends React.PureComponent {
                     manageRangeFacets(null, facetName, null, eventType);
                 }
 
-                removeFacet(facetName);
+                removeRangeFacet(facetName);
                 setPageStart(0);
                 getResults();
             };
             executeCallback(onFacetClick, [{ facetName }, eventType], onFinish);
-        };
-
-        const removeFacet = (selectedFacetName) => {
-            clearARangeFacet(selectedFacetName);
         };
 
         const addRangeFacet = (
@@ -143,7 +140,7 @@ class RangeFacetsContainer extends React.PureComponent {
             }
         };
 
-        const removeRangeFacet = ({ facetName }, getResults = false) => {
+        const removeRangeFacet = (facetName, getResults = false) => {
             clearARangeFacet(facetName);
             if (getResults) {
                 applyRangeFacet();
@@ -153,7 +150,7 @@ class RangeFacetsContainer extends React.PureComponent {
         return {
             rangeFacets: formattedRangeFacets,
             onFacetClick: handleFacetClick,
-            onFacetObjectReset: handleFacetObjectReset,
+            onFacetClear: handleFacetClear,
             manageRangeFacets,
             addRangeFacet,
             applyRangeFacet,

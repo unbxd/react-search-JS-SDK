@@ -5,7 +5,12 @@ import { RangeSlider } from '../common/components';
 import { scrollTop } from '../utils';
 
 const RangeFacetsRender = (props) => {
-    const { rangeFacets, manageRangeFacets } = props;
+    const {
+        rangeFacets,
+        manageRangeFacets,
+        addRangeFacet,
+        applyRangeFacet
+    } = props;
     const [rangeValues, setRangeValues] = useState(rangeFacets);
 
     useEffect(() => {
@@ -22,17 +27,23 @@ const RangeFacetsRender = (props) => {
                     valMin,
                     valMax
                 };
-                return {
-                    ...facet,
-                    valMin,
-                    valMax
-                };
+                return currentItem;
             }
         });
         setRangeValues(updatedRangeValues);
+        // Apply
         const dataId = `${facetName}_${valMin}_${valMax}`;
-        manageRangeFacets(currentItem, facetName, dataId, 'REMOVE');
+        manageRangeFacets(currentItem, facetName, dataId, 'CLEAR');
         manageRangeFacets(currentItem, facetName, dataId, 'ADD');
+
+        // Instant
+        // addRangeFacet({
+        //     facetName,
+        //     start: valMin,
+        //     end: valMax
+        // });
+        // applyRangeFacet();
+        // scrollTop();
     }
 
     return (

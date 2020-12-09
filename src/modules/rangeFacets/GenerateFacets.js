@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { getUpdatedRangeFacets } from './utils';
 import { List, ViewMore } from '../../components';
 import FacetItem from './FacetItem';
-import { executeCallback } from '../../common/utils';
 
 class GenerateFacets extends React.Component {
     constructor(props) {
@@ -15,129 +14,6 @@ class GenerateFacets extends React.Component {
             rangeFacetsList: rangeFacets
         };
     }
-
-    setFacetValue(facetObj, getResults = false) {
-        const { onFacetClick, applyMultiple } = this.props;
-        const { facetName, valMin, valMax, isSelected } = facetObj;
-
-        const onFinish = () => {
-            this.setState((existingState) => {
-                const { rangeFacetsList } = existingState;
-                const updatedRangeFacets = rangeFacetsList.map((rangeValue) => {
-                    if (rangeValue.facetName === facetName) {
-                        //also go into values and set the specific from to as is selected
-                        let isFacetSelected = false;
-                        const updatedValues = rangeValue.values.map(
-                            (facetValue) => {
-                                const { from, end } = facetValue;
-                                const { dataId: fromValue } = from;
-                                const { dataId: toValue } = end;
-
-                                if (valMin >= fromValue && valMax <= toValue) {
-                                    const { isSelected } = facetValue;
-                                    if (!isSelected) {
-                                        isFacetSelected = true;
-                                    }
-                                    return {
-                                        ...facetValue,
-                                        isSelected: !isSelected
-                                    };
-                                } else {
-                                    const { isSelected } = facetValue;
-                                    if (applyMultiple && isSelected) {
-                                        isFacetSelected = true;
-                                    }
-                                    return {
-                                        ...facetValue,
-                                        isSelected: applyMultiple
-                                            ? isSelected
-                                            : false
-                                    };
-                                }
-                            }
-                        );
-
-                        return {
-                            ...rangeValue,
-                            isSelected: isFacetSelected,
-                            valMin,
-                            valMax,
-                            values: updatedValues
-                        };
-                    } else {
-                        return { ...rangeValue };
-                    }
-                });
-
-                return {
-                    ...existingState,
-                    rangeFacetsList: updatedRangeFacets
-                };
-            });
-
-            const { addRangeFacet, removeRangeFacet } = this.props;
-            if (isSelected && !applyMultiple) {
-                removeRangeFacet({ facetName }, getResults);
-            } else {
-                addRangeFacet(
-                    { facetName, start: valMin, end: valMax },
-                    getResults
-                );
-            }
-        };
-        executeCallback(onFacetClick, [facetObj, !isSelected], onFinish);
-    }
-
-    onApplyFilter = () => {
-        const { applyRangeFacet } = this.props;
-        applyRangeFacet();
-    };
-
-    onClearFilter = (event) => {
-        const facetName = event.target.dataset['unx_facetname'];
-        const { applyMultiple } = this.props;
-
-        const { removeRangeFacet, enableApplyFilters } = this.props;
-        removeRangeFacet({ facetName }, !enableApplyFilters);
-        this.setState((currentFacetState) => {
-            const { rangeFacetsList } = currentFacetState;
-            const updatedRangeFacets = rangeFacetsList.map((rangeValue) => {
-                if (rangeValue.facetName === facetName) {
-                    const updatedValues = rangeValue.values.map(
-                        (facetValue) => {
-                            return { ...facetValue, isSelected: false };
-                        }
-                    );
-                    return {
-                        ...rangeValue,
-                        isSelected: false,
-                        valMin: rangeValue.sliderMin,
-                        valMax: rangeValue.sliderMax,
-                        values: updatedValues
-                    };
-                } else {
-                    return { ...rangeValue };
-                }
-            });
-
-            return {
-                ...currentFacetState,
-                rangeFacetsList: updatedRangeFacets
-            };
-        });
-
-        !applyMultiple && this.onApplyFilter();
-    };
-
-    handleFacetClick = (currentItem) => {
-        const { from, end, facetName, isSelected = false } = currentItem;
-        const { dataId: valMin } = from;
-        const { dataId: valMax } = end;
-
-        const { enableApplyFilters } = this.props;
-        const facetObj = { facetName, valMin, valMax, isSelected };
-        this.setFacetValue(facetObj, !enableApplyFilters);
-    };
 
     handleCollapseToggle = (event) => {
         const facetName = event.target.dataset['unx_name'];
@@ -208,7 +84,7 @@ class GenerateFacets extends React.Component {
         const {
             facetItemComponent,
             onFacetClick,
-            onFacetObjectReset,
+            onFacetClear,
             priceUnit,
             label,
             collapsible,
@@ -264,7 +140,7 @@ class GenerateFacets extends React.Component {
                             />
                             {isSelected && (
                                 <div
-                                    onClick={onFacetObjectReset}
+                                    onClick={onFacetClear}
                                     data-unx_facetname={facetName}
                                     className="-clear"
                                 >

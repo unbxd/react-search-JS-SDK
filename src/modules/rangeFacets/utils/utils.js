@@ -14,6 +14,7 @@ export const getSelectedRangeFacets = (rangeFilterObject) => {
                 selectedRangeFacets[facetName] = [];
             }
             selectedRangeFacets[facetName].push({
+                facetName,
                 valMin,
                 valMax,
                 dataId: `${facetName}_${valMin}_${valMax}`

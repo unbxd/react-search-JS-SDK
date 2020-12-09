@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { conditionalRenderer, executeCallback } from '../../common/utils';
+import {
+    conditionalRenderer,
+    executeCallback,
+    mergeFacets
+} from '../../common/utils';
 import {
     getTextFacetItem,
     getTextFacetFacetCoreMethods,
@@ -8,19 +12,27 @@ import {
 } from '../textFacets/utils';
 import {
     getRangeFacetCoreMethods,
+    getSelectedRangeFacets,
     getFormattedRangeFacets
 } from '../rangeFacets/utils';
 import { manageStateTypes } from '../../config';
 import GenerateCombinedFacets from './generateCombinedFacets';
 
 class CombinedFacetsContainer extends React.PureComponent {
+    componentDidMount() {
+        const { helpers, applyMultiple } = this.props;
+        const { setRangeFacetsConfiguration } = helpers;
+        setRangeFacetsConfiguration({ applyMultiple });
+    }
+
     // a way to pass data to render props and our component
     getCombinedFacetsProps() {
         const {
             unbxdCore,
             unbxdCoreStatus,
-            helpers: { manageTextFacets },
+            helpers: { manageTextFacets, manageRangeFacets },
             selectedTextFacets,
+            selectedRangeFacets,
             textFacetItemComponent,
             enableApplyFilters,
             rangeFacetItemComponent,
@@ -37,10 +49,10 @@ class CombinedFacetsContainer extends React.PureComponent {
 
         const {
             getFacets,
-            updateFacets,
-            deleteAFacet,
             getSelectedFacet,
             getSelectedFacets,
+            updateFacets,
+            deleteAFacet,
             setPageStart,
             getResults
         } = getTextFacetFacetCoreMethods(unbxdCore);
@@ -50,21 +62,29 @@ class CombinedFacetsContainer extends React.PureComponent {
             setRangeFacet,
             applyRangeFacet,
             clearARangeFacet,
-            selectedRangeFacets
+            lastSelectedRangeFacets
         } = getRangeFacetCoreMethods(unbxdCore);
 
         const textFacets = getFacets() || [];
         const lastSelectedTextFacets = getSelectedFacets();
         const rangeFacets = getRangeFacets() || [];
 
+        // merge lastSelectedTextFacets and textFacets
         const formattedTextFacets = getFormattedTextFacets(
             textFacets,
-            selectedTextFacets
+            mergeFacets(selectedTextFacets, lastSelectedTextFacets)
         );
 
+        const formattedLastSelectedRangeFacets = getSelectedRangeFacets(
+            lastSelectedRangeFacets
+        );
         const formattedRangeFacets = getFormattedRangeFacets(
             rangeFacets,
-            selectedRangeFacets
+            mergeFacets(
+                selectedRangeFacets,
+                formattedLastSelectedRangeFacets,
+                applyMultiple
+            )
         );
 
         const combinedFacets = [
@@ -78,6 +98,22 @@ class CombinedFacetsContainer extends React.PureComponent {
                 return a.position - b.position;
             });
 
+        // Methods to handle click on facets
+        const addTextFacet = ({
+            selectedFacetName,
+            selectedFacetId,
+            facetData
+        }) => {
+            updateFacets({ selectedFacetName, selectedFacetId, facetData });
+        };
+
+        const removeTextFacet = ({
+            selectedFacetName,
+            selectedFacetId = null
+        }) => {
+            deleteAFacet(selectedFacetName, selectedFacetId);
+        };
+
         const handleTextFacetClick = (currentItem) => {
             const { facetName, dataId, isSelected = false } = currentItem;
 
@@ -86,55 +122,109 @@ class CombinedFacetsContainer extends React.PureComponent {
 
             // add or delete from state
             const facetRow = getTextFacetItem(facetValues, dataId);
-
+            const eventType = isSelected
+                ? manageStateTypes.REMOVE
+                : manageStateTypes.ADD;
             const onFinish = () => {
                 enableApplyFilters &&
-                    manageTextFacets(
-                        facetRow,
-                        facetName,
-                        dataId,
-                        isSelected
-                            ? manageStateTypes.REMOVE
-                            : manageStateTypes.ADD
-                    );
+                    manageTextFacets(facetRow, facetName, dataId, eventType);
 
                 !isSelected &&
                     !enableApplyFilters &&
-                    addFacet({
+                    addTextFacet({
                         selectedFacetName: facetName,
                         selectedFacetId: dataId,
                         facetData
                     });
                 isSelected &&
                     !enableApplyFilters &&
-                    removeFacet({
+                    removeTextFacet({
                         selectedFacetName: facetName,
                         selectedFacetId: dataId
                     });
             };
-            executeCallback(onFacetClick, [facetName, !isSelected], onFinish);
+            executeCallback(onFacetClick, [facetRow, eventType], onFinish);
         };
 
         const handleTextFacetClear = (event) => {
-            const { unx_name } = event.target.dataset;
-
+            const { unx_name: facetName } = event.target.dataset;
+            const eventType = manageStateTypes.CLEAR;
             const onFinish = () => {
                 if (enableApplyFilters) {
-                    manageTextFacets(
-                        null,
-                        unx_name,
-                        null,
-                        manageStateTypes.RESET
-                    );
+                    manageTextFacets(null, facetName, null, eventType);
                 }
 
-                if (!enableApplyFilters) {
-                    removeFacet({ selectedFacetName: unx_name });
-                    setPageStart(0);
-                    getResults();
-                }
+                removeTextFacet({ selectedFacetName: facetName });
+                setPageStart(0);
+                getResults();
             };
-            executeCallback(onFacetClick, [unx_name], onFinish);
+            executeCallback(onFacetClick, [{ facetName }, eventType], onFinish);
+        };
+
+        const handleRangeFacetClick = (currentItem) => {
+            const {
+                from,
+                end,
+                facetName,
+                dataId,
+                isSelected = false
+            } = currentItem;
+            const { dataId: valMin } = from;
+            const { dataId: valMax } = end;
+
+            const facetObj = { facetName, valMin, valMax, isSelected, dataId };
+            const eventType = isSelected
+                ? manageStateTypes.REMOVE
+                : manageStateTypes.ADD;
+            const onFinish = () => {
+                enableApplyFilters &&
+                    manageRangeFacets(facetObj, facetName, dataId, eventType);
+
+                !isSelected &&
+                    !enableApplyFilters &&
+                    addRangeFacet(
+                        {
+                            facetName,
+                            start: valMin,
+                            end: valMax,
+                            applyMultiple
+                        },
+                        true
+                    );
+                isSelected && applyMultiple;
+                !enableApplyFilters &&
+                    addRangeFacet(
+                        {
+                            facetName,
+                            start: valMin,
+                            end: valMax,
+                            applyMultiple
+                        },
+                        true
+                    );
+
+                isSelected &&
+                    !applyMultiple &&
+                    !enableApplyFilters &&
+                    removeRangeFacet(facetName, true);
+            };
+            executeCallback(onFacetClick, [facetObj, eventType], onFinish);
+        };
+
+        const handleRangeFacetClear = (event) => {
+            const { unx_facetname: facetName } = event.target.dataset;
+
+            const eventType = manageStateTypes.CLEAR;
+            const onFinish = () => {
+                if (enableApplyFilters) {
+                    manageRangeFacets(null, facetName, null, eventType);
+                }
+
+                removeRangeFacet(facetName);
+                setPageStart(0);
+                getResults();
+            };
+            executeCallback(onFacetClick, [{ facetName }, eventType], onFinish);
         };
 
         const addRangeFacet = (
@@ -147,7 +237,7 @@ class CombinedFacetsContainer extends React.PureComponent {
             }
         };
 
-        const removeRangeFacet = ({ facetName }, getResults = false) => {
+        const removeRangeFacet = (facetName, getResults = false) => {
             clearARangeFacet(facetName);
             if (getResults) {
                 applyRangeFacet();
@@ -171,12 +261,17 @@ class CombinedFacetsContainer extends React.PureComponent {
         const helpers = {
             onTextFacetClick: handleTextFacetClick,
             onTextFacetClear: handleTextFacetClear,
+            onRangeFacetClick: handleRangeFacetClick,
+            onRangeFacetClear: handleRangeFacetClear,
             textFacetItemComponent,
             label,
             addRangeFacet,
             applyRangeFacet,
             removeRangeFacet,
             selectedRangeFacets,
+            selectedTextFacets,
+            manageTextFacets,
+            manageRangeFacets,
             rangeFacetItemComponent,
             transform
         };
@@ -200,6 +295,7 @@ CombinedFacetsContainer.propTypes = {
     helpers: PropTypes.object.isRequired,
     priceUnit: PropTypes.string.isRequired,
     selectedTextFacets: PropTypes.object,
+    selectedRangeFacets: PropTypes.object,
     enableApplyFilters: PropTypes.bool.isRequired,
     collapsible: PropTypes.bool,
     searchable: PropTypes.bool,

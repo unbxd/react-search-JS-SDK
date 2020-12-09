@@ -78,7 +78,11 @@ export const cloneElement = (elements, props) => {
     return React.cloneElement(elements, props);
 };
 
-export const mergeFacets = (selectedFacets, lastSelectedFacets) => {
+export const mergeFacets = (
+    selectedFacets,
+    lastSelectedFacets,
+    applyMultiple = true
+) => {
     const modifiedSelectedFacets = { ...lastSelectedFacets };
     // remove from modifiedSelectedFacets
     Object.keys(lastSelectedFacets).map((facetName) => {
@@ -97,11 +101,14 @@ export const mergeFacets = (selectedFacets, lastSelectedFacets) => {
     // add to modifiedSelectedFacets
     Object.keys(selectedFacets.add).map((fName) => {
         const addFacetItems = selectedFacets.add[fName] || [];
-        modifiedSelectedFacets[fName] = [
-            ...(modifiedSelectedFacets[fName] || []),
-            ...addFacetItems
-        ];
+        if (applyMultiple) {
+            modifiedSelectedFacets[fName] = [
+                ...(modifiedSelectedFacets[fName] || []),
+                ...addFacetItems
+            ];
+        } else {
+            modifiedSelectedFacets[fName] = [...addFacetItems];
+        }
     });
-
     return modifiedSelectedFacets;
 };
