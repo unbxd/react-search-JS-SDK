@@ -10,7 +10,11 @@ import {
     getRangeFacetCoreMethods,
     getFormattedRangeFacets
 } from '../rangeFacets/utils';
-import { manageStateTypes } from '../../config';
+import {
+    getFacetCoreMethods,
+    getFormattedMultilevelFacets
+} from '../multilevelFacets/utils';
+import { manageStateTypes, productTypes, facetTypes } from '../../config';
 import GenerateCombinedFacets from './generateCombinedFacets';
 import { executeCallback } from '../../common/utils';
 
@@ -25,6 +29,7 @@ class CombinedFacetsContainer extends React.PureComponent {
             textFacetItemComponent,
             enableApplyFilters,
             rangeFacetItemComponent,
+            multilevelFacetItemComponent,
             priceUnit,
             transform,
             collapsible,
@@ -53,10 +58,18 @@ class CombinedFacetsContainer extends React.PureComponent {
             selectedRangeFacets
         } = getRangeFacetCoreMethods(unbxdCore);
 
+        const {
+            getBucketedFacets,
+            getBreadCrumbsList,
+            setCategoryFilter,
+            deleteCategoryFilter,
+        } = getFacetCoreMethods(unbxdCore);
+
         const textFacets = getFacets() || [];
         const lastSelectedFacets = getSelectedFacets();
         const applyMultiple = true;
         const rangeFacets = getRangeFacets() || [];
+        const multilevelFacets = getBucketedFacets() || [];
 
         const formattedTextFacets = getFormattedTextFacets(
             textFacets,
@@ -67,12 +80,15 @@ class CombinedFacetsContainer extends React.PureComponent {
             rangeFacets,
             selectedRangeFacets
         );
-
+        const formattedMultilevelFacets = getFormattedMultilevelFacets(
+            multilevelFacets,
+            unbxdCore
+        );
         const combinedFacets = [
             ...formattedTextFacets,
-            ...formattedRangeFacets
+            ...formattedRangeFacets,
+            ...formattedMultilevelFacets
         ];
-
         combinedFacets &&
             combinedFacets.length &&
             combinedFacets.sort((a, b) => {
@@ -93,6 +109,52 @@ class CombinedFacetsContainer extends React.PureComponent {
             facetData
         }) => {
             updateFacets({ selectedFacetName, selectedFacetId, facetData });
+        };
+
+        const handleMultilevelFacetClick = (currentItem) => {
+            const { name, filterField: parent, level } = currentItem;
+            const categoryObject = { parent, level, name };
+            const { helpers } = this.props;
+            const { getUpdatedResults } = helpers;
+            let highestBreadcrumbLevel = 0;
+
+            const onFinish = () => {
+                const { setCategoryId, options: { productType } } = unbxdCore;
+                if (
+                    productType === productTypes.CATEGORY &&
+                    typeof setCategoryId === 'function'
+                ) {
+                    const getResults = setCategoryId(categoryObject, unbxdCore);
+                    if (getResults) {
+                        getUpdatedResults();
+                    }
+                } else {
+                    const breadCrumbsList = getBreadCrumbsList(parent);
+                    breadCrumbsList.map((breadcrumb) => {
+                        console.log('breadcrumb', breadcrumb);
+                        if (highestBreadcrumbLevel < breadcrumb.level) {
+                            highestBreadcrumbLevel = breadcrumb.level;
+                        }
+                    });
+                    if (highestBreadcrumbLevel === parseInt(level)) {
+                        deleteCategoryFilter(categoryObject);
+                    } else {
+                        //check if it is a breadcrumb
+                        const hit = breadCrumbsList.find(({ value }) => {
+                            return name === value;
+                        });
+
+                        if (hit) {
+                            deleteCategoryFilter(categoryObject);
+                        } else {
+                            setCategoryFilter(categoryObject);
+                        }
+                    }
+                    getResults();
+                }
+            };
+
+            executeCallback(onFacetClick, [categoryObject, facetTypes.MULTILEVEL_FACET], onFinish);
         };
 
         const handleTextFacetClick = (currentItem) => {
@@ -129,7 +191,7 @@ class CombinedFacetsContainer extends React.PureComponent {
                         selectedFacetId: dataId
                     });
             };
-            executeCallback(onFacetClick, [facetName, !isSelected], onFinish);
+            executeCallback(onFacetClick, [facetName, facetTypes.TEXT_FACET, !isSelected], onFinish);
         };
 
         const handleTextFacetClear = (event) => {
@@ -151,7 +213,7 @@ class CombinedFacetsContainer extends React.PureComponent {
                     getResults();
                 }
             };
-            executeCallback(onFacetClick, [unx_name], onFinish);
+            executeCallback(onFacetClick, [unx_name, facetTypes.TEXT_FACET, false], onFinish);
         };
 
         const addRangeFacet = (
@@ -187,8 +249,10 @@ class CombinedFacetsContainer extends React.PureComponent {
         const helpers = {
             onTextFacetClick: handleTextFacetClick,
             onTextFacetClear: handleTextFacetClear,
+            onMultilevelFacetClick: handleMultilevelFacetClick,
             setSelectedFacets,
             textFacetItemComponent,
+            multilevelFacetItemComponent,
             label,
             addRangeFacet,
             applyRangeFacet,
@@ -220,6 +284,7 @@ CombinedFacetsContainer.propTypes = {
     collapsible: PropTypes.bool,
     searchable: PropTypes.bool,
     textFacetItemComponent: PropTypes.element,
+    multilevelFacetItemComponent: PropTypes.element,
     rangeFacetItemComponent: PropTypes.element,
     transform: PropTypes.func,
     label: PropTypes.node,
