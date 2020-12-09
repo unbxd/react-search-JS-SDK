@@ -39,11 +39,11 @@ export const getFormattedRangeFacets = (rangeFacets, selectedRangeFacets) => {
                 facetType: facetTypes.RANGE_FACET,
                 sliderMax,
                 sliderMin,
-                rangeMin: parseInt(valMin),
-                rangeMax: parseInt(valMax),
+                valMin: parseInt(valMin),
+                valMax: parseInt(valMax),
                 isSelected: true,
                 viewLess: false,
-                className: 'UNX-facet__list'
+                dataId: `${facetName}_${valMin}_${valMax}`
             };
             const activeFacets = selectedRangeFacets[facetName];
             const values = currentFacetObj.values.map((facetitem) => {
@@ -84,10 +84,10 @@ export const getFormattedRangeFacets = (rangeFacets, selectedRangeFacets) => {
             facetType: facetTypes.RANGE_FACET,
             sliderMin,
             sliderMax,
-            rangeMin: sliderMin,
-            rangeMax: sliderMax,
+            valMin: sliderMin,
+            valMax: sliderMax,
             viewLess: false,
-            className: 'UNX-facet__list'
+            dataId: `${facetName}_${sliderMin}_${sliderMax}`
         };
         const values = currentFacetObj.values.map((facetitem) => {
             const { from, end } = facetitem;

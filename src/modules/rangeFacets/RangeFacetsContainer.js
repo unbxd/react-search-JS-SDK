@@ -154,6 +154,7 @@ class RangeFacetsContainer extends React.PureComponent {
             rangeFacets: formattedRangeFacets,
             onFacetClick: handleFacetClick,
             onFacetObjectReset: handleFacetObjectReset,
+            manageRangeFacets,
             addRangeFacet,
             applyRangeFacet,
             removeRangeFacet,
