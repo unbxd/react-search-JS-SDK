@@ -137,10 +137,13 @@ class GenerateCombinedFacets extends React.Component {
             onTextFacetClear,
             onRangeFacetClick,
             onRangeFacetClear,
+            onMultilevelFacetClick,
             textFacetItemComponent,
             rangeFacetItemComponent,
             collapsible,
             searchable,
+            rangeFacetItemComponent,
+            multilevelFacetItemComponent,
             priceUnit,
             enableViewMore,
             minViewMore
@@ -235,6 +238,81 @@ class GenerateCombinedFacets extends React.Component {
                                     {enableViewMore &&
                                     isOpen &&
                                     filteredValues &&
+                                    filteredValues.length > minViewMore ? (
+                                        <ViewMore
+                                            facetName={facetName}
+                                            toggleViewLess={this.toggleViewLess}
+                                            viewLess={viewLess}
+                                        />
+                                    ) : null}
+                                </div>
+                            </div>
+                        );
+                    }
+                    if (
+                        combinedFacet.facetType === facetTypes.MULTILEVEL_FACET
+                    ) {
+                        const {
+                            facetName,
+                            values,
+                            isOpen = true,
+                            filter = '',
+                            viewLess
+                        } = combinedFacet;
+                        let filteredValues = values;
+                        if (filter && filter.length > 0) {
+                            filteredValues = values.filter((value) => {
+                                return value.name
+                                    .toLowerCase()
+                                    .includes(filter);
+                            });
+                        }
+                        return (
+                            <div className="UNX-bucketedFacet__container">
+                                <div
+                                    className={`UNX-facet__element ${
+                                        isOpen ? 'open' : ''
+                                    }`}
+                                >
+                                    <div className="UNX-facet__header">
+                                        {facetName}
+                                        {collapsible && (
+                                            <span
+                                                className="-collapse-icon"
+                                                data-unx_name={facetName}
+                                                onClick={
+                                                    this.handleCollapseToggle
+                                                }
+                                            />
+                                        )}
+                                    </div>
+
+                                    {searchable && isOpen && (
+                                        <div className="UNX-facetFilter__container">
+                                            <Input
+                                                className="-input"
+                                                value={filter}
+                                                name={facetName}
+                                                onChange={
+                                                    this.handleFilterChange
+                                                }
+                                                data-testid={'UNX_searchFacets'}
+                                            />
+                                        </div>
+                                    )}
+                                    <List
+                                        items={filteredValues}
+                                        ListItem={multilevelFacetItemComponent}
+                                        idAttribute={'name'}
+                                        onClick={onMultilevelFacetClick}
+                                        className={`UNX-facet__list ${
+                                            viewLess
+                                                ? 'UNX-facet__listShowLimited'
+                                                : ''
+                                        }`}
+                                    />
+                                    {enableViewMore &&
+                                    isOpen &&
                                     filteredValues.length > minViewMore ? (
                                         <ViewMore
                                             facetName={facetName}
