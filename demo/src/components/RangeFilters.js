@@ -5,7 +5,12 @@ import { RangeSlider } from '../common/components';
 import { scrollTop } from '../utils';
 
 const RangeFacetsRender = (props) => {
-    const { rangeFacets, addRangeFacet, applyRangeFacet } = props;
+    const {
+        rangeFacets,
+        manageRangeFacets,
+        addRangeFacet,
+        applyRangeFacet
+    } = props;
     const [rangeValues, setRangeValues] = useState(rangeFacets);
 
     useEffect(() => {
@@ -14,18 +19,29 @@ const RangeFacetsRender = (props) => {
 
     function handleSliderChange(facetName, values) {
         const [valMin, valMax] = values;
+        let currentItem = null;
         const updatedRangeValues = rangeValues.map((facet) => {
             if (facetName === facet.facetName) {
-                return { ...facet, rangeMin: valMin, rangeMax: valMax };
+                currentItem = {
+                    ...facet,
+                    valMin,
+                    valMax
+                };
+                return currentItem;
             }
         });
         setRangeValues(updatedRangeValues);
-        addRangeFacet({
-            facetName,
-            start: valMin,
-            end: valMax
-        });
-        // don't call in case of apply
+        // Apply
+        const dataId = `${facetName}_${valMin}_${valMax}`;
+        manageRangeFacets(currentItem, facetName, dataId, 'CLEAR');
+        manageRangeFacets(currentItem, facetName, dataId, 'ADD');
+
+        // Instant
+        // addRangeFacet({
+        //     facetName,
+        //     start: valMin,
+        //     end: valMax
+        // });
         // applyRangeFacet();
         // scrollTop();
     }
@@ -38,8 +54,8 @@ const RangeFacetsRender = (props) => {
                     displayName,
                     sliderMin,
                     sliderMax,
-                    rangeMin,
-                    rangeMax
+                    valMin,
+                    valMax
                 } = facet;
                 const onChangeHandler = handleSliderChange.bind(
                     null,
@@ -57,7 +73,7 @@ const RangeFacetsRender = (props) => {
                             <RangeSlider
                                 min={sliderMin}
                                 max={sliderMax}
-                                value={[rangeMin, rangeMax]}
+                                value={[valMin, valMax]}
                                 handleAfterChange={onChangeHandler}
                             />
                         </div>
@@ -101,7 +117,9 @@ const transform = function () {
 
 export const RangeFiltersRenderProps = () => {
     return (
-        <RangeFacets>{(props) => <RangeFacetsRender {...props} />}</RangeFacets>
+        <RangeFacets applyMultiple={false}>
+            {(props) => <RangeFacetsRender {...props} />}
+        </RangeFacets>
     );
 };
 
@@ -127,4 +145,4 @@ const RangeFilters = () => {
     );
 };
 
-export default RangeFilters;
+export default RangeFiltersRenderProps;

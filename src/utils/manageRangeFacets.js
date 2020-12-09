@@ -13,13 +13,15 @@ function manageRangeFacets(
 ) {
     this.setState((appState) => {
         const { unbxdState, ...remaningState } = appState;
-        const { selectedRangeFacets } = unbxdState;
+        const { selectedRangeFacets, applyMultiple } = unbxdState;
         const { add, remove } = selectedRangeFacets;
         const { unbxdCore } = this.state;
         const { lastSelectedRangeFacets } = getRangeFacetCoreMethods(unbxdCore);
         const formattedLastSelectedRangeFacets = getSelectedRangeFacets(
             lastSelectedRangeFacets
         );
+        const idAttr = applyMultiple ? 'dataId' : 'facetName';
+        const selectedId = applyMultiple ? selectedFacetId : selectedFacetName;
         let updatedSelectedFacets;
         switch (action) {
             case manageStateTypes.ADD:
@@ -38,7 +40,7 @@ function manageRangeFacets(
                         ...remainingStateRemove
                     } = remove;
                     const updatedFacetArrayRemove = currentFacetListRemove.filter(
-                        (fValue) => fValue.dataId !== selectedFacetId
+                        (fValue) => fValue[idAttr] !== selectedId
                     );
 
                     updatedSelectedFacets = {
@@ -51,6 +53,13 @@ function manageRangeFacets(
                             [selectedFacetName]: updatedFacetArrayRemove
                         }
                     };
+
+                    const list = mergeFacets(
+                        updatedSelectedFacets,
+                        formattedLastSelectedRangeFacets
+                    );
+
+                    updatedSelectedFacets = { ...updatedSelectedFacets, list };
                 }
                 break;
 
@@ -61,7 +70,7 @@ function manageRangeFacets(
                         ...remainingStateAdd
                     } = add;
                     const updatedFacetArrayAdd = currentFacetListAdd.filter(
-                        (fValue) => fValue.dataId !== selectedFacetId
+                        (fValue) => fValue[idAttr] !== selectedId
                     );
 
                     const {
@@ -83,6 +92,13 @@ function manageRangeFacets(
                             [selectedFacetName]: updatedFacetArrayRemove
                         }
                     };
+
+                    const list = mergeFacets(
+                        updatedSelectedFacets,
+                        formattedLastSelectedRangeFacets
+                    );
+
+                    updatedSelectedFacets = { ...updatedSelectedFacets, list };
                 }
                 break;
 
@@ -91,6 +107,13 @@ function manageRangeFacets(
                     add: {},
                     remove: {}
                 };
+
+                const list = mergeFacets(
+                    updatedSelectedFacets,
+                    formattedLastSelectedRangeFacets
+                );
+
+                updatedSelectedFacets = { ...updatedSelectedFacets, list };
 
                 break;
             }
@@ -109,7 +132,8 @@ function manageRangeFacets(
                 } = remove;
                 updatedSelectedFacets = {
                     add: { ...remainingStateAdd },
-                    remove: { ...remainingStateRemove }
+                    remove: { ...remainingStateRemove },
+                    list: {}
                 };
                 break;
             }
@@ -120,13 +144,6 @@ function manageRangeFacets(
             default:
                 return null;
         }
-
-        const list = mergeFacets(
-            updatedSelectedFacets,
-            formattedLastSelectedRangeFacets
-        );
-
-        updatedSelectedFacets = { ...updatedSelectedFacets, list };
 
         return {
             ...remaningState,

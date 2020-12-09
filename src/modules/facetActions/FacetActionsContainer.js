@@ -47,8 +47,8 @@ class FacetActionsContainer extends React.PureComponent {
         };
 
         const clearFacetState = () => {
-            manageTextFacets(null, null, null, manageStateTypes.CLEAR);
-            manageRangeFacets(null, null, null, manageStateTypes.CLEAR);
+            manageTextFacets(null, null, null, manageStateTypes.RESET);
+            manageRangeFacets(null, null, null, manageStateTypes.RESET);
         };
 
         const handleApplyFilter = () => {

@@ -90,7 +90,7 @@ class TextFacetsContainer extends React.PureComponent {
             executeCallback(onFacetClick, [facetRow, eventType], onFinish);
         };
 
-        const handleFacetObjectReset = (event) => {
+        const handleFacetClear = (event) => {
             const { unx_name: facetName } = event.target.dataset;
             const eventType = manageStateTypes.CLEAR;
             const onFinish = () => {
@@ -132,7 +132,8 @@ class TextFacetsContainer extends React.PureComponent {
 
         const helpers = {
             onFacetClick: handleFacetClick,
-            onFacetObjectReset: handleFacetObjectReset,
+            onFacetClear: handleFacetClear,
+            manageTextFacets,
             facetItemComponent,
             label,
             transform

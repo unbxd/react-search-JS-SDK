@@ -2,8 +2,7 @@ import React from 'react';
 import { List, Input, ViewMore } from '../../../components';
 import TextFacetItem from './TextFacetItem';
 import RangeFacetItem from './RangeFacetItem';
-import { searchStatus, facetTypes } from '../../../config';
-import { executeCallback } from '../../../common/utils';
+import { facetTypes } from '../../../config';
 
 class GenerateCombinedFacets extends React.Component {
     constructor(props) {
@@ -11,96 +10,8 @@ class GenerateCombinedFacets extends React.Component {
         this.state = { combinedFacetsList: props.combinedFacets };
     }
 
-    setFacetValue(facetObj, getResults = false) {
-        const { onFacetClick, applyMultiple } = this.props;
-        const { facetName, valMin, valMax, isSelected } = facetObj;
-
-        const onFinish = () => {
-            this.setState((existingState) => {
-                const { combinedFacetsList } = existingState;
-                const updatedRangeValues = combinedFacetsList.map(
-                    (rangeValue) => {
-                        if (
-                            rangeValue.facetType === facetTypes.RANGE_FACET &&
-                            rangeValue.facetName === facetName
-                        ) {
-                            //also go into values and set the specific from to as is selected
-                            let isFacetSelected = false;
-                            const updatedValues = rangeValue.values.map(
-                                (facetValue) => {
-                                    const {
-                                        from,
-                                        end,
-                                        isSelected = false
-                                    } = facetValue;
-                                    const { dataId: fromValue } = from;
-                                    const { dataId: toValue } = end;
-
-                                    if (
-                                        valMin >= fromValue &&
-                                        valMax <= toValue
-                                    ) {
-                                        if (!isSelected) {
-                                            isFacetSelected = true;
-                                        }
-                                        return {
-                                            ...facetValue,
-                                            isSelected: !isSelected
-                                        };
-                                    } else {
-                                        if (applyMultiple && isSelected) {
-                                            isFacetSelected = true;
-                                        }
-                                        return {
-                                            ...facetValue,
-                                            isSelected: applyMultiple
-                                                ? isSelected
-                                                : false
-                                        };
-                                    }
-                                }
-                            );
-
-                            return {
-                                ...rangeValue,
-                                isSelected: isFacetSelected,
-                                valMin,
-                                valMax,
-                                values: updatedValues
-                            };
-                        } else {
-                            return { ...rangeValue };
-                        }
-                    }
-                );
-
-                return {
-                    ...existingState,
-                    combinedFacetsList: updatedRangeValues
-                };
-            });
-
-            const { addRangeFacet, removeRangeFacet } = this.props;
-            if (isSelected && !applyMultiple) {
-                removeRangeFacet({ facetName }, getResults);
-            } else {
-                addRangeFacet(
-                    { facetName, start: valMin, end: valMax },
-                    getResults
-                );
-            }
-        };
-        executeCallback(onFacetClick, [facetObj, !isSelected], onFinish);
-    }
-
     componentDidUpdate(prevProps) {
-        const {
-            unbxdCoreStatus,
-            combinedFacets,
-            lastSelectedTextFacets,
-            selectedTextFacets,
-            transform
-        } = this.props;
+        const { combinedFacets, transform } = this.props;
         if (combinedFacets !== prevProps.combinedFacets) {
             // sorting the array
             let formattedCombinedFacets = [...combinedFacets];
@@ -118,12 +29,10 @@ class GenerateCombinedFacets extends React.Component {
                     const combinedFacetObj = { ...combinedFacet };
                     if (match) {
                         combinedFacetObj['viewLess'] = match.viewLess;
-                        combinedFacetObj['className'] = 'UNX-facet__list';
                         combinedFacetObj['filter'] = match.filter;
                         combinedFacetObj['isOpen'] = match.isOpen;
                     } else {
                         combinedFacetObj['viewLess'] = false;
-                        combinedFacetObj['className'] = 'UNX-facet__list';
                         combinedFacetObj['filter'] = '';
                         combinedFacetObj['isOpen'] = true;
                     }
@@ -191,59 +100,6 @@ class GenerateCombinedFacets extends React.Component {
         });
     };
 
-    onApplyFilter = () => {
-        const { applyRangeFacet } = this.props;
-        applyRangeFacet();
-    };
-
-    onRangeFacetClear = (event) => {
-        const facetName = event.target.dataset['unx_facetname'];
-
-        const { removeRangeFacet } = this.props;
-        removeRangeFacet({ facetName });
-        this.setState((existingState) => {
-            const { combinedFacetsList } = existingState;
-            const updatedRangeValues = combinedFacetsList.map((rangeValue) => {
-                if (
-                    rangeValue.facetName === facetName &&
-                    rangeValue.facetType === facetTypes.RANGE_FACET
-                ) {
-                    const updatedValues = rangeValue.values.map(
-                        (facetValue) => {
-                            return { ...facetValue, isSelected: false };
-                        }
-                    );
-                    return {
-                        ...rangeValue,
-                        isSelected: false,
-                        valMin: rangeValue.sliderMin,
-                        valMax: rangeValue.sliderMax,
-                        values: updatedValues
-                    };
-                } else {
-                    return { ...rangeValue };
-                }
-            });
-
-            return {
-                ...existingState,
-                combinedFacetsList: updatedRangeValues
-            };
-        });
-
-        !applyMultiple && this.onApplyFilter();
-    };
-
-    handleRangeFacetClick = (currentItem) => {
-        const { from, end, facetName, isSelected = false } = currentItem;
-        const { dataId: valMin } = from;
-        const { dataId: valMax } = end;
-
-        const { enableApplyFilters } = this.props;
-        const facetObj = { facetName, valMin, valMax, isSelected };
-        this.setFacetValue(facetObj, !enableApplyFilters);
-    };
-
     toggleViewLess = (event) => {
         const facetName = event.target.dataset['unx_name'];
         this.setState((existingState) => {
@@ -277,13 +133,14 @@ class GenerateCombinedFacets extends React.Component {
 
     render() {
         const {
-            selectedTextFacets,
             onTextFacetClick,
             onTextFacetClear,
+            onRangeFacetClick,
+            onRangeFacetClear,
             textFacetItemComponent,
+            rangeFacetItemComponent,
             collapsible,
             searchable,
-            rangeFacetItemComponent,
             priceUnit,
             enableViewMore,
             minViewMore
@@ -306,11 +163,9 @@ class GenerateCombinedFacets extends React.Component {
                             isOpen = true,
                             filter = '',
                             viewLess,
-                            className
+                            isSelected = false
                         } = combinedFacet;
-                        const hasActiveFacets = selectedTextFacets[facetName]
-                            ? true
-                            : false;
+
                         let filteredValues = values;
                         if (filter && filter.length > 0) {
                             filteredValues = values.filter((value) => {
@@ -362,11 +217,13 @@ class GenerateCombinedFacets extends React.Component {
                                             TextFacetItem
                                         }
                                         onClick={onTextFacetClick}
-                                        className={
-                                            className || 'UNX-facet__list'
-                                        }
+                                        className={`UNX-facet__list ${
+                                            viewLess
+                                                ? 'UNX-facet__listShowLimited'
+                                                : ''
+                                        }`}
                                     />
-                                    {hasActiveFacets && (
+                                    {isSelected && (
                                         <div
                                             className="-clear"
                                             data-unx_name={facetName}
@@ -395,8 +252,7 @@ class GenerateCombinedFacets extends React.Component {
                         facetName,
                         values,
                         isSelected,
-                        viewLess,
-                        className
+                        viewLess
                     } = combinedFacet;
                     return (
                         <div className="UNX-rangefacet__container">
@@ -426,15 +282,19 @@ class GenerateCombinedFacets extends React.Component {
                                         rangeFacetItemComponent ||
                                         RangeFacetItem
                                     }
-                                    onClick={this.handleRangeFacetClick}
+                                    onClick={onRangeFacetClick}
                                     idAttribute={facetName}
                                     facetName={facetName}
-                                    className={className}
+                                    className={`UNX-facet__list ${
+                                        viewLess
+                                            ? 'UNX-facet__listShowLimited'
+                                            : ''
+                                    }`}
                                     priceUnit={priceUnit}
                                 />
                                 {isSelected && (
                                     <div
-                                        onClick={this.onRangeFacetClear}
+                                        onClick={onRangeFacetClear}
                                         data-unx_facetname={facetName}
                                         className="-clear"
                                     >

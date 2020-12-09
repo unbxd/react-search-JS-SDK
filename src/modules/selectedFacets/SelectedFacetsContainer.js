@@ -72,7 +72,11 @@ class SelectedFacetsContainer extends React.PureComponent {
                 typeof dataId === 'string' ? dataId.split(' TO ') : '';
             const start = parseInt(from);
             const end = parseInt(to);
-            setRangeFacet({ facetName, start, end, applyMultiple });
+            if (applyMultiple) {
+                setRangeFacet({ facetName, start, end, applyMultiple });
+            } else {
+                clearARangeFacet(facetName);
+            }
             manageRangeFacets(
                 currentItem,
                 facetName,

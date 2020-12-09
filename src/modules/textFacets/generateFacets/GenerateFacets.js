@@ -92,7 +92,7 @@ class GenerateFacets extends React.Component {
     render() {
         const {
             onFacetClick,
-            onFacetObjectReset,
+            onFacetClear,
             facetItemComponent,
             label,
             collapsible,
@@ -172,7 +172,7 @@ class GenerateFacets extends React.Component {
                                 <div
                                     className="-clear"
                                     data-unx_name={facetName}
-                                    onClick={onFacetObjectReset}
+                                    onClick={onFacetClear}
                                 >
                                     Clear
                                 </div>
@@ -199,7 +199,7 @@ GenerateFacets.propTypes = {
     selectedTextFacets: PropTypes.object,
     lastSelectedTextFacets: PropTypes.object,
     onFacetClick: PropTypes.func.isRequired,
-    onFacetObjectReset: PropTypes.func.isRequired,
+    onFacetClear: PropTypes.func.isRequired,
     enableApplyFilters: PropTypes.bool.isRequired,
     unbxdCoreStatus: PropTypes.string.isRequired,
     facetItemComponent: PropTypes.element,
