@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.34](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.33...v0.0.34) (2020-12-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* **(wip) use console multilevel facets.:** stop supporting configuration for categories on sdk level. support console
+configured categories.
+
+### Features
+
+* **(wip) use console multilevel facets.:** using new multilevel filters and breadcrumbs format ([030bed3](https://github.com/unbxd/react-search-JS-SDK/commit/030bed35010385b4f7393a2f809958c3cb46a2ce))
+
 ### [0.0.33](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.32...v0.0.33) (2020-12-09)
 
 ### [0.0.32](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.31...v0.0.32) (2020-12-08)
