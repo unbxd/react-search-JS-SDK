@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { getUpdatedRangeFacets } from '../utils';
-import { toggleViewLess, handleCollapseToggle } from '../../../common/facetUtils';
+import {
+    toggleViewLess,
+    handleCollapseToggle
+} from '../../../common/facetUtils';
 import { List, ViewMore } from '../../../components';
 import FacetItem from './FacetItem';
 
@@ -50,10 +52,19 @@ class GenerateFacets extends React.Component {
         if (prevProps.rangeFacets !== rangeFacets) {
             this.setState((existingState) => {
                 const { rangeFacetsList } = existingState;
-                const formattedRangeFacets = getUpdatedRangeFacets(
-                    rangeFacets,
-                    rangeFacetsList
-                );
+                const formattedRangeFacets = rangeFacets.map((rangeFacet) => {
+                    const matchRangeFacet = rangeFacetsList.find(
+                        (facetObj) =>
+                            facetObj.facetName === rangeFacet.facetName
+                    );
+                    return {
+                        ...rangeFacet,
+                        isOpen: matchRangeFacet ? matchRangeFacet.isOpen : true,
+                        viewLess: matchRangeFacet
+                            ? matchRangeFacet.viewLess
+                            : false
+                    };
+                });
 
                 if (transform && typeof transform === 'function') {
                     let returnedFacets = transform.call(formattedRangeFacets);

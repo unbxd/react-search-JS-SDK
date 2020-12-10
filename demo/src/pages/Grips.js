@@ -7,8 +7,8 @@ import Sorter from '../components/Sorter';
 import MerchandizingBanner from '../components/MerchandizingBanner';
 import TextFilters from '../components/TextFilters';
 import RangeFilters from '../components/RangeFilters';
-import MultilevelFilters from '../components/MultilevelFilters';
 import CombinedFilters from '../components/CombinedFilters';
+import MultilevelFilters from '../components/MultilevelFilters';
 import ActiveFilters from '../components/ActiveFilters';
 import Crumbs from '../components/Crumbs';
 import SearchDescription from '../components/SearchDescription';
@@ -17,11 +17,12 @@ import ProductsSize from '../components/ProductsSize';
 import FacetApplyClear from '../components/FacetApplyClear';
 import { ProductTypeContext } from '../context';
 
-const Shorts = () => {
+const Grips = () => {
     const [productType, setProductType] = useContext(ProductTypeContext);
     useEffect(() => {
         window.UnbxdAnalyticsConf = {};
-        window.UnbxdAnalyticsConf['page'] = 'All Products>Shorts';
+        window.UnbxdAnalyticsConf['field'] = 'grips';
+        window.UnbxdAnalyticsConf['page'] = 'grips';
         window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         setProductType('CATEGORY');
     }, []);
@@ -40,7 +41,7 @@ const Shorts = () => {
                     <FacetApplyClear />
                     <RangeFilters />
                     <TextFilters />
-                    {/* <CombinedFilters /> */}
+                    {/* <CombinedFilters/> */}
                     <FacetApplyClear />
                 </div>
 
@@ -64,4 +65,4 @@ const Shorts = () => {
     );
 };
 
-export default Shorts;
+export default Grips;

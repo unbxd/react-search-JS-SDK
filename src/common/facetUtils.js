@@ -8,7 +8,7 @@ export function toggleViewLess(stateKey, event) {
                     viewLess: !facetValue.viewLess
                 };
             }
-            return { ...facetValue };
+            return facetValue;
         });
 
         return {
@@ -28,7 +28,7 @@ export function handleCollapseToggle(stateKey, event) {
                     isOpen: !facetValue.isOpen
                 };
             }
-            return { ...facetValue };
+            return facetValue;
         });
 
         return {
@@ -48,7 +48,7 @@ export function handleFilterChange(stateKey, event) {
             ) {
                 return { ...facetValue, filter: value.toLowerCase() };
             }
-            return { ...facetValue };
+            return facetValue;
         });
 
         return { ...existingState, [stateKey]: updatedFacets };

@@ -17,11 +17,12 @@ import ProductsSize from '../components/ProductsSize';
 import FacetApplyClear from '../components/FacetApplyClear';
 import { ProductTypeContext } from '../context';
 
-const Shoes = () => {
+const Accessories = () => {
     const [productType, setProductType] = useContext(ProductTypeContext);
     useEffect(() => {
         window.UnbxdAnalyticsConf = {};
-        window.UnbxdAnalyticsConf['page'] = 'All Products>Shoes';
+        window.UnbxdAnalyticsConf['field'] = 'CATEGORY';
+        window.UnbxdAnalyticsConf['page'] = 'accessories';
         window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         setProductType('CATEGORY');
     }, []);
@@ -64,4 +65,4 @@ const Shoes = () => {
     );
 };
 
-export default Shoes;
+export default Accessories;

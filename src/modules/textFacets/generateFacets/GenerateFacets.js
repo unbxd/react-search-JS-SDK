@@ -36,8 +36,7 @@ class GenerateFacets extends React.Component {
                     ...textFacet,
                     isOpen: matchTextFacet ? matchTextFacet.isOpen : true,
                     filter: matchTextFacet ? matchTextFacet.filter : '',
-                    viewLess: false,
-                    className: 'UNX-facet__list'
+                    viewLess: false
                 };
             });
 
