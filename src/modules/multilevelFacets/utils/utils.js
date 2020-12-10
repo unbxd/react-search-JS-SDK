@@ -1,7 +1,6 @@
 import { facetTypes } from '../../../config';
 
 export const getFormattedMultilevelFacets = (bucketedFacets, unbxdCore) => {
-
     const getBreadCrumbsList = unbxdCore.getBreadCrumbsList.bind(unbxdCore);
 
     const multilevelFacets = [];
@@ -33,10 +32,7 @@ export const getFormattedMultilevelFacets = (bucketedFacets, unbxdCore) => {
         });
 
         let formattedBucketedFacets = [];
-        if (
-            highestBreadcrumbLevel === level &&
-            highestBreadcrumbLevel > 0
-        ) {
+        if (highestBreadcrumbLevel === level && highestBreadcrumbLevel > 0) {
             const lastBreadcrumb =
                 breadCrumbFacets[breadCrumbFacets.length - 1];
             const hit = values.find((facetValue) => {
@@ -77,10 +73,10 @@ export const getFormattedMultilevelFacets = (bucketedFacets, unbxdCore) => {
         multilevelFacets.push(facet);
     });
 
-    return multilevelFacets
-}
+    return multilevelFacets;
+};
 
-export const getFacetCoreMethods = (unbxdCore) => {
+export const getMultilevelFacetCoreMethods = (unbxdCore) => {
     const getBucketedFacets = unbxdCore.getBucketedFacets.bind(unbxdCore);
     const getBreadCrumbsList = unbxdCore.getBreadCrumbsList.bind(unbxdCore);
     const setCategoryFilter = unbxdCore.setCategoryFilter.bind(unbxdCore);

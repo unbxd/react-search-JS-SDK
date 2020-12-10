@@ -96,8 +96,8 @@ const AppRoutes = () => {
                     value={[productType, setProductType]}
                 >
                     <UnbxdSearchWrapper
-                        siteKey="ss-unbxd-anu-25-11-prod-1813071606318149"
-                        apiKey="82418d9335e92ca5f3208b8fbf58f71a"
+                        siteKey="ss-unbxd-anu-3-12-14611606976347"
+                        apiKey="0a9da11df89a47b0d0a93b03ae248385"
                         getCategoryId={getCategoryId}
                         setCategoryId={setCategoryId}
                         searchConfigurations={searchConfigurations}

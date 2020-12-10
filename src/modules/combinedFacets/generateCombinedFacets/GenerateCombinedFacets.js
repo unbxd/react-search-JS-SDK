@@ -1,13 +1,28 @@
 import React from 'react';
+import {
+    toggleViewLess,
+    handleCollapseToggle,
+    handleFilterChange
+} from '../../../common/facetUtils';
 import { List, Input, ViewMore } from '../../../components';
-import TextFacetItem from './TextFacetItem';
-import RangeFacetItem from './RangeFacetItem';
+import { FacetItem as TextFacetItem } from '../../textFacets/generateFacets';
+import { FacetItem as RangeFacetItem } from '../../rangeFacets/generateFacets';
+import { FacetItem as MultilevelFacetItem } from '../../multilevelFacets/generateFacets';
 import { facetTypes } from '../../../config';
 
 class GenerateCombinedFacets extends React.Component {
     constructor(props) {
         super(props);
         this.state = { combinedFacetsList: props.combinedFacets };
+        this.toggleViewLess = toggleViewLess.bind(this, 'multilevelFacetsList');
+        this.handleFilterChange = handleFilterChange.bind(
+            this,
+            'multilevelFacetsList'
+        );
+        this.handleCollapseToggle = handleCollapseToggle.bind(
+            this,
+            'multilevelFacetsList'
+        );
     }
 
     componentDidUpdate(prevProps) {
@@ -28,20 +43,20 @@ class GenerateCombinedFacets extends React.Component {
                     );
                     const combinedFacetObj = { ...combinedFacet };
                     if (match) {
-                        combinedFacetObj['viewLess'] = match.viewLess;
-                        combinedFacetObj['filter'] = match.filter;
-                        combinedFacetObj['isOpen'] = match.isOpen;
-                    } else {
-                        combinedFacetObj['viewLess'] = false;
-                        combinedFacetObj['filter'] = '';
-                        combinedFacetObj['isOpen'] = true;
+                        return {
+                            ...combinedFacetObj,
+                            viewLess: match.viewLess,
+                            filter: match.filter,
+                            isOpen: match.isOpen
+                        };
                     }
-
-                    return combinedFacetObj;
+                    return {
+                        ...combinedFacetObj
+                    };
                 }
             );
             if (transform && typeof transform === 'function') {
-                let returnedFacets = transform.call(formattedCombinedFacets);
+                const returnedFacets = transform.call(formattedCombinedFacets);
                 this.setState(() => {
                     return { combinedFacetsList: returnedFacets };
                 });
@@ -52,84 +67,6 @@ class GenerateCombinedFacets extends React.Component {
             }
         }
     }
-
-    handleCollapseToggle = (event) => {
-        const facetId = event.target.dataset['unx_name'];
-        this.setState((existingState) => {
-            const { combinedFacetsList } = existingState;
-            const updatedCombinedFacets = combinedFacetsList.map(
-                (combinedFacet) => {
-                    if (facetId === combinedFacet.facetName) {
-                        return {
-                            ...combinedFacet,
-                            isOpen: !combinedFacet.isOpen
-                        };
-                    }
-                    return { ...combinedFacet };
-                }
-            );
-
-            return {
-                ...existingState,
-                combinedFacetsList: updatedCombinedFacets
-            };
-        });
-    };
-
-    handleFilterChange = (event) => {
-        const facetId = event.target.name;
-        const value = event.target.value;
-        this.setState((existingState) => {
-            const { combinedFacetsList } = existingState;
-            const updatedCombinedFacets = combinedFacetsList.map(
-                (combinedFacet) => {
-                    if (facetId === combinedFacet.facetName) {
-                        return {
-                            ...combinedFacet,
-                            filter: value.toLowerCase()
-                        };
-                    }
-                    return { ...combinedFacet };
-                }
-            );
-
-            return {
-                ...existingState,
-                combinedFacetsList: updatedCombinedFacets
-            };
-        });
-    };
-
-    toggleViewLess = (event) => {
-        const facetName = event.target.dataset['unx_name'];
-        this.setState((existingState) => {
-            const { combinedFacetsList } = existingState;
-            const updatedCombinedFacets = combinedFacetsList.map(
-                (combinedFacet) => {
-                    if (combinedFacet.facetName === facetName) {
-                        const currentFacet = { ...combinedFacet };
-                        currentFacet['viewLess'] = !currentFacet['viewLess'];
-                        if (currentFacet['viewLess']) {
-                            currentFacet.className =
-                                'UNX-facet__list UNX-facet__listShowLimited';
-                        } else {
-                            currentFacet.className = 'UNX-facet__list';
-                        }
-                        return {
-                            ...combinedFacet,
-                            viewLess: currentFacet['viewLess'],
-                            className: currentFacet['className']
-                        };
-                    }
-                    return { ...combinedFacet };
-                }
-            );
-            return {
-                ...existingState,
-                combinedFacetsList: updatedCombinedFacets
-            };
-        });
-    };
 
     render() {
         const {
@@ -142,7 +79,6 @@ class GenerateCombinedFacets extends React.Component {
             rangeFacetItemComponent,
             collapsible,
             searchable,
-            rangeFacetItemComponent,
             multilevelFacetItemComponent,
             priceUnit,
             enableViewMore,
@@ -296,14 +232,17 @@ class GenerateCombinedFacets extends React.Component {
                                                 onChange={
                                                     this.handleFilterChange
                                                 }
-                                                data-testid={'UNX_searchFacets'}
+                                                data-testid="UNX_searchFacets"
                                             />
                                         </div>
                                     )}
                                     <List
                                         items={filteredValues}
-                                        ListItem={multilevelFacetItemComponent}
-                                        idAttribute={'name'}
+                                        ListItem={
+                                            multilevelFacetItemComponent ||
+                                            MultilevelFacetItem
+                                        }
+                                        idAttribute="name"
                                         onClick={onMultilevelFacetClick}
                                         className={`UNX-facet__list ${
                                             viewLess

@@ -53,7 +53,7 @@ const ProductsListing = () => {
         <Products
             attributesMap={attributesMap}
             pageSize={10}
-            showVariants
+            showVariants={false}
             variantsCount={4}
             variantAttributesMap={variantAttributesMap}
             showSwatches={false}

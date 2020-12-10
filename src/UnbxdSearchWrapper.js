@@ -288,7 +288,11 @@ UnbxdSearchWrapper.propTypes = {
     /**
      * search configurations object.
      */
-    searchConfigurations: PropTypes.object
+    searchConfigurations: PropTypes.object,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
 };
 
 export default UnbxdSearchWrapper;

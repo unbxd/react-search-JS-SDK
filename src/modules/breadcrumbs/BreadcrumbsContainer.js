@@ -30,7 +30,7 @@ class BreadcrumbsContainer extends React.PureComponent {
             breadCrumbsList.push(breadcrumbs);
         });
 
-        const handleBreadCrumbClick = (currentItem) => { 
+        const handleBreadCrumbClick = (currentItem) => {
             const { value, filterField, level } = currentItem;
             const categoryObject = { parent: filterField, level, name: value };
             const { setCategoryId } = unbxdCore;
@@ -76,7 +76,11 @@ BreadcrumbsContainer.propTypes = {
     root: PropTypes.oneOfType([PropTypes.element, PropTypes.node]),
     separator: PropTypes.node,
     breadcrumbItemComponent: PropTypes.element,
-    productType: PropTypes.string.isRequired
+    productType: PropTypes.string.isRequired,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
 };
 
 export default BreadcrumbsContainer;

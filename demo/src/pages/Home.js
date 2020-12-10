@@ -5,6 +5,9 @@ import SpellChecker from '../components/SpellChecker';
 import Paginator from '../components/Paginator';
 import Sorter from '../components/Sorter';
 import MerchandizingBanner from '../components/MerchandizingBanner';
+import TextFilters from '../components/TextFilters';
+import RangeFilters from '../components/RangeFilters';
+import MultilevelFilters from '../components/MultilevelFilters';
 import CombinedFilters from '../components/CombinedFilters';
 import ActiveFilters from '../components/ActiveFilters';
 import Crumbs from '../components/Crumbs';
@@ -25,8 +28,11 @@ const Home = () => {
             </div>
             <div className="UNX-searchResults__container">
                 <div className="UNX-searchFacet__container">
+                    <MultilevelFilters />
                     <FacetApplyClear />
-                    <CombinedFilters />
+                    <RangeFilters />
+                    <TextFilters />
+                    {/* <CombinedFilters /> */}
                     <FacetApplyClear />
                 </div>
 

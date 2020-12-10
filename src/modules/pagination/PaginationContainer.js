@@ -96,7 +96,11 @@ PaginationContainer.propTypes = {
     padding: PropTypes.number,
     paginationItemComponent: PropTypes.element,
     paginationType: PropTypes.string.isRequired,
-    onPageChange: PropTypes.func
+    onPageChange: PropTypes.func,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
 };
 
 export default PaginationContainer;
