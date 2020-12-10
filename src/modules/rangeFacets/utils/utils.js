@@ -108,21 +108,6 @@ export const getFormattedRangeFacets = (rangeFacets, selectedRangeFacets) => {
     return formattedFacets;
 };
 
-export const getUpdatedRangeFacets = (
-    rangeFacets,
-    existingRangeValues = {}
-) => {
-    if (Object.keys(rangeFacets).length > 0) {
-        Object.keys(existingRangeValues).map((facetName) => {
-            const currentFacet = existingRangeValues[facetName];
-            rangeFacets[facetName]['isOpen'] = currentFacet
-                ? currentFacet['isOpen']
-                : true;
-        });
-    }
-    return rangeFacets;
-};
-
 export const getRangeFacetCoreMethods = (unbxdCore) => {
     const getRangeFacets = unbxdCore.getRanges.bind(unbxdCore);
     const setRangeFacet = unbxdCore.setRangeFacet.bind(unbxdCore);

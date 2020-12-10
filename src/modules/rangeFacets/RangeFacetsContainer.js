@@ -6,7 +6,7 @@ import {
     executeCallback,
     mergeFacets
 } from '../../common/utils';
-import GenerateFacets from './GenerateFacets';
+import GenerateFacets from './generateFacets';
 import {
     getRangeFacetCoreMethods,
     getFormattedRangeFacets,

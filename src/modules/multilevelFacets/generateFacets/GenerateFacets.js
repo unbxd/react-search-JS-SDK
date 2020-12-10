@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import {
+    toggleViewLess,
+    handleCollapseToggle,
+    handleFilterChange
+} from '../../../common/facetUtils';
 import FacetItem from './FacetItem';
 import { List, Input, ViewMore } from '../../../components';
 
@@ -8,6 +12,15 @@ class GenerateFacets extends React.Component {
     constructor(props) {
         super(props);
         this.state = { multilevelFacetsList: props.multilevelFacets };
+        this.toggleViewLess = toggleViewLess.bind(this, 'multilevelFacetsList');
+        this.handleFilterChange = handleFilterChange.bind(
+            this,
+            'multilevelFacetsList'
+        );
+        this.handleCollapseToggle = handleCollapseToggle.bind(
+            this,
+            'multilevelFacetsList'
+        );
     }
 
     componentDidUpdate(prevProps) {
@@ -50,75 +63,6 @@ class GenerateFacets extends React.Component {
         }
     }
 
-    handleCollapseToggle = (event) => {
-        const facetId = event.target.dataset['unx_name'];
-        this.setState((existingState) => {
-            const { multilevelFacetsList } = existingState;
-            const updatedTextFacets = multilevelFacetsList.map(
-                (multilevelFacet) => {
-                    if (facetId === multilevelFacet.facetDisplayName) {
-                        return {
-                            ...multilevelFacet,
-                            isOpen: !multilevelFacet.isOpen
-                        };
-                    }
-                    return { ...multilevelFacet };
-                }
-            );
-
-            return {
-                ...existingState,
-                multilevelFacetsList: updatedTextFacets
-            };
-        });
-    };
-
-    handleFilterChange = (event) => {
-        const facetId = event.target.name;
-        const value = event.target.value;
-        this.setState((existingState) => {
-            const { multilevelFacetsList } = existingState;
-            const updatedMultilevelFacets = multilevelFacetsList.map(
-                (bucketedFacet) => {
-                    if (facetId === bucketedFacet.facetDisplayName) {
-                        return {
-                            ...bucketedFacet,
-                            filter: value.toLowerCase()
-                        };
-                    }
-                    return { ...bucketedFacet };
-                }
-            );
-
-            return {
-                ...existingState,
-                multilevelFacetsList: updatedMultilevelFacets
-            };
-        });
-    };
-
-    toggleViewLess = (event) => {
-        const facetName = event.target.dataset['unx_name'];
-        this.setState((existingState) => {
-            const { multilevelFacetsList } = existingState;
-            const interimCombinedFacets = multilevelFacetsList.map(
-                (multiFacet) => {
-                    if (multiFacet.facetDisplayName === facetName) {
-                        return {
-                            ...multiFacet,
-                            viewLess: !multiFacet['viewLess']
-                        };
-                    }
-                    return { ...multiFacet };
-                }
-            );
-            return {
-                ...existingState,
-                multilevelFacetsList: interimCombinedFacets
-            };
-        });
-    };
-
     render() {
         const {
             onFacetClick,
@@ -138,7 +82,7 @@ class GenerateFacets extends React.Component {
 
         return (
             <div className="UNX-bucketedFacet__container">
-                {label ? label : null}
+                {label || null}
                 {multilevelFacetsList.map((multilevelFacet) => {
                     const {
                         facetDisplayName,
@@ -182,14 +126,14 @@ class GenerateFacets extends React.Component {
                                         value={filter}
                                         name={facetDisplayName}
                                         onChange={this.handleFilterChange}
-                                        data-testid={'UNX_searchFacets'}
+                                        data-testid="UNX_searchFacets"
                                     />
                                 </div>
                             )}
                             <List
                                 items={filteredValues}
                                 ListItem={facetItemComponent || FacetItem}
-                                idAttribute={'name'}
+                                idAttribute="name"
                                 onClick={onFacetClick}
                                 className={`UNX-facet__list ${
                                     viewLess ? 'UNX-facet__listShowLimited' : ''

@@ -26,7 +26,11 @@ class BannersContainer extends React.PureComponent {
 BannersContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
     altText: PropTypes.string.isRequired,
-    bannerItemComponent: PropTypes.element
+    bannerItemComponent: PropTypes.element,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
 };
 
 export default BannersContainer;

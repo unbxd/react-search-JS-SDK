@@ -132,7 +132,11 @@ FacetActionsContainer.propTypes = {
     applyFilterComponent: PropTypes.element,
     clearFilterComponent: PropTypes.element,
     onApply: PropTypes.func,
-    onClear: PropTypes.func
+    onClear: PropTypes.func,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
 };
 
 export default FacetActionsContainer;

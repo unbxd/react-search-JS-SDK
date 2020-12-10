@@ -1,8 +1,23 @@
 const categoryLinks = [
-    { path: 'All Products>Shorts', id: 'shorts', label: 'Shorts' },
-    { path: 'All Products>Shoes', id: 'shoes', label: 'Shoes' },
-    { path: 'All Products>Jackets', id: 'jackets', label: 'Jackets' },
-    { path: 'All Products>T-Shirts', id: 'shirts', label: 'Shirts ' }
+    {
+        field: 'CATEGORY',
+        path: 'strings',
+        id: 'strings',
+        label: 'Strings'
+    },
+    {
+        field: 'CATEGORY',
+        path: 'accessories',
+        id: 'accessories',
+        label: 'Accessories'
+    },
+    { field: 'CATEGORY', path: 'grips', id: 'grips', label: 'Grips' },
+    {
+        field: 'CATEGORY',
+        path: 'balls',
+        id: 'balls',
+        label: 'Balls '
+    }
 ];
 
 export default categoryLinks;

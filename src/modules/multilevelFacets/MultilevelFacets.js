@@ -50,14 +50,6 @@ MultilevelFacets.defaultProps = {
 
 MultilevelFacets.propTypes = {
     /**
-     * Display name of the category.
-     */
-    categoryDisplayName: PropTypes.string.isRequired,
-    /**
-     * Category field in the feed.
-     */
-    categoryField: PropTypes.string.isRequired,
-    /**
      * Maximum depth of the category.
      */
     facetDepth: PropTypes.number,

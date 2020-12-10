@@ -1,3 +1,6 @@
-import { getFacetCoreMethods, getFormattedMultilevelFacets } from './utils';
+import {
+    getMultilevelFacetCoreMethods,
+    getFormattedMultilevelFacets
+} from './utils';
 
-export { getFacetCoreMethods, getFormattedMultilevelFacets };
+export { getMultilevelFacetCoreMethods, getFormattedMultilevelFacets };

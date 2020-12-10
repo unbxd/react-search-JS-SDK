@@ -12,7 +12,7 @@ export const FacetItemComponent = ({ itemData, onClick }) => {
         <div
             className={`UNX-facet__item -l${level} ${
                 isSelected ? '-selected' : ''
-                }`}
+            }`}
             onClick={handleClick}
         >
             <div className="-checkbox" />
@@ -35,7 +35,7 @@ const MultilevelFilters = ({ showLabel = true }) => {
             collapsible
             searchable
             facetItemComponent={<FacetItemComponent />}
-            label={showLabel ? label : undefined}
+            label={showLabel ? label : null}
             minViewMore={3}
             onFacetClick={onFacetClick}
         />

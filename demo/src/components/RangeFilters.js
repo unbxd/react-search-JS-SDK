@@ -145,4 +145,4 @@ const RangeFilters = () => {
     );
 };
 
-export default RangeFiltersRenderProps;
+export default RangeFilters;

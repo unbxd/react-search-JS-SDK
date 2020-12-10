@@ -16,7 +16,7 @@ import {
     getFormattedRangeFacets
 } from '../rangeFacets/utils';
 import {
-    getFacetCoreMethods,
+    getMultilevelFacetCoreMethods,
     getFormattedMultilevelFacets
 } from '../multilevelFacets/utils';
 import { manageStateTypes, productTypes, facetTypes } from '../../config';
@@ -74,8 +74,8 @@ class CombinedFacetsContainer extends React.PureComponent {
             getBucketedFacets,
             getBreadCrumbsList,
             setCategoryFilter,
-            deleteCategoryFilter,
-        } = getFacetCoreMethods(unbxdCore);
+            deleteCategoryFilter
+        } = getMultilevelFacetCoreMethods(unbxdCore);
 
         const textFacets = getFacets() || [];
         const lastSelectedTextFacets = getSelectedFacets();
@@ -138,7 +138,10 @@ class CombinedFacetsContainer extends React.PureComponent {
             let highestBreadcrumbLevel = 0;
 
             const onFinish = () => {
-                const { setCategoryId, options: { productType } } = unbxdCore;
+                const {
+                    setCategoryId,
+                    options: { productType }
+                } = unbxdCore;
                 if (
                     productType === productTypes.CATEGORY &&
                     typeof setCategoryId === 'function'
@@ -150,7 +153,6 @@ class CombinedFacetsContainer extends React.PureComponent {
                 } else {
                     const breadCrumbsList = getBreadCrumbsList(parent);
                     breadCrumbsList.map((breadcrumb) => {
-                        console.log('breadcrumb', breadcrumb);
                         if (highestBreadcrumbLevel < breadcrumb.level) {
                             highestBreadcrumbLevel = breadcrumb.level;
                         }
@@ -158,7 +160,7 @@ class CombinedFacetsContainer extends React.PureComponent {
                     if (highestBreadcrumbLevel === parseInt(level)) {
                         deleteCategoryFilter(categoryObject);
                     } else {
-                        //check if it is a breadcrumb
+                        // check if it is a breadcrumb
                         const hit = breadCrumbsList.find(({ value }) => {
                             return name === value;
                         });
@@ -173,7 +175,11 @@ class CombinedFacetsContainer extends React.PureComponent {
                 }
             };
 
-            executeCallback(onFacetClick, [categoryObject, facetTypes.MULTILEVEL_FACET], onFinish);
+            executeCallback(
+                onFacetClick,
+                [categoryObject, facetTypes.MULTILEVEL_FACET],
+                onFinish
+            );
         };
 
         const handleTextFacetClick = (currentItem) => {
@@ -371,7 +377,11 @@ CombinedFacetsContainer.propTypes = {
     onFacetClick: PropTypes.node,
     applyMultiple: PropTypes.bool,
     enableViewMore: PropTypes.bool,
-    minViewMore: PropTypes.number
+    minViewMore: PropTypes.number,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
 };
 
 export default CombinedFacetsContainer;

@@ -2,23 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { conditionalRenderer, executeCallback } from '../../common/utils';
-import { getFacetCoreMethods } from './utils';
+import { getMultilevelFacetCoreMethods } from './utils';
 import MultilevelFacetsWrapper from './MultilevelFacetsWrapper';
 import { productTypes } from '../../config';
 
 class MultilevelFacetsContainer extends React.PureComponent {
     componentDidMount() {
         const {
-            categoryDisplayName = '',
-            categoryField = '',
             facetDepth,
             facetLimit,
             helpers: { setMultilevelFacetsConfiguration }
         } = this.props;
 
         setMultilevelFacetsConfiguration({
-            categoryDisplayName,
-            categoryField,
             facetDepth,
             facetLimit
         });
@@ -43,7 +39,7 @@ class MultilevelFacetsContainer extends React.PureComponent {
             setCategoryFilter,
             deleteCategoryFilter,
             getResults
-        } = getFacetCoreMethods(unbxdCore);
+        } = getMultilevelFacetCoreMethods(unbxdCore);
 
         const bucketedFacets = getBucketedFacets();
 
@@ -182,8 +178,6 @@ MultilevelFacetsContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
     unbxdCoreStatus: PropTypes.string.isRequired,
     helpers: PropTypes.object.isRequired,
-    categoryDisplayName: PropTypes.string.isRequired,
-    categoryField: PropTypes.string.isRequired,
     productType: PropTypes.string,
     facetDepth: PropTypes.number,
     facetLimit: PropTypes.number,
@@ -193,7 +187,11 @@ MultilevelFacetsContainer.propTypes = {
     searchable: PropTypes.bool,
     enableViewMore: PropTypes.bool,
     minViewMore: PropTypes.number,
-    onFacetClick: PropTypes.func
+    onFacetClick: PropTypes.func,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
 };
 
 export default MultilevelFacetsContainer;
