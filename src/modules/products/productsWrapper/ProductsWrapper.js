@@ -62,16 +62,27 @@ class ProductsWrapper extends React.PureComponent {
             query,
             productIdAttribute,
             viewType,
+            pageSize,
+            sort,
             unbxdCoreStatus,
             numberOfProducts
         } = this.props;
+        const loadedAllResults =
+            start === 0
+                ? products.length === numberOfProducts
+                : [...prevState.products, ...products].length ===
+                  numberOfProducts;
 
         if (
             prevProps.unbxdCoreStatus === 'LOADING' &&
             unbxdCoreStatus === 'READY'
         ) {
             if (this.state.products.length === 0 && products.length) {
-                this.setState({ products });
+                this.setState({
+                    products,
+                    start,
+                    hasMoreResults: !loadedAllResults
+                });
                 trackProductImpressions(
                     query,
                     getProductPids(products, productIdAttribute)
@@ -104,7 +115,7 @@ class ProductsWrapper extends React.PureComponent {
             }
 
             if (
-                prevProps.start !== start &&
+                (prevProps.start !== start || start === 0) &&
                 (paginationType === paginationTypes.INFINITE_SCROLL ||
                     paginationType === paginationTypes.CLICK_N_SCROLL)
             ) {
@@ -112,14 +123,22 @@ class ProductsWrapper extends React.PureComponent {
                     query,
                     getProductPids(products, productIdAttribute)
                 );
-                const loadedAllResults =
-                    [...prevState.products, ...products].length ===
-                    numberOfProducts;
+
                 if (loadedAllResults) {
                     window.removeEventListener('scroll', this.nextPageCallback);
+                } else if (
+                    !loadedAllResults &&
+                    paginationType === paginationTypes.INFINITE_SCROLL
+                ) {
+                    window.removeEventListener('scroll', this.nextPageCallback);
+                    window.addEventListener('scroll', this.nextPageCallback);
                 }
                 start === 0
-                    ? this.setState({ products: products })
+                    ? this.setState({
+                          products: products,
+                          start,
+                          hasMoreResults: !loadedAllResults
+                      })
                     : this.setState({
                           products: [...prevState.products, ...products],
                           start,
@@ -139,7 +158,11 @@ class ProductsWrapper extends React.PureComponent {
             }
         }
 
-        if (viewType !== prevProps.viewType) {
+        if (
+            viewType !== prevProps.viewType ||
+            pageSize !== prevProps.pageSize ||
+            sort !== prevProps.sort
+        ) {
             if (paginationType === paginationTypes.INFINITE_SCROLL) {
                 window.removeEventListener('scroll', this.nextPageCallback);
                 window.addEventListener('scroll', this.nextPageCallback);
