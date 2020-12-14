@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { conditionalRenderer } from '../../common/utils';
 import SearchBoxWrapper from './SearchBoxWrapper';
+import { manageStateTypes } from '../../config';
 import { trackSearch } from '../analytics';
 
 /**
@@ -59,7 +60,11 @@ class SearchBoxContainer extends React.PureComponent {
             helpers: { resetSearch }
         } = this.props;
         const {
-            helpers: { setSearchBoxConfiguration }
+            helpers: {
+                setSearchBoxConfiguration,
+                manageTextFacets,
+                manageRangeFacets
+            }
         } = this.props;
         if (!query.replace(/\s/g, '').length) {
             return false;
@@ -81,6 +86,8 @@ class SearchBoxContainer extends React.PureComponent {
             // track for search hit here
             trackSearch(query);
         }
+        manageTextFacets(null, null, null, manageStateTypes.RESET);
+        manageRangeFacets(null, null, null, manageStateTypes.RESET);
     }
 
     getSearchBoxProps() {

@@ -64,6 +64,8 @@ class ProductsContainer extends React.PureComponent {
             swatchAttributesMap = {},
             swatchItemComponent,
             viewType,
+            pageSizeState,
+            sort,
             priceUnit
         } = this.props;
 
@@ -142,6 +144,8 @@ class ProductsContainer extends React.PureComponent {
             query,
             productIdAttribute,
             viewType,
+            pageSize: pageSizeState,
+            sort,
             numberOfProducts,
             products,
             start,

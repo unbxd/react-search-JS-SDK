@@ -29,6 +29,7 @@ const RangeFacetsRender = (props) => {
                 };
                 return currentItem;
             }
+            return facet;
         });
         setRangeValues(updatedRangeValues);
         // Apply
