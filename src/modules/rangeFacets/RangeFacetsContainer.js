@@ -21,6 +21,25 @@ class RangeFacetsContainer extends React.PureComponent {
         setRangeFacetsConfiguration({ applyMultiple });
     }
 
+    componentDidUpdate(prevProps) {
+        const {
+            unbxdCore,
+            unbxdCoreStatus,
+            helpers: { manageRangeFacets }
+        } = this.props;
+        const { lastSelectedRangeFacets } = getRangeFacetCoreMethods(unbxdCore);
+        const formattedLastSelectedRangeFacets = getSelectedRangeFacets(
+            lastSelectedRangeFacets
+        );
+        if (
+            unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
+            unbxdCoreStatus === 'READY' &&
+            Object.keys(formattedLastSelectedRangeFacets).length
+        ) {
+            manageRangeFacets(null, null, null, manageStateTypes.SET);
+        }
+    }
+
     getRangeFacetsProps() {
         const {
             unbxdCore,

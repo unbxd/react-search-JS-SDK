@@ -46,6 +46,13 @@ function manageTextFacets(
                             [selectedFacetName]: updatedFacetArrayRemove
                         }
                     };
+
+                    const list = mergeFacets(
+                        updatedSelectedFacets,
+                        lastSelectedTextFacets
+                    );
+
+                    updatedSelectedFacets = { ...updatedSelectedFacets, list };
                 }
                 break;
 
@@ -78,6 +85,13 @@ function manageTextFacets(
                             [selectedFacetName]: updatedFacetArrayRemove
                         }
                     };
+
+                    const list = mergeFacets(
+                        updatedSelectedFacets,
+                        lastSelectedTextFacets
+                    );
+
+                    updatedSelectedFacets = { ...updatedSelectedFacets, list };
                 }
                 break;
 
@@ -86,6 +100,28 @@ function manageTextFacets(
                     add: {},
                     remove: {}
                 };
+                const list = mergeFacets(
+                    updatedSelectedFacets,
+                    lastSelectedTextFacets
+                );
+
+                updatedSelectedFacets = { ...updatedSelectedFacets, list };
+
+                break;
+            }
+
+            case manageStateTypes.SET: {
+                updatedSelectedFacets = {
+                    add: { ...add },
+                    remove: { ...remove }
+                };
+
+                const list = mergeFacets(
+                    updatedSelectedFacets,
+                    lastSelectedTextFacets
+                );
+
+                updatedSelectedFacets = { ...updatedSelectedFacets, list };
 
                 break;
             }
@@ -104,7 +140,8 @@ function manageTextFacets(
                 } = remove;
                 updatedSelectedFacets = {
                     add: { ...remainingStateAdd },
-                    remove: { ...remainingStateRemove }
+                    remove: { ...remainingStateRemove },
+                    list: {}
                 };
                 break;
             }
@@ -115,10 +152,6 @@ function manageTextFacets(
             default:
                 return null;
         }
-
-        const list = mergeFacets(updatedSelectedFacets, lastSelectedTextFacets);
-
-        updatedSelectedFacets = { ...updatedSelectedFacets, list };
 
         return {
             ...remaningState,

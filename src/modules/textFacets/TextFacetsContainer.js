@@ -15,6 +15,22 @@ import { manageStateTypes } from '../../config';
 import GenerateFacets from './generateFacets';
 
 class TextFacetsContainer extends React.PureComponent {
+    componentDidUpdate(prevProps) {
+        const {
+            unbxdCore,
+            unbxdCoreStatus,
+            helpers: { manageTextFacets }
+        } = this.props;
+        const { getSelectedFacets } = getTextFacetFacetCoreMethods(unbxdCore);
+        const selectedTextFacets = getSelectedFacets();
+        if (
+            unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
+            unbxdCoreStatus === 'READY' &&
+            Object.keys(selectedTextFacets).length
+        ) {
+            manageTextFacets(null, null, null, manageStateTypes.SET);
+        }
+    }
     // a way to pass data to render props and our component
     getTextFacetsProps() {
         const {
