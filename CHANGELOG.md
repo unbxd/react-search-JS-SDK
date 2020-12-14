@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.35](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.34...v0.0.35) (2020-12-14)
+
+
+### Bug Fixes
+
+* **infinite scroll and view types:** disable infinite scroll and click n scoll on complete load ([f059171](https://github.com/unbxd/react-search-JS-SDK/commit/f059171c4fc42028dfffe703135872b25e175aa2))
+
 ### [0.0.34](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.33...v0.0.34) (2020-12-10)
 
 
