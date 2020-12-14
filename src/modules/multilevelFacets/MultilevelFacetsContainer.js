@@ -125,8 +125,11 @@ class MultilevelFacetsContainer extends React.PureComponent {
                     productType === productTypes.CATEGORY &&
                     typeof setCategoryId === 'function'
                 ) {
-                    const getResults = setCategoryId(categoryObject, unbxdCore);
-                    if (getResults) {
+                    const triggerNewSearch = setCategoryId(
+                        categoryObject,
+                        unbxdCore
+                    );
+                    if (triggerNewSearch) {
                         getUpdatedResults();
                     }
                 } else {
@@ -145,7 +148,7 @@ class MultilevelFacetsContainer extends React.PureComponent {
                             setCategoryFilter(categoryObject);
                         }
                     }
-                    getResults();
+                    getUpdatedResults();
                 }
             };
             executeCallback(onFacetClick, [categoryObject], onFinish);

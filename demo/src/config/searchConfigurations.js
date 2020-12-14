@@ -1,8 +1,7 @@
 const searchConfigurations = {
     siteName: 'wildearthclone-neto-com-au808941566310465',
     siteKey: 'e6959ae0b643d51b565dc3e01bf41ec1',
-    searchEndPoint:
-        'http://ab220086aca8111ea943906919cae33f-1069342559.us-west-1.elb.amazonaws.com/',
+    searchEndPoint: 'https://search.unbxd.io/',
     searchQueryParam: 'q',
     productAttributes: [
         'title',
