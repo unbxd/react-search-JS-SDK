@@ -15,6 +15,9 @@ In return, they should reciprocate that respect in addressing your issue or asse
 
 Install [npm](https://www.npmjs.com/get-npm)
 
+* npm >= 6.14.6
+* node >= 12.18.3
+
 <a name="bugs"></a>
 
 ## Bug reports
