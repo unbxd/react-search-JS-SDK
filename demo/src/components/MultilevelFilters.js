@@ -3,7 +3,7 @@ import React from 'react';
 import { MultilevelFacets } from '@unbxd-ui/react-search-sdk';
 import { scrollTop } from '../utils';
 
-const FacetItemComponent = ({ itemData, onClick }) => {
+export const FacetItemComponent = ({ itemData, onClick }) => {
     const { name, count, level, isSelected } = itemData;
     const handleClick = () => {
         onClick(itemData);
@@ -32,12 +32,10 @@ const MultilevelFilters = ({ showLabel = true }) => {
     return (
         <MultilevelFacets
             enableViewMore
-            categoryDisplayName="category"
-            categoryField="categoryPath"
             collapsible
             searchable
             facetItemComponent={<FacetItemComponent />}
-            label={showLabel ? label : undefined}
+            label={showLabel ? label : null}
             minViewMore={3}
             onFacetClick={onFacetClick}
         />

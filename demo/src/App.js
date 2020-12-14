@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import UnbxdSearchWrapper from '@unbxd-ui/react-search-sdk';
 
-import { Jackets, Shirts, Shoes, Shorts, Home } from './pages';
+import { Strings, Accessories, Grips, Balls, Home } from './pages';
 
 import { searchConfigurations, categoryLinks } from './config';
 import { ProductTypeContext } from './context';
@@ -19,19 +19,21 @@ import '../public/css/index.scss';
 
 const getCategoryId = () => {
     if (window.UnbxdAnalyticsConf) {
-        return encodeURIComponent(window.UnbxdAnalyticsConf['page']);
+        const field = window.UnbxdAnalyticsConf['field'];
+        const page = encodeURIComponent(window.UnbxdAnalyticsConf['page']);
+        return `${field}:${page}`;
     }
 };
 
 const setCategoryId = (param, self) => {
-    const { level, name } = param;
+    const { level, name, parent } = param;
     let page = '';
     const pathArr = [];
     const l = Number(level);
     if (l === 1) {
         return;
     }
-    const breadCrumbs = self.getBreadCrumbsList();
+    const breadCrumbs = self.getBreadCrumbsList(parent);
     breadCrumbs.forEach((element, i) => {
         const { value, level } = element;
 
@@ -71,15 +73,18 @@ const AppRoutes = () => {
     const handleShow = () => setShowFilters(true);
     const handleCategoryLinkClick = (event) => {
         const path = event.target.dataset['unx_path'];
+        let currentCategoryItem = null;
         const updatedPathLinks = categoryPathLinks.map((links) => {
             if (links.path === path) {
+                currentCategoryItem = links;
                 return { ...links, isSelected: true };
             }
             return { ...links, isSelected: false };
         });
         setCategoryPathLinks(updatedPathLinks);
         window.UnbxdAnalyticsConf = {};
-        window.UnbxdAnalyticsConf['page'] = path;
+        window.UnbxdAnalyticsConf['field'] = currentCategoryItem.field;
+        window.UnbxdAnalyticsConf['page'] = currentCategoryItem.path;
         window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         setProductType('CATEGORY');
         setRefreshId(refreshId + 1);
@@ -96,10 +101,11 @@ const AppRoutes = () => {
                     value={[productType, setProductType]}
                 >
                     <UnbxdSearchWrapper
-                        siteKey="wildearthclone-neto-com-au808941566310465"
-                        apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+                        siteKey="ss-unbxd-sanj-tennis7501607934430"
+                        apiKey="6fbadfac18b560a0926da3e06fefecfb"
                         getCategoryId={getCategoryId}
                         setCategoryId={setCategoryId}
+                        searchConfigurations={searchConfigurations}
                         productType={productType}
                         refreshId={refreshId}
                         loaderComponent={<Loader />}
@@ -127,17 +133,17 @@ const AppRoutes = () => {
                             <Route exact path="/">
                                 <Home />
                             </Route>
-                            <Route exact path="/jackets">
-                                <Jackets />
+                            <Route exact path="/strings">
+                                <Strings />
                             </Route>
-                            <Route exact path="/shirts">
-                                <Shirts />
+                            <Route exact path="/accessories">
+                                <Accessories />
                             </Route>
-                            <Route exact path="/shoes">
-                                <Shoes />
+                            <Route exact path="/grips">
+                                <Grips />
                             </Route>
-                            <Route path="/shorts">
-                                <Shorts />
+                            <Route path="/balls">
+                                <Balls />
                             </Route>
                         </Switch>
                     </UnbxdSearchWrapper>

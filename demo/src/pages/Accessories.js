@@ -17,11 +17,12 @@ import ProductsSize from '../components/ProductsSize';
 import FacetApplyClear from '../components/FacetApplyClear';
 import { ProductTypeContext } from '../context';
 
-const Shirts = () => {
+const Accessories = () => {
     const [productType, setProductType] = useContext(ProductTypeContext);
     useEffect(() => {
         window.UnbxdAnalyticsConf = {};
-        window.UnbxdAnalyticsConf['page'] = 'All Products>T-Shirts';
+        window.UnbxdAnalyticsConf['field'] = 'CATEGORY';
+        window.UnbxdAnalyticsConf['page'] = 'accessories';
         window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         setProductType('CATEGORY');
     }, []);
@@ -64,4 +65,4 @@ const Shirts = () => {
     );
 };
 
-export default Shirts;
+export default Accessories;

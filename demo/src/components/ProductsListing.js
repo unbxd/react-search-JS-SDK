@@ -23,12 +23,11 @@ import { Products } from '@unbxd-ui/react-search-sdk';
 // };
 
 const attributesMap = {
-    productName: 'title',
+    productName: 'PRODUCT_NAME',
     uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl',
-    price: 'RRP_Price',
-    sellingPrice: 'unbxd_price',
-    productUrl: 'productUrl'
+    imageUrl: 'IMAGE_URL',
+    sellingPrice: 'PRODUCT_PRICE',
+    productUrl: 'PRODUCT_URL'
 };
 
 const variantAttributesMap = {
@@ -54,9 +53,10 @@ const ProductsListing = () => {
         <Products
             attributesMap={attributesMap}
             pageSize={10}
-            showVariants
+            showVariants={false}
             variantsCount={4}
             variantAttributesMap={variantAttributesMap}
+            showSwatches={false}
             swatchAttributesMap={swatchAttributesMap}
             paginationType="FIXED_PAGINATION"
         />

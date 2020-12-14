@@ -29,6 +29,7 @@ const RangeFacetsRender = (props) => {
                 };
                 return currentItem;
             }
+            return facet;
         });
         setRangeValues(updatedRangeValues);
         // Apply
@@ -145,4 +146,4 @@ const RangeFilters = () => {
     );
 };
 
-export default RangeFiltersRenderProps;
+export default RangeFilters;

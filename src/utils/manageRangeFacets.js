@@ -118,6 +118,21 @@ function manageRangeFacets(
                 break;
             }
 
+            case manageStateTypes.SET: {
+                updatedSelectedFacets = {
+                    add: { ...add },
+                    remove: { ...remove }
+                };
+                const list = mergeFacets(
+                    updatedSelectedFacets,
+                    formattedLastSelectedRangeFacets
+                );
+
+                updatedSelectedFacets = { ...updatedSelectedFacets, list };
+
+                break;
+            }
+
             case manageStateTypes.CLEAR: {
                 const {
                     // eslint-disable-next-line no-unused-vars

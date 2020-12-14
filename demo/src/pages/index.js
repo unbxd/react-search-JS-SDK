@@ -1,7 +1,7 @@
-import Jackets from './Jackets';
-import Shirts from './Shirts';
-import Shoes from './Shoes';
-import Shorts from './Shorts';
+import Strings from './Strings';
+import Accessories from './Accessories';
+import Grips from './Grips';
+import Balls from './Balls';
 import Home from './Home';
 
-export { Jackets, Shirts, Shoes, Shorts, Home };
+export { Strings, Accessories, Grips, Balls, Home };

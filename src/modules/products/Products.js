@@ -24,7 +24,7 @@ const Products = (props) => {
                     unbxdState,
                     priceUnit
                 } = appState;
-                const { viewType } = unbxdState;
+                const { viewType, pageSize: pageSizeState, sort } = unbxdState;
 
                 return (
                     <ProductsContainer
@@ -32,6 +32,8 @@ const Products = (props) => {
                         unbxdCoreStatus={unbxdCoreStatus}
                         helpers={helpers}
                         viewType={viewType}
+                        pageSizeState={pageSizeState}
+                        sort={sort}
                         priceUnit={priceUnit}
                         {...props}
                     />

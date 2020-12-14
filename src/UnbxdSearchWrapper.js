@@ -41,7 +41,9 @@ const initialUnbxdState = {
     enableApplyFilters: false,
     selectedTextFacets: { add: {}, remove: {}, list: {} },
     selectedRangeFacets: { add: {}, remove: {}, list: {} },
-    applyMultiple: false
+    applyMultiple: false,
+    pageSize: 10,
+    sort: ''
 };
 
 class UnbxdSearchWrapper extends Component {
@@ -163,7 +165,8 @@ class UnbxdSearchWrapper extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { refreshId } = prevProps;
+        const { refreshId, productType: prevProductType } = prevProps;
+        const { productType } = this.props;
         const { unbxdCore, categoryId } = this.state;
         const urlParams = unbxdCore.getQueryParams();
         const getResults = unbxdCore.getResults.bind(unbxdCore);
@@ -174,6 +177,7 @@ class UnbxdSearchWrapper extends Component {
 
         if (
             categoryId !== currentCategoryId &&
+            prevProductType !== productType &&
             typeof currentCategoryId === 'string' &&
             currentCategoryId.length > 0
         ) {
@@ -288,7 +292,11 @@ UnbxdSearchWrapper.propTypes = {
     /**
      * search configurations object.
      */
-    searchConfigurations: PropTypes.object
+    searchConfigurations: PropTypes.object,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
 };
 
 export default UnbxdSearchWrapper;

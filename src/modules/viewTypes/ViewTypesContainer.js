@@ -8,10 +8,9 @@ import ViewTypesWrapper from './ViewTypesWrapper';
 class ViewTypesContainer extends React.PureComponent {
     componentDidMount() {
         const {
-            viewTypes,
-            helpers: { setViewTypeConfiguration }
+            helpers: { setViewTypeConfiguration },
+            viewType
         } = this.props;
-        const viewType = getProductViewType(viewTypes)[0];
         setViewTypeConfiguration({ viewType });
     }
 
@@ -63,8 +62,7 @@ class ViewTypesContainer extends React.PureComponent {
             viewType === prevProps.viewType &&
             viewType !== currentViewType
         ) {
-            setViewTypeConfiguration({ viewType: currentViewType },
-true);
+            setViewTypeConfiguration({ viewType: currentViewType }, true);
         }
     }
 

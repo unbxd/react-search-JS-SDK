@@ -86,6 +86,10 @@ CombinedFacets.propTypes = {
      */
     applyMultiple: PropTypes.bool,
     /**
+     * Custom Multilevel Facet item component
+     */
+    multilevelFacetItemComponent: PropTypes.element,
+    /**
      * Custom transform method
      */
     transform: PropTypes.func,

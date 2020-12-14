@@ -17,11 +17,12 @@ import ProductsSize from '../components/ProductsSize';
 import FacetApplyClear from '../components/FacetApplyClear';
 import { ProductTypeContext } from '../context';
 
-const Jackets = () => {
+const Grips = () => {
     const [productType, setProductType] = useContext(ProductTypeContext);
     useEffect(() => {
         window.UnbxdAnalyticsConf = {};
-        window.UnbxdAnalyticsConf['page'] = 'All Products>Jackets';
+        window.UnbxdAnalyticsConf['field'] = 'CATEGORY';
+        window.UnbxdAnalyticsConf['page'] = 'grips';
         window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         setProductType('CATEGORY');
     }, []);
@@ -64,4 +65,4 @@ const Jackets = () => {
     );
 };
 
-export default Jackets;
+export default Grips;

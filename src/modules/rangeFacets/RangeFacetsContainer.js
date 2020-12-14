@@ -6,7 +6,7 @@ import {
     executeCallback,
     mergeFacets
 } from '../../common/utils';
-import GenerateFacets from './GenerateFacets';
+import GenerateFacets from './generateFacets';
 import {
     getRangeFacetCoreMethods,
     getFormattedRangeFacets,
@@ -19,6 +19,25 @@ class RangeFacetsContainer extends React.PureComponent {
         const { helpers, applyMultiple } = this.props;
         const { setRangeFacetsConfiguration } = helpers;
         setRangeFacetsConfiguration({ applyMultiple });
+    }
+
+    componentDidUpdate(prevProps) {
+        const {
+            unbxdCore,
+            unbxdCoreStatus,
+            helpers: { manageRangeFacets }
+        } = this.props;
+        const { lastSelectedRangeFacets } = getRangeFacetCoreMethods(unbxdCore);
+        const formattedLastSelectedRangeFacets = getSelectedRangeFacets(
+            lastSelectedRangeFacets
+        );
+        if (
+            unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
+            unbxdCoreStatus === 'READY' &&
+            Object.keys(formattedLastSelectedRangeFacets).length
+        ) {
+            manageRangeFacets(null, null, null, manageStateTypes.SET);
+        }
     }
 
     getRangeFacetsProps() {

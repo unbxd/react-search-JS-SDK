@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { conditionalRenderer } from '../../common/utils';
 import PageSizeWrapper from './PageSizeWrapper';
+import { getUpdatedOptions } from './utils';
 
 class PageSizeContainer extends React.PureComponent {
     constructor(props) {
@@ -25,10 +26,10 @@ class PageSizeContainer extends React.PureComponent {
         const { rows = false } = unbxdCore.getQueryParams();
         const numberOfProducts = Number(rows);
         if (!isNaN(numberOfProducts)) {
-            const updatedSizeOptions = sizeOptions.map((sizeOption) => ({
-                ...sizeOption,
-                isSelected: sizeOption.id === numberOfProducts
-            }));
+            const updatedSizeOptions = getUpdatedOptions(
+                sizeOptions,
+                numberOfProducts
+            );
             this.setState({
                 size: numberOfProducts || parseInt(size),
                 sizeOptions: updatedSizeOptions
@@ -36,6 +37,27 @@ class PageSizeContainer extends React.PureComponent {
             setPageSizeConfiguration({
                 size: numberOfProducts || parseInt(size)
             });
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        const {
+            unbxdCore,
+            unbxdCoreStatus,
+            pageSize,
+            sizeOptions
+        } = this.props;
+        const { rows } = unbxdCore.getQueryParams();
+        if (
+            unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
+            unbxdCoreStatus === 'LOADING' &&
+            typeof rows === 'string' &&
+            pageSize !== rows &&
+            prevProps.pageSize === pageSize
+        ) {
+            const size = parseInt(rows);
+            const updatedSizeOptions = getUpdatedOptions(sizeOptions, size);
+            this.setState({ size, sizeOptions: updatedSizeOptions });
         }
     }
 

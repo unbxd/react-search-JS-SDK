@@ -36,8 +36,8 @@ const searchConfigurations = {
     },
     extraParams: {
         version: 'V2',
-        'f.categoryPath.displayName': 'category',
-        'facet.multilevel': 'categoryPath',
+        // 'f.categoryPath.displayName': 'category',
+        // 'facet.multilevel': 'categoryPath',
         'f.categoryPath.max.depth': '',
         'f.categoryPath.facet.limit': ''
         // "f.categoryPath.facet.version": "V2",
