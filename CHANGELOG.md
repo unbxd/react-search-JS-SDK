@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.37](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.36...v0.0.37) (2020-12-14)
+
+
+### Bug Fixes
+
+* **sort and pagesize:** retain sort and pagesize on browser back ([ec9ad92](https://github.com/unbxd/react-search-JS-SDK/commit/ec9ad929a5d3e9a438ff58f37f09fab937b50d15))
+
 ### [0.0.36](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.35...v0.0.36) (2020-12-14)
 
 ### [0.0.35](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.34...v0.0.35) (2020-12-14)
