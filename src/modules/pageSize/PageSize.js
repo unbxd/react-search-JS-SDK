@@ -16,13 +16,19 @@ const PageSize = (props) => {
                     hasUnbxdSearchWrapperContext(PageSize.displayName);
                 }
 
-                const { unbxdCore, unbxdCoreStatus, helpers } = appState;
-
+                const {
+                    unbxdCore,
+                    unbxdCoreStatus,
+                    unbxdState,
+                    helpers
+                } = appState;
+                const { pageSize } = unbxdState;
                 return (
                     <PageSizeContainer
                         unbxdCore={unbxdCore}
                         unbxdCoreStatus={unbxdCoreStatus}
                         helpers={helpers}
+                        pageSize={pageSize}
                         {...props}
                     />
                 );

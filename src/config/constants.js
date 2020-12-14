@@ -30,7 +30,8 @@ export const manageStateTypes = {
     REMOVE: 'REMOVE',
     RESET: 'RESET',
     CLEAR: 'CLEAR',
-    APPLY: 'APPLY'
+    APPLY: 'APPLY',
+    SET: 'SET'
 };
 
 export const paginationTypes = {

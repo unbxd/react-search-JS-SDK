@@ -22,7 +22,7 @@ const Sort = (props) => {
                     helpers,
                     unbxdState
                 } = appState;
-                const { viewType } = unbxdState;
+                const { viewType, sort } = unbxdState;
 
                 return (
                     <SortContainer
@@ -30,6 +30,7 @@ const Sort = (props) => {
                         unbxdCoreStatus={unbxdCoreStatus}
                         helpers={helpers}
                         viewType={viewType}
+                        sort={sort}
                         {...props}
                     />
                 );

@@ -64,14 +64,43 @@ class SortContainer extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { unbxdCore, unbxdCoreStatus } = this.props;
+        const {
+            unbxdCore,
+            unbxdCoreStatus,
+            sort: sortState,
+            sortOptions
+        } = this.props;
+
         const { sort } = unbxdCore.getQueryParams();
+        let sortOn = null;
         if (
             unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
             unbxdCoreStatus === 'READY' &&
             sort === undefined
         ) {
             this.setState({ sortBy: { value: '' } });
+        }
+
+        if (
+            unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
+            unbxdCoreStatus === 'LOADING' &&
+            typeof sort === 'string' &&
+            sortState !== sort &&
+            prevProps.sort === sortState
+        ) {
+            const [field, order] = sort.split(' ');
+            sortOn = { field, order };
+            const formattedSort = `${field}|${order}`;
+            const formattedSortByOptions = sortOptions.map((sortByoption) =>
+                getFormattedSort(sortByoption, this.state.sortBy)
+            );
+            const selectedSort = getSelectedSort(
+                formattedSort,
+                formattedSortByOptions
+            );
+            if (field.length && order.length) {
+                this.setState({ sortBy: selectedSort });
+            }
         }
     }
 
