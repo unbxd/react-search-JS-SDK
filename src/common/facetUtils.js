@@ -2,7 +2,10 @@ export function toggleViewLess(stateKey, event) {
     const facetName = event.target.dataset['unx_name'];
     this.setState((existingState) => {
         const updatedFacets = existingState[stateKey].map((facetValue) => {
-            if (facetValue.facetName === facetName) {
+            if (
+                facetValue.facetName === facetName ||
+                facetValue.filterField === facetName
+            ) {
                 return {
                     ...facetValue,
                     viewLess: !facetValue.viewLess
@@ -22,7 +25,10 @@ export function handleCollapseToggle(stateKey, event) {
     const facetName = event.target.dataset['unx_name'];
     this.setState((existingState) => {
         const updatedFacets = existingState[stateKey].map((facetValue) => {
-            if (facetValue.facetName === facetName) {
+            if (
+                facetValue.facetName === facetName ||
+                facetValue.filterField === facetName
+            ) {
                 return {
                     ...facetValue,
                     isOpen: !facetValue.isOpen
