@@ -60,8 +60,8 @@ class FacetActionsContainer extends React.PureComponent {
                 const { list: applyRangeFacets } = selectedRangeFacets;
                 const { list: applyTextFacets } = selectedTextFacets;
 
+                unbxdCore.state.rangeFacet = {};
                 Object.keys(applyRangeFacets).map((facetName) => {
-                    unbxdCore.state.rangeFacet = {};
                     applyRangeFacets[facetName].map((facetItem) => {
                         const { valMin, valMax } = facetItem;
                         setRangeFacet({

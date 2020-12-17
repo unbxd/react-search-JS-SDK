@@ -15,8 +15,8 @@ export const getSelectedRangeFacets = (rangeFilterObject) => {
             }
             selectedRangeFacets[facetName].push({
                 facetName,
-                valMin,
-                valMax,
+                valMin: parseInt(valMin),
+                valMax: parseInt(valMax),
                 dataId: `${facetName}_${valMin}_${valMax}`
             });
         });

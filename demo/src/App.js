@@ -19,9 +19,7 @@ import '../public/css/index.scss';
 
 const getCategoryId = () => {
     if (window.UnbxdAnalyticsConf) {
-        const field = window.UnbxdAnalyticsConf['field'];
-        const page = encodeURIComponent(window.UnbxdAnalyticsConf['page']);
-        return `${field}:${page}`;
+        return encodeURIComponent(window.UnbxdAnalyticsConf['page']);
     }
 };
 
@@ -87,7 +85,6 @@ const AppRoutes = () => {
         });
         setCategoryPathLinks(updatedPathLinks);
         window.UnbxdAnalyticsConf = {};
-        window.UnbxdAnalyticsConf['field'] = currentCategoryItem.field;
         window.UnbxdAnalyticsConf['page'] = currentCategoryItem.path;
         window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         setProductType('CATEGORY');

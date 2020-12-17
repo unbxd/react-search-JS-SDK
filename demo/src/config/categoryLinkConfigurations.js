@@ -1,20 +1,17 @@
 const categoryLinks = [
     {
-        field: 'CATEGORY',
-        path: 'strings',
+        path: 'CATEGORY:strings',
         id: 'strings',
         label: 'Strings'
     },
     {
-        field: 'CATEGORY',
-        path: 'accessories',
+        path: 'CATEGORY:accessories',
         id: 'accessories',
         label: 'Accessories'
     },
-    { field: 'CATEGORY', path: 'grips', id: 'grips', label: 'Grips' },
+    { path: 'CATEGORY:grips', id: 'grips', label: 'Grips' },
     {
-        field: 'CATEGORY',
-        path: 'balls',
+        path: 'CATEGORY:balls',
         id: 'balls',
         label: 'Balls '
     }

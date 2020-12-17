@@ -21,8 +21,7 @@ const Strings = () => {
     const [productType, setProductType] = useContext(ProductTypeContext);
     useEffect(() => {
         window.UnbxdAnalyticsConf = {};
-        window.UnbxdAnalyticsConf['field'] = 'CATEGORY';
-        window.UnbxdAnalyticsConf['page'] = 'strings';
+        window.UnbxdAnalyticsConf['page'] = 'CATEGORY:strings';
         window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         setProductType('CATEGORY');
     }, []);
