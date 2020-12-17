@@ -72,7 +72,8 @@ const searchConfigurations = {
         }
     },
     applyMultipleFilters: false,
-    hashMode: true
+    hashMode: true,
+    enableUnbxdAnalytics: true
 };
 
 export default searchConfigurations;

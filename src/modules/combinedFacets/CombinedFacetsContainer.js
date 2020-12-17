@@ -377,7 +377,7 @@ CombinedFacetsContainer.propTypes = {
     rangeFacetItemComponent: PropTypes.element,
     transform: PropTypes.func,
     label: PropTypes.node,
-    onFacetClick: PropTypes.node,
+    onFacetClick: PropTypes.func,
     applyMultiple: PropTypes.bool,
     enableViewMore: PropTypes.bool,
     minViewMore: PropTypes.number,

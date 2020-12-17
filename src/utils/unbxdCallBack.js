@@ -1,5 +1,4 @@
 import { searchEvents, searchStatus } from '../config';
-import { trackFacetClick } from '../modules/analytics';
 import getActiveFacets from './getActiveFacets';
 
 function unbxdCallBack(unbxdSearchObj, eventName, data) {
@@ -18,8 +17,16 @@ function unbxdCallBack(unbxdSearchObj, eventName, data) {
     }
 
     if (eventName === searchEvents.ADDED_FACET) {
+        const {
+            helpers: { getAnalytics },
+            unbxdState
+        } = this.state;
+        const { trackFacetClick } = getAnalytics();
+        const { enableApplyFilters } = unbxdState;
         const query = unbxdSearchObj.getSearchQuery() || '';
-        trackFacetClick(query, getActiveFacets(unbxdSearchObj));
+        if (!enableApplyFilters) {
+            trackFacetClick(query, getActiveFacets(unbxdSearchObj));
+        }
     }
 
     console.log('unbxdCallBack ', eventName, data);

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { conditionalRenderer } from '../../common/utils';
 import ProductsWrapper from './productsWrapper';
-import { trackProductClick } from '../analytics';
 
 class ProductsContainer extends React.PureComponent {
     componentDidMount() {
@@ -44,7 +43,8 @@ class ProductsContainer extends React.PureComponent {
         const {
             unbxdCore,
             unbxdCoreStatus,
-            ZeroResultsComponent,
+            helpers: { getAnalytics },
+            zeroResultsComponent,
             perRow,
             pageSize,
             paginationType,
@@ -64,7 +64,6 @@ class ProductsContainer extends React.PureComponent {
             swatchAttributesMap = {},
             swatchItemComponent,
             viewType,
-            pageSizeState,
             sort,
             priceUnit
         } = this.props;
@@ -75,6 +74,7 @@ class ProductsContainer extends React.PureComponent {
         const getProductByPropValue = unbxdCore.getProductByPropValue.bind(
             unbxdCore
         );
+        const { trackProductClick } = getAnalytics();
 
         const query = unbxdCore.getSearchQuery() || '';
         const { numberOfProducts = 0, products = [], start = 0 } =
@@ -144,7 +144,7 @@ class ProductsContainer extends React.PureComponent {
             query,
             productIdAttribute,
             viewType,
-            pageSize: pageSizeState,
+            pageSize,
             sort,
             numberOfProducts,
             products,
@@ -153,7 +153,7 @@ class ProductsContainer extends React.PureComponent {
         };
 
         const helpers = {
-            ZeroResultsComponent,
+            zeroResultsComponent,
             getOnProductsClickProps,
             getNextPage,
             onProductClick,
@@ -161,7 +161,8 @@ class ProductsContainer extends React.PureComponent {
             onZeroResults,
             productItemComponent,
             swatchItemComponent,
-            loadMoreComponent
+            loadMoreComponent,
+            getAnalytics
         };
 
         return { ...data, ...helpers };
@@ -204,7 +205,7 @@ ProductsContainer.propTypes = {
     swatchAttributesMap: PropTypes.object,
     swatchItemComponent: PropTypes.element,
     productItemComponent: PropTypes.element,
-    ZeroResultsComponent: PropTypes.element,
+    zeroResultsComponent: PropTypes.element,
     priceUnit: PropTypes.string.isRequired
 };
 

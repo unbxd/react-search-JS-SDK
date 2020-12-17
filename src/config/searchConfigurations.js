@@ -22,7 +22,6 @@ const searchConfigurations = {
     },
     extraParams: {
         version: 'V2'
-        // "f.categoryPath.facet.version": "V2",
     },
     facetMultilevel: true,
     facetDepth: 6,
@@ -32,7 +31,8 @@ const searchConfigurations = {
     onEvent: () => {},
     getCategoryId: () => {},
     applyMultipleFilters: false,
-    hashMode: true
+    hashMode: true,
+    enableUnbxdAnalytics: false
 };
 
 export default searchConfigurations;

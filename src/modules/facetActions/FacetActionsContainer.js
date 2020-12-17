@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { conditionalRenderer, executeCallback } from '../../common/utils';
-import { getFacetCoreMethods } from './utils';
+import { getFacetCoreMethods, getParsedFacets } from './utils';
 import { manageStateTypes } from '../../config';
 import FacetActionsWrapper from './FacetActionsWrapper';
 
@@ -25,7 +25,7 @@ class FacetActionsContainer extends React.PureComponent {
             selectedTextFacets,
             selectedRangeFacets,
             applyMultiple,
-            helpers: { manageTextFacets, manageRangeFacets },
+            helpers: { manageTextFacets, manageRangeFacets, getAnalytics },
             onApply,
             onClear
         } = this.props;
@@ -38,6 +38,9 @@ class FacetActionsContainer extends React.PureComponent {
             clearARangeFacet,
             getPaginationInfo
         } = getFacetCoreMethods(unbxdCore);
+
+        const { trackFacetClick } = getAnalytics();
+        const query = unbxdCore.getSearchQuery() || '';
 
         const { noOfPages = 0 } = getPaginationInfo() || {};
 
@@ -71,6 +74,10 @@ class FacetActionsContainer extends React.PureComponent {
                 });
                 // does not work if we pass it as it is.
                 applyFacets({ ...applyTextFacets });
+                trackFacetClick(
+                    query,
+                    getParsedFacets(applyTextFacets, applyRangeFacets)
+                );
 
                 // remove everything from the state
                 applyFacetState();
