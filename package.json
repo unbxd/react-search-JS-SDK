@@ -6,6 +6,11 @@
     "files": [
         "public/dist"
     ],
+    "release": {
+        "branches": [
+            "semantic-release-feat"
+        ]
+    },
     "scripts": {
         "start": "yarn build:tailwind:core && yarn build:tailwind:theme && webpack-dev-server --open --config ./webpack/webpack.dev.js",
         "build": "yarn build:tailwind:core && yarn build:tailwind:theme && webpack --config ./webpack/webpack.prod.js",
@@ -84,10 +89,11 @@
         "@testing-library/react": "^11.1.2",
         "identity-obj-proxy": "^3.0.0",
         "jest": "^26.6.3",
-        "react-test-renderer": "^17.0.1"
+        "react-test-renderer": "^17.0.1",
+        "semantic-release": "^17.3.0"
     },
     "dependencies": {
-        "@unbxd-ui/unbxd-search-core": "^0.2.1",
+        "@unbxd-ui/unbxd-search-core": "0.2.4",
         "prop-types": "^15.7.2"
     },
     "keywords": [
