@@ -7,12 +7,14 @@ export const productTypes = {
 export const searchEvents = {
     BEFORE_API_CALL: 'BEFORE_API_CALL',
     AFTER_API_CALL: 'AFTER_API_CALL',
+    FETCH_ERROR: 'FETCH_ERROR',
     ADDED_FACET: 'added_facet'
 };
 
 export const searchStatus = {
     READY: 'READY',
-    LOADING: 'LOADING'
+    LOADING: 'LOADING',
+    ERROR: 'ERROR'
 };
 
 export const displayTypes = {

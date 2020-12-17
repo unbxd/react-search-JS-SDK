@@ -16,6 +16,13 @@ function unbxdCallBack(unbxdSearchObj, eventName, data) {
         });
     }
 
+    if (eventName === searchEvents.FETCH_ERROR) {
+        this.setState({
+            unbxdCore: unbxdSearchObj,
+            unbxdCoreStatus: searchStatus.ERROR
+        });
+    }
+
     if (eventName === searchEvents.ADDED_FACET) {
         const {
             helpers: { getAnalytics },
