@@ -241,12 +241,18 @@ class UnbxdSearchWrapper extends Component {
 
     render() {
         const { unbxdCoreStatus } = this.state;
-        const { loaderComponent } = this.props;
+        const { loaderComponent, errorComponent } = this.props;
+
         return (
             <>
-                {unbxdCoreStatus === 'LOADING' &&
+                {unbxdCoreStatus === searchStatus.LOADING &&
                     loaderComponent &&
                     cloneElement(loaderComponent)}
+
+                {unbxdCoreStatus === searchStatus.ERROR &&
+                    errorComponent &&
+                    cloneElement(errorComponent)}
+
                 <AppContextProvider value={this.getProps()}>
                     {this.props.children}
                 </AppContextProvider>
@@ -290,6 +296,10 @@ UnbxdSearchWrapper.propTypes = {
      * custom loader component.
      */
     loaderComponent: PropTypes.element,
+    /**
+     * custom error component instance.
+     */
+    errorComponent: PropTypes.element,
     /**
      * id to trigger a refresh.
      */

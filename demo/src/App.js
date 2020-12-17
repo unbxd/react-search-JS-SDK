@@ -63,6 +63,10 @@ const Loader = () => {
     );
 };
 
+const ErrorComponent = () => {
+    return <div>Something went wrong.</div>;
+};
+
 const AppRoutes = () => {
     const [categoryPathLinks, setCategoryPathLinks] = useState(categoryLinks);
     const [productType, setProductType] = useState('SEARCH');
@@ -109,6 +113,7 @@ const AppRoutes = () => {
                         productType={productType}
                         refreshId={refreshId}
                         loaderComponent={<Loader />}
+                        errorComponent={<ErrorComponent />}
                     >
                         <MobileModal
                             showFilters={showFilters}
