@@ -21,8 +21,7 @@ const Accessories = () => {
     const [productType, setProductType] = useContext(ProductTypeContext);
     useEffect(() => {
         window.UnbxdAnalyticsConf = {};
-        window.UnbxdAnalyticsConf['field'] = 'CATEGORY';
-        window.UnbxdAnalyticsConf['page'] = 'accessories';
+        window.UnbxdAnalyticsConf['page'] = 'CATEGORY:accessories';
         window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         setProductType('CATEGORY');
     }, []);

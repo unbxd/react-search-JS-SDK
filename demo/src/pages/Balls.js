@@ -21,8 +21,7 @@ const Balls = () => {
     const [productType, setProductType] = useContext(ProductTypeContext);
     useEffect(() => {
         window.UnbxdAnalyticsConf = {};
-        window.UnbxdAnalyticsConf['field'] = 'CATEGORY';
-        window.UnbxdAnalyticsConf['page'] = 'balls';
+        window.UnbxdAnalyticsConf['page'] = 'CATEGORY:balls';
         window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         setProductType('CATEGORY');
     }, []);

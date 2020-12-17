@@ -168,7 +168,7 @@ class UnbxdSearchWrapper extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { refreshId, productType: prevProductType } = prevProps;
+        const { refreshId } = prevProps;
         const { productType } = this.props;
         const { unbxdCore, categoryId } = this.state;
         const { trackCategory } = this.getAnalytics();
@@ -182,7 +182,7 @@ class UnbxdSearchWrapper extends Component {
 
         if (
             categoryId !== currentCategoryId &&
-            prevProductType !== productType &&
+            productType === productTypes.CATEGORY &&
             typeof currentCategoryId === 'string' &&
             currentCategoryId.length > 0
         ) {
