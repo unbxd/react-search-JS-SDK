@@ -24,7 +24,7 @@ const Products = (props) => {
                     unbxdState,
                     priceUnit
                 } = appState;
-                const { viewType, pageSize: pageSizeState, sort } = unbxdState;
+                const { viewType, pageSize, sort } = unbxdState;
 
                 return (
                     <ProductsContainer
@@ -32,7 +32,7 @@ const Products = (props) => {
                         unbxdCoreStatus={unbxdCoreStatus}
                         helpers={helpers}
                         viewType={viewType}
-                        pageSizeState={pageSizeState}
+                        pageSize={pageSize}
                         sort={sort}
                         priceUnit={priceUnit}
                         {...props}
@@ -61,10 +61,6 @@ Products.propTypes = {
      * Number of products to be shown per row.
      */
     perRow: PropTypes.number,
-    /**
-     * Number of products to be loaded on a page.
-     */
-    pageSize: PropTypes.number,
     /**
      * Required pagination type. Possible options are `INFINITE_SCROLL`, `CLICK_N_SCROLL` and `FIXED_PAGINATION`.
      */
@@ -136,7 +132,7 @@ Products.propTypes = {
     /**
      *  Component to be shown in case of zero results.
      */
-    ZeroResultsComponent: PropTypes.element
+    zeroResultsComponent: PropTypes.element
 };
 
 export default Products;

@@ -128,6 +128,7 @@ class GenerateFacets extends React.Component {
                             <List
                                 items={values}
                                 ListItem={facetItemComponent || FacetItem}
+                                idAttribute="dataId"
                                 onClick={onFacetClick}
                                 className={`UNX-facet__list ${
                                     viewLess ? 'UNX-facet__listShowLimited' : ''

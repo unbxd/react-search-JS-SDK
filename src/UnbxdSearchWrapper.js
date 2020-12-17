@@ -25,12 +25,12 @@ import {
     getActiveFacets,
     handleViewTypeClick,
     getUpdatedResults,
-    resetSearch
+    resetSearch,
+    getAnalytics
 } from './utils';
 import { cloneElement } from './common/utils';
 import '../public/css/core/index.scss';
 import { viewTypes } from './config/constants';
-import { trackCategory } from './modules/analytics';
 
 /**
  * Component to initialize Unbxd Search. UnbxdSearchWrapper also acts as a root component for modules such as Products, Pagination and facets.
@@ -56,8 +56,7 @@ class UnbxdSearchWrapper extends Component {
             getCategoryId,
             setCategoryId,
             productType,
-            priceUnit,
-            loaderComponent
+            priceUnit
         } = this.props;
 
         this.unbxdCallBack = unbxdCallBack.bind(this);
@@ -81,6 +80,7 @@ class UnbxdSearchWrapper extends Component {
         this.handleViewTypeClick = handleViewTypeClick.bind(this);
         this.getUpdatedResults = getUpdatedResults.bind(this);
         this.resetSearch = resetSearch.bind(this);
+        this.getAnalytics = getAnalytics.bind(this);
 
         this.state = {
             unbxdCore: new UnbxdSearch({
@@ -96,6 +96,7 @@ class UnbxdSearchWrapper extends Component {
             categoryId: '',
             unbxdState: initialUnbxdState,
             unbxdCoreStatus: searchStatus.READY,
+            enableUnbxdAnalytics: searchConfigurations.enableUnbxdAnalytics,
             helpers: {
                 setProductConfiguration: this.setProductConfiguration,
                 setSearchBoxConfiguration: this.setSearchBoxConfiguration,
@@ -112,6 +113,7 @@ class UnbxdSearchWrapper extends Component {
                 handleViewTypeClick: this.handleViewTypeClick,
                 getUpdatedResults: this.getUpdatedResults,
                 resetSearch: this.resetSearch,
+                getAnalytics: this.getAnalytics,
                 getActiveFacets
             },
             priceUnit
@@ -122,6 +124,7 @@ class UnbxdSearchWrapper extends Component {
 
     componentDidMount() {
         const { unbxdCore } = this.state;
+        const { trackCategory } = this.getAnalytics();
         const categoryId =
             typeof unbxdCore.options.getCategoryId === 'function' &&
             unbxdCore.options.getCategoryId();
@@ -168,6 +171,8 @@ class UnbxdSearchWrapper extends Component {
         const { refreshId, productType: prevProductType } = prevProps;
         const { productType } = this.props;
         const { unbxdCore, categoryId } = this.state;
+        const { trackCategory } = this.getAnalytics();
+
         const urlParams = unbxdCore.getQueryParams();
         const getResults = unbxdCore.getResults.bind(unbxdCore);
         const renderFromUrl = unbxdCore.renderFromUrl.bind(unbxdCore);
@@ -284,11 +289,11 @@ UnbxdSearchWrapper.propTypes = {
     /**
      * custom loader component.
      */
-    loaderComponent: PropTypes.string,
+    loaderComponent: PropTypes.element,
     /**
      * id to trigger a refresh.
      */
-    refreshId: PropTypes.string,
+    refreshId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
      * search configurations object.
      */

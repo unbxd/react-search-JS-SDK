@@ -70,7 +70,7 @@ TextFacets.propTypes = {
     /**
      * Callback for facet click.
      */
-    onFacetClick: PropTypes.node,
+    onFacetClick: PropTypes.func,
     /**
      * Min value for viewMore to be enabled.
      */

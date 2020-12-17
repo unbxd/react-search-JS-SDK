@@ -36,7 +36,7 @@ class GenerateFacets extends React.Component {
                     ...textFacet,
                     isOpen: matchTextFacet ? matchTextFacet.isOpen : true,
                     filter: matchTextFacet ? matchTextFacet.filter : '',
-                    viewLess: false
+                    viewLess: matchTextFacet ? matchTextFacet.viewLess : false
                 };
             });
 

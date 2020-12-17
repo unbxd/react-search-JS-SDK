@@ -86,7 +86,7 @@ class GenerateFacets extends React.Component {
                 {multilevelFacetsList.map((multilevelFacet) => {
                     const {
                         facetDisplayName,
-                        multiLevelField,
+                        filterField,
                         values = [],
                         isOpen = true,
                         filter = '',
@@ -105,7 +105,7 @@ class GenerateFacets extends React.Component {
                             className={`UNX-facet__element ${
                                 isOpen ? 'open' : ''
                             }`}
-                            key={multiLevelField}
+                            key={filterField}
                         >
                             <div className="UNX-facet__header">
                                 {facetDisplayName}
@@ -133,7 +133,7 @@ class GenerateFacets extends React.Component {
                             <List
                                 items={filteredValues}
                                 ListItem={facetItemComponent || FacetItem}
-                                idAttribute="name"
+                                idAttribute="dataId"
                                 onClick={onFacetClick}
                                 className={`UNX-facet__list ${
                                     viewLess ? 'UNX-facet__listShowLimited' : ''

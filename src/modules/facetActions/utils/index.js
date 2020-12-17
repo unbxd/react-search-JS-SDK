@@ -1,3 +1,3 @@
-import { getFacetCoreMethods } from './utils';
+import { getFacetCoreMethods, getParsedFacets } from './utils';
 
-export { getFacetCoreMethods };
+export { getFacetCoreMethods, getParsedFacets };

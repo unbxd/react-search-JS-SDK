@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { conditionalRenderer } from '../../common/utils';
 import SearchBoxWrapper from './SearchBoxWrapper';
 import { manageStateTypes } from '../../config';
-import { trackSearch } from '../analytics';
 
 /**
  * Component to manage the search query.
@@ -53,7 +52,10 @@ class SearchBoxContainer extends React.PureComponent {
 
     onSearchBoxSubmit(event) {
         event.preventDefault();
-
+        const {
+            helpers: { getAnalytics }
+        } = this.props;
+        const { trackSearch } = getAnalytics();
         const { query } = this.state;
         const {
             onSubmit,

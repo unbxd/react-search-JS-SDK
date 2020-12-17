@@ -9,7 +9,6 @@ import { paginationTypes } from '../../../config';
 import { debounce, cloneElement } from '../../../common/utils';
 import { DEBOUNCE_TIME } from '../utils';
 import { searchStatus, viewTypes } from '../../../config';
-import { trackProductImpressions } from '../../analytics';
 
 class ProductsWrapper extends React.PureComponent {
     constructor(props) {
@@ -65,8 +64,10 @@ class ProductsWrapper extends React.PureComponent {
             pageSize,
             sort,
             unbxdCoreStatus,
-            numberOfProducts
+            numberOfProducts,
+            getAnalytics
         } = this.props;
+        const { trackProductImpressions } = getAnalytics();
         const loadedAllResults =
             start === 0
                 ? products.length === numberOfProducts
@@ -189,6 +190,7 @@ class ProductsWrapper extends React.PureComponent {
     render() {
         const {
             viewType,
+            query,
             onProductClick,
             perRow,
             attributesMap,
@@ -205,7 +207,7 @@ class ProductsWrapper extends React.PureComponent {
             loaderComponent,
             showLoader,
             numberOfProducts,
-            ZeroResultsComponent,
+            zeroResultsComponent,
             priceUnit
         } = this.props;
         const { products, hasMoreResults } = this.state;
@@ -213,14 +215,10 @@ class ProductsWrapper extends React.PureComponent {
         //return the prop based Zero results template
         if (
             numberOfProducts === 0 &&
-            ZeroResultsComponent &&
+            zeroResultsComponent &&
             unbxdCoreStatus === searchStatus.READY
         ) {
-            return typeof ZeroResultsComponent === 'function' ? (
-                ZeroResultsComponent()
-            ) : (
-                <ZeroResultsComponent />
-            );
+            return cloneElement(zeroResultsComponent, { query });
         }
 
         //return the default Zero results template
@@ -302,7 +300,7 @@ ProductsWrapper.propTypes = {
     swatchItemComponent: PropTypes.element,
     numberOfProducts: PropTypes.number.isRequired,
     start: PropTypes.number.isRequired,
-    ZeroResultsComponent: PropTypes.element,
+    zeroResultsComponent: PropTypes.element,
     priceUnit: PropTypes.string.isRequired,
     loaderComponent: PropTypes.element
 };

@@ -8,7 +8,10 @@ export function toggleViewLess(stateKey, event) {
             ) {
                 return {
                     ...facetValue,
-                    viewLess: !facetValue.viewLess
+                    viewLess:
+                        typeof facetValue.viewLess === undefined
+                            ? true
+                            : !facetValue.viewLess
                 };
             }
             return facetValue;
@@ -31,7 +34,7 @@ export function handleCollapseToggle(stateKey, event) {
             ) {
                 return {
                     ...facetValue,
-                    isOpen: !facetValue.isOpen
+                    isOpen: !(facetValue.isOpen != false)
                 };
             }
             return facetValue;

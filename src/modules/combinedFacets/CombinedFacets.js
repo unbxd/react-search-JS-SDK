@@ -100,7 +100,7 @@ CombinedFacets.propTypes = {
     /**
      * Callback for facet click.
      */
-    onFacetClick: PropTypes.node
+    onFacetClick: PropTypes.func
 };
 
 export default CombinedFacets;

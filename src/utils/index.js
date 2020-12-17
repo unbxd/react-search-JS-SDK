@@ -15,6 +15,7 @@ import handleViewTypeClick from './handleViewTypeClick';
 import setCategoryPath from './setCategoryPath';
 import getUpdatedResults from './getUpdatedResults';
 import resetSearch from './resetSearch';
+import getAnalytics from './getAnalytics';
 
 export {
     setProductConfiguration,
@@ -33,5 +34,6 @@ export {
     handleViewTypeClick,
     setCategoryPath,
     getUpdatedResults,
-    resetSearch
+    resetSearch,
+    getAnalytics
 };

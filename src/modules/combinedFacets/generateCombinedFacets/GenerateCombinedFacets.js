@@ -14,14 +14,14 @@ class GenerateCombinedFacets extends React.Component {
     constructor(props) {
         super(props);
         this.state = { combinedFacetsList: props.combinedFacets };
-        this.toggleViewLess = toggleViewLess.bind(this, 'multilevelFacetsList');
+        this.toggleViewLess = toggleViewLess.bind(this, 'combinedFacetsList');
         this.handleFilterChange = handleFilterChange.bind(
             this,
-            'multilevelFacetsList'
+            'combinedFacetsList'
         );
         this.handleCollapseToggle = handleCollapseToggle.bind(
             this,
-            'multilevelFacetsList'
+            'combinedFacetsList'
         );
     }
 
@@ -115,7 +115,10 @@ class GenerateCombinedFacets extends React.Component {
                         }
 
                         return (
-                            <div className="UNX-textFacet__container">
+                            <div
+                                className="UNX-textFacet__container"
+                                key={facetName}
+                            >
                                 <div
                                     className={`UNX-facet__element ${
                                         isOpen ? 'open' : ''
@@ -155,6 +158,7 @@ class GenerateCombinedFacets extends React.Component {
                                             textFacetItemComponent ||
                                             TextFacetItem
                                         }
+                                        idAttribute="dataId"
                                         onClick={onTextFacetClick}
                                         className={`UNX-facet__list ${
                                             viewLess
@@ -204,7 +208,10 @@ class GenerateCombinedFacets extends React.Component {
                             });
                         }
                         return (
-                            <div className="UNX-bucketedFacet__container">
+                            <div
+                                className="UNX-bucketedFacet__container"
+                                key={facetName}
+                            >
                                 <div
                                     className={`UNX-facet__element ${
                                         isOpen ? 'open' : ''
@@ -242,7 +249,7 @@ class GenerateCombinedFacets extends React.Component {
                                             multilevelFacetItemComponent ||
                                             MultilevelFacetItem
                                         }
-                                        idAttribute="name"
+                                        idAttribute="dataId"
                                         onClick={onMultilevelFacetClick}
                                         className={`UNX-facet__list ${
                                             viewLess
@@ -272,7 +279,10 @@ class GenerateCombinedFacets extends React.Component {
                         viewLess
                     } = combinedFacet;
                     return (
-                        <div className="UNX-rangefacet__container">
+                        <div
+                            className="UNX-rangefacet__container"
+                            key={facetName}
+                        >
                             <div
                                 className={`UNX-facet__element ${
                                     isOpen ? 'open' : ''
@@ -300,7 +310,7 @@ class GenerateCombinedFacets extends React.Component {
                                         RangeFacetItem
                                     }
                                     onClick={onRangeFacetClick}
-                                    idAttribute={facetName}
+                                    idAttribute="dataId"
                                     facetName={facetName}
                                     className={`UNX-facet__list ${
                                         viewLess
