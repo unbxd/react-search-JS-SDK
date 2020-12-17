@@ -97,3 +97,36 @@ test('No products found test', async () => {
 
     await waitFor(() => expect(getByText("Sorry! No products found!")).toBeInTheDocument());
 });
+
+test('zeroResultsComponent test', async () => {
+    window.fetch = jest.fn(() => {
+        return Promise.resolve({
+            json: () => Promise.resolve(emptySearchResponse),
+        });
+    });
+
+    const ZeroResultsComponent = () => {
+        return <div>No products dude!</div>;
+    };
+
+    const { getByText } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >
+                <Products
+                    attributesMap={attributesMap}
+                    zeroResultsComponent={<ZeroResultsComponent />}
+                />
+                <div>
+                    <SearchBox
+                        defaultSearch="nonsensical123wait"
+                    />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(() => expect(getByText("No products dude!")).toBeInTheDocument());
+});
