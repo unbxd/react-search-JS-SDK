@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.39](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.38...v0.0.39) (2020-12-17)
+
+
+### Bug Fixes
+
+* **misc:** change unbxdanalytics conf. misc fixes ([c2ab86d](https://github.com/unbxd/react-search-JS-SDK/commit/c2ab86df85e8d7de85a18db0fcf2af7f86656973))
+
 ### [0.0.38](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.37...v0.0.38) (2020-12-17)
 
 ### [0.0.37](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.36...v0.0.37) (2020-12-14)
