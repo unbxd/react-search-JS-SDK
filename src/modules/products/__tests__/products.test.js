@@ -69,6 +69,11 @@ test('Products found test', async () => {
 });
 
 test('No products found test', async () => {
+    window.fetch = jest.fn(() => {
+        return Promise.resolve({
+            json: () => Promise.resolve(emptySearchResponse),
+        });
+    });
     const attributesMap = {
         productName: 'title',
         uniqueId: 'uniqueId',
