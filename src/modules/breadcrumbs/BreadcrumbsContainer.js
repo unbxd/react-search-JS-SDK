@@ -19,14 +19,14 @@ class BreadcrumbsContainer extends React.PureComponent {
         const {
             getBreadCrumbsList,
             deleteCategoryFilter,
-            getSelectedBucketedFacet,
+            getBucketedFacets,
             getResults
         } = getFacetCoreMethods(unbxdCore);
 
-        const selectedMultilevelFacet = getSelectedBucketedFacet();
+        const multilevelFacets = getBucketedFacets();
         const breadCrumbsList = [];
-        Object.keys(selectedMultilevelFacet).map((selectedFacetField) => {
-            const breadcrumbs = getBreadCrumbsList(selectedFacetField);
+        multilevelFacets.map(({ filterField }) => {
+            const breadcrumbs = getBreadCrumbsList(filterField);
             breadCrumbsList.push(breadcrumbs);
         });
 
