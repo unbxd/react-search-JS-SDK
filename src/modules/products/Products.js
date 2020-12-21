@@ -70,7 +70,7 @@ Products.propTypes = {
      */
     heightDiffToTriggerNextPage: PropTypes.number,
     /**
-     * Custom load more component for CLICK_N_SCROLL
+     * Custom load more component instance
      */
     loadMoreComponent: PropTypes.element,
     /**
@@ -98,7 +98,7 @@ Products.propTypes = {
      */
     showLoader: PropTypes.bool,
     /**
-     * Custom loader component
+     * Custom loader component instance
      */
     loaderComponent: PropTypes.element,
     /**
@@ -122,15 +122,15 @@ Products.propTypes = {
      */
     swatchAttributesMap: PropTypes.object,
     /**
-     * Custom swatch component
+     * Custom swatch component instance
      */
     swatchItemComponent: PropTypes.element,
     /**
-     * Custom product item component
+     * Custom product item component instance
      */
     productItemComponent: PropTypes.element,
     /**
-     *  Component to be shown in case of zero results.
+     *  Custom zero result component instance
      */
     zeroResultsComponent: PropTypes.element
 };

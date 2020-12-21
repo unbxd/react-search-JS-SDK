@@ -5,79 +5,36 @@ import MultilevelFacets from '../src/modules/multilevelFacets';
 import Products from '../src/modules/products';
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import SearchBox from '../src/modules/searchBox';
-const attributesMap = {
-    productName: 'title',
-    uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl',
-    price: 'unbxd_price',
-    productUrl: 'productUrl'
-};
-const variantAttributesMap = {
-    productName: 'title',
-    uniqueId: 'vId',
-    imageUrl: 'imageUrl',
-    price: 'v_unbxd_price',
-    productUrl: 'productUrl'
-};
-const BreadcrumbItemComponent = ({
-    itemData,
+import {
+    BreadcrumbItemComponent,
     Root,
-    separator,
-    onClick,
-    idx
-}) => {
-    const { value } = itemData;
-    const handleClick = () => {
-        onClick(itemData);
-    };
-    return (
-        <div className={'UNX-breadcrumb__item'} onClick={handleClick}>
-            {value} x
-        </div>
-    );
-};
-const Root = () => <span>Home</span>;
-const separator = <span>-</span>;
+    separator
+} from '../demo/src/components/Crumbs.js';
+import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
 
 <Meta title="Breadcrumbs" component={Breadcrumbs} />
 
 # Breadcrumbs
 
-### Widget to display current page breadcrumb.
+### module to display the page path.
 
 ```jsx
-const Root = () => <span>Home</span>;
-
-const separator = <span>-</span>;
+const Root = () => <span className="UNX-breadcrumb__root">Home</span>;
+const separator = <span className="UNX-breadcrumb__separator">/</span>;
 ```
 
 ```jsx
-<Breadcrumbs
-    //...
-    Root={Root}
-    separator={separator}
-    //...
-/>
+<Breadcrumbs root={<Root />} separator={separator} />
 ```
 
 <Preview>
     <Story name="default">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
-            <Breadcrumbs Root={Root} separator={separator} />
-            <MultilevelFacets
-                categoryDisplayName={'category'}
-                categoryField={'categoryPath'}
-            />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <Breadcrumbs root={<Root />} separator={separator} />
+            <MultilevelFacets />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
-                <SearchBox defaultSearch={'Shoes'} />
+                <SearchBox defaultSearch={defaultSearch} />
             </div>
         </UnbxdSearchWrapper>
     </Story>
@@ -85,49 +42,57 @@ const separator = <span>-</span>;
 
 ---
 
-### BreadcrumbItemComponent
+### breadcrumbItemComponent
 
-The default Breadcrumb item component can be overridden by passing `BreadcrumbItemComponent`.
+The default Breadcrumb item component can be overridden by passing a custom component instance.
 
 ```jsx
-const BreadcrumbItemComponent = ({
-    itemData,
-    Root,
-    separator,
-    onClick,
-    idx
-}) => {
+const BreadcrumbItemComponent = ({ itemData, separator, idx, onClick }) => {
     const { value } = itemData;
     const handleClick = () => {
         onClick(itemData);
     };
-    return <div onClick={handleClick}>{value} x</div>;
+    return (
+        <>
+            {idx === 0 && <Root />}
+
+            {separator}
+
+            <div className="UNX-breadcrumbs-list-item" onClick={handleClick}>
+                {value}
+            </div>
+        </>
+    );
 };
 ```
 
+The custom component instance will receive the following props
+
+#### breadcrumbItemComponent Props
+
+| Name      | Type   | Description                |
+| --------- | ------ | -------------------------- |
+| itemData  | object | breadcrumb values.         |
+| separator | node   | breadcrumb separator.      |
+| idx       | number | current breadcrumb index . |
+| onClick   | func   | handle facet change.       |
+
 ```jsx
-<Breadcrumbs BreadcrumbItemComponent={BreadcrumbItemComponent} />
+<Breadcrumbs breadcrumbItemComponent={<BreadcrumbItemComponent />} />
 ```
 
 <Preview>
-    <Story name="with BreadcrumbItemComponent">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
-            <Breadcrumbs BreadcrumbItemComponent={BreadcrumbItemComponent} />
-            <MultilevelFacets
-                categoryDisplayName={'category'}
-                categoryField={'categoryPath'}
-                defaultCategoryFilter={'All Products'}
+    <Story name="with breadcrumbItemComponent">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <Breadcrumbs
+                root={<Root />}
+                separator={separator}
+                breadcrumbItemComponent={<BreadcrumbItemComponent />}
             />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <MultilevelFacets />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
-                <SearchBox defaultSearch={'Shoes'} />
+                <SearchBox defaultSearch={defaultSearch} />
             </div>
         </UnbxdSearchWrapper>
     </Story>
@@ -135,50 +100,32 @@ const BreadcrumbItemComponent = ({
 
 ---
 
-### Render Props
+### Render props
 
--   This approach gives the total control of the widget to the user.
--   The anonymous function will receive all the data and methods needed to build and manage the widget.
+-   This approach gives the total control of the module to the user.
+-   The anonymous function will receive all the data and methods needed to build and manage the module.
 
 #### Render prop parameters
 
-| Name                    | Type                | Description                       |
-| ----------------------- | ------------------- | --------------------------------- |
-| Root                    | element\|func\|node | Root component in the breadcrumb. |
-| separator               | node                | Separator in the breadcrumb.      |
-| breadCrumbsList         | array               | breadcrumb path                   |
-| removeCategoryFilter    | func                | Handle breadcrumb click.          |
-| BreadcrumbItemComponent | element\|func       | Custom component                  |
+| Name              | Type    | Description                       |
+| ----------------- | ------- | --------------------------------- |
+| root              | element | Root component in the breadcrumb. |
+| separator         | node    | Separator in the breadcrumb.      |
+| breadCrumbsList   | array   | breadcrumb data.                  |
+| onBreadCrumbClick | func    | Handle breadcrumb click.          |
 
 <Preview>
     <Story name="with render props">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <Breadcrumbs>
-                {({
-                    Root,
-                    separator,
-                    breadCrumbsList,
-                    removeCategoryFilter,
-                    BreadcrumbItemComponent
-                }) => {
+                {({ root, separator, breadCrumbsList, onBreadCrumbClick }) => {
                     return <div>render Breadcrumbs</div>;
                 }}
             </Breadcrumbs>
-            <MultilevelFacets
-                categoryDisplayName={'category'}
-                categoryField={'categoryPath'}
-                defaultCategoryFilter={'All Products'}
-            />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <MultilevelFacets />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
-                <SearchBox defaultSearch={'Shoes'} />
+                <SearchBox defaultSearch={defaultSearch} />
             </div>
         </UnbxdSearchWrapper>
     </Story>

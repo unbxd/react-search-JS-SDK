@@ -36,7 +36,7 @@ SpellCheck.displayName = 'SpellCheck';
 
 SpellCheck.propTypes = {
     /**
-     * Custom Spell check component
+     * Custom Spell check component instance
      */
     spellCheckItemComponent: PropTypes.element
 };

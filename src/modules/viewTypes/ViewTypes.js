@@ -56,7 +56,7 @@ ViewTypes.propTypes = {
      */
     displayType: PropTypes.string,
     /**
-     * Custom `LIST` item component for product views.
+     * Custom `LIST` item component instance.
      */
     viewItemComponent: PropTypes.element
 };

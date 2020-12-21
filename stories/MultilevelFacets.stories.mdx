@@ -6,124 +6,79 @@ import Breadcrumbs from '../src/modules/breadcrumbs';
 import Products from '../src/modules/products';
 import SearchBox from '../src/modules/searchBox';
 import { Button } from '../src/components';
-const attributesMap = {
-    productName: 'title',
-    uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl',
-    price: 'unbxd_price',
-    productUrl: 'productUrl'
-};
-const variantAttributesMap = {
-    productName: 'title',
-    uniqueId: 'vId',
-    imageUrl: 'imageUrl',
-    price: 'v_unbxd_price',
-    productUrl: 'productUrl'
-};
-const FacetItemComponent = ({ itemData, onClick }) => {
-    const { name, count, level, isSelected = false } = itemData;
-    const handleClick = () => {
-        onClick(itemData);
-    };
-    return (
-        <Button
-            className={`UNX-facet__item -l${level} ${
-                isSelected ? '-selected' : ''
-            }`}
-            onClick={handleClick}
-        >
-            {name} {count && <span>-{count}</span>}
-        </Button>
-    );
-};
-const Root = () => <span>Home</span>;
-const separator = <span>-</span>;
+import { FacetItemComponent } from '../demo/src/components/MultilevelFilters.js';
+import { Root, separator } from '../demo/src/components/Crumbs.js';
+import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
 
 <Meta title="MultilevelFacets" component={MultilevelFacets} />
 
 # MultilevelFacets
 
-### Widget to display Multilevel facets.
+### module to display Multilevel facets.
 
 ```jsx
-<MultilevelFacets
-    //...
-    categoryDisplayName={'category'}
-    categoryField={'categoryPath'}
-    //...
-/>
+<MultilevelFacets />
 ```
 
 <Preview>
     <Story name="default">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <Breadcrumbs Root={Root} separator={separator} />
-            <MultilevelFacets
-                categoryDisplayName={'category'}
-                categoryField={'categoryPath'}
-            />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <MultilevelFacets />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
-                <SearchBox defaultSearch={'shoes'} />
+                <SearchBox defaultSearch={defaultSearch} />
             </div>
         </UnbxdSearchWrapper>
     </Story>
 </Preview>
 
-### FacetItemComponent
+### facetItemComponent
 
-The default Multilevel facet item can be overridden by passing `FacetItemComponent`.
+The default Multilevel facet item can be overridden by passing a custom component instance.
 
 ```jsx
-const FacetItemComponent = ({ itemData, multiLevelField, level, onClick }) => {
-    const { name, count } = itemData;
+const FacetItemComponent = ({ itemData, onClick }) => {
+    const { name, count, level, isSelected } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
     return (
         <div
-            data-unx_categoryname={name}
-            data-unx_multilevelfield={multiLevelField}
-            data-unx_level={level}
-            onClick={onClick}
+            className={`UNX-facet__item -l${level} ${
+                isSelected ? '-selected' : ''
+            }`}
+            onClick={handleClick}
         >
-            {name} - {count}
+            <div className="-checkbox" />
+            <div className="-label">{name}</div>
+            {count && <div className="-count">({count})</div>}
         </div>
     );
 };
 ```
 
+The custom component instance will receive the following props
+
+#### facetItemComponent Props
+
+| Name     | Type   | Description          |
+| -------- | ------ | -------------------- |
+| itemData | object | facet values.        |
+| onClick  | func   | handle facet change. |
+
 ```jsx
-<MultilevelFacets
-    //...
-    FacetItemComponent={FacetItemComponent}
-    //...
-/>
+<MultilevelFacets facetItemComponent={<FacetItemComponent />} />
 ```
 
 <Preview>
-    <Story name="with FacetItemComponent">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
-            <Breadcrumbs Root={Root} separator={separator} />
-            <MultilevelFacets
-                categoryDisplayName={'category'}
-                categoryField={'categoryPath'}
-                FacetItemComponent={FacetItemComponent}
-            />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+    <Story name="with facetItemComponent">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <Breadcrumbs root={Root} separator={separator} />
+            <MultilevelFacets facetItemComponent={<FacetItemComponent />} />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
-                <SearchBox defaultSearch={'shoes'} />
+                <SearchBox defaultSearch={defaultSearch} />
             </div>
         </UnbxdSearchWrapper>
     </Story>
@@ -131,51 +86,30 @@ const FacetItemComponent = ({ itemData, multiLevelField, level, onClick }) => {
 
 ---
 
-### Render Props
+### Render props
 
--   This approach gives the total control of the widget to the user.
--   The anonymous function will receive all the data and methods needed to build and manage the widget.
+-   This approach gives the total control of the module to the user.
+-   The anonymous function will receive all the data and methods needed to build and manage the module.
 
 #### Render prop parameters
 
-| Name                  | Type          | Description                           |
-| --------------------- | ------------- | ------------------------------------- |
-| bucketedFacets,       | array         | contains the multilevel facets.       |
-| selectedBucketedFacet | object        | currently selected multilevel facets. |
-| breadCrumbsList       | array         | breadcrumb items                      |
-| addCategoryFilter,    | func          | handle facet click.                   |
-| FacetItemComponent,   | element\|func | custom component.                     |
-| label                 | node          | label for the component.              |
+| Name             | Type  | Description                     |
+| ---------------- | ----- | ------------------------------- |
+| multilevelFacets | array | contains the multilevel facets. |
+| onFacetClick     | func  | handle facet click.             |
 
 <Preview>
     <Story name="with render props">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <Breadcrumbs Root={Root} separator={separator} />
-            <MultilevelFacets
-                categoryDisplayName={'category'}
-                categoryField={'categoryPath'}
-            >
-                {({
-                    bucketedFacets,
-                    selectedBucketedFacet,
-                    breadCrumbsList,
-                    addCategoryFilter,
-                    FacetItemComponent,
-                    label
-                }) => {
+            <MultilevelFacets>
+                {({ multilevelFacets, onFacetClick }) => {
                     return <div>render MultilevelFacets</div>;
                 }}
             </MultilevelFacets>
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
-                <SearchBox defaultSearch={'shoes'} />
+                <SearchBox defaultSearch={defaultSearch} />
             </div>
         </UnbxdSearchWrapper>
     </Story>

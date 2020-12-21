@@ -70,7 +70,7 @@ MultilevelFacets.propTypes = {
      */
     facetItemComponent: PropTypes.element,
     /**
-     * Label for the component.
+     * Label for the module.
      */
     label: PropTypes.node,
     /**

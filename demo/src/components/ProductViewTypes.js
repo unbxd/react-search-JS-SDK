@@ -4,7 +4,7 @@ import { ViewTypes } from '@unbxd-ui/react-search-sdk';
 
 const viewTypes = ['GRID', 'LIST'];
 
-const ProductsViewItemComponent = ({ itemData, onClick }) => {
+export const ProductsViewItemComponent = ({ itemData, onClick }) => {
     const { viewType, isSelected } = itemData;
     const iconClassName = viewType === 'GRID' ? 'fa fa-th' : 'fa fa-th-list';
     const dataTestId = viewType === 'GRID' ? 'UNX_gridBtn' : 'UNX_listBtn';

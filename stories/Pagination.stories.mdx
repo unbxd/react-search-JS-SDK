@@ -4,52 +4,14 @@ import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import Pagination from '../src/modules/pagination';
 import Products from '../src/modules/products';
 import SearchBox from '../src/modules/searchBox';
-const attributesMap = {
-    productName: 'title',
-    uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl',
-    price: 'unbxd_price',
-    productUrl: 'productUrl'
-};
-const variantAttributesMap = {
-    productName: 'title',
-    uniqueId: 'vId',
-    imageUrl: 'imageUrl',
-    price: 'v_unbxd_price',
-    productUrl: 'productUrl'
-};
-const PaginationItemComponent = (props) => {
-    const { pagenumber, onClick, label, type, active } = props;
-    return (
-        <div data-pagenumber={pagenumber} onClick={onClick ? onClick : null}>
-            {type === 'NUMBER' && (
-                <button
-                    className={`UNX-pageNavigation__button ${
-                        active ? '-active' : ''
-                    }`}
-                >
-                    {label}
-                </button>
-            )}
-            {type === 'PREVIOUS' && (
-                <button className="UNX-pageNavigation__button -action">
-                    &lt;
-                </button>
-            )}
-            {type === 'NEXT' && (
-                <button className="UNX-pageNavigation__button -action">
-                    &gt;
-                </button>
-            )}
-        </div>
-    );
-};
+import { PaginationItemComponent } from '../demo/src/components/Paginator.js';
+import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
 
 <Meta title="Pagination" component={Pagination} />
 
 # Pagination
 
-### Widget to navigate across pages.
+### module to navigate across pages.
 
 ```jsx
 <Pagination />
@@ -57,18 +19,11 @@ const PaginationItemComponent = (props) => {
 
 <Preview>
     <Story name="default">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <Pagination />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
-                <SearchBox defaultSearch={'shoes'} />
+                <SearchBox defaultSearch={defaultSearch} />
             </div>
         </UnbxdSearchWrapper>
     </Story>
@@ -81,27 +36,16 @@ const PaginationItemComponent = (props) => {
 Number of pages on either side of active page can be configured by passing `padding`.
 
 ```jsx
-<Pagination
-    //...
-    padding={3}
-    //...
-/>
+<Pagination padding={3} />
 ```
 
 <Preview>
     <Story name="with padding">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <Pagination padding={3} />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
-                <SearchBox defaultSearch={'shoes'} />
+                <SearchBox defaultSearch={defaultSearch} />
             </div>
         </UnbxdSearchWrapper>
     </Story>
@@ -109,22 +53,22 @@ Number of pages on either side of active page can be configured by passing `padd
 
 ---
 
-### PaginationItemComponent
+### paginationItemComponent
 
-The default Pagination item component can be overridden by passing `PaginationItemComponent`.
+The default Pagination item component can be overridden by passing a custom component instance.
 
 ```jsx
-const PaginationItemComponent = (props) => {
-    const { pagenumber, onClick, label, type, active } = props;
+const PaginationItemComponent = ({ itemData, onClick }) => {
+    const { pageNumber, label, type, isSelected = false } = itemData;
     return (
-        <div data-pagenumber={pagenumber} onClick={onClick ? onClick : null}>
+        <div data-pagenumber={pageNumber} onClick={onClick ? onClick : null}>
             {type === 'NUMBER' && (
                 <button
                     className={`UNX-pageNavigation__button ${
-                        active ? '-active' : ''
+                        isSelected ? '-isSelected' : ''
                     }`}
                 >
-                    {label}
+                    {pageNumber}
                 </button>
             )}
             {type === 'PREVIOUS' && (
@@ -142,28 +86,26 @@ const PaginationItemComponent = (props) => {
 };
 ```
 
+The custom component instance will receive the following props
+
+#### paginationItemComponent props
+
+| Name     | Type   | Description        |
+| -------- | ------ | ------------------ |
+| itemData | object | page values.       |
+| onClick  | func   | handle page click. |
+
 ```jsx
-<Pagination
-    //. . .
-    PaginationItemComponent={PaginationItemComponent}
-    //. . .
-/>
+<Pagination paginationItemComponent={<PaginationItemComponent />} />
 ```
 
 <Preview>
-    <Story name="with PaginationItemComponent">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
-            <Pagination PaginationItemComponent={PaginationItemComponent} />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+    <Story name="with paginationItemComponent">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <Pagination paginationItemComponent={<PaginationItemComponent />} />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
-                <SearchBox defaultSearch={'shoes'} />
+                <SearchBox defaultSearch={defaultSearch} />
             </div>
         </UnbxdSearchWrapper>
     </Story>
@@ -171,32 +113,28 @@ const PaginationItemComponent = (props) => {
 
 ---
 
-### Render Props
+### Render props
 
--   This approach gives the total control of the widget to the user.
--   The anonymous function will receive all the data and methods needed to build and manage the widget.
+-   This approach gives the total control of the module to the user.
+-   The anonymous function will receive all the data and methods needed to build and manage the module.
 
 #### Render prop parameters
 
-| Name                     | Type          | Description                                           |
-| ------------------------ | ------------- | ----------------------------------------------------- |
-| currentPage,             | number        | current page number.                                  |
-| isNext,                  | bool          | does next page exist.                                 |
-| isPrev,                  | bool          | does previous page exist.                             |
-| noOfPages,               | number        | total number of pages.                                |
-| padding,                 | number        | number of pages on either side of active page.        |
-| onNextPageClick,         | func          | handle click of next page.                            |
-| onPreviousPageClick,     | func          | handle click of previous page.                        |
-| onPageClick,             | func          | handle click of page.                                 |
-| PaginationItemComponent, | element\|func | custom component.                                     |
-| paginationType           | string        | INFINITE_SCROLL \| CLICK_N_SCROLL \| FIXED_PAGINATION |
+| Name                | Type   | Description                                           |
+| ------------------- | ------ | ----------------------------------------------------- |
+| currentPage         | number | current page number.                                  |
+| isNext              | bool   | does next page exist.                                 |
+| isPrev              | bool   | does previous page exist.                             |
+| noOfPages           | number | total number of pages.                                |
+| padding             | number | number of pages on either side of active page.        |
+| onNextPageClick     | func   | handle click of next page.                            |
+| onPreviousPageClick | func   | handle click of previous page.                        |
+| onPageClick         | func   | handle click of page.                                 |
+| paginationType      | string | INFINITE_SCROLL \| CLICK_N_SCROLL \| FIXED_PAGINATION |
 
 <Preview>
     <Story name="with render props">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <Pagination>
                 {({
                     currentPage,
@@ -207,19 +145,14 @@ const PaginationItemComponent = (props) => {
                     onNextPageClick,
                     onPreviousPageClick,
                     onPageClick,
-                    PaginationItemComponent,
                     paginationType
                 }) => {
                     return <div>render Pagination</div>;
                 }}
             </Pagination>
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
-                <SearchBox defaultSearch={'shoes'} />
+                <SearchBox defaultSearch={defaultSearch} />
             </div>
         </UnbxdSearchWrapper>
     </Story>

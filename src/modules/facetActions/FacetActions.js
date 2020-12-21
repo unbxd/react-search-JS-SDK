@@ -61,11 +61,11 @@ FacetActions.propTypes = {
      */
     showClearFilter: PropTypes.bool,
     /**
-     * Custom apply filter component.
+     * Custom apply filter component instance.
      */
     applyFilterComponent: PropTypes.element,
     /**
-     * Custom clear filter component.
+     * Custom clear filter component instance.
      */
     clearFilterComponent: PropTypes.element,
     /**

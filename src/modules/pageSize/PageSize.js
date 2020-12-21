@@ -64,11 +64,11 @@ PageSize.propTypes = {
      */
     displayType: PropTypes.string,
     /**
-     * Custom size element.
+     * Custom size component instance.
      */
     pageSizeItemComponent: PropTypes.element,
     /**
-     * Label for the component.
+     * Label for the module.
      */
     label: PropTypes.node
 };

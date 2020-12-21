@@ -44,7 +44,7 @@ SearchTitle.displayName = 'SearchTitle';
 
 SearchTitle.propTypes = {
     /**
-     * Custom search title item.
+     * Custom search title item component instance.
      */
     searchTitleItem: PropTypes.element
 };

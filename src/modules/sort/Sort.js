@@ -61,11 +61,11 @@ Sort.propTypes = {
      */
     displayType: PropTypes.string,
     /**
-     * Custom sort item component.
+     * Custom sort item component instance.
      */
     sortItemComponent: PropTypes.element,
     /**
-     * Label for the component.
+     * Label for the module.
      */
     label: PropTypes.node,
     /**

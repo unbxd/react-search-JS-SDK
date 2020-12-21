@@ -4,42 +4,14 @@ import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import ViewTypes from '../src/modules/viewTypes';
 import Products from '../src/modules/products';
 import SearchBox from '../src/modules/searchBox';
-const defaultSearch = 'shirt';
-const attributesMap = {
-    productName: 'title',
-    uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl',
-    price: 'min_cheapest_default_price',
-    productUrl: 'productUrl'
-};
-const variantAttributesMap = {
-    productName: 'title',
-    uniqueId: 'variantId',
-    imageUrl: 'imageUrl',
-    price: 'v_unbxd_price'
-};
-const ViewItemComponent = ({ itemData, onClick }) => {
-    const { viewType, isSelected } = itemData;
-    const handleClick = () => {
-        onClick(itemData);
-    };
-    return (
-        <div className="UNX-viewType__wrapper">
-            <div
-                className={`${isSelected ? '-selected' : ''}`}
-                onClick={handleClick}
-            >
-                {viewType}
-            </div>
-        </div>
-    );
-};
+import { ProductViewTypes } from '../demo/src/components/ProductViewTypes.js';
+import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
 
 <Meta title="ViewTypes" component={ViewTypes} />
 
 # ViewTypes
 
-### Widget to display view types.
+### module to display product view types.
 
 ```jsx
 <ViewTypes />
@@ -49,16 +21,9 @@ The default view type is `GRID`.
 
 <Preview>
     <Story name="default">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <ViewTypes />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />
             </div>
@@ -73,25 +38,14 @@ The default view type is `GRID`.
 View types like `GRID` and `LIST` can be passed using `viewTypes`.
 
 ```jsx
-<ViewTypes
-    //...
-    viewTypes={['GRID', 'LIST']}
-    //...
-/>
+<ViewTypes viewTypes={['GRID', 'LIST']} />
 ```
 
 <Preview>
     <Story name="with viewTypes">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <ViewTypes viewTypes={['GRID', 'LIST']} />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />
             </div>
@@ -101,9 +55,9 @@ View types like `GRID` and `LIST` can be passed using `viewTypes`.
 
 ---
 
-### ViewItemComponent
+### viewItemComponent
 
-The default ViewTypes can be overridden by setting `displayType` to `LIST` and passing `ViewItemComponent`.
+The default ViewTypes can be overridden by setting `displayType` to `LIST` and passing a custom component instance.
 
 ```jsx
 const ViewItemComponent = ({ itemData, onClick }) => {
@@ -119,35 +73,32 @@ const ViewItemComponent = ({ itemData, onClick }) => {
 };
 ```
 
+The custom component instance will receive the following props
+
+#### viewItemComponent props
+
+| Name     | Type   | Description             |
+| -------- | ------ | ----------------------- |
+| itemData | object | view type values.       |
+| onClick  | func   | handle view type click. |
+
 ```jsx
-<ViewTypes
-    //...
-    displayType={'LIST'}
-    ViewItemComponent={ViewItemComponent}
-    //...
-/>
+<ViewTypes displayType={'LIST'} viewItemComponent={<ViewItemComponent />} />
 ```
 
 #### Note:
 
--   If `displayType` is set to `LIST`, passing `ViewItemComponent` is mandatory.
+-   If `displayType` is set to `LIST`, passing `viewItemComponent` is mandatory.
 
 <Preview>
-    <Story name="with ViewItemComponent">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+    <Story name="with viewItemComponent">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <ViewTypes
                 viewTypes={['GRID', 'LIST']}
                 displayType={'LIST'}
-                ViewItemComponent={ViewItemComponent}
+                viewItemComponent={<ViewItemComponent />}
             />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />
             </div>
@@ -157,34 +108,29 @@ const ViewItemComponent = ({ itemData, onClick }) => {
 
 ---
 
-### Render Props
+### Render props
 
--   This approach gives the total control of the widget to the user.
--   The anonymous function will receive all the data and methods needed to build and manage the widget.
+-   This approach gives the total control of the module to the user.
+-   The anonymous function will receive all the data and methods needed to build and manage the module.
 
 #### Render prop parameters
 
-| Name                | Type          | Description                                      |
-| ------------------- | ------------- | ------------------------------------------------ |
-| viewType            | string        | `GRID` \| `LIST`                                 |
-| viewTypes,          | array         | view type values.                                |
-| displayType         | string        | `DROPDOWN` \| `LIST`                             |
-| ViewItemComponent   | element\|func | custom view type component.                      |
-| numberOfProducts    | number        | number of products for the current search query. |
-| handleViewTypeClick | func          | handle view type change.                         |
+| Name                | Type   | Description                                      |
+| ------------------- | ------ | ------------------------------------------------ |
+| viewType            | string | `GRID` \| `LIST`                                 |
+| viewTypes,          | array  | view type values.                                |
+| displayType         | string | `DROPDOWN` \| `LIST`                             |
+| numberOfProducts    | number | number of products for the current search query. |
+| handleViewTypeClick | func   | handle view type change.                         |
 
 <Preview>
     <Story name="with render props">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <ViewTypes viewTypes={['GRID', 'LIST']} displayType={'LIST'}>
                 {({
                     viewType,
                     viewTypes,
                     displayType,
-                    ViewItemComponent,
                     numberOfProducts,
                     validViewTypes,
                     handleViewTypeClick
@@ -192,11 +138,7 @@ const ViewItemComponent = ({ itemData, onClick }) => {
                     return <div>render ViewTypes</div>;
                 }}
             </ViewTypes>
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />
             </div>

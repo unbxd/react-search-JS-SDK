@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Sort } from '@unbxd-ui/react-search-sdk';
 
-const sortOptions = [
+export const sortOptions = [
     {
         label: 'Most Relevant'
     },
@@ -23,7 +23,7 @@ const onSortChange = (field, order) => {
     return true;
 };
 
-const SortItemComponent = ({ itemData, onClick }) => {
+export const SortItemComponent = ({ itemData, onClick }) => {
     const { value, isSelected = false } = itemData;
     const handleClick = () => {
         onClick(itemData);

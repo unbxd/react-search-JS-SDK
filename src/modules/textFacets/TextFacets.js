@@ -60,11 +60,11 @@ TextFacets.propTypes = {
      */
     searchable: PropTypes.bool,
     /**
-     * Custom Facet item component
+     * Custom Facet item component instance
      */
     facetItemComponent: PropTypes.element,
     /**
-     * Label for the component.
+     * Label for the module.
      */
     label: PropTypes.node,
     /**

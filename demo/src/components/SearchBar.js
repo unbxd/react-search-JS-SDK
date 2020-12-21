@@ -3,10 +3,30 @@ import React from 'react';
 import { SearchBox } from '@unbxd-ui/react-search-sdk';
 import { useHistory } from 'react-router-dom';
 
-const SearchButton = ({ onSearchBoxSubmit }) => {
+export const SearchButton = ({ onSearchBoxSubmit }) => {
     return (
         <button onClick={onSearchBoxSubmit} className="UNX-searchbox__button" />
     );
+};
+
+export const InputComponent = ({
+    query,
+    onSearchBoxChange,
+    onSearchBoxClear
+}) => {
+    return (
+        <input
+            value={query}
+            onChange={onSearchBoxChange}
+            onClear={onSearchBoxClear}
+        />
+    );
+};
+export const SubmitComponent = ({ onSearchBoxSubmit }) => {
+    return <div onClick={onSearchBoxSubmit}> Submit</div>;
+};
+export const ClearComponent = ({ onSearchBoxClear }) => {
+    return <div onClick={onSearchBoxClear}> x </div>;
 };
 
 const SearchBar = (props) => {

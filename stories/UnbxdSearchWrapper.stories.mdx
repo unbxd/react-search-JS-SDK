@@ -1,6 +1,6 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
-
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
+import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
 const setCategoryId = (param, self) => {
     const { level, name } = param;
     let page = ``;
@@ -29,27 +29,19 @@ const setCategoryId = (param, self) => {
 
 # UnbxdSearchWrapper
 
-### Component to wrap widgets.
+### Component to wrap modules.
 
 ```jsx
-<UnbxdSearchWrapper
-    //...
-    siteKey="..."
-    apiKey="..."
-    //...
->
-    {/*widgets*/}
+<UnbxdSearchWrapper siteKey="..." apiKey="...">
+    {/*modules*/}
 </UnbxdSearchWrapper>
 ```
 
 <Preview>
     <Story name="default">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <div>
-                Wrap all the widgets in <strong>UnbxdSearchWrapper</strong>
+                Wrap all the modules in <strong>UnbxdSearchWrapper</strong>
             </div>
         </UnbxdSearchWrapper>
     </Story>
@@ -69,7 +61,7 @@ const getCategoryId = () => {
 };
 
 const setCategoryId = (param, self) => {
-    const { level, name } = param;
+    const { level, name, parent } = param;
     let page = ``;
     let pathArr = [];
     const l = Number(level);
@@ -88,32 +80,27 @@ const setCategoryId = (param, self) => {
     }
     page = pathArr.join('>');
     if (window.UnbxdAnalyticsConf) {
-        window.UnbxdAnalyticsConf.page = page;
+        window.UnbxdAnalyticsConf.page = `${parent}:${page}`;
     }
 };
 ```
 
 ```jsx
-<UnbxdSearchWrapper
-    //...
-    getCategoryId={getCategoryId}
-    setCategoryId={setCategoryId}
-    //...
->
-    {/*widgets*/}
+<UnbxdSearchWrapper getCategoryId={getCategoryId} setCategoryId={setCategoryId}>
+    {/*modules*/}
 </UnbxdSearchWrapper>
 ```
 
 <Preview>
     <Story name="with category">
         <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            siteKey={siteKey}
+            apiKey={apiKey}
             getCategoryId={getCategoryId}
             setCategoryId={setCategoryId}
         >
             <div>
-                Wrap all the widgets in <strong>UnbxdSearchWrapper</strong>
+                Wrap all the modules in <strong>UnbxdSearchWrapper</strong>
             </div>
         </UnbxdSearchWrapper>
     </Story>
