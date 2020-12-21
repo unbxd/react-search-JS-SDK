@@ -44,7 +44,7 @@ const setCategoryId = (param, self) => {
     }
     page = pathArr.join('>');
     if (window.UnbxdAnalyticsConf) {
-        window.UnbxdAnalyticsConf.page = page;
+        window.UnbxdAnalyticsConf.page = `${parent}:${page}`;
     }
     return true;
 };
