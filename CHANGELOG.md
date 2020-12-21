@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.40-alpha.0](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.39...v0.0.40-alpha.0) (2020-12-21)
+
 ### [0.0.39](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.38...v0.0.39) (2020-12-17)
 
 
