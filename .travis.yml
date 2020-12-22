@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+- 14
+cache: yarn
+jobs:
+  include:
+  - stage: Build
+    name: Build SDK
+    script:
+      - yarn build
+  - stage: Test
+    name: Run test cases
+    script:
+      - yarn test
+  - stage: npm release
+    name: Release new version of SDK
+    node_js: lts/*
+    script: echo "Deploying to npm"
+    before_deploy:
+      - yarn build
+    deploy:
+      provider: script
+      skip_cleanup: true
+      script: yarn run semantic-release
+      on:
+        branches:
+          only:
+              - master
+              - beta
+              - alpha
