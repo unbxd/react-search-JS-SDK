@@ -168,6 +168,8 @@ class RangeFacetsContainer extends React.PureComponent {
 
         return {
             rangeFacets: formattedRangeFacets,
+            selectedRangeFacets,
+            lastSelectedRangeFacets: formattedLastSelectedRangeFacets,
             onFacetClick: handleFacetClick,
             onFacetClear: handleFacetClear,
             manageRangeFacets,

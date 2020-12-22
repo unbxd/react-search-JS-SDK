@@ -4,51 +4,15 @@ import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import SpellCheck from '../src/modules/spellCheck';
 import Products from '../src/modules/products';
 import SearchBox from '../src/modules/searchBox';
-const defaultSearch = 'rde shirt';
-const attributesMap = {
-    productName: 'title',
-    uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl',
-    price: 'min_cheapest_default_price',
-    productUrl: 'productUrl'
-};
-const variantAttributesMap = {
-    productName: 'title',
-    uniqueId: 'variantId',
-    imageUrl: 'imageUrl',
-    price: 'v_unbxd_price'
-};
-const SpellCheckItemComponent = ({ itemData, currentQuery, onClick }) => {
-    const { suggestion } = itemData;
-    const handleClick = () => {
-        onClick(itemData);
-    };
-    return (
-        <div className="UNX-spellCheck__item">
-            <div className="UNX-spellCheck__query">
-                Showing results for
-                <span className="-query"> {currentQuery}</span>
-            </div>
-            <div className="UNX-spellCheck__suggestion">
-                Did you mean
-                <span
-                    className="-suggestion"
-                    onClick={handleClick}
-                    data-testid={'UNX_spellCheck'}
-                >
-                    {' '}
-                    {suggestion}
-                </span>?
-            </div>
-        </div>
-    );
-};
+import { SpellCheckItemComponent } from '../demo/src/components/SpellChecker.js';
+import { siteKey, apiKey, attributesMap } from './config';
+const defaultSearch = 'danlop';
 
 <Meta title="SpellCheck" component={SpellCheck} />
 
 # SpellCheck
 
-### Widget to spell check the queries.
+### module to spell check the queries.
 
 ```jsx
 <SpellCheck />
@@ -56,16 +20,9 @@ const SpellCheckItemComponent = ({ itemData, currentQuery, onClick }) => {
 
 <Preview>
     <Story name="default">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <SpellCheck />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />
             </div>
@@ -75,58 +32,49 @@ const SpellCheckItemComponent = ({ itemData, currentQuery, onClick }) => {
 
 ---
 
-### SpellCheckItemComponent
+### spellCheckItemComponent
 
-The default SpellCheck item component can be overridden by passing `SpellCheckItemComponent`.
+The default SpellCheck item component can be overridden by passing a custom component instance.
 
 ```jsx
-const SpellCheckItemComponent = ({ itemData, currentQuery, onClick }) => {
+const SpellCheckItemComponent = ({ itemData, onClick }) => {
     const { suggestion } = itemData;
     const handleClick = () => {
         onClick(itemData);
     };
     return (
         <div className="UNX-spellCheck__item">
-            <div className="UNX-spellCheck__query">
-                Showing results for
-                <span className="-query"> {currentQuery}</span>
-            </div>
-            <div className="UNX-spellCheck__suggestion">
-                Did you mean
-                <span
-                    className="-suggestion"
-                    onClick={handleClick}
-                    data-testid={'UNX_spellCheck'}
-                >
-                    {' '}
-                    {suggestion}
-                </span>?
-            </div>
+            Did you mean
+            <span
+                className="-suggestion"
+                onClick={handleClick}
+                data-testid="UNX_spellCheck"
+            >
+                {suggestion}
+            </span>?
         </div>
     );
 };
 ```
 
+The custom component instance will receive the following props
+
+#### spellCheckItemComponent props
+
+| Name     | Type   | Description                         |
+| -------- | ------ | ----------------------------------- |
+| itemData | object | spellcheck values.                  |
+| onClick  | func   | handle spellcheck suggestion click. |
+
 ```jsx
-<SpellCheck
-    //...
-    SpellCheckItemComponent={SpellCheckItemComponent}
-    //...
-/>
+<SpellCheck spellCheckItemComponent={<SpellCheckItemComponent />} />
 ```
 
 <Preview>
-    <Story name="with SpellCheckItemComponent">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
-            <SpellCheck SpellCheckItemComponent={SpellCheckItemComponent} />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+    <Story name="with spellCheckItemComponent">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <SpellCheck spellCheckItemComponent={<SpellCheckItemComponent />} />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />
             </div>
@@ -136,41 +84,28 @@ const SpellCheckItemComponent = ({ itemData, currentQuery, onClick }) => {
 
 ---
 
-### Render Props
+### Render props
 
--   This approach gives the total control of the widget to the user.
--   The anonymous function will receive all the data and methods needed to build and manage the widget.
+-   This approach gives the total control of the module to the user.
+-   The anonymous function will receive all the data and methods needed to build and manage the module.
 
 #### Render prop parameters
 
-| Name                    | Type          | Description                  |
-| ----------------------- | ------------- | ---------------------------- |
-| spellChecks             | array         | spell check data.            |
-| currentQuery            | string        | current search query.        |
-| onSuggestionClick       | func          | handle suggestion click.     |
-| SpellCheckItemComponent | element\|func | custom spellcheck component. |
+| Name              | Type   | Description              |
+| ----------------- | ------ | ------------------------ |
+| spellChecks       | array  | spell check data.        |
+| currentQuery      | string | current search query.    |
+| onSuggestionClick | func   | handle suggestion click. |
 
 <Preview>
     <Story name="with render props">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <SpellCheck>
-                {({
-                    spellChecks,
-                    currentQuery,
-                    onSuggestionClick,
-                    SpellCheckItemComponent
-                }) => {
+                {({ spellChecks, currentQuery, onSuggestionClick }) => {
                     return <div>render SpellCheck</div>;
                 }}
             </SpellCheck>
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />
             </div>

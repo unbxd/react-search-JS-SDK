@@ -111,6 +111,8 @@ class FacetActionsContainer extends React.PureComponent {
             showClearFilter,
             onApplyFilter: handleApplyFilter,
             onClearFilter: handleClearFilter,
+            manageTextFacets,
+            manageRangeFacets,
             noOfPages,
             applyFilterComponent,
             clearFilterComponent

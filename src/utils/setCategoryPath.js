@@ -5,8 +5,8 @@ const setCategoryPath = () => {
         2: 'g',
         3: 'h',
         4: 't',
-        page: 'All Products>Boots',
-        page_type: 'CATEGORY_PATH'
+        page: 'CATEGORY:strings',
+        page_type: 'BOOLEAN'
     };
 };
 

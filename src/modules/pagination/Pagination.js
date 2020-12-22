@@ -49,7 +49,7 @@ Pagination.propTypes = {
      */
     padding: PropTypes.number,
     /**
-     * Custom product item component
+     * Custom product item component instance
      */
     paginationItemComponent: PropTypes.element,
     /**

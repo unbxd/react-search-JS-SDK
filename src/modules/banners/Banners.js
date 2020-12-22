@@ -50,7 +50,7 @@ Banners.propTypes = {
      */
     altText: PropTypes.string,
     /**
-     * Banner custom element
+     * Custom banner item component instance.
      */
     bannerItemComponent: PropTypes.element
 };

@@ -18,7 +18,7 @@ module.exports = {
         config.module.rules[0].include.push(path.resolve('../src'));
 
         config.module.rules.push({
-            test: /\.s?css$/,
+            test: /\.scss$/,
             loaders: [
                 {
                     loader: MiniCssExtractPlugin.loader

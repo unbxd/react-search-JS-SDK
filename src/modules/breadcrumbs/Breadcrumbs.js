@@ -51,7 +51,7 @@ Breadcrumbs.propTypes = {
      */
     separator: PropTypes.node,
     /**
-     * Custom breadcrumb element.
+     * Custom breadcrumb component instance.
      */
     breadcrumbItemComponent: PropTypes.element
 };

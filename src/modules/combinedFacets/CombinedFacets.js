@@ -52,7 +52,7 @@ CombinedFacets.displayName = 'CombinedFacets';
 CombinedFacets.defaultProps = {
     collapsible: false,
     searchable: false,
-    enableViewMore: true,
+    enableViewMore: false,
     minViewMore: 3
 };
 
@@ -74,11 +74,11 @@ CombinedFacets.propTypes = {
      */
     searchable: PropTypes.bool,
     /**
-     * Custom Text Facet item component
+     * Custom Text Facet item component instance
      */
     textFacetItemComponent: PropTypes.element,
     /**
-     * Custom Range Facet item component
+     * Custom Range Facet item component instance
      */
     rangeFacetItemComponent: PropTypes.element,
     /**
@@ -86,7 +86,7 @@ CombinedFacets.propTypes = {
      */
     applyMultiple: PropTypes.bool,
     /**
-     * Custom Multilevel Facet item component
+     * Custom Multilevel Facet item component instance
      */
     multilevelFacetItemComponent: PropTypes.element,
     /**
@@ -94,7 +94,7 @@ CombinedFacets.propTypes = {
      */
     transform: PropTypes.func,
     /**
-     * Label for the component.
+     * Label for the module.
      */
     label: PropTypes.node,
     /**

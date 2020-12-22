@@ -2,7 +2,7 @@ import React from 'react';
 
 import { PageSize } from '@unbxd-ui/react-search-sdk';
 
-const sizeOptions = [
+export const sizeOptions = [
     { id: 5, value: '5' },
     { id: 10, value: '10' },
     { id: 15, value: '15' },
@@ -11,7 +11,7 @@ const sizeOptions = [
 
 const label = <div className="-label">Products per page</div>;
 
-const PageSizeItemComponent = ({ itemData, onClick }) => {
+export const PageSizeItemComponent = ({ itemData, onClick }) => {
     const { value, isSelected } = itemData;
     const handleClick = () => {
         onClick(itemData);

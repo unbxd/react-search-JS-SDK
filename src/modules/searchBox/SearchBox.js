@@ -67,15 +67,15 @@ SearchBox.propTypes = {
      */
     showLoader: PropTypes.bool,
     /**
-     * Custom input component
+     * Custom input component instance
      */
     inputComponent: PropTypes.element,
     /**
-     * Custom submit component
+     * Custom submit component instance
      */
     submitComponent: PropTypes.element,
     /**
-     * Custom reset component
+     * Custom reset component instance
      */
     clearComponent: PropTypes.element,
     /**

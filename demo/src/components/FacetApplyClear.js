@@ -3,16 +3,26 @@ import React from 'react';
 import { FacetActions } from '@unbxd-ui/react-search-sdk';
 import { scrollTop } from '../utils';
 
-const ApplyFilter = ({ onApplyFilter }) => (
+export const ApplyFilter = ({ onApplyFilter }) => (
     <button className="-apply" onClick={onApplyFilter}>
         Apply
     </button>
 );
-const ClearFilter = ({ onClearFilter }) => (
+export const ClearFilter = ({ onClearFilter }) => (
     <button className="-clear" onClick={onClearFilter}>
         Clear
     </button>
 );
+
+export const onApply = (textFacets, rangeFacets) => {
+    console.log('Facets apply :', textFacets, rangeFacets);
+    return true;
+};
+
+export const onClear = (textFacets, rangeFacets) => {
+    console.log('Facets clear :', textFacets, rangeFacets);
+    return true;
+};
 
 const FacetApplyClear = (props) => {
     const { handleClose } = props;

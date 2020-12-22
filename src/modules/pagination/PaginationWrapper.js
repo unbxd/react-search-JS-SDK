@@ -34,12 +34,14 @@ const PaginationWrapper = (props) => {
     }
 
     const activePage = paginationItemComponent ? (
-        <paginationItemComponent
-            pagenumber={currentPage}
-            type={paginationButtonTypes.NUMBER}
-            label={currentPage}
-            isSelected
-        />
+        cloneElement(paginationItemComponent, {
+            onClick: onPreviousPageClick,
+            itemData: {
+                pageNumber: currentPage,
+                type: paginationButtonTypes.NUMBER,
+                isSelected: true
+            }
+        })
     ) : (
         <Button
             className="UNX-pageNavigation__button -selected"
@@ -66,10 +68,10 @@ const PaginationWrapper = (props) => {
                 (paginationItemComponent ? (
                     cloneElement(paginationItemComponent, {
                         onClick: onPreviousPageClick,
-                        pagenumber: currentPage - 1,
-                        type: paginationButtonTypes.PREVIOUS,
-                        label: currentPage - 1,
-                        active: false
+                        itemData: {
+                            pageNumber: currentPage - 1,
+                            type: paginationButtonTypes.PREVIOUS
+                        }
                     })
                 ) : (
                     <Button
@@ -91,10 +93,10 @@ const PaginationWrapper = (props) => {
                 (paginationItemComponent ? (
                     cloneElement(paginationItemComponent, {
                         onClick: onNextPageClick,
-                        pagenumber: currentPage + 1,
-                        type: paginationButtonTypes.NEXT,
-                        label: currentPage + 1,
-                        active: false
+                        itemData: {
+                            pageNumber: currentPage + 1,
+                            type: paginationButtonTypes.NEXT
+                        }
                     })
                 ) : (
                     <Button

@@ -60,7 +60,7 @@ RangeFacets.propTypes = {
      */
     collapsible: PropTypes.bool,
     /**
-     * Label for the component.
+     * Label for the module.
      */
     label: PropTypes.node,
     /**
@@ -76,7 +76,7 @@ RangeFacets.propTypes = {
      */
     enableViewMore: PropTypes.bool,
     /**
-     * Custom facet item component.
+     * Custom facet item component instance.
      */
     facetItemComponent: PropTypes.element
 };

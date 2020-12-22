@@ -4,100 +4,31 @@ import Sort from '../src/modules/sort';
 import Products from '../src/modules/products';
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import SearchBox from '../src/modules/searchBox';
-const sortOptions = [
-    {
-        label: 'Most Popular'
-    },
-    {
-        label: 'Newest',
-        field: 'Date_Added',
-        order: 'desc'
-    },
-    {
-        label: 'Lowest Price',
-        field: 'price',
-        order: 'asc'
-    },
-    {
-        label: 'Highest Price',
-        field: 'price',
-        order: 'desc'
-    },
-    {
-        label: 'Brand A-Z',
-        field: 'title',
-        order: 'asc'
-    },
-    {
-        label: 'Brand Z-A',
-        field: 'title',
-        order: 'desc'
-    }
-];
-const attributesMap = {
-    productName: 'title',
-    uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl',
-    price: 'unbxd_price',
-    productUrl: 'productUrl'
-};
-const variantAttributesMap = {
-    productName: 'title',
-    uniqueId: 'vId',
-    imageUrl: 'imageUrl',
-    price: 'v_unbxd_price',
-    productUrl: 'productUrl'
-};
-const SortItemComponent = ({ itemData, onClick }) => {
-    const { value, isSelected = false } = itemData;
-    const handleClick = () => {
-        onClick(itemData);
-    };
-    return (
-        <div
-            data-testid={value.split('|').join(' ')}
-            className={`UNX-sortby__item ${isSelected ? '-selected' : ''}`}
-            onClick={handleClick}
-        >
-            {itemData.label}
-        </div>
-    );
-};
+import {
+    SortItemComponent,
+    sortOptions
+} from '../demo/src/components/Sorter.js';
+import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
 
 <Meta title="Sort" component={Sort} />
 
 # Sort
 
-### Widget to sort the products based on different attributes.
+### module to sort the products based on different attributes.
 
 ```js
 const sortOptions = [
     {
-        label: 'Most Popular'
-    },
-    {
-        label: 'Newest',
-        field: 'Date_Added',
-        order: 'desc'
+        label: 'Most Relevant'
     },
     {
         label: 'Lowest Price',
-        field: 'price',
+        field: 'PRODUCT_PRICE',
         order: 'asc'
     },
     {
         label: 'Highest Price',
-        field: 'price',
-        order: 'desc'
-    },
-    {
-        label: 'Brand A-Z',
-        field: 'title',
-        order: 'asc'
-    },
-    {
-        label: 'Brand Z-A',
-        field: 'title',
+        field: 'PRODUCT_PRICE',
         order: 'desc'
     }
 ];
@@ -109,18 +40,11 @@ const sortOptions = [
 
 <Preview>
     <Story name="default">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <Sort sortOptions={sortOptions} />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
-                <SearchBox defaultSearch={'boots'} />
+                <SearchBox defaultSearch={defaultSearch} />
             </div>
         </UnbxdSearchWrapper>
     </Story>
@@ -128,9 +52,9 @@ const sortOptions = [
 
 ---
 
-### SortItemComponent
+### sortItemComponent
 
-To display sort in a list format, set `displayType` to `LIST` and pass a custom Sort item component.
+To display sort in a list format, set `displayType` to `LIST` and pass a custom component instance.
 
 ```jsx
 const SortItemComponent = ({ itemData, onClick }) => {
@@ -138,42 +62,46 @@ const SortItemComponent = ({ itemData, onClick }) => {
     const handleClick = () => {
         onClick(itemData);
     };
-    return <div onClick={handleClick}>{itemData.label}</div>;
+    return (
+        <button
+            className={`UNX-sortby__item ${isSelected ? '-selected' : ''}`}
+            data-testid={value.split('|').join(' ')}
+            onClick={handleClick}
+        >
+            {itemData.label}
+        </button>
+    );
 };
 ```
 
+The custom component instance will receive the following props
+
+#### sortItemComponent props
+
+| Name     | Type   | Description        |
+| -------- | ------ | ------------------ |
+| itemData | object | sort values.       |
+| onClick  | func   | handle sort click. |
+
 ```jsx
-<Sort
-    //...
-    displayType={'LIST'}
-    SortItemComponent={SortItemComponent}
-    //...
-/>
+<Sort displayType={'LIST'} sortItemComponent={<SortItemComponent />} />
 ```
 
 #### Note:
 
--   If `displayType` is set to `LIST`, passing `SortItemComponent` is mandatory.
+-   If `displayType` is set to `LIST`, passing `sortItemComponent` is mandatory.
 
 <Preview>
     <Story name="with displayType">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <Sort
-                default={sortOptions[4]}
                 sortOptions={sortOptions}
                 displayType={'LIST'}
-                SortItemComponent={SortItemComponent}
+                sortItemComponent={<SortItemComponent />}
             />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
-                <SearchBox defaultSearch={'boots'} />
+                <SearchBox defaultSearch={defaultSearch} />
             </div>
         </UnbxdSearchWrapper>
     </Story>
@@ -183,30 +111,19 @@ const SortItemComponent = ({ itemData, onClick }) => {
 
 ### label
 
-A label for the component can be diplayed by passing `label`.
+A label for the module can be diplayed by passing `label`.
 
 ```jsx
-<Sort
-    //...
-    label={<span>Sort:</span>}
-    //...
-/>
+<Sort label={<span>Sort:</span>} />
 ```
 
 <Preview>
     <Story name="with label">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <Sort sortOptions={sortOptions} label={<span>Sort:</span>} />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
-                <SearchBox defaultSearch={'boots'} />
+                <SearchBox defaultSearch={defaultSearch} />
             </div>
         </UnbxdSearchWrapper>
     </Story>
@@ -216,27 +133,23 @@ A label for the component can be diplayed by passing `label`.
 
 ### Render props
 
--   This approach gives the total control of the widget to the user.
--   The anonymous function will receive all the data and methods needed to build and manage the widget.
+-   This approach gives the total control of the module to the user.
+-   The anonymous function will receive all the data and methods needed to build and manage the module.
 
 #### Render prop parameters
 
-| Name                | Type     | Description                                    |
-| ------------------- | -------- | ---------------------------------------------- |
-| `sortBy`            | object   | current selected attribute for sort.           |
-| `sortOptions`       | array    | Sort options to be applied on products.        |
-| `displayType`       | string   | selected display type of `DROPDOWN` or `LIST`. |
-| `noOfPages`         | number   | Number of products for current search query.   |
-| `onSortClick`       | function | Handles change of sort option.                 |
-| `SortItemComponent` | element  | Custom sort item component.                    |
-| `label`             | node     | Label for the component.                       |
+| Name          | Type     | Description                                    |
+| ------------- | -------- | ---------------------------------------------- |
+| `sortBy`      | object   | current selected attribute for sort.           |
+| `sortOptions` | array    | Sort options to be applied on products.        |
+| `displayType` | string   | selected display type of `DROPDOWN` or `LIST`. |
+| `noOfPages`   | number   | Number of products for current search query.   |
+| `onSortClick` | function | Handles change of sort option.                 |
+| `label`       | node     | Label for the module.                          |
 
 <Preview>
     <Story name="with render props">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <Sort sortOptions={sortOptions}>
                 {({
                     sortBy,
@@ -244,19 +157,14 @@ A label for the component can be diplayed by passing `label`.
                     displayType,
                     noOfPages,
                     onSortClick,
-                    SortItemComponent,
                     label
                 }) => {
                     return <p>render Sort</p>;
                 }}
             </Sort>
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
-                <SearchBox defaultSearch={'boots'} />
+                <SearchBox defaultSearch={defaultSearch} />
             </div>
         </UnbxdSearchWrapper>
     </Story>

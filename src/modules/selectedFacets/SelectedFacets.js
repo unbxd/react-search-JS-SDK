@@ -49,11 +49,11 @@ SelectedFacets.displayName = 'SelectedFacets';
 
 SelectedFacets.propTypes = {
     /**
-     * Custom facet item component.
+     * Custom facet item component instance.
      */
     facetItemComponent: PropTypes.element,
     /**
-     * Label for the component.
+     * Label for the module.
      */
     label: PropTypes.node
 };

@@ -25,10 +25,7 @@ const ApplyFacets = (props) => {
 ApplyFacets.propTypes = {
     showApplyFilter: PropTypes.bool.isRequired,
     onApplyFilter: PropTypes.func.isRequired,
-    applyFilterComponent: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func
-    ])
+    applyFilterComponent: PropTypes.element
 };
 
 export default ApplyFacets;

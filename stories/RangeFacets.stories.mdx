@@ -4,44 +4,14 @@ import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import RangeFacets from '../src/modules/rangeFacets';
 import Products from '../src/modules/products';
 import SearchBox from '../src/modules/searchBox';
-const defaultSearch = 'Shoes';
-const attributesMap = {
-    productName: 'title',
-    uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl',
-    price: 'unbxd_price',
-    productUrl: 'productUrl'
-};
-const variantAttributesMap = {
-    productName: 'title',
-    uniqueId: 'vId',
-    imageUrl: 'imageUrl',
-    price: 'v_unbxd_price',
-    productUrl: 'productUrl'
-};
-const FacetItemComponent = ({ itemData, facetName, onClick, priceUnit }) => {
-    const { from, end, isSelected = false } = itemData;
-    const { name: fromName, count, dataId: fromDataId } = from;
-    const { name: ToName, dataId: toDataId } = end;
-    const handleClick = () => {
-        onClick(itemData);
-    };
-    return (
-        <div
-            key={`${facetName}_${fromDataId}-${toDataId}`}
-            onClick={handleClick}
-            className={`UNX-facet__item ${isSelected ? '-selected' : ''}`}
-        >
-            {priceUnit} {fromName} - {priceUnit} {ToName} - {count}
-        </div>
-    );
-};
+import { FacetItemComponent } from '../demo/src/components/RangeFilters.js';
+import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
 
 <Meta title="RangeFacets" component={RangeFacets} />
 
 # RangeFacets
 
-### Widget to display range facets.
+### module to display range facets.
 
 #### Default
 
@@ -51,16 +21,9 @@ const FacetItemComponent = ({ itemData, facetName, onClick, priceUnit }) => {
 
 <Preview>
     <Story name="default">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <RangeFacets />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />
             </div>
@@ -68,61 +31,57 @@ const FacetItemComponent = ({ itemData, facetName, onClick, priceUnit }) => {
     </Story>
 </Preview>
 
-#### FacetItemComponent
+#### facetItemComponent
 
-The default List item component can be overriden by passing `FacetItemComponent`.
+The default List item component can be overriden by passing a custom component instance.
 
 ```jsx
-const FacetItem = ({ itemData, facetName, onClick, priceUnit }) => {
-    const { from, end, isSelected = false } = itemData;
+const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
+    const { from, end, facetName, isSelected = false } = itemData;
     const { name: fromName, count, dataId: fromDataId } = from;
     const { name: ToName, dataId: toDataId } = end;
+
     const handleClick = () => {
         onClick(itemData);
     };
+
     return (
         <div
             key={`${facetName}_${fromDataId}-${toDataId}`}
             className={`UNX-facet__item ${isSelected ? '-selected' : ''}`}
             onClick={handleClick}
         >
-            {priceUnit} {fromName} - {priceUnit} {ToName} - {count}
+            <div className="-checkbox" />
+            <div className="-label">
+                {priceUnit}
+                {fromName} - {priceUnit}
+                {ToName}
+            </div>
+            <div className="-count">({count})</div>
         </div>
     );
 };
 ```
 
-The custom component will receive the following props
+The custom component instance will receive the following props
 
-#### FacetListItemComponent Props
+#### facetItemComponent Props
 
 | Name      | Type   | Description          |
 | --------- | ------ | -------------------- |
 | itemData  | object | facet values.        |
-| facetName | string | facet name.          |
 | onClick   | func   | handle facet change. |
 | priceUnit | string | price unit.          |
 
 ```jsx
-<RangeFacets
-    //...
-    FacetItemComponent={FacetItemComponent}
-    //...
-/>
+<RangeFacets facetItemComponent={<FacetItemComponent />} />
 ```
 
 <Preview>
     <Story name="with FacetItemComponent">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
-            <RangeFacets FacetItemComponent={FacetItemComponent} />
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <RangeFacets facetItemComponent={<FacetItemComponent />} />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />
             </div>
@@ -132,45 +91,48 @@ The custom component will receive the following props
 
 ---
 
-### Render Props
+### Render props
 
--   This approach gives the total control of the widget to the user.
--   The anonymous function will receive all the data and methods needed to build and manage the widget.
+-   This approach gives the total control of the module to the user.
+-   The anonymous function will receive all the data and methods needed to build and manage the module.
 
 #### Render prop parameters
 
-| Name                | Type          | Description                  |
-| ------------------- | ------------- | ---------------------------- |
-| rangeFacets         | array         | range facet values.          |
-| selectedRangeFacets | object        | selected range facet values. |
-| priceUnit           | string        | price unit.                  |
-| FacetItemComponent, | element\|func | custom list item component.  |
-| label               | node          | label for the component.     |
+| Name                    | Type   | Description                       |
+| ----------------------- | ------ | --------------------------------- |
+| rangeFacets             | array  | range facet values.               |
+| selectedRangeFacets     | object | selected facet values.            |
+| lastSelectedRangeFacets | object | previously selected facet values. |
+| onFacetClick            | func   | handle facet click.               |
+| onFacetClear            | func   | handle facet clear.               |
+| manageRangeFacets       | func   | manage facets.                    |
+| addRangeFacet           | func   | handle facet add.                 |
+| removeRangeFacet        | func   | handle facet remove.              |
+| applyRangeFacet         | func   | handle facet apply.               |
+| priceUnit               | string | price unit.                       |
 
 <Preview>
     <Story name="with render props">
-        <UnbxdSearchWrapper
-            siteKey="wildearthclone-neto-com-au808941566310465"
-            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-        >
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <RangeFacets>
                 {({
                     rangeFacets,
                     selectedRangeFacets,
+                    lastSelectedRangeFacets,
+                    onFacetClick,
+                    onFacetClear,
+                    manageRangeFacets,
+                    addRangeFacet,
+                    removeRangeFacet,
+                    applyRangeFacet,
                     displayType,
                     priceUnit,
-                    FacetSliderItemComponent,
-                    FacetItemComponent,
                     label
                 }) => {
                     return <div>render RangeFacets</div>;
                 }}
             </RangeFacets>
-            <Products
-                attributesMap={attributesMap}
-                showVariants={true}
-                variantAttributesMap={variantAttributesMap}
-            />
+            <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />
             </div>

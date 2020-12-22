@@ -2,7 +2,7 @@ import React from 'react';
 
 import { SpellCheck } from '@unbxd-ui/react-search-sdk';
 
-const SpellCheckItemComponent = ({ itemData, onClick }) => {
+export const SpellCheckItemComponent = ({ itemData, onClick }) => {
     const { suggestion } = itemData;
     const handleClick = () => {
         onClick(itemData);

@@ -3,7 +3,7 @@ import React from 'react';
 
 import { SelectedFacets } from '@unbxd-ui/react-search-sdk';
 
-const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
+export const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
     const { name, type, dataId } = itemData;
     const handleClick = () => {
         onClick(itemData);

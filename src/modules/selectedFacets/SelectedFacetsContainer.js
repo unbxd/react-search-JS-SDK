@@ -151,6 +151,8 @@ class SelectedFacetsContainer extends React.PureComponent {
             onTextFacetClick: handleTextFacetClick,
             onRangeFacetClick: handleRangeFacetClick,
             onMultilevelFacetClick: handleMultilevelFacetClick,
+            manageTextFacets,
+            manageRangeFacets,
             facetItemComponent,
             priceUnit,
             label

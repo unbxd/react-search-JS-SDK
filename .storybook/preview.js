@@ -14,17 +14,18 @@ addParameters({
                 TextFacets: 4,
                 RangeFacets: 5,
                 MultilevelFacets: 6,
-                Breadcrumbs: 7,
-                SelectedFacets: 8,
-                FacetActions: 9,
-                SearchBox: 10,
-                PageSize: 11,
-                Pagination: 12,
-                Sort: 13,
-                SpellCheck: 14,
-                ViewTypes: 15,
-                Banners: 16,
-                SearchTitle: 17
+                CombinedFacets: 7,
+                Breadcrumbs: 8,
+                SelectedFacets: 9,
+                FacetActions: 10,
+                SearchBox: 11,
+                PageSize: 12,
+                Pagination: 13,
+                Sort: 14,
+                SpellCheck: 15,
+                ViewTypes: 16,
+                Banners: 17,
+                SearchTitle: 18
             };
 
             if (rootStoriesOrder[a[1].kind] < rootStoriesOrder[b[1].kind]) {
