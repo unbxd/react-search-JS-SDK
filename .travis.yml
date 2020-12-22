@@ -1,6 +1,7 @@
 language: node_js
 node_js:
 - 14
+cache: yarn
 jobs:
   include:
   - stage: Build
@@ -18,14 +19,12 @@ jobs:
     before_deploy:
       - yarn build
     deploy:
-      provider: npm
-      email: vikram.gupta@unbxd.com
-      api_key: WztUPGNqkrpLCeljKdgRIgbf4ReNhbo5usbsfOlrpagMheBmpolUtqIyFdVyS/tjwOgjR/thotnc3Eetrqx5tSnBbbycewYyRjfTRgmdLHWpM6YXNBUBaF3hBZoE5DXVHj7Sseok+3dkueOZbDzzaJstb/JxogKNRUocbwqrf8JKe3mRAml8G+rZ/vW03bx+gTGBPrV0HtoTv6YLze0lAC7tMfoB0jYnzbvn9bxUMtsepSXgbrMOSFKoB7T1xp4sSwyTFn/JBeB0IVAYg2DafUYsPSrDEbwFM1LE+LOJW4WCnXZWXiURvufIZ3R9iFHVwXWz/eVROoYo+Q/Ns7YhjB0xnAdWg3ZcflOOBncVSJVTxj/dGhJWqkJ6RBXyR+UhM6++WzYD+a0N4jwadiMiMpJdAKYwgBx8s75zZVGWb1R0rIu0WKUSPML8Dmju6nBcSenvgZXA2Ev1DwxMtK0AEsvbTbCRwf5KKCV5/XlVlX9VS8FhaH9uqbkqP7J2rQ8uOZaa5+sgM2aViozMHfknNf4REMIJfn4LGxc6EpzvHtQWmq+rwmOl+5vpKqWOEk2vIPLdvy7H794aQQeX6aYcdcs4/N1TaI8mX0D+Nzu/KZl0ZME02TLg3RqjZBe2rvfgsZe/GAWDDXoPRBYMlvDluER8OYZeKbe0gLF4Mp8jOKY=
+      provider: script
       skip_cleanup: true
-      script: npm run semantic-release
+      script: yarn run semantic-release
       on:
-        branch: semantic-release-feat
-
-deploy:
-  api_key:
-    secure: WztUPGNqkrpLCeljKdgRIgbf4ReNhbo5usbsfOlrpagMheBmpolUtqIyFdVyS/tjwOgjR/thotnc3Eetrqx5tSnBbbycewYyRjfTRgmdLHWpM6YXNBUBaF3hBZoE5DXVHj7Sseok+3dkueOZbDzzaJstb/JxogKNRUocbwqrf8JKe3mRAml8G+rZ/vW03bx+gTGBPrV0HtoTv6YLze0lAC7tMfoB0jYnzbvn9bxUMtsepSXgbrMOSFKoB7T1xp4sSwyTFn/JBeB0IVAYg2DafUYsPSrDEbwFM1LE+LOJW4WCnXZWXiURvufIZ3R9iFHVwXWz/eVROoYo+Q/Ns7YhjB0xnAdWg3ZcflOOBncVSJVTxj/dGhJWqkJ6RBXyR+UhM6++WzYD+a0N4jwadiMiMpJdAKYwgBx8s75zZVGWb1R0rIu0WKUSPML8Dmju6nBcSenvgZXA2Ev1DwxMtK0AEsvbTbCRwf5KKCV5/XlVlX9VS8FhaH9uqbkqP7J2rQ8uOZaa5+sgM2aViozMHfknNf4REMIJfn4LGxc6EpzvHtQWmq+rwmOl+5vpKqWOEk2vIPLdvy7H794aQQeX6aYcdcs4/N1TaI8mX0D+Nzu/KZl0ZME02TLg3RqjZBe2rvfgsZe/GAWDDXoPRBYMlvDluER8OYZeKbe0gLF4Mp8jOKY=
+        branches:
+          only:
+              - master
+              - beta
+              - alpha
