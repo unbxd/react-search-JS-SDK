@@ -21,7 +21,7 @@ jobs:
     deploy:
       provider: script
       skip_cleanup: true
-      script: yarn run semantic-release
+      script: yarn && npx semantic-release
       on:
         branches:
           only:
