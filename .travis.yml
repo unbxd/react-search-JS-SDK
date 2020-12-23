@@ -23,8 +23,5 @@ jobs:
       skip_cleanup: true
       script: yarn && npx semantic-release
       on:
-        branches:
-          only:
-              - master
-              - semantic-release-feat
-              - alpha
+        all_branches: true
+      
