@@ -58,7 +58,7 @@ class UnbxdSearchWrapper extends Component {
             productType,
             priceUnit
         } = this.props;
-        console.log("hello 1");
+        console.log("hello 1223");
         this.unbxdCallBack = unbxdCallBack.bind(this);
         this.setPageSizeConfiguration = setPageSizeConfiguration.bind(this);
         this.setSortConfiguration = setSortConfiguration.bind(this);
