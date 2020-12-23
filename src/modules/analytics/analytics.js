@@ -21,7 +21,7 @@ export const trackCategory = function (unbxdAnalyticsConf) {
 };
 
 export const trackProductClick = function (uniqueId, prank) {
-    console.log("test1")
+    console.log("test2")
     try {
         Unbxd.track('click', {
             pid: uniqueId,
