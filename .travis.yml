@@ -12,7 +12,7 @@ jobs:
     name: Run test cases
     script:
       - yarn test
-  - stage: npm release
+  - stage: NPM Release
     name: Release new version of SDK
     node_js: lts/*
     script: echo "Deploying to npm"
@@ -28,4 +28,24 @@ jobs:
           - next
           - alpha
           - beta
-      
+  - stage: Storybook Release
+    name: Release new storybook
+    node_js: lts/*
+    script: echo "Deploying to GH pages"
+    before_script:
+    - yarn build
+    - cd demo
+    - yarn install
+    - cd ..
+    - yarn build-storybook        
+    deploy:
+      provider: pages # Tell Travis we want to deploy to Github Pages
+      skip-cleanup: true 
+      github-token: $GITHUB_TOKEN # Will take the environment variable
+      local_dir: storybook-static # The folder that needs to be deployed -- default
+      repo: unbxd/react-search-JS-SDK # Add your username/project_name here
+      target_branch: gh-pages # Tell Travis to deploy on the gh-pages branch
+      on:
+        branch: master # Tell Travis to trigger a deploy only when we push to master      
+notifications:
+  slack: unbxd:6lCkwyhlkp87V1vvR4ZSe8OL
