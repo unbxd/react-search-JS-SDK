@@ -7,7 +7,6 @@
         "public/dist"
     ],
     "release": {
-        "pkgRoot": "public/dist",
         "branches": [
             "master",
             "next",
