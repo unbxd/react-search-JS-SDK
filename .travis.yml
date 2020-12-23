@@ -26,5 +26,5 @@ jobs:
         branches:
           only:
               - master
-              - beta
+              - semantic-release-feat
               - alpha
