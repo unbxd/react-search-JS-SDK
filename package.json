@@ -1,6 +1,6 @@
 {
     "name": "@unbxd-ui/react-search-sdk",
-    "version": "0.0.40-alpha.0",
+    "version": "0.0.39",
     "description": "Unbxd React Search JS SDK",
     "main": "public/dist/js/react-search-sdk.js",
     "files": [
@@ -15,8 +15,40 @@
         "build:tailwind:theme": "postcss public/css/theme/base.scss -o public/css/theme/index.scss",
         "commit": "cz",
         "pre-pack": "yarn build && yarn pack",
+        "semantic-release": "semantic-release",
         "test": "jest",
         "test:watch": "jest --watch"
+    },
+    "release": {
+        "branches": [
+            "master",
+            "next",
+            {
+                "name": "alpha",
+                "prerelease": true
+            },
+            {
+                "name": "beta",
+                "prerelease": true
+            }
+        ],
+        "plugins": [
+            "@semantic-release/commit-analyzer",
+            "@semantic-release/release-notes-generator",
+            "@semantic-release/changelog",
+            "@semantic-release/npm",
+            [
+                "@semantic-release/git",
+                {
+                    "assets": [
+                        "package.json",
+                        "CHANGELOG.md"
+                    ],
+                    "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+                }
+            ],
+            "@semantic-release/github"
+        ]
     },
     "devDependencies": {
         "@babel/core": "^7.12.3",
@@ -86,9 +118,13 @@
         "webpack-dev-server": "^3.10.3"
     },
     "dependencies": {
-        "@unbxd-ui/unbxd-search-core": "0.2.5",
         "@babel/plugin-transform-runtime": "^7.12.10",
-        "prop-types": "^15.7.2"
+        "@semantic-release/changelog": "^5.0.1",
+        "@semantic-release/git": "^9.0.0",
+        "@semantic-release/release-notes-generator": "^9.0.1",
+        "@unbxd-ui/unbxd-search-core": "0.2.5",
+        "prop-types": "^15.7.2",
+        "semantic-release": "^17.3.0"
     },
     "keywords": [
         "React Search",
