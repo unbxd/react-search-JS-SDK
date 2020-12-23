@@ -25,8 +25,8 @@ jobs:
       on:
         branches:
           only:
-          - master
-          - next
-          - alpha
-          - beta
+            - master
+            - next
+            - alpha
+            - beta
       
