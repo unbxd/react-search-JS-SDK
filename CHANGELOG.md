@@ -1,3 +1,10 @@
+## [0.0.40-alpha.1](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.39...v0.0.40-alpha.1) (2020-12-23)
+
+
+### Bug Fixes
+
+* **travis config:** change the deploy on branch config ([22f15df](https://github.com/unbxd/react-search-JS-SDK/commit/22f15df7eeb552d40e5b89a40340ccd54d5ab7a7))
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
