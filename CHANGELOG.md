@@ -1,3 +1,24 @@
+# [0.1.0-semantic-release-feat.1](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.37...v0.1.0-semantic-release-feat.1) (2020-12-23)
+
+
+### Bug Fixes
+
+* **build:** update travis ([efb6003](https://github.com/unbxd/react-search-JS-SDK/commit/efb60030e2957ab9672dc67bea97607784827106))
+* **test:** test ([8682fc3](https://github.com/unbxd/react-search-JS-SDK/commit/8682fc3b570f4e9b970d68d91a96ea9b8ca1d9f5))
+* **test:** test ([7d60652](https://github.com/unbxd/react-search-JS-SDK/commit/7d606524a47a2dd7fbfec2617dfd2a3133176145))
+* **test:** test ([fdfcd95](https://github.com/unbxd/react-search-JS-SDK/commit/fdfcd9535e1164b518c1c954251c6e32721f849d))
+* **test:** test ([2a88f40](https://github.com/unbxd/react-search-JS-SDK/commit/2a88f404abd4fea3f5cea27bfe6cc99c127c2a6b))
+* **test:** test ([736ce9f](https://github.com/unbxd/react-search-JS-SDK/commit/736ce9fcc20b1a040595f4dd34de45097b482d91))
+* **tets:** tes ([1678bd1](https://github.com/unbxd/react-search-JS-SDK/commit/1678bd1ae5826ba19832350c582a5b0b337037a0))
+* package update ([55929db](https://github.com/unbxd/react-search-JS-SDK/commit/55929dbb94d16de51f9f95ac19530ec95682a8b5))
+* script for semantic release ([0e9a40e](https://github.com/unbxd/react-search-JS-SDK/commit/0e9a40e9654c396db4c27b94fb0e098574482ae6))
+
+
+### Features
+
+* **some feature:** test ([80a55e7](https://github.com/unbxd/react-search-JS-SDK/commit/80a55e755369d868089d2de4beacd62aa07096ea))
+* **test:** test ([d9d8390](https://github.com/unbxd/react-search-JS-SDK/commit/d9d8390ad5cffb7f5583757245a1b9b182b90e8f))
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
