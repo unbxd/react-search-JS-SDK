@@ -11,6 +11,7 @@
         "build": "yarn build:tailwind:core && yarn build:tailwind:theme && webpack --config ./webpack/webpack.prod.js",
         "storybook": "yarn build:tailwind:core && yarn build:tailwind:theme && start-storybook -p 6006 --ci",
         "deploy-storybook": "storybook-to-ghpages",
+        "build-storybook": "build-storybook -s public",
         "build:tailwind:core": "postcss public/css/core/base.scss -o public/css/core/index.scss",
         "build:tailwind:theme": "postcss public/css/theme/base.scss -o public/css/theme/index.scss",
         "commit": "cz",
