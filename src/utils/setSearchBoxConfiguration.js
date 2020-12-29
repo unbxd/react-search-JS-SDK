@@ -11,7 +11,8 @@ function setSearchBoxConfiguration(config) {
         return {
             ...existingState,
             productType: productTypes.SEARCH,
-            categoryId: ''
+            categoryId: '',
+            unbxdState: { ...existingState.unbxdState, query: config.query }
         };
     });
 }

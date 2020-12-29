@@ -92,6 +92,21 @@ class SearchBoxContainer extends React.PureComponent {
         manageRangeFacets(null, null, null, manageStateTypes.RESET);
     }
 
+    componentDidUpdate(prevProps) {
+        const { unbxdCore, unbxdCoreStatus, query } = this.props;
+        const { q: currentQuery } = unbxdCore.getQueryParams();
+        if (
+            unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
+            unbxdCoreStatus === 'LOADING' &&
+            typeof currentQuery === 'string' &&
+            currentQuery.length > 0 &&
+            currentQuery !== query &&
+            prevProps.query === query
+        ) {
+            this.setState({ query: currentQuery });
+        }
+    }
+
     getSearchBoxProps() {
         const {
             unbxdCore,

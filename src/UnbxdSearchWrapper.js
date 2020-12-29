@@ -43,7 +43,8 @@ const initialUnbxdState = {
     selectedRangeFacets: { add: {}, remove: {}, list: {} },
     applyMultiple: false,
     pageSize: 10,
-    sort: ''
+    sort: '',
+    query: ''
 };
 
 class UnbxdSearchWrapper extends Component {
