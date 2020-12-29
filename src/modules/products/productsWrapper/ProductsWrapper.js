@@ -75,7 +75,7 @@ class ProductsWrapper extends React.PureComponent {
                   numberOfProducts;
 
         if (
-            prevProps.unbxdCoreStatus === 'LOADING' &&
+            prevProps.unbxdCoreStatus === searchStatus.LOADING &&
             unbxdCoreStatus === 'READY'
         ) {
             if (this.state.products.length === 0 && products.length) {

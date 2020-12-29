@@ -35,8 +35,8 @@ const SearchBar = (props) => {
     const handleSubmit = () => {
         if (productType !== 'SEARCH') {
             onSearch('SEARCH');
+            history.push('/');
         }
-        history.push('/');
         return true;
     };
     return (

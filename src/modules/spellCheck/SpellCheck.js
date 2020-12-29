@@ -17,13 +17,20 @@ const SpellCheck = (props) => {
                     hasUnbxdSearchWrapperContext(SpellCheck.displayName);
                 }
 
-                const { unbxdCore, unbxdCoreStatus, helpers } = appState;
+                const {
+                    unbxdCore,
+                    unbxdCoreStatus,
+                    helpers,
+                    unbxdState
+                } = appState;
 
+                const { query } = unbxdState;
                 return (
                     <SpellCheckContainer
                         unbxdCore={unbxdCore}
                         unbxdCoreStatus={unbxdCoreStatus}
                         helpers={helpers}
+                        query={query}
                         {...props}
                     />
                 );
@@ -38,7 +45,11 @@ SpellCheck.propTypes = {
     /**
      * Custom Spell check component instance
      */
-    spellCheckItemComponent: PropTypes.element
+    spellCheckItemComponent: PropTypes.element,
+    /**
+     * Callback for SpellCheck  click
+     */
+    onSpellCheckClick: PropTypes.func
 };
 
 export default SpellCheck;

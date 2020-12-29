@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { conditionalRenderer, executeCallback } from '../../common/utils';
 import { getFormattedSort, getSelectedSort } from './utils';
 import SortWrapper from './SortWrapper';
+import { searchStatus } from '../../config';
 
 class SortContainer extends React.Component {
     constructor(props) {
@@ -83,7 +84,7 @@ class SortContainer extends React.Component {
 
         if (
             unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
-            unbxdCoreStatus === 'LOADING' &&
+            unbxdCoreStatus === searchStatus.LOADING &&
             typeof sort === 'string' &&
             sortState !== sort &&
             prevProps.sort === sortState
