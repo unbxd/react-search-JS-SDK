@@ -13,9 +13,8 @@ class RenderInput extends React.Component {
             setSearchBoxQuery
         } = this.props;
         if (
-            (prevProps.lastSearchedQuery !== lastSearchedQuery &&
-                query !== lastSearchedQuery) ||
-            productType !== prevProps.productType
+            prevProps.lastSearchedQuery !== lastSearchedQuery &&
+            query !== lastSearchedQuery
         ) {
             if (productType === productTypes.CATEGORY) {
                 setSearchBoxQuery('');

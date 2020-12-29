@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { conditionalRenderer } from '../../common/utils';
 import { getProductViewType } from './utils';
 import ViewTypesWrapper from './ViewTypesWrapper';
+import { searchStatus } from '../../config';
 
 class ViewTypesContainer extends React.PureComponent {
     componentDidMount() {
@@ -58,7 +59,7 @@ class ViewTypesContainer extends React.PureComponent {
             setViewTypeConfiguration({ viewType });
         } else if (
             currentViewType &&
-            unbxdCoreStatus === 'LOADING' &&
+            unbxdCoreStatus === searchStatus.LOADING &&
             viewType === prevProps.viewType &&
             viewType !== currentViewType
         ) {

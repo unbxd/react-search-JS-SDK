@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import GenerateSpellCheck from './generateSpellCheck';
 import { conditionalRenderer, executeCallback } from '../../common/utils';
+import { searchStatus } from '../../config';
 
 /**
  * Component to manage query suggestions.
@@ -49,7 +50,7 @@ class SpellCheckContainer extends React.PureComponent {
             setSearchBoxConfiguration({ query: currentSuggestion });
         } else if (
             unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
-            unbxdCoreStatus === 'LOADING' &&
+            unbxdCoreStatus === searchStatus.LOADING &&
             query !== prevProps.query &&
             currentSuggestion.length &&
             query !== currentSuggestion
