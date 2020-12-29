@@ -2,12 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import GenerateSpellCheck from './generateSpellCheck';
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer, executeCallback } from '../../common/utils';
 
 /**
  * Component to manage query suggestions.
  */
-class SpellCheck extends React.PureComponent {
+class SpellCheckContainer extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = { typedQuery: '', spellChecks: [], currentSuggestion: '' };
+    }
+
     componentDidMount() {
         const {
             helpers: { setSpellCheckConfiguration }
@@ -15,20 +20,66 @@ class SpellCheck extends React.PureComponent {
         setSpellCheckConfiguration({ enable: true });
     }
 
-    getSpellCheckProps() {
+    componentDidUpdate(prevProps) {
         const {
             unbxdCore,
-            helpers: { setSearchBoxConfiguration }
+            unbxdCoreStatus,
+            helpers: { setSearchBoxConfiguration },
+            query
+        } = this.props;
+        // get the number of product
+        const { numberOfProducts = 0 } = unbxdCore.getSearchResults() || {};
+        // check if we got spellcheck suggestion
+        const spellChecks = unbxdCore.getDidYouMeanFromResponse();
+        const { currentSuggestion } = this.state;
+        if (
+            unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
+            unbxdCoreStatus === 'READY' &&
+            numberOfProducts === 0 &&
+            spellChecks.length
+        ) {
+            // trigger a new search
+            // save the typed query
+            const currentSuggestion = spellChecks[0]['suggestion'];
+            this.setState({
+                typedQuery: query,
+                currentSuggestion,
+                spellChecks
+            });
+            setSearchBoxConfiguration({ query: currentSuggestion });
+        } else if (
+            unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
+            unbxdCoreStatus === 'LOADING' &&
+            query !== prevProps.query &&
+            currentSuggestion.length &&
+            query !== currentSuggestion
+        ) {
+            this.setState({
+                typedQuery: '',
+                currentSuggestion: '',
+                spellChecks: []
+            });
+        }
+    }
+
+    getSpellCheckProps() {
+        const {
+            helpers: { setSearchBoxConfiguration },
+            onSpellCheckClick
         } = this.props;
 
         const { spellCheckItemComponent } = this.props;
-        const spellChecks = unbxdCore.getDidYouMeanFromResponse();
-        const currentQuery = unbxdCore.getSearchQuery() || '';
         const handleSuggestionClick = (currentItem) => {
             const { suggestion } = currentItem;
-            setSearchBoxConfiguration({ query: suggestion });
-        };
 
+            const onFinish = () => {
+                setSearchBoxConfiguration({ query: suggestion });
+                this.setState({ typedQuery: '', spellChecks: [] });
+            };
+
+            executeCallback(onSpellCheckClick, [suggestion], onFinish);
+        };
+        const { typedQuery: currentQuery, spellChecks } = this.state;
         return {
             spellChecks,
             currentQuery,
@@ -48,10 +99,11 @@ class SpellCheck extends React.PureComponent {
     }
 }
 
-SpellCheck.propTypes = {
+SpellCheckContainer.propTypes = {
     unbxdCore: PropTypes.object.isRequired,
     helpers: PropTypes.object.isRequired,
-    spellCheckItemComponent: PropTypes.element
+    spellCheckItemComponent: PropTypes.element,
+    onSpellCheckClick: PropTypes.func
 };
 
-export default SpellCheck;
+export default SpellCheckContainer;
