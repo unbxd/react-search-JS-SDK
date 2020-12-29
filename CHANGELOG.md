@@ -1,3 +1,11 @@
+## [0.0.40-alpha.2](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.40-alpha.1...v0.0.40-alpha.2) (2020-12-29)
+
+
+### Bug Fixes
+
+* **read search query on back:** fetch the current search query on browser back ([687c77c](https://github.com/unbxd/react-search-JS-SDK/commit/687c77c48164a0a935c9274ad5be76829ddae5ff))
+* **spellcheck experience:** change spellcheck flow where on no results, trigger the suggested query ([b16fda1](https://github.com/unbxd/react-search-JS-SDK/commit/b16fda16669aed81ae8b04f87f258639778f166a))
+
 ## [0.0.40-alpha.1](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.39...v0.0.40-alpha.1) (2020-12-23)
 
 
