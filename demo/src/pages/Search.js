@@ -8,6 +8,7 @@ import CategoryLinks from '../components/CategoryLinks';
 import MobileMenu from '../components/MobileMenu';
 import SearchBar from '../components/SearchBar';
 import { Route, useHistory, useLocation } from 'react-router-dom';
+import { scrollTop } from '../utils';
 
 const getCategoryId = () => {
     if (window.UnbxdAnalyticsConf && window.UnbxdAnalyticsConf['page']) {
@@ -87,6 +88,7 @@ const Search = () => {
     };
 
     const handleRouteChange = (hash) => {
+        scrollTop();
         if (routeLocation.hash && routeHistory.action !== 'POP') {
             routeHistory.push(`${routeLocation.pathname}#${hash}`);
         } else {

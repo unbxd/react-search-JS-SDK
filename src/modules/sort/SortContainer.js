@@ -74,33 +74,29 @@ class SortContainer extends React.Component {
 
         const { sort } = unbxdCore.getQueryParams();
         let sortOn = null;
-        if (
-            unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
-            unbxdCoreStatus === 'READY' &&
-            sort === undefined
-        ) {
-            this.setState({ sortBy: { value: '' } });
-        }
 
         if (
             unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
             unbxdCoreStatus === searchStatus.LOADING &&
-            typeof sort === 'string' &&
             sortState !== sort &&
             prevProps.sort === sortState
         ) {
-            const [field, order] = sort.split(' ');
-            sortOn = { field, order };
-            const formattedSort = `${field}|${order}`;
-            const formattedSortByOptions = sortOptions.map((sortByoption) =>
-                getFormattedSort(sortByoption, this.state.sortBy)
-            );
-            const selectedSort = getSelectedSort(
-                formattedSort,
-                formattedSortByOptions
-            );
-            if (field.length && order.length) {
-                this.setState({ sortBy: selectedSort });
+            if (sort === undefined) {
+                this.setState({ sortBy: { value: '' } });
+            } else {
+                const [field, order] = sort.split(' ');
+                sortOn = { field, order };
+                const formattedSort = `${field}|${order}`;
+                const formattedSortByOptions = sortOptions.map((sortByoption) =>
+                    getFormattedSort(sortByoption, this.state.sortBy)
+                );
+                const selectedSort = getSelectedSort(
+                    formattedSort,
+                    formattedSortByOptions
+                );
+                if (field.length && order.length) {
+                    this.setState({ sortBy: selectedSort });
+                }
             }
         }
     }
