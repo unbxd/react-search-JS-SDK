@@ -26,7 +26,8 @@ import {
     handleViewTypeClick,
     getUpdatedResults,
     resetSearch,
-    getAnalytics
+    getAnalytics,
+    getStateString
 } from './utils';
 import { cloneElement } from './common/utils';
 import '../public/css/core/index.scss';
@@ -60,6 +61,9 @@ class UnbxdSearchWrapper extends Component {
             priceUnit
         } = this.props;
 
+        if (!UnbxdSearch.prototype.getStateString) {
+            UnbxdSearch.prototype.getStateString = getStateString;
+        }
         this.unbxdCallBack = unbxdCallBack.bind(this);
         this.setPageSizeConfiguration = setPageSizeConfiguration.bind(this);
         this.setSortConfiguration = setSortConfiguration.bind(this);
@@ -171,7 +175,11 @@ class UnbxdSearchWrapper extends Component {
     componentDidUpdate(prevProps) {
         const { refreshId } = prevProps;
         const { productType } = this.props;
-        const { unbxdCore, categoryId } = this.state;
+        const {
+            unbxdCore,
+            categoryId,
+            unbxdState: { query }
+        } = this.state;
         const { trackCategory } = this.getAnalytics();
 
         const urlParams = unbxdCore.getQueryParams();
@@ -209,7 +217,12 @@ class UnbxdSearchWrapper extends Component {
             renderFromUrl();
         } else if (refreshId !== this.props.refreshId) {
             this.resetSearch();
-            getResults();
+            unbxdCore.options.productType = productType;
+            if (productType === productTypes.SEARCH) {
+                getResults(query);
+            } else {
+                getResults();
+            }
         }
     }
 
@@ -309,6 +322,10 @@ UnbxdSearchWrapper.propTypes = {
      * search configurations object.
      */
     searchConfigurations: PropTypes.object,
+    /**
+     * callback to handle routes.
+     */
+    onRouteChange: PropTypes.func,
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node

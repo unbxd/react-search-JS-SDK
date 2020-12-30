@@ -19,7 +19,7 @@ const searchConfigurations = {
     startPageNo: 0,
     facetMultiSelect: true,
     facetMultiSelectionMode: true,
-    updateUrls: true,
+    updateUrls: false,
     variants: {
         enabled: false,
         count: 1,
