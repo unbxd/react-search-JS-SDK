@@ -72,7 +72,7 @@ class ProductsWrapper extends React.PureComponent {
             start === 0
                 ? products.length === numberOfProducts
                 : [...prevState.products, ...products].length ===
-                  numberOfProducts;
+                numberOfProducts;
 
         if (
             prevProps.unbxdCoreStatus === searchStatus.LOADING &&
@@ -136,15 +136,15 @@ class ProductsWrapper extends React.PureComponent {
                 }
                 start === 0
                     ? this.setState({
-                          products: products,
-                          start,
-                          hasMoreResults: !loadedAllResults
-                      })
+                        products: products,
+                        start,
+                        hasMoreResults: !loadedAllResults
+                    })
                     : this.setState({
-                          products: [...prevState.products, ...products],
-                          start,
-                          hasMoreResults: !loadedAllResults
-                      });
+                        products: [...prevState.products, ...products],
+                        start,
+                        hasMoreResults: !loadedAllResults
+                    });
 
                 return;
             }
@@ -207,6 +207,7 @@ class ProductsWrapper extends React.PureComponent {
             loaderComponent,
             showLoader,
             numberOfProducts,
+            onZeroResults,
             zeroResultsComponent,
             priceUnit
         } = this.props;
@@ -223,6 +224,9 @@ class ProductsWrapper extends React.PureComponent {
 
         //return the default Zero results template
         if (numberOfProducts === 0 && unbxdCoreStatus === searchStatus.READY) {
+            if (typeof onZeroResults !== 'undefined') {
+                onZeroResults(query);
+            }
             return <NoProducts />;
         }
 
@@ -267,14 +271,14 @@ class ProductsWrapper extends React.PureComponent {
                             loadMoreProducts: this.loadMoreProducts
                         })
                     ) : (
-                        <div
-                            className="UNX-productLoadMore"
-                            onClick={this.loadMoreProducts}
-                            data-testid={'UNX_loadMore'}
-                        >
-                            Load more
+                            <div
+                                className="UNX-productLoadMore"
+                                onClick={this.loadMoreProducts}
+                                data-testid={'UNX_loadMore'}
+                            >
+                                Load more
                         </div>
-                    ))}
+                        ))}
 
                 {displayLoader && loaderComponent}
             </div>

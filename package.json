@@ -17,7 +17,7 @@
         "commit": "cz",
         "pre-pack": "yarn build && yarn pack",
         "semantic-release": "semantic-release",
-        "test": "jest",
+        "test": "jest --collectCoverage",
         "test:watch": "jest --watch"
     },
     "release": {
