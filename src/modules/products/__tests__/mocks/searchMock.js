@@ -80,7 +80,7 @@ export const searchResponse = {
         },
     },
     response: {
-        numberOfProducts: 159,
+        numberOfProducts: 20,
         start: 0,
         products: [
             {
