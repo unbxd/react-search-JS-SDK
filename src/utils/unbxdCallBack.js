@@ -7,6 +7,10 @@ function unbxdCallBack(unbxdSearchObj, eventName, data) {
             unbxdCore: unbxdSearchObj,
             unbxdCoreStatus: searchStatus.READY
         });
+        const { onRouteChange } = this.props;
+        if (typeof onRouteChange === 'function') {
+            onRouteChange(unbxdSearchObj.getStateString());
+        }
     }
 
     if (eventName === searchEvents.BEFORE_API_CALL) {
