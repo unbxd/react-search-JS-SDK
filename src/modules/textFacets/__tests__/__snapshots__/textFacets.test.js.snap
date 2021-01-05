@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Match Snapshot for text facets 1`] = `
+Array [
+  <div>
+    <div
+      className="UNX-products__container"
+    >
+      <div
+        className="UNX-products__list -grid grid-cols-4"
+      />
+    </div>
+  </div>,
+  <div>
+    <div
+      className="UNX-searchbox__container"
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        <input
+          className="UNX-searchbox__input"
+          onChange={[Function]}
+          placeholder=""
+          value=""
+        />
+        
+        <button
+          className="UNX-searchbox__button"
+          type="submit"
+        >
+          Search
+        </button>
+      </form>
+    </div>
+  </div>,
+]
+`;
