@@ -1,3 +1,11 @@
+## [0.0.40-alpha.3](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.40-alpha.2...v0.0.40-alpha.3) (2021-01-05)
+
+
+### Bug Fixes
+
+* **custom route handling:** pass a callback to listen to url changes triggered by the SDK ([6012e4b](https://github.com/unbxd/react-search-JS-SDK/commit/6012e4b970217b2f123a29df5b43de040f9e7d2f))
+* **misc fixes:** don't update searchbox when product type is category. group the sort read logic ([397741d](https://github.com/unbxd/react-search-JS-SDK/commit/397741d57979042603ac9fa8cb824c85b157ee78))
+
 ## [0.0.40-alpha.2](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.40-alpha.1...v0.0.40-alpha.2) (2020-12-29)
 
 
