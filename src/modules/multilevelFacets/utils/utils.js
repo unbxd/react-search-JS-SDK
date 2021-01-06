@@ -19,7 +19,6 @@ export const getFormattedMultilevelFacets = (bucketedFacets, unbxdCore) => {
         highestBreadcrumbLevel = 0;
 
         const breadCrumbFacets = breadCrumbsList.map((breadcrumb) => {
-            console.log('breadcrumb', breadcrumb);
             if (highestBreadcrumbLevel < breadcrumb.level) {
                 highestBreadcrumbLevel = breadcrumb.level;
             }

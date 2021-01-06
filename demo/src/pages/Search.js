@@ -16,32 +16,6 @@ const getCategoryId = () => {
     }
 };
 
-const setCategoryId = (param, self) => {
-    const { level, name, parent } = param;
-    let page = '';
-    const pathArr = [];
-    const l = Number(level);
-    if (l === 1) {
-        return;
-    }
-    const breadCrumbs = self.getBreadCrumbsList(parent);
-    breadCrumbs.forEach((element) => {
-        const { value, level } = element;
-
-        if (l > level) {
-            pathArr.push(value);
-        }
-    });
-    if (l > breadCrumbs.length) {
-        pathArr.push(name);
-    }
-    page = pathArr.join('>');
-    if (window.UnbxdAnalyticsConf) {
-        window.UnbxdAnalyticsConf.page = `${parent}:${page}`;
-    }
-    return true;
-};
-
 const Loader = () => {
     return (
         <div className="overlay">
@@ -101,7 +75,6 @@ const Search = () => {
             siteKey="ss-unbxd-sanj-tennis7501607934430"
             apiKey="6fbadfac18b560a0926da3e06fefecfb"
             getCategoryId={getCategoryId}
-            setCategoryId={setCategoryId}
             searchConfigurations={searchConfigurations}
             productType={productType}
             refreshId={refreshId}

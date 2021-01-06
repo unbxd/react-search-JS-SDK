@@ -22,7 +22,8 @@ const CombinedFacets = (props) => {
                     unbxdCoreStatus,
                     helpers,
                     unbxdState,
-                    priceUnit
+                    priceUnit,
+                    productType
                 } = appState;
                 const {
                     enableApplyFilters,
@@ -35,6 +36,7 @@ const CombinedFacets = (props) => {
                         unbxdCore={unbxdCore}
                         unbxdCoreStatus={unbxdCoreStatus}
                         helpers={helpers}
+                        productType={productType}
                         enableApplyFilters={enableApplyFilters}
                         selectedTextFacets={selectedTextFacets}
                         selectedRangeFacets={selectedRangeFacets}

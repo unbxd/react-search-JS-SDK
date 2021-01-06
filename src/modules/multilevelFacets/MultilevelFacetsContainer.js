@@ -37,8 +37,7 @@ class MultilevelFacetsContainer extends React.PureComponent {
             getBucketedFacets,
             getBreadCrumbsList,
             setCategoryFilter,
-            deleteCategoryFilter,
-            getResults
+            deleteCategoryFilter
         } = getMultilevelFacetCoreMethods(unbxdCore);
 
         const bucketedFacets = getBucketedFacets();
@@ -59,7 +58,6 @@ class MultilevelFacetsContainer extends React.PureComponent {
             highestBreadcrumbLevel = 0;
 
             const breadCrumbFacets = breadCrumbsList.map((breadcrumb) => {
-                console.log('breadcrumb', breadcrumb);
                 if (highestBreadcrumbLevel < breadcrumb.level) {
                     highestBreadcrumbLevel = breadcrumb.level;
                 }
@@ -120,24 +118,32 @@ class MultilevelFacetsContainer extends React.PureComponent {
             const { getUpdatedResults } = helpers;
 
             const onFinish = () => {
-                const { setCategoryId } = unbxdCore;
-                if (
-                    productType === productTypes.CATEGORY &&
-                    typeof setCategoryId === 'function'
-                ) {
-                    const triggerNewSearch = setCategoryId(
-                        categoryObject,
-                        unbxdCore
-                    );
-                    if (triggerNewSearch) {
-                        getUpdatedResults();
-                    }
+                if (highestBreadcrumbLevel === parseInt(level)) {
+                    deleteCategoryFilter(categoryObject);
                 } else {
-                    if (highestBreadcrumbLevel === parseInt(level)) {
-                        deleteCategoryFilter(categoryObject);
+                    // check if it is a breadcrumb
+                    const breadCrumbsList = getBreadCrumbsList(parent);
+                    if (productType === productTypes.CATEGORY) {
+                        unbxdCore.state.categoryFilter[parent] = [];
+                        const breadCrumbs = getBreadCrumbsList(parent);
+                        breadCrumbs.forEach((element) => {
+                            const {
+                                value: breadcrumbValue,
+                                level: breadcrumbLevel
+                            } = element;
+                            setCategoryFilter({
+                                parent,
+                                level: breadcrumbLevel,
+                                name: breadcrumbValue
+                            });
+                        });
+                        if (categoryObject.level >= highestBreadcrumbLevel) {
+                            setCategoryFilter(categoryObject);
+                        } else {
+                            deleteCategoryFilter(categoryObject);
+                        }
+                        getUpdatedResults();
                     } else {
-                        // check if it is a breadcrumb
-                        const breadCrumbsList = getBreadCrumbsList(parent);
                         const hit = breadCrumbsList.find(({ value }) => {
                             return name === value;
                         });
@@ -148,8 +154,8 @@ class MultilevelFacetsContainer extends React.PureComponent {
                             setCategoryFilter(categoryObject);
                         }
                     }
-                    getUpdatedResults();
                 }
+                getUpdatedResults();
             };
             executeCallback(onFacetClick, [categoryObject], onFinish);
         };
