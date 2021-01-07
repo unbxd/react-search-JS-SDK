@@ -38,7 +38,7 @@ const attributesMap = {
     productName: 'title',
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
-    price: 'min_cheapest_default_price',
+    price: 'RRP_Price',
     productUrl: 'productUrl'
 };
 
@@ -49,6 +49,7 @@ test('Match Snapshot for text facets', () => {
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >
+                <TextFacets />
                 <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
@@ -116,37 +117,5 @@ test('Test text facet click with FacetItemComponent', async () => {
     });
 });
 
-test('Test text facet click with renderProps', async () => {
-    const { getByText } = render(
-        <>
-            <UnbxdSearchWrapper
-                siteKey="wildearthclone-neto-com-au808941566310465"
-                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
-                < TextFacets 
-                    collapsible={true}
-                    searchable={true}
-                    minViewMore={3}
-                    enableViewMore={true}
-                />
-
-                <Products
-                    attributesMap={attributesMap}
-                />
-                <div>
-                    <SearchBox defaultSearch="shoes" />
-                </div>
-            </UnbxdSearchWrapper>
-        </>
-    );
-
-    await waitFor(async () => {
-        expect(getByText('Scarpa - 18')).toBeInTheDocument();
-        fireEvent.click(getByText("Scarpa - 18"));
-    });
-    await waitFor(() => {
-        expect(getByText("Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots")).toBeInTheDocument();
-    });
-});
 
 
