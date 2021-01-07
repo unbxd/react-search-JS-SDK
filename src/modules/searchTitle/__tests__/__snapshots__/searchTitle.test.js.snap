@@ -1,7 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Match Snapshot for products 1`] = `
+exports[`Match Snapshot for Search Title 1`] = `
 Array [
+  <div
+    className="UNBXD-searchTitle__container"
+  >
+    Showing results for
+    <span
+      className="-query"
+    >
+       
+      boots
+    </span>
+    <span
+      className="-pageDescription"
+    >
+      - 
+      1
+       to 
+      10
+       of
+       
+      20
+       products
+    </span>
+  </div>,
   <div>
     <div
       className="UNX-products__container"
