@@ -1,29 +1,6 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
-const setCategoryId = (param, self) => {
-    const { level, name } = param;
-    let page = ``;
-    let pathArr = [];
-    const l = Number(level);
-    if (l === 1) {
-        return;
-    }
-    const breadCrumbs = self.getBreadCrumbsList();
-    breadCrumbs.forEach((element, i) => {
-        const { value, level } = element;
-        if (l > level) {
-            pathArr.push(value);
-        }
-    });
-    if (l > breadCrumbs.length) {
-        pathArr.push(name);
-    }
-    page = pathArr.join('>');
-    if (window.UnbxdAnalyticsConf) {
-        window.UnbxdAnalyticsConf.page = page;
-    }
-};
 
 <Meta title="UnbxdSearchWrapper" component={UnbxdSearchWrapper} />
 
@@ -51,7 +28,7 @@ const setCategoryId = (param, self) => {
 
 ### Category
 
-Pass `getCategoryId`, which returns the category path, and `setCategoryId`, which sets the category path, for category pages.
+Pass `getCategoryId`, which returns the category path for category pages.
 
 ```js
 const getCategoryId = () => {
@@ -59,34 +36,10 @@ const getCategoryId = () => {
         return encodeURIComponent(window.UnbxdAnalyticsConf['page']);
     }
 };
-
-const setCategoryId = (param, self) => {
-    const { level, name, parent } = param;
-    let page = ``;
-    let pathArr = [];
-    const l = Number(level);
-    if (l === 1) {
-        return;
-    }
-    const breadCrumbs = self.getBreadCrumbsList();
-    breadCrumbs.forEach((element, i) => {
-        const { value, level } = element;
-        if (l > level) {
-            pathArr.push(value);
-        }
-    });
-    if (l > breadCrumbs.length) {
-        pathArr.push(name);
-    }
-    page = pathArr.join('>');
-    if (window.UnbxdAnalyticsConf) {
-        window.UnbxdAnalyticsConf.page = `${parent}:${page}`;
-    }
-};
 ```
 
 ```jsx
-<UnbxdSearchWrapper getCategoryId={getCategoryId} setCategoryId={setCategoryId}>
+<UnbxdSearchWrapper getCategoryId={getCategoryId}>
     {/*modules*/}
 </UnbxdSearchWrapper>
 ```
@@ -97,7 +50,6 @@ const setCategoryId = (param, self) => {
             siteKey={siteKey}
             apiKey={apiKey}
             getCategoryId={getCategoryId}
-            setCategoryId={setCategoryId}
         >
             <div>
                 Wrap all the modules in <strong>UnbxdSearchWrapper</strong>

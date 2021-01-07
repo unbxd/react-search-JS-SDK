@@ -53,7 +53,11 @@ Breadcrumbs.propTypes = {
     /**
      * Custom breadcrumb component instance.
      */
-    breadcrumbItemComponent: PropTypes.element
+    breadcrumbItemComponent: PropTypes.element,
+    /**
+     * Callback for breadcrumb click.
+     */
+    onBreadcrumbClick: PropTypes.func
 };
 
 export default Breadcrumbs;

@@ -24,7 +24,9 @@ export const BreadcrumbItemComponent = ({
         </>
     );
 };
-
+export const onBreadcrumbClick = (categoryObject) => {
+    return true;
+};
 export const Root = () => <span className="UNX-breadcrumb__root">Home</span>;
 export const separator = <span className="UNX-breadcrumb__separator">/</span>;
 
@@ -33,6 +35,7 @@ const Crumbs = () => {
         <Breadcrumbs
             separator={separator}
             breadcrumbItemComponent={<BreadcrumbItemComponent />}
+            onBreadcrumbClick={onBreadcrumbClick}
         />
     );
 };

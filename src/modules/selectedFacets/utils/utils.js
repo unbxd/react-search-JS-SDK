@@ -8,6 +8,7 @@ export const getFacetCoreMethods = (unbxdCore) => {
     const selectedRangeFacets = unbxdCore.state.rangeFacet;
     const getBreadCrumbsList = unbxdCore.getBreadCrumbsList.bind(unbxdCore);
     const deleteCategoryFilter = unbxdCore.deleteCategoryFilter.bind(unbxdCore);
+    const getBucketedFacets = unbxdCore.getBucketedFacets.bind(unbxdCore);
 
     return {
         deleteAFacet,
@@ -18,6 +19,7 @@ export const getFacetCoreMethods = (unbxdCore) => {
         clearARangeFacet,
         selectedRangeFacets,
         getBreadCrumbsList,
-        deleteCategoryFilter
+        deleteCategoryFilter,
+        getBucketedFacets
     };
 };

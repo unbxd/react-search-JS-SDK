@@ -16,7 +16,6 @@ class SelectedFacetsContainer extends React.PureComponent {
             priceUnit,
             label,
             getUpdatedResults,
-            productType,
             helpers,
             applyMultiple
         } = this.props;
@@ -30,24 +29,24 @@ class SelectedFacetsContainer extends React.PureComponent {
             setRangeFacet,
             applyRangeFacet,
             getBreadCrumbsList,
-            deleteCategoryFilter
+            deleteCategoryFilter,
+            getBucketedFacets
         } = getFacetCoreMethods(unbxdCore);
 
         const textFacets = getFacets();
         const selectedTextFacets = getSelectedFacets();
-        const multilevelFacets = getBreadCrumbsList();
+        const multilevelFacets = getBucketedFacets();
+        const selectedMultilevelFacets = multilevelFacets.map(
+            ({ filterField }) => {
+                return getBreadCrumbsList(filterField);
+            }
+        );
 
         const { manageTextFacets, manageRangeFacets } = helpers;
 
         const removeTextFacet = (facetName, dataId) => {
             deleteAFacet(facetName, dataId);
             getUpdatedResults();
-        };
-
-        const removeRangeFacet = (facetName) => {
-            //call addRangeFacet from here
-            clearARangeFacet(facetName);
-            applyRangeFacet();
         };
 
         const removeMultilevelFacet = (parent, name, level) => {
@@ -88,19 +87,7 @@ class SelectedFacetsContainer extends React.PureComponent {
 
         const handleMultilevelFacetClick = (currentItem) => {
             const { name, level, filterField: parent } = currentItem;
-            const categoryObject = { parent, level, name };
-            const { setCategoryId } = unbxdCore;
-            if (
-                productType === productTypes.CATEGORY &&
-                typeof setCategoryId === 'function'
-            ) {
-                const getResults = setCategoryId(categoryObject, unbxdCore);
-                if (getResults) {
-                    getUpdatedResults();
-                }
-            } else {
-                removeMultilevelFacet(parent, name, level);
-            }
+            removeMultilevelFacet(parent, name, level);
         };
 
         const activeFacets = {};
@@ -136,14 +123,20 @@ class SelectedFacetsContainer extends React.PureComponent {
         });
 
         activeFacets['multilevelFacets'] = [];
-        multilevelFacets.map((facetValue) => {
-            const { value: name, filterField, level } = facetValue;
-            activeFacets['multilevelFacets'].push({
-                name,
-                filterField,
-                level,
-                type: facetTypes.MULTILEVEL_FACET
-            });
+        selectedMultilevelFacets.map((facetValue) => {
+            if (facetValue.length) {
+                activeFacets['multilevelFacets'].push(
+                    ...facetValue.map((fVal) => {
+                        const { value: name, filterField, level } = fVal;
+                        return {
+                            name,
+                            filterField,
+                            level,
+                            type: facetTypes.MULTILEVEL_FACET
+                        };
+                    })
+                );
+            }
         });
 
         return {
