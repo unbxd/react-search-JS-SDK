@@ -25,7 +25,6 @@ export const BreadcrumbItemComponent = ({
     );
 };
 export const onBreadcrumbClick = (categoryObject) => {
-    console.log('clicked item', categoryObject);
     return true;
 };
 export const Root = () => <span className="UNX-breadcrumb__root">Home</span>;

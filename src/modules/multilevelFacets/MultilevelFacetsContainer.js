@@ -106,7 +106,8 @@ class MultilevelFacetsContainer extends React.PureComponent {
             const facet = {
                 facetDisplayName,
                 filterField,
-                values: [...breadCrumbFacets, ...formattedBucketedFacets]
+                values: [...breadCrumbFacets, ...formattedBucketedFacets],
+                highestBreadcrumbLevel
             };
             multilevelFacets.push(facet);
         });
@@ -116,7 +117,10 @@ class MultilevelFacetsContainer extends React.PureComponent {
             const categoryObject = { parent, level, name };
             const { helpers } = this.props;
             const { getUpdatedResults } = helpers;
-
+            const currentMultilevelFacet = multilevelFacets.find(
+                (multilevelFacet) => multilevelFacet.filterField === parent
+            );
+            const { highestBreadcrumbLevel } = currentMultilevelFacet;
             const onFinish = () => {
                 if (highestBreadcrumbLevel === parseInt(level)) {
                     deleteCategoryFilter(categoryObject);

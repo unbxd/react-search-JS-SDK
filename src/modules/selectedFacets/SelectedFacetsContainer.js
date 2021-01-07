@@ -36,11 +36,11 @@ class SelectedFacetsContainer extends React.PureComponent {
         const textFacets = getFacets();
         const selectedTextFacets = getSelectedFacets();
         const multilevelFacets = getBucketedFacets();
-        const selectedMultilevelFacets = [];
-        multilevelFacets.map(({ filterField }) => {
-            const breadcrumbs = getBreadCrumbsList(filterField);
-            selectedMultilevelFacets.push(breadcrumbs);
-        });
+        const selectedMultilevelFacets = multilevelFacets.map(
+            ({ filterField }) => {
+                return getBreadCrumbsList(filterField);
+            }
+        );
 
         const { manageTextFacets, manageRangeFacets } = helpers;
 
@@ -125,15 +125,17 @@ class SelectedFacetsContainer extends React.PureComponent {
         activeFacets['multilevelFacets'] = [];
         selectedMultilevelFacets.map((facetValue) => {
             if (facetValue.length) {
-                facetValue.map((fVal) => {
-                    const { value: name, filterField, level } = fVal;
-                    activeFacets['multilevelFacets'].push({
-                        name,
-                        filterField,
-                        level,
-                        type: facetTypes.MULTILEVEL_FACET
-                    });
-                });
+                activeFacets['multilevelFacets'].push(
+                    ...facetValue.map((fVal) => {
+                        const { value: name, filterField, level } = fVal;
+                        return {
+                            name,
+                            filterField,
+                            level,
+                            type: facetTypes.MULTILEVEL_FACET
+                        };
+                    })
+                );
             }
         });
 
