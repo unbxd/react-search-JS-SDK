@@ -1,3 +1,11 @@
+## [0.0.40-alpha.4](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.40-alpha.3...v0.0.40-alpha.4) (2021-01-07)
+
+
+### Bug Fixes
+
+* **cp multilevel facets:** treat multilevel facets as filters instead of category path update ([64ec2b9](https://github.com/unbxd/react-search-JS-SDK/commit/64ec2b983e323cdaeef8ca1649523d5c2ce59a9c))
+* **multilevel facets:** localize highest breadcrumb level for multiple facets ([8703e60](https://github.com/unbxd/react-search-JS-SDK/commit/8703e60bccc8fb54cbb948b96689c2ff4295870d))
+
 ## [0.0.40-alpha.3](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.40-alpha.2...v0.0.40-alpha.3) (2021-01-05)
 
 
