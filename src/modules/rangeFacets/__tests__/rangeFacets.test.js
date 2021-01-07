@@ -2,24 +2,32 @@ import renderer from 'react-test-renderer';
 import { render, waitFor, fireEvent } from '@testing-library/react';
 import React from 'react';
 import Products from '../../products/index';
-import TextFacets from '../index';
+import RangeFacets from '../index';
 import UnbxdSearchWrapper from '../../../UnbxdSearchWrapper';
 import SearchBox from '../../searchBox';
 import { searchResponse } from './mocks/searchMock';
 
-const FacetItemComponent = ({ itemData, onClick }) => {
-    const { name, count, isSelected } = itemData;
+export const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
+    const { from, end, facetName, isSelected = false } = itemData;
+    const { name: fromName, count, dataId: fromDataId } = from;
+    const { name: ToName, dataId: toDataId } = end;
+
     const handleClick = () => {
         onClick(itemData);
     };
 
     return (
         <div
+            key={`${facetName}_${fromDataId}-${toDataId}`}
             className={`UNX-facet__item ${isSelected ? '-selected' : ''}`}
             onClick={handleClick}
         >
             <div className="-checkbox" />
-            <div className="-label">{name}</div>
+            <div className="-label">
+                {priceUnit}
+                {fromName} - {priceUnit}
+                {ToName}
+            </div>
             <div className="-count">({count})</div>
         </div>
     );
@@ -43,14 +51,14 @@ const attributesMap = {
 };
 
 
-test('Match Snapshot for text facets', async () => {
+test('Match Snapshot for range facets', async () => {
     const tree = renderer
         .create(
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >
-                <TextFacets />
+                <RangeFacets />
                 <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
@@ -62,14 +70,14 @@ test('Match Snapshot for text facets', async () => {
         expect(tree.toJSON()).toMatchSnapshot();
 });
 
-test('Test text facet click', async () => {
+test('Test range facet click', async () => {
     const { getByText } = render(
         <>
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >   
-                <TextFacets />
+                <RangeFacets />
                 <Products
                     attributesMap={attributesMap}
                 />
@@ -81,23 +89,22 @@ test('Test text facet click', async () => {
     );
 
     await waitFor(async () => {
-        expect(getByText('Scarpa - 18')).toBeInTheDocument();
-        fireEvent.click(getByText("Scarpa - 18"));
+        expect(getByText('$ 200 - $ 300 - 60')).toBeInTheDocument();
+        fireEvent.click(getByText("$ 200 - $ 300 - 60"));
     });
     await waitFor(() => {
-        expect(getByText("Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots")).toBeInTheDocument();
-        fireEvent.click(getByText("Clear"));
+        expect(getByText("Salomon OUTblast TS CSWP Mens Hiking Boots - Black/Black/Black")).toBeInTheDocument();
     });
 });
 
-test('Test text facet click with FacetItemComponent', async () => {
+test('Test range facet click with FacetItemComponent', async () => {
     const { getByText } = render(
         <>
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >   
-                <TextFacets facetItemComponent={<FacetItemComponent />}/>
+                <RangeFacets facetItemComponent={<FacetItemComponent />}/>
                 <Products
                     attributesMap={attributesMap}
                 />
@@ -109,12 +116,11 @@ test('Test text facet click with FacetItemComponent', async () => {
     );
 
     await waitFor(async () => {
-        expect(getByText('Scarpa')).toBeInTheDocument();
-        fireEvent.click(getByText("Scarpa"));
+        expect(getByText('$200 - $300')).toBeInTheDocument();
+        fireEvent.click(getByText("$200 - $300"));
     });
     await waitFor(() => {
-        expect(getByText("Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots")).toBeInTheDocument();
-        fireEvent.click(getByText("Clear"));
+        expect(getByText("Salomon OUTblast TS CSWP Mens Hiking Boots - Black/Black/Black")).toBeInTheDocument();
     });
 });
 
