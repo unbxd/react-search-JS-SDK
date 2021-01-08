@@ -1,7 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Match Snapshot for products 1`] = `
+exports[`Match Snapshot for Pagination 1`] = `
 Array [
+  <div
+    className="UNX-pageNavigation__container"
+  >
+    <button
+      className="UNX-pageNavigation__button -selected"
+      data-pagenumber={1}
+      data-testid="UNX_pageNumber1"
+    >
+      1
+    </button>
+    <button
+      className="UNX-pageNavigation__button"
+      data-pagenumber={2}
+      data-testid="UNX_pageNumber2"
+      itemData={
+        Object {
+          "pageNumber": 2,
+          "type": "NUMBER",
+        }
+      }
+      onClick={[Function]}
+    >
+      2
+    </button>
+    <button
+      className="UNX-pageNavigation__button"
+      data-pagenumber={3}
+      data-testid="UNX_pageNumber3"
+      itemData={
+        Object {
+          "pageNumber": 3,
+          "type": "NUMBER",
+        }
+      }
+      onClick={[Function]}
+    >
+      3
+    </button>
+    <button
+      className="UNX-pageNavigation__button -action"
+      data-pagenumber={2}
+      data-testid="UNX_pagination-next"
+      onClick={[Function]}
+    >
+      &gt;
+    </button>
+  </div>,
   <div>
     <div
       className="UNX-products__container"

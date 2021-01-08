@@ -1,7 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Match Snapshot for products 1`] = `
+exports[`Match Snapshot for Search Title 1`] = `
 Array [
+  <div
+    className="UNX-spellCheck__list"
+  >
+    <div
+      className="UNX-spellCheck__item"
+    >
+      <div
+        className="UNX-spellCheck__query"
+      >
+        Showing results for
+        <span
+          className="-query"
+        >
+           
+          shoes
+        </span>
+      </div>
+      <div
+        className="UNX-spellCheck__suggestion"
+      >
+        Did you mean
+        <span
+          className="-suggestion"
+          data-testid="UNX_spellCheck"
+          onClick={[Function]}
+        >
+           
+          dunlop
+        </span>
+        ?
+      </div>
+    </div>
+  </div>,
   <div>
     <div
       className="UNX-products__container"
@@ -433,7 +466,7 @@ Array [
           className="UNX-searchbox__input"
           onChange={[Function]}
           placeholder=""
-          value="boots"
+          value="danlop"
         />
         <button
           className="UNX-searchbox__button"

@@ -23,7 +23,7 @@ const attributesMap = {
     productUrl: 'productUrl'
 };
 
-test('Match Snapshot for products', () => {
+test('Match Snapshot for products', async () => {
     const tree = renderer
         .create(
             <UnbxdSearchWrapper
@@ -36,9 +36,9 @@ test('Match Snapshot for products', () => {
                 </div>
             </UnbxdSearchWrapper>
 
-        )
-        .toJSON();
-    expect(tree).toMatchSnapshot();
+        );
+    await waitFor(() => tree.toJSON());
+    expect(tree.toJSON()).toMatchSnapshot();
 });
 
 test('Products found test', async () => {

@@ -1,4 +1,4 @@
-export const emptySearchResponse = {
+export const page2SearchResponse = {
     searchMetaData: {
         status: 0,
         queryTime: 46,
@@ -14,51 +14,7 @@ export const emptySearchResponse = {
             'variants.groupby': 'variant_color',
             'facet.multiselect': 'true',
             'original.q': 'boots',
-            start: '0',
-            'req.rm.asterix': 'true',
-            rows: '10',
-            version: 'V2',
-            enableTaxonomy: 'false',
-            'variants.relevant': 'true',
-            'f.categoryPath.displayName': 'category',
-            q: 'boots',
-            'f.categoryPath.max.depth': '6',
-            spellcheck: 'true',
-            viewType: 'GRID',
-            enablePf: 'false',
-            'facet.multilevel': 'categoryPath',
-            'user.behaviour': 'true',
-            fields: 'title,uniqueId,imageUrl,RRP_Price,unbxd_price,productUrl',
-            'facet.version': 'V2',
-            enablePopularity: 'true',
-            'variants.fields':
-                'v_title,vId,imageUrl,v_RRP_Price,v_unbxd_price,productUrl,variantId,variant_overhead_swatch,variant_image_array,variant_cheapest_default_price,variant_min_cheapest_msrp,variant_productUrl',
-        },
-    },
-    response: {
-        numberOfProducts: 0,
-        start: 0,
-        products: []
-    }
-};
-
-export const searchResponse = {
-    searchMetaData: {
-        status: 0,
-        queryTime: 46,
-        queryParams: {
-            'log.response': 'false',
-            'module.exclude': 'personalization',
-            'alternate.op': 'true',
-            'q.op': 'AND',
-            variants: 'true',
-            'f.categoryPath.facet.limit': '100',
-            'variants.count': '4',
-            'req.rm.promotionEngine': 'true',
-            'variants.groupby': 'variant_color',
-            'facet.multiselect': 'true',
-            'original.q': 'boots',
-            start: '0',
+            start: '10',
             'req.rm.asterix': 'true',
             rows: '10',
             version: 'V2',
@@ -81,7 +37,7 @@ export const searchResponse = {
     },
     response: {
         numberOfProducts: 40,
-        start: 0,
+        start: 10,
         products: [
             {
                 productUrl:
