@@ -310,6 +310,52 @@ Array [
       </div>
     </div>
     <div
+      className="UNX-bucketedFacet__container"
+    >
+      <div
+        className="UNX-facet__element open"
+      >
+        <div
+          className="UNX-facet__header"
+        >
+          CATEGORY
+        </div>
+        <div
+          className="UNX-facet__list "
+        >
+          <button
+            className="UNX-facet__item -l1 -selected"
+            onClick={[Function]}
+          >
+            All
+             
+          </button>
+          <button
+            className="UNX-facet__item -l2 "
+            onClick={[Function]}
+          >
+            All Products
+             
+            <span>
+              -
+              159
+            </span>
+          </button>
+          <button
+            className="UNX-facet__item -l2 "
+            onClick={[Function]}
+          >
+            Camp & Hike
+             
+            <span>
+              -
+              1
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
       className="UNX-textFacet__container"
     >
       <div
@@ -551,6 +597,45 @@ Array [
              - 
             1
           </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="UNX-bucketedFacet__container"
+    >
+      <div
+        className="UNX-facet__element open"
+      >
+        <div
+          className="UNX-facet__header"
+        >
+          SUBCATEGORY
+        </div>
+        <div
+          className="UNX-facet__list "
+        >
+          <button
+            className="UNX-facet__item -l1 "
+            onClick={[Function]}
+          >
+            All Products
+             
+            <span>
+              -
+              159
+            </span>
+          </button>
+          <button
+            className="UNX-facet__item -l1 "
+            onClick={[Function]}
+          >
+            Camp & Hike
+             
+            <span>
+              -
+              1
+            </span>
+          </button>
         </div>
       </div>
     </div>
