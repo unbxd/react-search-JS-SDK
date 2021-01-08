@@ -43,15 +43,15 @@ const PaginationWrapper = (props) => {
             }
         })
     ) : (
-        <Button
-            className="UNX-pageNavigation__button -selected"
-            data-pagenumber={currentPage}
-            key={currentPage}
-            data-testid={`UNX_pageNumber${currentPage}`}
-        >
-            {currentPage}
-        </Button>
-    );
+            <Button
+                className="UNX-pageNavigation__button -selected"
+                data-pagenumber={currentPage}
+                key={currentPage}
+                data-testid={`UNX_pageNumber${currentPage}`}
+            >
+                {currentPage}
+            </Button>
+        );
 
     const { prevPages, nextPages } = PageNavigationOptions(
         currentPage,
@@ -74,16 +74,16 @@ const PaginationWrapper = (props) => {
                         }
                     })
                 ) : (
-                    <Button
-                        className="UNX-pageNavigation__button -action"
-                        onClick={onPreviousPageClick}
-                        data-pagenumber={currentPage - 1}
-                        key={currentPage - 1}
-                        data-testid={`UNX_pageNumber${currentPage - 1}`}
-                    >
-                        &lt;
+                        <Button
+                            className="UNX-pageNavigation__button -action"
+                            onClick={onPreviousPageClick}
+                            data-pagenumber={currentPage - 1}
+                            key={currentPage - 1}
+                            data-testid={`UNX_pagination-prev`}
+                        >
+                            &lt;
                     </Button>
-                ))}
+                    ))}
 
             {prevPages}
             {activePage}
@@ -99,16 +99,16 @@ const PaginationWrapper = (props) => {
                         }
                     })
                 ) : (
-                    <Button
-                        className="UNX-pageNavigation__button -action"
-                        onClick={onNextPageClick}
-                        data-pagenumber={currentPage + 1}
-                        key={currentPage + 1}
-                        data-testid={`UNX_pageNumber${currentPage + 1}`}
-                    >
-                        &gt;
+                        <Button
+                            className="UNX-pageNavigation__button -action"
+                            onClick={onNextPageClick}
+                            data-pagenumber={currentPage + 1}
+                            key={currentPage + 1}
+                            data-testid={`UNX_pagination-next`}
+                        >
+                            &gt;
                     </Button>
-                ))}
+                    ))}
         </div>
     );
 };

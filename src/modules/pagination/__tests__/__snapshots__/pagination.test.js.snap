@@ -1,29 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Match Snapshot for Search Title 1`] = `
+exports[`Match Snapshot for Pagination 1`] = `
 Array [
   <div
-    className="UNBXD-searchTitle__container"
+    className="UNX-pageNavigation__container"
   >
-    Showing results for
-    <span
-      className="-query"
+    <button
+      className="UNX-pageNavigation__button -selected"
+      data-pagenumber={1}
+      data-testid="UNX_pageNumber1"
     >
-       
-      boots
-    </span>
-    <span
-      className="-pageDescription"
-    >
-      - 
       1
-       to 
-      10
-       of
-       
-      40
-       products
-    </span>
+    </button>
+    <button
+      className="UNX-pageNavigation__button"
+      data-pagenumber={2}
+      data-testid="UNX_pageNumber2"
+      itemData={
+        Object {
+          "pageNumber": 2,
+          "type": "NUMBER",
+        }
+      }
+      onClick={[Function]}
+    >
+      2
+    </button>
+    <button
+      className="UNX-pageNavigation__button"
+      data-pagenumber={3}
+      data-testid="UNX_pageNumber3"
+      itemData={
+        Object {
+          "pageNumber": 3,
+          "type": "NUMBER",
+        }
+      }
+      onClick={[Function]}
+    >
+      3
+    </button>
+    <button
+      className="UNX-pageNavigation__button -action"
+      data-pagenumber={2}
+      data-testid="UNX_pagination-next"
+      onClick={[Function]}
+    >
+      &gt;
+    </button>
   </div>,
   <div>
     <div

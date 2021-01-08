@@ -3,11 +3,10 @@ import { render, waitFor, fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 import Products from '../../products/';
 import Pagination from '../../pagination';
-import SearchTitle from '../index';
 import UnbxdSearchWrapper from '../../../UnbxdSearchWrapper';
 import SearchBox from '../../searchBox';
 import { searchResponse } from '../../products/__tests__/mocks/searchMock';
-import { page2SearchResponse } from '../../pagination/__tests__/mocks';
+import { page2SearchResponse } from './mocks';
 
 // establish API mocking before all tests
 beforeAll(() => {
@@ -31,14 +30,14 @@ const attributesMap = {
     productUrl: 'productUrl'
 };
 
-test('Match Snapshot for Search Title', async () => {
+test('Match Snapshot for Pagination', async () => {
     const tree = renderer
         .create(
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >
-                <SearchTitle />
+                <Pagination />
                 <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
@@ -49,34 +48,14 @@ test('Match Snapshot for Search Title', async () => {
     expect(tree.toJSON()).toMatchSnapshot();
 });
 
-test('Search Title test', async () => {
-    const { getByText } = render(
-        <>
-            <UnbxdSearchWrapper
-                siteKey="wildearthclone-neto-com-au808941566310465"
-                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >
-                <SearchTitle />
-                <Products attributesMap={attributesMap} />
-                <div>
-                    <SearchBox defaultSearch="shoes" />
-                </div>
-            </UnbxdSearchWrapper>
-        </>
-    );
-
-    await waitFor(() => expect(getByText("- 1 to 10 of 40 products")).toBeInTheDocument());
-});
-
-test('Search Title Pagination test', async () => {
-    const { getByText, getByTestId } = render(
+test('Pagination buttons test', async () => {
+    const { getByTestId, container } = render(
         <>
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >
                 <Pagination />
-                <SearchTitle />
                 <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
@@ -86,34 +65,25 @@ test('Search Title Pagination test', async () => {
     );
 
     await waitFor(() => {
-        expect(getByText("- 1 to 10 of 40 products")).toBeInTheDocument()
+        expect(getByTestId("UNX_pagination-next")).toBeInTheDocument()
+        expect(getByTestId("UNX_pageNumber1")).toBeInTheDocument()
+        expect(getByTestId("UNX_pageNumber2")).toBeInTheDocument()
         fireEvent.click(getByTestId("UNX_pageNumber2"))
     });
 
     await waitFor(() => {
-        expect(screen.getByText("- 11 to 20 of 40 products")).toBeInTheDocument()
+        expect(getByTestId("UNX_pagination-prev")).toBeInTheDocument()
     });
 });
 
-test('Search Title Item test', async () => {
-
-    const SearchTitleItem = (props) => {
-        const { searchQuery, start, productsLn, numberOfProducts } = props;
-        return (
-            <div>
-                Showing results for {searchQuery} - {start + 1} to{' '}
-                {start + productsLn} of {numberOfProducts} products
-        </div>
-        );
-    };
-
-    const { getByText } = render(
+test('Pagination padding test', async () => {
+    const { getByTestId } = render(
         <>
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >
-                <SearchTitle searchTitleItem={<SearchTitleItem />} />
+                <Pagination padding={3} />
                 <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
@@ -122,5 +92,61 @@ test('Search Title Item test', async () => {
         </>
     );
 
-    await waitFor(() => expect(getByText("Showing results for boots - 1 to 10 of 40 products")).toBeInTheDocument());
+    await waitFor(() => {
+        expect(getByTestId("UNX_pageNumber1")).toBeInTheDocument()
+        expect(getByTestId("UNX_pageNumber2")).toBeInTheDocument()
+        expect(getByTestId("UNX_pageNumber3")).toBeInTheDocument()
+        expect(getByTestId("UNX_pageNumber4")).toBeInTheDocument()
+    });
+});
+
+test('Pagination Item component test', async () => {
+
+    const PaginationItemComponent = ({ itemData, onClick }) => {
+        const { pageNumber, type, isSelected = false } = itemData;
+        return (
+            <div data-pagenumber={pageNumber} onClick={onClick ? onClick : null}>
+                {type === 'NUMBER' && (
+                    <button
+                        data-testId={`page-${pageNumber}-do`}
+                        className={`UNX-pageNavigation__button ${
+                            isSelected ? '-isSelected' : ''
+                            }`}
+                    >
+                        {pageNumber}
+                    </button>
+                )}
+                {type === 'PREVIOUS' && (
+                    <button className="UNX-pageNavigation__button -action">
+                        &lt;
+                </button>
+                )}
+                {type === 'NEXT' && (
+                    <button className="UNX-pageNavigation__button -action">
+                        &gt;
+                </button>
+                )}
+            </div>
+        );
+    };
+
+    const { getByTestId } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >
+                <Pagination paginationItemComponent={<PaginationItemComponent />} />
+                <Products attributesMap={attributesMap} />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(() => {
+        expect(getByTestId("page-1-do")).toBeInTheDocument()
+        expect(getByTestId("page-2-do")).toBeInTheDocument()
+    });
 });
