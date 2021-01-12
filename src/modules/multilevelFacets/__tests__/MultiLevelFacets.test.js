@@ -15,7 +15,7 @@ export const FacetItemComponent = ({ itemData, onClick }) => {
     };
     return (
         <div
-            className={`UNX-facet__item -l${level} ${
+            className={`UNX-facet__item -l test-class ${level} ${
                 isSelected ? '-selected' : ''
             }`}
             onClick={handleClick}
@@ -98,7 +98,30 @@ test('Test MultilevelFacets click', async () => {
     });
 });
 
-test('Test text facet click with FacetItemComponent', async () => {
+test('Test Multi facet with FacetItemComponent', async () => {
+    const { container } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >   
+                <MultilevelFacets facetItemComponent={<FacetItemComponent />}/>
+                <Products
+                    attributesMap={attributesMap}
+                />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(() => {
+        expect(container.getElementsByClassName('test-class').length).toBe(5)
+    })
+});
+
+test('Test Multi click with FacetItemComponent', async () => {
     const { getByText } = render(
         <>
             <UnbxdSearchWrapper

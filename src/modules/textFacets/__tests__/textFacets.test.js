@@ -16,7 +16,7 @@ const FacetItemComponent = ({ itemData, onClick }) => {
 
     return (
         <div
-            className={`UNX-facet__item ${isSelected ? '-selected' : ''}`}
+            className={`UNX-facet__item test-class ${isSelected ? '-selected' : ''}`}
             onClick={handleClick}
         >
             <div className="-checkbox" />
@@ -94,6 +94,29 @@ test('Test text facet click', async () => {
         expect(getByText("Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots")).toBeInTheDocument();
         fireEvent.click(getByText("Clear"));
     });
+});
+
+test('Test text facet with FacetItemComponent', async () => {
+    const { container } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >   
+                <TextFacets facetItemComponent={<FacetItemComponent />}/>
+                <Products
+                    attributesMap={attributesMap}
+                />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(() => {
+        expect(container.getElementsByClassName('test-class').length).toBe(118)
+    })
 });
 
 test('Test text facet click with FacetItemComponent', async () => {
