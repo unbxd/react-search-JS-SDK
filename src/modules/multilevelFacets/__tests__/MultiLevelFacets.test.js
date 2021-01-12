@@ -2,11 +2,11 @@ import renderer from 'react-test-renderer';
 import { render, waitFor, fireEvent } from '@testing-library/react';
 import React from 'react';
 import Products from '../../products/index';
-import Breadcrumbs from '../../breadcrumbs/index';
 import MultilevelFacets from '../index';
 import UnbxdSearchWrapper from '../../../UnbxdSearchWrapper';
 import SearchBox from '../../searchBox';
 import { searchResponse } from './mocks/searchMock';
+import { facetResponse } from './mocks/searchMock';
 
 export const FacetItemComponent = ({ itemData, onClick }) => {
     const { name, count, level, isSelected } = itemData;
@@ -26,9 +26,16 @@ export const FacetItemComponent = ({ itemData, onClick }) => {
         </div>
     );
 };
+
 // establish API mocking before all tests
 beforeAll(() => {
-    window.fetch = jest.fn(() => {
+    window.fetch = jest.fn((request) => {
+        if (request.includes('category-filter=All')) {
+            return Promise.resolve({
+                json: () => Promise.resolve(facetResponse),
+            });
+        }
+        
         return Promise.resolve({
             json: () => Promise.resolve(searchResponse),
         });

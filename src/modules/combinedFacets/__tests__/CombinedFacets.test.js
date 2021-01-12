@@ -6,12 +6,26 @@ import CombinedFacets from '../index';
 import UnbxdSearchWrapper from '../../../UnbxdSearchWrapper';
 import SearchBox from '../../searchBox';
 import { searchResponse } from './mocks/searchMock';
-
-
+import { facetResponse } from './mocks/searchMock';
 
 // establish API mocking before all tests
 beforeAll(() => {
-    window.fetch = jest.fn(() => {
+    window.fetch = jest.fn((request) => {
+        if (request.includes('category-filter=All')) {
+            return Promise.resolve({
+                json: () => Promise.resolve(facetResponse),
+            });
+        }
+        if (request.includes('filter=brand_uFilter:"Scarpa"')) {
+            return Promise.resolve({
+                json: () => Promise.resolve(facetResponse),
+            });
+        }
+        if (request.includes('[200%20TO%20300]')) {
+            return Promise.resolve({
+                json: () => Promise.resolve(facetResponse),
+            });
+        }
         return Promise.resolve({
             json: () => Promise.resolve(searchResponse),
         });

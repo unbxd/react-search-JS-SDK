@@ -6,6 +6,7 @@ import RangeFacets from '../index';
 import UnbxdSearchWrapper from '../../../UnbxdSearchWrapper';
 import SearchBox from '../../searchBox';
 import { searchResponse } from './mocks/searchMock';
+import { facetResponse } from './mocks/searchMock';
 
 export const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
     const { from, end, facetName, isSelected = false } = itemData;
@@ -35,7 +36,12 @@ export const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
 
 // establish API mocking before all tests
 beforeAll(() => {
-    window.fetch = jest.fn(() => {
+    window.fetch = jest.fn((request) => {
+        if (request.includes('[200%20TO%20300]')) {
+            return Promise.resolve({
+                json: () => Promise.resolve(facetResponse),
+            });
+        }
         return Promise.resolve({
             json: () => Promise.resolve(searchResponse),
         });

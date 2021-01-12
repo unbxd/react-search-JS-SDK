@@ -6,6 +6,7 @@ import TextFacets from '../index';
 import UnbxdSearchWrapper from '../../../UnbxdSearchWrapper';
 import SearchBox from '../../searchBox';
 import { searchResponse } from './mocks/searchMock';
+import { facetResponse } from './mocks/facetResponse';
 
 const FacetItemComponent = ({ itemData, onClick }) => {
     const { name, count, isSelected } = itemData;
@@ -27,7 +28,12 @@ const FacetItemComponent = ({ itemData, onClick }) => {
 
 // establish API mocking before all tests
 beforeAll(() => {
-    window.fetch = jest.fn(() => {
+    window.fetch = jest.fn((request) => {
+        if (request.includes('filter=brand_uFilter:"Scarpa"')) {
+            return Promise.resolve({
+                json: () => Promise.resolve(facetResponse),
+            });
+        }
         return Promise.resolve({
             json: () => Promise.resolve(searchResponse),
         });
@@ -114,7 +120,6 @@ test('Test text facet click with FacetItemComponent', async () => {
     });
     await waitFor(() => {
         expect(getByText("Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots")).toBeInTheDocument();
-        fireEvent.click(getByText("Clear"));
     });
 });
 
