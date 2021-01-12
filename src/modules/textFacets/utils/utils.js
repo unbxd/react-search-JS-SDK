@@ -7,7 +7,10 @@ export const getTextFacetItem = (facetObjectValues, dataId) => {
 export const getFormattedTextFacets = (textFacets, selectedTextFacets) => {
     const formattedFacets = textFacets.map((facetObj) => {
         const { facetName } = facetObj;
-        if (selectedTextFacets[facetName]) {
+        if (
+            selectedTextFacets[facetName] &&
+            selectedTextFacets[facetName].length
+        ) {
             const currentFacetObj = {
                 facetType: facetTypes.TEXT_FACET,
                 ...facetObj,
