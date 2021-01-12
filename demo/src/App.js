@@ -11,6 +11,7 @@ import '../public/css/index.scss';
 
 const AppRoutes = () => {
     const [productType, setProductType] = useState('SEARCH');
+    const [enableFilters, setEnableFilters] = useState(true);
 
     if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
@@ -20,7 +21,12 @@ const AppRoutes = () => {
         <div>
             <Router>
                 <ProductTypeContext.Provider
-                    value={[productType, setProductType]}
+                    value={{
+                        productType,
+                        setProductType,
+                        enableFilters,
+                        setEnableFilters
+                    }}
                 >
                     <Switch>
                         <Route path="/">

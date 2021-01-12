@@ -18,7 +18,7 @@ import FacetApplyClear from '../components/FacetApplyClear';
 import { ProductTypeContext } from '../context';
 
 const Accessories = () => {
-    const [productType, setProductType] = useContext(ProductTypeContext);
+    const { productType, setProductType } = useContext(ProductTypeContext);
     useEffect(() => {
         window.UnbxdAnalyticsConf = {};
         window.UnbxdAnalyticsConf['page'] = 'CATEGORY:accessories';

@@ -7,7 +7,8 @@ const MobileMenu = (props) => {
         categoryPathLinks,
         handleCategoryLinkClick,
         handleShow,
-        productType
+        productType,
+        enableFilters
     } = props;
     return (
         <div className="UNX-mobileMenu UNX-mobileView">
@@ -44,9 +45,11 @@ const MobileMenu = (props) => {
                 </Dropdown.Menu>
             </Dropdown>
 
-            <div className="UNX-fiterIcon" onClick={handleShow}>
-                <i className="fa fa-filter" aria-hidden="true" />
-            </div>
+            {enableFilters && (
+                <div className="UNX-fiterIcon" onClick={handleShow}>
+                    <i className="fa fa-filter" aria-hidden="true" />
+                </div>
+            )}
         </div>
     );
 };
