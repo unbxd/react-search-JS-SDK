@@ -19,9 +19,6 @@ const FacetItem = ({ itemData, onClick, priceUnit }) => {
             </span>
         );
     }
-    if (type === facetTypes.MULTILEVEL_FACET) {
-        selectedFacetMarkup = <span>{name}</span>;
-    }
 
     return (
         <div className="UNX-selectedFacets__item" onClick={handleClick}>

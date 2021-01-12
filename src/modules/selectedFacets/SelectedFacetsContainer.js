@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { conditionalRenderer } from '../../common/utils';
 import { getFacetCoreMethods } from './utils';
 import SelectedFacetsWrapper from './SelectedFacetsWrapper';
-import { productTypes } from '../../config';
 import { facetTypes } from '../../config';
 import { manageStateTypes } from '../../config/constants';
 
@@ -27,30 +26,15 @@ class SelectedFacetsContainer extends React.PureComponent {
             deleteAFacet,
             clearARangeFacet,
             setRangeFacet,
-            applyRangeFacet,
-            getBreadCrumbsList,
-            deleteCategoryFilter,
-            getBucketedFacets
+            applyRangeFacet
         } = getFacetCoreMethods(unbxdCore);
 
         const textFacets = getFacets();
         const selectedTextFacets = getSelectedFacets();
-        const multilevelFacets = getBucketedFacets();
-        const selectedMultilevelFacets = multilevelFacets.map(
-            ({ filterField }) => {
-                return getBreadCrumbsList(filterField);
-            }
-        );
-
         const { manageTextFacets, manageRangeFacets } = helpers;
 
         const removeTextFacet = (facetName, dataId) => {
             deleteAFacet(facetName, dataId);
-            getUpdatedResults();
-        };
-
-        const removeMultilevelFacet = (parent, name, level) => {
-            deleteCategoryFilter({ parent, name, level });
             getUpdatedResults();
         };
 
@@ -85,10 +69,6 @@ class SelectedFacetsContainer extends React.PureComponent {
             applyRangeFacet();
         };
 
-        const handleMultilevelFacetClick = (currentItem) => {
-            const { name, level, filterField: parent } = currentItem;
-            removeMultilevelFacet(parent, name, level);
-        };
 
         const activeFacets = {};
         activeFacets['textFacets'] = [];
@@ -122,28 +102,10 @@ class SelectedFacetsContainer extends React.PureComponent {
             });
         });
 
-        activeFacets['multilevelFacets'] = [];
-        selectedMultilevelFacets.map((facetValue) => {
-            if (facetValue.length) {
-                activeFacets['multilevelFacets'].push(
-                    ...facetValue.map((fVal) => {
-                        const { value: name, filterField, level } = fVal;
-                        return {
-                            name,
-                            filterField,
-                            level,
-                            type: facetTypes.MULTILEVEL_FACET
-                        };
-                    })
-                );
-            }
-        });
-
         return {
             activeFacets,
             onTextFacetClick: handleTextFacetClick,
             onRangeFacetClick: handleRangeFacetClick,
-            onMultilevelFacetClick: handleMultilevelFacetClick,
             manageTextFacets,
             manageRangeFacets,
             facetItemComponent,
