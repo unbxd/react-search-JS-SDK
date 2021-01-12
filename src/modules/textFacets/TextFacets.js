@@ -78,7 +78,11 @@ TextFacets.propTypes = {
     /**
      * Bool value to enable disable viewMore.
      */
-    enableViewMore: PropTypes.bool
+    enableViewMore: PropTypes.bool,
+    /**
+     * callback to format the facets.
+     */
+    transform: PropTypes.func
 };
 
 export default TextFacets;

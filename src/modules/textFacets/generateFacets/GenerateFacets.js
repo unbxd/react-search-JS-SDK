@@ -169,7 +169,8 @@ GenerateFacets.propTypes = {
     facetItemComponent: PropTypes.element,
     label: PropTypes.node,
     collapsible: PropTypes.bool.isRequired,
-    searchable: PropTypes.bool.isRequired
+    searchable: PropTypes.bool.isRequired,
+    transform: PropTypes.func
 };
 
 export default GenerateFacets;

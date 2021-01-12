@@ -179,7 +179,8 @@ TextFacetsContainer.propTypes = {
     label: PropTypes.node,
     collapsible: PropTypes.bool.isRequired,
     searchable: PropTypes.bool.isRequired,
-    onFacetClick: PropTypes.func
+    onFacetClick: PropTypes.func,
+    transform: PropTypes.func
 };
 
 export default TextFacetsContainer;
