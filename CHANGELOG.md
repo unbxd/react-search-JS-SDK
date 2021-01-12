@@ -1,3 +1,12 @@
+## [0.0.40-alpha.5](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.40-alpha.4...v0.0.40-alpha.5) (2021-01-12)
+
+
+### Bug Fixes
+
+* **handle redirects:** use onRouteChange to handle redirects ([d5328bc](https://github.com/unbxd/react-search-JS-SDK/commit/d5328bc65f32d481d7c114ac83d8214db7fecffe))
+* **selected facets:** add an extra check to detect empty selected facets list ([0fcdb72](https://github.com/unbxd/react-search-JS-SDK/commit/0fcdb72b5e7790f8f10e42ab3345b416a7f05977))
+* **sort:** update main state on sort reset ([085cc0c](https://github.com/unbxd/react-search-JS-SDK/commit/085cc0c7b6a438c13c2cb31ee1d23b077741b370))
+
 ## [0.0.40-alpha.4](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.40-alpha.3...v0.0.40-alpha.4) (2021-01-07)
 
 
