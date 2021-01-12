@@ -172,7 +172,7 @@ class UnbxdSearchWrapper extends Component {
 
     componentDidUpdate(prevProps) {
         const { refreshId } = prevProps;
-        const { productType } = this.props;
+        const { productType, onRouteChange } = this.props;
         const {
             unbxdCore,
             categoryId,
@@ -215,11 +215,15 @@ class UnbxdSearchWrapper extends Component {
             renderFromUrl();
         } else if (refreshId !== this.props.refreshId) {
             this.resetSearch();
-            unbxdCore.options.productType = productType;
-            if (productType === productTypes.SEARCH) {
-                getResults(query);
-            } else {
-                getResults();
+            if (onRouteChange(unbxdCore, '', refreshId)) {
+                unbxdCore.options.productType = productType;
+                const currentQuery =
+                    urlParams[unbxdCore.options.searchQueryParam];
+                if (productType === productTypes.SEARCH) {
+                    getResults(currentQuery);
+                } else {
+                    getResults();
+                }
             }
         }
     }

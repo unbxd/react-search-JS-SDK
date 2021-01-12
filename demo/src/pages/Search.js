@@ -33,7 +33,12 @@ const ErrorComponent = () => {
 };
 
 const Search = () => {
-    const [productType, setProductType] = useContext(ProductTypeContext);
+    const {
+        productType,
+        setProductType,
+        enableFilters,
+        setEnableFilters
+    } = useContext(ProductTypeContext);
     const [categoryPathLinks, setCategoryPathLinks] = useState(categoryLinks);
     const [refreshId, setRefreshId] = useState(1);
     const [showFilters, setShowFilters] = useState(false);
@@ -61,12 +66,43 @@ const Search = () => {
         setRefreshId(refreshId + 1);
     };
 
-    const handleRouteChange = (hash) => {
+    const handleRouteChange = (searchObj, hash, refreshId) => {
         scrollTop();
-        if (routeLocation.hash && routeHistory.action !== 'POP') {
-            routeHistory.push(`${routeLocation.pathname}#${hash}`);
+        setEnableFilters(true);
+        const { state = {} } = searchObj;
+        const { responseObj = {} } = state;
+        const { redirect = {} } = responseObj;
+        const { type = '', value } = redirect;
+        const urlParams = searchObj.getQueryParams();
+        // check if it is the home page and we don't have any query params on the url.
+        // return false to ensure sdk makes no further search calls
+        if (
+            routeLocation.pathname === '/' &&
+            Object.keys(urlParams).length === 0 &&
+            refreshId
+        ) {
+            return false;
+        } else if (
+            // check for redirects
+            type === 'url' &&
+            typeof value === 'string' &&
+            value.length > 0
+        ) {
+            // if hash already exists, to retain the current state, push on history
+            if (routeLocation.pathname === '/' && routeLocation.hash) {
+                routeHistory.push(value);
+            } else {
+                routeHistory.replace(value);
+            }
+            return true;
         } else {
-            routeHistory.replace(`${routeLocation.pathname}#${hash}`);
+            // if hash already exists, to retain the current state, push on history
+            if (routeLocation.hash && routeHistory.action !== 'POP') {
+                routeHistory.push(`${routeLocation.pathname}#${hash}`);
+            } else {
+                routeHistory.replace(`${routeLocation.pathname}#${hash}`);
+            }
+            return true;
         }
     };
 
@@ -94,6 +130,7 @@ const Search = () => {
                 categoryPathLinks={categoryPathLinks}
                 handleCategoryLinkClick={handleCategoryLinkClick}
                 handleShow={handleShow}
+                enableFilters={enableFilters}
             />
 
             <Route exact path="/">

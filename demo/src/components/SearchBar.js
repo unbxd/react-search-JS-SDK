@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { SearchBox } from '@unbxd-ui/react-search-sdk';
 import { useHistory } from 'react-router-dom';
+import { ProductTypeContext } from '../context';
 
 export const SearchButton = ({ onSearchBoxSubmit }) => {
     return (
@@ -31,11 +32,15 @@ export const ClearComponent = ({ onSearchBoxClear }) => {
 
 const SearchBar = (props) => {
     const { onSearch, productType } = props;
+    const { enableFilters, setEnableFilters } = useContext(ProductTypeContext);
     const history = useHistory();
     const handleSubmit = () => {
         if (productType !== 'SEARCH') {
             onSearch('SEARCH');
             history.push('/');
+        }
+        if (!enableFilters) {
+            setEnableFilters(true);
         }
         return true;
     };

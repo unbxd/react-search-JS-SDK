@@ -69,7 +69,8 @@ class SortContainer extends React.Component {
             unbxdCore,
             unbxdCoreStatus,
             sort: sortState,
-            sortOptions
+            sortOptions,
+            helpers: { setSortConfiguration }
         } = this.props;
 
         const { sort } = unbxdCore.getQueryParams();
@@ -83,6 +84,9 @@ class SortContainer extends React.Component {
         ) {
             if (sort === undefined) {
                 this.setState({ sortBy: { value: '' } });
+                setSortConfiguration({
+                    sortBy: ``
+                });
             } else {
                 const [field, order] = sort.split(' ');
                 sortOn = { field, order };

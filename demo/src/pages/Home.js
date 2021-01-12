@@ -19,7 +19,7 @@ import { ProductTypeContext } from '../context';
 
 const Home = (props) => {
     const { setRefreshId } = props;
-    const [productType, setProductType] = useContext(ProductTypeContext);
+    const { productType, setProductType } = useContext(ProductTypeContext);
     useEffect(() => {
         if (productType === 'CATEGORY') {
             window.UnbxdAnalyticsConf = {};

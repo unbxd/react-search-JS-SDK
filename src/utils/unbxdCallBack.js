@@ -9,7 +9,7 @@ function unbxdCallBack(unbxdSearchObj, eventName, data) {
         });
         const { onRouteChange } = this.props;
         if (typeof onRouteChange === 'function') {
-            onRouteChange(unbxdSearchObj.getStateString());
+            onRouteChange(unbxdSearchObj, unbxdSearchObj.getStateString());
         }
     }
 

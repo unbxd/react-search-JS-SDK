@@ -29,7 +29,10 @@ export const getFormattedRangeFacets = (rangeFacets, selectedRangeFacets) => {
     const formattedFacets = rangeFacets.map((facetObj) => {
         const { facetName } = facetObj;
 
-        if (selectedRangeFacets[facetName]) {
+        if (
+            selectedRangeFacets[facetName] &&
+            selectedRangeFacets[facetName].length
+        ) {
             const { start, end } = facetObj;
             const sliderMin = start;
             const sliderMax = end;
