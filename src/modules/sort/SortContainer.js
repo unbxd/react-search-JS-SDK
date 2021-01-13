@@ -103,6 +103,19 @@ class SortContainer extends React.Component {
                 }
             }
         }
+
+        if (
+            unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
+            unbxdCoreStatus === searchStatus.LOADING &&
+            sortState !== sort &&
+            sortState === ''
+        ) {
+            // there has been a reset
+            this.setState({ sortBy: { value: '' } });
+            setSortConfiguration({
+                sortBy: ``
+            });
+        }
     }
 
     getSortProps() {

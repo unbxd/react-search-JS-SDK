@@ -3,7 +3,7 @@ import { manageStateTypes } from '../config';
 function resetSearch() {
     const {
         unbxdCore,
-        helpers: { manageTextFacets, manageRangeFacets }
+        helpers: { manageTextFacets, manageRangeFacets, setSortConfiguration }
     } = this.state;
 
     if (unbxdCore.state.responseObj !== null) {
@@ -11,6 +11,9 @@ function resetSearch() {
     }
     manageTextFacets(null, null, null, manageStateTypes.RESET);
     manageRangeFacets(null, null, null, manageStateTypes.RESET);
+    setSortConfiguration({
+        sortBy: ``
+    });
     unbxdCore.state.selectedFacets = {};
     unbxdCore.state.rangeFacet = {};
     unbxdCore.setPageStart(0);
