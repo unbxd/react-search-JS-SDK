@@ -1,3 +1,10 @@
+## [0.0.40-alpha.6](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.40-alpha.5...v0.0.40-alpha.6) (2021-01-13)
+
+
+### Bug Fixes
+
+* **making the comment changes:** n ([62327a9](https://github.com/unbxd/react-search-JS-SDK/commit/62327a91fe56b051cf236b2f16e721890ae2d93d))
+
 ## [0.0.40-alpha.5](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.40-alpha.4...v0.0.40-alpha.5) (2021-01-12)
 
 
