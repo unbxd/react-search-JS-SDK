@@ -10,7 +10,7 @@ import SearchBar from '../components/SearchBar';
 import { Route, useHistory, useLocation } from 'react-router-dom';
 import { scrollTop } from '../utils';
 
-const getCategoryId = () => {
+export const getCategoryId = () => {
     if (window.UnbxdAnalyticsConf && window.UnbxdAnalyticsConf['page']) {
         return encodeURIComponent(window.UnbxdAnalyticsConf['page']);
     }
