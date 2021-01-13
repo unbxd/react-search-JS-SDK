@@ -1,3 +1,10 @@
+## [0.0.40-alpha.7](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.40-alpha.6...v0.0.40-alpha.7) (2021-01-13)
+
+
+### Bug Fixes
+
+* **sort:** listen to unbxdwrapper to reset sort state on a new search ([2924f67](https://github.com/unbxd/react-search-JS-SDK/commit/2924f670719786222eb9217de123f9ef12406854))
+
 ## [0.0.40-alpha.6](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.40-alpha.5...v0.0.40-alpha.6) (2021-01-13)
 
 
