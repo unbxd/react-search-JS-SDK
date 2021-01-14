@@ -200,5 +200,6 @@ test('Test selected facet click on text Facet', async () => {
     await waitFor(() => {
         expect(container.getElementsByClassName('UNX-selectedFacets__container').length).toBe(1)
         fireEvent.click(getByText("Clear"));
+        expect(container.getElementsByClassName('UNX-selectedFacets__container').length).toBe(0)
     })
 });
