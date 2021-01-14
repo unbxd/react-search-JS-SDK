@@ -70,6 +70,7 @@ export const searchResponse = {
             spellcheck: 'true',
             viewType: 'GRID',
             enablePf: 'false',
+            filter: "price:[200 TO 300]",
             'facet.multilevel': 'categoryPath',
             'user.behaviour': 'true',
             fields: 'title,uniqueId,imageUrl,RRP_Price,unbxd_price,productUrl',

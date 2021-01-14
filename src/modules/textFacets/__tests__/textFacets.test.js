@@ -7,6 +7,7 @@ import UnbxdSearchWrapper from '../../../UnbxdSearchWrapper';
 import SearchBox from '../../searchBox';
 import { searchResponse } from './mocks/searchMock';
 import { facetResponse } from './mocks/facetResponse';
+import SelectedFacets from '../../selectedFacets/index';
 
 const FacetItemComponent = ({ itemData, onClick }) => {
     const { name, count, isSelected } = itemData;
@@ -22,6 +23,35 @@ const FacetItemComponent = ({ itemData, onClick }) => {
             <div className="-checkbox" />
             <div className="-label">{name}</div>
             <div className="-count">({count})</div>
+        </div>
+    );
+};
+
+const FacetItemComponentSelected = ({ itemData, onClick, priceUnit }) => {
+    const { name, type, dataId } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
+
+    let selectedFacetMarkup = null;
+    if (type === 'TEXT_FACET') {
+        selectedFacetMarkup = <span className="text-selected">{name}</span>;
+    }
+    if (type === 'RANGE_FACET') {
+        const [valMin, valMax] = dataId.split(' TO ');
+        selectedFacetMarkup = (
+            <span>
+                {priceUnit} {valMin} - {priceUnit} {valMax}
+            </span>
+        );
+    }
+    if (type === 'MULTILEVEL_FACET') {
+        selectedFacetMarkup = <span>{name}</span>;
+    }
+
+    return (
+        <div className="UNX-selectedFacets__item" onClick={handleClick}>
+            {selectedFacetMarkup} <span className="-cross" />
         </div>
     );
 };
@@ -56,6 +86,8 @@ test('Match Snapshot for text facets', async () => {
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >
+
+                <SelectedFacets />
                 <TextFacets />
                 <Products attributesMap={attributesMap} />
                 <div>
@@ -143,7 +175,65 @@ test('Test text facet click with FacetItemComponent', async () => {
     });
     await waitFor(() => {
         expect(getByText("Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots")).toBeInTheDocument();
+        fireEvent.click(getByText("Clear"));
     });
+});
+
+test('Test selected facet click on text Facet', async () => {
+    const { getByText , container } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >   
+                <SelectedFacets />
+                <TextFacets />
+                <Products
+                    attributesMap={attributesMap}
+                />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(async () => {
+        expect(getByText('Scarpa - 18')).toBeInTheDocument();
+        fireEvent.click(getByText("Scarpa - 18"));
+    });
+    await waitFor(() => {
+        expect(container.getElementsByClassName('UNX-selectedFacets__container').length).toBe(1)
+        fireEvent.click(getByText("Clear"));
+    })
+});
+
+test('Test selected facet click on text Facet with FacetItemComponent', async () => {
+    const { getByText , container } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >   
+                <SelectedFacets facetItemComponent={<FacetItemComponentSelected />}/>
+                <TextFacets />
+                <Products
+                    attributesMap={attributesMap}
+                />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(async () => {
+        expect(getByText('Scarpa - 18')).toBeInTheDocument();
+        fireEvent.click(getByText("Scarpa - 18"));
+    });
+    await waitFor(() => {
+        expect(container.getElementsByClassName('text-selected').length).toBe(1)
+    })
 });
 
 

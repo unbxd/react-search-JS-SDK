@@ -7,6 +7,8 @@ import UnbxdSearchWrapper from '../../../UnbxdSearchWrapper';
 import SearchBox from '../../searchBox';
 import { searchResponse } from './mocks/searchMock';
 import { facetResponse } from './mocks/searchMock';
+import SelectedFacets from '../../selectedFacets/index';
+import FacetActions from '../../facetActions/index';
 
 export const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
     const { from, end, facetName, isSelected = false } = itemData;
@@ -30,6 +32,35 @@ export const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
                 {ToName}
             </div>
             <div className="-count">({count})</div>
+        </div>
+    );
+};
+
+const FacetItemComponentSelected = ({ itemData, onClick, priceUnit }) => {
+    const { name, type, dataId } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
+
+    let selectedFacetMarkup = null;
+    if (type === 'TEXT_FACET') {
+        selectedFacetMarkup = <span className="text-selected">{name}</span>;
+    }
+    if (type === 'RANGE_FACET') {
+        const [valMin, valMax] = dataId.split(' TO ');
+        selectedFacetMarkup = (
+            <span className="range-selected">
+                {priceUnit} {valMin} - {priceUnit} {valMax}
+            </span>
+        );
+    }
+    if (type === 'MULTILEVEL_FACET') {
+        selectedFacetMarkup = <span>{name}</span>;
+    }
+
+    return (
+        <div className="UNX-selectedFacets__item" onClick={handleClick}>
+            {selectedFacetMarkup} <span className="-cross" />
         </div>
     );
 };
@@ -64,6 +95,7 @@ test('Match Snapshot for range facets', async () => {
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >
+                <SelectedFacets />
                 <RangeFacets />
                 <Products attributesMap={attributesMap} />
                 <div>
@@ -153,5 +185,61 @@ test('Test range facet click with FacetItemComponent', async () => {
     });
 });
 
+test('Test selected facet click on range Facet', async () => {
+    const { getByText, container } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >   
+                <FacetActions showApplyFilter={false} showClearFilter={false}/>
+                <SelectedFacets />
+                <RangeFacets />
+                <Products
+                    attributesMap={attributesMap}
+                />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
 
+    await waitFor(async () => {
+        expect(getByText('$ 200 - $ 300 - 60')).toBeInTheDocument();
+        fireEvent.click(getByText("$ 200 - $ 300 - 60"));
+    });
+    await waitFor(() => {
+        expect(container.getElementsByClassName('UNX-selectedFacets__container').length).toBe(1)
+    });
+});
+
+test('Test selected facet click on range Facet with FacetItemComponent', async () => {
+    const { getByText, container } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >   
+                <FacetActions showApplyFilter={false} showClearFilter={false}/>
+                <SelectedFacets facetItemComponent={<FacetItemComponentSelected />}/>
+                <RangeFacets />
+                <Products
+                    attributesMap={attributesMap}
+                />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(async () => {
+        expect(getByText('$ 200 - $ 300 - 60')).toBeInTheDocument();
+        fireEvent.click(getByText("$ 200 - $ 300 - 60"));
+    });
+    await waitFor(() => {
+        expect(container.getElementsByClassName('range-selected').length).toBe(1)
+    });
+});
 

@@ -70,6 +70,11 @@ export const searchResponse = {
             spellcheck: 'true',
             viewType: 'GRID',
             enablePf: 'false',
+            filter: [
+                "CATEGORY:\"strings\"",
+                "CATEGORY:\"strings\"",
+                "DEPARTMENT_uFilter:\"strings\""
+                ],
             'facet.multilevel': 'categoryPath',
             'user.behaviour': 'true',
             fields: 'title,uniqueId,imageUrl,RRP_Price,unbxd_price,productUrl',
@@ -580,48 +585,48 @@ export const searchResponse = {
         },
         multilevel: {
             list: [
-               {
-                  values: [
-                     {
-                        name: "All Products",
-                        count: 159
-                     },
-                     {
-                        name: "Camp & Hike",
-                        count: 1
-                     }
-                  ],
-                  position: 4,
-                  displayName: "SUBCATEGORY",
-                  filterField: "SUBCATEGORY",
-                  level: 1,
-                  breadcrumb: {}
-               },
-               {
-                  values: [
-                     {
-                        name: "All Products",
-                        count: 159
-                     },
-                     {
-                        name: "Camp & Hike",
-                        count: 1
-                     }
-                  ],
-                  position: 2,
-                  displayName: "CATEGORY",
-                  filterField: "CATEGORY",
-                  level: 2,
-                  breadcrumb: {
-                     filterField: "CATEGORY",
-                     values: [
-                        {
-                           name: "All"
-                        }
-                     ],
-                     level: 1
-                  }
-               }
+                {
+                values: [
+                {
+                name: "Sets",
+                count: 21
+                },
+                {
+                name: "Reels",
+                count: 8
+                }
+                ],
+                position: 4,
+                displayName: "SUBCATEGORY",
+                filterField: "SUBCATEGORY",
+                level: 1,
+                breadcrumb: { }
+                },
+                {
+                values: [
+                {
+                name: "sets",
+                count: 14
+                },
+                {
+                name: "reels",
+                count: 4
+                }
+                ],
+                position: 2,
+                displayName: "CATEGORY",
+                filterField: "CATEGORY",
+                level: 2,
+                breadcrumb: {
+                filterField: "CATEGORY",
+                values: [
+                {
+                name: "strings"
+                }
+                ],
+                level: 1
+                }
+                }
             ]
          }
     },
@@ -657,6 +662,11 @@ export const facetResponse = {
             enablePf: 'false',
             'facet.multilevel': 'categoryPath',
             'user.behaviour': 'true',
+            filter: [
+                "CATEGORY:\"strings\"",
+                "CATEGORY:\"strings\"",
+                "DEPARTMENT_uFilter:\"strings\""
+                ],
             fields: 'title,uniqueId,imageUrl,RRP_Price,unbxd_price,productUrl',
             'facet.version': 'V2',
             enablePopularity: 'true',
@@ -1165,49 +1175,49 @@ export const facetResponse = {
         },
         multilevel: {
             list: [
-               {
-                  values: [
-                     {
-                        name: "All Products",
-                        count: 159
-                     },
-                     {
-                        name: "Camp & Hike",
-                        count: 1
-                     }
-                  ],
-                  position: 4,
-                  displayName: "SUBCATEGORY",
-                  filterField: "SUBCATEGORY",
-                  level: 1,
-                  breadcrumb: {}
-               },
-               {
-                  values: [
-                     {
-                        name: "All Products",
-                        count: 159
-                     },
-                     {
-                        name: "Camp & Hike",
-                        count: 1
-                     }
-                  ],
-                  position: 2,
-                  displayName: "CATEGORY",
-                  filterField: "CATEGORY",
-                  level: 2,
-                  breadcrumb: {
-                     filterField: "CATEGORY",
-                     values: [
-                        {
-                           name: "All"
-                        }
-                     ],
-                     level: 1
-                  }
-               }
-            ]
+                {
+                values: [
+                {
+                name: "Sets",
+                count: 21
+                },
+                {
+                name: "Reels",
+                count: 8
+                }
+                ],
+                position: 4,
+                displayName: "SUBCATEGORY",
+                filterField: "SUBCATEGORY",
+                level: 1,
+                breadcrumb: { }
+                },
+                {
+                values: [
+                {
+                name: "sets",
+                count: 14
+                },
+                {
+                name: "reels",
+                count: 4
+                }
+                ],
+                position: 2,
+                displayName: "CATEGORY",
+                filterField: "CATEGORY",
+                level: 2,
+                breadcrumb: {
+                filterField: "CATEGORY",
+                values: [
+                {
+                name: "strings"
+                }
+                ],
+                level: 1
+                }
+                }
+                ]
          }
     },
 };

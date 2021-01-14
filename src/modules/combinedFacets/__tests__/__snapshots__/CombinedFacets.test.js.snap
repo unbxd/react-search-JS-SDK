@@ -500,7 +500,7 @@ Array [
             18
           </div>
           <div
-            className="UNX-facet__item "
+            className="UNX-facet__item -selected"
             onClick={[Function]}
           >
             $
@@ -597,6 +597,13 @@ Array [
              - 
             1
           </div>
+        </div>
+        <div
+          className="-clear"
+          data-unx_facetname="price"
+          onClick={[Function]}
+        >
+          Clear
         </div>
       </div>
     </div>

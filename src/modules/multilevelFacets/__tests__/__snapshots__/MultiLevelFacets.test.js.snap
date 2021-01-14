@@ -20,22 +20,22 @@ Array [
           className="UNX-facet__item -l1 "
           onClick={[Function]}
         >
-          All Products
+          Sets
            
           <span>
             -
-            159
+            21
           </span>
         </button>
         <button
           className="UNX-facet__item -l1 "
           onClick={[Function]}
         >
-          Camp & Hike
+          Reels
            
           <span>
             -
-            1
+            8
           </span>
         </button>
       </div>
@@ -55,29 +55,29 @@ Array [
           className="UNX-facet__item -l1 -selected"
           onClick={[Function]}
         >
-          All
+          strings
            
         </button>
         <button
           className="UNX-facet__item -l2 "
           onClick={[Function]}
         >
-          All Products
+          sets
            
           <span>
             -
-            159
+            14
           </span>
         </button>
         <button
           className="UNX-facet__item -l2 "
           onClick={[Function]}
         >
-          Camp & Hike
+          reels
            
           <span>
             -
-            1
+            4
           </span>
         </button>
       </div>
