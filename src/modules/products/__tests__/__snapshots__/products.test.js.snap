@@ -47,7 +47,15 @@ Array [
               className="-price"
               data-prank={1}
               data-uniqueid="V7040W"
-            />
+            >
+              <span
+                className="-strike"
+              >
+                $
+                369.99
+                 
+              </span>
+            </div>
           </div>
         </div>
         <div
@@ -88,7 +96,15 @@ Array [
               className="-price"
               data-prank={2}
               data-uniqueid="V7023W"
-            />
+            >
+              <span
+                className="-strike"
+              >
+                $
+                369.99
+                 
+              </span>
+            </div>
           </div>
         </div>
         <div
@@ -129,7 +145,15 @@ Array [
               className="-price"
               data-prank={3}
               data-uniqueid="SCA40017-BlackOrange"
-            />
+            >
+              <span
+                className="-strike"
+              >
+                $
+                1099.95
+                 
+              </span>
+            </div>
           </div>
         </div>
         <div
@@ -170,7 +194,15 @@ Array [
               className="-price"
               data-prank={4}
               data-uniqueid="SCA40013"
-            />
+            >
+              <span
+                className="-strike"
+              >
+                $
+                749.95
+                 
+              </span>
+            </div>
           </div>
         </div>
         <div
@@ -211,7 +243,15 @@ Array [
               className="-price"
               data-prank={5}
               data-uniqueid="SCA00108"
-            />
+            >
+              <span
+                className="-strike"
+              >
+                $
+                349.95
+                 
+              </span>
+            </div>
           </div>
         </div>
         <div
@@ -252,7 +292,15 @@ Array [
               className="-price"
               data-prank={6}
               data-uniqueid="SCA00090"
-            />
+            >
+              <span
+                className="-strike"
+              >
+                $
+                399.95
+                 
+              </span>
+            </div>
           </div>
         </div>
         <div
@@ -293,7 +341,15 @@ Array [
               className="-price"
               data-prank={7}
               data-uniqueid="SCA00065"
-            />
+            >
+              <span
+                className="-strike"
+              >
+                $
+                499.95
+                 
+              </span>
+            </div>
           </div>
         </div>
         <div
@@ -334,7 +390,15 @@ Array [
               className="-price"
               data-prank={8}
               data-uniqueid="411299"
-            />
+            >
+              <span
+                className="-strike"
+              >
+                $
+                299.99
+                 
+              </span>
+            </div>
           </div>
         </div>
         <div
@@ -375,7 +439,15 @@ Array [
               className="-price"
               data-prank={9}
               data-uniqueid="409223"
-            />
+            >
+              <span
+                className="-strike"
+              >
+                $
+                259.99
+                 
+              </span>
+            </div>
           </div>
         </div>
         <div
@@ -416,7 +488,15 @@ Array [
               className="-price"
               data-prank={10}
               data-uniqueid="404637"
-            />
+            >
+              <span
+                className="-strike"
+              >
+                $
+                299.99
+                 
+              </span>
+            </div>
           </div>
         </div>
       </div>
