@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer';
-import { render, waitFor, fireEvent, screen } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import React from 'react';
 import Products from '../../products/';
 import Banners from '../index';
@@ -20,7 +20,7 @@ const attributesMap = {
     productName: 'title',
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
-    price: 'min_cheapest_default_price',
+    price: 'RRP_Price',
     productUrl: 'productUrl'
 };
 

@@ -19,7 +19,7 @@ const attributesMap = {
     productName: 'title',
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
-    price: 'min_cheapest_default_price',
+    price: 'RRP_Price',
     productUrl: 'productUrl'
 };
 

@@ -50,6 +50,7 @@ class Input extends React.PureComponent {
                         <div
                             onClick={this.handleClickClear}
                             className="UNX-searchbox__clearIcon"
+                            data-testid="UNX-searchbox__clearIcon"
                         >
                             X
                         </div>

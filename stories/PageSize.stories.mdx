@@ -34,28 +34,6 @@ import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
 
 ---
 
-### size
-
-The page size can be controlled by passing `size`.
-
-```jsx
-<PageSize size={5} />
-```
-
-<Preview>
-    <Story name="with size">
-        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
-            <PageSize size={5} />
-            <Products attributesMap={attributesMap} />
-            <div className="hidden">
-                <SearchBox defaultSearch={defaultSearch} />
-            </div>
-        </UnbxdSearchWrapper>
-    </Story>
-</Preview>
-
----
-
 ### sizeOptions
 
 Page size options can be provided by passing `sizeOptions`.
@@ -77,6 +55,34 @@ const sizeOptions = [
     <Story name="with sizeOptions">
         <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <PageSize sizeOptions={sizeOptions} />
+            <Products attributesMap={attributesMap} />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### size
+
+The page size can be controlled by passing `size`.
+
+```jsx
+const sizeOptions = [
+    { id: 5, value: '5' },
+    { id: 10, value: '10' },
+    { id: 15, value: '15' },
+    { id: 20, value: '20' }
+];
+<PageSize size={5} sizeOptions={sizeOptions} />
+```
+
+<Preview>
+    <Story name="with size">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <PageSize size={5} />
             <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />
