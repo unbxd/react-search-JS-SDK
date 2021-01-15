@@ -3,6 +3,29 @@
 exports[`Match Snapshot for range facets 1`] = `
 Array [
   <div
+    className="UNX-selectedFacets__container"
+  >
+    <div
+      className="UNX-selectedFacets__list"
+    >
+      <div
+        className="UNX-selectedFacets__item"
+        onClick={[Function]}
+      >
+        <span>
+          $
+           
+          200
+           - 
+          $
+           
+          300
+        </span>
+         x
+      </div>
+    </div>
+  </div>,
+  <div
     className="UNX-rangefacet__container"
   >
     <div
@@ -54,7 +77,7 @@ Array [
           18
         </div>
         <div
-          className="UNX-facet__item "
+          className="UNX-facet__item -selected"
           onClick={[Function]}
         >
           $
@@ -151,6 +174,13 @@ Array [
            - 
           1
         </div>
+      </div>
+      <div
+        className="-clear"
+        data-unx_facetname="price"
+        onClick={[Function]}
+      >
+        Clear
       </div>
     </div>
   </div>,

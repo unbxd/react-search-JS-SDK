@@ -89,8 +89,8 @@ test('Test MultilevelFacets click', async () => {
     );
 
     await waitFor(async () => {
-        expect(getByText('All')).toBeInTheDocument();
-        fireEvent.click(getByText("All"));
+        expect(getByText('strings')).toBeInTheDocument();
+        fireEvent.click(getByText("strings"));
     });
     await waitFor(() => {
         expect(getByText("Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle")).toBeInTheDocument();
@@ -140,8 +140,8 @@ test('Test Multi click with FacetItemComponent', async () => {
     );
 
     await waitFor(async () => {
-        expect(getByText('All')).toBeInTheDocument();
-        fireEvent.click(getByText('All'));
+        expect(getByText('strings')).toBeInTheDocument();
+        fireEvent.click(getByText('strings'));
     });
     await waitFor(() => {
         expect(getByText("Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle")).toBeInTheDocument();

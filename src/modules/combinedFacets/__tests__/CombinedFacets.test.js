@@ -7,6 +7,8 @@ import UnbxdSearchWrapper from '../../../UnbxdSearchWrapper';
 import SearchBox from '../../searchBox';
 import { searchResponse } from './mocks/searchMock';
 import { facetResponse } from './mocks/searchMock';
+import SelectedFacets from '../../selectedFacets/index';
+import FacetActions from '../../facetActions/index';
 
 // establish API mocking before all tests
 beforeAll(() => {
@@ -141,4 +143,63 @@ test('Test Combined Facet category click', async () => {
     await waitFor(() => {
         expect(getByText("Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle")).toBeInTheDocument();
     });
+});
+
+test('Test selected facet click on range Facet', async () => {
+    const { getByText, container } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >   
+                <FacetActions showApplyFilter={false} showClearFilter={false}/>
+                <SelectedFacets />
+                <CombinedFacets />
+                <Products
+                    attributesMap={attributesMap}
+                />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(async () => {
+        expect(getByText('$ 200 - $ 300 - 60')).toBeInTheDocument();
+        fireEvent.click(getByText("$ 200 - $ 300 - 60"));
+    });
+    await waitFor(() => {
+        expect(container.getElementsByClassName('UNX-selectedFacets__container').length).toBe(1)
+    });
+});
+
+test('Test selected facet click on text Facet', async () => {
+    const { getByText , container } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >   
+                <SelectedFacets />
+                <CombinedFacets />
+                <Products
+                    attributesMap={attributesMap}
+                />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(async () => {
+        expect(getByText('Scarpa - 18')).toBeInTheDocument();
+        fireEvent.click(getByText("Scarpa - 18"));
+    });
+    await waitFor(() => {
+        expect(container.getElementsByClassName('UNX-selectedFacets__container').length).toBe(1)
+        fireEvent.click(getByText("Clear"));
+        expect(container.getElementsByClassName('UNX-selectedFacets__container').length).toBe(0)
+    })
 });
