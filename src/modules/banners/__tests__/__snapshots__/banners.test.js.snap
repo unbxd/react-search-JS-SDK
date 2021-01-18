@@ -5,7 +5,7 @@ Array [
   <div
     className="UNX-banners__container"
   >
-    <div
+    <a
       className="UNX-banner__item"
     >
       <img
@@ -13,7 +13,7 @@ Array [
         className="-item"
         src="https://dunlopsports.com/wp-content/themes/dunlopsports/assets/img/hero-our-story-large.jpg"
       />
-    </div>
+    </a>
   </div>,
   <div>
     <div
