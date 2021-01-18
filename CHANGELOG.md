@@ -1,3 +1,10 @@
+## [0.0.40-alpha.8](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.40-alpha.7...v0.0.40-alpha.8) (2021-01-18)
+
+
+### Bug Fixes
+
+* **banners:** add the landing page url to banner item ([c1fc78b](https://github.com/unbxd/react-search-JS-SDK/commit/c1fc78b470b9936dbcd414740d7c0832f9f094ee))
+
 ## [0.0.40-alpha.7](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.40-alpha.6...v0.0.40-alpha.7) (2021-01-13)
 
 
