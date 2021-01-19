@@ -18,6 +18,7 @@
         "pre-pack": "yarn build && yarn pack",
         "semantic-release": "semantic-release",
         "test": "jest && codecov",
+        "only-test": "jest",
         "test:watch": "jest --watch"
     },
     "release": {
@@ -150,7 +151,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "yarn test"
+            "pre-commit": "yarn only-test"
         }
     }
 }
