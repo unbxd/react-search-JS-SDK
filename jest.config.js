@@ -24,4 +24,5 @@ module.exports = {
     coveragePathIgnorePatterns: [
         "Loader.js"
     ],
+    collectCoverage: true
 };
