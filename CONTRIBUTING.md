@@ -172,3 +172,6 @@ You can run unit tests with NPM like so:
 cd <root>
 yarn test
 ```
+
+## Test reports
+[![Build Status](https://travis-ci.com/unbxd/react-search-JS-SDK.svg?branch=alpha)](https://travis-ci.com/unbxd/react-search-JS-SDK)
