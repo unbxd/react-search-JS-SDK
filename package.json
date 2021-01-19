@@ -17,7 +17,8 @@
         "commit": "cz",
         "pre-pack": "yarn build && yarn pack",
         "semantic-release": "semantic-release",
-        "test": "jest --collectCoverage",
+        "test": "jest && codecov",
+        "only-test": "jest",
         "test:watch": "jest --watch"
     },
     "release": {
@@ -73,6 +74,7 @@
         "autoprefixer": "^9.7.6",
         "babel-eslint": "^10.1.0",
         "babel-loader": "^8.0.6",
+        "codecov": "^3.8.1",
         "commitizen": "^4.2.2",
         "compression-webpack-plugin": "^3.1.0",
         "css-loader": "^3.4.2",
@@ -149,7 +151,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "yarn test"
+            "pre-commit": "yarn only-test"
         }
     }
 }

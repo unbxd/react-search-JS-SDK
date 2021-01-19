@@ -39,8 +39,6 @@ function unbxdCallBack(unbxdSearchObj, eventName, data) {
             trackFacetClick(query, getActiveFacets(unbxdSearchObj));
         }
     }
-
-    console.log('unbxdCallBack ', eventName, data);
 }
 
 export default unbxdCallBack;

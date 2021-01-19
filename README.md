@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/unbxd/react-search-JS-SDK.svg?branch=alpha)](https://travis-ci.com/unbxd/react-search-JS-SDK)
+[![Codecov Coverage](https://img.shields.io/codecov/c/github/unbxd/react-search-JS-SDK/alpha/coverage.svg?style=flat-square)](https://codecov.io/gh/unbxd/react-search-JS-SDK/)
 # react-search-JS-SDK
 
 React SDK for building search experience with Unbxd.

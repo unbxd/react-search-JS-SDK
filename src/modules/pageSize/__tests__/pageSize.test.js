@@ -11,7 +11,6 @@ import { searchResponse } from '../../products/__tests__/mocks/searchMock';
 // establish API mocking before all tests
 beforeAll(() => {
     window.fetch = jest.fn((request) => {
-        console.log('Request', request);
         if (request.includes('rows=5')) {
             return Promise.resolve({
                 json: () => Promise.resolve(size5SearchResponse),
