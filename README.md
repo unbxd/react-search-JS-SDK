@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/unbxd/react-search-JS-SDK.svg?branch=alpha)](https://travis-ci.com/unbxd/react-search-JS-SDK)
 # react-search-JS-SDK
 
 React SDK for building search experience with Unbxd.
