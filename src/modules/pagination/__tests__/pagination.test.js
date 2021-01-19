@@ -100,6 +100,35 @@ test('Pagination padding test', async () => {
     });
 });
 
+test('Pagination prev and next click test', async () => {
+    const { getByTestId } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >
+                <Pagination padding={1} />
+                <Products attributesMap={attributesMap} />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(() => {
+        expect(getByTestId("UNX_pagination-next")).toBeInTheDocument()
+        fireEvent.click(getByTestId("UNX_pagination-next"));
+    });
+
+    await waitFor(() => {
+        expect(getByTestId("UNX_pageNumber3")).toBeInTheDocument()
+        expect(getByTestId("UNX_pagination-prev")).toBeInTheDocument()
+        fireEvent.click(getByTestId("UNX_pagination-prev"));
+        expect(getByTestId("UNX_pageNumber1")).toBeInTheDocument()
+    });
+});
+
 test('Pagination Item component test', async () => {
 
     const PaginationItemComponent = ({ itemData, onClick }) => {

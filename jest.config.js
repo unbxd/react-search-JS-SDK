@@ -20,5 +20,8 @@ module.exports = {
     moduleNameMapper: {
         '\\.(css|less|scss)$': 'identity-obj-proxy'
     },
-    setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'] // setupFiles before the tests are ran
+    setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'], // setupFiles before the tests are ran
+    coveragePathIgnorePatterns: [
+        "Loader.js"
+    ],
 };
