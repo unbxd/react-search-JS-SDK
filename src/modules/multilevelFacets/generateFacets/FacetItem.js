@@ -12,7 +12,7 @@ const FacetItem = ({ itemData, onClick }) => {
         <Button
             className={`UNX-facet__item -l${level} ${
                 isSelected ? '-selected' : ''
-            }`}
+                }`}
             onClick={handleClick}
         >
             {name} {count && <span>-{count}</span>}
@@ -27,7 +27,6 @@ FacetItem.propTypes = {
         level: PropTypes.number,
         isSelected: PropTypes.bool
     }).isRequired,
-    level: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired
 };
 

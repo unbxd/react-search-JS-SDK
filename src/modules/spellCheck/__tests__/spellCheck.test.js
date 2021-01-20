@@ -64,9 +64,16 @@ test('Spell Check test', async () => {
         </>
     );
 
-    await waitFor(() => expect(getByTestId("UNX_spellCheck")).toBeInTheDocument());
-    await waitFor(() => expect(getByText("danlop")).toBeInTheDocument());
-    await waitFor(() => expect(getByText("dunlop")).toBeInTheDocument());
+    await waitFor(() => {
+        expect(getByTestId("UNX_spellCheck")).toBeInTheDocument()
+        expect(getByText("danlop")).toBeInTheDocument()
+        expect(getByText("dunlop")).toBeInTheDocument()
+        fireEvent.click(getByText("dunlop"));
+    });
+
+    await waitFor(() => {
+        expect(getByText('Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle'));
+    })
 });
 
 test('Spell Check Item component test', async () => {

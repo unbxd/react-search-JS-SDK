@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const FacetItem = ({ itemData, facetName, onClick, priceUnit }) => {
-    const { from, end, isSelected = false } = itemData;
+const FacetItem = ({ itemData, onClick, priceUnit }) => {
+    const { from, end, isSelected = false, facetName } = itemData;
     const { name: fromName, count, dataId: fromDataId } = from;
     const { name: ToName, dataId: toDataId } = end;
 
@@ -23,7 +23,6 @@ const FacetItem = ({ itemData, facetName, onClick, priceUnit }) => {
 
 FacetItem.propTypes = {
     itemData: PropTypes.object.isRequired,
-    facetName: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
     priceUnit: PropTypes.string.isRequired
 };
