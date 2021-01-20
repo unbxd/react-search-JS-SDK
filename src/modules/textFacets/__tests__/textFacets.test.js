@@ -239,7 +239,7 @@ test('Test text facet actions with custom onApply method', async () => {
     })
 });
 
-test('Test text facet actions with custom onApply method', async () => {
+test('Test text facet actions with custom onClear method', async () => {
     const onClear = jest.fn();
     const { getByText} = render(
         <>
