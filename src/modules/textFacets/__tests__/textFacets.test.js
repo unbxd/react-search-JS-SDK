@@ -8,6 +8,7 @@ import SearchBox from '../../searchBox';
 import { searchResponse } from './mocks/searchMock';
 import { facetResponse } from './mocks/facetResponse';
 import SelectedFacets from '../../selectedFacets/index';
+import FacetActions from '../../FacetActions/index';
 
 const FacetItemComponent = ({ itemData, onClick }) => {
     const { name, count, isSelected } = itemData;
@@ -56,6 +57,18 @@ const FacetItemComponentSelected = ({ itemData, onClick, priceUnit }) => {
     );
 };
 
+const ApplyFilterComponent = ({ onApplyFilter }) => (
+    <button className="filter-apply" onClick={onApplyFilter}>
+        Apply
+    </button>
+);
+
+const ClearFilterComponent = ({ onClearFilter }) => (
+    <button className="filter-clear" onClick={onClearFilter}>
+        Clear
+    </button>
+);
+
 // establish API mocking before all tests
 beforeAll(() => {
     window.fetch = jest.fn((request) => {
@@ -88,6 +101,7 @@ test('Match Snapshot for text facets', async () => {
             >
 
                 <SelectedFacets />
+                <FacetActions />
                 <TextFacets />
                 <Products attributesMap={attributesMap} />
                 <div>
@@ -99,6 +113,158 @@ test('Match Snapshot for text facets', async () => {
         await waitFor(() => tree.toJSON());
         expect(tree.toJSON()).toMatchSnapshot();
 });
+
+
+test('Test text facet actions showApplyFilter', async () => {
+    const { container } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >   
+                <FacetActions showApplyFilter={false}/>
+                <TextFacets />
+                <Products
+                    attributesMap={attributesMap}
+                />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(() => {
+        expect(container.getElementsByClassName('UNX-facet__action -applyFilters').length).toBe(0)
+    })
+});
+
+test('Test text facet actions with applyFilter Component', async () => {
+    const { container } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >   
+                <FacetActions applyFilterComponent={<ApplyFilterComponent />} />
+                <TextFacets />
+                <Products
+                    attributesMap={attributesMap}
+                />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(() => {
+        expect(container.getElementsByClassName('filter-apply').length).toBe(1)
+    })
+});
+
+test('Test text facet actions showClearFilter', async () => {
+    const { container } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >   
+                <FacetActions showClearFilter={false} />
+                <TextFacets />
+                <Products
+                    attributesMap={attributesMap}
+                />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(() => {
+        expect(container.getElementsByClassName('UNX-facet__action  -clearFilters').length).toBe(0)
+    })
+});
+
+test('Test text facet actions with clearFilter Component', async () => {
+    const { container } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >   
+                <FacetActions clearFilterComponent={<ClearFilterComponent />} />
+                <TextFacets />
+                <Products
+                    attributesMap={attributesMap}
+                />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(() => {
+        expect(container.getElementsByClassName('filter-clear').length).toBe(1)
+    })
+});
+
+test('Test text facet actions with custom onApply method', async () => {
+    const onApply = jest.fn();
+    const { getByText} = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >   
+                <FacetActions onApply={onApply} />
+                <TextFacets />
+                <Products
+                    attributesMap={attributesMap}
+                />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(() => {
+        expect(getByText('Scarpa - 18')).toBeInTheDocument();
+        fireEvent.click(getByText("Scarpa - 18"));
+        fireEvent.click(getByText("Apply Facets"));
+        expect(onApply).toHaveBeenCalledTimes(1);
+    })
+});
+
+test('Test text facet actions with custom onApply method', async () => {
+    const onClear = jest.fn();
+    const { getByText} = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >   
+                <FacetActions onClear={onClear} />
+                <TextFacets />
+                <Products
+                    attributesMap={attributesMap}
+                />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(() => {
+        fireEvent.click(getByText("Clear Facets"));
+        expect(onClear).toHaveBeenCalledTimes(1);
+    })
+});
+
 
 test('Test text facet click', async () => {
     const { getByText } = render(
