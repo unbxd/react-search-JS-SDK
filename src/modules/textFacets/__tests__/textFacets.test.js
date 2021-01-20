@@ -8,7 +8,7 @@ import SearchBox from '../../searchBox';
 import { searchResponse } from './mocks/searchMock';
 import { facetResponse } from './mocks/facetResponse';
 import SelectedFacets from '../../selectedFacets/index';
-import FacetActions from '../../FacetActions/index';
+import FacetActions from '../../facetActions/index';
 
 const FacetItemComponent = ({ itemData, onClick }) => {
     const { name, count, isSelected } = itemData;
