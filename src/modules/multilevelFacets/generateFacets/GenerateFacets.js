@@ -104,7 +104,7 @@ class GenerateFacets extends React.Component {
                         <div
                             className={`UNX-facet__element ${
                                 isOpen ? 'open' : ''
-                            }`}
+                                }`}
                             key={filterField}
                         >
                             <div className="UNX-facet__header">
@@ -137,17 +137,17 @@ class GenerateFacets extends React.Component {
                                 onClick={onFacetClick}
                                 className={`UNX-facet__list ${
                                     viewLess ? 'UNX-facet__listShowLimited' : ''
-                                }`}
+                                    }`}
                             />
                             {enableViewMore &&
-                            isOpen &&
-                            filteredValues.length > minViewMore ? (
-                                <ViewMore
-                                    facetName={facetDisplayName}
-                                    toggleViewLess={this.toggleViewLess}
-                                    viewLess={viewLess}
-                                />
-                            ) : null}
+                                isOpen &&
+                                filteredValues.length > minViewMore ? (
+                                    <ViewMore
+                                        facetName={facetDisplayName}
+                                        toggleViewLess={this.toggleViewLess}
+                                        viewLess={viewLess}
+                                    />
+                                ) : null}
                         </div>
                     );
                 })}
