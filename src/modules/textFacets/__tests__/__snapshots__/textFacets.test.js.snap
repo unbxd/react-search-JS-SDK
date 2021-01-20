@@ -3,6 +3,22 @@
 exports[`Match Snapshot for text facets 1`] = `
 Array [
   <div
+    className="UNX-facetActions__container"
+  >
+    <button
+      className="UNX-facet__action -applyFilters"
+      onClick={[Function]}
+    >
+      Apply Facets
+    </button>
+    <button
+      className="UNX-facet__action  -clearFilters"
+      onClick={[Function]}
+    >
+      Clear Facets
+    </button>
+  </div>,
+  <div
     className="UNX-textFacet__container"
   >
     <div
