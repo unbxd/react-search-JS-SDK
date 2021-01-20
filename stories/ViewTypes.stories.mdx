@@ -4,7 +4,7 @@ import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import ViewTypes from '../src/modules/viewTypes';
 import Products from '../src/modules/products';
 import SearchBox from '../src/modules/searchBox';
-import { ProductViewTypes } from '../demo/src/components/ProductViewTypes.js';
+import { ProductsViewItemComponent } from '../demo/src/components/ProductViewTypes.js';
 import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
 
 <Meta title="ViewTypes" component={ViewTypes} />
@@ -83,7 +83,7 @@ The custom component instance will receive the following props
 | onClick  | func   | handle view type click. |
 
 ```jsx
-<ViewTypes displayType={'LIST'} viewItemComponent={<ViewItemComponent />} />
+<ViewTypes viewTypes={['LIST', 'GRID']} displayType={'LIST'} viewItemComponent={<ViewItemComponent />} />
 ```
 
 #### Note:
@@ -94,9 +94,9 @@ The custom component instance will receive the following props
     <Story name="with viewItemComponent">
         <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <ViewTypes
-                viewTypes={['GRID', 'LIST']}
+                viewTypes={['LIST', 'GRID']}
                 displayType={'LIST'}
-                viewItemComponent={<ViewItemComponent />}
+                viewItemComponent={<ProductsViewItemComponent />}
             />
             <Products attributesMap={attributesMap} />
             <div className="hidden">
