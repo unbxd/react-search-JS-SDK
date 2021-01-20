@@ -137,7 +137,7 @@ test('Pagination Item component test', async () => {
             <div data-pagenumber={pageNumber} onClick={onClick ? onClick : null}>
                 {type === 'NUMBER' && (
                     <button
-                        data-testId={`page-${pageNumber}-do`}
+                        data-testid={`page-${pageNumber}-do`}
                         className={`UNX-pageNavigation__button ${
                             isSelected ? '-isSelected' : ''
                             }`}
