@@ -6,8 +6,9 @@ function setViewTypeConfiguration(config, triggerResults = false) {
             unbxdState: { ...currentState.unbxdState, viewType }
         };
     });
+    const { unbxdCore } = this.state;
+    unbxdCore.options.extraParams['viewType'] = viewType;
     if (triggerResults) {
-        const { unbxdCore } = this.state;
         unbxdCore.options.extraParams['viewType'] = viewType;
         unbxdCore.getResults();
     }

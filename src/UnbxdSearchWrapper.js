@@ -37,7 +37,7 @@ import { viewTypes } from './config/constants';
  * Component to initialize Unbxd Search. UnbxdSearchWrapper also acts as a root component for modules such as Products, Pagination and facets.
  */
 const initialUnbxdState = {
-    viewType: 'GRID',
+    viewType: '',
     paginationType: paginationTypes.FIXED_PAGINATION,
     enableApplyFilters: false,
     selectedTextFacets: { add: {}, remove: {}, list: {} },
@@ -132,9 +132,6 @@ class UnbxdSearchWrapper extends Component {
             typeof unbxdCore.options.getCategoryId === 'function' &&
             unbxdCore.options.getCategoryId();
 
-        const viewType =
-            this.state.unbxdCore.getQueryParams()['viewType'] || viewTypes.GRID;
-        unbxdCore.options.extraParams['viewType'] = viewType;
 
         if (unbxdCore.options.applyMultipleFilters) {
             this.setState((currentState) => {
