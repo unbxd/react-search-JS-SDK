@@ -29,7 +29,12 @@ const ViewTypesDropdown = ({ viewType, viewTypes, onViewTypeClick }) => {
 
 ViewTypesDropdown.propTypes = {
     viewType: PropTypes.string,
-    viewTypes: PropTypes.arrayOf(PropTypes.string),
+    viewTypes: PropTypes.arrayOf(
+        PropTypes.shape({
+            isSelected: PropTypes.bool,
+            viewType: PropTypes.string
+        })
+    ),
     onViewTypeClick: PropTypes.func.isRequired
 };
 

@@ -65,7 +65,8 @@ class MultilevelFacetsContainer extends React.PureComponent {
                     filterField: breadcrumb.filterField,
                     level: breadcrumb.level,
                     name: breadcrumb.value,
-                    isSelected: true
+                    isSelected: true,
+                    dataId: breadcrumb.value,
                 };
             });
 
