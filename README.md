@@ -18,6 +18,16 @@ React SDK for building search experience with Unbxd.
 
 ## Getting started
 
+The quickest way to get started is to use Create Unbxd Search App.
+
+```shell
+npx @unbxd-ui/create-unbxd-search-app demo-app
+cd demo-app
+yarn start
+```
+
+For more details about using Create Unbxd Search App, refer [here](https://github.com/unbxd/create-unbxd-search-app/).
+
 Install `react-search-sdk` using npm.
 
 ```shell

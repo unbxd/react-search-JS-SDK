@@ -13,19 +13,16 @@ Array [
       value={10}
     >
       <option
-        selected={false}
         value={5}
       >
         5
       </option>
       <option
-        selected={true}
         value={10}
       >
         10
       </option>
       <option
-        selected={false}
         value={15}
       >
         15

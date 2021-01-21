@@ -11,7 +11,7 @@ const PageSizeDropdown = ({ size, sizeOptions, onPageSizeClick }) => {
             onChange={onPageSizeClick}
         >
             {sizeOptions.map((item) => (
-                <option value={item.id} key={item.id} selected={item.id == size}>
+                <option value={item.id} key={item.id}>
                     {item.value}
                 </option>
             ))}
