@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/unbxd/react-search-JS-SDK.svg?branch=alpha)](https://travis-ci.com/unbxd/react-search-JS-SDK)
+[![Codecov Coverage](https://img.shields.io/codecov/c/github/unbxd/react-search-JS-SDK/alpha/coverage.svg?style=flat-square)](https://codecov.io/gh/unbxd/react-search-JS-SDK/)
 # react-search-JS-SDK
 
 React SDK for building search experience with Unbxd.
@@ -15,6 +17,16 @@ React SDK for building search experience with Unbxd.
 
 
 ## Getting started
+
+The quickest way to get started is to use Create Unbxd Search App.
+
+```shell
+npx @unbxd-ui/create-unbxd-search-app demo-app
+cd demo-app
+yarn start
+```
+
+For more details about using Create Unbxd Search App, refer [here](https://github.com/unbxd/create-unbxd-search-app/).
 
 Install `react-search-sdk` using npm.
 

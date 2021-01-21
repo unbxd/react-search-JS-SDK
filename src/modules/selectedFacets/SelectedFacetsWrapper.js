@@ -9,17 +9,15 @@ const SelectedFacetsWrapper = (props) => {
         activeFacets,
         onTextFacetClick,
         onRangeFacetClick,
-        onMultilevelFacetClick,
         facetItemComponent,
         priceUnit,
         label
     } = props;
 
-    const { textFacets, rangeFacets, multilevelFacets } = activeFacets;
+    const { textFacets, rangeFacets } = activeFacets;
 
     let activeTextFacetsMarkup = null;
     let activeRangeFacetsMarkup = null;
-    let activeMultilevelFacetsMarkup = null;
 
     if (textFacets.length) {
         activeTextFacetsMarkup = (
@@ -46,21 +44,8 @@ const SelectedFacetsWrapper = (props) => {
         );
     }
 
-    if (Object.keys(multilevelFacets).length) {
-        activeMultilevelFacetsMarkup = (
-            <List
-                items={multilevelFacets}
-                ListItem={facetItemComponent || FacetItem}
-                idAttribute="name"
-                onClick={onMultilevelFacetClick}
-                className="UNX-selectedFacets__list"
-            />
-        );
-    }
-
     if (
         activeTextFacetsMarkup === activeRangeFacetsMarkup &&
-        activeTextFacetsMarkup === activeMultilevelFacetsMarkup &&
         activeTextFacetsMarkup === null
     ) {
         return null;
@@ -71,7 +56,6 @@ const SelectedFacetsWrapper = (props) => {
             {label || null}
             {activeTextFacetsMarkup}
             {activeRangeFacetsMarkup}
-            {activeMultilevelFacetsMarkup}
         </div>
     );
 };
@@ -80,7 +64,6 @@ SelectedFacetsWrapper.propTypes = {
     activeFacets: PropTypes.object,
     onTextFacetClick: PropTypes.func.isRequired,
     onRangeFacetClick: PropTypes.func.isRequired,
-    onMultilevelFacetClick: PropTypes.func.isRequired,
     facetItemComponent: PropTypes.element,
     priceUnit: PropTypes.string.isRequired,
     label: PropTypes.node

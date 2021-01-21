@@ -209,7 +209,8 @@ RangeFacetsContainer.propTypes = {
     label: PropTypes.node,
     collapsible: PropTypes.bool,
     applyMultiple: PropTypes.bool,
-    onFacetClick: PropTypes.func
+    onFacetClick: PropTypes.func,
+    transform: PropTypes.func
 };
 
 export default RangeFacetsContainer;

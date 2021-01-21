@@ -171,7 +171,8 @@ GenerateFacets.propTypes = {
     priceUnit: PropTypes.string.isRequired,
     label: PropTypes.node,
     collapsible: PropTypes.bool,
-    applyMultiple: PropTypes.bool
+    applyMultiple: PropTypes.bool,
+    transform: PropTypes.func
 };
 
 export default GenerateFacets;

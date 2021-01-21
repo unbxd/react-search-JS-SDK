@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { Products } from '@unbxd-ui/react-search-sdk';
+import { ProductTypeContext } from '../context';
 
 const attributesMap = {
     productName: 'PRODUCT_NAME',
@@ -139,6 +140,10 @@ export const ProductItemComponent = (props) => {
 };
 
 const ProductsListing = () => {
+    const { setEnableFilters } = useContext(ProductTypeContext);
+    const onZeroResults = () => {
+        setEnableFilters(false);
+    };
     return (
         <Products
             attributesMap={attributesMap}
@@ -149,6 +154,7 @@ const ProductsListing = () => {
             showSwatches={false}
             swatchAttributesMap={swatchAttributesMap}
             paginationType="FIXED_PAGINATION"
+            onZeroResults={onZeroResults}
         />
     );
 };

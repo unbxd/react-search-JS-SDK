@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { conditionalRenderer } from '../../common/utils';
 import SearchBoxWrapper from './SearchBoxWrapper';
-import { manageStateTypes } from '../../config';
+import { manageStateTypes, searchStatus, productTypes } from '../../config';
 
 /**
  * Component to manage the search query.
@@ -90,6 +90,21 @@ class SearchBoxContainer extends React.PureComponent {
         }
         manageTextFacets(null, null, null, manageStateTypes.RESET);
         manageRangeFacets(null, null, null, manageStateTypes.RESET);
+    }
+
+    componentDidUpdate(prevProps) {
+        const { unbxdCore, unbxdCoreStatus, query, productType } = this.props;
+        const { q: currentQuery } = unbxdCore.getQueryParams();
+        if (
+            unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
+            unbxdCoreStatus === searchStatus.LOADING &&
+            typeof currentQuery === 'string' &&
+            currentQuery.length > 0 &&
+            prevProps.query === query &&
+            productType === productTypes.SEARCH
+        ) {
+            this.setState({ query: currentQuery });
+        }
     }
 
     getSearchBoxProps() {

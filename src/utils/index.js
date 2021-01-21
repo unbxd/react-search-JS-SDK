@@ -16,6 +16,7 @@ import setCategoryPath from './setCategoryPath';
 import getUpdatedResults from './getUpdatedResults';
 import resetSearch from './resetSearch';
 import getAnalytics from './getAnalytics';
+import getStateString from './getStateString';
 
 export {
     setProductConfiguration,
@@ -35,5 +36,6 @@ export {
     setCategoryPath,
     getUpdatedResults,
     resetSearch,
-    getAnalytics
+    getAnalytics,
+    getStateString
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import ProductsListing from '../components/ProductsListing';
 import SpellChecker from '../components/SpellChecker';
@@ -15,8 +15,18 @@ import SearchDescription from '../components/SearchDescription';
 import ProductViewTypes from '../components/ProductViewTypes';
 import ProductsSize from '../components/ProductsSize';
 import FacetApplyClear from '../components/FacetApplyClear';
+import { ProductTypeContext } from '../context';
 
-const Home = () => {
+const Home = (props) => {
+    const { setRefreshId } = props;
+    const { productType, setProductType } = useContext(ProductTypeContext);
+    useEffect(() => {
+        if (productType === 'CATEGORY') {
+            window.UnbxdAnalyticsConf = {};
+            setProductType('SEARCH');
+            setRefreshId(Math.random);
+        }
+    }, []);
     return (
         <div className="UNX-search__container">
             <div className="UNX-searchMeta__container">

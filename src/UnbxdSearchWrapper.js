@@ -26,7 +26,8 @@ import {
     handleViewTypeClick,
     getUpdatedResults,
     resetSearch,
-    getAnalytics
+    getAnalytics,
+    getStateString
 } from './utils';
 import { cloneElement } from './common/utils';
 import '../public/css/core/index.scss';
@@ -43,7 +44,8 @@ const initialUnbxdState = {
     selectedRangeFacets: { add: {}, remove: {}, list: {} },
     applyMultiple: false,
     pageSize: 10,
-    sort: ''
+    sort: '',
+    query: ''
 };
 
 class UnbxdSearchWrapper extends Component {
@@ -54,11 +56,13 @@ class UnbxdSearchWrapper extends Component {
             apiKey,
             searchConfigurations,
             getCategoryId,
-            setCategoryId,
             productType,
             priceUnit
         } = this.props;
 
+        if (!UnbxdSearch.prototype.getStateString) {
+            UnbxdSearch.prototype.getStateString = getStateString;
+        }
         this.unbxdCallBack = unbxdCallBack.bind(this);
         this.setPageSizeConfiguration = setPageSizeConfiguration.bind(this);
         this.setSortConfiguration = setSortConfiguration.bind(this);
@@ -89,8 +93,7 @@ class UnbxdSearchWrapper extends Component {
                 siteKey,
                 apiKey,
                 onEvent: this.unbxdCallBack,
-                getCategoryId,
-                setCategoryId
+                getCategoryId
             }),
             productType,
             categoryId: '',
@@ -169,8 +172,12 @@ class UnbxdSearchWrapper extends Component {
 
     componentDidUpdate(prevProps) {
         const { refreshId } = prevProps;
-        const { productType } = this.props;
-        const { unbxdCore, categoryId } = this.state;
+        const { productType, onRouteChange } = this.props;
+        const {
+            unbxdCore,
+            categoryId,
+            unbxdState: { query }
+        } = this.state;
         const { trackCategory } = this.getAnalytics();
 
         const urlParams = unbxdCore.getQueryParams();
@@ -208,7 +215,16 @@ class UnbxdSearchWrapper extends Component {
             renderFromUrl();
         } else if (refreshId !== this.props.refreshId) {
             this.resetSearch();
-            getResults();
+            if (onRouteChange(unbxdCore, '', refreshId)) {
+                unbxdCore.options.productType = productType;
+                const currentQuery =
+                    urlParams[unbxdCore.options.searchQueryParam];
+                if (productType === productTypes.SEARCH) {
+                    getResults(currentQuery);
+                } else {
+                    getResults();
+                }
+            }
         }
     }
 
@@ -281,10 +297,6 @@ UnbxdSearchWrapper.propTypes = {
      */
     getCategoryId: PropTypes.func,
     /**
-     * Custom function to set the Category Id.
-     */
-    setCategoryId: PropTypes.func,
-    /**
      * Product type of UnbxdSearchWrapper.
      */
     productType: PropTypes.string,
@@ -308,6 +320,10 @@ UnbxdSearchWrapper.propTypes = {
      * search configurations object.
      */
     searchConfigurations: PropTypes.object,
+    /**
+     * callback to handle routes.
+     */
+    onRouteChange: PropTypes.func,
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node

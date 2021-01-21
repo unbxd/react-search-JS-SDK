@@ -78,7 +78,11 @@ RangeFacets.propTypes = {
     /**
      * Custom facet item component instance.
      */
-    facetItemComponent: PropTypes.element
+    facetItemComponent: PropTypes.element,
+    /**
+     * callback to format the facets.
+     */
+    transform: PropTypes.func
 };
 
 export default RangeFacets;

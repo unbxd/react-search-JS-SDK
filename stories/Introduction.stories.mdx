@@ -34,29 +34,6 @@ const getCategoryId = () => {
         return encodeURIComponent(window.UnbxdAnalyticsConf['page']);
     }
 };
-const setCategoryId = (param, self) => {
-    const { level, name, parent } = param;
-    let page = ``;
-    let pathArr = [];
-    const l = Number(level);
-    if (l === 1) {
-        return;
-    }
-    const breadCrumbs = self.getBreadCrumbsList();
-    breadCrumbs.forEach((element, i) => {
-        const { value, level } = element;
-        if (l > level) {
-            pathArr.push(value);
-        }
-    });
-    if (l > breadCrumbs.length) {
-        pathArr.push(name);
-    }
-    page = pathArr.join('>');
-    if (window.UnbxdAnalyticsConf) {
-        window.UnbxdAnalyticsConf.page = `${parent}:${page}`;
-    }
-};
 setCategoryPath();
 
 <Meta title="Introduction" />

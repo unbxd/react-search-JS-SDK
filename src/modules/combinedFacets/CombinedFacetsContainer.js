@@ -49,7 +49,8 @@ class CombinedFacetsContainer extends React.PureComponent {
             minViewMore,
             label,
             onFacetClick,
-            applyMultiple
+            applyMultiple,
+            productType
         } = this.props;
 
         const {
@@ -138,32 +139,32 @@ class CombinedFacetsContainer extends React.PureComponent {
             let highestBreadcrumbLevel = 0;
 
             const onFinish = () => {
-                const {
-                    setCategoryId,
-                    options: { productType }
-                } = unbxdCore;
-                if (
-                    productType === productTypes.CATEGORY &&
-                    typeof setCategoryId === 'function'
-                ) {
-                    const triggerNewSearch = setCategoryId(
-                        categoryObject,
-                        unbxdCore
-                    );
-                    if (triggerNewSearch) {
-                        getUpdatedResults();
-                    }
+                if (highestBreadcrumbLevel === parseInt(level)) {
+                    deleteCategoryFilter(categoryObject);
                 } else {
+                    // check if it is a breadcrumb
                     const breadCrumbsList = getBreadCrumbsList(parent);
-                    breadCrumbsList.map((breadcrumb) => {
-                        if (highestBreadcrumbLevel < breadcrumb.level) {
-                            highestBreadcrumbLevel = breadcrumb.level;
+                    if (productType === productTypes.CATEGORY) {
+                        unbxdCore.state.categoryFilter[parent] = [];
+                        const breadCrumbs = getBreadCrumbsList(parent);
+                        breadCrumbs.forEach((element) => {
+                            const {
+                                value: breadcrumbValue,
+                                level: breadcrumbLevel
+                            } = element;
+                            setCategoryFilter({
+                                parent,
+                                level: breadcrumbLevel,
+                                name: breadcrumbValue
+                            });
+                        });
+                        if (categoryObject.level >= highestBreadcrumbLevel) {
+                            setCategoryFilter(categoryObject);
+                        } else {
+                            deleteCategoryFilter(categoryObject);
                         }
-                    });
-                    if (highestBreadcrumbLevel === parseInt(level)) {
-                        deleteCategoryFilter(categoryObject);
+                        getUpdatedResults();
                     } else {
-                        // check if it is a breadcrumb
                         const hit = breadCrumbsList.find(({ value }) => {
                             return name === value;
                         });
@@ -174,8 +175,8 @@ class CombinedFacetsContainer extends React.PureComponent {
                             setCategoryFilter(categoryObject);
                         }
                     }
-                    getUpdatedResults();
                 }
+                getUpdatedResults();
             };
 
             executeCallback(

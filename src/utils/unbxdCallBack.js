@@ -7,6 +7,10 @@ function unbxdCallBack(unbxdSearchObj, eventName, data) {
             unbxdCore: unbxdSearchObj,
             unbxdCoreStatus: searchStatus.READY
         });
+        const { onRouteChange } = this.props;
+        if (typeof onRouteChange === 'function') {
+            onRouteChange(unbxdSearchObj, unbxdSearchObj.getStateString());
+        }
     }
 
     if (eventName === searchEvents.BEFORE_API_CALL) {
@@ -35,8 +39,6 @@ function unbxdCallBack(unbxdSearchObj, eventName, data) {
             trackFacetClick(query, getActiveFacets(unbxdSearchObj));
         }
     }
-
-    console.log('unbxdCallBack ', eventName, data);
 }
 
 export default unbxdCallBack;

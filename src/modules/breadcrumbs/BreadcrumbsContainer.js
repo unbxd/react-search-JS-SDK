@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { conditionalRenderer } from '../../common/utils';
+import { conditionalRenderer, executeCallback } from '../../common/utils';
 import { getFacetCoreMethods } from './utils';
 import BreadcrumbsWrapper from './BreadcrumbsWrapper';
 import { productTypes } from '../../config';
@@ -13,7 +13,7 @@ class BreadcrumbsContainer extends React.PureComponent {
             root,
             separator,
             breadcrumbItemComponent,
-            productType
+            onBreadcrumbClick
         } = this.props;
 
         const {
@@ -33,22 +33,11 @@ class BreadcrumbsContainer extends React.PureComponent {
         const handleBreadCrumbClick = (currentItem) => {
             const { value, filterField, level } = currentItem;
             const categoryObject = { parent: filterField, level, name: value };
-            const { setCategoryId } = unbxdCore;
-            if (
-                productType === productTypes.CATEGORY &&
-                typeof setCategoryId === 'function'
-            ) {
-                const getUpdatedResults = setCategoryId(
-                    categoryObject,
-                    unbxdCore
-                );
-                if (getUpdatedResults) {
-                    getResults();
-                }
-            } else {
+            const onFinish = () => {
                 deleteCategoryFilter(categoryObject);
                 getResults();
-            }
+            };
+            executeCallback(onBreadcrumbClick, [categoryObject], onFinish);
         };
 
         return {

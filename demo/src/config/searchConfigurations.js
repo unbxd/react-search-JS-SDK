@@ -19,7 +19,7 @@ const searchConfigurations = {
     startPageNo: 0,
     facetMultiSelect: true,
     facetMultiSelectionMode: true,
-    updateUrls: true,
+    updateUrls: false,
     variants: {
         enabled: false,
         count: 1,
@@ -50,27 +50,6 @@ const searchConfigurations = {
     swatchMap: {},
     onEvent: () => {},
     getCategoryId: () => {},
-    setCategoryId: (param, self) => {
-        const { level, name } = param;
-        let page = '';
-        const pathArr = [];
-        const l = Number(level);
-        const breadCrumbs = self.getBreadCrumbsList();
-        breadCrumbs.forEach((element, i) => {
-            const { value, level } = element;
-
-            if (l > level) {
-                pathArr.push(value);
-            }
-        });
-        if (l > breadCrumbs.length) {
-            pathArr.push(name);
-        }
-        page = pathArr.join('>');
-        if (window.UnbxdAnalyticsConf) {
-            window.UnbxdAnalyticsConf.page = page;
-        }
-    },
     applyMultipleFilters: false,
     hashMode: true,
     enableUnbxdAnalytics: true

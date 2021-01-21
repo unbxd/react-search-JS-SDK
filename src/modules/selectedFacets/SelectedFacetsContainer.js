@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { conditionalRenderer } from '../../common/utils';
 import { getFacetCoreMethods } from './utils';
 import SelectedFacetsWrapper from './SelectedFacetsWrapper';
-import { productTypes } from '../../config';
 import { facetTypes } from '../../config';
 import { manageStateTypes } from '../../config/constants';
 
@@ -16,7 +15,6 @@ class SelectedFacetsContainer extends React.PureComponent {
             priceUnit,
             label,
             getUpdatedResults,
-            productType,
             helpers,
             applyMultiple
         } = this.props;
@@ -28,30 +26,15 @@ class SelectedFacetsContainer extends React.PureComponent {
             deleteAFacet,
             clearARangeFacet,
             setRangeFacet,
-            applyRangeFacet,
-            getBreadCrumbsList,
-            deleteCategoryFilter
+            applyRangeFacet
         } = getFacetCoreMethods(unbxdCore);
 
         const textFacets = getFacets();
         const selectedTextFacets = getSelectedFacets();
-        const multilevelFacets = getBreadCrumbsList();
-
         const { manageTextFacets, manageRangeFacets } = helpers;
 
         const removeTextFacet = (facetName, dataId) => {
             deleteAFacet(facetName, dataId);
-            getUpdatedResults();
-        };
-
-        const removeRangeFacet = (facetName) => {
-            //call addRangeFacet from here
-            clearARangeFacet(facetName);
-            applyRangeFacet();
-        };
-
-        const removeMultilevelFacet = (parent, name, level) => {
-            deleteCategoryFilter({ parent, name, level });
             getUpdatedResults();
         };
 
@@ -86,22 +69,6 @@ class SelectedFacetsContainer extends React.PureComponent {
             applyRangeFacet();
         };
 
-        const handleMultilevelFacetClick = (currentItem) => {
-            const { name, level, filterField: parent } = currentItem;
-            const categoryObject = { parent, level, name };
-            const { setCategoryId } = unbxdCore;
-            if (
-                productType === productTypes.CATEGORY &&
-                typeof setCategoryId === 'function'
-            ) {
-                const getResults = setCategoryId(categoryObject, unbxdCore);
-                if (getResults) {
-                    getUpdatedResults();
-                }
-            } else {
-                removeMultilevelFacet(parent, name, level);
-            }
-        };
 
         const activeFacets = {};
         activeFacets['textFacets'] = [];
@@ -135,22 +102,10 @@ class SelectedFacetsContainer extends React.PureComponent {
             });
         });
 
-        activeFacets['multilevelFacets'] = [];
-        multilevelFacets.map((facetValue) => {
-            const { value: name, filterField, level } = facetValue;
-            activeFacets['multilevelFacets'].push({
-                name,
-                filterField,
-                level,
-                type: facetTypes.MULTILEVEL_FACET
-            });
-        });
-
         return {
             activeFacets,
             onTextFacetClick: handleTextFacetClick,
             onRangeFacetClick: handleRangeFacetClick,
-            onMultilevelFacetClick: handleMultilevelFacetClick,
             manageTextFacets,
             manageRangeFacets,
             facetItemComponent,

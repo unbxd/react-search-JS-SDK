@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { conditionalRenderer } from '../../common/utils';
 import PageSizeWrapper from './PageSizeWrapper';
 import { getUpdatedOptions } from './utils';
+import { searchStatus } from '../../config';
 
 class PageSizeContainer extends React.PureComponent {
     constructor(props) {
@@ -50,7 +51,7 @@ class PageSizeContainer extends React.PureComponent {
         const { rows } = unbxdCore.getQueryParams();
         if (
             unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
-            unbxdCoreStatus === 'LOADING' &&
+            unbxdCoreStatus === searchStatus.LOADING &&
             typeof rows === 'string' &&
             pageSize !== rows &&
             prevProps.pageSize === pageSize

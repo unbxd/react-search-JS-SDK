@@ -15,7 +15,7 @@ const BreadcrumbsWrapper = (props) => {
 
     return breadCrumbsList.map((breadCrumbList) => {
         return (
-            <div className="UNX-breadcrumbs__container">
+            <div className="UNX-breadcrumbs__container" key={breadCrumbList.length > 0 ? breadCrumbList[0].filterField : Math.random()}>
                 <List
                     items={breadCrumbList}
                     idAttribute="value"

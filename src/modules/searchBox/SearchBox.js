@@ -20,8 +20,11 @@ const SearchBox = (props) => {
                     unbxdCore,
                     unbxdCoreStatus,
                     helpers,
-                    productType
+                    productType,
+                    unbxdState
                 } = appState;
+
+                const { query } = unbxdState;
 
                 return (
                     <SearchBoxContainer
@@ -29,6 +32,7 @@ const SearchBox = (props) => {
                         unbxdCoreStatus={unbxdCoreStatus}
                         helpers={helpers}
                         productType={productType}
+                        query={query}
                         {...props}
                     />
                 );

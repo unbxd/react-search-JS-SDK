@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { SpellCheck } from '@unbxd-ui/react-search-sdk';
+import { scrollTop } from '../utils';
 
 export const SpellCheckItemComponent = ({ itemData, onClick }) => {
     const { suggestion } = itemData;
@@ -22,8 +23,18 @@ export const SpellCheckItemComponent = ({ itemData, onClick }) => {
     );
 };
 
+const onSpellCheckClick = () => {
+    scrollTop();
+    return true;
+};
+
 const SpellChecker = () => {
-    return <SpellCheck spellCheckItemComponent={<SpellCheckItemComponent />} />;
+    return (
+        <SpellCheck
+            spellCheckItemComponent={<SpellCheckItemComponent />}
+            onSpellCheckClick={onSpellCheckClick}
+        />
+    );
 };
 
 export default SpellChecker;

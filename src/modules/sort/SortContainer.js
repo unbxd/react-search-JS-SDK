@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { conditionalRenderer, executeCallback } from '../../common/utils';
 import { getFormattedSort, getSelectedSort } from './utils';
 import SortWrapper from './SortWrapper';
+import { searchStatus } from '../../config';
 
 class SortContainer extends React.Component {
     constructor(props) {
@@ -68,39 +69,52 @@ class SortContainer extends React.Component {
             unbxdCore,
             unbxdCoreStatus,
             sort: sortState,
-            sortOptions
+            sortOptions,
+            helpers: { setSortConfiguration }
         } = this.props;
 
         const { sort } = unbxdCore.getQueryParams();
         let sortOn = null;
+
         if (
             unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
-            unbxdCoreStatus === 'READY' &&
-            sort === undefined
+            unbxdCoreStatus === searchStatus.LOADING &&
+            sortState !== sort &&
+            prevProps.sort === sortState
         ) {
-            this.setState({ sortBy: { value: '' } });
+            if (sort === undefined) {
+                this.setState({ sortBy: { value: '' } });
+                setSortConfiguration({
+                    sortBy: ``
+                });
+            } else {
+                const [field, order] = sort.split(' ');
+                sortOn = { field, order };
+                const formattedSort = `${field}|${order}`;
+                const formattedSortByOptions = sortOptions.map((sortByoption) =>
+                    getFormattedSort(sortByoption, this.state.sortBy)
+                );
+                const selectedSort = getSelectedSort(
+                    formattedSort,
+                    formattedSortByOptions
+                );
+                if (field.length && order.length) {
+                    this.setState({ sortBy: selectedSort });
+                }
+            }
         }
 
         if (
             unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
-            unbxdCoreStatus === 'LOADING' &&
-            typeof sort === 'string' &&
+            unbxdCoreStatus === searchStatus.LOADING &&
             sortState !== sort &&
-            prevProps.sort === sortState
+            sortState === ''
         ) {
-            const [field, order] = sort.split(' ');
-            sortOn = { field, order };
-            const formattedSort = `${field}|${order}`;
-            const formattedSortByOptions = sortOptions.map((sortByoption) =>
-                getFormattedSort(sortByoption, this.state.sortBy)
-            );
-            const selectedSort = getSelectedSort(
-                formattedSort,
-                formattedSortByOptions
-            );
-            if (field.length && order.length) {
-                this.setState({ sortBy: selectedSort });
-            }
+            // there has been a reset
+            this.setState({ sortBy: { value: '' } });
+            setSortConfiguration({
+                sortBy: ``
+            });
         }
     }
 

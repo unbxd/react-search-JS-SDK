@@ -1,0 +1,1646 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Match Snapshot for text facets 1`] = `
+Array [
+  <div
+    className="UNX-facetActions__container"
+  >
+    <button
+      className="UNX-facet__action -applyFilters"
+      onClick={[Function]}
+    >
+      Apply Facets
+    </button>
+    <button
+      className="UNX-facet__action  -clearFilters"
+      onClick={[Function]}
+    >
+      Clear Facets
+    </button>
+  </div>,
+  <div
+    className="UNX-textFacet__container"
+  >
+    <div
+      className="UNX-facet__element open"
+    >
+      <div
+        className="UNX-facet__header"
+        data-unx_name="brand_uFilter"
+      >
+        FILTER BY BRAND
+      </div>
+      <div
+        className="UNX-facet__list "
+      >
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Keen
+           - 
+          18
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Scarpa
+           - 
+          18
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Salomon
+           - 
+          12
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          The North Face
+           - 
+          12
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Merrell
+           - 
+          9
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Vasque
+           - 
+          9
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Burke and Wills
+           - 
+          8
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Vango
+           - 
+          8
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Sahara Swags
+           - 
+          7
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Mammut
+           - 
+          5
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Patagonia
+           - 
+          5
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Rainbird
+           - 
+          4
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Topo Athletic
+           - 
+          4
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Lock Laces
+           - 
+          3
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Oztrail
+           - 
+          3
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Sea to Summit
+           - 
+          3
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Teva
+           - 
+          3
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Under Armour
+           - 
+          3
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Arc'teryx
+           - 
+          2
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Bridgedale
+           - 
+          2
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Fjallraven
+           - 
+          2
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          HI-TEC
+           - 
+          2
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Petzl
+           - 
+          2
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          SBR
+           - 
+          2
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Wilderness Equipment
+           - 
+          2
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Boot Bananas
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          CamelBak
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Dakine
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Eclectic Products
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Gear Aid
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Grangers
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Jack Wolfskin
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Kuhl
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Metolius
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Osprey
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Yakima
+           - 
+          1
+        </button>
+      </div>
+    </div>
+    <div
+      className="UNX-facet__element open"
+    >
+      <div
+        className="UNX-facet__header"
+        data-unx_name="Best_Use_uFilter"
+      >
+        FILTER BY BEST USE
+      </div>
+      <div
+        className="UNX-facet__list "
+      >
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Hiking
+           - 
+          107
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Camping
+           - 
+          29
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Mountaineering
+           - 
+          8
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Everyday
+           - 
+          4
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Multisport
+           - 
+          3
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Travelling
+           - 
+          3
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Running
+           - 
+          2
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Climbing
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Snow
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Tactical
+           - 
+          1
+        </button>
+      </div>
+    </div>
+    <div
+      className="UNX-facet__element open"
+    >
+      <div
+        className="UNX-facet__header"
+        data-unx_name="v_Size_uFilter"
+      >
+        FILTER BY SIZE
+      </div>
+      <div
+        className="UNX-facet__list "
+      >
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US9
+           - 
+          81
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US9.5
+           - 
+          68
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US10
+           - 
+          67
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US8.5
+           - 
+          64
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US8
+           - 
+          59
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US10.5
+           - 
+          44
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US12
+           - 
+          43
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US13
+           - 
+          42
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US11.5
+           - 
+          40
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US7.5
+           - 
+          38
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US11
+           - 
+          35
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US7
+           - 
+          29
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US6
+           - 
+          20
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US6.5
+           - 
+          20
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          L
+           - 
+          16
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          M
+           - 
+          16
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          XL
+           - 
+          15
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          S
+           - 
+          14
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Single
+           - 
+          13
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US12.5
+           - 
+          9
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US13 Kids
+           - 
+          5
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US5
+           - 
+          5
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          XS
+           - 
+          5
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Double
+           - 
+          4
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US1
+           - 
+          4
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US12 Kids
+           - 
+          4
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US2
+           - 
+          4
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US3
+           - 
+          4
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US4
+           - 
+          4
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          XXL
+           - 
+          3
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          46
+           - 
+          2
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          48
+           - 
+          2
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          50
+           - 
+          2
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          52
+           - 
+          2
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          54
+           - 
+          2
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          XXXL
+           - 
+          2
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          32
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          34
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          36
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          6
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US13.5
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          US14
+           - 
+          1
+        </button>
+      </div>
+    </div>
+    <div
+      className="UNX-facet__element open"
+    >
+      <div
+        className="UNX-facet__header"
+        data-unx_name="v_Bag_Type_uFilter"
+      >
+        FILTER BY BAG TYPE
+      </div>
+      <div
+        className="UNX-facet__list "
+      >
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Climbing
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Daypacks
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Duffel Bags
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Hiking Packs
+           - 
+          1
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Wheeled Luggage
+           - 
+          1
+        </button>
+      </div>
+    </div>
+    <div
+      className="UNX-facet__element open"
+    >
+      <div
+        className="UNX-facet__header"
+        data-unx_name="v_Fitment_uFilter"
+      >
+        FILTER BY FITMENT
+      </div>
+      <div
+        className="UNX-facet__list "
+      >
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Regular
+           - 
+          72
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Slim
+           - 
+          2
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Wide
+           - 
+          2
+        </button>
+      </div>
+    </div>
+    <div
+      className="UNX-facet__element open"
+    >
+      <div
+        className="UNX-facet__header"
+        data-unx_name="v_Swag_Type_uFilter"
+      >
+        FILTER BY SWAG TYPE
+      </div>
+      <div
+        className="UNX-facet__list "
+      >
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Dome
+           - 
+          12
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Traditional
+           - 
+          6
+        </button>
+      </div>
+    </div>
+    <div
+      className="UNX-facet__element open"
+    >
+      <div
+        className="UNX-facet__header"
+        data-unx_name="v_Capacity_uFilter"
+      >
+        FILTER BY CAPACITY
+      </div>
+      <div
+        className="UNX-facet__list "
+      >
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          3 Person
+           - 
+          5
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          2 Person
+           - 
+          4
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          4 Person
+           - 
+          1
+        </button>
+      </div>
+    </div>
+    <div
+      className="UNX-facet__element open"
+    >
+      <div
+        className="UNX-facet__header"
+        data-unx_name="v_Season_uFilter"
+      >
+        FILTER BY SEASON
+      </div>
+      <div
+        className="UNX-facet__list "
+      >
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          3 Season
+           - 
+          6
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          4 Season
+           - 
+          4
+        </button>
+      </div>
+    </div>
+    <div
+      className="UNX-facet__element open"
+    >
+      <div
+        className="UNX-facet__header"
+        data-unx_name="v_Pant_Type_uFilter"
+      >
+        FILTER BY PANT TYPE
+      </div>
+      <div
+        className="UNX-facet__list "
+      >
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Waterproof
+           - 
+          11
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Hiking
+           - 
+          6
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Softshell
+           - 
+          1
+        </button>
+      </div>
+    </div>
+    <div
+      className="UNX-facet__element open"
+    >
+      <div
+        className="UNX-facet__header"
+        data-unx_name="v_Gender_uFilter"
+      >
+        FILTER BY GENDER
+      </div>
+      <div
+        className="UNX-facet__list "
+      >
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Men
+           - 
+          51
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Women
+           - 
+          46
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Unisex
+           - 
+          9
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Kids
+           - 
+          8
+        </button>
+      </div>
+    </div>
+    <div
+      className="UNX-facet__element open"
+    >
+      <div
+        className="UNX-facet__header"
+        data-unx_name="v_Colour_uFilter"
+      >
+        FILTER BY COLOUR
+      </div>
+      <div
+        className="UNX-facet__list "
+      >
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Black
+           - 
+          45
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Brown
+           - 
+          41
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Green
+           - 
+          25
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Grey
+           - 
+          24
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Blue
+           - 
+          12
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Red
+           - 
+          6
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Orange
+           - 
+          3
+        </button>
+        <button
+          className="UNX-facet__item "
+          onClick={[Function]}
+        >
+          Yellow
+           - 
+          2
+        </button>
+      </div>
+    </div>
+  </div>,
+  <div>
+    <div
+      className="UNX-products__container"
+    >
+      <div
+        className="UNX-products__list -grid grid-cols-4"
+      >
+        <div
+          className="UNX-productCard__container"
+        >
+          <a
+            className="UNX-product-card UNX-grid-card"
+            data-prank={1}
+            data-uniqueid="V7040W"
+            href="https://www.wildearth.com.au/buy/vasque-breeze-all-terrain-gtx-mens-hiking-boots-br/V7040W"
+            onClick={[Function]}
+          >
+            <img
+              className="-image"
+              data-prank={1}
+              data-uniqueid="V7040W"
+              src="https://www.wildearth.com.au/assets/full/V7040W.jpg"
+            />
+          </a>
+          <div
+            className="UNX-swatch__container"
+          >
+            <div
+              className="UNX-swatch__list"
+            />
+          </div>
+          <div
+            className="-details"
+          >
+            <div
+              className="-title"
+              data-prank={1}
+              data-uniqueid="V7040W"
+            >
+              Vasque Breeze All-Terrain GTX Mens Hiking Boots - Brown Olive/Bossa Nova
+            </div>
+            <div
+              className="-price"
+              data-prank={1}
+              data-uniqueid="V7040W"
+            >
+              <span
+                className="-strike"
+              >
+                $
+                369.99
+                 
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="UNX-productCard__container"
+        >
+          <a
+            className="UNX-product-card UNX-grid-card"
+            data-prank={2}
+            data-uniqueid="V7023W"
+            href="https://www.wildearth.com.au/buy/vasque-breeze-all-terrain-gtx-womens-hiking-boots/V7023W"
+            onClick={[Function]}
+          >
+            <img
+              className="-image"
+              data-prank={2}
+              data-uniqueid="V7023W"
+              src="https://www.wildearth.com.au/assets/full/V7023W.jpg"
+            />
+          </a>
+          <div
+            className="UNX-swatch__container"
+          >
+            <div
+              className="UNX-swatch__list"
+            />
+          </div>
+          <div
+            className="-details"
+          >
+            <div
+              className="-title"
+              data-prank={2}
+              data-uniqueid="V7023W"
+            >
+              Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle
+            </div>
+            <div
+              className="-price"
+              data-prank={2}
+              data-uniqueid="V7023W"
+            >
+              <span
+                className="-strike"
+              >
+                $
+                369.99
+                 
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="UNX-productCard__container"
+        >
+          <a
+            className="UNX-product-card UNX-grid-card"
+            data-prank={3}
+            data-uniqueid="SCA40017-BlackOrange"
+            href="https://www.wildearth.com.au/buy/scarpa-phantom-6000-mountaineering-boots-black-ora/SCA40017-BlackOrange"
+            onClick={[Function]}
+          >
+            <img
+              className="-image"
+              data-prank={3}
+              data-uniqueid="SCA40017-BlackOrange"
+              src="https://www.wildearth.com.au/assets/full/SCA40017-BlackOrange.jpg"
+            />
+          </a>
+          <div
+            className="UNX-swatch__container"
+          >
+            <div
+              className="UNX-swatch__list"
+            />
+          </div>
+          <div
+            className="-details"
+          >
+            <div
+              className="-title"
+              data-prank={3}
+              data-uniqueid="SCA40017-BlackOrange"
+            >
+              Scarpa Phantom 6000 Unisex Waterproof Mountaineering Boots
+            </div>
+            <div
+              className="-price"
+              data-prank={3}
+              data-uniqueid="SCA40017-BlackOrange"
+            >
+              <span
+                className="-strike"
+              >
+                $
+                1099.95
+                 
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="UNX-productCard__container"
+        >
+          <a
+            className="UNX-product-card UNX-grid-card"
+            data-prank={4}
+            data-uniqueid="SCA40013"
+            href="https://www.wildearth.com.au/buy/scarpa-mont-blanc-pro-gtx-goretex-mountaineering-b/SCA40013"
+            onClick={[Function]}
+          >
+            <img
+              className="-image"
+              data-prank={4}
+              data-uniqueid="SCA40013"
+              src="https://www.wildearth.com.au/assets/full/SCA40013.jpg"
+            />
+          </a>
+          <div
+            className="UNX-swatch__container"
+          >
+            <div
+              className="UNX-swatch__list"
+            />
+          </div>
+          <div
+            className="-details"
+          >
+            <div
+              className="-title"
+              data-prank={4}
+              data-uniqueid="SCA40013"
+            >
+              Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots
+            </div>
+            <div
+              className="-price"
+              data-prank={4}
+              data-uniqueid="SCA40013"
+            >
+              <span
+                className="-strike"
+              >
+                $
+                749.95
+                 
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="UNX-productCard__container"
+        >
+          <a
+            className="UNX-product-card UNX-grid-card"
+            data-prank={5}
+            data-uniqueid="SCA00108"
+            href="https://www.wildearth.com.au/buy/scarpa-terra-gtx-unisex-shoes-brown/SCA00108"
+            onClick={[Function]}
+          >
+            <img
+              className="-image"
+              data-prank={5}
+              data-uniqueid="SCA00108"
+              src="https://www.wildearth.com.au/assets/full/SCA00108.jpg"
+            />
+          </a>
+          <div
+            className="UNX-swatch__container"
+          >
+            <div
+              className="UNX-swatch__list"
+            />
+          </div>
+          <div
+            className="-details"
+          >
+            <div
+              className="-title"
+              data-prank={5}
+              data-uniqueid="SCA00108"
+            >
+              Scarpa Terra Goretex Unisex Waterproof Hiking Boots - Brown
+            </div>
+            <div
+              className="-price"
+              data-prank={5}
+              data-uniqueid="SCA00108"
+            >
+              <span
+                className="-strike"
+              >
+                $
+                349.95
+                 
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="UNX-productCard__container"
+        >
+          <a
+            className="UNX-product-card UNX-grid-card"
+            data-prank={6}
+            data-uniqueid="SCA00090"
+            href="https://www.wildearth.com.au/buy/scarpa-delta-leather-fly-mens-hiking-boots-mens-hi/SCA00090"
+            onClick={[Function]}
+          >
+            <img
+              className="-image"
+              data-prank={6}
+              data-uniqueid="SCA00090"
+              src="https://www.wildearth.com.au/assets/full/SCA00090.jpg"
+            />
+          </a>
+          <div
+            className="UNX-swatch__container"
+          >
+            <div
+              className="UNX-swatch__list"
+            />
+          </div>
+          <div
+            className="-details"
+          >
+            <div
+              className="-title"
+              data-prank={6}
+              data-uniqueid="SCA00090"
+            >
+              Scarpa Delta Leather Fly Mens Waterproof Hiking Boots - T.Di Moro
+            </div>
+            <div
+              className="-price"
+              data-prank={6}
+              data-uniqueid="SCA00090"
+            >
+              <span
+                className="-strike"
+              >
+                $
+                399.95
+                 
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="UNX-productCard__container"
+        >
+          <a
+            className="UNX-product-card UNX-grid-card"
+            data-prank={7}
+            data-uniqueid="SCA00065"
+            href="https://www.wildearth.com.au/buy/scarpa-delta-womens-leather-waterproof-hiking-boot/SCA00065"
+            onClick={[Function]}
+          >
+            <img
+              className="-image"
+              data-prank={7}
+              data-uniqueid="SCA00065"
+              src="https://www.wildearth.com.au/assets/full/SCA00065.jpg"
+            />
+          </a>
+          <div
+            className="UNX-swatch__container"
+          >
+            <div
+              className="UNX-swatch__list"
+            />
+          </div>
+          <div
+            className="-details"
+          >
+            <div
+              className="-title"
+              data-prank={7}
+              data-uniqueid="SCA00065"
+            >
+              Scarpa Delta Womens Goretex Waterproof Leather Hiking Boots
+            </div>
+            <div
+              className="-price"
+              data-prank={7}
+              data-uniqueid="SCA00065"
+            >
+              <span
+                className="-strike"
+              >
+                $
+                499.95
+                 
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="UNX-productCard__container"
+        >
+          <a
+            className="UNX-product-card UNX-grid-card"
+            data-prank={8}
+            data-uniqueid="411299"
+            href="https://www.wildearth.com.au/buy/salomon-quest-prime-gtx-womens-hiking-boots-ebony/411299"
+            onClick={[Function]}
+          >
+            <img
+              className="-image"
+              data-prank={8}
+              data-uniqueid="411299"
+              src="https://www.wildearth.com.au/assets/full/411299.jpg"
+            />
+          </a>
+          <div
+            className="UNX-swatch__container"
+          >
+            <div
+              className="UNX-swatch__list"
+            />
+          </div>
+          <div
+            className="-details"
+          >
+            <div
+              className="-title"
+              data-prank={8}
+              data-uniqueid="411299"
+            >
+              Salomon Quest Prime GTX Womens Hiking Boots - Ebony/Black/Icy Morn
+            </div>
+            <div
+              className="-price"
+              data-prank={8}
+              data-uniqueid="411299"
+            >
+              <span
+                className="-strike"
+              >
+                $
+                299.99
+                 
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="UNX-productCard__container"
+        >
+          <a
+            className="UNX-product-card UNX-grid-card"
+            data-prank={9}
+            data-uniqueid="409223"
+            href="https://www.wildearth.com.au/buy/salomon-outblast-ts-cswp-mens-hiking-boots-black-b/409223"
+            onClick={[Function]}
+          >
+            <img
+              className="-image"
+              data-prank={9}
+              data-uniqueid="409223"
+              src="https://www.wildearth.com.au/assets/full/409223.jpg"
+            />
+          </a>
+          <div
+            className="UNX-swatch__container"
+          >
+            <div
+              className="UNX-swatch__list"
+            />
+          </div>
+          <div
+            className="-details"
+          >
+            <div
+              className="-title"
+              data-prank={9}
+              data-uniqueid="409223"
+            >
+              Salomon OUTblast TS CSWP Mens Hiking Boots - Black/Black/Black
+            </div>
+            <div
+              className="-price"
+              data-prank={9}
+              data-uniqueid="409223"
+            >
+              <span
+                className="-strike"
+              >
+                $
+                259.99
+                 
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="UNX-productCard__container"
+        >
+          <a
+            className="UNX-product-card UNX-grid-card"
+            data-prank={10}
+            data-uniqueid="404637"
+            href="https://www.wildearth.com.au/buy/salomon-quest-prime-gtx-mens-hiking-shoes-phantom/404637"
+            onClick={[Function]}
+          >
+            <img
+              className="-image"
+              data-prank={10}
+              data-uniqueid="404637"
+              src="https://www.wildearth.com.au/assets/full/404637.jpg"
+            />
+          </a>
+          <div
+            className="UNX-swatch__container"
+          >
+            <div
+              className="UNX-swatch__list"
+            />
+          </div>
+          <div
+            className="-details"
+          >
+            <div
+              className="-title"
+              data-prank={10}
+              data-uniqueid="404637"
+            >
+              Salomon Quest Prime Goretex Mens Waterproof Hiking Boots - Phantom/Black/Quiet Shade
+            </div>
+            <div
+              className="-price"
+              data-prank={10}
+              data-uniqueid="404637"
+            >
+              <span
+                className="-strike"
+              >
+                $
+                299.99
+                 
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  <div>
+    <div
+      className="UNX-searchbox__container"
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        <input
+          className="UNX-searchbox__input"
+          onChange={[Function]}
+          placeholder=""
+          value="boots"
+        />
+        <button
+          className="UNX-searchbox__button"
+          type="submit"
+        >
+          Search
+        </button>
+      </form>
+    </div>
+  </div>,
+]
+`;

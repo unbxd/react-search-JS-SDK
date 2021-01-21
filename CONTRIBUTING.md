@@ -71,6 +71,9 @@ Please provide as much detail and context as possible.
 Good pull requests - patches, improvements, new features - are a fantastic help.
 They should remain focused in scope and avoid containing unrelated commits.
 
+Please make sure the commits follow the [Conventional Commits](https://github.com/commitizen/cz-cli) guidelines. This can be acheived by using the `commit` script to add the commit messages.
+
+
 **Please ask first** before embarking on any significant pull request (e.g. implementing features, refactoring code, porting to a different language),
 otherwise you risk spending a lot of time working on something that the project's developers might not want to merge into the project.
 
