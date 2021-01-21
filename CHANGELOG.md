@@ -1,3 +1,22 @@
+## [0.0.40](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.39...v0.0.40) (2021-01-21)
+
+
+### Bug Fixes
+
+* **banners:** add the landing page url to banner item ([c1fc78b](https://github.com/unbxd/react-search-JS-SDK/commit/c1fc78b470b9936dbcd414740d7c0832f9f094ee))
+* **cp multilevel facets:** treat multilevel facets as filters instead of category path update ([64ec2b9](https://github.com/unbxd/react-search-JS-SDK/commit/64ec2b983e323cdaeef8ca1649523d5c2ce59a9c))
+* **custom route handling:** pass a callback to listen to url changes triggered by the SDK ([6012e4b](https://github.com/unbxd/react-search-JS-SDK/commit/6012e4b970217b2f123a29df5b43de040f9e7d2f))
+* **handle redirects:** use onRouteChange to handle redirects ([d5328bc](https://github.com/unbxd/react-search-JS-SDK/commit/d5328bc65f32d481d7c114ac83d8214db7fecffe))
+* **making the comment changes:** n ([62327a9](https://github.com/unbxd/react-search-JS-SDK/commit/62327a91fe56b051cf236b2f16e721890ae2d93d))
+* **misc fixes:** don't update searchbox when product type is category. group the sort read logic ([397741d](https://github.com/unbxd/react-search-JS-SDK/commit/397741d57979042603ac9fa8cb824c85b157ee78))
+* **multilevel facets:** localize highest breadcrumb level for multiple facets ([8703e60](https://github.com/unbxd/react-search-JS-SDK/commit/8703e60bccc8fb54cbb948b96689c2ff4295870d))
+* **read search query on back:** fetch the current search query on browser back ([687c77c](https://github.com/unbxd/react-search-JS-SDK/commit/687c77c48164a0a935c9274ad5be76829ddae5ff))
+* **selected facets:** add an extra check to detect empty selected facets list ([0fcdb72](https://github.com/unbxd/react-search-JS-SDK/commit/0fcdb72b5e7790f8f10e42ab3345b416a7f05977))
+* **sort:** listen to unbxdwrapper to reset sort state on a new search ([2924f67](https://github.com/unbxd/react-search-JS-SDK/commit/2924f670719786222eb9217de123f9ef12406854))
+* **sort:** update main state on sort reset ([085cc0c](https://github.com/unbxd/react-search-JS-SDK/commit/085cc0c7b6a438c13c2cb31ee1d23b077741b370))
+* **spellcheck experience:** change spellcheck flow where on no results, trigger the suggested query ([b16fda1](https://github.com/unbxd/react-search-JS-SDK/commit/b16fda16669aed81ae8b04f87f258639778f166a))
+* **travis config:** change the deploy on branch config ([22f15df](https://github.com/unbxd/react-search-JS-SDK/commit/22f15df7eeb552d40e5b89a40340ccd54d5ab7a7))
+
 ## [0.0.40-alpha.8](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.40-alpha.7...v0.0.40-alpha.8) (2021-01-18)
 
 
