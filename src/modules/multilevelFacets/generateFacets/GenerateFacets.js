@@ -32,8 +32,8 @@ class GenerateFacets extends React.Component {
                     const matchBucketedFacet = multilevelFacetsList.find(
                         (bucketedFacetObj) => {
                             return (
-                                bucketedFacetObj.facetDisplayName ===
-                                bucketedFacet.facetDisplayName
+                                bucketedFacetObj.filterField ===
+                                bucketedFacet.filterField
                             );
                         }
                     );
@@ -44,20 +44,18 @@ class GenerateFacets extends React.Component {
                             : true,
                         filter: matchBucketedFacet
                             ? matchBucketedFacet.filter
-                            : ''
+                            : '',
+                        viewLess: matchBucketedFacet
+                            ? matchBucketedFacet.viewLess
+                            : false
                     };
                 }
             );
-            const multiFacets = formattedMultilevelFacets.map((multiFacet) => {
-                multiFacet.viewLess = false;
-                multiFacet.className = 'UNX-facet__list';
-                return multiFacet;
-            });
 
             this.setState((existingState) => {
                 return {
                     ...existingState,
-                    multilevelFacetsList: multiFacets
+                    multilevelFacetsList: formattedMultilevelFacets
                 };
             });
         }
@@ -85,7 +83,7 @@ class GenerateFacets extends React.Component {
                 {label || null}
                 {multilevelFacetsList.map((multilevelFacet) => {
                     const {
-                        facetDisplayName,
+                        displayName,
                         filterField,
                         values = [],
                         isOpen = true,
@@ -104,16 +102,16 @@ class GenerateFacets extends React.Component {
                         <div
                             className={`UNX-facet__element ${
                                 isOpen ? 'open' : ''
-                                }`}
+                            }`}
                             key={filterField}
                         >
                             <div className="UNX-facet__header">
-                                {facetDisplayName}
+                                {displayName}
 
                                 {collapsible && (
                                     <span
                                         className="-collapse-icon"
-                                        data-unx_name={facetDisplayName}
+                                        data-unx_name={filterField}
                                         onClick={this.handleCollapseToggle}
                                     />
                                 )}
@@ -124,7 +122,7 @@ class GenerateFacets extends React.Component {
                                     <Input
                                         className="-input"
                                         value={filter}
-                                        name={facetDisplayName}
+                                        name={filterField}
                                         onChange={this.handleFilterChange}
                                         data-testid="UNX_searchFacets"
                                     />
@@ -137,17 +135,17 @@ class GenerateFacets extends React.Component {
                                 onClick={onFacetClick}
                                 className={`UNX-facet__list ${
                                     viewLess ? 'UNX-facet__listShowLimited' : ''
-                                    }`}
+                                }`}
                             />
                             {enableViewMore &&
-                                isOpen &&
-                                filteredValues.length > minViewMore ? (
-                                    <ViewMore
-                                        facetName={facetDisplayName}
-                                        toggleViewLess={this.toggleViewLess}
-                                        viewLess={viewLess}
-                                    />
-                                ) : null}
+                            isOpen &&
+                            filteredValues.length > minViewMore ? (
+                                <ViewMore
+                                    facetName={filterField}
+                                    toggleViewLess={this.toggleViewLess}
+                                    viewLess={viewLess}
+                                />
+                            ) : null}
                         </div>
                     );
                 })}

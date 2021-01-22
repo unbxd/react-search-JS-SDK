@@ -136,7 +136,10 @@ class CombinedFacetsContainer extends React.PureComponent {
             const categoryObject = { parent, level, name };
             const { helpers } = this.props;
             const { getUpdatedResults } = helpers;
-            let highestBreadcrumbLevel = 0;
+            const currentMultilevelFacet = formattedMultilevelFacets.find(
+                (multilevelFacet) => multilevelFacet.filterField === parent
+            );
+            const { highestBreadcrumbLevel } = currentMultilevelFacet;
 
             const onFinish = () => {
                 if (highestBreadcrumbLevel === parseInt(level)) {
