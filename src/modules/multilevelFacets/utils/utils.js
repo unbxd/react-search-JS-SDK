@@ -26,7 +26,8 @@ export const getFormattedMultilevelFacets = (bucketedFacets, unbxdCore) => {
                 filterField: breadcrumb.filterField,
                 level: breadcrumb.level,
                 name: breadcrumb.value,
-                isSelected: true
+                isSelected: true,
+                dataId: breadcrumb.value,
             };
         });
 
@@ -67,7 +68,8 @@ export const getFormattedMultilevelFacets = (bucketedFacets, unbxdCore) => {
             displayName,
             facetType: facetTypes.MULTILEVEL_FACET,
             position,
-            values: [...breadCrumbFacets, ...formattedBucketedFacets]
+            values: [...breadCrumbFacets, ...formattedBucketedFacets],
+            highestBreadcrumbLevel
         };
         multilevelFacets.push(facet);
     });

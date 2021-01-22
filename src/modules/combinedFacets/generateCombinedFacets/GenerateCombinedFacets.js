@@ -193,7 +193,8 @@ class GenerateCombinedFacets extends React.Component {
                         combinedFacet.facetType === facetTypes.MULTILEVEL_FACET
                     ) {
                         const {
-                            facetName,
+                            filterField,
+                            displayName,
                             values,
                             isOpen = true,
                             filter = '',
@@ -210,7 +211,7 @@ class GenerateCombinedFacets extends React.Component {
                         return (
                             <div
                                 className="UNX-bucketedFacet__container"
-                                key={facetName}
+                                key={filterField}
                             >
                                 <div
                                     className={`UNX-facet__element ${
@@ -218,11 +219,11 @@ class GenerateCombinedFacets extends React.Component {
                                     }`}
                                 >
                                     <div className="UNX-facet__header">
-                                        {facetName}
+                                        {displayName}
                                         {collapsible && (
                                             <span
                                                 className="-collapse-icon"
-                                                data-unx_name={facetName}
+                                                data-unx_name={filterField}
                                                 onClick={
                                                     this.handleCollapseToggle
                                                 }
@@ -235,7 +236,7 @@ class GenerateCombinedFacets extends React.Component {
                                             <Input
                                                 className="-input"
                                                 value={filter}
-                                                name={facetName}
+                                                name={filterField}
                                                 onChange={
                                                     this.handleFilterChange
                                                 }
@@ -261,7 +262,7 @@ class GenerateCombinedFacets extends React.Component {
                                     isOpen &&
                                     filteredValues.length > minViewMore ? (
                                         <ViewMore
-                                            facetName={facetName}
+                                            facetName={filterField}
                                             toggleViewLess={this.toggleViewLess}
                                             viewLess={viewLess}
                                         />

@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { conditionalRenderer, executeCallback } from '../../common/utils';
-import { getMultilevelFacetCoreMethods } from './utils';
+import {
+    getMultilevelFacetCoreMethods,
+    getFormattedMultilevelFacets
+} from './utils';
 import MultilevelFacetsWrapper from './MultilevelFacetsWrapper';
 import { productTypes } from '../../config';
 
@@ -40,85 +43,19 @@ class MultilevelFacetsContainer extends React.PureComponent {
             deleteCategoryFilter
         } = getMultilevelFacetCoreMethods(unbxdCore);
 
-        const bucketedFacets = getBucketedFacets();
+        const multilevelFacets = getBucketedFacets() || [];
 
-        const multilevelFacets = [];
-        let highestBreadcrumbLevel = 0;
-
-        let facetDisplayName = '';
-        bucketedFacets.map((bucketedFacet) => {
-            const {
-                displayName,
-                level,
-                filterField,
-                values = []
-            } = bucketedFacet;
-            facetDisplayName = displayName;
-            const breadCrumbsList = getBreadCrumbsList(filterField);
-            highestBreadcrumbLevel = 0;
-
-            const breadCrumbFacets = breadCrumbsList.map((breadcrumb) => {
-                if (highestBreadcrumbLevel < breadcrumb.level) {
-                    highestBreadcrumbLevel = breadcrumb.level;
-                }
-                return {
-                    filterField: breadcrumb.filterField,
-                    level: breadcrumb.level,
-                    name: breadcrumb.value,
-                    isSelected: true,
-                    dataId: breadcrumb.value,
-                };
-            });
-
-            let formattedBucketedFacets = [];
-            if (
-                highestBreadcrumbLevel === level &&
-                highestBreadcrumbLevel > 0
-            ) {
-                const lastBreadcrumb =
-                    breadCrumbFacets[breadCrumbFacets.length - 1];
-                const hit = values.find((facetValue) => {
-                    const { name } = facetValue;
-                    const { name: breadcrumbName } = lastBreadcrumb;
-                    return breadcrumbName === name;
-                });
-                formattedBucketedFacets = [
-                    {
-                        ...hit,
-                        filterField,
-                        level,
-                        isSelected: true
-                    }
-                ];
-                breadCrumbFacets.pop();
-            } else {
-                formattedBucketedFacets = values.map((facetValue) => {
-                    const { name, count, dataId } = facetValue;
-                    return {
-                        filterField,
-                        level,
-                        name,
-                        count,
-                        dataId
-                    };
-                });
-            }
-
-            const facet = {
-                facetDisplayName,
-                filterField,
-                values: [...breadCrumbFacets, ...formattedBucketedFacets],
-                highestBreadcrumbLevel
-            };
-            multilevelFacets.push(facet);
-        });
+        const formattedMultilevelFacets = getFormattedMultilevelFacets(
+            multilevelFacets,
+            unbxdCore
+        );
 
         const handleFacetClick = (currentItem) => {
             const { name, filterField: parent, level } = currentItem;
             const categoryObject = { parent, level, name };
             const { helpers } = this.props;
             const { getUpdatedResults } = helpers;
-            const currentMultilevelFacet = multilevelFacets.find(
+            const currentMultilevelFacet = formattedMultilevelFacets.find(
                 (multilevelFacet) => multilevelFacet.filterField === parent
             );
             const { highestBreadcrumbLevel } = currentMultilevelFacet;
@@ -166,7 +103,7 @@ class MultilevelFacetsContainer extends React.PureComponent {
         };
 
         return {
-            multilevelFacets,
+            multilevelFacets: formattedMultilevelFacets,
             onFacetClick: handleFacetClick,
             facetItemComponent,
             label,
