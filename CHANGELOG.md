@@ -1,3 +1,11 @@
+## [0.0.41](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.40...v0.0.41) (2021-01-22)
+
+
+### Bug Fixes
+
+* **multilevel facets:** retain viewless and use common utils ([b2352b0](https://github.com/unbxd/react-search-JS-SDK/commit/b2352b0ded59d66d8396289e2e3f9b5e13fb227e))
+* **view types:** handle default view type selection ([c98f371](https://github.com/unbxd/react-search-JS-SDK/commit/c98f3713c8f2434bb5bb80b97b88e57407955094))
+
 ## [0.0.40](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.39...v0.0.40) (2021-01-21)
 
 
