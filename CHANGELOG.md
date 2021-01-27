@@ -1,3 +1,10 @@
+# [0.1.0](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.41...v0.1.0) (2021-01-27)
+
+
+### Features
+
+* **rel 0.1.0:** release v0.1.0 ([0ef3e29](https://github.com/unbxd/react-search-JS-SDK/commit/0ef3e29fe118972a6c64d3a5a0ddc8e5264a515c))
+
 ## [0.0.41](https://github.com/unbxd/react-search-JS-SDK/compare/v0.0.40...v0.0.41) (2021-01-22)
 
 
