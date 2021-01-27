@@ -84,7 +84,7 @@ The custom component instance will receive the following props
 | onClick  | func   | handle sort click. |
 
 ```jsx
-<Sort displayType={'LIST'} sortItemComponent={<SortItemComponent />} />
+<Sort sortOptions={sortOptions} displayType={'LIST'} sortItemComponent={<SortItemComponent />} />
 ```
 
 #### Note:
@@ -114,7 +114,7 @@ The custom component instance will receive the following props
 A label for the module can be diplayed by passing `label`.
 
 ```jsx
-<Sort label={<span>Sort:</span>} />
+<Sort sortOptions={sortOptions} label={<span>Sort:</span>} />
 ```
 
 <Preview>
