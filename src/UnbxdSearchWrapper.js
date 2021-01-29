@@ -49,7 +49,7 @@ const initialUnbxdState = {
 };
 
 class UnbxdSearchWrapper extends Component {
-    //rel 0.1.0
+    //rel 1.0.0
     constructor(props) {
         super(props);
         const {
