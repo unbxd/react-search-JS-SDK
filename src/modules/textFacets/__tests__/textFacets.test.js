@@ -103,7 +103,7 @@ test('Match Snapshot for text facets', async () => {
                 <SelectedFacets />
                 <FacetActions />
                 <TextFacets />
-                <Products attributesMap={attributesMap} />
+                <Products attributesMap={attributesMap} collapsible={true}/>
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -213,6 +213,7 @@ test('Test text facet actions with clearFilter Component', async () => {
 
 test('Test text facet actions with custom onApply method', async () => {
     const onApply = jest.fn();
+    onApply.mockReturnValue(true);
     const { getByText} = render(
         <>
             <UnbxdSearchWrapper
@@ -241,6 +242,7 @@ test('Test text facet actions with custom onApply method', async () => {
 
 test('Test text facet actions with custom onClear method', async () => {
     const onClear = jest.fn();
+    onClear.mockReturnValue(true);
     const { getByText} = render(
         <>
             <UnbxdSearchWrapper
@@ -402,5 +404,54 @@ test('Test selected facet click on text Facet with FacetItemComponent', async ()
     })
 });
 
+test('Test view more  & view Less on text facet', async () => {
+    const { getByText, container, getAllByText } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >   
+                <TextFacets enableViewMore={true} minViewMore={3}/>
+                <Products
+                    attributesMap={attributesMap}
+                />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(async () => {
+        fireEvent.click(container.getElementsByClassName('view-Less')[0]);
+        expect(getByText("View More"));
+        fireEvent.click(container.getElementsByClassName('view-More')[0]);
+        expect(getAllByText("View Less").length).toBe(6);
+    });
+});
+
+test('Test collapsible on text facet', async () => {
+    const { getByText, container } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >   
+                <TextFacets collapsible={true}/>
+                <Products
+                    attributesMap={attributesMap}
+                />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(async () => {
+        fireEvent.click(container.getElementsByClassName('-collapse-icon')[0]);
+        expect(container.getElementsByClassName("UNX-facet__element"));
+    });
+});
 
 
