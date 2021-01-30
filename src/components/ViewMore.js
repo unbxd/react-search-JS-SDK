@@ -3,7 +3,7 @@ import React from 'react';
 const ViewMore = ({ facetName, toggleViewLess, viewLess, ...props }) => {
     return !viewLess ? (
         <div
-            className="view-More"
+            className="view-Less"
             data-unx_name={facetName}
             onClick={toggleViewLess}
         >

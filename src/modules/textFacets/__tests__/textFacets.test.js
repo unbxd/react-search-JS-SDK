@@ -102,7 +102,7 @@ test('Match Snapshot for text facets', async () => {
 
                 <SelectedFacets />
                 <FacetActions />
-                <TextFacets/>
+                <TextFacets />
                 <Products attributesMap={attributesMap} collapsible={true}/>
                 <div>
                     <SearchBox defaultSearch="shoes" />
@@ -404,8 +404,8 @@ test('Test selected facet click on text Facet with FacetItemComponent', async ()
     })
 });
 
-test('Test view more on text facet', async () => {
-    const { getByText, container } = render(
+test('Test view more  & view Less on text facet', async () => {
+    const { getByText, container, getAllByText } = render(
         <>
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
@@ -423,8 +423,10 @@ test('Test view more on text facet', async () => {
     );
 
     await waitFor(async () => {
-        fireEvent.click(container.getElementsByClassName('view-More')[0]);
+        fireEvent.click(container.getElementsByClassName('view-Less')[0]);
         expect(getByText("View More"));
+        fireEvent.click(container.getElementsByClassName('view-More')[0]);
+        expect(getAllByText("View Less").length).toBe(6);
     });
 });
 
