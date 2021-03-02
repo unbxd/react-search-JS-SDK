@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.0...v1.0.1) (2021-03-02)
+
+
+### Bug Fixes
+
+* **core sdk update:** update core sdk. changes demo site keys ([acd5ce7](https://github.com/unbxd/react-search-JS-SDK/commit/acd5ce7489fd85fb5d0a7deab049af5153f23d5b))
+
 # [1.0.0](https://github.com/unbxd/react-search-JS-SDK/compare/v0.1.0...v1.0.0) (2021-01-29)
 
 
