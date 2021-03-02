@@ -1,5 +1,5 @@
-export const siteKey = 'ss-unbxd-sanj-tennis7501607934430';
-export const apiKey = '6fbadfac18b560a0926da3e06fefecfb';
+export const siteKey = 'ss-unbxd-demo-tennisplaza-mar-27501614667606';
+export const apiKey = '943214cecb3a39d15a969bb89f1df6d8';
 export const attributesMap = {
     productName: 'PRODUCT_NAME',
     uniqueId: 'uniqueId',

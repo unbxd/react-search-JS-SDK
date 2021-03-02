@@ -108,8 +108,8 @@ const Search = () => {
 
     return (
         <UnbxdSearchWrapper
-            siteKey="ss-unbxd-sanj-tennis7501607934430"
-            apiKey="6fbadfac18b560a0926da3e06fefecfb"
+            siteKey="ss-unbxd-demo-tennisplaza-mar-27501614667606"
+            apiKey="943214cecb3a39d15a969bb89f1df6d8"
             getCategoryId={getCategoryId}
             searchConfigurations={searchConfigurations}
             productType={productType}
