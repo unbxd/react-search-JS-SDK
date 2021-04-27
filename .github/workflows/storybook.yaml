@@ -1,0 +1,39 @@
+name: Storybook
+on:
+    push:
+        branches:
+            - master
+defaults:
+    run:
+        shell: bash
+jobs:
+    publish:
+        name: Publish 📖
+        runs-on: ubuntu-latest
+        steps:
+            - name: Pre-reqs
+              uses: actions/checkout@v2
+            - name: Setup node
+              uses: actions/setup-node@v2
+              with:
+                  node-version: 12
+
+            - name: Setup Base
+              run: yarn install --frozen-lockfile
+
+            - name: Build Base
+              run: yarn build
+
+            - name: Setup Demo
+              working-directory: ./demo
+              run: yarn install --frozen-lockfile
+
+            - name: Build Storybook
+              run: yarn build-storybook
+
+            - name: Deploying storybook
+              uses: JamesIves/github-pages-deploy-action@4.1.1
+              with:
+                  branch: gh-pages # The branch the action should deploy to.
+                  folder: storybook-static # The folder the action should deploy.
+
