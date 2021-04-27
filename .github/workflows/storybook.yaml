@@ -1,0 +1,32 @@
+name: build-storybook
+on:
+    push:
+        branches:
+            - master
+            - add_storybook_deployment
+            - feature-add-github-actions
+env:
+    GITHUB_TOKEN: '${{ secrets.REACT_GITHUB_TOKEN }}'
+defaults:
+    run:
+        shell: bash
+jobs:
+    deploy-docs:
+        name: Deploy 📖
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: 12
+            - uses: actions/cache@v2
+              id: restore-build
+              with:
+                  path: '**/node_modules'
+                  key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+            - run: yarn install --frozen-lockfile
+            - run: yarn build-storybook
+            - uses: JamesIves/github-pages-deploy-action@4.1.1
+              with:
+                  branch: gh-pages # The branch the action should deploy to.
+                  folder: storybook-static # The folder the action should deploy.
