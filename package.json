@@ -24,13 +24,9 @@
     "release": {
         "branches": [
             "master",
-            "next",
+            "develop",
             {
-                "name": "alpha",
-                "prerelease": true
-            },
-            {
-                "name": "beta",
+                "name": "feature-*",
                 "prerelease": true
             }
         ],
