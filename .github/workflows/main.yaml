@@ -1,4 +1,4 @@
-name: build-npm
+name: NPM
 on:
     pull_request:
     push:
@@ -18,44 +18,72 @@ jobs:
         name: Test 🧪
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v2
+            - name: Pre-reqs
+              uses: actions/checkout@v2
+
+            - name: Setup node
+              uses: actions/setup-node@v2
               with:
                   node-version: 12
-            - uses: actions/cache@v2
-              id: restore-build
+
+            - name: Check Cache
+              uses: actions/cache@v2
               with:
                   path: '**/node_modules'
                   key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-            - run: yarn install --frozen-lockfile
-            - run: yarn test
+
+            - name: Install Dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Run Test
+              run: yarn test
+
     build:
         name: Build ⚙️
         runs-on: ubuntu-latest
         needs: test
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v2
+            - name: Pre-reqs
+              uses: actions/checkout@v2
+
+            - name: Setup node
+              uses: actions/setup-node@v2
               with:
                   node-version: 12
-            - uses: actions/cache@v2
-              id: restore-build
+
+            - name: Check Cache
+              uses: actions/cache@v2
               with:
                   path: '**/node_modules'
                   key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-            - run: yarn install --frozen-lockfile
-            - run: yarn build
+
+            - name: Install Dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Run Build
+              run: yarn build
+
     publish:
         name: Publish 🚀
         runs-on: ubuntu-latest
         needs: build
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v2
-            - uses: actions/cache@v2
-              id: restore-build
+            - name: Pre-reqs
+              uses: actions/checkout@v2
+
+            - name: Setup node
+              uses: actions/setup-node@v2
+              with:
+                  node-version: 12
+
+            - name: Check Cache
+              uses: actions/cache@v2
               with:
                   path: '**/node_modules'
                   key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-            - run: yarn install --frozen-lockfile
-            - uses: cycjimmy/semantic-release-action@v2.5.3
+
+            - name: Install Dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Run Semantic Release
+              uses: cycjimmy/semantic-release-action@v2.5.3
