@@ -42,7 +42,6 @@ const Search = () => {
     const [categoryPathLinks, setCategoryPathLinks] = useState(categoryLinks);
     const [refreshId, setRefreshId] = useState(1);
     const [showFilters, setShowFilters] = useState(false);
-    const [] = useState('');
     const routeHistory = useHistory();
     const routeLocation = useLocation();
 
@@ -108,8 +107,8 @@ const Search = () => {
 
     return (
         <UnbxdSearchWrapper
-            siteKey="ss-unbxd-demo-tennisplaza-mar-27501614667606"
-            apiKey="943214cecb3a39d15a969bb89f1df6d8"
+            siteKey="ss-unbxd-ner-demo-site7501612449283"
+            apiKey="955731f5d1c36ebbc704687b9bfd9b09"
             getCategoryId={getCategoryId}
             searchConfigurations={searchConfigurations}
             productType={productType}

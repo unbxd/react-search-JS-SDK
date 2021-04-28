@@ -8,12 +8,12 @@ export const sortOptions = [
     },
     {
         label: 'Lowest Price',
-        field: 'PRODUCT_PRICE',
+        field: 'sortPrice',
         order: 'asc'
     },
     {
         label: 'Highest Price',
-        field: 'PRODUCT_PRICE',
+        field: 'sortPrice',
         order: 'desc'
     }
 ];
