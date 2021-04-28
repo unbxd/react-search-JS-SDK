@@ -4,7 +4,7 @@ import { Products } from '@unbxd-ui/react-search-sdk';
 import { ProductTypeContext } from '../context';
 
 const attributesMap = {
-    productName: 'title',
+    title: 'title',
     uniqueId: 'uniqueId',
     imageUrl: 'productImage',
     sellingPrice: 'sortPrice',
@@ -12,7 +12,7 @@ const attributesMap = {
 };
 
 const variantAttributesMap = {
-    productName: 'v_title',
+    title: 'v_title',
     uniqueId: 'vId',
     imageUrl: 'imageUrl',
     price: 'v_RRP_Price',
