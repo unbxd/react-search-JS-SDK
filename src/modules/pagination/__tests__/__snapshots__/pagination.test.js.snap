@@ -41,7 +41,7 @@ Array [
       3
     </button>
     <button
-      className="UNX-pageNavigation__button -action"
+      className="UNX-pageNavigation__button -action next"
       data-pagenumber={2}
       data-testid="UNX_pagination-next"
       onClick={[Function]}
