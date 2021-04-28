@@ -7,6 +7,7 @@ import UnbxdSearchWrapper from '../../../UnbxdSearchWrapper';
 import SearchBox from '../../searchBox';
 import { spellCheckResponse } from './mocks/index';
 import { searchResponse } from '../../products/__tests__/mocks/searchMock'
+import { attributesMap } from '../../../config/constants';
 
 // establish API mocking before all tests
 beforeAll(() => {
@@ -21,14 +22,6 @@ beforeAll(() => {
         });
     });
 })
-
-const attributesMap = {
-    productName: 'title',
-    uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl',
-    price: 'RRP_Price',
-    productUrl: 'productUrl'
-};
 
 test('Match Snapshot for Search Title', async () => {
     const tree = renderer

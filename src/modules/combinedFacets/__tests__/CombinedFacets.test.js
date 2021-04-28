@@ -9,6 +9,7 @@ import { searchResponse } from './mocks/searchMock';
 import { facetResponse } from './mocks/searchMock';
 import SelectedFacets from '../../selectedFacets/index';
 import FacetActions from '../../facetActions/index';
+import { attributesMap } from '../../../config/constants';
 
 // establish API mocking before all tests
 beforeAll(() => {
@@ -33,15 +34,6 @@ beforeAll(() => {
         });
     });
 })
-
-const attributesMap = {
-    productName: 'title',
-    uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl',
-    price: 'RRP_Price',
-    productUrl: 'productUrl'
-};
-
 
 test('Match Snapshot for Combined Facets', async () => {
     const tree = renderer

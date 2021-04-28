@@ -7,6 +7,7 @@ import UnbxdSearchWrapper from '../../../UnbxdSearchWrapper';
 import SearchBox from '../../searchBox';
 import { searchResponse } from './mocks/searchMock';
 import { facetResponse } from './mocks/searchMock';
+import { attributesMap } from '../../../config/constants';
 
 export const FacetItemComponent = ({ itemData, onClick }) => {
     const { name, count, level, isSelected } = itemData;
@@ -41,15 +42,6 @@ beforeAll(() => {
         });
     });
 })
-
-const attributesMap = {
-    productName: 'title',
-    uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl',
-    price: 'RRP_Price',
-    productUrl: 'productUrl'
-};
-
 
 test('Match Snapshot for MultilevelFacets ', async () => {
     const tree = renderer

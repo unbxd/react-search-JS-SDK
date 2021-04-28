@@ -9,6 +9,7 @@ import { searchResponse } from './mocks/searchMock';
 import { facetResponse } from './mocks/facetResponse';
 import SelectedFacets from '../../selectedFacets/index';
 import FacetActions from '../../facetActions/index';
+import { attributesMap } from '../../../config/constants';
 
 const FacetItemComponent = ({ itemData, onClick }) => {
     const { name, count, isSelected } = itemData;
@@ -82,15 +83,6 @@ beforeAll(() => {
         });
     });
 })
-
-const attributesMap = {
-    productName: 'title',
-    uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl',
-    price: 'RRP_Price',
-    productUrl: 'productUrl'
-};
-
 
 test('Match Snapshot for text facets', async () => {
     const tree = renderer

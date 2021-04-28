@@ -9,6 +9,7 @@ import { searchResponse } from './mocks/searchMock';
 import { facetResponse } from './mocks/searchMock';
 import SelectedFacets from '../../selectedFacets/index';
 import FacetActions from '../../facetActions/index';
+import { attributesMap } from '../../../config/constants';
 
 export const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
     const { from, end, facetName, isSelected = false } = itemData;
@@ -77,16 +78,7 @@ beforeAll(() => {
             json: () => Promise.resolve(searchResponse),
         });
     });
-})
-
-const attributesMap = {
-    productName: 'title',
-    uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl',
-    price: 'RRP_Price',
-    productUrl: 'productUrl'
-};
-
+});
 
 test('Match Snapshot for range facets', async () => {
     const tree = renderer
@@ -102,7 +94,6 @@ test('Match Snapshot for range facets', async () => {
                     <SearchBox defaultSearch="shoes" />
                 </div>
             </UnbxdSearchWrapper>
-
         );
         await waitFor(() => tree.toJSON());
         expect(tree.toJSON()).toMatchSnapshot();
@@ -242,4 +233,3 @@ test('Test selected facet click on range Facet with FacetItemComponent', async (
         expect(container.getElementsByClassName('range-selected').length).toBe(1)
     });
 });
-

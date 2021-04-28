@@ -1,4 +1,4 @@
-export const page2SearchResponse = {
+export const nextPageSearchResponse = {
     searchMetaData: {
         status: 0,
         queryTime: 46,

@@ -47,3 +47,11 @@ export const facetTypes = {
     RANGE_FACET: 'RANGE_FACET',
     MULTILEVEL_FACET: 'MULTILEVEL_FACET'
 };
+
+export const attributesMap = {
+    title: 'title',
+    uniqueId: 'uniqueId',
+    imageUrl: 'imageUrl',
+    price: 'RRP_Price',
+    productUrl: 'productUrl'
+};
