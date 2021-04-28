@@ -1,5 +1,5 @@
 export const getProductFields = ({
-    itemData: product,
+    product,
     attributesMap,
     showVariants,
     variantAttributesMap,
@@ -8,17 +8,18 @@ export const getProductFields = ({
     groupBy
 }) => {
     const attributesMapper = {
-        PRODUCT_NAME: 'productName',
+        TITLE: 'title',
         PRODUCT_URL: 'productUrl',
         IMAGE_URL: 'imageUrl',
         SWATCH_IMAGE_URL: 'swatchImageUrl',
         PRICE: 'price',
-        SELLING_PRICE: 'sellingPrice',
-        UNIQUE_ID: 'uniqueId'
+        SELLING_PRICE: 'sellingPrice'
     };
+    const UNIQUE_ID = 'uniqueId';
 
     const productValues = {};
     let swatches = [];
+    productValues[UNIQUE_ID] = product[UNIQUE_ID];
     for (const key in attributesMapper) {
         const mappedKey = attributesMapper[key];
         if (product['relevantDocument'] === 'variant' && showVariants) {
