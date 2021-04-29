@@ -75,7 +75,7 @@ const PaginationWrapper = (props) => {
                     })
                 ) : (
                         <Button
-                            className="UNX-pageNavigation__button -action"
+                            className="UNX-pageNavigation__button -action prev"
                             onClick={onPreviousPageClick}
                             data-pagenumber={currentPage - 1}
                             key={currentPage - 1}
@@ -100,7 +100,7 @@ const PaginationWrapper = (props) => {
                     })
                 ) : (
                         <Button
-                            className="UNX-pageNavigation__button -action"
+                            className="UNX-pageNavigation__button -action next"
                             onClick={onNextPageClick}
                             data-pagenumber={currentPage + 1}
                             key={currentPage + 1}

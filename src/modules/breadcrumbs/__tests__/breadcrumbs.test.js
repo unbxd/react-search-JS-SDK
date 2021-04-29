@@ -7,6 +7,7 @@ import MultilevelFacets from '../../multilevelFacets';
 import UnbxdSearchWrapper from '../../../UnbxdSearchWrapper';
 import SearchBox from '../../searchBox';
 import { breadcrumbSearchResponse, setsBreadcrumbResponse } from './mocks/';
+import { attributesMap } from '../../../config/constants';
 
 // establish API mocking before all tests
 beforeAll(() => {
@@ -21,14 +22,6 @@ beforeAll(() => {
         });
     });
 })
-
-const attributesMap = {
-    productName: 'title',
-    uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl',
-    price: 'RRP_Price',
-    productUrl: 'productUrl'
-};
 
 const Root = () => <span className="UNX-breadcrumb__root">Home</span>;
 const separator = <span className="UNX-breadcrumb__separator">/</span>;

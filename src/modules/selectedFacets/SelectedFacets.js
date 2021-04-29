@@ -26,7 +26,7 @@ const SelectedFacets = (props) => {
                     helpers
                 } = appState;
 
-                const { applyMultiple } = unbxdState;
+                const { applyMultiple, enableApplyFilters } = unbxdState;
 
                 return (
                     <SelectedFacetsContainer
@@ -37,6 +37,7 @@ const SelectedFacets = (props) => {
                         getUpdatedResults={getUpdatedResults}
                         applyMultiple={applyMultiple}
                         productType={productType}
+                        enableApplyFilters={enableApplyFilters}
                         {...props}
                     />
                 );

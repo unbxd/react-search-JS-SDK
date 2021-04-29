@@ -7,6 +7,7 @@ import ViewTypes from '../index';
 import SearchBox from '../../searchBox';
 import { searchResponse } from '../../products/__tests__/mocks/searchMock';
 import { listViewResponse } from './mocks';
+import { attributesMap } from '../../../config/constants';
 
 // establish API mocking before all tests
 beforeAll(() => {
@@ -21,14 +22,6 @@ beforeAll(() => {
         });
     });
 })
-
-const attributesMap = {
-    productName: 'title',
-    uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl',
-    price: 'RRP_Price',
-    productUrl: 'productUrl'
-};
 
 test('Match Snapshot for View types', async () => {
     const tree = renderer

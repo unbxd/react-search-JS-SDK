@@ -6,6 +6,7 @@ import Banners from '../index';
 import UnbxdSearchWrapper from '../../../UnbxdSearchWrapper';
 import SearchBox from '../../searchBox';
 import { bannerSearchResponse } from './mocks/';
+import { attributesMap } from '../../../config/constants';
 
 // establish API mocking before all tests
 beforeAll(() => {
@@ -14,15 +15,7 @@ beforeAll(() => {
             json: () => Promise.resolve(bannerSearchResponse),
         });
     });
-})
-
-const attributesMap = {
-    productName: 'title',
-    uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl',
-    price: 'RRP_Price',
-    productUrl: 'productUrl'
-};
+});
 
 test('Match Snapshot for banners', async () => {
     const tree = renderer
@@ -37,7 +30,6 @@ test('Match Snapshot for banners', async () => {
                     <SearchBox defaultSearch="shoes" />
                 </div>
             </UnbxdSearchWrapper>
-
         );
     await waitFor(() => tree.toJSON());
     expect(tree.toJSON()).toMatchSnapshot();

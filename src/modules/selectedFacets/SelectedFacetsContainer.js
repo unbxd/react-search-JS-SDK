@@ -16,7 +16,8 @@ class SelectedFacetsContainer extends React.PureComponent {
             label,
             getUpdatedResults,
             helpers,
-            applyMultiple
+            applyMultiple,
+            enableApplyFilters
         } = this.props;
 
         const {
@@ -41,12 +42,14 @@ class SelectedFacetsContainer extends React.PureComponent {
         const handleTextFacetClick = (currentItem) => {
             const { facetName, dataId } = currentItem;
             removeTextFacet(facetName, dataId);
-            manageTextFacets(
-                currentItem,
-                facetName,
-                dataId,
-                manageStateTypes.REMOVE
-            );
+            if (enableApplyFilters) {
+                manageTextFacets(
+                    currentItem,
+                    facetName,
+                    dataId,
+                    manageStateTypes.REMOVE
+                );
+            }
         };
 
         const handleRangeFacetClick = (currentItem) => {
@@ -60,15 +63,16 @@ class SelectedFacetsContainer extends React.PureComponent {
             } else {
                 clearARangeFacet(facetName);
             }
-            manageRangeFacets(
-                currentItem,
-                facetName,
-                dataId,
-                manageStateTypes.REMOVE
-            );
+            if (enableApplyFilters) {
+                manageRangeFacets(
+                    currentItem,
+                    facetName,
+                    dataId,
+                    manageStateTypes.REMOVE
+                );
+            }
             applyRangeFacet();
         };
-
 
         const activeFacets = {};
         activeFacets['textFacets'] = [];

@@ -6,14 +6,15 @@ import Pagination from '../../pagination';
 import UnbxdSearchWrapper from '../../../UnbxdSearchWrapper';
 import SearchBox from '../../searchBox';
 import { searchResponse } from '../../products/__tests__/mocks/searchMock';
-import { page2SearchResponse } from './mocks';
+import { nextPageSearchResponse } from './mocks';
+import { attributesMap } from '../../../config/constants';
 
 // establish API mocking before all tests
 beforeAll(() => {
     window.fetch = jest.fn((request) => {
         if (request.includes('start=10')) {
             return Promise.resolve({
-                json: () => Promise.resolve(page2SearchResponse),
+                json: () => Promise.resolve(nextPageSearchResponse),
             });
         }
         return Promise.resolve({
@@ -21,14 +22,6 @@ beforeAll(() => {
         });
     });
 })
-
-const attributesMap = {
-    productName: 'title',
-    uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl',
-    price: 'RRP_Price',
-    productUrl: 'productUrl'
-};
 
 test('Match Snapshot for Pagination', async () => {
     const tree = renderer

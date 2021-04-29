@@ -3,34 +3,14 @@ import PropTypes from 'prop-types';
 
 import SwatchItem from '../swatches';
 import { List } from '../../../../components';
-import { getProductFields } from '../../utils';
 
 class GridProductCard extends React.Component {
     constructor(props) {
         super(props);
 
-        const {
-            itemData,
-            attributesMap,
-            showVariants,
-            variantAttributesMap,
-            showSwatches,
-            swatchAttributesMap,
-            groupBy
-        } = this.props;
+        const { itemData } = this.props;
 
-        //Get the datas from the product bases on attributesMap and create the card
-        const productValues = getProductFields({
-            itemData,
-            attributesMap,
-            showVariants,
-            variantAttributesMap,
-            showSwatches,
-            swatchAttributesMap,
-            groupBy
-        });
-
-        this.state = { productValues };
+        this.state = { productValues: itemData };
     }
 
     onSwatchClick = (event) => {
@@ -64,7 +44,7 @@ class GridProductCard extends React.Component {
         const product = { ...productValues, ...activeSwatch };
         const {
             uniqueId,
-            productName,
+            title,
             imageUrl,
             productUrl,
             price,
@@ -107,7 +87,7 @@ class GridProductCard extends React.Component {
                         data-uniqueid={uniqueId}
                         data-prank={prank}
                     >
-                        {productName}
+                        {title}
                     </div>
 
                     <div
@@ -135,17 +115,7 @@ class GridProductCard extends React.Component {
 }
 
 GridProductCard.propTypes = {
-    itemData: PropTypes.object.isRequired,
-    attributesMap: PropTypes.object.isRequired,
-    showVariants: PropTypes.bool.isRequired,
-    variantAttributesMap: PropTypes.object.isRequired,
-    showSwatches: PropTypes.bool,
-    swatchAttributesMap: PropTypes.object,
-    groupBy: PropTypes.string,
-    swatchItemComponent: PropTypes.element,
-    idx: PropTypes.number,
-    onClick: PropTypes.func.isRequired,
-    priceUnit: PropTypes.string.isRequired
+    itemData: PropTypes.object.isRequired
 };
 
 export default GridProductCard;
