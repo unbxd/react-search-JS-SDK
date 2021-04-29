@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const RemovePlugin = require('remove-files-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 function recursiveIssuer(m) {
     if (m.issuer) {
@@ -19,14 +20,17 @@ module.exports = {
         ie: Path.resolve(__dirname, '../public/css/ie/index.scss'),
         core: Path.resolve(__dirname, '../public/css/core/index.scss'),
         theme: Path.resolve(__dirname, '../public/css/theme/index.scss'),
-        'react-search-sdk': Path.resolve(__dirname, '../src/index.js')
+        reactSearch: Path.resolve(__dirname, '../src/index.js')
     },
     mode: 'production',
     output: {
         path: Path.join(__dirname, '../public/dist'),
         filename: 'js/[name].js',
         sourceMapFilename: '[file].map',
-        libraryTarget: 'commonjs2'
+        libraryTarget: 'umd',
+        globalObject: 'this',
+        library: '',
+        libraryExport: ''
     },
     optimization: {
         splitChunks: {
@@ -58,13 +62,28 @@ module.exports = {
             filename: 'css/[name].css',
             chunkFilename: '[id].css'
         }),
+        new CompressionPlugin({
+            algorithm: 'gzip',
+            filename(pathData) {
+                const { dir, name, ext } = pathData;
+                if (ext === '.css') {
+                    return `${dir}${name}.min.css`;
+                }
+                return `${dir}${name}.min.js`;
+            }
+        }),
         new RemovePlugin({
             after: {
                 root: './public/dist',
                 include: [
                     'js/core.js',
                     'js/theme.js',
-                    'css/react-search-sdk.css'
+                    'js/ie.js',
+                    'js/core.min.js',
+                    'js/ie.min.js',
+                    'js/theme.min.js',
+                    'js/reactSearch.js.LICENSE.min.js',
+                    'css/core.min.css'
                 ]
             }
         })
@@ -120,8 +139,5 @@ module.exports = {
                 ]
             }
         ]
-    },
-    externals: {
-        react: 'commonjs react'
     }
 };
