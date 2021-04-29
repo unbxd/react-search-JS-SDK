@@ -63,6 +63,12 @@ jobs:
             - name: Run Build
               run: yarn build
 
+            - name: Save Build
+              uses: actions/upload-artifact@v2
+              with:
+                  name: dist
+                  path: ./public/dist
+
     publish:
         name: Publish 🚀
         runs-on: ubuntu-latest
@@ -84,6 +90,12 @@ jobs:
 
             - name: Install Dependencies
               run: yarn install --frozen-lockfile
+
+            - name: Fetch Build
+              uses: actions/download-artifact@v2
+              with:
+                  name: dist
+                  path: ./public/dist
 
             - name: Run Semantic Release
               uses: cycjimmy/semantic-release-action@v2.5.3
