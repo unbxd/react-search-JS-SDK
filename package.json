@@ -1,6 +1,6 @@
 {
     "name": "@unbxd-ui/react-search-sdk",
-    "version": "1.0.2-feature-add-github-actions.1",
+    "version": "1.0.2",
     "description": "Unbxd React Search JS SDK",
     "main": "public/dist/js/react-search-sdk.js",
     "files": [
