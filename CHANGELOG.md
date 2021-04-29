@@ -1,3 +1,12 @@
+## [1.0.3-feature-1.0.3.1](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.2...v1.0.3-feature-1.0.3.1) (2021-04-29)
+
+
+### Bug Fixes
+
+* **pagination:** add classes denoting the type of pagination action ([49e00dc](https://github.com/unbxd/react-search-JS-SDK/commit/49e00dc24f125eda3c23fde49980f31ef69d6852))
+* **products:** rename productName to title. optimise the products processing ([253392b](https://github.com/unbxd/react-search-JS-SDK/commit/253392b0c8c140b08586588e456fc5d33a5b56d7))
+* **selected facets:** remove from facet store only when apply filters is enabled ([fa5dd1c](https://github.com/unbxd/react-search-JS-SDK/commit/fa5dd1c6b649c96c023f8cc7817d27de24901140))
+
 ## [1.0.2](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.1...v1.0.2) (2021-04-29)
 
 
