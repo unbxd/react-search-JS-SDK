@@ -1,3 +1,10 @@
+## [1.0.3-feature-1.0.3.2](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.3-feature-1.0.3.1...v1.0.3-feature-1.0.3.2) (2021-04-29)
+
+
+### Bug Fixes
+
+* **build:** download build before semantic release ([a49d914](https://github.com/unbxd/react-search-JS-SDK/commit/a49d914eb284bed6fae9f6ccd1396e9b41ec153b))
+
 ## [1.0.3-feature-1.0.3.1](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.2...v1.0.3-feature-1.0.3.1) (2021-04-29)
 
 
