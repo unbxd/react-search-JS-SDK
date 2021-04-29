@@ -1,3 +1,11 @@
+## [1.0.2-feature-add-github-actions.1](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.1...v1.0.2-feature-add-github-actions.1) (2021-04-27)
+
+
+### Bug Fixes
+
+* **github actions:** add storybook deployment ([4b5df2b](https://github.com/unbxd/react-search-JS-SDK/commit/4b5df2b3f8373e5476e9c7f664b6a5a8ec790b27))
+* **github actions:** rename flows ([35c098f](https://github.com/unbxd/react-search-JS-SDK/commit/35c098f14a7ce233ab1c0a9bffd0ab53f59c8646))
+
 ## [1.0.1](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.0...v1.0.1) (2021-03-02)
 
 
