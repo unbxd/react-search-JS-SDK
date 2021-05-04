@@ -16,12 +16,6 @@ Array [
       className="UNX-pageNavigation__button"
       data-pagenumber={2}
       data-testid="UNX_pageNumber2"
-      itemData={
-        Object {
-          "pageNumber": 2,
-          "type": "NUMBER",
-        }
-      }
       onClick={[Function]}
     >
       2
@@ -30,12 +24,6 @@ Array [
       className="UNX-pageNavigation__button"
       data-pagenumber={3}
       data-testid="UNX_pageNumber3"
-      itemData={
-        Object {
-          "pageNumber": 3,
-          "type": "NUMBER",
-        }
-      }
       onClick={[Function]}
     >
       3
