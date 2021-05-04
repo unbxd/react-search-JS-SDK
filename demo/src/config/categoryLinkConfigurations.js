@@ -1,19 +1,19 @@
 const categoryLinks = [
     {
-        path: 'CATEGORY:strings',
+        path: 'categoryPath:cat430028',
         id: 'strings',
-        label: 'Strings'
+        label: 'Tops'
     },
     {
-        path: 'CATEGORY:accessories',
+        path: 'categoryPath:cat1730035',
         id: 'accessories',
-        label: 'Accessories'
+        label: 'Jeans'
     },
-    { path: 'CATEGORY:grips', id: 'grips', label: 'Grips' },
+    { path: 'categoryPath:cat740011', id: 'grips', label: 'New' },
     {
-        path: 'CATEGORY:balls',
+        path: 'categoryPath:cat890004',
         id: 'balls',
-        label: 'Balls '
+        label: 'Sale '
     }
 ];
 
