@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { Search, Landing } from './pages';
+import Search from './pages/Search';
+import Landing from './pages/Landing';
 import { ProductTypeContext } from './context';
 
-import '@unbxd-ui/react-search-sdk/public/dist/css/theme.css';
 import '@unbxd-ui/react-search-sdk/public/dist/css/core.css';
+import '@unbxd-ui/react-search-sdk/public/dist/css/theme.css';
 // import '@unbxd-ui/react-search-sdk/public/dist/css/ie.css';
 import '../public/css/index.scss';
 

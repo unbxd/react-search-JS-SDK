@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Select from 'react-select';
 import { Sort } from '@unbxd-ui/react-search-sdk';
 
 export const sortOptions = [
@@ -38,15 +38,63 @@ export const SortItemComponent = ({ itemData, onClick }) => {
         </button>
     );
 };
+
+const SortItemDropdownComponent = ({ sortOptions, noOfPages, onSortClick }) => {
+    if (noOfPages === 0) {
+        return null;
+    }
+    //find the selected option
+    const selectedOption = sortOptions.find(
+        (sortOption) => sortOption.isSelected
+    );
+    const handleChange = (selected) => {
+        onSortClick(selected);
+    };
+    return (
+        <div className="UNX-sortby__container">
+            <span className="-label">Sort By</span>
+            <Select
+                defaultValue={sortOptions[0]}
+                options={sortOptions}
+                value={selectedOption}
+                onChange={handleChange}
+                className="UNX-sort__dropdown UNX-dropdown-container"
+                classNamePrefix="UNX-dropdown"
+            />
+        </div>
+    );
+};
+
+// const Sorter = () => {
+//     return (
+//         <Sort
+//             sortOptions={sortOptions}
+//             label={label}
+//             onSortChange={onSortChange}
+//             // displayType={'LIST'}
+//             // sortItemComponent={<SortItemComponent/>}
+//         />
+//     );
+// };
+
 const Sorter = () => {
     return (
         <Sort
             sortOptions={sortOptions}
             label={label}
             onSortChange={onSortChange}
-            // displayType={'LIST'}
-            // sortItemComponent={<SortItemComponent/>}
-        />
+        >
+            {({ sortOptions, sortBy, noOfPages, onSortClick }) => {
+                return (
+                    <SortItemDropdownComponent
+                        sortOptions={sortOptions}
+                        sortBy={sortBy}
+                        noOfPages={noOfPages}
+                        onSortClick={onSortClick}
+                    />
+                );
+            }}
+        </Sort>
     );
 };
 
