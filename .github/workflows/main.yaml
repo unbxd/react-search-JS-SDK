@@ -98,4 +98,18 @@ jobs:
                   path: ./public/dist
 
             - name: Run Semantic Release
+              id: semantic-release-step
               uses: cycjimmy/semantic-release-action@v2.5.3
+
+            - name: Run S3 Upload
+              if: steps.semantic-release-step.outputs.new_release_published
+              uses: jakejarvis/s3-sync-action@master
+              with:
+                  args: --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers --cache-control 'public,max-age=2592000' --content-encoding 'gzip'
+              env:
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  AWS_REGION: ${{ secrets.AWS_REGION }}
+                  AWS_ACCESS_KEY_ID: apple
+                  AWS_S3_BUCKET: unbxd/react-search-sdk/
+                  SOURCE_DIR: 'public/dist'
+                  DEST_DIR: ${{ steps.semantic-release-step.outputs.new_release_version }}
