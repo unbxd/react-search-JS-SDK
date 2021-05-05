@@ -1,3 +1,14 @@
+## [1.0.3-feature-1.0.3.3](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.3-feature-1.0.3.2...v1.0.3-feature-1.0.3.3) (2021-05-05)
+
+
+### Bug Fixes
+
+* **core sdk:** version bump ([3f468a0](https://github.com/unbxd/react-search-JS-SDK/commit/3f468a08f4e4d63b10401c19203974f95098b11c))
+* **misc:** miscellaneous fixes ([a2ee721](https://github.com/unbxd/react-search-JS-SDK/commit/a2ee721cc82f57e56c87231f1a40fb14f9eb8e96))
+* **multilevelfacets:** encode the multilevel facet value to keep it in the same format as core sdk ([5bdc37c](https://github.com/unbxd/react-search-JS-SDK/commit/5bdc37c03c3caded799a9a7b6a0dcb88f0e063de))
+* **searchtitle:** add a formatter to format search title based on different producttypes ([2944dc9](https://github.com/unbxd/react-search-JS-SDK/commit/2944dc994ecad8b4c14651f19437c331c58ae494))
+* **styles:** segregate core and theme styles better ([478d90c](https://github.com/unbxd/react-search-JS-SDK/commit/478d90c8d896f815a9e09f861eda5769dba3a7ab))
+
 ## [1.0.3-feature-1.0.3.2](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.3-feature-1.0.3.1...v1.0.3-feature-1.0.3.2) (2021-04-29)
 
 
