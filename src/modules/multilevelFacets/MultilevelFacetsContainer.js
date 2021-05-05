@@ -52,7 +52,11 @@ class MultilevelFacetsContainer extends React.PureComponent {
 
         const handleFacetClick = (currentItem) => {
             const { name, filterField: parent, level } = currentItem;
-            const categoryObject = { parent, level, name };
+            const categoryObject = {
+                parent,
+                level,
+                name: encodeURIComponent(name)
+            };
             const { helpers } = this.props;
             const { getUpdatedResults } = helpers;
             const currentMultilevelFacet = formattedMultilevelFacets.find(
