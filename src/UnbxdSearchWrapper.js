@@ -31,7 +31,6 @@ import {
 } from './utils';
 import { cloneElement } from './common/utils';
 import '../public/css/core/index.scss';
-import { viewTypes } from './config/constants';
 
 /**
  * Component to initialize Unbxd Search. UnbxdSearchWrapper also acts as a root component for modules such as Products, Pagination and facets.
@@ -133,7 +132,6 @@ class UnbxdSearchWrapper extends Component {
             typeof unbxdCore.options.getCategoryId === 'function' &&
             unbxdCore.options.getCategoryId();
 
-
         if (unbxdCore.options.applyMultipleFilters) {
             this.setState((currentState) => {
                 return {
@@ -171,11 +169,7 @@ class UnbxdSearchWrapper extends Component {
     componentDidUpdate(prevProps) {
         const { refreshId } = prevProps;
         const { productType, onRouteChange } = this.props;
-        const {
-            unbxdCore,
-            categoryId,
-            unbxdState: { query }
-        } = this.state;
+        const { unbxdCore, categoryId } = this.state;
         const { trackCategory } = this.getAnalytics();
 
         const urlParams = unbxdCore.getQueryParams();
@@ -184,6 +178,7 @@ class UnbxdSearchWrapper extends Component {
         const currentCategoryId =
             typeof unbxdCore.options.getCategoryId === 'function' &&
             unbxdCore.options.getCategoryId();
+        unbxdCore.options.productType = productType;
 
         if (
             categoryId !== currentCategoryId &&
@@ -198,7 +193,6 @@ class UnbxdSearchWrapper extends Component {
                     productType: productTypes.CATEGORY
                 };
             });
-            unbxdCore.options.productType = productTypes.CATEGORY;
             if (categoryId.length === 0 && Object.keys(urlParams).length) {
                 renderFromUrl();
             } else {
@@ -214,11 +208,8 @@ class UnbxdSearchWrapper extends Component {
         } else if (refreshId !== this.props.refreshId) {
             this.resetSearch();
             if (onRouteChange(unbxdCore, '', refreshId)) {
-                unbxdCore.options.productType = productType;
-                const currentQuery =
-                    urlParams[unbxdCore.options.searchQueryParam];
-                if (productType === productTypes.SEARCH) {
-                    getResults(currentQuery);
+                if (Object.keys(urlParams).length) {
+                    renderFromUrl();
                 } else {
                     getResults();
                 }

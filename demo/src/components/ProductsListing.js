@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import { Products } from '@unbxd-ui/react-search-sdk';
 import { ProductTypeContext } from '../context';
@@ -139,11 +139,15 @@ export const ProductItemComponent = (props) => {
     );
 };
 
-const ProductsListing = () => {
+const ZeroResultsComponent = ({ query }) => {
     const { setEnableFilters } = useContext(ProductTypeContext);
-    const onZeroResults = () => {
+    useEffect(() => {
         setEnableFilters(false);
-    };
+    }, [query]);
+    return <div>No products found.</div>;
+};
+
+const ProductsListing = () => {
     return (
         <Products
             attributesMap={attributesMap}
@@ -154,7 +158,7 @@ const ProductsListing = () => {
             showSwatches={false}
             swatchAttributesMap={swatchAttributesMap}
             paginationType="FIXED_PAGINATION"
-            onZeroResults={onZeroResults}
+            zeroResultsComponent={<ZeroResultsComponent />}
         />
     );
 };

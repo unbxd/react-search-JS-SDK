@@ -3,6 +3,7 @@ const searchConfigurations = {
     siteKey: 'e6959ae0b643d51b565dc3e01bf41ec1',
     searchEndPoint: 'https://search.unbxd.io/',
     searchQueryParam: 'q',
+    browseQueryParam: 'p',
     productAttributes: [
         'title',
         'uniqueId',

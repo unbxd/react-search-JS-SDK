@@ -1,8 +1,11 @@
-import React, { useContext } from 'react';
-
+import React, { useState, useContext } from 'react';
+import Select from 'react-select';
 import { SearchBox } from '@unbxd-ui/react-search-sdk';
 import { useHistory } from 'react-router-dom';
 import { ProductTypeContext } from '../context';
+import CategoryLinks from './CategoryLinks';
+import MobileMenu from './MobileMenu';
+import { categoryLinks } from '../config';
 
 export const SearchButton = ({ onSearchBoxSubmit }) => {
     return (
@@ -31,12 +34,19 @@ export const ClearComponent = ({ onSearchBoxClear }) => {
 };
 
 const SearchBar = (props) => {
-    const { onSearch, productType } = props;
+    const {
+        onProductTypeChange,
+        productType,
+        handleShow,
+        refreshId,
+        setRefreshId
+    } = props;
+    const [categoryPathLinks, setCategoryPathLinks] = useState(categoryLinks);
     const { enableFilters, setEnableFilters } = useContext(ProductTypeContext);
     const history = useHistory();
     const handleSubmit = () => {
         if (productType !== 'SEARCH') {
-            onSearch('SEARCH');
+            onProductTypeChange('SEARCH');
             history.push('/');
         }
         if (!enableFilters) {
@@ -44,17 +54,60 @@ const SearchBar = (props) => {
         }
         return true;
     };
+
+    const handleCategoryLinkClick = (event) => {
+        const path = event.target.dataset['unx_path'];
+        let currentCategoryItem = null;
+        const updatedPathLinks = categoryPathLinks.map((links) => {
+            if (links.path === path) {
+                currentCategoryItem = links;
+                return { ...links, isSelected: true };
+            }
+            return { ...links, isSelected: false };
+        });
+        setCategoryPathLinks(updatedPathLinks);
+        window.UnbxdAnalyticsConf = {};
+        window.UnbxdAnalyticsConf['page'] = currentCategoryItem.path;
+        window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
+        onProductTypeChange('CATEGORY');
+        setRefreshId(refreshId + 1);
+    };
+
+    const languageOptions = [
+        { value: 'english', label: 'English' },
+        { value: 'french', label: 'French' },
+        { value: 'german', label: 'German' }
+    ];
+
     return (
         <div className="UNX-header__container">
             <a href="/">
                 <span className="UNX-header__logo" />
             </a>
+            <CategoryLinks
+                categoryPathLinks={categoryPathLinks}
+                handleCategoryLinkClick={handleCategoryLinkClick}
+                setProductType={onProductTypeChange}
+            />
+            <MobileMenu
+                categoryPathLinks={categoryPathLinks}
+                handleCategoryLinkClick={handleCategoryLinkClick}
+                handleShow={handleShow}
+                enableFilters={enableFilters}
+            />
             <div className="UNX-header__search">
                 <SearchBox
                     submitComponent={<SearchButton />}
                     placeholder="Search Demo"
                     onSubmit={handleSubmit}
                 />
+                <Select
+                    defaultValue={languageOptions[0]}
+                    options={languageOptions}
+                    className="UNX-language__dropdown UNX-dropdown-container"
+                    classNamePrefix="UNX-dropdown"
+                />
+                <i className="UNX-cart__icon fa fa-shopping-bag fa-2x" />
             </div>
         </div>
     );

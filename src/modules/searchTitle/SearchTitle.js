@@ -46,7 +46,11 @@ SearchTitle.propTypes = {
     /**
      * Custom search title item component instance.
      */
-    searchTitleItem: PropTypes.element
+    searchTitleItem: PropTypes.element,
+    /**
+     * Custom search title formatter.
+     */
+    formatter: PropTypes.func
 };
 
 export default SearchTitle;

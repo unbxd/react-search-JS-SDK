@@ -35,13 +35,14 @@ class SortContainer extends React.Component {
         } = this.props;
 
         let sortOn = null;
-        const { sort = '' } = unbxdCore.getQueryParams();
-        if (typeof sort === 'string' && sort.length) {
-            const [field, order] = sort.split(' ');
+        const { sort } = unbxdCore.getQueryParams();
+        const decodedSort = sort ? decodeURI(sort) : '';
+        if (typeof decodedSort === 'string' && decodedSort.length) {
+            const [field, order] = decodedSort.split(' ');
             sortOn = { field, order };
             const formattedSort = `${field}|${order}`;
             const formattedSortByOptions = sortOptions.map((sortByoption) =>
-                getFormattedSort(sortByoption, this.state.sortBy)
+                getFormattedSort(sortByoption, { value: formattedSort })
             );
             const selectedSort = getSelectedSort(
                 formattedSort,
@@ -74,25 +75,24 @@ class SortContainer extends React.Component {
         } = this.props;
 
         const { sort } = unbxdCore.getQueryParams();
-        let sortOn = null;
+        const decodedSort = sort ? decodeURI(sort) : '';
 
         if (
             unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
             unbxdCoreStatus === searchStatus.LOADING &&
-            sortState !== sort &&
+            sortState !== decodedSort &&
             prevProps.sort === sortState
         ) {
-            if (sort === undefined) {
+            if (decodedSort === undefined) {
                 this.setState({ sortBy: { value: '' } });
                 setSortConfiguration({
                     sortBy: ``
                 });
             } else {
-                const [field, order] = sort.split(' ');
-                sortOn = { field, order };
+                const [field, order] = decodedSort.split(' ');
                 const formattedSort = `${field}|${order}`;
                 const formattedSortByOptions = sortOptions.map((sortByoption) =>
-                    getFormattedSort(sortByoption, this.state.sortBy)
+                    getFormattedSort(sortByoption, { value: formattedSort })
                 );
                 const selectedSort = getSelectedSort(
                     formattedSort,
@@ -110,7 +110,7 @@ class SortContainer extends React.Component {
             sortState !== sort &&
             sortState === ''
         ) {
-            // there has been a reset
+            //there has been a reset
             this.setState({ sortBy: { value: '' } });
             setSortConfiguration({
                 sortBy: ``

@@ -32,8 +32,9 @@ export const conditionalRenderer = (
 
 export const executeCallback = (callback, parameters, onFinish) => {
     if (typeof callback === 'function') {
-        if (callback(...parameters)) {
-            onFinish();
+        const result = callback(...parameters);
+        if (result) {
+            onFinish(result);
         }
     } else {
         onFinish();

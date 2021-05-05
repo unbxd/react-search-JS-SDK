@@ -14,9 +14,29 @@ class ProductsWrapper extends React.PureComponent {
     constructor(props) {
         super(props);
 
-        const { products } = this.props;
+        const {
+            products = [],
+            attributesMap,
+            showVariants,
+            variantAttributesMap,
+            showSwatches,
+            swatchAttributesMap,
+            groupBy
+        } = this.props;
+        const processedProducts = products.map((product) => {
+            const productValues = getProductFields({
+                product,
+                attributesMap,
+                showVariants,
+                variantAttributesMap,
+                showSwatches,
+                swatchAttributesMap,
+                groupBy
+            });
+            return productValues;
+        });
         this.state = {
-            products,
+            products: processedProducts,
             hasMoreResults: true,
             start: 0
         };
