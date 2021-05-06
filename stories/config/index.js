@@ -1,11 +1,11 @@
-export const siteKey = 'ss-unbxd-demo-tennisplaza-mar-27501614667606';
-export const apiKey = '943214cecb3a39d15a969bb89f1df6d8';
+export const siteKey = 'ss-unbxd-ner-demo-site7501612449283';
+export const apiKey = '955731f5d1c36ebbc704687b9bfd9b09';
 export const attributesMap = {
-    productName: 'PRODUCT_NAME',
+    productName: 'title',
     uniqueId: 'uniqueId',
-    imageUrl: 'IMAGE_URL',
-    sellingPrice: 'PRODUCT_PRICE',
-    productUrl: 'PRODUCT_URL'
+    imageUrl: 'productImage',
+    sellingPrice: 'sortPrice',
+    productUrl: 'productUrl'
 };
 export const variantAttributesMap = {
     productName: 'title',
