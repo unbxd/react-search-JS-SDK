@@ -21,7 +21,7 @@ const Grips = () => {
     const { productType, setProductType } = useContext(ProductTypeContext);
     useEffect(() => {
         window.UnbxdAnalyticsConf = {};
-        window.UnbxdAnalyticsConf['page'] = 'CATEGORY:grips';
+        window.UnbxdAnalyticsConf['page'] = 'categoryPath:cat740011';
         window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         setProductType('CATEGORY');
     }, []);
