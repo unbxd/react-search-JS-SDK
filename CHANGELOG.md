@@ -5,6 +5,13 @@
 
 * **demo:** update site configs ([9ef0f7c](https://github.com/unbxd/react-search-JS-SDK/commit/9ef0f7ce12ba20a9a0ec119c8cf82b94a0d16e32))
 
+## [1.0.3](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.2...v1.0.3) (2021-05-06)
+
+
+### Bug Fixes
+
+* **demo:** update site configs ([9ef0f7c](https://github.com/unbxd/react-search-JS-SDK/commit/9ef0f7ce12ba20a9a0ec119c8cf82b94a0d16e32))
+
 ## [1.0.2](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.1...v1.0.2) (2021-04-29)
 
 
