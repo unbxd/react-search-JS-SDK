@@ -9,7 +9,7 @@
     "scripts": {
         "start": "yarn build:tailwind:core && yarn build:tailwind:theme && webpack-dev-server --open --config ./webpack/webpack.dev.js",
         "build": "yarn build:tailwind:core && yarn build:tailwind:theme && webpack --config ./webpack/webpack.prod.js",
-        "storybook": "yarn build:tailwind:core && yarn build:tailwind:theme && start-storybook -p 6006 --ci",
+        "storybook": "yarn build:tailwind:core && yarn build:tailwind:theme && start-storybook -p 6006 --ci --no-manager-cache",
         "deploy-storybook": "storybook-to-ghpages",
         "build-storybook": "build-storybook -s public",
         "build:tailwind:core": "postcss public/css/core/base.scss -o public/css/core/index.scss",
@@ -122,6 +122,7 @@
         "@semantic-release/changelog": "^5.0.1",
         "@semantic-release/git": "^9.0.0",
         "@semantic-release/release-notes-generator": "^9.0.1",
+        "@storybook/theming": "^6.2.9",
         "@unbxd-ui/unbxd-search-core": "^0.3.1",
         "prop-types": "^15.7.2",
         "semantic-release": "^17.3.0"

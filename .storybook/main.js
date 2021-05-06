@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const unbxdTheme = require('./unbxdTheme.js');
 
 module.exports = {
     stories: ['../stories/**/*.stories.@(js|mdx)'],
