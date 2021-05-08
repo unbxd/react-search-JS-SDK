@@ -6,8 +6,8 @@ import { FacetItemComponent as RangeFacetItemComponent } from './RangeFilters';
 import { FacetItemComponent as MultilevelFacetItemComponent } from './MultilevelFilters';
 import { scrollTop } from '../utils';
 
-const transform = function () {
-    console.log(this);
+export const transform = function () {
+    //process the facets
     return this;
 };
 

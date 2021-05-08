@@ -6,6 +6,12 @@ import Products from '../src/modules/products';
 import SearchBox from '../src/modules/searchBox';
 import { PaginationItemComponent } from '../demo/src/components/Paginator.js';
 import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
+const handlePageChange = (page) => {
+    // process the page change
+    // return false to cancel
+    // return true to continue
+    return true;
+};
 
 <Meta title="Pagination" component={Pagination} />
 
@@ -103,6 +109,45 @@ The custom component instance will receive the following props
     <Story name="with paginationItemComponent">
         <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <Pagination paginationItemComponent={<PaginationItemComponent />} />
+            <Products attributesMap={attributesMap} />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### onPageChange
+
+A callback which will be triggered on page change.
+
+```jsx
+const handlePageChange = (page) => {
+    // process the page change
+    // return false to cancel
+    // return true to continue
+    return true;
+};
+```
+
+The callback will receive the following parameters
+
+#### onPageChange parameters
+
+| Name | Type   | Description         |
+| ---- | ------ | ------------------- |
+| page | number | changed page value. |
+
+```jsx
+<Pagination onPageChange={handlePageChange} />
+```
+
+<Preview>
+    <Story name="with onPageChange">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <Pagination onPageChange={handlePageChange} />
             <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />

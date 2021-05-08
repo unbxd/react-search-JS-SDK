@@ -111,8 +111,8 @@ export const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
     );
 };
 
-const transform = function () {
-    console.log(this);
+export const transform = function () {
+    //process the facets
     return this;
 };
 

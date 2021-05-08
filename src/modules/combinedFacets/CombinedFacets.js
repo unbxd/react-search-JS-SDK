@@ -60,14 +60,6 @@ CombinedFacets.defaultProps = {
 
 CombinedFacets.propTypes = {
     /**
-     * Min value for viewMore to be enabled.
-     */
-    minViewMore: PropTypes.number,
-    /**
-     * Bool value to enable disable viewMore.
-     */
-    enableViewMore: PropTypes.bool,
-    /**
      * Collapse facet values
      */
     collapsible: PropTypes.bool,
@@ -75,6 +67,18 @@ CombinedFacets.propTypes = {
      * Search facet values
      */
     searchable: PropTypes.bool,
+    /**
+     * Bool value to enable/disable viewMore.
+     */
+    enableViewMore: PropTypes.bool,
+    /**
+     * Min value for viewMore to be enabled.
+     */
+    minViewMore: PropTypes.number,
+    /**
+     * Apply multiple filters on the same facet
+     */
+    applyMultiple: PropTypes.bool,
     /**
      * Custom Text Facet item component instance
      */
@@ -84,25 +88,21 @@ CombinedFacets.propTypes = {
      */
     rangeFacetItemComponent: PropTypes.element,
     /**
-     * Enable mutiple range facets
-     */
-    applyMultiple: PropTypes.bool,
-    /**
      * Custom Multilevel Facet item component instance
      */
     multilevelFacetItemComponent: PropTypes.element,
-    /**
-     * Custom transform method
-     */
-    transform: PropTypes.func,
     /**
      * Label for the module.
      */
     label: PropTypes.node,
     /**
-     * Callback for facet click.
+     * Callback for facet change.
      */
-    onFacetClick: PropTypes.func
+    onFacetClick: PropTypes.func,
+    /**
+     * Callback to format the facets.
+     */
+    transform: PropTypes.func
 };
 
 export default CombinedFacets;

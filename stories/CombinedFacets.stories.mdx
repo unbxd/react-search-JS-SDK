@@ -9,8 +9,23 @@ import { Button } from '../src/components';
 import { FacetItemComponent as MultilevelFacetItemComponent } from '../demo/src/components/MultilevelFilters.js';
 import { FacetItemComponent as TextFacetItemComponent } from '../demo/src/components/TextFilters';
 import { FacetItemComponent as RangeFacetItemComponent } from '../demo/src/components/RangeFilters';
+import { transform } from '../demo/src/components/CombinedFilters';
 import { Root, separator } from '../demo/src/components/Crumbs.js';
-import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
+import { defaultSearch } from './config';
+const siteKey = 'demo-spanish-unbxd809051588861207';
+const apiKey = 'f19768e22b49909798bc2411fa3dd963';
+const attributesMap = {
+    productName: 'title',
+    uniqueId: 'uniqueId',
+    imageUrl: 'imageUrl',
+    sellingPrice: 'sortPrice'
+};
+const handleFacetClick = (facetObj, eventType) => {
+    // process the facet change
+    // return false to cancel
+    // return true to continue
+    return true;
+};
 
 <Meta title="CombinedFacets" component={CombinedFacets} />
 
@@ -25,7 +40,7 @@ import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
 <Preview>
     <Story name="default">
         <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
-            <Breadcrumbs Root={Root} separator={separator} />
+            <Breadcrumbs root={<Root />} separator={separator} />
             <CombinedFacets applyMultiple />
             <Products attributesMap={attributesMap} />
             <div className="hidden">
@@ -34,6 +49,30 @@ import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
         </UnbxdSearchWrapper>
     </Story>
 </Preview>
+
+---
+
+#### applyMultiple
+
+If multiple price ranges can be selected, pass `applyMultiple` as `true`.
+
+```jsx
+<RangeFacets applyMultiple={true} />
+```
+
+<Preview>
+    <Story name="with applyMultiple">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <CombinedFacets applyMultiple={true} />
+            <Products attributesMap={attributesMap} />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
 
 ### facetItemComponent
 
@@ -140,13 +179,85 @@ The custom component instance will receive the following props
 <Preview>
     <Story name="with facetItemComponent">
         <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
-            <Breadcrumbs root={Root} separator={separator} />
+            <Breadcrumbs root={<Root />} separator={separator} />
             <CombinedFacets
                 rangeFacetItemComponent={<RangeFacetItemComponent />}
                 textFacetItemComponent={<TextFacetItemComponent />}
                 multilevelFacetItemComponent={<MultilevelFacetItemComponent />}
                 applyMultiple
             />
+            <Products attributesMap={attributesMap} />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### onFacetClick
+
+A callback which will be triggered on the change of facet.
+
+```jsx
+const handleFacetClick = (facetObj, eventType) => {
+    // process the facet change
+    // return false to cancel
+    // return true to continue
+    return true;
+};
+```
+
+The callback will receive the following parameters
+
+#### onFacetClick parameters
+
+| Name      | Type   | Description       |
+| --------- | ------ | ----------------- |
+| facetObj  | object | facet values.     |
+| eventType | func   | facet event type. |
+
+```jsx
+<MultilevelFacets onFacetClick={handleFacetClick} />
+```
+
+<Preview>
+    <Story name="with onFacetClick">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <Breadcrumbs root={<Root />} separator={separator} />
+            <CombinedFacets onFacetClick={handleFacetClick} />
+            <Products attributesMap={attributesMap} />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### transform
+
+A callback to format the facets.
+
+```jsx
+const transform = function () {
+    //process the facets
+    return this;
+};
+```
+
+The callback will receive the facets on `this`.
+
+```jsx
+<RangeFacets transform={transform} />
+```
+
+<Preview>
+    <Story name="with transform">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <CombinedFacets transform={transform} />
             <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />
@@ -180,7 +291,7 @@ The custom component instance will receive the following props
 <Preview>
     <Story name="with render props">
         <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
-            <Breadcrumbs Root={Root} separator={separator} />
+            <Breadcrumbs root={<Root />} separator={separator} />
             <CombinedFacets>
                 {({
                     combinedFacets,

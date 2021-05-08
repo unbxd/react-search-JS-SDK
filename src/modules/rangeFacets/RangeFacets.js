@@ -52,35 +52,35 @@ RangeFacets.defaultProps = {
 
 RangeFacets.propTypes = {
     /**
-     * apply multiple filters on the same facet
-     */
-    applyMultiple: PropTypes.bool,
-    /**
      * Collapse facet values
      */
     collapsible: PropTypes.bool,
     /**
-     * Label for the module.
+     * Bool value to enable/disable viewMore.
      */
-    label: PropTypes.node,
-    /**
-     * Callback for facet click.
-     */
-    onFacetClick: PropTypes.func,
+    enableViewMore: PropTypes.bool,
     /**
      * Min value for viewMore to be enabled.
      */
     minViewMore: PropTypes.number,
     /**
-     * Bool value to enable disable viewMore.
+     * Apply multiple filters on the same facet
      */
-    enableViewMore: PropTypes.bool,
+    applyMultiple: PropTypes.bool,
     /**
      * Custom facet item component instance.
      */
     facetItemComponent: PropTypes.element,
     /**
-     * callback to format the facets.
+     * Label for the module.
+     */
+    label: PropTypes.node,
+    /**
+     * Callback for facet change.
+     */
+    onFacetClick: PropTypes.func,
+    /**
+     * Callback to format the facets.
      */
     transform: PropTypes.func
 };

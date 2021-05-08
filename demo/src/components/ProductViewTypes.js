@@ -26,6 +26,25 @@ export const ProductsViewItemComponent = ({ itemData, onClick }) => {
     );
 };
 
+export const ViewItemComponent = ({ itemData, onClick }) => {
+    const { viewType, isSelected } = itemData;
+    const handleClick = () => {
+        onClick(itemData);
+    };
+    return (
+        <div className="UNX-viewType__wrapper">
+            <span
+                className={`UNX-viewType__option ${
+                    isSelected ? '-selected' : ''
+                }`}
+                onClick={handleClick}
+            >
+                {viewType}
+            </span>
+        </div>
+    );
+};
+
 const ProductViewTypes = () => {
     return (
         <ViewTypes

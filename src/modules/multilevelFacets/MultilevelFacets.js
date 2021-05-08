@@ -40,8 +40,6 @@ const MultilevelFacets = (props) => {
 MultilevelFacets.displayName = 'MultilevelFacets';
 
 MultilevelFacets.defaultProps = {
-    facetDepth: 6,
-    facetLimit: 100,
     collapsible: false,
     searchable: false,
     minViewMore: 3,
@@ -49,14 +47,6 @@ MultilevelFacets.defaultProps = {
 };
 
 MultilevelFacets.propTypes = {
-    /**
-     * Maximum depth of the category.
-     */
-    facetDepth: PropTypes.number,
-    /**
-     * Maximum number of values present in a facet.
-     */
-    facetLimit: PropTypes.number,
     /**
      * Collapse facet values
      */
@@ -66,6 +56,14 @@ MultilevelFacets.propTypes = {
      */
     searchable: PropTypes.bool,
     /**
+     * Min value for viewMore to be enabled.
+     */
+    minViewMore: PropTypes.number,
+    /**
+     * Bool value to enable/disable viewMore.
+     */
+    enableViewMore: PropTypes.bool,
+    /**
      * Custom facet element
      */
     facetItemComponent: PropTypes.element,
@@ -74,17 +72,9 @@ MultilevelFacets.propTypes = {
      */
     label: PropTypes.node,
     /**
-     * Callback for facet click.
+     * Callback for facet change.
      */
-    onFacetClick: PropTypes.func,
-    /**
-     * Min value for viewMore to be enabled.
-     */
-    minViewMore: PropTypes.number,
-    /**
-     * Bool value to enable disable viewMore.
-     */
-    enableViewMore: PropTypes.bool
+    onFacetClick: PropTypes.func
 };
 
 export default MultilevelFacets;

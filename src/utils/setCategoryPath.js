@@ -5,7 +5,7 @@ const setCategoryPath = () => {
         2: 'g',
         3: 'h',
         4: 't',
-        page: 'categoryPath:cat430028',
+        page: 'categoryPath:cat120009',
         page_type: 'BOOLEAN'
     };
 };

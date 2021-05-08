@@ -3,8 +3,8 @@ import React from 'react';
 import { TextFacets } from '@unbxd-ui/react-search-sdk';
 import { scrollTop } from '../utils';
 
-const transform = function () {
-    console.log(this);
+export const transform = function () {
+    //process the facets
     return this;
 };
 

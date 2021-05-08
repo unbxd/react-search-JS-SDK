@@ -60,6 +60,14 @@ TextFacets.propTypes = {
      */
     searchable: PropTypes.bool,
     /**
+     * Bool value to enable/disable viewMore.
+     */
+    enableViewMore: PropTypes.bool,
+    /**
+     * Min value for viewMore to be enabled.
+     */
+    minViewMore: PropTypes.number,
+    /**
      * Custom Facet item component instance
      */
     facetItemComponent: PropTypes.element,
@@ -68,19 +76,11 @@ TextFacets.propTypes = {
      */
     label: PropTypes.node,
     /**
-     * Callback for facet click.
+     * Callback for facet change.
      */
     onFacetClick: PropTypes.func,
     /**
-     * Min value for viewMore to be enabled.
-     */
-    minViewMore: PropTypes.number,
-    /**
-     * Bool value to enable disable viewMore.
-     */
-    enableViewMore: PropTypes.bool,
-    /**
-     * callback to format the facets.
+     * Callback to format the facets.
      */
     transform: PropTypes.func
 };
