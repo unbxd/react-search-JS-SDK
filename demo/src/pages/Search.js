@@ -108,8 +108,8 @@ const Search = () => {
 
     return (
         <UnbxdSearchWrapper
-            siteKey="ss-unbxd-ner-demo-site7501612449283"
-            apiKey="955731f5d1c36ebbc704687b9bfd9b09"
+            siteKey="demo-unbxd700181503576558"
+            apiKey="fb853e3332f2645fac9d71dc63e09ec1"
             getCategoryId={getCategoryId}
             searchConfigurations={searchConfigurations}
             productType={productType}
