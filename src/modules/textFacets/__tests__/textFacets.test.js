@@ -18,7 +18,9 @@ const FacetItemComponent = ({ itemData, onClick }) => {
 
     return (
         <div
-            className={`UNX-facet__item test-class ${isSelected ? '-selected' : ''}`}
+            className={`UNX-facet__item test-class ${
+                isSelected ? '-selected' : ''
+            }`}
             onClick={handleClick}
         >
             <div className="-checkbox" />
@@ -74,46 +76,41 @@ beforeAll(() => {
     window.fetch = jest.fn((request) => {
         if (request.includes('filter=brand_uFilter:"Scarpa"')) {
             return Promise.resolve({
-                json: () => Promise.resolve(facetResponse),
+                json: () => Promise.resolve(facetResponse)
             });
         }
         return Promise.resolve({
-            json: () => Promise.resolve(searchResponse),
+            json: () => Promise.resolve(searchResponse)
         });
     });
-})
+});
 
 const attributesMap = {
-    productName: 'title',
+    title: 'title',
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'RRP_Price',
     productUrl: 'productUrl'
 };
 
-
 test('Match Snapshot for text facets', async () => {
-    const tree = renderer
-        .create(
-            <UnbxdSearchWrapper
-                siteKey="wildearthclone-neto-com-au808941566310465"
-                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >
-
-                <SelectedFacets />
-                <FacetActions />
-                <TextFacets />
-                <Products attributesMap={attributesMap} />
-                <div>
-                    <SearchBox defaultSearch="shoes" />
-                </div>
-            </UnbxdSearchWrapper>
-
-        );
-        await waitFor(() => tree.toJSON());
-        expect(tree.toJSON()).toMatchSnapshot();
+    const tree = renderer.create(
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SelectedFacets />
+            <FacetActions />
+            <TextFacets />
+            <Products attributesMap={attributesMap} />
+            <div>
+                <SearchBox defaultSearch="shoes" />
+            </div>
+        </UnbxdSearchWrapper>
+    );
+    await waitFor(() => tree.toJSON());
+    expect(tree.toJSON()).toMatchSnapshot();
 });
-
 
 test('Test text facet actions showApplyFilter', async () => {
     const { container } = render(
@@ -121,12 +118,10 @@ test('Test text facet actions showApplyFilter', async () => {
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
-                <FacetActions showApplyFilter={false}/>
+            >
+                <FacetActions showApplyFilter={false} />
                 <TextFacets />
-                <Products
-                    attributesMap={attributesMap}
-                />
+                <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -135,8 +130,11 @@ test('Test text facet actions showApplyFilter', async () => {
     );
 
     await waitFor(() => {
-        expect(container.getElementsByClassName('UNX-facet__action -applyFilters').length).toBe(0)
-    })
+        expect(
+            container.getElementsByClassName('UNX-facet__action -applyFilters')
+                .length
+        ).toBe(0);
+    });
 });
 
 test('Test text facet actions with applyFilter Component', async () => {
@@ -145,12 +143,10 @@ test('Test text facet actions with applyFilter Component', async () => {
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
+            >
                 <FacetActions applyFilterComponent={<ApplyFilterComponent />} />
                 <TextFacets />
-                <Products
-                    attributesMap={attributesMap}
-                />
+                <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -159,8 +155,8 @@ test('Test text facet actions with applyFilter Component', async () => {
     );
 
     await waitFor(() => {
-        expect(container.getElementsByClassName('filter-apply').length).toBe(1)
-    })
+        expect(container.getElementsByClassName('filter-apply').length).toBe(1);
+    });
 });
 
 test('Test text facet actions showClearFilter', async () => {
@@ -169,12 +165,10 @@ test('Test text facet actions showClearFilter', async () => {
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
+            >
                 <FacetActions showClearFilter={false} />
                 <TextFacets />
-                <Products
-                    attributesMap={attributesMap}
-                />
+                <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -183,8 +177,11 @@ test('Test text facet actions showClearFilter', async () => {
     );
 
     await waitFor(() => {
-        expect(container.getElementsByClassName('UNX-facet__action  -clearFilters').length).toBe(0)
-    })
+        expect(
+            container.getElementsByClassName('UNX-facet__action  -clearFilters')
+                .length
+        ).toBe(0);
+    });
 });
 
 test('Test text facet actions with clearFilter Component', async () => {
@@ -193,12 +190,10 @@ test('Test text facet actions with clearFilter Component', async () => {
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
+            >
                 <FacetActions clearFilterComponent={<ClearFilterComponent />} />
                 <TextFacets />
-                <Products
-                    attributesMap={attributesMap}
-                />
+                <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -207,23 +202,21 @@ test('Test text facet actions with clearFilter Component', async () => {
     );
 
     await waitFor(() => {
-        expect(container.getElementsByClassName('filter-clear').length).toBe(1)
-    })
+        expect(container.getElementsByClassName('filter-clear').length).toBe(1);
+    });
 });
 
 test('Test text facet actions with custom onApply method', async () => {
     const onApply = jest.fn();
-    const { getByText} = render(
+    const { getByText } = render(
         <>
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
+            >
                 <FacetActions onApply={onApply} />
                 <TextFacets />
-                <Products
-                    attributesMap={attributesMap}
-                />
+                <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -233,25 +226,23 @@ test('Test text facet actions with custom onApply method', async () => {
 
     await waitFor(() => {
         expect(getByText('Scarpa - 18')).toBeInTheDocument();
-        fireEvent.click(getByText("Scarpa - 18"));
-        fireEvent.click(getByText("Apply Facets"));
+        fireEvent.click(getByText('Scarpa - 18'));
+        fireEvent.click(getByText('Apply Facets'));
         expect(onApply).toHaveBeenCalledTimes(1);
-    })
+    });
 });
 
 test('Test text facet actions with custom onClear method', async () => {
     const onClear = jest.fn();
-    const { getByText} = render(
+    const { getByText } = render(
         <>
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
+            >
                 <FacetActions onClear={onClear} />
                 <TextFacets />
-                <Products
-                    attributesMap={attributesMap}
-                />
+                <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -260,11 +251,10 @@ test('Test text facet actions with custom onClear method', async () => {
     );
 
     await waitFor(() => {
-        fireEvent.click(getByText("Clear Facets"));
+        fireEvent.click(getByText('Clear Facets'));
         expect(onClear).toHaveBeenCalledTimes(1);
-    })
+    });
 });
-
 
 test('Test text facet click', async () => {
     const { getByText } = render(
@@ -272,11 +262,9 @@ test('Test text facet click', async () => {
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
+            >
                 <TextFacets />
-                <Products
-                    attributesMap={attributesMap}
-                />
+                <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -286,11 +274,15 @@ test('Test text facet click', async () => {
 
     await waitFor(async () => {
         expect(getByText('Scarpa - 18')).toBeInTheDocument();
-        fireEvent.click(getByText("Scarpa - 18"));
+        fireEvent.click(getByText('Scarpa - 18'));
     });
     await waitFor(() => {
-        expect(getByText("Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots")).toBeInTheDocument();
-        fireEvent.click(getByText("Clear"));
+        expect(
+            getByText(
+                'Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots'
+            )
+        ).toBeInTheDocument();
+        fireEvent.click(getByText('Clear'));
     });
 });
 
@@ -300,11 +292,9 @@ test('Test text facet with FacetItemComponent', async () => {
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
-                <TextFacets facetItemComponent={<FacetItemComponent />}/>
-                <Products
-                    attributesMap={attributesMap}
-                />
+            >
+                <TextFacets facetItemComponent={<FacetItemComponent />} />
+                <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -313,8 +303,8 @@ test('Test text facet with FacetItemComponent', async () => {
     );
 
     await waitFor(() => {
-        expect(container.getElementsByClassName('test-class').length).toBe(118)
-    })
+        expect(container.getElementsByClassName('test-class').length).toBe(118);
+    });
 });
 
 test('Test text facet click with FacetItemComponent', async () => {
@@ -323,11 +313,9 @@ test('Test text facet click with FacetItemComponent', async () => {
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
-                <TextFacets facetItemComponent={<FacetItemComponent />}/>
-                <Products
-                    attributesMap={attributesMap}
-                />
+            >
+                <TextFacets facetItemComponent={<FacetItemComponent />} />
+                <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -337,26 +325,28 @@ test('Test text facet click with FacetItemComponent', async () => {
 
     await waitFor(async () => {
         expect(getByText('Scarpa')).toBeInTheDocument();
-        fireEvent.click(getByText("Scarpa"));
+        fireEvent.click(getByText('Scarpa'));
     });
     await waitFor(() => {
-        expect(getByText("Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots")).toBeInTheDocument();
-        fireEvent.click(getByText("Clear"));
+        expect(
+            getByText(
+                'Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots'
+            )
+        ).toBeInTheDocument();
+        fireEvent.click(getByText('Clear'));
     });
 });
 
 test('Test selected facet click on text Facet', async () => {
-    const { getByText , container } = render(
+    const { getByText, container } = render(
         <>
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
+            >
                 <SelectedFacets />
                 <TextFacets />
-                <Products
-                    attributesMap={attributesMap}
-                />
+                <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -366,26 +356,29 @@ test('Test selected facet click on text Facet', async () => {
 
     await waitFor(async () => {
         expect(getByText('Scarpa - 18')).toBeInTheDocument();
-        fireEvent.click(getByText("Scarpa - 18"));
+        fireEvent.click(getByText('Scarpa - 18'));
     });
     await waitFor(() => {
-        expect(container.getElementsByClassName('UNX-selectedFacets__container').length).toBe(1)
-        fireEvent.click(getByText("Clear"));
-    })
+        expect(
+            container.getElementsByClassName('UNX-selectedFacets__container')
+                .length
+        ).toBe(1);
+        fireEvent.click(getByText('Clear'));
+    });
 });
 
 test('Test selected facet click on text Facet with FacetItemComponent', async () => {
-    const { getByText , container } = render(
+    const { getByText, container } = render(
         <>
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
-                <SelectedFacets facetItemComponent={<FacetItemComponentSelected />}/>
-                <TextFacets />
-                <Products
-                    attributesMap={attributesMap}
+            >
+                <SelectedFacets
+                    facetItemComponent={<FacetItemComponentSelected />}
                 />
+                <TextFacets />
+                <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -395,12 +388,11 @@ test('Test selected facet click on text Facet with FacetItemComponent', async ()
 
     await waitFor(async () => {
         expect(getByText('Scarpa - 18')).toBeInTheDocument();
-        fireEvent.click(getByText("Scarpa - 18"));
+        fireEvent.click(getByText('Scarpa - 18'));
     });
     await waitFor(() => {
-        expect(container.getElementsByClassName('text-selected').length).toBe(1)
-    })
+        expect(container.getElementsByClassName('text-selected').length).toBe(
+            1
+        );
+    });
 });
-
-
-

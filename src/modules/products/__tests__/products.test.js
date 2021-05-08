@@ -10,13 +10,13 @@ import { searchResponse, emptySearchResponse } from './mocks/searchMock';
 beforeAll(() => {
     window.fetch = jest.fn(() => {
         return Promise.resolve({
-            json: () => Promise.resolve(searchResponse),
+            json: () => Promise.resolve(searchResponse)
         });
     });
-})
+});
 
 const attributesMap = {
-    productName: 'title',
+    title: 'title',
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'RRP_Price',
@@ -24,19 +24,17 @@ const attributesMap = {
 };
 
 test('Match Snapshot for products', async () => {
-    const tree = renderer
-        .create(
-            <UnbxdSearchWrapper
-                siteKey="wildearthclone-neto-com-au808941566310465"
-                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >
-                <Products attributesMap={attributesMap} />
-                <div>
-                    <SearchBox defaultSearch="shoes" />
-                </div>
-            </UnbxdSearchWrapper>
-
-        );
+    const tree = renderer.create(
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <Products attributesMap={attributesMap} />
+            <div>
+                <SearchBox defaultSearch="shoes" />
+            </div>
+        </UnbxdSearchWrapper>
+    );
     await waitFor(() => tree.toJSON());
     expect(tree.toJSON()).toMatchSnapshot();
 });
@@ -56,8 +54,20 @@ test('Products found test', async () => {
         </>
     );
 
-    await waitFor(() => expect(getByText("Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle")).toBeInTheDocument());
-    await waitFor(() => expect(getByText("Scarpa Terra Goretex Unisex Waterproof Hiking Boots - Brown")).toBeInTheDocument());
+    await waitFor(() =>
+        expect(
+            getByText(
+                'Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle'
+            )
+        ).toBeInTheDocument()
+    );
+    await waitFor(() =>
+        expect(
+            getByText(
+                'Scarpa Terra Goretex Unisex Waterproof Hiking Boots - Brown'
+            )
+        ).toBeInTheDocument()
+    );
 });
 
 test('Test CLICK_N_SCROLL', async () => {
@@ -69,7 +79,7 @@ test('Test CLICK_N_SCROLL', async () => {
             >
                 <Products
                     attributesMap={attributesMap}
-                    paginationType={"CLICK_N_SCROLL"}
+                    paginationType={'CLICK_N_SCROLL'}
                 />
                 <div>
                     <SearchBox defaultSearch="shoes" />
@@ -79,12 +89,20 @@ test('Test CLICK_N_SCROLL', async () => {
     );
 
     await waitFor(async () => {
-        expect(getAllByText("Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle")).toHaveLength(1);
+        expect(
+            getAllByText(
+                'Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle'
+            )
+        ).toHaveLength(1);
         expect(getByText('Load more')).toBeInTheDocument();
-        fireEvent.click(getByText("Load more"));
+        fireEvent.click(getByText('Load more'));
     });
     await waitFor(() => {
-        expect(getAllByText("Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle")).toHaveLength(1);
+        expect(
+            getAllByText(
+                'Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle'
+            )
+        ).toHaveLength(1);
     });
 });
 
@@ -100,7 +118,7 @@ test('loadMoreComponent Test', async () => {
             >
                 <Products
                     attributesMap={attributesMap}
-                    paginationType={"CLICK_N_SCROLL"}
+                    paginationType={'CLICK_N_SCROLL'}
                     loadMoreComponent={<LoadMoreComponent />}
                 />
                 <div>
@@ -111,12 +129,20 @@ test('loadMoreComponent Test', async () => {
     );
 
     await waitFor(async () => {
-        expect(getAllByText("Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle")).toHaveLength(1);
+        expect(
+            getAllByText(
+                'Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle'
+            )
+        ).toHaveLength(1);
         expect(getByText('Load more please')).toBeInTheDocument();
-        fireEvent.click(getByText("Load more please"));
+        fireEvent.click(getByText('Load more please'));
     });
     await waitFor(() => {
-        expect(getAllByText("Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle")).toHaveLength(1);
+        expect(
+            getAllByText(
+                'Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle'
+            )
+        ).toHaveLength(1);
     });
 });
 
@@ -141,9 +167,11 @@ test('Test onProductClick', async () => {
     );
 
     await waitFor(() => {
-        fireEvent.click(container.getElementsByClassName('UNX-product-card')[0]);
+        fireEvent.click(
+            container.getElementsByClassName('UNX-product-card')[0]
+        );
         expect(onProductClick).toHaveBeenCalledTimes(1);
-    })
+    });
 });
 
 test('Test loaderComponent', async () => {
@@ -175,7 +203,7 @@ test('Test onZeroResults', async () => {
     const onZeroResults = jest.fn();
     window.fetch = jest.fn(() => {
         return Promise.resolve({
-            json: () => Promise.resolve(emptySearchResponse),
+            json: () => Promise.resolve(emptySearchResponse)
         });
     });
     render(
@@ -197,13 +225,13 @@ test('Test onZeroResults', async () => {
 
     await waitFor(() => {
         expect(onZeroResults).toHaveBeenCalledTimes(1);
-    })
+    });
 });
 
 test('Zero Results test', async () => {
     window.fetch = jest.fn(() => {
         return Promise.resolve({
-            json: () => Promise.resolve(emptySearchResponse),
+            json: () => Promise.resolve(emptySearchResponse)
         });
     });
 
@@ -221,13 +249,15 @@ test('Zero Results test', async () => {
         </>
     );
 
-    await waitFor(() => expect(getByText("Sorry! No products found!")).toBeInTheDocument());
+    await waitFor(() =>
+        expect(getByText('Sorry! No products found!')).toBeInTheDocument()
+    );
 });
 
 test('zeroResultsComponent test', async () => {
     window.fetch = jest.fn(() => {
         return Promise.resolve({
-            json: () => Promise.resolve(emptySearchResponse),
+            json: () => Promise.resolve(emptySearchResponse)
         });
     });
 
@@ -246,13 +276,13 @@ test('zeroResultsComponent test', async () => {
                     zeroResultsComponent={<ZeroResultsComponent />}
                 />
                 <div>
-                    <SearchBox
-                        defaultSearch="nonsensical123wait"
-                    />
+                    <SearchBox defaultSearch="nonsensical123wait" />
                 </div>
             </UnbxdSearchWrapper>
         </>
     );
 
-    await waitFor(() => expect(getByText("No products dude!")).toBeInTheDocument());
+    await waitFor(() =>
+        expect(getByText('No products dude!')).toBeInTheDocument()
+    );
 });

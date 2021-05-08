@@ -6,24 +6,24 @@ import SpellCheck from '../index';
 import UnbxdSearchWrapper from '../../../UnbxdSearchWrapper';
 import SearchBox from '../../searchBox';
 import { spellCheckResponse } from './mocks/index';
-import { searchResponse } from '../../products/__tests__/mocks/searchMock'
+import { searchResponse } from '../../products/__tests__/mocks/searchMock';
 
 // establish API mocking before all tests
 beforeAll(() => {
     window.fetch = jest.fn((query) => {
         if (query.includes('dunlop')) {
             return Promise.resolve({
-                json: () => Promise.resolve(searchResponse),
+                json: () => Promise.resolve(searchResponse)
             });
         }
         return Promise.resolve({
-            json: () => Promise.resolve(spellCheckResponse),
+            json: () => Promise.resolve(spellCheckResponse)
         });
     });
-})
+});
 
 const attributesMap = {
-    productName: 'title',
+    title: 'title',
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'RRP_Price',
@@ -31,19 +31,18 @@ const attributesMap = {
 };
 
 test('Match Snapshot for Search Title', async () => {
-    const tree = renderer
-        .create(
-            <UnbxdSearchWrapper
-                siteKey="wildearthclone-neto-com-au808941566310465"
-                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >
-                <SpellCheck />
-                <Products attributesMap={attributesMap} />
-                <div>
-                    <SearchBox defaultSearch="shoes" />
-                </div>
-            </UnbxdSearchWrapper>
-        );
+    const tree = renderer.create(
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SpellCheck />
+            <Products attributesMap={attributesMap} />
+            <div>
+                <SearchBox defaultSearch="shoes" />
+            </div>
+        </UnbxdSearchWrapper>
+    );
     await waitFor(() => tree.toJSON());
     expect(tree.toJSON()).toMatchSnapshot();
 });
@@ -65,15 +64,19 @@ test('Spell Check test', async () => {
     );
 
     await waitFor(() => {
-        expect(getByTestId("UNX_spellCheck")).toBeInTheDocument()
-        expect(getByText("danlop")).toBeInTheDocument()
-        expect(getByText("dunlop")).toBeInTheDocument()
-        fireEvent.click(getByText("dunlop"));
+        expect(getByTestId('UNX_spellCheck')).toBeInTheDocument();
+        expect(getByText('danlop')).toBeInTheDocument();
+        expect(getByText('dunlop')).toBeInTheDocument();
+        fireEvent.click(getByText('dunlop'));
     });
 
     await waitFor(() => {
-        expect(getByText('Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle'));
-    })
+        expect(
+            getByText(
+                'Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle'
+            )
+        );
+    });
 });
 
 test('Spell Check Item component test', async () => {
@@ -91,7 +94,8 @@ test('Spell Check Item component test', async () => {
                     data-testid="UNX_spellCheck_custom"
                 >
                     {suggestion}
-                </span>?
+                </span>
+                ?
             </div>
         );
     };
@@ -101,7 +105,9 @@ test('Spell Check Item component test', async () => {
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >
-                <SpellCheck spellCheckItemComponent={<SpellCheckItemComponent />} />
+                <SpellCheck
+                    spellCheckItemComponent={<SpellCheckItemComponent />}
+                />
                 <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="danlop" />
@@ -110,5 +116,7 @@ test('Spell Check Item component test', async () => {
         </>
     );
 
-    await waitFor(() => expect(getByTestId("UNX_spellCheck_custom")).toBeInTheDocument());
+    await waitFor(() =>
+        expect(getByTestId('UNX_spellCheck_custom')).toBeInTheDocument()
+    );
 });

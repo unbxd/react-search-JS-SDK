@@ -32,42 +32,39 @@ beforeAll(() => {
     window.fetch = jest.fn((request) => {
         if (request.includes('category-filter=All')) {
             return Promise.resolve({
-                json: () => Promise.resolve(facetResponse),
+                json: () => Promise.resolve(facetResponse)
             });
         }
-        
+
         return Promise.resolve({
-            json: () => Promise.resolve(searchResponse),
+            json: () => Promise.resolve(searchResponse)
         });
     });
-})
+});
 
 const attributesMap = {
-    productName: 'title',
+    title: 'title',
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'RRP_Price',
     productUrl: 'productUrl'
 };
 
-
 test('Match Snapshot for MultilevelFacets ', async () => {
-    const tree = renderer
-        .create(
-            <UnbxdSearchWrapper
-                siteKey="wildearthclone-neto-com-au808941566310465"
-                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >
-                <MultilevelFacets />
-                <Products attributesMap={attributesMap} />
-                <div>
-                    <SearchBox defaultSearch="shoes" />
-                </div>
-            </UnbxdSearchWrapper>
-
-        );
-        await waitFor(() => tree.toJSON());
-        expect(tree.toJSON()).toMatchSnapshot();
+    const tree = renderer.create(
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <MultilevelFacets />
+            <Products attributesMap={attributesMap} />
+            <div>
+                <SearchBox defaultSearch="shoes" />
+            </div>
+        </UnbxdSearchWrapper>
+    );
+    await waitFor(() => tree.toJSON());
+    expect(tree.toJSON()).toMatchSnapshot();
 });
 
 test('Test MultilevelFacets click', async () => {
@@ -76,62 +73,9 @@ test('Test MultilevelFacets click', async () => {
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
+            >
                 <MultilevelFacets />
-                <Products
-                    attributesMap={attributesMap}
-                />
-                <div>
-                    <SearchBox defaultSearch="shoes" />
-                </div>
-            </UnbxdSearchWrapper>
-        </>
-    );
-
-    await waitFor(async () => {
-        expect(getByText('strings')).toBeInTheDocument();
-        fireEvent.click(getByText("strings"));
-    });
-    await waitFor(() => {
-        expect(getByText("Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle")).toBeInTheDocument();
-        
-    });
-});
-
-test('Test Multi facet with FacetItemComponent', async () => {
-    const { container } = render(
-        <>
-            <UnbxdSearchWrapper
-                siteKey="wildearthclone-neto-com-au808941566310465"
-                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
-                <MultilevelFacets facetItemComponent={<FacetItemComponent />}/>
-                <Products
-                    attributesMap={attributesMap}
-                />
-                <div>
-                    <SearchBox defaultSearch="shoes" />
-                </div>
-            </UnbxdSearchWrapper>
-        </>
-    );
-
-    await waitFor(() => {
-        expect(container.getElementsByClassName('test-class').length).toBe(5)
-    })
-});
-
-test('Test Multi click with FacetItemComponent', async () => {
-    const { getByText } = render(
-        <>
-            <UnbxdSearchWrapper
-                siteKey="wildearthclone-neto-com-au808941566310465"
-                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
-                <MultilevelFacets facetItemComponent={<FacetItemComponent />}/>
-                <Products
-                    attributesMap={attributesMap}
-                />
+                <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -144,6 +88,60 @@ test('Test Multi click with FacetItemComponent', async () => {
         fireEvent.click(getByText('strings'));
     });
     await waitFor(() => {
-        expect(getByText("Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle")).toBeInTheDocument();
+        expect(
+            getByText(
+                'Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle'
+            )
+        ).toBeInTheDocument();
+    });
+});
+
+test('Test Multi facet with FacetItemComponent', async () => {
+    const { container } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >
+                <MultilevelFacets facetItemComponent={<FacetItemComponent />} />
+                <Products attributesMap={attributesMap} />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(() => {
+        expect(container.getElementsByClassName('test-class').length).toBe(5);
+    });
+});
+
+test('Test Multi click with FacetItemComponent', async () => {
+    const { getByText } = render(
+        <>
+            <UnbxdSearchWrapper
+                siteKey="wildearthclone-neto-com-au808941566310465"
+                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+            >
+                <MultilevelFacets facetItemComponent={<FacetItemComponent />} />
+                <Products attributesMap={attributesMap} />
+                <div>
+                    <SearchBox defaultSearch="shoes" />
+                </div>
+            </UnbxdSearchWrapper>
+        </>
+    );
+
+    await waitFor(async () => {
+        expect(getByText('strings')).toBeInTheDocument();
+        fireEvent.click(getByText('strings'));
+    });
+    await waitFor(() => {
+        expect(
+            getByText(
+                'Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle'
+            )
+        ).toBeInTheDocument();
     });
 });
