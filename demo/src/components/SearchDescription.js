@@ -12,8 +12,16 @@ export const SearchTitleItem = (props) => {
     );
 };
 
+export const formatter = (query, productType) => {
+    if (productType === 'CATEGORY') {
+        const formattedQuery = query.replace('categoryPath:', '');
+        return formattedQuery;
+    }
+    return query;
+};
+
 const SearchDescription = () => {
-    return <SearchTitle />;
+    return <SearchTitle formatter={formatter} />;
 };
 
 export default SearchDescription;
