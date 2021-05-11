@@ -14,9 +14,29 @@ class ProductsWrapper extends React.PureComponent {
     constructor(props) {
         super(props);
 
-        const { products } = this.props;
+        const {
+            products = [],
+            attributesMap,
+            showVariants,
+            variantAttributesMap,
+            showSwatches,
+            swatchAttributesMap,
+            groupBy
+        } = this.props;
+        const processedProducts = products.map((product, idx) => {
+            const productValues = getProductFields({
+                product,
+                attributesMap,
+                showVariants,
+                variantAttributesMap,
+                showSwatches,
+                swatchAttributesMap,
+                groupBy
+            });
+            return { ...productValues, prank: idx };
+        });
         this.state = {
-            products,
+            products: processedProducts,
             hasMoreResults: true,
             start: 0
         };
@@ -74,7 +94,7 @@ class ProductsWrapper extends React.PureComponent {
             getAnalytics
         } = this.props;
         const { trackProductImpressions } = getAnalytics();
-        const processedProducts = products.map((product) => {
+        const processedProducts = products.map((product, idx) => {
             const productValues = getProductFields({
                 product,
                 attributesMap,
@@ -84,7 +104,7 @@ class ProductsWrapper extends React.PureComponent {
                 swatchAttributesMap,
                 groupBy
             });
-            return productValues;
+            return { ...productValues, prank: idx };
         });
 
         const loadedAllResults =

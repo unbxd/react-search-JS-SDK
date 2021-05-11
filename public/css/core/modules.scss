@@ -47,6 +47,7 @@
 
 .UNX-swatch__item {
     @apply m-1;
+    cursor: pointer;
 
     &.-selected {
         @apply border-2 border-gray-600;

@@ -94,10 +94,10 @@ class ProductsContainer extends React.PureComponent {
             getResults();
         };
 
-        const onProductClick = (event) => {
-            const productUniqueId = event.target.dataset.uniqueid;
+        const onProductClick = (currentItem) => {
+            const productUniqueId = currentItem[productIdAttribute];
             if (productUniqueId) {
-                const { prank } = event.target.dataset;
+                const { prank } = currentItem;
                 const clickedProduct = getProductByPropValue(
                     productIdAttribute,
                     productUniqueId
@@ -109,8 +109,6 @@ class ProductsContainer extends React.PureComponent {
                             clickedProduct[productIdAttribute],
                             prank
                         );
-                    } else {
-                        event.preventDefault();
                     }
                 } else {
                     trackProductClick(

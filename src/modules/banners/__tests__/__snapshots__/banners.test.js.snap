@@ -27,35 +27,23 @@ Array [
         >
           <a
             className="UNX-product-card UNX-grid-card"
-            data-prank={1}
-            data-uniqueid="T624835"
             onClick={[Function]}
           >
             <img
               className="-image"
-              data-prank={1}
-              data-uniqueid="T624835"
             />
           </a>
           <div
             className="UNX-swatch__container"
-          >
-            <div
-              className="UNX-swatch__list"
-            />
-          </div>
+          />
           <div
             className="-details"
           >
             <div
               className="-title"
-              data-prank={1}
-              data-uniqueid="T624835"
             />
             <div
               className="-price"
-              data-prank={1}
-              data-uniqueid="T624835"
             />
           </div>
         </div>
@@ -64,35 +52,23 @@ Array [
         >
           <a
             className="UNX-product-card UNX-grid-card"
-            data-prank={2}
-            data-uniqueid="T624611"
             onClick={[Function]}
           >
             <img
               className="-image"
-              data-prank={2}
-              data-uniqueid="T624611"
             />
           </a>
           <div
             className="UNX-swatch__container"
-          >
-            <div
-              className="UNX-swatch__list"
-            />
-          </div>
+          />
           <div
             className="-details"
           >
             <div
               className="-title"
-              data-prank={2}
-              data-uniqueid="T624611"
             />
             <div
               className="-price"
-              data-prank={2}
-              data-uniqueid="T624611"
             />
           </div>
         </div>
@@ -101,35 +77,23 @@ Array [
         >
           <a
             className="UNX-product-card UNX-grid-card"
-            data-prank={3}
-            data-uniqueid="T624610"
             onClick={[Function]}
           >
             <img
               className="-image"
-              data-prank={3}
-              data-uniqueid="T624610"
             />
           </a>
           <div
             className="UNX-swatch__container"
-          >
-            <div
-              className="UNX-swatch__list"
-            />
-          </div>
+          />
           <div
             className="-details"
           >
             <div
               className="-title"
-              data-prank={3}
-              data-uniqueid="T624610"
             />
             <div
               className="-price"
-              data-prank={3}
-              data-uniqueid="T624610"
             />
           </div>
         </div>
@@ -138,35 +102,23 @@ Array [
         >
           <a
             className="UNX-product-card UNX-grid-card"
-            data-prank={4}
-            data-uniqueid="T624604"
             onClick={[Function]}
           >
             <img
               className="-image"
-              data-prank={4}
-              data-uniqueid="T624604"
             />
           </a>
           <div
             className="UNX-swatch__container"
-          >
-            <div
-              className="UNX-swatch__list"
-            />
-          </div>
+          />
           <div
             className="-details"
           >
             <div
               className="-title"
-              data-prank={4}
-              data-uniqueid="T624604"
             />
             <div
               className="-price"
-              data-prank={4}
-              data-uniqueid="T624604"
             />
           </div>
         </div>
@@ -175,35 +127,23 @@ Array [
         >
           <a
             className="UNX-product-card UNX-grid-card"
-            data-prank={5}
-            data-uniqueid="T623252"
             onClick={[Function]}
           >
             <img
               className="-image"
-              data-prank={5}
-              data-uniqueid="T623252"
             />
           </a>
           <div
             className="UNX-swatch__container"
-          >
-            <div
-              className="UNX-swatch__list"
-            />
-          </div>
+          />
           <div
             className="-details"
           >
             <div
               className="-title"
-              data-prank={5}
-              data-uniqueid="T623252"
             />
             <div
               className="-price"
-              data-prank={5}
-              data-uniqueid="T623252"
             />
           </div>
         </div>
@@ -212,35 +152,23 @@ Array [
         >
           <a
             className="UNX-product-card UNX-grid-card"
-            data-prank={6}
-            data-uniqueid="T613177"
             onClick={[Function]}
           >
             <img
               className="-image"
-              data-prank={6}
-              data-uniqueid="T613177"
             />
           </a>
           <div
             className="UNX-swatch__container"
-          >
-            <div
-              className="UNX-swatch__list"
-            />
-          </div>
+          />
           <div
             className="-details"
           >
             <div
               className="-title"
-              data-prank={6}
-              data-uniqueid="T613177"
             />
             <div
               className="-price"
-              data-prank={6}
-              data-uniqueid="T613177"
             />
           </div>
         </div>
@@ -249,35 +177,23 @@ Array [
         >
           <a
             className="UNX-product-card UNX-grid-card"
-            data-prank={7}
-            data-uniqueid="T613176"
             onClick={[Function]}
           >
             <img
               className="-image"
-              data-prank={7}
-              data-uniqueid="T613176"
             />
           </a>
           <div
             className="UNX-swatch__container"
-          >
-            <div
-              className="UNX-swatch__list"
-            />
-          </div>
+          />
           <div
             className="-details"
           >
             <div
               className="-title"
-              data-prank={7}
-              data-uniqueid="T613176"
             />
             <div
               className="-price"
-              data-prank={7}
-              data-uniqueid="T613176"
             />
           </div>
         </div>
