@@ -1,3 +1,19 @@
+## [1.0.4](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.3...v1.0.4) (2021-05-11)
+
+
+### Bug Fixes
+
+* **core sdk:** version bump ([744d72f](https://github.com/unbxd/react-search-JS-SDK/commit/744d72fb8fa91f070a6b1e9516d7193b6b118c12))
+* **misc:** read decoded sort from query params. misc changes ([9064f71](https://github.com/unbxd/react-search-JS-SDK/commit/9064f71cd2a0a384fb2bbfd960a0bddd09959c47))
+* **multilevelfacets:** encode the multilevel facet value to keep it in the same format as core sdk ([4aaf9cc](https://github.com/unbxd/react-search-JS-SDK/commit/4aaf9ccad01826565fa83f9cb932d1f70f7967f9))
+* **multilevelfacets:** removing support for configurations that can be set on console ([771c894](https://github.com/unbxd/react-search-JS-SDK/commit/771c89440c6f94edcb1a986d697181c2f2744c44))
+* **pagination:** add classes denoting the type of pagination action ([8664d6f](https://github.com/unbxd/react-search-JS-SDK/commit/8664d6fe521223e07d52d387eb40cdc0b239c396))
+* **pagination:** remove unnecessary prop on button component ([c0467cf](https://github.com/unbxd/react-search-JS-SDK/commit/c0467cf7b10f14026e6c908b1e63f66ce67cc9c2))
+* **products:** pass product object on the click event. update products processing logic ([31d626c](https://github.com/unbxd/react-search-JS-SDK/commit/31d626cf8394851471fef0ee241e73d5461a3c43))
+* **products:** rename productName to title. optimise the products processing ([6d3791c](https://github.com/unbxd/react-search-JS-SDK/commit/6d3791c9349cfb45aea526bb1e733e7491f86f67))
+* **searchtitle:** add a formatter to format search title based on different producttypes ([f4405b1](https://github.com/unbxd/react-search-JS-SDK/commit/f4405b115981c918cb4cfdffce0a137ace070ce8))
+* **styles:** segregate core and theme styles better ([aabecf0](https://github.com/unbxd/react-search-JS-SDK/commit/aabecf035f49c794cc5183ed65a2b4690af34bc3))
+
 ## [1.0.3](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.2...v1.0.3) (2021-05-06)
 
 
