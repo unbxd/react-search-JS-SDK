@@ -1,11 +1,13 @@
 import React, { useState, useContext } from 'react';
 import UnbxdSearchWrapper from '@unbxd-ui/react-search-sdk';
-import { Strings, Accessories, Grips, Balls, Home } from '.';
-import { searchConfigurations, categoryLinks } from '../config';
+import Strings from './Strings';
+import Balls from './Balls';
+import Accessories from './Accessories';
+import Grips from './Grips';
+import Home from './Home';
 import { ProductTypeContext } from '../context';
+import { searchConfigurations } from '../config';
 import MobileModal from '../components/MobileModal';
-import CategoryLinks from '../components/CategoryLinks';
-import MobileMenu from '../components/MobileMenu';
 import SearchBar from '../components/SearchBar';
 import { Route, useHistory, useLocation } from 'react-router-dom';
 import { scrollTop } from '../utils';
@@ -33,13 +35,7 @@ const ErrorComponent = () => {
 };
 
 const Search = () => {
-    const {
-        productType,
-        setProductType,
-        enableFilters,
-        setEnableFilters
-    } = useContext(ProductTypeContext);
-    const [categoryPathLinks, setCategoryPathLinks] = useState(categoryLinks);
+    const { productType, setProductType } = useContext(ProductTypeContext);
     const [refreshId, setRefreshId] = useState(1);
     const [showFilters, setShowFilters] = useState(false);
     const [] = useState('');
@@ -48,27 +44,9 @@ const Search = () => {
 
     const handleClose = () => setShowFilters(false);
     const handleShow = () => setShowFilters(true);
-    const handleCategoryLinkClick = (event) => {
-        const path = event.target.dataset['unx_path'];
-        let currentCategoryItem = null;
-        const updatedPathLinks = categoryPathLinks.map((links) => {
-            if (links.path === path) {
-                currentCategoryItem = links;
-                return { ...links, isSelected: true };
-            }
-            return { ...links, isSelected: false };
-        });
-        setCategoryPathLinks(updatedPathLinks);
-        window.UnbxdAnalyticsConf = {};
-        window.UnbxdAnalyticsConf['page'] = currentCategoryItem.path;
-        window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
-        setProductType('CATEGORY');
-        setRefreshId(refreshId + 1);
-    };
 
     const handleRouteChange = (searchObj, hash, refreshId) => {
         scrollTop();
-        setEnableFilters(true);
         const { state = {} } = searchObj;
         const { responseObj = {} } = state;
         const { redirect = {} } = responseObj;
@@ -99,7 +77,7 @@ const Search = () => {
             // if hash already exists, to retain the current state, push on history
             if (routeLocation.hash && routeHistory.action !== 'POP') {
                 routeHistory.push(`${routeLocation.pathname}#${hash}`);
-            } else {
+            } else if (hash) {
                 routeHistory.replace(`${routeLocation.pathname}#${hash}`);
             }
             return true;
@@ -108,8 +86,8 @@ const Search = () => {
 
     return (
         <UnbxdSearchWrapper
-            siteKey="ss-unbxd-ner-demo-site7501612449283"
-            apiKey="955731f5d1c36ebbc704687b9bfd9b09"
+            siteKey="demo-unbxd700181503576558"
+            apiKey="fb853e3332f2645fac9d71dc63e09ec1"
             getCategoryId={getCategoryId}
             searchConfigurations={searchConfigurations}
             productType={productType}
@@ -119,18 +97,12 @@ const Search = () => {
             onRouteChange={handleRouteChange}
         >
             <MobileModal showFilters={showFilters} handleClose={handleClose} />
-            <SearchBar onSearch={setProductType} productType={productType} />
-
-            <CategoryLinks
-                categoryPathLinks={categoryPathLinks}
-                handleCategoryLinkClick={handleCategoryLinkClick}
-                setProductType={setProductType}
-            />
-            <MobileMenu
-                categoryPathLinks={categoryPathLinks}
-                handleCategoryLinkClick={handleCategoryLinkClick}
+            <SearchBar
+                onProductTypeChange={setProductType}
+                productType={productType}
                 handleShow={handleShow}
-                enableFilters={enableFilters}
+                refreshId={refreshId}
+                setRefreshId={setRefreshId}
             />
 
             <Route exact path="/">
@@ -139,14 +111,14 @@ const Search = () => {
             <Route exact path="/strings">
                 <Strings />
             </Route>
+            <Route exact path="/balls">
+                <Balls />
+            </Route>
             <Route exact path="/accessories">
                 <Accessories />
             </Route>
-            <Route exact path="/grips">
+            <Route path="/grips">
                 <Grips />
-            </Route>
-            <Route path="/balls">
-                <Balls />
             </Route>
         </UnbxdSearchWrapper>
     );

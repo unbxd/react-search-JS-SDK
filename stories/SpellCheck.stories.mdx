@@ -7,6 +7,12 @@ import SearchBox from '../src/modules/searchBox';
 import { SpellCheckItemComponent } from '../demo/src/components/SpellChecker.js';
 import { siteKey, apiKey, attributesMap } from './config';
 const defaultSearch = 'shrt';
+const handleSpellCheckClick = (suggestion) => {
+    // process the suggestion
+    // return false to cancel
+    // return true to continue
+    return true;
+};
 
 <Meta title="SpellCheck" component={SpellCheck} />
 
@@ -74,6 +80,45 @@ The custom component instance will receive the following props
     <Story name="with spellCheckItemComponent">
         <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <SpellCheck spellCheckItemComponent={<SpellCheckItemComponent />} />
+            <Products attributesMap={attributesMap} />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### onSpellCheckClick
+
+A callback which will be triggered on the click of the suggestion.
+
+```jsx
+const handleSpellCheckClick = (suggestion) => {
+    // process the suggestion
+    // return false to cancel
+    // return true to continue
+    return true;
+};
+```
+
+The callback will receive the following parameters
+
+#### onSpellCheckClick parameters
+
+| Name       | Type   | Description       |
+| ---------- | ------ | ----------------- |
+| suggestion | string | spellcheck value. |
+
+```jsx
+<SpellCheck onSpellCheckClick={<handleSpellCheckClick />} />
+```
+
+<Preview>
+    <Story name="with onSpellCheckClick">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <SpellCheck onSpellCheckClick={<handleSpellCheckClick />} />
             <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />

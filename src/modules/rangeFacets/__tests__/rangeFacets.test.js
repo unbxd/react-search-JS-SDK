@@ -22,7 +22,9 @@ export const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
     return (
         <div
             key={`${facetName}_${fromDataId}-${toDataId}`}
-            className={`UNX-facet__item test-class ${isSelected ? '-selected' : ''}`}
+            className={`UNX-facet__item test-class ${
+                isSelected ? '-selected' : ''
+            }`}
             onClick={handleClick}
         >
             <div className="-checkbox" />
@@ -70,42 +72,39 @@ beforeAll(() => {
     window.fetch = jest.fn((request) => {
         if (request.includes('[200%20TO%20300]')) {
             return Promise.resolve({
-                json: () => Promise.resolve(facetResponse),
+                json: () => Promise.resolve(facetResponse)
             });
         }
         return Promise.resolve({
-            json: () => Promise.resolve(searchResponse),
+            json: () => Promise.resolve(searchResponse)
         });
     });
-})
+});
 
 const attributesMap = {
-    productName: 'title',
+    title: 'title',
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'RRP_Price',
     productUrl: 'productUrl'
 };
 
-
 test('Match Snapshot for range facets', async () => {
-    const tree = renderer
-        .create(
-            <UnbxdSearchWrapper
-                siteKey="wildearthclone-neto-com-au808941566310465"
-                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >
-                <SelectedFacets />
-                <RangeFacets />
-                <Products attributesMap={attributesMap} />
-                <div>
-                    <SearchBox defaultSearch="shoes" />
-                </div>
-            </UnbxdSearchWrapper>
-
-        );
-        await waitFor(() => tree.toJSON());
-        expect(tree.toJSON()).toMatchSnapshot();
+    const tree = renderer.create(
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SelectedFacets />
+            <RangeFacets />
+            <Products attributesMap={attributesMap} />
+            <div>
+                <SearchBox defaultSearch="shoes" />
+            </div>
+        </UnbxdSearchWrapper>
+    );
+    await waitFor(() => tree.toJSON());
+    expect(tree.toJSON()).toMatchSnapshot();
 });
 
 test('Test range facet click', async () => {
@@ -114,11 +113,9 @@ test('Test range facet click', async () => {
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
+            >
                 <RangeFacets />
-                <Products
-                    attributesMap={attributesMap}
-                />
+                <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -128,10 +125,14 @@ test('Test range facet click', async () => {
 
     await waitFor(async () => {
         expect(getByText('$ 200 - $ 300 - 60')).toBeInTheDocument();
-        fireEvent.click(getByText("$ 200 - $ 300 - 60"));
+        fireEvent.click(getByText('$ 200 - $ 300 - 60'));
     });
     await waitFor(() => {
-        expect(getByText("Salomon OUTblast TS CSWP Mens Hiking Boots - Black/Black/Black")).toBeInTheDocument();
+        expect(
+            getByText(
+                'Salomon OUTblast TS CSWP Mens Hiking Boots - Black/Black/Black'
+            )
+        ).toBeInTheDocument();
     });
 });
 
@@ -141,11 +142,9 @@ test('Test range facet with FacetItemComponent', async () => {
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
-                <RangeFacets facetItemComponent={<FacetItemComponent />}/>
-                <Products
-                    attributesMap={attributesMap}
-                />
+            >
+                <RangeFacets facetItemComponent={<FacetItemComponent />} />
+                <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -154,8 +153,8 @@ test('Test range facet with FacetItemComponent', async () => {
     );
 
     await waitFor(() => {
-        expect(container.getElementsByClassName('test-class').length).toBe(9)
-    })
+        expect(container.getElementsByClassName('test-class').length).toBe(9);
+    });
 });
 
 test('Test range facet click with FacetItemComponent', async () => {
@@ -164,11 +163,9 @@ test('Test range facet click with FacetItemComponent', async () => {
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
-                <RangeFacets facetItemComponent={<FacetItemComponent />}/>
-                <Products
-                    attributesMap={attributesMap}
-                />
+            >
+                <RangeFacets facetItemComponent={<FacetItemComponent />} />
+                <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -178,10 +175,14 @@ test('Test range facet click with FacetItemComponent', async () => {
 
     await waitFor(async () => {
         expect(getByText('$200 - $300')).toBeInTheDocument();
-        fireEvent.click(getByText("$200 - $300"));
+        fireEvent.click(getByText('$200 - $300'));
     });
     await waitFor(() => {
-        expect(getByText("Salomon OUTblast TS CSWP Mens Hiking Boots - Black/Black/Black")).toBeInTheDocument();
+        expect(
+            getByText(
+                'Salomon OUTblast TS CSWP Mens Hiking Boots - Black/Black/Black'
+            )
+        ).toBeInTheDocument();
     });
 });
 
@@ -191,13 +192,11 @@ test('Test selected facet click on range Facet', async () => {
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
-                <FacetActions showApplyFilter={false} showClearFilter={false}/>
+            >
+                <FacetActions showApplyFilter={false} showClearFilter={false} />
                 <SelectedFacets />
                 <RangeFacets />
-                <Products
-                    attributesMap={attributesMap}
-                />
+                <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -207,10 +206,13 @@ test('Test selected facet click on range Facet', async () => {
 
     await waitFor(async () => {
         expect(getByText('$ 200 - $ 300 - 60')).toBeInTheDocument();
-        fireEvent.click(getByText("$ 200 - $ 300 - 60"));
+        fireEvent.click(getByText('$ 200 - $ 300 - 60'));
     });
     await waitFor(() => {
-        expect(container.getElementsByClassName('UNX-selectedFacets__container').length).toBe(1)
+        expect(
+            container.getElementsByClassName('UNX-selectedFacets__container')
+                .length
+        ).toBe(1);
     });
 });
 
@@ -220,13 +222,13 @@ test('Test selected facet click on range Facet with FacetItemComponent', async (
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >   
-                <FacetActions showApplyFilter={false} showClearFilter={false}/>
-                <SelectedFacets facetItemComponent={<FacetItemComponentSelected />}/>
-                <RangeFacets />
-                <Products
-                    attributesMap={attributesMap}
+            >
+                <FacetActions showApplyFilter={false} showClearFilter={false} />
+                <SelectedFacets
+                    facetItemComponent={<FacetItemComponentSelected />}
                 />
+                <RangeFacets />
+                <Products attributesMap={attributesMap} />
                 <div>
                     <SearchBox defaultSearch="shoes" />
                 </div>
@@ -236,10 +238,11 @@ test('Test selected facet click on range Facet with FacetItemComponent', async (
 
     await waitFor(async () => {
         expect(getByText('$ 200 - $ 300 - 60')).toBeInTheDocument();
-        fireEvent.click(getByText("$ 200 - $ 300 - 60"));
+        fireEvent.click(getByText('$ 200 - $ 300 - 60'));
     });
     await waitFor(() => {
-        expect(container.getElementsByClassName('range-selected').length).toBe(1)
+        expect(container.getElementsByClassName('range-selected').length).toBe(
+            1
+        );
     });
 });
-

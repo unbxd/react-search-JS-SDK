@@ -1,35 +1,19 @@
 @import '~bootstrap/scss/bootstrap';
 
+*,
 body {
-    background: #f4f5f6;
     font-family: Barlow, sans-serif;
 }
 
-.UNX-header__container {
-    padding: 0 40px;
-}
-
-.UNX-header__logo {
-    width: 140px;
-    background: url(https://libraries.unbxdapi.com/sdk-assets/images/logo.svg);
-    background-size: 100%;
-    background-repeat: no-repeat;
-    height: 35px;
-    display: inline-block;
-}
-
-.UNX-header__container {
-    background: #f6f6f6;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-    border: 1px solid #dae1e9;
-    display: flex;
-    align-items: center;
+body {
+    font-family: Barlow, sans-serif;
 }
 
 .UNX-header__search {
-    width: 60%;
+    width: 40%;
     padding: 15px 0;
-    margin: 0 auto;
+    display: flex;
+    align-items: center;
 }
 
 .UNX-search__container {
@@ -37,33 +21,10 @@ body {
     margin: 0 40px;
 }
 
-.UNX-searchResults__container {
-    margin-bottom: 35px;
-    display: flex;
-}
-
-.UNX-searchFacet__container,
-.UNX-searchResult__container {
-    background-color: #fff;
-}
-
-.UNX-searchFacet__container {
-    padding: 15px 21px;
-    margin-right: 35px;
-    border-radius: 5px;
-    width: 24%;
-}
-
-.UNX-searchResult__container {
-    padding: 12px 18px;
-    border-radius: 5px;
-    flex: 1;
-    height: 100%;
-}
-
 .UNX-searchHeader__container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
 }
 
@@ -168,28 +129,6 @@ body {
         color: #a7a7a7;
         font-size: 14px;
         padding-left: 6px;
-    }
-}
-
-.UNX-categoryLinks__container {
-    background-color: #ffffff;
-    padding: 0 40px;
-
-    .UNX-categoryLink__Header {
-        overflow: hidden;
-    }
-
-    .menu-items {
-        float: left;
-        color: #1d2e44;
-        font-size: 16px;
-        font-weight: 500;
-        text-align: center;
-        margin: 14px 16px;
-
-        &:first-child {
-            margin-left: 0;
-        }
     }
 }
 
@@ -353,14 +292,155 @@ body {
 
 .rc-slider-mark-text:first-child {
     left: 3% !important;
-    width:40px;
+    width: 40px;
 }
 .rc-slider-mark-text:last-child {
     left: 97% !important;
-    width:40px;
+    width: 40px;
 }
-//slider starts
+//slider ends
+
+.UNX-dropdown-container {
+    color: #5d7483;
+
+    .UNX-dropdown__control {
+        border-radius: 25px;
+        width: 90px;
+    }
+    .UNX-dropdown__indicator-separator {
+        display: none;
+    }
+    .UNX-dropdown__single-value {
+        font-size: 12px;
+    }
+    .UNX-dropdown__option:hover {
+        background-color: #f2f2f2;
+    }
+    .UNX-dropdown__option--is-selected {
+        color: #5d7483;
+        background-color: #f2f2f2c0;
+    }
+}
 
 .UNX-productLoadMore {
     display: inline-block;
+}
+
+.UNX-header__search {
+    .UNX-searchbox__container {
+        flex: 0.7;
+        margin-right: 20px;
+    }
+
+    .UNX-language__dropdown {
+        flex: 0.2;
+        margin-right: 20px;
+    }
+
+    .UNX-cart__icon {
+        flex: 0.1;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.UNX-sortby__container {
+    .UNX-dropdown__menu {
+        width: 150%;
+    }
+}
+
+.UNX-sortby__container,
+.UNX-pageSize__container {
+    .-label {
+        font-size: 12px;
+        font-weight: 500;
+        margin-right: 10px;
+    }
+
+    .UNX-dropdown-container {
+        width: 90px;
+    }
+}
+
+.UNX-productCard__container {
+    .-swatch__container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 200px;
+        .UNX-swatch__item {
+            height: 24px;
+            width: 24px;
+            margin: 6px;
+            cursor: pointer;
+        }
+    }
+
+    .UNX-swatch__item {
+        &.-selected {
+            border: solid 2px #ccc;
+            outline: solid 2px #ccc;
+        }
+    }
+
+    .-multiple {
+        &.-swatch__container {
+            display: block;
+        }
+    }
+    .-swatch__list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .-color__container,
+    .-size__container {
+        display: grid;
+        grid-template-columns: 10fr 1fr;
+    }
+    .-color__container,
+    .-size__container {
+        max-height: 45px;
+        overflow: hidden;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+
+    .-swatch__container {
+        .-color__container,
+        .-size__container {
+            &.-open {
+                max-height: unset;
+            }
+        }
+    }
+    .-size__container {
+        .UNX-swatch__item {
+            border: solid 1px #9196a2;
+            color: #9196a2;
+            background: #ffffff;
+            min-height: 31px;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            min-width: 31px;
+            font-size: 12px;
+            font-weight: 500;
+            width: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1px;
+        }
+    }
+}
+
+.viewMore__container {
+    height: 31px;
+    border: solid 1px #cccccc;
+    color: #9a9595;
+    cursor: pointer;
+    background-color: #ccc;
+    padding: 6px;
+    width: 32px;
+    text-align: center;
+    font-size: 12px;
 }

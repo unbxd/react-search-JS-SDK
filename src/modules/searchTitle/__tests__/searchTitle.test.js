@@ -14,17 +14,17 @@ beforeAll(() => {
     window.fetch = jest.fn((request) => {
         if (request.includes('start=10')) {
             return Promise.resolve({
-                json: () => Promise.resolve(page2SearchResponse),
+                json: () => Promise.resolve(page2SearchResponse)
             });
         }
         return Promise.resolve({
-            json: () => Promise.resolve(searchResponse),
+            json: () => Promise.resolve(searchResponse)
         });
     });
-})
+});
 
 const attributesMap = {
-    productName: 'title',
+    title: 'title',
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'RRP_Price',
@@ -32,19 +32,18 @@ const attributesMap = {
 };
 
 test('Match Snapshot for Search Title', async () => {
-    const tree = renderer
-        .create(
-            <UnbxdSearchWrapper
-                siteKey="wildearthclone-neto-com-au808941566310465"
-                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >
-                <SearchTitle />
-                <Products attributesMap={attributesMap} />
-                <div>
-                    <SearchBox defaultSearch="shoes" />
-                </div>
-            </UnbxdSearchWrapper>
-        );
+    const tree = renderer.create(
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SearchTitle />
+            <Products attributesMap={attributesMap} />
+            <div>
+                <SearchBox defaultSearch="shoes" />
+            </div>
+        </UnbxdSearchWrapper>
+    );
     await waitFor(() => tree.toJSON());
     expect(tree.toJSON()).toMatchSnapshot();
 });
@@ -65,7 +64,9 @@ test('Search Title test', async () => {
         </>
     );
 
-    await waitFor(() => expect(getByText("- 1 to 10 of 40 products")).toBeInTheDocument());
+    await waitFor(() =>
+        expect(getByText('- 1 to 10 of 40 products')).toBeInTheDocument()
+    );
 });
 
 test('Search Title Pagination test', async () => {
@@ -86,24 +87,25 @@ test('Search Title Pagination test', async () => {
     );
 
     await waitFor(() => {
-        expect(getByText("- 1 to 10 of 40 products")).toBeInTheDocument()
-        fireEvent.click(getByTestId("UNX_pageNumber2"))
+        expect(getByText('- 1 to 10 of 40 products')).toBeInTheDocument();
+        fireEvent.click(getByTestId('UNX_pageNumber2'));
     });
 
     await waitFor(() => {
-        expect(screen.getByText("- 11 to 20 of 40 products")).toBeInTheDocument()
+        expect(
+            screen.getByText('- 11 to 20 of 40 products')
+        ).toBeInTheDocument();
     });
 });
 
 test('Search Title Item test', async () => {
-
     const SearchTitleItem = (props) => {
         const { searchQuery, start, productsLn, numberOfProducts } = props;
         return (
             <div>
                 Showing results for {searchQuery} - {start + 1} to{' '}
                 {start + productsLn} of {numberOfProducts} products
-        </div>
+            </div>
         );
     };
 
@@ -122,5 +124,9 @@ test('Search Title Item test', async () => {
         </>
     );
 
-    await waitFor(() => expect(getByText("Showing results for boots - 1 to 10 of 40 products")).toBeInTheDocument());
+    await waitFor(() =>
+        expect(
+            getByText('Showing results for boots - 1 to 10 of 40 products')
+        ).toBeInTheDocument()
+    );
 });

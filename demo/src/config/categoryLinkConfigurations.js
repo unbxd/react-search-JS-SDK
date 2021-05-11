@@ -11,7 +11,7 @@ const categoryLinks = [
     },
     { path: 'categoryPath:cat740011', id: 'grips', label: 'New' },
     {
-        path: 'categoryPath:cat890004',
+        path: 'categoryPath:cat120002',
         id: 'balls',
         label: 'Sale '
     }

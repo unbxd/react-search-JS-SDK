@@ -3,46 +3,27 @@ import PropTypes from 'prop-types';
 
 import SwatchItem from '../swatches';
 import { List } from '../../../../components';
-import { getProductFields } from '../../utils';
 
 class GridProductCard extends React.Component {
     constructor(props) {
         super(props);
 
-        const {
-            itemData,
-            attributesMap,
-            showVariants,
-            variantAttributesMap,
-            showSwatches,
-            swatchAttributesMap,
-            groupBy
-        } = this.props;
+        const { itemData } = this.props;
 
-        //Get the datas from the product bases on attributesMap and create the card
-        const productValues = getProductFields({
-            itemData,
-            attributesMap,
-            showVariants,
-            variantAttributesMap,
-            showSwatches,
-            swatchAttributesMap,
-            groupBy
-        });
-
-        this.state = { productValues };
+        this.state = { productValues: itemData };
     }
 
-    onSwatchClick = (event) => {
-        const currentSwatchId = event.target.dataset['variant_id'];
-
+    onSwatchClick = (currentSwatchId) => {
         this.setState((currentState) => {
             return {
                 productValues: {
                     ...currentState.productValues,
                     swatches: currentState.productValues.swatches.map(
                         (swatchObject) => {
-                            if (swatchObject.swatchId === currentSwatchId) {
+                            if (
+                                swatchObject.uniqueId ===
+                                currentSwatchId.uniqueId
+                            ) {
                                 return { ...swatchObject, isSelected: true };
                             } else {
                                 return { ...swatchObject, isSelected: false };
@@ -55,66 +36,61 @@ class GridProductCard extends React.Component {
     };
 
     render() {
-        const { swatchItemComponent, idx, onClick, priceUnit } = this.props;
+        const {
+            swatchItemComponent,
+            itemData,
+            onClick,
+            priceUnit,
+            variantAttributesMap,
+            showSwatches
+        } = this.props;
         const { productValues } = this.state;
-        const activeSwatch = productValues['swatches'].find((swatch) => {
+        const { swatches = [], variants = [] } = productValues;
+        const activeSwatch = swatches.find((swatch) => {
             return swatch.isSelected;
         });
+        let activeVariant = {};
+        if (showSwatches) {
+            activeVariant = variants.find((variant) => {
+                return (
+                    variant[variantAttributesMap['uniqueId']] ===
+                    activeSwatch.uniqueId
+                );
+            });
+        }
+        
+        const handleClick = () => {
+            onClick(itemData);
+        };
 
-        const product = { ...productValues, ...activeSwatch };
-        const {
-            uniqueId,
-            productName,
-            imageUrl,
-            productUrl,
-            price,
-            sellingPrice,
-            swatches
-        } = product;
+        const product = { ...productValues, ...activeVariant };
+        const { title, imageUrl, productUrl, price, sellingPrice } = product;
 
-        const prank = idx + 1;
-
-        //Add support for router as a config
         return (
             <div className="UNX-productCard__container">
                 <a
                     href={productUrl}
                     className={`UNX-product-card UNX-grid-card`}
-                    data-uniqueid={uniqueId}
-                    data-prank={prank}
-                    onClick={onClick}
+                    onClick={handleClick}
                 >
-                    <img
-                        className="-image"
-                        src={imageUrl}
-                        data-uniqueid={uniqueId}
-                        data-prank={prank}
-                    />
+                    <img className="-image" src={imageUrl} />
                 </a>
 
                 <div className="UNX-swatch__container">
-                    <List
-                        items={swatches}
-                        ListItem={swatchItemComponent || SwatchItem}
-                        idAttribute={'swatchId'}
-                        onClick={this.onSwatchClick}
-                        className="UNX-swatch__list"
-                    />
+                    {swatches.length > 1 ? (
+                        <List
+                            items={swatches}
+                            ListItem={swatchItemComponent || SwatchItem}
+                            idAttribute={'swatchId'}
+                            onClick={this.onSwatchClick}
+                            className="UNX-swatch__list"
+                        />
+                    ) : null}
                 </div>
                 <div className={'-details'}>
-                    <div
-                        className="-title"
-                        data-uniqueid={uniqueId}
-                        data-prank={prank}
-                    >
-                        {productName}
-                    </div>
+                    <div className="-title">{title}</div>
 
-                    <div
-                        className="-price"
-                        data-uniqueid={uniqueId}
-                        data-prank={prank}
-                    >
+                    <div className="-price">
                         {sellingPrice && (
                             <span>
                                 {priceUnit}
@@ -135,17 +111,7 @@ class GridProductCard extends React.Component {
 }
 
 GridProductCard.propTypes = {
-    itemData: PropTypes.object.isRequired,
-    attributesMap: PropTypes.object.isRequired,
-    showVariants: PropTypes.bool.isRequired,
-    variantAttributesMap: PropTypes.object.isRequired,
-    showSwatches: PropTypes.bool,
-    swatchAttributesMap: PropTypes.object,
-    groupBy: PropTypes.string,
-    swatchItemComponent: PropTypes.element,
-    idx: PropTypes.number,
-    onClick: PropTypes.func.isRequired,
-    priceUnit: PropTypes.string.isRequired
+    itemData: PropTypes.object.isRequired
 };
 
 export default GridProductCard;

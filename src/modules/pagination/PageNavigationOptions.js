@@ -26,7 +26,6 @@ const PageNavigationOptions = (
                 ) : (
                     <PageElement
                         className="UNX-pageNavigation__button"
-                        itemData={{ pageNumber: item, type }}
                         onClick={onClick}
                         data-pagenumber={item}
                         key={item}
@@ -51,7 +50,6 @@ const PageNavigationOptions = (
             ) : (
                 <PageElement
                     className="UNX-pageNavigation__button"
-                    itemData={{ pageNumber: item, type }}
                     onClick={onClick}
                     data-pagenumber={item}
                     key={item}

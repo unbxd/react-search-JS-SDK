@@ -1,19 +1,17 @@
-export const siteKey = 'ss-unbxd-ner-demo-site7501612449283';
-export const apiKey = '955731f5d1c36ebbc704687b9bfd9b09';
+export const siteKey = 'demo-unbxd700181503576558';
+export const apiKey = 'fb853e3332f2645fac9d71dc63e09ec1';
 export const attributesMap = {
-    productName: 'title',
+    title: 'title',
     uniqueId: 'uniqueId',
     imageUrl: 'productImage',
-    sellingPrice: 'sortPrice',
-    productUrl: 'productUrl'
+    sellingPrice: 'sortPrice'
 };
 export const variantAttributesMap = {
-    productName: 'title',
+    title: 'title',
     uniqueId: 'vId',
     imageUrl: 'v_imageUrl',
     price: 'max_price',
     sellingPrice: 'min_price',
-    productUrl: 'productUrl',
     swatchImageUrl: 'v_swatchUrl',
     groupBy: 'v_StandardColor1'
 };

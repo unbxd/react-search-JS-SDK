@@ -11,7 +11,11 @@ const FacetItem = ({ itemData, onClick }) => {
     };
 
     return (
-        <Button className={stateClass} onClick={handleClick}>
+        <Button
+            className={stateClass}
+            onClick={handleClick}
+            data-testid="UNX_textFacet__facetItem"
+        >
             {name} - {count}
         </Button>
     );

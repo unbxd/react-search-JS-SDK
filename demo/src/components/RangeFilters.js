@@ -99,6 +99,7 @@ export const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
             key={`${facetName}_${fromDataId}-${toDataId}`}
             className={`UNX-facet__item ${isSelected ? '-selected' : ''}`}
             onClick={handleClick}
+            data-testid="UNX_rangeFacet__facetItem"
         >
             <div className="-checkbox" />
             <div className="-label">
@@ -111,8 +112,8 @@ export const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
     );
 };
 
-const transform = function () {
-    console.log(this);
+export const transform = function () {
+    //process the facets
     return this;
 };
 

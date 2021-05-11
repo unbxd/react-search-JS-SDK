@@ -25,7 +25,7 @@ class PageSizeContainer extends React.PureComponent {
         } = this.props;
         const { sizeOptions } = this.state;
         const { rows = false } = unbxdCore.getQueryParams();
-        const numberOfProducts = Number(rows);
+        const numberOfProducts = Number(rows || size);
         if (!isNaN(numberOfProducts)) {
             const updatedSizeOptions = getUpdatedOptions(
                 sizeOptions,

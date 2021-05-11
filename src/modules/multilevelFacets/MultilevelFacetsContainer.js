@@ -10,19 +10,6 @@ import MultilevelFacetsWrapper from './MultilevelFacetsWrapper';
 import { productTypes } from '../../config';
 
 class MultilevelFacetsContainer extends React.PureComponent {
-    componentDidMount() {
-        const {
-            facetDepth,
-            facetLimit,
-            helpers: { setMultilevelFacetsConfiguration }
-        } = this.props;
-
-        setMultilevelFacetsConfiguration({
-            facetDepth,
-            facetLimit
-        });
-    }
-
     getMultilevelFacetsProps() {
         const {
             unbxdCore,
@@ -52,7 +39,11 @@ class MultilevelFacetsContainer extends React.PureComponent {
 
         const handleFacetClick = (currentItem) => {
             const { name, filterField: parent, level } = currentItem;
-            const categoryObject = { parent, level, name };
+            const categoryObject = {
+                parent,
+                level,
+                name: encodeURIComponent(name)
+            };
             const { helpers } = this.props;
             const { getUpdatedResults } = helpers;
             const currentMultilevelFacet = formattedMultilevelFacets.find(

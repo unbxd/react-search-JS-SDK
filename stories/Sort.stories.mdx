@@ -9,6 +9,12 @@ import {
     sortOptions
 } from '../demo/src/components/Sorter.js';
 import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
+const handleSortChange = (field, order) => {
+    // process the sort change
+    // return false to cancel
+    // return true to continue
+    return true;
+};
 
 <Meta title="Sort" component={Sort} />
 
@@ -23,12 +29,12 @@ const sortOptions = [
     },
     {
         label: 'Lowest Price',
-        field: 'PRODUCT_PRICE',
+        field: 'sortPrice',
         order: 'asc'
     },
     {
         label: 'Highest Price',
-        field: 'PRODUCT_PRICE',
+        field: 'sortPrice',
         order: 'desc'
     }
 ];
@@ -99,6 +105,46 @@ The custom component instance will receive the following props
                 displayType={'LIST'}
                 sortItemComponent={<SortItemComponent />}
             />
+            <Products attributesMap={attributesMap} />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### onSortClick
+
+A callback which is triggered on the click of sort.
+
+```jsx
+const handleSortChange = (field, order) => {
+    // process the sort change
+    // return false to cancel
+    // return true to continue
+    return true;
+};
+```
+
+The callback will receive the following parameters
+
+#### onSortClick parameters
+
+| Name  | Type   | Description                     |
+| ----- | ------ | ------------------------------- |
+| field | string | field on which sort is applied. |
+| order | string | order of sort.                  |
+
+```jsx
+<Sort onSortclick={handleSortChange} />
+```
+
+<Preview>
+    <Story name="with onSortClick">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <Sort onSortclick={handleSortChange} />
             <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />

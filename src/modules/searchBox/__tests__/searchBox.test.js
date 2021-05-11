@@ -10,13 +10,13 @@ import { searchBoxResponse } from './mocks';
 beforeAll(() => {
     window.fetch = jest.fn(() => {
         return Promise.resolve({
-            json: () => Promise.resolve(searchBoxResponse),
+            json: () => Promise.resolve(searchBoxResponse)
         });
     });
-})
+});
 
 const attributesMap = {
-    productName: 'title',
+    title: 'title',
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'RRP_Price',
@@ -24,17 +24,15 @@ const attributesMap = {
 };
 
 test('Match Snapshot for search box', async () => {
-    const tree = renderer
-        .create(
-            <UnbxdSearchWrapper
-                siteKey="wildearthclone-neto-com-au808941566310465"
-                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >
-                <SearchBox defaultSearch="shoes" />
-                <Products attributesMap={attributesMap} />
-            </UnbxdSearchWrapper>
-
-        );
+    const tree = renderer.create(
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <SearchBox defaultSearch="shoes" />
+            <Products attributesMap={attributesMap} />
+        </UnbxdSearchWrapper>
+    );
     await waitFor(() => tree.toJSON());
     expect(tree.toJSON()).toMatchSnapshot();
 });
@@ -53,9 +51,11 @@ test('Search Box Input test', async () => {
     );
 
     await waitFor(() => {
-        expect(container.getElementsByClassName('UNX-searchbox__input').length).toEqual(1);
+        expect(
+            container.getElementsByClassName('UNX-searchbox__input').length
+        ).toEqual(1);
         expect(getByText('Search')).toBeInTheDocument();
-    })
+    });
 });
 
 test('Search Box Clearable test', async () => {
@@ -72,12 +72,14 @@ test('Search Box Clearable test', async () => {
     );
 
     await waitFor(() => {
-        expect(container.getElementsByClassName('UNX-searchbox__input').length).toEqual(1);
+        expect(
+            container.getElementsByClassName('UNX-searchbox__input').length
+        ).toEqual(1);
         expect(getByText('Search')).toBeInTheDocument();
         expect(screen.getByDisplayValue('boots1')).toBeInTheDocument();
         fireEvent.click(getByTestId('UNX-searchbox__clearIcon'));
         expect(screen.getByDisplayValue('')).toBeInTheDocument();
-    })
+    });
 });
 
 test('Search Box callback test', async () => {
@@ -89,20 +91,26 @@ test('Search Box callback test', async () => {
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >
-                <SearchBox onSubmit={onSubmit} onClear={onClear} clearable={true} />
+                <SearchBox
+                    onSubmit={onSubmit}
+                    onClear={onClear}
+                    clearable={true}
+                />
                 <Products attributesMap={attributesMap} />
             </UnbxdSearchWrapper>
         </>
     );
 
     await waitFor(() => {
-        expect(container.getElementsByClassName('UNX-searchbox__input').length).toEqual(1);
+        expect(
+            container.getElementsByClassName('UNX-searchbox__input').length
+        ).toEqual(1);
         expect(getByText('Search')).toBeInTheDocument();
         fireEvent.click(getByText('Search'));
         expect(onSubmit).toHaveBeenCalledTimes(1);
         fireEvent.click(getByTestId('UNX-searchbox__clearIcon'));
         expect(onClear).toHaveBeenCalledTimes(1);
-    })
+    });
 });
 
 test('Search Box input component test', async () => {
@@ -131,15 +139,22 @@ test('Search Box input component test', async () => {
 
     await waitFor(() => {
         expect(getByTestId('custom-search-input')).toBeInTheDocument();
-        fireEvent.change(getByTestId('custom-search-input'), { target: { value: 'shoes' } });
+        fireEvent.change(getByTestId('custom-search-input'), {
+            target: { value: 'shoes' }
+        });
         expect(onSearchBoxChange).toHaveBeenCalledTimes(1);
-    })
+    });
 });
 
 test('Search Box submit component test', async () => {
     const onSearchBoxSubmit = jest.fn();
     const SubmitComponent = () => {
-        return <div data-testid="custom-search-btn" onClick={onSearchBoxSubmit}> Submit</div>;
+        return (
+            <div data-testid="custom-search-btn" onClick={onSearchBoxSubmit}>
+                {' '}
+                Submit
+            </div>
+        );
     };
 
     const { getByTestId } = render(
@@ -158,13 +173,18 @@ test('Search Box submit component test', async () => {
         expect(getByTestId('custom-search-btn')).toBeInTheDocument();
         fireEvent.click(getByTestId('custom-search-btn'));
         expect(onSearchBoxSubmit).toHaveBeenCalledTimes(1);
-    })
+    });
 });
 
 test('Search Box search component test', async () => {
     const onSearchBoxClear = jest.fn();
     const ClearComponent = () => {
-        return <div data-testid="custom-clear-btn" onClick={onSearchBoxClear}> x </div>;
+        return (
+            <div data-testid="custom-clear-btn" onClick={onSearchBoxClear}>
+                {' '}
+                x{' '}
+            </div>
+        );
     };
 
     const { getByTestId } = render(
@@ -173,7 +193,10 @@ test('Search Box search component test', async () => {
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >
-                <SearchBox clearable={true} clearComponent={<ClearComponent />} />
+                <SearchBox
+                    clearable={true}
+                    clearComponent={<ClearComponent />}
+                />
                 <Products attributesMap={attributesMap} />
             </UnbxdSearchWrapper>
         </>
@@ -183,5 +206,5 @@ test('Search Box search component test', async () => {
         expect(getByTestId('custom-clear-btn')).toBeInTheDocument();
         fireEvent.click(getByTestId('custom-clear-btn'));
         expect(onSearchBoxClear).toHaveBeenCalledTimes(1);
-    })
+    });
 });

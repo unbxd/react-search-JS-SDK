@@ -8,7 +8,21 @@ import SearchBox from '../src/modules/searchBox';
 import { Button } from '../src/components';
 import { FacetItemComponent } from '../demo/src/components/MultilevelFilters.js';
 import { Root, separator } from '../demo/src/components/Crumbs.js';
-import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
+import { defaultSearch } from './config';
+const siteKey = 'demo-spanish-unbxd809051588861207';
+const apiKey = 'f19768e22b49909798bc2411fa3dd963';
+const attributesMap = {
+    title: 'title',
+    uniqueId: 'uniqueId',
+    imageUrl: 'imageUrl',
+    sellingPrice: 'sortPrice'
+};
+const handleFacetClick = (facetObj, eventType) => {
+    // process the facet change
+    // return false to cancel
+    // return true to continue
+    return true;
+};
 
 <Meta title="MultilevelFacets" component={MultilevelFacets} />
 
@@ -23,7 +37,7 @@ import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
 <Preview>
     <Story name="default">
         <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
-            <Breadcrumbs Root={Root} separator={separator} />
+            <Breadcrumbs root={<Root />} separator={separator} />
             <MultilevelFacets />
             <Products attributesMap={attributesMap} />
             <div className="hidden">
@@ -74,8 +88,49 @@ The custom component instance will receive the following props
 <Preview>
     <Story name="with facetItemComponent">
         <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
-            <Breadcrumbs root={Root} separator={separator} />
+            <Breadcrumbs root={<Root />} separator={separator} />
             <MultilevelFacets facetItemComponent={<FacetItemComponent />} />
+            <Products attributesMap={attributesMap} />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### onFacetClick
+
+A callback which will be triggered on the change of facet.
+
+```jsx
+const handleFacetClick = (facetObj, eventType) => {
+    // process the facet change
+    // return false to cancel
+    // return true to continue
+    return true;
+};
+```
+
+The callback will receive the following parameters
+
+#### onFacetClick parameters
+
+| Name      | Type   | Description       |
+| --------- | ------ | ----------------- |
+| facetObj  | object | facet values.     |
+| eventType | func   | facet event type. |
+
+```jsx
+<MultilevelFacets onFacetClick={handleFacetClick} />
+```
+
+<Preview>
+    <Story name="with onFacetClick">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <Breadcrumbs root={<Root />} separator={separator} />
+            <MultilevelFacets onFacetClick={handleFacetClick} />
             <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />
@@ -101,7 +156,7 @@ The custom component instance will receive the following props
 <Preview>
     <Story name="with render props">
         <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
-            <Breadcrumbs Root={Root} separator={separator} />
+            <Breadcrumbs root={<Root />} separator={separator} />
             <MultilevelFacets>
                 {({ multilevelFacets, onFacetClick }) => {
                     return <div>render MultilevelFacets</div>;

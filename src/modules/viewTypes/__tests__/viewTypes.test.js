@@ -1,5 +1,12 @@
 import renderer from 'react-test-renderer';
-import { render, waitFor, fireEvent, screen, getByTestId, getByText } from '@testing-library/react';
+import {
+    render,
+    waitFor,
+    fireEvent,
+    screen,
+    getByTestId,
+    getByText
+} from '@testing-library/react';
 import React from 'react';
 import Products from '../../products';
 import UnbxdSearchWrapper from '../../../UnbxdSearchWrapper';
@@ -13,17 +20,17 @@ beforeAll(() => {
     window.fetch = jest.fn((request) => {
         if (request.includes('viewType=LIST')) {
             return Promise.resolve({
-                json: () => Promise.resolve(listViewResponse),
+                json: () => Promise.resolve(listViewResponse)
             });
         }
         return Promise.resolve({
-            json: () => Promise.resolve(searchResponse),
+            json: () => Promise.resolve(searchResponse)
         });
     });
-})
+});
 
 const attributesMap = {
-    productName: 'title',
+    title: 'title',
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'RRP_Price',
@@ -31,18 +38,16 @@ const attributesMap = {
 };
 
 test('Match Snapshot for View types', async () => {
-    const tree = renderer
-        .create(
-            <UnbxdSearchWrapper
-                siteKey="wildearthclone-neto-com-au808941566310465"
-                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >
-                <ViewTypes />
-                <SearchBox defaultSearch="shoes" />
-                <Products attributesMap={attributesMap} />
-            </UnbxdSearchWrapper>
-
-        );
+    const tree = renderer.create(
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <ViewTypes />
+            <SearchBox defaultSearch="shoes" />
+            <Products attributesMap={attributesMap} />
+        </UnbxdSearchWrapper>
+    );
     await waitFor(() => tree.toJSON());
     expect(tree.toJSON()).toMatchSnapshot();
 });
@@ -62,8 +67,10 @@ test('View types test', async () => {
     );
 
     await waitFor(() => {
-        expect(container.getElementsByClassName('UNX-grid-card')).toHaveLength(10);
-    })
+        expect(container.getElementsByClassName('UNX-grid-card')).toHaveLength(
+            10
+        );
+    });
 });
 
 test('View types grid test', async () => {
@@ -81,8 +88,10 @@ test('View types grid test', async () => {
     );
 
     await waitFor(() => {
-        expect(container.getElementsByClassName('UNX-viewTypes__dropdown')).toHaveLength(1);
-    })
+        expect(
+            container.getElementsByClassName('UNX-viewTypes__dropdown')
+        ).toHaveLength(1);
+    });
 });
 
 test('View types grid test', async () => {
@@ -104,7 +113,11 @@ test('View types grid test', async () => {
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >
-                <ViewTypes viewTypes={['LIST', 'GRID']} displayType={'LIST'} viewItemComponent={<ViewItemComponent />} />
+                <ViewTypes
+                    viewTypes={['LIST', 'GRID']}
+                    displayType={'LIST'}
+                    viewItemComponent={<ViewItemComponent />}
+                />
                 <SearchBox defaultSearch="shoes" />
                 <Products attributesMap={attributesMap} />
             </UnbxdSearchWrapper>
@@ -115,6 +128,8 @@ test('View types grid test', async () => {
         fireEvent.click(getByText('LIST'));
     });
     await waitFor(() => {
-        expect(container.getElementsByClassName('UNX-list-card')).toHaveLength(10);
+        expect(container.getElementsByClassName('UNX-list-card')).toHaveLength(
+            10
+        );
     });
 });

@@ -15,7 +15,6 @@ import {
     setSpellCheckConfiguration,
     setPageSizeConfiguration,
     setSortConfiguration,
-    setMultilevelFacetsConfiguration,
     setRangeFacetsConfiguration,
     setFacetsActionConfiguration,
     setViewTypeConfiguration,
@@ -31,7 +30,6 @@ import {
 } from './utils';
 import { cloneElement } from './common/utils';
 import '../public/css/core/index.scss';
-import { viewTypes } from './config/constants';
 
 /**
  * Component to initialize Unbxd Search. UnbxdSearchWrapper also acts as a root component for modules such as Products, Pagination and facets.
@@ -67,9 +65,6 @@ class UnbxdSearchWrapper extends Component {
         this.unbxdCallBack = unbxdCallBack.bind(this);
         this.setPageSizeConfiguration = setPageSizeConfiguration.bind(this);
         this.setSortConfiguration = setSortConfiguration.bind(this);
-        this.setMultilevelFacetsConfiguration = setMultilevelFacetsConfiguration.bind(
-            this
-        );
         this.setRangeFacetsConfiguration = setRangeFacetsConfiguration.bind(
             this
         );
@@ -106,8 +101,6 @@ class UnbxdSearchWrapper extends Component {
                 setSearchBoxConfiguration: this.setSearchBoxConfiguration,
                 setPageSizeConfiguration: this.setPageSizeConfiguration,
                 setSortConfiguration: this.setSortConfiguration,
-                setMultilevelFacetsConfiguration: this
-                    .setMultilevelFacetsConfiguration,
                 setRangeFacetsConfiguration: this.setRangeFacetsConfiguration,
                 setFacetsActionConfiguration: this.setFacetsActionConfiguration,
                 setSpellCheckConfiguration: this.setSpellCheckConfiguration,
@@ -132,7 +125,6 @@ class UnbxdSearchWrapper extends Component {
         const categoryId =
             typeof unbxdCore.options.getCategoryId === 'function' &&
             unbxdCore.options.getCategoryId();
-
 
         if (unbxdCore.options.applyMultipleFilters) {
             this.setState((currentState) => {
@@ -184,6 +176,7 @@ class UnbxdSearchWrapper extends Component {
         const currentCategoryId =
             typeof unbxdCore.options.getCategoryId === 'function' &&
             unbxdCore.options.getCategoryId();
+        unbxdCore.options.productType = productType;
 
         if (
             categoryId !== currentCategoryId &&

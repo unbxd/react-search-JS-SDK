@@ -12,8 +12,9 @@ const FacetItem = ({ itemData, onClick }) => {
         <Button
             className={`UNX-facet__item -l${level} ${
                 isSelected ? '-selected' : ''
-                }`}
+            }`}
             onClick={handleClick}
+            data-testid="UNX_multilevelFacet__facetItem"
         >
             {name} {count && <span>-{count}</span>}
         </Button>

@@ -7,16 +7,36 @@ import NoProducts from './NoProducts';
 import { getProductPids } from '../utils';
 import { paginationTypes } from '../../../config';
 import { debounce, cloneElement } from '../../../common/utils';
-import { DEBOUNCE_TIME } from '../utils';
+import { DEBOUNCE_TIME, getProductFields } from '../utils';
 import { searchStatus, viewTypes } from '../../../config';
 
 class ProductsWrapper extends React.PureComponent {
     constructor(props) {
         super(props);
 
-        const { products } = this.props;
+        const {
+            products = [],
+            attributesMap,
+            showVariants,
+            variantAttributesMap,
+            showSwatches,
+            swatchAttributesMap,
+            groupBy
+        } = this.props;
+        const processedProducts = products.map((product, idx) => {
+            const productValues = getProductFields({
+                product,
+                attributesMap,
+                showVariants,
+                variantAttributesMap,
+                showSwatches,
+                swatchAttributesMap,
+                groupBy
+            });
+            return { ...productValues, prank: idx };
+        });
         this.state = {
-            products,
+            products: processedProducts,
             hasMoreResults: true,
             start: 0
         };
@@ -65,13 +85,32 @@ class ProductsWrapper extends React.PureComponent {
             sort,
             unbxdCoreStatus,
             numberOfProducts,
+            attributesMap,
+            showVariants,
+            variantAttributesMap,
+            showSwatches,
+            swatchAttributesMap,
+            groupBy,
             getAnalytics
         } = this.props;
         const { trackProductImpressions } = getAnalytics();
+        const processedProducts = products.map((product, idx) => {
+            const productValues = getProductFields({
+                product,
+                attributesMap,
+                showVariants,
+                variantAttributesMap,
+                showSwatches,
+                swatchAttributesMap,
+                groupBy
+            });
+            return { ...productValues, prank: idx };
+        });
+
         const loadedAllResults =
             start === 0
                 ? products.length === numberOfProducts
-                : [...prevState.products, ...products].length ===
+                : [...prevState.products, ...processedProducts].length ===
                   numberOfProducts;
 
         if (
@@ -80,7 +119,7 @@ class ProductsWrapper extends React.PureComponent {
         ) {
             if (this.state.products.length === 0 && products.length) {
                 this.setState({
-                    products,
+                    products: processedProducts,
                     start,
                     hasMoreResults: !loadedAllResults
                 });
@@ -136,12 +175,15 @@ class ProductsWrapper extends React.PureComponent {
                 }
                 start === 0
                     ? this.setState({
-                          products: products,
+                          products: processedProducts,
                           start,
                           hasMoreResults: !loadedAllResults
                       })
                     : this.setState({
-                          products: [...prevState.products, ...products],
+                          products: [
+                              ...prevState.products,
+                              ...processedProducts
+                          ],
                           start,
                           hasMoreResults: !loadedAllResults
                       });
@@ -154,7 +196,7 @@ class ProductsWrapper extends React.PureComponent {
                     query,
                     getProductPids(products, productIdAttribute)
                 );
-                this.setState({ products: products, start });
+                this.setState({ products: processedProducts, start });
                 return;
             }
         }

@@ -4,7 +4,10 @@ import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import SearchTitle from '../src/modules/searchTitle';
 import Products from '../src/modules/products';
 import SearchBox from '../src/modules/searchBox';
-import { SearchTitleItem } from '../demo/src/components/SearchDescription.js';
+import {
+    SearchTitleItem,
+    formatter
+} from '../demo/src/components/SearchDescription.js';
 import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
 
 <Meta title="SearchTitle" component={SearchTitle} />
@@ -66,6 +69,47 @@ The custom component instance will receive the following props
     <Story name="with searchTitleItem">
         <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <SearchTitle searchTitleItem={<SearchTitleItem />} />
+            <Products attributesMap={attributesMap} />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### formatter
+
+A callback to format the search title.
+
+```jsx
+const formatter = (query, productType) => {
+    if (productType === 'CATEGORY') {
+        const formattedQuery = query.replace('categoryPath:', '');
+        return formattedQuery;
+    }
+    return query;
+};
+```
+
+The callback will receive the following parameters
+
+#### formatter parameters
+
+| Name        | Type   | Description           |
+| ----------- | ------ | --------------------- |
+| query       | string | current search query. |
+| productType | string | current product type. |
+
+```jsx
+<SearchTitle formatter={formatter} />
+```
+
+<Preview>
+    <Story name="with formatter">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <SearchTitle formatter={formatter} />
             <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />

@@ -11,13 +11,13 @@ import { bannerSearchResponse } from './mocks/';
 beforeAll(() => {
     window.fetch = jest.fn(() => {
         return Promise.resolve({
-            json: () => Promise.resolve(bannerSearchResponse),
+            json: () => Promise.resolve(bannerSearchResponse)
         });
     });
-})
+});
 
 const attributesMap = {
-    productName: 'title',
+    title: 'title',
     uniqueId: 'uniqueId',
     imageUrl: 'imageUrl',
     price: 'RRP_Price',
@@ -25,20 +25,18 @@ const attributesMap = {
 };
 
 test('Match Snapshot for banners', async () => {
-    const tree = renderer
-        .create(
-            <UnbxdSearchWrapper
-                siteKey="wildearthclone-neto-com-au808941566310465"
-                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >
-                <Banners altText="alt banner text" />
-                <Products attributesMap={attributesMap} />
-                <div>
-                    <SearchBox defaultSearch="shoes" />
-                </div>
-            </UnbxdSearchWrapper>
-
-        );
+    const tree = renderer.create(
+        <UnbxdSearchWrapper
+            siteKey="wildearthclone-neto-com-au808941566310465"
+            apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        >
+            <Banners altText="alt banner text" />
+            <Products attributesMap={attributesMap} />
+            <div>
+                <SearchBox defaultSearch="shoes" />
+            </div>
+        </UnbxdSearchWrapper>
+    );
     await waitFor(() => tree.toJSON());
     expect(tree.toJSON()).toMatchSnapshot();
 });
@@ -59,7 +57,9 @@ test('Banners alt test', async () => {
         </>
     );
 
-    await waitFor(() => expect(getByAltText("alt banner text")).toBeInTheDocument());
+    await waitFor(() =>
+        expect(getByAltText('alt banner text')).toBeInTheDocument()
+    );
 });
 
 test('Banners Item component test', async () => {
@@ -83,5 +83,7 @@ test('Banners Item component test', async () => {
         </>
     );
 
-    await waitFor(() => expect(getByAltText("Banners Item alt text")).toBeInTheDocument());
+    await waitFor(() =>
+        expect(getByAltText('Banners Item alt text')).toBeInTheDocument()
+    );
 });

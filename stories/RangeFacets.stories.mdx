@@ -4,8 +4,18 @@ import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
 import RangeFacets from '../src/modules/rangeFacets';
 import Products from '../src/modules/products';
 import SearchBox from '../src/modules/searchBox';
-import { FacetItemComponent } from '../demo/src/components/RangeFilters.js';
-import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
+import {
+    FacetItemComponent,
+    transform
+} from '../demo/src/components/RangeFilters.js';
+import { siteKey, apiKey, attributesMap } from './config';
+const defaultSearch = 'mens';
+const handleFacetClick = (facetObj, eventType) => {
+    // process the facet change
+    // return false to cancel
+    // return true to continue
+    return true;
+};
 
 <Meta title="RangeFacets" component={RangeFacets} />
 
@@ -30,6 +40,30 @@ import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
         </UnbxdSearchWrapper>
     </Story>
 </Preview>
+
+---
+
+#### applyMultiple
+
+If multiple price ranges can be selected, pass `applyMultiple` as `true`.
+
+```jsx
+<RangeFacets applyMultiple={true} />
+```
+
+<Preview>
+    <Story name="with applyMultiple">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <RangeFacets applyMultiple={true} />
+            <Products attributesMap={attributesMap} />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
 
 #### facetItemComponent
 
@@ -81,6 +115,77 @@ The custom component instance will receive the following props
     <Story name="with FacetItemComponent">
         <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
             <RangeFacets facetItemComponent={<FacetItemComponent />} />
+            <Products attributesMap={attributesMap} />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### onFacetClick
+
+A callback which will be triggered on the change of facet.
+
+```jsx
+const handleFacetClick = (facetObj, eventType) => {
+    // process the facet change
+    // return false to cancel
+    // return true to continue
+    return true;
+};
+```
+
+The callback will receive the following parameters
+
+#### onFacetClick parameters
+
+| Name      | Type   | Description       |
+| --------- | ------ | ----------------- |
+| facetObj  | object | facet values.     |
+| eventType | func   | facet event type. |
+
+```jsx
+<RangeFacets onFacetClick={handleFacetClick} />
+```
+
+<Preview>
+    <Story name="with onFacetClick">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <RangeFacets onFacetClick={handleFacetClick} />
+            <Products attributesMap={attributesMap} />
+            <div className="hidden">
+                <SearchBox defaultSearch={defaultSearch} />
+            </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### transform
+
+A callback to format the facets.
+
+```jsx
+const transform = function () {
+    //process the facets
+    return this;
+};
+```
+
+The callback will receive the facets on `this`.
+
+```jsx
+<RangeFacets transform={transform} />
+```
+
+<Preview>
+    <Story name="with transform">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey}>
+            <RangeFacets transform={transform} />
             <Products attributesMap={attributesMap} />
             <div className="hidden">
                 <SearchBox defaultSearch={defaultSearch} />
