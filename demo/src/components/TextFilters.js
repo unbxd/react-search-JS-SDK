@@ -18,6 +18,7 @@ export const FacetItemComponent = ({ itemData, onClick }) => {
         <div
             className={`UNX-facet__item ${isSelected ? '-selected' : ''}`}
             onClick={handleClick}
+            data-testid="UNX_textFacet__facetItem"
         >
             <div className="-checkbox" />
             <div className="-label">{name}</div>
