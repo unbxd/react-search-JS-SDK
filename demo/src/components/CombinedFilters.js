@@ -11,8 +11,8 @@ export const transform = function () {
     return this;
 };
 
-const onFacetClick = (facet, facetType, isSelected) => {
-    console.log('Facet change :', facet, facetType, isSelected);
+const onFacetClick = (facetObj, eventType) => {
+    console.log('Facet change :', facetObj, eventType);
     scrollTop();
     return true;
 };

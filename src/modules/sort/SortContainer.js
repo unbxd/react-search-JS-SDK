@@ -36,8 +36,9 @@ class SortContainer extends React.Component {
 
         let sortOn = null;
         const { sort = '' } = unbxdCore.getQueryParams();
-        if (typeof sort === 'string' && sort.length) {
-            const [field, order] = sort.split(' ');
+        const decodedSort = sort ? decodeURI(sort) : '';
+        if (typeof decodedSort === 'string' && decodedSort.length) {
+            const [field, order] = decodedSort.split(' ');
             sortOn = { field, order };
             const formattedSort = `${field}|${order}`;
             const formattedSortByOptions = sortOptions.map((sortByoption) =>
@@ -74,22 +75,21 @@ class SortContainer extends React.Component {
         } = this.props;
 
         const { sort } = unbxdCore.getQueryParams();
-        let sortOn = null;
+        const decodedSort = sort ? decodeURI(sort) : '';
 
         if (
             unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
             unbxdCoreStatus === searchStatus.LOADING &&
-            sortState !== sort &&
+            sortState !== decodedSort &&
             prevProps.sort === sortState
         ) {
-            if (sort === undefined) {
+            if (decodedSort === undefined) {
                 this.setState({ sortBy: { value: '' } });
                 setSortConfiguration({
                     sortBy: ``
                 });
             } else {
-                const [field, order] = sort.split(' ');
-                sortOn = { field, order };
+                const [field, order] = decodedSort.split(' ');
                 const formattedSort = `${field}|${order}`;
                 const formattedSortByOptions = sortOptions.map((sortByoption) =>
                     getFormattedSort(sortByoption, this.state.sortBy)
