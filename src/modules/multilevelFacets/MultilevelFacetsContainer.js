@@ -10,19 +10,6 @@ import MultilevelFacetsWrapper from './MultilevelFacetsWrapper';
 import { productTypes } from '../../config';
 
 class MultilevelFacetsContainer extends React.PureComponent {
-    componentDidMount() {
-        const {
-            facetDepth,
-            facetLimit,
-            helpers: { setMultilevelFacetsConfiguration }
-        } = this.props;
-
-        setMultilevelFacetsConfiguration({
-            facetDepth,
-            facetLimit
-        });
-    }
-
     getMultilevelFacetsProps() {
         const {
             unbxdCore,

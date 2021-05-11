@@ -3,7 +3,6 @@ import setSearchBoxConfiguration from './setSearchBoxConfiguration';
 import setSpellCheckConfiguration from './setSpellCheckConfiguration';
 import setPageSizeConfiguration from './setPageSizeConfiguration';
 import setSortConfiguration from './setSortConfiguration';
-import setMultilevelFacetsConfiguration from './setMultilevelFacetsConfiguration';
 import setRangeFacetsConfiguration from './setRangeFacetsConfiguration';
 import setFacetsActionConfiguration from './setFacetsActionConfiguration';
 import setViewTypeConfiguration from './setViewTypeConfiguration';
@@ -24,7 +23,6 @@ export {
     setSpellCheckConfiguration,
     setPageSizeConfiguration,
     setSortConfiguration,
-    setMultilevelFacetsConfiguration,
     setRangeFacetsConfiguration,
     setFacetsActionConfiguration,
     setViewTypeConfiguration,
