@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.4...v1.0.5) (2021-05-11)
+
+
+### Bug Fixes
+
+* **build:** download build before semantic release ([edc1454](https://github.com/unbxd/react-search-JS-SDK/commit/edc1454c66d59864d60b89b1340c04e3137b9f12))
+
 ## [1.0.4](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.3...v1.0.4) (2021-05-11)
 
 
