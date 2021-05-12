@@ -19,7 +19,8 @@
         "semantic-release": "semantic-release",
         "test": "jest && codecov",
         "only-test": "jest",
-        "test:watch": "jest --watch"
+        "test:watch": "jest --watch",
+        "deploy-s3": "node s3Upload.js"
     },
     "release": {
         "branches": [
