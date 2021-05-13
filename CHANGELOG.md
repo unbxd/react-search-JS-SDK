@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.5...v1.0.6) (2021-05-13)
+
+
+### Bug Fixes
+
+* **accessibility:** add basic accessibility compliance ([aa8a362](https://github.com/unbxd/react-search-JS-SDK/commit/aa8a36203896da60c9ccde32e14d255f34d01135))
+
 ## [1.0.5](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.4...v1.0.5) (2021-05-11)
 
 
