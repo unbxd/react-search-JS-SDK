@@ -98,4 +98,16 @@ jobs:
                   path: ./public/dist
 
             - name: Run Semantic Release
+              id: semantic-release-step
               uses: cycjimmy/semantic-release-action@v2.5.3
+
+            - name: Configure AWS Credentials
+              uses: aws-actions/configure-aws-credentials@v1
+              with:
+                  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  aws-region: ${{ secrets.AWS_REGION }}
+
+            - name: Run S3 Upload
+              if: steps.semantic-release-step.outputs.new_release_published
+              run: yarn deploy-s3 ${{ steps.semantic-release-step.outputs.new_release_version }}

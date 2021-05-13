@@ -2,7 +2,7 @@
     "name": "@unbxd-ui/react-search-sdk",
     "version": "1.0.5",
     "description": "Unbxd React Search JS SDK",
-    "main": "public/dist/js/react-search-sdk.js",
+    "main": "public/dist/js/reactSearch.js",
     "files": [
         "public/dist"
     ],
@@ -19,7 +19,8 @@
         "semantic-release": "semantic-release",
         "test": "jest && codecov",
         "only-test": "jest",
-        "test:watch": "jest --watch"
+        "test:watch": "jest --watch",
+        "deploy-s3": "node s3Upload.js"
     },
     "release": {
         "branches": [
