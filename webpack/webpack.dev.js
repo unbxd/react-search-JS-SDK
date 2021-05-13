@@ -8,7 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: {
         app: Path.resolve(__dirname, '../demo/js'),
-        'react-search-sdk': Path.resolve(__dirname, '../src/index.js')
+        reactSearch: Path.resolve(__dirname, '../src/index.js')
     },
     mode: 'development',
     devtool: 'inline-source-map',
