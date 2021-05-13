@@ -4,7 +4,7 @@ import { MultilevelFacets } from '@unbxd-ui/react-search-sdk';
 import { scrollTop } from '../utils';
 
 export const FacetItemComponent = ({ itemData, onClick }) => {
-    const { name, count, level, isSelected } = itemData;
+    const { name, count, level, isSelected, fieldName } = itemData;
     const handleClick = () => {
         onClick(itemData);
     };
@@ -15,6 +15,10 @@ export const FacetItemComponent = ({ itemData, onClick }) => {
             }`}
             onClick={handleClick}
             data-testid="UNX_multilevelFacet__facetItem"
+            data-facet-name={fieldName}
+            data-id={name}
+            tabIndex={0}
+            role={'button'}
         >
             <div className="-checkbox" />
             <div className="-label">{name}</div>

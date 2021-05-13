@@ -18,6 +18,8 @@ const SpellCheckItem = ({ itemData, currentQuery, onClick }) => {
                     className="-suggestion"
                     onClick={handleClick}
                     data-testid="UNX_spellCheck"
+                    tabIndex={0}
+                    role={'button'}
                 >
                     {' '}
                     {suggestion}

@@ -290,7 +290,9 @@ Array [
           value="*"
         />
         <button
+          aria-label="search"
           className="UNX-searchbox__button"
+          tabIndex={0}
           type="submit"
         >
           Search

@@ -73,7 +73,7 @@ class ListProductCard extends React.Component {
                     className={`UNX-product-card UNX-list-card`}
                     onClick={handleClick}
                 >
-                    <img className="-image" src={imageUrl} />
+                    <img className="-image" src={imageUrl} alt={title} />
                 </a>
                 <div className={'-details'}>
                     <div className="UNX-swatch__container">

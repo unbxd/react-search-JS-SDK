@@ -5,6 +5,7 @@ const PageSizeDropdown = ({ size, sizeOptions, onPageSizeClick }) => {
     return (
         <select
             name="pageSize"
+            id="UNX-pageSize__dropdown"
             className="UNX-pageSize__dropdown"
             data-testid="UNX-pageSize__dropdown"
             value={size}

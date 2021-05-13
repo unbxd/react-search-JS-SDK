@@ -27,7 +27,8 @@ class Input extends React.PureComponent {
             clearable,
             clearComponent,
             onClear,
-            placeholder
+            placeholder,
+            ariaLabel
         } = this.props;
         const showClear = value && value.length > 0 && clearable;
 
@@ -40,6 +41,7 @@ class Input extends React.PureComponent {
                     onChange={onChange ? onChange : null}
                     className={className}
                     ref={this.inputRef}
+                    aria-label={ariaLabel}
                 />
                 {showClear &&
                     (clearComponent ? (
@@ -76,7 +78,8 @@ Input.propTypes = {
     className: PropTypes.string,
     clearable: PropTypes.bool,
     autoFocus: PropTypes.bool,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    ariaLabel: PropTypes.string
 };
 
 export default Input;

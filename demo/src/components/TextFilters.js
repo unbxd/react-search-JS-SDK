@@ -9,7 +9,7 @@ export const transform = function () {
 };
 
 export const FacetItemComponent = ({ itemData, onClick }) => {
-    const { name, count, isSelected } = itemData;
+    const { name, count, isSelected, facetName } = itemData;
     const handleClick = () => {
         onClick(itemData);
     };
@@ -19,6 +19,10 @@ export const FacetItemComponent = ({ itemData, onClick }) => {
             className={`UNX-facet__item ${isSelected ? '-selected' : ''}`}
             onClick={handleClick}
             data-testid="UNX_textFacet__facetItem"
+            data-facet-name={facetName}
+            data-id={name}
+            tabIndex={0}
+            role={'button'}
         >
             <div className="-checkbox" />
             <div className="-label">{name}</div>

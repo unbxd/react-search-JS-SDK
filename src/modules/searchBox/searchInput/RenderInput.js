@@ -46,6 +46,7 @@ class RenderInput extends React.Component {
                 onClear={onSearchBoxClear}
                 clearComponent={clearComponent}
                 placeholder={placeholder}
+                aria-label="searchBox input"
             />
         );
     }

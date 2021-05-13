@@ -16,6 +16,10 @@ const FacetItem = ({ itemData, onClick, priceUnit }) => {
             onClick={handleClick}
             className={`UNX-facet__item ${isSelected ? '-selected' : ''}`}
             data-testid="UNX_rangeFacet__facetItem"
+            data-facet-name={facetName}
+            data-id={`[${fromDataId}-${toDataId}]`}
+            tabIndex={0}
+            role={'button'}
         >
             {priceUnit} {fromName} - {priceUnit} {ToName} - {count}
         </div>

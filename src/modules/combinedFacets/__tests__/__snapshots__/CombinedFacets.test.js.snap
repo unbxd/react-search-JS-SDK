@@ -20,8 +20,12 @@ Array [
         >
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Keen"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Keen
              - 
@@ -29,8 +33,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Scarpa"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Scarpa
              - 
@@ -38,8 +46,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Salomon"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Salomon
              - 
@@ -47,8 +59,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="The North Face"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             The North Face
              - 
@@ -56,8 +72,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Merrell"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Merrell
              - 
@@ -65,8 +85,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Vasque"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Vasque
              - 
@@ -74,8 +98,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Burke and Wills"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Burke and Wills
              - 
@@ -83,8 +111,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Vango"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Vango
              - 
@@ -92,8 +124,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Sahara Swags"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Sahara Swags
              - 
@@ -101,8 +137,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Mammut"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Mammut
              - 
@@ -110,8 +150,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Patagonia"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Patagonia
              - 
@@ -119,8 +163,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Rainbird"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Rainbird
              - 
@@ -128,8 +176,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Topo Athletic"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Topo Athletic
              - 
@@ -137,8 +189,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Lock Laces"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Lock Laces
              - 
@@ -146,8 +202,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Oztrail"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Oztrail
              - 
@@ -155,8 +215,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Sea to Summit"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Sea to Summit
              - 
@@ -164,8 +228,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Teva"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Teva
              - 
@@ -173,8 +241,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Under Armour"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Under Armour
              - 
@@ -182,8 +254,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Arc'teryx"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Arc'teryx
              - 
@@ -191,8 +267,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Bridgedale"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Bridgedale
              - 
@@ -200,8 +280,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Fjallraven"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Fjallraven
              - 
@@ -209,8 +293,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="HI-TEC"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             HI-TEC
              - 
@@ -218,8 +306,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Petzl"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Petzl
              - 
@@ -227,8 +319,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="SBR"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             SBR
              - 
@@ -236,8 +332,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Wilderness Equipment"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Wilderness Equipment
              - 
@@ -245,8 +345,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Boot Bananas"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Boot Bananas
              - 
@@ -254,8 +358,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="CamelBak"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             CamelBak
              - 
@@ -263,8 +371,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Dakine"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Dakine
              - 
@@ -272,8 +384,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Eclectic Products"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Eclectic Products
              - 
@@ -281,8 +397,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Gear Aid"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Gear Aid
              - 
@@ -290,8 +410,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Grangers"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Grangers
              - 
@@ -299,8 +423,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Jack Wolfskin"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Jack Wolfskin
              - 
@@ -308,8 +436,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Kuhl"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Kuhl
              - 
@@ -317,8 +449,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Metolius"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Metolius
              - 
@@ -326,8 +462,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Osprey"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Osprey
              - 
@@ -335,8 +475,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="brand_uFilter"
+            data-id="Yakima"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Yakima
              - 
@@ -361,16 +505,22 @@ Array [
         >
           <button
             className="UNX-facet__item -l1 -selected"
+            data-id="All"
             data-testid="UNX_multilevelFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             All
              
           </button>
           <button
             className="UNX-facet__item -l2 "
+            data-id="All Products"
             data-testid="UNX_multilevelFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             All Products
              
@@ -381,8 +531,11 @@ Array [
           </button>
           <button
             className="UNX-facet__item -l2 "
+            data-id="Camp & Hike"
             data-testid="UNX_multilevelFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Camp & Hike
              
@@ -411,8 +564,12 @@ Array [
         >
           <button
             className="UNX-facet__item "
+            data-facet-name="Best_Use_uFilter"
+            data-id="Hiking"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Hiking
              - 
@@ -420,8 +577,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="Best_Use_uFilter"
+            data-id="Camping"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Camping
              - 
@@ -429,8 +590,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="Best_Use_uFilter"
+            data-id="Mountaineering"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Mountaineering
              - 
@@ -438,8 +603,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="Best_Use_uFilter"
+            data-id="Everyday"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Everyday
              - 
@@ -447,8 +616,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="Best_Use_uFilter"
+            data-id="Multisport"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Multisport
              - 
@@ -456,8 +629,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="Best_Use_uFilter"
+            data-id="Travelling"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Travelling
              - 
@@ -465,8 +642,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="Best_Use_uFilter"
+            data-id="Running"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Running
              - 
@@ -474,8 +655,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="Best_Use_uFilter"
+            data-id="Climbing"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Climbing
              - 
@@ -483,8 +668,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="Best_Use_uFilter"
+            data-id="Snow"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Snow
              - 
@@ -492,8 +681,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="Best_Use_uFilter"
+            data-id="Tactical"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Tactical
              - 
@@ -522,8 +715,12 @@ Array [
         >
           <div
             className="UNX-facet__item "
+            data-facet-name="price"
+            data-id="[0-100]"
             data-testid="UNX_rangeFacet__facetItem"
             onClick={[Function]}
+            role="button"
+            tabIndex={0}
           >
             $
              
@@ -537,8 +734,12 @@ Array [
           </div>
           <div
             className="UNX-facet__item "
+            data-facet-name="price"
+            data-id="[100-200]"
             data-testid="UNX_rangeFacet__facetItem"
             onClick={[Function]}
+            role="button"
+            tabIndex={0}
           >
             $
              
@@ -552,8 +753,12 @@ Array [
           </div>
           <div
             className="UNX-facet__item -selected"
+            data-facet-name="price"
+            data-id="[200-300]"
             data-testid="UNX_rangeFacet__facetItem"
             onClick={[Function]}
+            role="button"
+            tabIndex={0}
           >
             $
              
@@ -567,8 +772,12 @@ Array [
           </div>
           <div
             className="UNX-facet__item "
+            data-facet-name="price"
+            data-id="[300-400]"
             data-testid="UNX_rangeFacet__facetItem"
             onClick={[Function]}
+            role="button"
+            tabIndex={0}
           >
             $
              
@@ -582,8 +791,12 @@ Array [
           </div>
           <div
             className="UNX-facet__item "
+            data-facet-name="price"
+            data-id="[400-600]"
             data-testid="UNX_rangeFacet__facetItem"
             onClick={[Function]}
+            role="button"
+            tabIndex={0}
           >
             $
              
@@ -597,8 +810,12 @@ Array [
           </div>
           <div
             className="UNX-facet__item "
+            data-facet-name="price"
+            data-id="[600-700]"
             data-testid="UNX_rangeFacet__facetItem"
             onClick={[Function]}
+            role="button"
+            tabIndex={0}
           >
             $
              
@@ -612,8 +829,12 @@ Array [
           </div>
           <div
             className="UNX-facet__item "
+            data-facet-name="price"
+            data-id="[700-900]"
             data-testid="UNX_rangeFacet__facetItem"
             onClick={[Function]}
+            role="button"
+            tabIndex={0}
           >
             $
              
@@ -627,8 +848,12 @@ Array [
           </div>
           <div
             className="UNX-facet__item "
+            data-facet-name="price"
+            data-id="[900-1000]"
             data-testid="UNX_rangeFacet__facetItem"
             onClick={[Function]}
+            role="button"
+            tabIndex={0}
           >
             $
              
@@ -642,8 +867,12 @@ Array [
           </div>
           <div
             className="UNX-facet__item "
+            data-facet-name="price"
+            data-id="[1000-1100]"
             data-testid="UNX_rangeFacet__facetItem"
             onClick={[Function]}
+            role="button"
+            tabIndex={0}
           >
             $
              
@@ -681,8 +910,11 @@ Array [
         >
           <button
             className="UNX-facet__item -l1 "
+            data-id="All Products"
             data-testid="UNX_multilevelFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             All Products
              
@@ -693,8 +925,11 @@ Array [
           </button>
           <button
             className="UNX-facet__item -l1 "
+            data-id="Camp & Hike"
             data-testid="UNX_multilevelFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Camp & Hike
              
@@ -723,8 +958,12 @@ Array [
         >
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US9"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US9
              - 
@@ -732,8 +971,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US9.5"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US9.5
              - 
@@ -741,8 +984,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US10"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US10
              - 
@@ -750,8 +997,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US8.5"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US8.5
              - 
@@ -759,8 +1010,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US8"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US8
              - 
@@ -768,8 +1023,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US10.5"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US10.5
              - 
@@ -777,8 +1036,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US12"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US12
              - 
@@ -786,8 +1049,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US13"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US13
              - 
@@ -795,8 +1062,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US11.5"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US11.5
              - 
@@ -804,8 +1075,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US7.5"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US7.5
              - 
@@ -813,8 +1088,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US11"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US11
              - 
@@ -822,8 +1101,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US7"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US7
              - 
@@ -831,8 +1114,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US6"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US6
              - 
@@ -840,8 +1127,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US6.5"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US6.5
              - 
@@ -849,8 +1140,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="L"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             L
              - 
@@ -858,8 +1153,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="M"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             M
              - 
@@ -867,8 +1166,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="XL"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             XL
              - 
@@ -876,8 +1179,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="S"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             S
              - 
@@ -885,8 +1192,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="Single"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Single
              - 
@@ -894,8 +1205,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US12.5"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US12.5
              - 
@@ -903,8 +1218,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US13 Kids"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US13 Kids
              - 
@@ -912,8 +1231,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US5"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US5
              - 
@@ -921,8 +1244,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="XS"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             XS
              - 
@@ -930,8 +1257,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="Double"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Double
              - 
@@ -939,8 +1270,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US1"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US1
              - 
@@ -948,8 +1283,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US12 Kids"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US12 Kids
              - 
@@ -957,8 +1296,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US2"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US2
              - 
@@ -966,8 +1309,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US3"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US3
              - 
@@ -975,8 +1322,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US4"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US4
              - 
@@ -984,8 +1335,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="XXL"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             XXL
              - 
@@ -993,8 +1348,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="46"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             46
              - 
@@ -1002,8 +1361,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="48"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             48
              - 
@@ -1011,8 +1374,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="50"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             50
              - 
@@ -1020,8 +1387,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="52"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             52
              - 
@@ -1029,8 +1400,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="54"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             54
              - 
@@ -1038,8 +1413,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="XXXL"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             XXXL
              - 
@@ -1047,8 +1426,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="32"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             32
              - 
@@ -1056,8 +1439,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="34"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             34
              - 
@@ -1065,8 +1452,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="36"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             36
              - 
@@ -1074,8 +1465,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="6"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             6
              - 
@@ -1083,8 +1478,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US13.5"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US13.5
              - 
@@ -1092,8 +1491,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Size_uFilter"
+            data-id="US14"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             US14
              - 
@@ -1119,8 +1522,12 @@ Array [
         >
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Bag_Type_uFilter"
+            data-id="Climbing"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Climbing
              - 
@@ -1128,8 +1535,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Bag_Type_uFilter"
+            data-id="Daypacks"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Daypacks
              - 
@@ -1137,8 +1548,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Bag_Type_uFilter"
+            data-id="Duffel Bags"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Duffel Bags
              - 
@@ -1146,8 +1561,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Bag_Type_uFilter"
+            data-id="Hiking Packs"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Hiking Packs
              - 
@@ -1155,8 +1574,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Bag_Type_uFilter"
+            data-id="Wheeled Luggage"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Wheeled Luggage
              - 
@@ -1182,8 +1605,12 @@ Array [
         >
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Fitment_uFilter"
+            data-id="Regular"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Regular
              - 
@@ -1191,8 +1618,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Fitment_uFilter"
+            data-id="Slim"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Slim
              - 
@@ -1200,8 +1631,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Fitment_uFilter"
+            data-id="Wide"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Wide
              - 
@@ -1227,8 +1662,12 @@ Array [
         >
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Swag_Type_uFilter"
+            data-id="Dome"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Dome
              - 
@@ -1236,8 +1675,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Swag_Type_uFilter"
+            data-id="Traditional"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Traditional
              - 
@@ -1263,8 +1706,12 @@ Array [
         >
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Capacity_uFilter"
+            data-id="3 Person"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             3 Person
              - 
@@ -1272,8 +1719,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Capacity_uFilter"
+            data-id="2 Person"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             2 Person
              - 
@@ -1281,8 +1732,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Capacity_uFilter"
+            data-id="4 Person"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             4 Person
              - 
@@ -1308,8 +1763,12 @@ Array [
         >
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Season_uFilter"
+            data-id="3 Season"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             3 Season
              - 
@@ -1317,8 +1776,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Season_uFilter"
+            data-id="4 Season"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             4 Season
              - 
@@ -1344,8 +1807,12 @@ Array [
         >
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Pant_Type_uFilter"
+            data-id="Waterproof"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Waterproof
              - 
@@ -1353,8 +1820,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Pant_Type_uFilter"
+            data-id="Hiking"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Hiking
              - 
@@ -1362,8 +1833,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Pant_Type_uFilter"
+            data-id="Softshell"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Softshell
              - 
@@ -1389,8 +1864,12 @@ Array [
         >
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Gender_uFilter"
+            data-id="Men"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Men
              - 
@@ -1398,8 +1877,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Gender_uFilter"
+            data-id="Women"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Women
              - 
@@ -1407,8 +1890,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Gender_uFilter"
+            data-id="Unisex"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Unisex
              - 
@@ -1416,8 +1903,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Gender_uFilter"
+            data-id="Kids"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Kids
              - 
@@ -1443,8 +1934,12 @@ Array [
         >
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Colour_uFilter"
+            data-id="Black"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Black
              - 
@@ -1452,8 +1947,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Colour_uFilter"
+            data-id="Brown"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Brown
              - 
@@ -1461,8 +1960,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Colour_uFilter"
+            data-id="Green"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Green
              - 
@@ -1470,8 +1973,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Colour_uFilter"
+            data-id="Grey"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Grey
              - 
@@ -1479,8 +1986,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Colour_uFilter"
+            data-id="Blue"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Blue
              - 
@@ -1488,8 +1999,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Colour_uFilter"
+            data-id="Red"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Red
              - 
@@ -1497,8 +2012,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Colour_uFilter"
+            data-id="Orange"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Orange
              - 
@@ -1506,8 +2025,12 @@ Array [
           </button>
           <button
             className="UNX-facet__item "
+            data-facet-name="v_Colour_uFilter"
+            data-id="Yellow"
             data-testid="UNX_textFacet__facetItem"
             onClick={[Function]}
+            tabIndex={0}
+            type="button"
           >
             Yellow
              - 
@@ -1533,6 +2056,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Vasque Breeze All-Terrain GTX Mens Hiking Boots - Brown Olive/Bossa Nova"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/V7040W.jpg"
             />
@@ -1570,6 +2094,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/V7023W.jpg"
             />
@@ -1607,6 +2132,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Scarpa Phantom 6000 Unisex Waterproof Mountaineering Boots"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/SCA40017-BlackOrange.jpg"
             />
@@ -1644,6 +2170,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/SCA40013.jpg"
             />
@@ -1681,6 +2208,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Scarpa Terra Goretex Unisex Waterproof Hiking Boots - Brown"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/SCA00108.jpg"
             />
@@ -1718,6 +2246,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Scarpa Delta Leather Fly Mens Waterproof Hiking Boots - T.Di Moro"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/SCA00090.jpg"
             />
@@ -1755,6 +2284,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Scarpa Delta Womens Goretex Waterproof Leather Hiking Boots"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/SCA00065.jpg"
             />
@@ -1792,6 +2322,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Salomon Quest Prime GTX Womens Hiking Boots - Ebony/Black/Icy Morn"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/411299.jpg"
             />
@@ -1829,6 +2360,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Salomon OUTblast TS CSWP Mens Hiking Boots - Black/Black/Black"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/409223.jpg"
             />
@@ -1866,6 +2398,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Salomon Quest Prime Goretex Mens Waterproof Hiking Boots - Phantom/Black/Quiet Shade"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/404637.jpg"
             />
@@ -1911,7 +2444,9 @@ Array [
           value="boots"
         />
         <button
+          aria-label="search"
           className="UNX-searchbox__button"
+          tabIndex={0}
           type="submit"
         >
           Search
