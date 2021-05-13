@@ -1,6 +1,6 @@
 {
     "name": "@unbxd-ui/react-search-sdk",
-    "version": "1.0.5",
+    "version": "1.0.6-feature-s3-deploy.1",
     "description": "Unbxd React Search JS SDK",
     "main": "public/dist/js/reactSearch.js",
     "files": [
