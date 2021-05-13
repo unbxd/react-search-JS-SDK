@@ -121,6 +121,11 @@ class GenerateFacets extends React.Component {
                                             className="-collapse-icon"
                                             data-unx_name={facetName}
                                             onClick={this.handleCollapseToggle}
+                                            tabIndex={0}
+                                            role={'button'}
+                                            aria-label={`${
+                                                isOpen ? 'collapse' : 'open'
+                                            } facets`}
                                         />
                                     )}
                                 </div>

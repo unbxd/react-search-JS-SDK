@@ -58,7 +58,7 @@ class GridProductCard extends React.Component {
                 );
             });
         }
-        
+
         const handleClick = () => {
             onClick(itemData);
         };
@@ -73,7 +73,7 @@ class GridProductCard extends React.Component {
                     className={`UNX-product-card UNX-grid-card`}
                     onClick={handleClick}
                 >
-                    <img className="-image" src={imageUrl} />
+                    <img className="-image" src={imageUrl} alt={title} />
                 </a>
 
                 <div className="UNX-swatch__container">

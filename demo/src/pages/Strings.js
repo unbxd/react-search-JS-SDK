@@ -26,7 +26,7 @@ const Strings = () => {
         setProductType('CATEGORY');
     }, []);
     return (
-        <div className="UNX-search__container">
+        <main className="UNX-search__container">
             <div className="UNX-searchMeta__container">
                 <Crumbs />
                 <div className="UNX-searchMeta__more">
@@ -60,7 +60,7 @@ const Strings = () => {
                     <Paginator />
                 </div>
             </div>
-        </div>
+        </main>
     );
 };
 

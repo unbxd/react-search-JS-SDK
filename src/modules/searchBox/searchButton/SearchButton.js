@@ -10,7 +10,11 @@ const SearchButton = (props) => {
     return submitComponent ? (
         cloneElement(submitComponent, { onSearchBoxSubmit })
     ) : (
-        <Button type="submit" className="UNX-searchbox__button">
+        <Button
+            type="submit"
+            className="UNX-searchbox__button"
+            aria-label="search"
+        >
             Search
         </Button>
     );

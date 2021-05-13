@@ -41,6 +41,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Vasque Breeze All-Terrain GTX Mens Hiking Boots - Brown Olive/Bossa Nova"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/V7040W.jpg"
             />
@@ -78,6 +79,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Vasque Breeze All-Terrain GTX Womens Hiking Boots - Gargyle"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/V7023W.jpg"
             />
@@ -115,6 +117,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Scarpa Phantom 6000 Unisex Waterproof Mountaineering Boots"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/SCA40017-BlackOrange.jpg"
             />
@@ -152,6 +155,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/SCA40013.jpg"
             />
@@ -189,6 +193,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Scarpa Terra Goretex Unisex Waterproof Hiking Boots - Brown"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/SCA00108.jpg"
             />
@@ -226,6 +231,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Scarpa Delta Leather Fly Mens Waterproof Hiking Boots - T.Di Moro"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/SCA00090.jpg"
             />
@@ -263,6 +269,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Scarpa Delta Womens Goretex Waterproof Leather Hiking Boots"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/SCA00065.jpg"
             />
@@ -300,6 +307,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Salomon Quest Prime GTX Womens Hiking Boots - Ebony/Black/Icy Morn"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/411299.jpg"
             />
@@ -337,6 +345,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Salomon OUTblast TS CSWP Mens Hiking Boots - Black/Black/Black"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/409223.jpg"
             />
@@ -374,6 +383,7 @@ Array [
             onClick={[Function]}
           >
             <img
+              alt="Salomon Quest Prime Goretex Mens Waterproof Hiking Boots - Phantom/Black/Quiet Shade"
               className="-image"
               src="https://www.wildearth.com.au/assets/full/404637.jpg"
             />
@@ -419,7 +429,9 @@ Array [
           value="boots"
         />
         <button
+          aria-label="search"
           className="UNX-searchbox__button"
+          tabIndex={0}
           type="submit"
         >
           Search

@@ -100,6 +100,10 @@ export const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
             className={`UNX-facet__item ${isSelected ? '-selected' : ''}`}
             onClick={handleClick}
             data-testid="UNX_rangeFacet__facetItem"
+            data-facet-name={facetName}
+            data-id={`[${fromDataId}-${toDataId}]`}
+            tabIndex={0}
+            role={'button'}
         >
             <div className="-checkbox" />
             <div className="-label">

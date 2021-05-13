@@ -6,6 +6,9 @@ const ViewMore = ({ facetName, toggleViewLess, viewLess, ...props }) => {
             className="view-More"
             data-unx_name={facetName}
             onClick={toggleViewLess}
+            aria-label="view less facets"
+            tabIndex={0}
+            role={'button'}
         >
             View Less
         </div>
@@ -14,6 +17,9 @@ const ViewMore = ({ facetName, toggleViewLess, viewLess, ...props }) => {
             className="view-More"
             data-unx_name={facetName}
             onClick={toggleViewLess}
+            aria-label="view more facets"
+            tabIndex={0}
+            role={'button'}
         >
             View More
         </div>

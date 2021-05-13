@@ -5,6 +5,7 @@ const SortByDropdown = ({ sortBy, sortByOptions, onSortClick }) => {
     return (
         <select
             name="sortby"
+            id="UNX-sortby__dropdown"
             className="UNX-sortby__dropdown"
             value={sortBy.value}
             onChange={onSortClick}

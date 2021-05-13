@@ -113,6 +113,11 @@ class GenerateFacets extends React.Component {
                                         className="-collapse-icon"
                                         data-unx_name={filterField}
                                         onClick={this.handleCollapseToggle}
+                                        tabIndex={0}
+                                        role={'button'}
+                                        aria-label={`${
+                                            isOpen ? 'collapse' : 'open'
+                                        } facets`}
                                     />
                                 )}
                             </div>
@@ -125,6 +130,7 @@ class GenerateFacets extends React.Component {
                                         name={filterField}
                                         onChange={this.handleFilterChange}
                                         data-testid="UNX_searchFacets"
+                                        ariaLabel={`${displayName} facets filter`}
                                     />
                                 </div>
                             )}

@@ -15,6 +15,8 @@ export const SpellCheckItemComponent = ({ itemData, onClick }) => {
                 className="-suggestion"
                 onClick={handleClick}
                 data-testid="UNX_spellCheck"
+                tabIndex={0}
+                role={'button'}
             >
                 {suggestion}
             </span>

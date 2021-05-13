@@ -9,7 +9,11 @@ import { categoryLinks } from '../config';
 
 export const SearchButton = ({ onSearchBoxSubmit }) => {
     return (
-        <button onClick={onSearchBoxSubmit} className="UNX-searchbox__button" />
+        <button
+            onClick={onSearchBoxSubmit}
+            className="UNX-searchbox__button"
+            aria-label="Search"
+        />
     );
 };
 
@@ -81,7 +85,7 @@ const SearchBar = (props) => {
 
     return (
         <div className="UNX-header__container">
-            <a href="/">
+            <a href="/" aria-label="Unbxd">
                 <span className="UNX-header__logo" />
             </a>
             <CategoryLinks
@@ -106,6 +110,7 @@ const SearchBar = (props) => {
                     options={languageOptions}
                     className="UNX-language__dropdown UNX-dropdown-container"
                     classNamePrefix="UNX-dropdown"
+                    aria-label="language options"
                 />
                 <i className="UNX-cart__icon fa fa-shopping-bag fa-2x" />
             </div>

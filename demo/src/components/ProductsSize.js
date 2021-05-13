@@ -9,7 +9,6 @@ export const sizeOptions = [
     { id: 20, value: '20', label: '20' }
 ];
 
-
 export const PageSizeItemComponent = ({ itemData, onClick }) => {
     const { value, isSelected } = itemData;
     const handleClick = () => {
@@ -44,7 +43,13 @@ export const PageSizeItemDropdownComponent = ({
     };
     return (
         <div className="UNX-pageSize__container">
-            <span className="-label">Products per page</span>
+            <label
+                className="-label"
+                id="UNX-pageSize__dropdown-label"
+                htmlFor="UNX-pageSize__dropdown-input"
+            >
+                Products per page
+            </label>
             <Select
                 defaultValue={selectedOption}
                 options={sizeOptions}
@@ -52,10 +57,18 @@ export const PageSizeItemDropdownComponent = ({
                 onChange={handleChange}
                 className="UNX-pageSize__dropdown UNX-dropdown-container"
                 classNamePrefix="UNX-dropdown"
+                aria-labelledby="UNX-pageSize__dropdown-label"
+                inputId="UNX-pageSize__dropdown-input"
             />
         </div>
     );
 };
+
+const label = (
+    <div className="-label" htmlFor={'UNX-pageSize__dropdown'}>
+        Sort by
+    </div>
+);
 
 // const ProductsSize = () => {
 //     return (
