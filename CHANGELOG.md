@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.6...v1.0.7) (2021-05-13)
+
+
+### Bug Fixes
+
+* **s3:** test s3 deploy ([b3f9516](https://github.com/unbxd/react-search-JS-SDK/commit/b3f9516442f5c3876f0990ebff8dfec640503e03))
+
 ## [1.0.6](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.5...v1.0.6) (2021-05-13)
 
 
