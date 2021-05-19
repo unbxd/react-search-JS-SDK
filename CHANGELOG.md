@@ -1,3 +1,10 @@
+## [1.0.8-feature-products-processing.1](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.7...v1.0.8-feature-products-processing.1) (2021-05-19)
+
+
+### Bug Fixes
+
+* **products:** refactor product values processing ([2f6dab4](https://github.com/unbxd/react-search-JS-SDK/commit/2f6dab487375a97199880a656e917fdbdfd7dc97))
+
 ## [1.0.7](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.6...v1.0.7) (2021-05-13)
 
 
