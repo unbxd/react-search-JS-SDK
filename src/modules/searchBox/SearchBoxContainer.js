@@ -93,7 +93,13 @@ class SearchBoxContainer extends React.PureComponent {
     }
 
     componentDidUpdate(prevProps) {
-        const { unbxdCore, unbxdCoreStatus, query, productType } = this.props;
+        const {
+            unbxdCore,
+            unbxdCoreStatus,
+            query,
+            productType,
+            defaultSearch
+        } = this.props;
         const { q: currentQuery } = unbxdCore.getQueryParams();
         if (
             unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
@@ -104,6 +110,20 @@ class SearchBoxContainer extends React.PureComponent {
             productType === productTypes.SEARCH
         ) {
             this.setState({ query: currentQuery });
+        }
+
+        if (
+            defaultSearch !== currentQuery &&
+            typeof defaultSearch === 'string' &&
+            unbxdCoreStatus !== searchStatus.LOADING &&
+            defaultSearch.length > 0 &&
+            currentQuery === undefined
+        ) {
+            const {
+                helpers: { setSearchBoxConfiguration }
+            } = this.props;
+            this.setState({ query: defaultSearch });
+            setSearchBoxConfiguration({ query: defaultSearch });
         }
     }
 
