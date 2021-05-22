@@ -1,3 +1,11 @@
+## [1.0.8-feature-products-processing.2](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.8-feature-products-processing.1...v1.0.8-feature-products-processing.2) (2021-05-22)
+
+
+### Bug Fixes
+
+* **searchbox:** handle default search query for demos ([a537950](https://github.com/unbxd/react-search-JS-SDK/commit/a53795005498637e005499b60e245f551bc0ebc4))
+* **selected facets:** group text and range facets under a common container ([31e379a](https://github.com/unbxd/react-search-JS-SDK/commit/31e379a7bb49d3428967dda10dd317db18e8b220))
+
 ## [1.0.8-feature-products-processing.1](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.7...v1.0.8-feature-products-processing.1) (2021-05-19)
 
 
