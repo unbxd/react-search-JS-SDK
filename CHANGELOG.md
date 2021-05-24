@@ -1,3 +1,10 @@
+## [1.0.8-feature-products-processing.3](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.8-feature-products-processing.2...v1.0.8-feature-products-processing.3) (2021-05-24)
+
+
+### Bug Fixes
+
+* **unbxdsearchwrapper:** return the error ui only in case of errors ([374af02](https://github.com/unbxd/react-search-JS-SDK/commit/374af02ba8d5fabc835198339f603584c8bc8229))
+
 ## [1.0.8-feature-products-processing.2](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.8-feature-products-processing.1...v1.0.8-feature-products-processing.2) (2021-05-22)
 
 
