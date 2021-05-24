@@ -1,3 +1,25 @@
+## [1.0.8-feature-products-processing.3](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.8-feature-products-processing.2...v1.0.8-feature-products-processing.3) (2021-05-24)
+
+
+### Bug Fixes
+
+* **unbxdsearchwrapper:** return the error ui only in case of errors ([374af02](https://github.com/unbxd/react-search-JS-SDK/commit/374af02ba8d5fabc835198339f603584c8bc8229))
+
+## [1.0.8-feature-products-processing.2](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.8-feature-products-processing.1...v1.0.8-feature-products-processing.2) (2021-05-22)
+
+
+### Bug Fixes
+
+* **searchbox:** handle default search query for demos ([a537950](https://github.com/unbxd/react-search-JS-SDK/commit/a53795005498637e005499b60e245f551bc0ebc4))
+* **selected facets:** group text and range facets under a common container ([31e379a](https://github.com/unbxd/react-search-JS-SDK/commit/31e379a7bb49d3428967dda10dd317db18e8b220))
+
+## [1.0.8-feature-products-processing.1](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.7...v1.0.8-feature-products-processing.1) (2021-05-19)
+
+
+### Bug Fixes
+
+* **products:** refactor product values processing ([2f6dab4](https://github.com/unbxd/react-search-JS-SDK/commit/2f6dab487375a97199880a656e917fdbdfd7dc97))
+
 ## [1.0.7](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.6...v1.0.7) (2021-05-13)
 
 

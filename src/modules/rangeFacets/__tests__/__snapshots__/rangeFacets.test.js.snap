@@ -9,23 +9,27 @@ Array [
       className="UNX-selectedFacets__list"
     >
       <div
-        className="UNX-selectedFacets__item"
-        data-facet-name="price"
-        data-id="[200-300]"
-        onClick={[Function]}
-        role="button"
-        tabIndex={0}
+        className="UNX-selectedRangeFacets__list"
       >
-        <span>
-          $
-           
-          200
-           - 
-          $
-           
-          300
-        </span>
-         x
+        <div
+          className="UNX-selectedFacets__item"
+          data-facet-name="price"
+          data-id="[200-300]"
+          onClick={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <span>
+            $
+             
+            200
+             - 
+            $
+             
+            300
+          </span>
+           x
+        </div>
       </div>
     </div>
   </div>,

@@ -56,14 +56,6 @@
         .UNX-productCard__container {
             display: flex;
             flex-direction: row;
-
-            .UNX-product-card {
-                flex: 0.4;
-            }
-            .-details {
-                flex: 0.6;
-                min-width: 0;
-            }
         }
     }
 }
@@ -525,6 +517,12 @@
 .UNX-selectedFacets__container {
     display: flex;
     align-items: baseline;
+
+    .UNX-selectedTextFacets__list,
+    .UNX-selectedRangeFacets__list {
+        display: flex;
+        align-items: baseline;
+    }
 
     .-label {
         color: #333;

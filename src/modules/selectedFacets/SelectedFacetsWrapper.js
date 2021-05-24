@@ -26,7 +26,7 @@ const SelectedFacetsWrapper = (props) => {
                 ListItem={facetItemComponent || FacetItem}
                 idAttribute="dataId"
                 onClick={onTextFacetClick}
-                className="UNX-selectedFacets__list"
+                className="UNX-selectedTextFacets__list"
             />
         );
     }
@@ -38,7 +38,7 @@ const SelectedFacetsWrapper = (props) => {
                 ListItem={facetItemComponent || FacetItem}
                 idAttribute="facetName"
                 onClick={onRangeFacetClick}
-                className="UNX-selectedFacets__list"
+                className="UNX-selectedRangeFacets__list"
                 priceUnit={priceUnit}
             />
         );
@@ -54,8 +54,10 @@ const SelectedFacetsWrapper = (props) => {
     return (
         <div className="UNX-selectedFacets__container">
             {label || null}
-            {activeTextFacetsMarkup}
-            {activeRangeFacetsMarkup}
+            <div className="UNX-selectedFacets__list">
+                {activeTextFacetsMarkup}
+                {activeRangeFacetsMarkup}
+            </div>
         </div>
     );
 };

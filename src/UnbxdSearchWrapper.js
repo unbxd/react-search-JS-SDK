@@ -250,15 +250,18 @@ class UnbxdSearchWrapper extends Component {
         const { unbxdCoreStatus } = this.state;
         const { loaderComponent, errorComponent } = this.props;
 
+        if (unbxdCoreStatus === searchStatus.ERROR) {
+            return errorComponent ? (
+                cloneElement(errorComponent)
+            ) : (
+                <div className="UNX-mainError">Something went wrong...</div>
+            );
+        }
         return (
             <>
                 {unbxdCoreStatus === searchStatus.LOADING &&
                     loaderComponent &&
                     cloneElement(loaderComponent)}
-
-                {unbxdCoreStatus === searchStatus.ERROR &&
-                    errorComponent &&
-                    cloneElement(errorComponent)}
 
                 <AppContextProvider value={this.getProps()}>
                     {this.props.children}
