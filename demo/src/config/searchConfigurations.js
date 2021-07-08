@@ -21,28 +21,8 @@ const searchConfigurations = {
     facetMultiSelect: true,
     facetMultiSelectionMode: true,
     updateUrls: false,
-    variants: {
-        enabled: false,
-        count: 1,
-        attributes: [
-            'v_title',
-            'vId',
-            'imageUrl',
-            'v_RRP_Price',
-            'v_unbxd_price',
-            'productUrl'
-        ],
-        mapping: {},
-        groupBy: ''
-    },
     extraParams: {
-        version: 'V2',
-        // 'f.categoryPath.displayName': 'category',
-        // 'facet.multilevel': 'categoryPath',
-        'f.categoryPath.max.depth': '',
-        'f.categoryPath.facet.limit': ''
-        // "f.categoryPath.facet.version": "V2",
-        // 'category-filter': 'All Products',
+        version: 'V2'
     },
     facetMultilevel: true,
     facetDepth: 6,
