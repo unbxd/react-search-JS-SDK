@@ -3,6 +3,7 @@ const searchConfigurations = {
     siteKey: '',
     searchEndPoint: 'https://search.unbxd.io/',
     searchQueryParam: 'q',
+    browseQueryParam: 'p',
     productAttributes: ['title'],
     defaultFilters: null,
     spellCheck: {
@@ -13,13 +14,6 @@ const searchConfigurations = {
     facetMultiSelect: true,
     facetMultiSelectionMode: true,
     updateUrls: true,
-    variants: {
-        enabled: false,
-        count: 1,
-        attributes: [],
-        mapping: {},
-        groupBy: ''
-    },
     extraParams: {
         version: 'V2'
     },
