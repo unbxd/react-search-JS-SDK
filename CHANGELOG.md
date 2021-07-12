@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.8...v1.0.9) (2021-07-12)
+
+
+### Bug Fixes
+
+* **variants:** remove default variant config ([bd8061b](https://github.com/unbxd/react-search-JS-SDK/commit/bd8061bf8357406025e7daf50c175b2a3af5d4df))
+
 ## [1.0.8](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.7...v1.0.8) (2021-05-24)
 
 
