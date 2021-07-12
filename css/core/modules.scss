@@ -1,0 +1,239 @@
+/* SearchBox Begins*/
+.UNX-searchbox__container {
+    display: inline-block;
+    position: relative;
+}
+
+.UNX-searchbox__button {
+    @apply m-2;
+}
+
+.UNX-searchbox__clearIcon {
+    position: absolute;
+}
+
+/* SearchBox Ends*/
+
+/* Products Begins*/
+.UNX-products__list {
+    @apply grid gap-4;
+}
+
+.UNX-productCard__container {
+    .-details {
+        width: 100%;
+        display: inline-block;
+    }
+    .-image {
+        height: 200px;
+        width: 200px;
+    }
+
+    .-price {
+        .-strike {
+            text-decoration: line-through;
+        }
+    }
+}
+
+.UNX-swatch__list {
+    display: flex;
+
+    .-image {
+        height: 30px;
+        width: 30px;
+    }
+}
+
+.UNX-swatch__item {
+    @apply m-1;
+    cursor: pointer;
+
+    &.-selected {
+        @apply border-2 border-gray-600;
+    }
+}
+
+/* Products Ends*/
+
+/* Facets Begins*/
+.UNX-facet__item {
+    cursor: pointer;
+    text-overflow: ellipsis;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+
+    .-count {
+        margin-left: 5px;
+    }
+}
+
+.UNX-facet__element {
+    margin: 10px 0;
+
+    .-clear {
+        display: none;
+        font-size: 12px;
+        padding: 0;
+        margin-left: auto;
+    }
+
+    .-input {
+        border: 1px solid #a7a7a7;
+    }
+
+    .-l1 {
+        padding-left: 0;
+    }
+
+    .-l2 {
+        padding-left: 12px;
+    }
+
+    .-l3 {
+        padding-left: 24px;
+    }
+
+    .-l4 {
+        padding-left: 36px;
+    }
+}
+
+.UNX-facet__element.open {
+    .UNX-facet__list {
+        max-height: 500px;
+        overflow: auto;
+    }
+    .UNX-facet__list.UNX-facet__listShowLimited {
+        max-height: 100px;
+        overflow: auto;
+    }
+    .-clear {
+        display: block;
+    }
+
+    .-collapse-icon {
+        &:before {
+            content: '-';
+        }
+    }
+}
+
+.UNX-facet__list {
+    max-height: 0;
+    overflow: auto;
+}
+
+.UNX-facet__header {
+    font-size: 17px;
+
+    .-collapse-icon {
+        margin-left: 10px;
+        &:before {
+            content: '+';
+        }
+    }
+}
+
+/* Facets Ends*/
+
+/* Facet Actions Begins*/
+.UNX-facetActions__container {
+    .-apply {
+        margin-right: 5px;
+    }
+    .-clear {
+        margin-left: 5px;
+    }
+}
+/* Facet Actions Ends*/
+
+/* SpellCheck Actions Begins*/
+.UNX-spellCheck__item {
+    .-suggestion {
+        margin-left: 5px;
+        text-decoration: underline;
+    }
+}
+/* SpellCheck Actions Ends*/
+
+/* Pagination Actions Begins*/
+.UNX-pageNavigation__container {
+    cursor: pointer;
+}
+
+.UNX-pageNavigation__button {
+    margin: 0 5px;
+}
+/* Pagination Actions Ends*/
+
+/* Sort Actions Begins*/
+.UNX-sortby__container {
+    display: flex;
+}
+/* Sort Actions Ends*/
+
+/* PageSize Actions Begins*/
+.UNX-pageSize__container {
+    display: flex;
+}
+/* PageSize Actions Ends*/
+
+/* ProductsView Begins*/
+.UNX-viewTypes__list {
+    display: flex;
+}
+
+.UNX-viewType__option {
+    margin: 0 5px;
+}
+/* ProductsView Ends*/
+
+/* Breadcrumbs Begins*/
+.UNX-breadcrumbs__list {
+    display: flex;
+    cursor: pointer;
+}
+
+.UNX-breadcrumb__root,
+.UNX-breadcrumb__separator,
+.UNX-breadcrumbs-list-item {
+    margin: 0 2px;
+}
+/* Breadcrumbs Ends*/
+
+/* SelectedFacets Begins*/
+.UNX-selectedFacets__container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.UNX-selectedFacets__list {
+    display: flex;
+}
+
+.UNX-selectedFacets__item {
+    margin: 0 5px;
+}
+/* SelectedFacets Ends*/
+
+.UNX-loader__icon {
+    height: 100px;
+    width: 100px;
+    path {
+        fill: grey;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.-label {
+    margin-bottom: 0;
+}
