@@ -1573,10 +1573,10 @@
     "@types/webpack-sources" "*"
     source-map "^0.6.0"
 
-"@unbxd-ui/react-search-sdk@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@unbxd-ui/react-search-sdk/-/react-search-sdk-1.0.7.tgz#f1dc17783b62b0d97f2102ea183bb242087bba96"
-  integrity sha512-K9D5nifSwL0QGiJzpBk2JbLGsLowQtPP+KenW2zeKZy+UO8AnHoXEJX6gsKtJpll/CQXu7EMYuQqLJaHstCFFQ==
+"@unbxd-ui/react-search-sdk@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@unbxd-ui/react-search-sdk/-/react-search-sdk-1.0.8.tgz#f2cb156b741a31fb60e074751aecdd31fa036b8e"
+  integrity sha512-DrY3aK2OAddtFwWVVBN2RbIMD0uPz8g5q9EhTvXcm9cuCZu2TMpfkSKIkroO4Qz8AvFfWgfewcW0zA9Qym2M6Q==
   dependencies:
     "@babel/plugin-transform-runtime" "^7.12.10"
     "@semantic-release/changelog" "^5.0.1"
@@ -3053,18 +3053,10 @@ color-name@^1.0.0, color-name@~1.1.4:
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
 
-color-string@^1.5.2:
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/color-string/-/color-string-1.5.3.tgz#c9bbc5f01b58b5492f3d6857459cb6590ce204cc"
-  integrity sha512-dC2C5qeWoYkxki5UAXapdjqO672AM4vZuPGRQfO8b5HKuKGBbKWpITyDYN7TOFKvRW7kOgAn3746clDBMDJyQw==
-  dependencies:
-    color-name "^1.0.0"
-    simple-swizzle "^0.2.2"
-
-color-string@^1.5.4:
-  version "1.5.4"
-  resolved "https://registry.yarnpkg.com/color-string/-/color-string-1.5.4.tgz#dd51cd25cfee953d138fe4002372cc3d0e504cb6"
-  integrity sha512-57yF5yt8Xa3czSEW1jfQDE79Idk0+AkN/4KWad6tbdxUmAs3MvjxlWSWD4deYytcRfoZ9nhKyFl1kj5tBvidbw==
+color-string@^1.5.2, color-string@^1.5.4:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/color-string/-/color-string-1.5.5.tgz#65474a8f0e7439625f3d27a6a19d89fc45223014"
+  integrity sha512-jgIoum0OfQfq9Whcfc2z/VhCNcmQjWbey6qBX0vqt7YICflUmBCh9E9CiQD5GSJ+Uehixm3NUwHVhqUAWRivZg==
   dependencies:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
