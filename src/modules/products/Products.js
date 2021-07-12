@@ -48,12 +48,13 @@ Products.displayName = 'Products';
 Products.defaultProps = {
     perRow: 4,
     pageSize: 10,
-    variantsCount: 5,
+    variantsCount: 0,
     paginationType: 'FIXED_PAGINATION',
     heightDiffToTriggerNextPage: 300,
-    showVariants: false,
     showLoader: false,
-    productIdAttribute: 'uniqueId'
+    productIdAttribute: 'uniqueId',
+    groupBy: '',
+    variantAttributesMap: {}
 };
 
 Products.propTypes = {

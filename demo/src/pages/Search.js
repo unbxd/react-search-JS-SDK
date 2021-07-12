@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import UnbxdSearchWrapper from '@unbxd-ui/react-search-sdk';
+import { Route, useHistory, useLocation } from 'react-router-dom';
 import Strings from './Strings';
 import Balls from './Balls';
 import Accessories from './Accessories';
@@ -9,7 +10,6 @@ import { ProductTypeContext } from '../context';
 import { searchConfigurations } from '../config';
 import MobileModal from '../components/MobileModal';
 import SearchBar from '../components/SearchBar';
-import { Route, useHistory, useLocation } from 'react-router-dom';
 import { scrollTop } from '../utils';
 
 export const getCategoryId = () => {
@@ -38,7 +38,6 @@ const Search = () => {
     const { productType, setProductType } = useContext(ProductTypeContext);
     const [refreshId, setRefreshId] = useState(1);
     const [showFilters, setShowFilters] = useState(false);
-    const [] = useState('');
     const routeHistory = useHistory();
     const routeLocation = useLocation();
 

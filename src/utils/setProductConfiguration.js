@@ -12,10 +12,15 @@ function setProductConfiguration(config) {
     } = config;
 
     this.state.unbxdCore.setProductAttributes(requiredFields);
-    this.state.unbxdCore.setShowVariants(showVariants);
-    this.state.unbxdCore.setVariantsCount(variantsCount);
-    this.state.unbxdCore.setVariantAttributes(variantRequiredFields);
-    this.state.unbxdCore.setVariantsGroupBy(groupBy);
+    if (typeof showVariants === 'boolean')
+        this.state.unbxdCore.setShowVariants(showVariants);
+    if (showVariants === true) {
+        this.state.unbxdCore.setVariantsCount(variantsCount);
+        if (Object.keys(variantRequiredFields).length > 0)
+            this.state.unbxdCore.setVariantAttributes(variantRequiredFields);
+        if (groupBy.length > 0)
+            this.state.unbxdCore.setVariantsGroupBy(groupBy);
+    }
 
     if (
         paginationType === paginationTypes.INFINITE_SCROLL ||
