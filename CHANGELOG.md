@@ -1,3 +1,11 @@
+## [1.0.10](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.9...v1.0.10) (2021-09-17)
+
+
+### Bug Fixes
+
+* **misc:** misc updates ([84d7270](https://github.com/unbxd/react-search-JS-SDK/commit/84d7270f15a7ea537e0875a7e90c87a2e780f5fa))
+* **search configurations:** handle updated search configurations ([de945b3](https://github.com/unbxd/react-search-JS-SDK/commit/de945b3802048bebf6400fc693929aa40a1639cf))
+
 ## [1.0.9](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.8...v1.0.9) (2021-07-12)
 
 
