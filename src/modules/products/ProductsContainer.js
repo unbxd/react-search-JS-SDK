@@ -57,7 +57,7 @@ class ProductsContainer extends React.PureComponent {
             productItemComponent,
             productIdAttribute,
             attributesMap = {},
-            showVariants,
+            showVariants = false,
             groupBy,
             variantAttributesMap = {},
             showSwatches,
