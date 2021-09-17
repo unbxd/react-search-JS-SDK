@@ -161,13 +161,13 @@ class UnbxdSearchWrapper extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { refreshId } = prevProps;
-        const { productType, onRouteChange } = this.props;
         const {
-            unbxdCore,
-            categoryId,
-            unbxdState: { query }
-        } = this.state;
+            productType,
+            onRouteChange,
+            searchConfigurations,
+            refreshId
+        } = this.props;
+        const { unbxdCore, categoryId } = this.state;
         const { trackCategory } = this.getAnalytics();
 
         const urlParams = unbxdCore.getQueryParams();
@@ -204,7 +204,7 @@ class UnbxdSearchWrapper extends Component {
             urlParams[unbxdCore.options.searchQueryParam]
         ) {
             renderFromUrl();
-        } else if (refreshId !== this.props.refreshId) {
+        } else if (refreshId !== prevProps.refreshId) {
             this.resetSearch();
             if (onRouteChange(unbxdCore, '', refreshId)) {
                 unbxdCore.options.productType = productType;
@@ -216,6 +216,8 @@ class UnbxdSearchWrapper extends Component {
                     getResults();
                 }
             }
+        } else if (searchConfigurations !== prevProps.searchConfigurations) {
+            unbxdCore.setSearchConfigurations(searchConfigurations);
         }
     }
 
