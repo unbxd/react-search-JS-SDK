@@ -38,11 +38,19 @@ const Search = () => {
     const { productType, setProductType } = useContext(ProductTypeContext);
     const [refreshId, setRefreshId] = useState(1);
     const [showFilters, setShowFilters] = useState(false);
+    const [configs, setConfigs] = useState(searchConfigurations);
     const routeHistory = useHistory();
     const routeLocation = useLocation();
 
     const handleClose = () => setShowFilters(false);
     const handleShow = () => setShowFilters(true);
+
+    const handleChange = () => {
+        setConfigs({
+            ...searchConfigurations,
+            defaultFilters: { flag: 'article' }
+        });
+    };
 
     const handleRouteChange = (searchObj, hash, refreshId) => {
         scrollTop();
@@ -85,10 +93,10 @@ const Search = () => {
 
     return (
         <UnbxdSearchWrapper
-            siteKey="demo-unbxd700181503576558"
-            apiKey="fb853e3332f2645fac9d71dc63e09ec1"
+            siteKey="prod-wexphotovideo12641621579820"
+            apiKey="b75cd508567ce3307238189e00592ae5"
             getCategoryId={getCategoryId}
-            searchConfigurations={searchConfigurations}
+            searchConfigurations={configs}
             productType={productType}
             refreshId={refreshId}
             loaderComponent={<Loader />}
@@ -103,7 +111,9 @@ const Search = () => {
                 refreshId={refreshId}
                 setRefreshId={setRefreshId}
             />
-
+            <button type="button" onClick={handleChange}>
+                change
+            </button>
             <Route exact path="/">
                 <Home setRefreshId={setRefreshId} />
             </Route>

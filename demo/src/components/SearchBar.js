@@ -24,6 +24,7 @@ export const InputComponent = ({
 }) => {
     return (
         <input
+            className="UNX-searchbox__input"
             value={query}
             onChange={onSearchBoxChange}
             onClear={onSearchBoxClear}
@@ -101,6 +102,7 @@ const SearchBar = (props) => {
             />
             <div className="UNX-header__search">
                 <SearchBox
+                    inputComponent={<InputComponent />}
                     submitComponent={<SearchButton />}
                     placeholder="Search Demo"
                     onSubmit={handleSubmit}
