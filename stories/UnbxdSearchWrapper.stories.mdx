@@ -1,6 +1,11 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 import UnbxdSearchWrapper from '../src/UnbxdSearchWrapper';
-import { getCategoryId } from '../demo/src/pages/Search';
+import {
+    getCategoryId,
+    LoaderComponent,
+    ErrorComponent
+} from '../demo/src/pages/Search';
+import searchConfigurations from '../demo/src/config/searchConfigurations';
 import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
 
 <Meta title="UnbxdSearchWrapper" component={UnbxdSearchWrapper} />
@@ -11,9 +16,12 @@ import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
 
 ```jsx
 <UnbxdSearchWrapper siteKey="..." apiKey="...">
-    {/*modules*/}
+    <OtherComponent />
+    <AnotherComponent />
 </UnbxdSearchWrapper>
 ```
+
+`UnbxdSearchWrapper` requires `siteKey` and `apiKey` props to be passed mandatorily. To access your `siteKey` and `apiKey` please refer to the `Keys` section of this [link](https://unbxd.com/docs/site-search/documentation/configure-site-profile/).
 
 <Preview>
     <Story name="default">
@@ -27,9 +35,11 @@ import { siteKey, apiKey, attributesMap, defaultSearch } from './config';
 
 ---
 
-### Category
+### getCategoryId
 
-Pass `getCategoryId`, which returns the category path for category pages.
+Pass `getCategoryId`, a function, which returns the category path for category pages.
+
+Category pages can be configured by following the guide available [here](https://unbxd.com/docs/recommendations/integration-documentation/browser-integration/).
 
 ```js
 const getCategoryId = () => {
@@ -41,12 +51,13 @@ const getCategoryId = () => {
 
 ```jsx
 <UnbxdSearchWrapper getCategoryId={getCategoryId}>
-    {/*modules*/}
+    <OtherComponent />
+    <AnotherComponent />
 </UnbxdSearchWrapper>
 ```
 
 <Preview>
-    <Story name="with category">
+    <Story name="with getCategoryId">
         <UnbxdSearchWrapper
             siteKey={siteKey}
             apiKey={apiKey}
@@ -55,6 +66,252 @@ const getCategoryId = () => {
             <div>
                 Wrap all the modules in <strong>UnbxdSearchWrapper</strong>
             </div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### productType
+
+Pass `productType`, a string, to represent if the current page `SEARCH` or a `CATEGORY` page. The default value of `productType` is `SEARCH`.
+
+```js
+const productType = 'SEARCH';
+```
+
+```jsx
+<UnbxdSearchWrapper productType={productType}>
+    <OtherComponent />
+    <AnotherComponent />
+</UnbxdSearchWrapper>
+```
+
+<Preview>
+    <Story name="with productType">
+        <UnbxdSearchWrapper
+            siteKey={siteKey}
+            apiKey={apiKey}
+            productType={'SEARCH'}
+        >
+            <div>This is a search page.</div>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+`productType` must be changed to `CATEGORY` when the user is on/navigates to a category page.
+
+---
+
+### priceUnit
+
+Pass `priceUnit`, a string, to represent the currency unit of your products. The default value of `priceUnit` is `$`.
+
+```js
+const priceUnit = '$';
+```
+
+```jsx
+<UnbxdSearchWrapper priceUnit={priceUnit}>
+    <OtherComponent />
+    <AnotherComponent />
+</UnbxdSearchWrapper>
+```
+
+<Preview>
+    <Story name="with priceUnit">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey} priceUnit={'$'}>
+            Wrap all the modules in <strong>UnbxdSearchWrapper</strong>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### loaderComponent
+
+Pass `loaderComponent`, a React Component instance, to be used as a loader. This component will be shown when the SDK is in the loading state.
+
+```js
+const LoaderComponent = () => {
+    return <div>Loading...</div>;
+};
+```
+
+```jsx
+<UnbxdSearchWrapper loaderComponent={<LoaderComponent />}>
+    <OtherComponent />
+    <AnotherComponent />
+</UnbxdSearchWrapper>
+```
+
+<Preview>
+    <Story name="with loaderComponent">
+        <UnbxdSearchWrapper
+            siteKey={siteKey}
+            apiKey={apiKey}
+            loaderComponent={<LoaderComponent />}
+        >
+            Wrap all the modules in <strong>UnbxdSearchWrapper</strong>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### errorComponent
+
+Pass `errorComponent`, a React Component instance, to be used as an Error component. This component will be shown when something with the SDK breaks.
+
+```js
+const ErrorComponent = () => {
+    return <div>Something went wrong.</div>;
+};
+```
+
+```jsx
+<UnbxdSearchWrapper errorComponent={<ErrorComponent />}>
+    <OtherComponent />
+    <AnotherComponent />
+</UnbxdSearchWrapper>
+```
+
+<Preview>
+    <Story name="with errorComponent">
+        <UnbxdSearchWrapper
+            siteKey={siteKey}
+            apiKey={apiKey}
+            errorComponent={<ErrorComponent />}
+        >
+            Wrap all the modules in <strong>UnbxdSearchWrapper</strong>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### refreshId
+
+Pass `refreshId`, a string/number, to trigger a new search/category call. `refreshId` has to have a new value everytime you wish to trigger a new search/category call.
+
+```js
+const refreshId = 111;
+```
+
+```jsx
+<UnbxdSearchWrapper refreshId={refreshId}>
+    <OtherComponent />
+    <AnotherComponent />
+</UnbxdSearchWrapper>
+```
+
+<Preview>
+    <Story name="with refreshId">
+        <UnbxdSearchWrapper siteKey={siteKey} apiKey={apiKey} refreshId={111}>
+            Wrap all the modules in <strong>UnbxdSearchWrapper</strong>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### searchConfigurations
+
+Pass `searchConfigurations`, an object, to pass further configurations. `searchConfigurations` has a default value of an empty object.
+
+```js
+const searchConfigurations = {
+    searchEndPoint: 'https://search.unbxd.io/',
+    searchQueryParam: 'q',
+    browseQueryParam: 'p',
+    defaultFilters: null,
+    pageSize: 10,
+    facetMultiSelect: true,
+    updateUrls: true,
+    extraParams: {
+        version: 'V2'
+    },
+    facetMultilevel: true,
+    facetDepth: 6,
+    applyMultipleFilters: false,
+    hashMode: true,
+    enableUnbxdAnalytics: false
+};
+```
+
+#### searchConfigurations parameters
+
+| Name                 | Type   | Description                                                                     |
+| -------------------- | ------ | ------------------------------------------------------------------------------- |
+| searchEndPoint       | string | Domain name of the search API endpoint.                                         |
+| searchQueryParam     | string | Search query parameter name to be used.                                         |
+| browseQueryParam     | string | Browse query parameter name to be used.                                         |
+| defaultFilters       | object | Default filters to be appied on all searches.                                   |
+| pageSize             | number | Number of products to be loaded per page.                                       |
+| facetMultiSelect     | bool   | enable/disable multiple selection of facets.                                    |
+| updateUrls           | bool   | enable/disable URL updation on searches.                                        |
+| extraParams          | object | pass any additional parameters to be added to the search URL.                   |
+| facetMultilevel      | bool   | enable/disable passing multilevel filters.                                      |
+| facetDepth           | number | pass the maximum number of levels of category filter.                           |
+| applyMultipleFilters | bool   | enable/disable if multiple filters can be applied at the same time.             |
+| hashMode             | bool   | enable/disable URL updation on hash instead of query parameters.                |
+| enableUnbxdAnalytics | bool   | enable/disable Unbxd Analytics events associated with the search/category page. |
+
+```jsx
+<UnbxdSearchWrapper searchConfigurations={searchConfigurations}>
+    <OtherComponent />
+    <AnotherComponent />
+</UnbxdSearchWrapper>
+```
+
+<Preview>
+    <Story name="with searchConfigurations">
+        <UnbxdSearchWrapper
+            siteKey={siteKey}
+            apiKey={apiKey}
+            searchConfigurations={searchConfigurations}
+        >
+            Wrap all the modules in <strong>UnbxdSearchWrapper</strong>
+        </UnbxdSearchWrapper>
+    </Story>
+</Preview>
+
+---
+
+### onRouteChange
+
+Pass `onRouteChange`, a function, to handle route changes.
+
+```js
+const onRouteChange = (searchObj, hash, refreshId) => {
+    // handle redirects
+    // perform route handling
+};
+```
+
+#### onRouteChange parameters
+
+| Name      | Type          | Description          |
+| --------- | ------------- | -------------------- |
+| searchObj | object        | Unbxd Search object. |
+| hash      | string        | Current hash string. |
+| refreshId | string/number | Current refresh Id.  |
+
+```jsx
+<UnbxdSearchWrapper onRouteChange={onRouteChange}>
+    <OtherComponent />
+    <AnotherComponent />
+</UnbxdSearchWrapper>
+```
+
+<Preview>
+    <Story name="with onRouteChange">
+        <UnbxdSearchWrapper
+            siteKey={siteKey}
+            apiKey={apiKey}
+            onRouteChange={111}
+        >
+            Wrap all the modules in <strong>UnbxdSearchWrapper</strong>
         </UnbxdSearchWrapper>
     </Story>
 </Preview>
