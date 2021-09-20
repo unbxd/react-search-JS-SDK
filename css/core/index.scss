@@ -257,6 +257,11 @@ template {
  * Removes the default spacing and border for appropriate elements.
  */
 
+
+p {
+  margin: 0;
+}
+
 button {
   background-color: transparent;
   background-image: none;

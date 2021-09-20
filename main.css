@@ -65,6 +65,10 @@ template{
   display:none
 }
 
+p{
+  margin:0
+}
+
 button{
   background-color:transparent;
   background-image:none
