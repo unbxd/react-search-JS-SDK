@@ -5,7 +5,6 @@ const searchConfigurations = {
     defaultFilters: null,
     pageSize: 10,
     facetMultiSelect: true,
-    facetMultiSelectionMode: true,
     updateUrls: true,
     extraParams: {
         version: 'V2'

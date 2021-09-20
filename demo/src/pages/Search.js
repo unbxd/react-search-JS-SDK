@@ -18,7 +18,7 @@ export const getCategoryId = () => {
     }
 };
 
-const Loader = () => {
+export const LoaderComponent = () => {
     return (
         <div className="overlay">
             <div className="overlay__inner">
@@ -30,7 +30,7 @@ const Loader = () => {
     );
 };
 
-const ErrorComponent = () => {
+export const ErrorComponent = () => {
     return <div>Something went wrong.</div>;
 };
 
@@ -99,7 +99,7 @@ const Search = () => {
             searchConfigurations={configs}
             productType={productType}
             refreshId={refreshId}
-            loaderComponent={<Loader />}
+            loaderComponent={<LoaderComponent />}
             errorComponent={<ErrorComponent />}
             onRouteChange={handleRouteChange}
         >
