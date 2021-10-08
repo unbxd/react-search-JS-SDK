@@ -19,14 +19,14 @@ jobs:
                   node-version: 12
 
             - name: Setup Base
-              run: yarn install --frozen-lockfile
+              run: yarn install
 
             - name: Build Base
               run: yarn build
 
             - name: Setup Demo
               working-directory: ./demo
-              run: yarn install --frozen-lockfile
+              run: yarn install
 
             - name: Build Storybook
               run: yarn build-storybook
