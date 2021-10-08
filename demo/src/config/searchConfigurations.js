@@ -5,7 +5,6 @@ const searchConfigurations = {
     defaultFilters: { flag: 'Product' },
     pageSize: 10,
     facetMultiSelect: true,
-    facetMultiSelectionMode: true,
     updateUrls: false,
     extraParams: {
         version: 'V2'

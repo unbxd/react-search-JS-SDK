@@ -24,5 +24,4 @@ export const swatchAttributesMap = {
     sellingPrice: 'min_price',
     productUrl: 'productUrl'
 };
-
 export const defaultSearch = '*';
