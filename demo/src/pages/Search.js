@@ -1,6 +1,9 @@
 import React, { useState, useContext } from 'react';
-import UnbxdSearchWrapper from '@unbxd-ui/react-search-sdk';
 import { Route, useHistory, useLocation } from 'react-router-dom';
+
+
+import UnbxdSearchWrapper from '../../../src/index';
+
 import Strings from './Strings';
 import Balls from './Balls';
 import Accessories from './Accessories';

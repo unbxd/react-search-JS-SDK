@@ -1,6 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
-import { PageSize } from '@unbxd-ui/react-search-sdk';
+import { PageSize } from '../../../src/index';
 
 export const sizeOptions = [
     { id: 5, value: '5', label: '5' },

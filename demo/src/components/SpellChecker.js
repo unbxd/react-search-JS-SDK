@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SpellCheck } from '@unbxd-ui/react-search-sdk';
+import { SpellCheck } from '../../../src/index';
 import { scrollTop } from '../utils';
 
 export const SpellCheckItemComponent = ({ itemData, onClick }) => {

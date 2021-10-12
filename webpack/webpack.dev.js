@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        app: Path.resolve(__dirname, '../demo/js'),
+        app: Path.resolve(__dirname, '../demo/src/index.js'),
         reactSearch: Path.resolve(__dirname, '../src/index.js')
     },
     mode: 'development',
@@ -42,7 +42,7 @@ module.exports = {
         }),
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
-            template: Path.resolve(__dirname, '../demo/index.html'),
+            template: Path.resolve(__dirname, '../demo/public/index.html'),
             chunks: ['common', 'app'],
             path: Path.resolve(__dirname, '../public'),
             filename: 'index.html'
