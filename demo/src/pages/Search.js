@@ -96,8 +96,8 @@ const Search = () => {
 
     return (
         <UnbxdSearchWrapper
-            siteKey="prod-wexphotovideo12641621579820"
-            apiKey="b75cd508567ce3307238189e00592ae5"
+        siteKey="wildearthclone-neto-com-au808941566310465"
+        apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             getCategoryId={getCategoryId}
             searchConfigurations={configs}
             productType={productType}

@@ -70,11 +70,8 @@ export const searchResponse = {
             spellcheck: 'true',
             viewType: 'GRID',
             enablePf: 'false',
-            filter: [
-                "CATEGORY:\"strings\"",
-                "CATEGORY:\"strings\"",
-                "DEPARTMENT_uFilter:\"strings\""
-                ],
+            filter: [],
+            'category-filter': "All Products",
             'facet.multilevel': 'categoryPath',
             'user.behaviour': 'true',
             fields: 'title,uniqueId,imageUrl,RRP_Price,unbxd_price,productUrl',
@@ -662,11 +659,8 @@ export const facetResponse = {
             enablePf: 'false',
             'facet.multilevel': 'categoryPath',
             'user.behaviour': 'true',
-            filter: [
-                "CATEGORY:\"strings\"",
-                "CATEGORY:\"strings\"",
-                "DEPARTMENT_uFilter:\"strings\""
-                ],
+            filter: [],
+            'category-filter': "All Products",
             fields: 'title,uniqueId,imageUrl,RRP_Price,unbxd_price,productUrl',
             'facet.version': 'V2',
             enablePopularity: 'true',

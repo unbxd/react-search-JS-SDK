@@ -2,7 +2,7 @@ const searchConfigurations = {
     searchEndPoint: 'https://search.unbxd.io/',
     searchQueryParam: 'q',
     browseQueryParam: 'p',
-    defaultFilters: { flag: 'Product' },
+    defaultFilters: {},
     pageSize: 10,
     facetMultiSelect: true,
     updateUrls: false,
