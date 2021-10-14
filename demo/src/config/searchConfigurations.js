@@ -1,3 +1,4 @@
+//default config for the unbxdWrapper class
 const searchConfigurations = {
     searchEndPoint: 'https://search.unbxd.io/',
     searchQueryParam: 'q',
