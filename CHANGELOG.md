@@ -1,3 +1,10 @@
+## [1.0.11](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.10...v1.0.11) (2021-10-14)
+
+
+### Bug Fixes
+
+* **special character  support for multilevelfacets and text facets:** special characters in facets ([9c67abf](https://github.com/unbxd/react-search-JS-SDK/commit/9c67abf23ee9de8fdab721fa39d17460ada53f92))
+
 ## [1.0.10](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.9...v1.0.10) (2021-09-17)
 
 
