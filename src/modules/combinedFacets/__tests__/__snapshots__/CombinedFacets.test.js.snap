@@ -752,7 +752,7 @@ Array [
             18
           </div>
           <div
-            className="UNX-facet__item -selected"
+            className="UNX-facet__item "
             data-facet-name="price"
             data-id="[200-300]"
             data-testid="UNX_rangeFacet__facetItem"
@@ -884,13 +884,6 @@ Array [
              - 
             1
           </div>
-        </div>
-        <div
-          className="-clear"
-          data-unx_facetname="price"
-          onClick={[Function]}
-        >
-          Clear
         </div>
       </div>
     </div>

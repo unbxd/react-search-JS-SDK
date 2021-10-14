@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
-import { SelectedFacets } from '@unbxd-ui/react-search-sdk';
+import { SelectedFacets } from '../../../src/index';
 
 export const FacetItemComponent = ({ itemData, onClick, priceUnit }) => {
     const { name, type, dataId, facetName } = itemData;

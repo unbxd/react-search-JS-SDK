@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
+//mapping for the local debug
+//import UnbxdSearch from '../../../search-JS-core/src/index';
 
 import { AppContextProvider } from './common/context';
 import {

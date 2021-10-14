@@ -294,10 +294,7 @@ export const setsBreadcrumbResponse = {
             "rows": "15",
             "version": "V2",
             "enableTaxonomy": "false",
-            "filter": [
-                "SUBCATEGORY:\"Sets\"",
-                "SUBCATEGORY:\"Sets\""
-            ],
+            'category-filter': "Sets",
             "q": "*",
             "f.categoryPath.max.depth": "6",
             "spellcheck": "true",

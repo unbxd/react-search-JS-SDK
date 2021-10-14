@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Select from 'react-select';
-import { SearchBox } from '@unbxd-ui/react-search-sdk';
+import { SearchBox } from '../../../src/index';
 import { useHistory } from 'react-router-dom';
 import { ProductTypeContext } from '../context';
 import CategoryLinks from './CategoryLinks';

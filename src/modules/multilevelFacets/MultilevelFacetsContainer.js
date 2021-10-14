@@ -42,7 +42,7 @@ class MultilevelFacetsContainer extends React.PureComponent {
             const categoryObject = {
                 parent,
                 level,
-                name: encodeURIComponent(name)
+                name: unbxdCore.encodeCategoryFacetValue(name)
             };
             const { helpers } = this.props;
             const { getUpdatedResults } = helpers;

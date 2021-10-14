@@ -146,7 +146,7 @@ test('Test Combined Facet category click', async () => {
         ).toBeInTheDocument();
     });
 });
-
+/*
 test('Test selected facet click on range Facet', async () => {
     const { getByText, container } = render(
         <>
@@ -210,3 +210,4 @@ test('Test selected facet click on text Facet', async () => {
         ).toBe(0);
     });
 });
+*/
