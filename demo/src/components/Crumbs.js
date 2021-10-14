@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Breadcrumbs } from '@unbxd-ui/react-search-sdk';
+import { Breadcrumbs } from '../../../src/index';
 
 export const BreadcrumbItemComponent = ({
     itemData,

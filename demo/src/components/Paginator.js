@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Pagination } from '@unbxd-ui/react-search-sdk';
+import { Pagination } from '../../../src/index';
 import { scrollTop } from '../utils';
 
 export const PaginationItemComponent = ({ itemData, onClick }) => {

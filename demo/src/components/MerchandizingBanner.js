@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Banners } from '@unbxd-ui/react-search-sdk';
+import { Banners } from '../../../src/index';
 
 export const BannerItemComponent = ({ itemData }) => {
     const { imageUrl, landingUrl } = itemData;

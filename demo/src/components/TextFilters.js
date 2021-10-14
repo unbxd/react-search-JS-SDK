@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TextFacets } from '@unbxd-ui/react-search-sdk';
+import { TextFacets } from '../../../src/index';
 import { scrollTop } from '../utils';
 
 export const transform = function () {

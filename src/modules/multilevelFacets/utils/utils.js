@@ -2,17 +2,19 @@ import { facetTypes } from '../../../config';
 
 export const getFormattedMultilevelFacets = (bucketedFacets, unbxdCore) => {
     const getBreadCrumbsList = unbxdCore.getBreadCrumbsList.bind(unbxdCore);
-
     const multilevelFacets = [];
     let highestBreadcrumbLevel = 0;
     let facetName = '';
     bucketedFacets.map((bucketedFacet) => {
+        if(!bucketedFacet.filterField && bucketedFacet.multiLevelField) {
+            bucketedFacet.filterField = bucketedFacet.multiLevelField
+        }
         const {
             displayName,
             level,
-            filterField,
             values = [],
-            position
+            position,
+            filterField
         } = bucketedFacet;
         facetName = displayName;
         const breadCrumbsList = getBreadCrumbsList(filterField);
@@ -27,7 +29,7 @@ export const getFormattedMultilevelFacets = (bucketedFacets, unbxdCore) => {
                 level: breadcrumb.level,
                 name: breadcrumb.value,
                 isSelected: true,
-                dataId: breadcrumb.value,
+                dataId: breadcrumb.value
             };
         });
 

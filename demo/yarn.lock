@@ -1825,24 +1825,24 @@
     "@types/webpack-sources" "*"
     source-map "^0.6.0"
 
-"@unbxd-ui/react-search-sdk@^1.0.9":
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/@unbxd-ui/react-search-sdk/-/react-search-sdk-1.0.9.tgz#3b9fc571c058fa22d6ba6e63cff96a78a8f1b0a6"
-  integrity sha512-/prvhGpzBZ7tgxKYP5DXcgeHw3FLh8jNy7MO3SNAEpW+v9JrzNJ+aswCOhv56WjJWHxsPtpJ9Lb9qwVZz92y/g==
+"@unbxd-ui/react-search-sdk@^1.0.10":
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/@unbxd-ui/react-search-sdk/-/react-search-sdk-1.0.10.tgz#f9e0026fd20d4955f82abe2a5d493049b7a570f0"
+  integrity sha512-YKXEHqM+PMIBtPANjcXd52BOt6xjyd1OBzEsMVZQqQzJJxPEUJyTWvAsrN2Pqwvn3v5ZB5l+dOoOuWsiQd2mpg==
   dependencies:
     "@babel/plugin-transform-runtime" "^7.12.10"
     "@semantic-release/changelog" "^5.0.1"
     "@semantic-release/git" "^9.0.0"
     "@semantic-release/release-notes-generator" "^9.0.1"
     "@storybook/theming" "^6.2.9"
-    "@unbxd-ui/unbxd-search-core" "^0.3.5"
+    "@unbxd-ui/unbxd-search-core" "^0.3.7"
     prop-types "^15.7.2"
     semantic-release "^17.3.0"
 
-"@unbxd-ui/unbxd-search-core@^0.3.5":
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/@unbxd-ui/unbxd-search-core/-/unbxd-search-core-0.3.7.tgz#09758a6ee0f1551c315c542806b0874f244e45d2"
-  integrity sha512-9A120n/YVOg4/qrb064njw0goaJtg4bLKNk5V0uAfra2DMm0ucFMolef3sC8XyO324EXTNAKiM+tYGvNRmUnuA==
+"@unbxd-ui/unbxd-search-core@^0.3.7":
+  version "0.3.9"
+  resolved "https://registry.yarnpkg.com/@unbxd-ui/unbxd-search-core/-/unbxd-search-core-0.3.9.tgz#1c7ec852145be7a81e5a571d75fd36918b91a7ed"
+  integrity sha512-5mODJm4x9bV7IxmpeVy4M/2MwcyHI4kBGq06g94YOKSpLB2QOf+sdpthb+muKDzRrS+gj91gQ97S9tTUQkpNGw==
   dependencies:
     babel-polyfill "^6.26.0"
     babel-runtime "^6.26.0"

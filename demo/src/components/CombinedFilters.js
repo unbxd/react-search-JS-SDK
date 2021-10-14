@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CombinedFacets } from '@unbxd-ui/react-search-sdk';
+import { CombinedFacets } from '../../../src/index';
 import { FacetItemComponent as TextFacetItemComponent } from './TextFilters';
 import { FacetItemComponent as RangeFacetItemComponent } from './RangeFilters';
 import { FacetItemComponent as MultilevelFacetItemComponent } from './MultilevelFilters';

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 
-import { Products } from '@unbxd-ui/react-search-sdk';
+import { Products } from '../../../src/index';
 import { ProductTypeContext } from '../context';
 
 const attributesMap = {
