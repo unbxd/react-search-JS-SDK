@@ -60,8 +60,6 @@ object-assign
  * Released under the MIT License.
  */
 
-/*! For license information please see reactSearch.js.LICENSE.txt */
-
 /**
  * Prism: Lightweight, robust, elegant syntax highlighting
  *
