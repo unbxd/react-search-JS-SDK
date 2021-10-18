@@ -516,7 +516,7 @@ Array [
           </button>
           <button
             className="UNX-facet__item -l2 "
-            data-id="All Products"
+            data-id="All%20Products"
             data-testid="UNX_multilevelFacet__facetItem"
             onClick={[Function]}
             tabIndex={0}
@@ -531,7 +531,7 @@ Array [
           </button>
           <button
             className="UNX-facet__item -l2 "
-            data-id="Camp & Hike"
+            data-id="Camp%20%26%20Hike"
             data-testid="UNX_multilevelFacet__facetItem"
             onClick={[Function]}
             tabIndex={0}
@@ -903,7 +903,7 @@ Array [
         >
           <button
             className="UNX-facet__item -l1 "
-            data-id="All Products"
+            data-id="All%20Products"
             data-testid="UNX_multilevelFacet__facetItem"
             onClick={[Function]}
             tabIndex={0}
@@ -918,7 +918,7 @@ Array [
           </button>
           <button
             className="UNX-facet__item -l1 "
-            data-id="Camp & Hike"
+            data-id="Camp%20%26%20Hike"
             data-testid="UNX_multilevelFacet__facetItem"
             onClick={[Function]}
             tabIndex={0}

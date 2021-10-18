@@ -44,7 +44,7 @@ test('Search Box Input test', async () => {
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >
-                <SearchBox />
+                <SearchBox defaultSearch="boots1" />
                 <Products attributesMap={attributesMap} />
             </UnbxdSearchWrapper>
         </>
@@ -65,7 +65,7 @@ test('Search Box Clearable test', async () => {
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >
-                <SearchBox clearable={true} />
+                <SearchBox defaultSearch="boots1" clearable={true} />
                 <Products attributesMap={attributesMap} />
             </UnbxdSearchWrapper>
         </>
