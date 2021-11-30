@@ -1,3 +1,10 @@
+## [1.0.12](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.11...v1.0.12) (2021-11-30)
+
+
+### Bug Fixes
+
+* **unbxdseachwrapper:** updated js core for facetvalue fix and category page rendering from url ([52311a8](https://github.com/unbxd/react-search-JS-SDK/commit/52311a84476351062088b317d29ebd02efdae1e4))
+
 ## [1.0.11](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.10...v1.0.11) (2021-10-14)
 
 
