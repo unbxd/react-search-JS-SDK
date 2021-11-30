@@ -89,7 +89,7 @@ test('Test Combined Facet range click', async () => {
 });
 
 test('Test Combined Facet text click', async () => {
-    const { getByText } = render(
+    const { getByText, getAllByText } = render(
         <>
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
@@ -114,7 +114,7 @@ test('Test Combined Facet text click', async () => {
                 'Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots'
             )
         ).toBeInTheDocument();
-        fireEvent.click(getByText('Clear'));
+        fireEvent.click(getAllByText('Clear')[0]);
     });
 });
 
