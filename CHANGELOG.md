@@ -1,3 +1,11 @@
+## [1.0.13](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.12...v1.0.13) (2022-02-09)
+
+
+### Bug Fixes
+
+* **component and file:** added datat id for filters and fixed broken test cases of facets ([2a75896](https://github.com/unbxd/react-search-JS-SDK/commit/2a75896ade8a11775e8aee9597f0cc4151588a3e))
+* **uodated unbxdcore:** update the js core ([b1ec76f](https://github.com/unbxd/react-search-JS-SDK/commit/b1ec76f590fb0228f69a2410f7cdadd0e137d631))
+
 ## [1.0.12](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.11...v1.0.12) (2021-11-30)
 
 
