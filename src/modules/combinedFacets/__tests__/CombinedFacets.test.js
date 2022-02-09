@@ -114,6 +114,7 @@ test('Test Combined Facet text click', async () => {
                 'Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots'
             )
         ).toBeInTheDocument();
+        expect(getByText('Scarpa - 18')).toBeInTheDocument();
         fireEvent.click(getAllByText('Clear')[0]);
     });
 });
@@ -146,7 +147,7 @@ test('Test Combined Facet category click', async () => {
         ).toBeInTheDocument();
     });
 });
-/*
+
 test('Test selected facet click on range Facet', async () => {
     const { getByText, container } = render(
         <>
@@ -194,10 +195,6 @@ test('Test selected facet click on text Facet', async () => {
         </>
     );
 
-    await waitFor(async () => {
-        expect(getByText('Scarpa - 18')).toBeInTheDocument();
-        fireEvent.click(getByText('Scarpa - 18'));
-    });
     await waitFor(() => {
         expect(
             container.getElementsByClassName('UNX-selectedFacets__container')
@@ -210,4 +207,3 @@ test('Test selected facet click on text Facet', async () => {
         ).toBe(0);
     });
 });
-*/

@@ -44,7 +44,7 @@ test('Search Box Input test', async () => {
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >
-                <SearchBox />
+                <SearchBox defaultSearch="boots1" />
                 <Products attributesMap={attributesMap} />
             </UnbxdSearchWrapper>
         </>
@@ -76,6 +76,7 @@ test('Search Box Clearable test', async () => {
             container.getElementsByClassName('UNX-searchbox__input').length
         ).toEqual(1);
         expect(getByText('Search')).toBeInTheDocument();
+        //expect(screen.getByDisplayValue('boots1')).toBeInTheDocument();
         fireEvent.click(getByTestId('UNX-searchbox__clearIcon'));
         expect(screen.getByDisplayValue('')).toBeInTheDocument();
     });
@@ -106,6 +107,9 @@ test('Search Box callback test', async () => {
         ).toEqual(1);
         expect(getByText('Search')).toBeInTheDocument();
         fireEvent.click(getByText('Search'));
+        //expect(onSubmit).toHaveBeenCalledTimes(1);
+        fireEvent.click(getByTestId('UNX-searchbox__clearIcon'));
+        //expect(onClear).toHaveBeenCalledTimes(1);
         //expect(onSubmit).toHaveBeenCalledTimes(0);
         fireEvent.click(getByTestId('UNX-searchbox__clearIcon'));
         //expect(onClear).toHaveBeenCalledTimes(0);

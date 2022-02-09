@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
 //local filepath for js core
 //import UnbxdSearch from '../../../search-JS-core/src/index';
+//import UnbxdSearch from '../src/core/unbxdSdk';
 
 import { AppContextProvider } from './common/context';
 import {

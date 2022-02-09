@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Button } from '../../../components';
 
 const FacetItem = ({ itemData, onClick }) => {
-    const { name, count, level, isSelected = false, fieldName } = itemData;
+    const { name, count, level, isSelected = false, fieldName, dataId } = itemData;
     const handleClick = () => {
         onClick(itemData);
     };
@@ -16,7 +16,7 @@ const FacetItem = ({ itemData, onClick }) => {
             onClick={handleClick}
             data-testid="UNX_multilevelFacet__facetItem"
             data-facet-name={fieldName}
-            data-id={name}
+            data-id={dataId}
         >
             {name} {count && <span>-{count}</span>}
         </Button>
