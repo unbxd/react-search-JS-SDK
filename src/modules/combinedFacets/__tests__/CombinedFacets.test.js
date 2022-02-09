@@ -89,7 +89,7 @@ test('Test Combined Facet range click', async () => {
 });
 
 test('Test Combined Facet text click', async () => {
-    const { getByText } = render(
+    const { getByText, getAllByText } = render(
         <>
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
@@ -115,7 +115,7 @@ test('Test Combined Facet text click', async () => {
             )
         ).toBeInTheDocument();
         expect(getByText('Scarpa - 18')).toBeInTheDocument();
-        fireEvent.click(getByText('Scarpa - 18'));
+        fireEvent.click(getAllByText('Clear')[0]);
     });
 });
 
