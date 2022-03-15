@@ -11,7 +11,11 @@ import { searchStatus } from '../../config';
 class SpellCheckContainer extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.state = { typedQuery: '', spellChecks: [], currentSuggestion: '' };
+        this.state = {
+            typedQuery: '',
+            spellChecks: [],
+            currentSuggestion: ''
+        };
     }
 
     componentDidMount() {
@@ -41,13 +45,16 @@ class SpellCheckContainer extends React.PureComponent {
         ) {
             // trigger a new search
             // save the typed query
-            const currentSuggestion = spellChecks[0]['suggestion'];
-            this.setState({
-                typedQuery: query,
-                currentSuggestion,
-                spellChecks
-            });
-            setSearchBoxConfiguration({ query: currentSuggestion });
+            if(!unbxdCore.state.isLoadedFromSpellCheck){
+                const currentSuggestion = spellChecks[0]['suggestion'];
+                this.setState({
+                    typedQuery: query,
+                    currentSuggestion,
+                    spellChecks
+                });
+                setSearchBoxConfiguration({ query: currentSuggestion });
+            }
+            unbxdCore.state.isLoadedFromSpellCheck = false;
         } else if (
             unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
             unbxdCoreStatus === searchStatus.LOADING &&
@@ -66,16 +73,17 @@ class SpellCheckContainer extends React.PureComponent {
     getSpellCheckProps() {
         const {
             helpers: { setSearchBoxConfiguration },
-            onSpellCheckClick
+            onSpellCheckClick,
+            unbxdCore
         } = this.props;
 
         const { spellCheckItemComponent } = this.props;
         const handleSuggestionClick = (currentItem) => {
             const { suggestion } = currentItem;
-
+            unbxdCore.state.isLoadedFromSpellCheck = true;
             const onFinish = () => {
                 setSearchBoxConfiguration({ query: suggestion });
-                this.setState({ typedQuery: '', spellChecks: [] });
+                this.setState({ typedQuery: suggestion, spellChecks: []});
             };
 
             executeCallback(onSpellCheckClick, [suggestion], onFinish);
