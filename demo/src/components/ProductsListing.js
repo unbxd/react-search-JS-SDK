@@ -386,6 +386,11 @@ const ProductsListing = () => {
             paginationType="FIXED_PAGINATION"
             zeroResultsComponent={<ZeroResultsComponent />}
             productItemComponent={<ProductItemComponent />}
+            onResultsLoaded={
+                (core)=>{
+                    console.log(core.getRequestId())
+                }
+            }
             //productItemComponent={<SwatchProductItemComponent />}
             //swatchItemComponent={<SwatchItemComponent />}
         />

@@ -17,6 +17,10 @@ import CombinedFacets from './modules/combinedFacets';
 import ViewTypes from './modules/viewTypes';
 import UnbxdSearchWrapper from './UnbxdSearchWrapper';
 
+if(window.localStorage && window.localStorage.getItem("debug")) {
+    console.log(UnbxdSearchWrapper)
+}
+
 export default UnbxdSearchWrapper;
 export {
     Banners,
