@@ -16,6 +16,7 @@ class SpellCheckContainer extends React.PureComponent {
             spellChecks: [],
             currentSuggestion: ''
         };
+        this.isLoadedFromSpellCheck = false;
     }
 
     componentDidMount() {
@@ -45,7 +46,7 @@ class SpellCheckContainer extends React.PureComponent {
         ) {
             // trigger a new search
             // save the typed query
-            if(!unbxdCore.state.isLoadedFromSpellCheck){
+            if(!this.isLoadedFromSpellCheck){
                 const currentSuggestion = spellChecks[0]['suggestion'];
                 this.setState({
                     typedQuery: query,
@@ -54,7 +55,7 @@ class SpellCheckContainer extends React.PureComponent {
                 });
                 setSearchBoxConfiguration({ query: currentSuggestion });
             }
-            unbxdCore.state.isLoadedFromSpellCheck = false;
+            this.isLoadedFromSpellCheck = false;
         } else if (
             unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
             unbxdCoreStatus === searchStatus.LOADING &&
@@ -73,14 +74,13 @@ class SpellCheckContainer extends React.PureComponent {
     getSpellCheckProps() {
         const {
             helpers: { setSearchBoxConfiguration },
-            onSpellCheckClick,
-            unbxdCore
+            onSpellCheckClick
         } = this.props;
 
         const { spellCheckItemComponent } = this.props;
         const handleSuggestionClick = (currentItem) => {
             const { suggestion } = currentItem;
-            unbxdCore.state.isLoadedFromSpellCheck = true;
+            this.isLoadedFromSpellCheck = true;
             const onFinish = () => {
                 setSearchBoxConfiguration({ query: suggestion });
                 this.setState({ typedQuery: suggestion, spellChecks: []});

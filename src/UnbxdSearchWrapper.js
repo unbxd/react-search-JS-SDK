@@ -125,7 +125,6 @@ class UnbxdSearchWrapper extends Component {
     componentDidMount() {
         const { unbxdCore } = this.state;
         const { trackCategory } = this.getAnalytics();
-        unbxdCore.isLoadedFromSpellCheck = false;
         const categoryId =
             typeof unbxdCore.options.getCategoryId === 'function' &&
             unbxdCore.options.getCategoryId();
