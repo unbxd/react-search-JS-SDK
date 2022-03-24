@@ -1,6 +1,6 @@
 {
     "name": "@unbxd-ui/react-search-sdk",
-    "version": "1.0.11",
+    "version": "1.1.0",
     "description": "Unbxd React Search JS SDK",
     "main": "public/dist/js/reactSearch.js",
     "files": [
@@ -97,7 +97,7 @@
         "identity-obj-proxy": "^3.0.0",
         "jest": "^26.6.3",
         "mini-css-extract-plugin": "^0.9.0",
-        "node-sass": "^4.14.1",
+        "node-sass": "^7.0.0",
         "optimize-css-assets-webpack-plugin": "^5.0.3",
         "path": "^0.12.7",
         "postcss-cli": "^7.1.1",
@@ -124,7 +124,7 @@
         "@semantic-release/git": "^9.0.0",
         "@semantic-release/release-notes-generator": "^9.0.1",
         "@storybook/theming": "^6.2.9",
-        "@unbxd-ui/unbxd-search-core": "^0.4.0",
+        "@unbxd-ui/unbxd-search-core": "^0.4.4",
         "prop-types": "^15.7.2",
         "semantic-release": "^17.3.0"
     },

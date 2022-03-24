@@ -11,7 +11,12 @@ import { searchStatus } from '../../config';
 class SpellCheckContainer extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.state = { typedQuery: '', spellChecks: [], currentSuggestion: '' };
+        this.state = {
+            typedQuery: '',
+            spellChecks: [],
+            currentSuggestion: ''
+        };
+        this.isLoadedFromSpellCheck = false;
     }
 
     componentDidMount() {
@@ -41,13 +46,16 @@ class SpellCheckContainer extends React.PureComponent {
         ) {
             // trigger a new search
             // save the typed query
-            const currentSuggestion = spellChecks[0]['suggestion'];
-            this.setState({
-                typedQuery: query,
-                currentSuggestion,
-                spellChecks
-            });
-            setSearchBoxConfiguration({ query: currentSuggestion });
+            if(!this.isLoadedFromSpellCheck){
+                const currentSuggestion = spellChecks[0]['suggestion'];
+                this.setState({
+                    typedQuery: query,
+                    currentSuggestion,
+                    spellChecks
+                });
+                setSearchBoxConfiguration({ query: currentSuggestion });
+            }
+            this.isLoadedFromSpellCheck = false;
         } else if (
             unbxdCoreStatus !== prevProps.unbxdCoreStatus &&
             unbxdCoreStatus === searchStatus.LOADING &&
@@ -72,10 +80,10 @@ class SpellCheckContainer extends React.PureComponent {
         const { spellCheckItemComponent } = this.props;
         const handleSuggestionClick = (currentItem) => {
             const { suggestion } = currentItem;
-
+            this.isLoadedFromSpellCheck = true;
             const onFinish = () => {
                 setSearchBoxConfiguration({ query: suggestion });
-                this.setState({ typedQuery: '', spellChecks: [] });
+                this.setState({ typedQuery: suggestion, spellChecks: []});
             };
 
             executeCallback(onSpellCheckClick, [suggestion], onFinish);

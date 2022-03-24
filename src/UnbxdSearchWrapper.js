@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
-//mapping for the local debug
+//local filepath for js core
 //import UnbxdSearch from '../../../search-JS-core/src/index';
+//import UnbxdSearch from '../src/core/unbxdSdk';
 
 import { AppContextProvider } from './common/context';
 import {
@@ -153,7 +154,12 @@ class UnbxdSearchWrapper extends Component {
                 };
             });
             unbxdCore.options.productType = productTypes.CATEGORY;
-            unbxdCore.getResults();
+            const urlParams = unbxdCore.getQueryParams();
+            if (Object.keys(urlParams).length > 1) {
+                unbxdCore.renderFromUrl();
+            } else {
+                unbxdCore.getResults();
+            }
             trackCategory(window.UnbxdAnalyticsConf);
         }
 

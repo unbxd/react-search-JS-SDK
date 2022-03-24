@@ -1,3 +1,31 @@
+# [1.1.0](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.13...v1.1.0) (2022-03-24)
+
+
+### Bug Fixes
+
+* **component:** spellcheck couldnt trigger the wrong query ([a744e35](https://github.com/unbxd/react-search-JS-SDK/commit/a744e35ba6109af32eb8b4c37a009c1b40319f22))
+* **component:** spellcheck couldnt trigger the wrong query ([e53b642](https://github.com/unbxd/react-search-JS-SDK/commit/e53b6421eea0eed65ca11c2c3423b7ed38111217))
+
+
+### Features
+
+* **component:** request id and debugger ([4659c42](https://github.com/unbxd/react-search-JS-SDK/commit/4659c42274e017ebd13fcc5f1d66323fb1973107))
+
+## [1.0.13](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.12...v1.0.13) (2022-02-09)
+
+
+### Bug Fixes
+
+* **component and file:** added datat id for filters and fixed broken test cases of facets ([2a75896](https://github.com/unbxd/react-search-JS-SDK/commit/2a75896ade8a11775e8aee9597f0cc4151588a3e))
+* **uodated unbxdcore:** update the js core ([b1ec76f](https://github.com/unbxd/react-search-JS-SDK/commit/b1ec76f590fb0228f69a2410f7cdadd0e137d631))
+
+## [1.0.12](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.11...v1.0.12) (2021-11-30)
+
+
+### Bug Fixes
+
+* **unbxdseachwrapper:** updated js core for facetvalue fix and category page rendering from url ([52311a8](https://github.com/unbxd/react-search-JS-SDK/commit/52311a84476351062088b317d29ebd02efdae1e4))
+
 ## [1.0.11](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.10...v1.0.11) (2021-10-14)
 
 

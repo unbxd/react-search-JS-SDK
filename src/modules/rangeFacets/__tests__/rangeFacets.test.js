@@ -185,7 +185,6 @@ test('Test range facet click with FacetItemComponent', async () => {
         ).toBeInTheDocument();
     });
 });
-/*
 test('Test selected facet click on range Facet', async () => {
     const { getByText, container } = render(
         <>
@@ -205,12 +204,14 @@ test('Test selected facet click on range Facet', async () => {
     );
 
     await waitFor(async () => {
-        expect(getByText('$ 200 - $ 300 - 60')).toBeInTheDocument();
-        fireEvent.click(getByText('$ 200 - $ 300 - 60'));
+        const aRange = getByText('$ 200 - $ 300 - 60');
+        expect(aRange).toBeInTheDocument();
+        fireEvent.click(aRange);
+        
     });
     await waitFor(() => {
         expect(
-            container.getElementsByClassName('UNX-selectedFacets__container')
+            container.getElementsByClassName('UNX-facet__item -selected')
                 .length
         ).toBe(1);
     });
@@ -241,9 +242,8 @@ test('Test selected facet click on range Facet with FacetItemComponent', async (
         fireEvent.click(getByText('$ 200 - $ 300 - 60'));
     });
     await waitFor(() => {
-        expect(container.getElementsByClassName('range-selected').length).toBe(
+        expect(container.getElementsByClassName('-selected').length).toBe(
             1
         );
     });
 });
-*/
