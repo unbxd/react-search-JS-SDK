@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/unbxd/react-search-JS-SDK/compare/v1.1.0...v1.1.1) (2022-03-24)
+
+
+### Bug Fixes
+
+* **filename:** fixed incorrect node sass version ([11ad8d7](https://github.com/unbxd/react-search-JS-SDK/commit/11ad8d703aa89d350d3bae5067fcf83dbb2cd6da))
+
 # [1.1.0](https://github.com/unbxd/react-search-JS-SDK/compare/v1.0.13...v1.1.0) (2022-03-24)
 
 
