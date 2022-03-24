@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SpellCheckItem = ({ itemData, currentQuery, onClick }) => {
+const SpellCheckItem = (props) => {
+    const {
+        itemData, currentQuery, onClick
+    } = props;
     const { suggestion } = itemData;
     const handleClick = () => {
         onClick(itemData);

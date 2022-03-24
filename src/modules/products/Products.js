@@ -54,7 +54,8 @@ Products.defaultProps = {
     showLoader: false,
     productIdAttribute: 'uniqueId',
     groupBy: '',
-    variantAttributesMap: {}
+    variantAttributesMap: {},
+    onResultsLoaded:()=>{}
 };
 
 Products.propTypes = {
@@ -133,7 +134,11 @@ Products.propTypes = {
     /**
      *  Custom zero result component instance
      */
-    zeroResultsComponent: PropTypes.element
+    zeroResultsComponent: PropTypes.element,
+    /**
+     *  callback on each new results load
+     */
+     onResultsLoaded: PropTypes.func
 };
 
 export default Products;

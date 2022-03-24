@@ -169,7 +169,7 @@ class ProductsContainer extends React.PureComponent {
     render() {
         const DefaultRender = ProductsWrapper;
         const LoaderRender = null;
-
+        this.props.onResultsLoaded(this.props.unbxdCore)
         return conditionalRenderer(
             this.props.children,
             this.getProductProps(),

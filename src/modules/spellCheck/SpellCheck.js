@@ -23,14 +23,12 @@ const SpellCheck = (props) => {
                     helpers,
                     unbxdState
                 } = appState;
-
-                const { query } = unbxdState;
                 return (
                     <SpellCheckContainer
                         unbxdCore={unbxdCore}
                         unbxdCoreStatus={unbxdCoreStatus}
                         helpers={helpers}
-                        query={query}
+                        query={unbxdCore.state.userInput}
                         {...props}
                     />
                 );
