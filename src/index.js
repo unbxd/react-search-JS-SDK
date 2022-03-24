@@ -17,6 +17,10 @@ import CombinedFacets from './modules/combinedFacets';
 import ViewTypes from './modules/viewTypes';
 import UnbxdSearchWrapper from './UnbxdSearchWrapper';
 
+
+//param added for the production debug
+//works only if we added debug value in the browser localstorage
+
 if(window.localStorage && window.localStorage.getItem("debug")) {
     console.log(UnbxdSearchWrapper)
 }
