@@ -56,7 +56,6 @@ const Search = () => {
     };
 
     const handleRouteChange = (searchObj, hash, refreshId) => {
-        console.log(searchObj, hash, refreshId,"searchObj, hash, refreshId")
         scrollTop();
         const { state = {} } = searchObj;
         const { responseObj = {} } = state;
