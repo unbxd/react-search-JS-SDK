@@ -124,6 +124,9 @@ class UnbxdSearchWrapper extends Component {
 
     componentDidMount() {
         const { unbxdCore } = this.state;
+        const {
+            onUrlBack
+        } = this.props;
         const { trackCategory } = this.getAnalytics();
         const categoryId =
             typeof unbxdCore.options.getCategoryId === 'function' &&
@@ -154,17 +157,18 @@ class UnbxdSearchWrapper extends Component {
                 };
             });
             unbxdCore.options.productType = productTypes.CATEGORY;
-            const urlParams = unbxdCore.getQueryParams();
-            if (Object.keys(urlParams).length > 1) {
-                unbxdCore.renderFromUrl();
-            } else {
-                unbxdCore.getResults();
-            }
+            unbxdCore.getResults();
             trackCategory(window.UnbxdAnalyticsConf);
         }
 
         if (unbxdCore.options.hashMode) {
-            window.onhashchange = unbxdCore.onLocationChange.bind(unbxdCore);
+            window.onhashchange = onUrlBack ? onUrlBack.bind(this)(unbxdCore): unbxdCore.onLocationChange.bind(unbxdCore);
+        } else {
+            const backHandler = onUrlBack ? onUrlBack.bind(this): ()=>{
+                unbxdCore.state.isBack = true;
+                unbxdCore.renderFromUrl(window.location.search.replace('?',''));
+            }
+            window.addEventListener('popstate', backHandler);
         }
     }
 
