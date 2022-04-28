@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/unbxd/react-search-JS-SDK/compare/v1.1.2...v1.2.0) (2022-03-24)
+
+
+### Features
+
+* **requestif:** added request id ([151ca5a](https://github.com/unbxd/react-search-JS-SDK/commit/151ca5a3b4bcdc7a0ac86eba45658dd99ba1e56b))
+
 ## [1.1.1](https://github.com/unbxd/react-search-JS-SDK/compare/v1.1.0...v1.1.1) (2022-03-24)
 
 
