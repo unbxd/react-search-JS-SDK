@@ -86,9 +86,9 @@ const Search = () => {
         } else {
             // if hash already exists, to retain the current state, push on history
             if (routeLocation.hash && routeHistory.action !== 'POP') {
-                routeHistory.push(`${routeLocation.pathname}#${hash}`);
+                routeHistory.push(`${routeLocation.pathname}?${hash}`);
             } else if (hash) {
-                routeHistory.replace(`${routeLocation.pathname}#${hash}`);
+                routeHistory.replace(`${routeLocation.pathname}?${hash}`);
             }
             return true;
         }
@@ -105,6 +105,12 @@ const Search = () => {
             loaderComponent={<LoaderComponent />}
             errorComponent={<ErrorComponent />}
             onRouteChange={handleRouteChange}
+            onUrlBack = {
+                function() {
+                    this.state.unbxdCore.state.isBack = true;
+                    this.state.unbxdCore.renderFromUrl(window.location.search.replace('?',''));
+                }
+            }
         >
             <MobileModal showFilters={showFilters} handleClose={handleClose} />
             <SearchBar
