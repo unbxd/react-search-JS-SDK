@@ -133,7 +133,7 @@ class CombinedFacetsContainer extends React.PureComponent {
 
         const handleMultilevelFacetClick = (currentItem) => {
             const { name, filterField: parent, level } = currentItem;
-            const categoryObject = { parent, level, name };
+            const categoryObject = { parent, level, name:unbxdCore.encodeCategoryFacetValue(name) };
             const { helpers } = this.props;
             const { getUpdatedResults } = helpers;
             const currentMultilevelFacet = formattedMultilevelFacets.find(
@@ -158,7 +158,7 @@ class CombinedFacetsContainer extends React.PureComponent {
                             setCategoryFilter({
                                 parent,
                                 level: breadcrumbLevel,
-                                name: breadcrumbValue
+                                name: unbxdCore.encodeCategoryFacetValue(breadcrumbValue)
                             });
                         });
                         if (categoryObject.level >= highestBreadcrumbLevel) {
