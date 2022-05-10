@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/unbxd/react-search-JS-SDK/compare/v1.2.2...v1.2.3) (2022-05-10)
+
+
+### Bug Fixes
+
+* **combinedfacet:** combined facets were not handling the values with spaces and special characters ([28a7526](https://github.com/unbxd/react-search-JS-SDK/commit/28a752644e53e9d2aa549f162289cbedb9142a10))
+
 # [1.2.0](https://github.com/unbxd/react-search-JS-SDK/compare/v1.1.2...v1.2.0) (2022-03-24)
 
 
