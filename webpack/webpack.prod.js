@@ -22,6 +22,7 @@ module.exports = {
         theme: Path.resolve(__dirname, '../public/css/theme/index.scss'),
         reactSearch: Path.resolve(__dirname, '../src/index.js')
     },
+    // change it to 'development' for building in dev mode
     mode: 'production',
     output: {
         path: Path.join(__dirname, '../public/dist'),
@@ -53,6 +54,7 @@ module.exports = {
                 }
             }
         },
+        // comment minimizer to build in dev mode
         minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
         usedExports: true
     },
@@ -62,6 +64,7 @@ module.exports = {
             filename: 'css/[name].css',
             chunkFilename: '[id].css'
         }),
+        // comment CompressionPlugin block to avoid minified files for dev mode
         new CompressionPlugin({
             algorithm: 'gzip',
             filename(pathData) {
