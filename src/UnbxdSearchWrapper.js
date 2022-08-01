@@ -211,12 +211,17 @@ class UnbxdSearchWrapper extends Component {
                 getResults();
             }
             trackCategory(window.UnbxdAnalyticsConf);
-        } else if (
-            unbxdCore.getResponseObj() === null &&
-            urlParams[unbxdCore.options.searchQueryParam]
-        ) {
-            renderFromUrl();
-        } else if (refreshId !== prevProps.refreshId) {
+        } else if (unbxdCore.getResponseObj() === null) {
+            let urlParamsState = "";
+            if(productType === productTypes.CATEGORY) {
+                urlParamsState = urlParams[unbxdCore.options.browseQueryParam]
+            } else {
+                urlParamsState = urlParams[unbxdCore.options.searchQueryParam]
+            }
+            if (urlParamsState) {
+                renderFromUrl();
+            }
+        }  else if (refreshId !== prevProps.refreshId) {
             this.resetSearch();
             if (onRouteChange(unbxdCore, '', refreshId)) {
                 unbxdCore.options.productType = productType;
