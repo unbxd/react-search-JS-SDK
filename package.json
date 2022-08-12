@@ -1,6 +1,6 @@
 {
     "name": "@unbxd-ui/react-search-sdk",
-    "version": "1.2.8",
+    "version": "1.2.9",
     "description": "Unbxd React Search JS SDK",
     "main": "public/dist/js/reactSearch.js",
     "files": [
@@ -124,7 +124,7 @@
         "@semantic-release/git": "^9.0.0",
         "@semantic-release/release-notes-generator": "^9.0.1",
         "@storybook/theming": "^6.2.9",
-        "@unbxd-ui/unbxd-search-core": "^0.4.8",
+        "@unbxd-ui/unbxd-search-core": "^0.4.9",
         "prop-types": "^15.7.2",
         "semantic-release": "^17.3.0"
     },
