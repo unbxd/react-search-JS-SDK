@@ -58,42 +58,59 @@ function manageTextFacets(
 
             case manageStateTypes.REMOVE:
                 {
-                    const {
-                        [selectedFacetName]: currentFacetListAdd = [],
-                        ...remainingStateAdd
-                    } = add;
-                    const updatedFacetArrayAdd = currentFacetListAdd.filter(
-                        (fValue) => fValue.dataId !== selectedFacetId
-                    );
-
-                    const {
-                        [selectedFacetName]: currentFacetListRemove = [],
-                        ...remainingStateRemove
-                    } = remove;
-                    const updatedFacetArrayRemove = [
-                        ...currentFacetListRemove,
-                        currentFacet
-                    ];
-
                     updatedSelectedFacets = {
-                        add: {
-                            ...remainingStateAdd,
-                            [selectedFacetName]: updatedFacetArrayAdd
-                        },
-                        remove: {
-                            ...remainingStateRemove,
-                            [selectedFacetName]: updatedFacetArrayRemove
-                        }
+                        add: { ...add },
+                        remove: { ...remove }
                     };
-
+    
                     const list = mergeFacets(
                         updatedSelectedFacets,
                         lastSelectedTextFacets
                     );
-
+    
                     updatedSelectedFacets = { ...updatedSelectedFacets, list };
+    
+                    break;
                 }
-                break;
+                ////////////  DO NOT DELETE THIS  ////////////
+                // {
+                //     const {
+                //         [selectedFacetName]: currentFacetListAdd = [],
+                //         ...remainingStateAdd
+                //     } = add;
+                //     const updatedFacetArrayAdd = currentFacetListAdd.filter(
+                //         (fValue) => fValue.dataId !== selectedFacetId
+                //     );
+
+                //     const {
+                //         [selectedFacetName]: currentFacetListRemove = [],
+                //         ...remainingStateRemove
+                //     } = remove;
+                //     const updatedFacetArrayRemove = [
+                //         ...currentFacetListRemove,
+                //         currentFacet
+                //     ];
+
+                //     updatedSelectedFacets = {
+                //         add: {
+                //             ...remainingStateAdd,
+                //             [selectedFacetName]: updatedFacetArrayAdd
+                //         },
+                //         remove: {
+                //             ...remainingStateRemove,
+                //             [selectedFacetName]: updatedFacetArrayRemove
+                //         }
+                //     };
+
+                //     const list = mergeFacets(
+                //         updatedSelectedFacets,
+                //         lastSelectedTextFacets
+                //     );
+
+                //     updatedSelectedFacets = { ...updatedSelectedFacets, list };
+                // }
+                // break;
+                ////////////  DO NOT DELETE THIS  ////////////
 
             case manageStateTypes.APPLY: {
                 updatedSelectedFacets = {
