@@ -33,7 +33,7 @@ jobs:
                   key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
             - name: Install Dependencies
-              run: yarn install --frozen-lockfile
+              run: yarn install
 
             - name: Run Test
               run: yarn test
@@ -49,7 +49,7 @@ jobs:
             - name: Setup node
               uses: actions/setup-node@v2
               with:
-                  node-version: 12
+                  node-version: 14.17.1
 
             - name: Check Cache
               uses: actions/cache@v2
@@ -58,7 +58,7 @@ jobs:
                   key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
             - name: Install Dependencies
-              run: yarn install --frozen-lockfile
+              run: yarn install
 
             - name: Run Build
               run: yarn build
@@ -80,7 +80,7 @@ jobs:
             - name: Setup node
               uses: actions/setup-node@v2
               with:
-                  node-version: 12
+                  node-version: 14.17.1
 
             - name: Check Cache
               uses: actions/cache@v2
@@ -89,7 +89,7 @@ jobs:
                   key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
             - name: Install Dependencies
-              run: yarn install --frozen-lockfile
+              run: yarn install
 
             - name: Fetch Build
               uses: actions/download-artifact@v2
