@@ -28,7 +28,7 @@ const CombinedFilters = () => {
             searchable
             multilevelFacetItemComponent={<MultilevelFacetItemComponent />}
             minViewMore={3}
-            applyMultiple
+            applyMultiple={true}
             onFacetClick={onFacetClick}
         />
     );

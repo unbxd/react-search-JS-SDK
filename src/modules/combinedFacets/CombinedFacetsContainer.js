@@ -255,6 +255,8 @@ class CombinedFacetsContainer extends React.PureComponent {
                 enableApplyFilters &&
                     manageRangeFacets(facetObj, facetName, dataId, eventType);
 
+                    
+
                 !isSelected &&
                     !enableApplyFilters &&
                     addRangeFacet(
@@ -266,9 +268,8 @@ class CombinedFacetsContainer extends React.PureComponent {
                         },
                         true
                     );
-                isSelected && applyMultiple;
-                !enableApplyFilters &&
-                    addRangeFacet(
+                isSelected && applyMultiple && !enableApplyFilters &&
+                addRangeFacet(
                         {
                             facetName,
                             start: valMin,

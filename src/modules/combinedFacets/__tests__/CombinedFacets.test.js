@@ -19,11 +19,13 @@ beforeAll(() => {
             });
         }
         if (request.includes('filter=brand_uFilter:"Scarpa"')) {
+            // console.log("range request");
             return Promise.resolve({
                 json: () => Promise.resolve(facetResponse)
             });
         }
-        if (request.includes('[200%20TO%20300]')) {
+        if (request.includes('filter=price:[200 TO 300]')) {
+            // console.log("range request");
             return Promise.resolve({
                 json: () => Promise.resolve(facetResponse)
             });
@@ -60,12 +62,13 @@ test('Match Snapshot for Combined Facets', async () => {
 });
 
 test('Test Combined Facet range click', async () => {
-    const { getByText } = render(
+    const { getByText, container } = render(
         <>
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >
+                <SelectedFacets />
                 <CombinedFacets />
                 <Products attributesMap={attributesMap} />
                 <div>
@@ -79,22 +82,26 @@ test('Test Combined Facet range click', async () => {
         expect(getByText('$ 200 - $ 300 - 60')).toBeInTheDocument();
         fireEvent.click(getByText('$ 200 - $ 300 - 60'));
     });
+    await waitFor(async () => {
+        expect(container.getElementsByClassName('UNX-selectedFacets__container').length).toBe(1);
+    });
+    await waitFor(async () => {
+        expect(getByText('$ 200 - $ 300 - 60')).toBeInTheDocument();
+        fireEvent.click(getByText('$ 200 - $ 300 - 60'));
+    });
     await waitFor(() => {
-        expect(
-            getByText(
-                'Salomon OUTblast TS CSWP Mens Hiking Boots - Black/Black/Black'
-            )
-        ).toBeInTheDocument();
+        expect(container.getElementsByClassName('UNX-selectedFacets__container').length).toBe(0);
     });
 });
 
 test('Test Combined Facet text click', async () => {
-    const { getByText, getAllByText } = render(
+    const { getByText, getAllByText, container } = render(
         <>
             <UnbxdSearchWrapper
                 siteKey="wildearthclone-neto-com-au808941566310465"
                 apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
             >
+                <SelectedFacets />
                 <CombinedFacets />
                 <Products attributesMap={attributesMap} />
                 <div>
@@ -108,14 +115,16 @@ test('Test Combined Facet text click', async () => {
         expect(getByText('Scarpa - 18')).toBeInTheDocument();
         fireEvent.click(getByText('Scarpa - 18'));
     });
-    await waitFor(() => {
-        expect(
-            getByText(
-                'Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots'
-            )
-        ).toBeInTheDocument();
+    await waitFor(async () => {
+        expect(container.getElementsByClassName('UNX-selectedFacets__container').length).toBe(1);
+    });
+    await waitFor(async () => {
         expect(getByText('Scarpa - 18')).toBeInTheDocument();
-        fireEvent.click(getAllByText('Clear')[0]);
+        fireEvent.click(getByText('Scarpa - 18'));
+    });
+    await waitFor( () => {    
+        expect(getByText('Scarpa - 18').classList.contains('-selected')).toBe(false)
+        expect(container.getElementsByClassName('UNX-selectedFacets__container').length).toBe(0);
     });
 });
 
@@ -137,7 +146,7 @@ test('Test Combined Facet category click', async () => {
 
     await waitFor(async () => {
         expect(getByText('All')).toBeInTheDocument();
-        fireEvent.click(getByText('All'));
+        //fireEvent.click(getByText('All'));
     });
     await waitFor(() => {
         expect(
@@ -148,62 +157,3 @@ test('Test Combined Facet category click', async () => {
     });
 });
 
-test('Test selected facet click on range Facet', async () => {
-    const { getByText, container } = render(
-        <>
-            <UnbxdSearchWrapper
-                siteKey="wildearthclone-neto-com-au808941566310465"
-                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >
-                <FacetActions showApplyFilter={false} showClearFilter={false} />
-                <SelectedFacets />
-                <CombinedFacets />
-                <Products attributesMap={attributesMap} />
-                <div>
-                    <SearchBox defaultSearch="shoes" />
-                </div>
-            </UnbxdSearchWrapper>
-        </>
-    );
-
-    await waitFor(async () => {
-        expect(getByText('$ 200 - $ 300 - 60')).toBeInTheDocument();
-        fireEvent.click(getByText('$ 200 - $ 300 - 60'));
-    });
-    await waitFor(() => {
-        expect(
-            container.getElementsByClassName('UNX-selectedFacets__container')
-                .length
-        ).toBe(1);
-    });
-});
-
-test('Test selected facet click on text Facet', async () => {
-    const { getByText, container } = render(
-        <>
-            <UnbxdSearchWrapper
-                siteKey="wildearthclone-neto-com-au808941566310465"
-                apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
-            >
-                <SelectedFacets />
-                <CombinedFacets />
-                <Products attributesMap={attributesMap} />
-                <div>
-                    <SearchBox defaultSearch="shoes" />
-                </div>
-            </UnbxdSearchWrapper>
-        </>
-    );
-
-    await waitFor(() => {
-        expect(
-            container.getElementsByClassName('UNX-selectedFacets__container')
-                .length
-        ).toBe(1);
-        fireEvent.click(getByText('Clear'));
-        expect(
-            container.getElementsByClassName('UNX-selectedFacets__container')
-                .length
-        ).toBe(0);
-    });
-});
