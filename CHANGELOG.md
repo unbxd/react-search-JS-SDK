@@ -1,3 +1,9 @@
+### Bug Fixes and feature enhancements:
+- Fix Combined Facets functionality of click, reclick, refresh, etc
+- Fixed combined facets test cases, changed logic
+- Retain custom keys from url that are non unbxd keys 
+- Use core helper function to fix reload and special chars issue in url via encoding
+
 ## [1.2.3](https://github.com/unbxd/react-search-JS-SDK/compare/v1.2.2...v1.2.3) (2022-05-10)
 
 
