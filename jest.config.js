@@ -5,9 +5,12 @@ module.exports = {
     setupFiles: ['./jestSetup/unbxdAnalytics.js'],
     // Jest transformations -- this adds support for TypeScript
     // using ts-jest
+    // transform: {
+    //     '\\.(js|jsx)?$': 'babel-jest'
+    // },
     transform: {
-        '\\.(js|jsx)?$': 'babel-jest'
-    },
+        "^.+\\.(js|jsx)$": "babel-jest"
+     },
 
     // Test spec file resolution pattern
     // Matches parent folder `__tests__` and filename
