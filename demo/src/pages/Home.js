@@ -38,11 +38,11 @@ const Home = (props) => {
             </div>
             <div className="UNX-searchResults__container">
                 <div className="UNX-searchFacet__container">
-                    {/* <MultilevelFilters /> */}
+                    <MultilevelFilters />
                     {/* <FacetApplyClear /> */}
-                    {/* <RangeFilters />
-                    <TextFilters /> */}
-                    <CombinedFilters />
+                    <RangeFilters />
+                    <TextFilters />
+                    {/* <CombinedFilters /> */}
                     {/* <FacetApplyClear /> */}
                 </div>
 
