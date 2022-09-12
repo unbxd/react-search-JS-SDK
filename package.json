@@ -126,7 +126,7 @@
         "@storybook/theming": "^6.2.9",
         "@unbxd-ui/unbxd-search-core": "^0.4.14",
         "prop-types": "^15.7.2",
-        "semantic-release": "^17.3.0"
+        "semantic-release": "^19.0.3"
     },
     "keywords": [
         "React Search",
