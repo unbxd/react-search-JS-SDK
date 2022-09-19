@@ -6,15 +6,16 @@ const searchConfigurations = {
     defaultFilters: {},
     pageSize: 10,
     facetMultiSelect: true,
-    updateUrls: false,
+    updateUrls: true,
     extraParams: {
         version: 'V2'
     },
     facetMultilevel: true,
     facetDepth: 6,
     applyMultipleFilters: false,
-    hashMode: true,
-    enableUnbxdAnalytics: true
+    hashMode: false,
+    enableUnbxdAnalytics: true,
+    allowExternalUrlParams: true
 };
 
 export default searchConfigurations;
