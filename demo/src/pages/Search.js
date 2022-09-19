@@ -86,9 +86,9 @@ const Search = () => {
         } else {
             // if hash already exists, to retain the current state, push on history
             if (routeLocation.hash && routeHistory.action !== 'POP') {
-                routeHistory.push(`${routeLocation.pathname}?${hash}`);
+                routeHistory.push(`${routeLocation.pathname}#${hash}`);
             } else if (hash) {
-                routeHistory.replace(`${routeLocation.pathname}?${hash}`);
+                routeHistory.replace(`${routeLocation.pathname}#${hash}`);
             }
             return true;
         }
@@ -96,21 +96,22 @@ const Search = () => {
 
     return (
         <UnbxdSearchWrapper
-        siteKey="wildearthclone-neto-com-au808941566310465"
-        apiKey="e6959ae0b643d51b565dc3e01bf41ec1"
+        siteKey="ss-unbxd-gcp-Gardner-White-STG8241646781056"
+        apiKey="e2082aeb3a7f0ac8955c879daf7673e8"
             getCategoryId={getCategoryId}
             searchConfigurations={configs}
             productType={productType}
             refreshId={refreshId}
+            allowExternalUrlParams={true}
             loaderComponent={<LoaderComponent />}
             errorComponent={<ErrorComponent />}
-            onRouteChange={handleRouteChange}
-            onUrlBack = {
-                function() {
-                    this.state.unbxdCore.state.isBack = true;
-                    this.state.unbxdCore.renderFromUrl(window.location.search.replace('?',''));
-                }
-            }
+            // onRouteChange={handleRouteChange}
+            // onUrlBack = {
+            //     function() {
+            //         this.state.unbxdCore.state.isBack = true;
+            //         this.state.unbxdCore.renderFromUrl(window.location.search.replace('?',''));
+            //     }
+            // }
         >
             <MobileModal showFilters={showFilters} handleClose={handleClose} />
             <SearchBar

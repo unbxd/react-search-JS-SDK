@@ -72,7 +72,8 @@ const SearchBar = (props) => {
         });
         setCategoryPathLinks(updatedPathLinks);
         window.UnbxdAnalyticsConf = {};
-        window.UnbxdAnalyticsConf['page'] = currentCategoryItem.path;
+        window.UnbxdAnalyticsConf['page'] = "itemGroupIds:1800"
+        // window.UnbxdAnalyticsConf['page'] = currentCategoryItem.path;
         window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         onProductTypeChange('CATEGORY');
         setRefreshId(refreshId + 1);
