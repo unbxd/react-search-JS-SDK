@@ -12,7 +12,7 @@ const searchConfigurations = {
     facetMultilevel: true,
     facetDepth: 6,
     applyMultipleFilters: false,
-    hashMode: false,
+    hashMode: true,
     enableUnbxdAnalytics: false
 };
 

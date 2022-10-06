@@ -71,10 +71,10 @@ const SearchBar = (props) => {
             return { ...links, isSelected: false };
         });
         setCategoryPathLinks(updatedPathLinks);
-        window.UnbxdAnalyticsConf = {};
-        window.UnbxdAnalyticsConf['page'] = "itemGroupIds:1800"
+        // window.UnbxdAnalyticsConf = {};
+        // window.UnbxdAnalyticsConf['page'] = "itemGroupIds:1800"
         // window.UnbxdAnalyticsConf['page'] = currentCategoryItem.path;
-        window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
+        // window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         onProductTypeChange('CATEGORY');
         setRefreshId(refreshId + 1);
     };

@@ -5,7 +5,7 @@ const categoryLinks = [
         label: 'Tops'
     },
     {
-        path: 'categoryPath:cat1730035',
+        path: 'itemGroupIds:185',
         id: 'accessories',
         label: 'Jeans'
     },
