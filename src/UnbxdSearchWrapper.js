@@ -162,12 +162,12 @@ class UnbxdSearchWrapper extends Component {
                 };
             });
             unbxdCore.options.productType = productTypes.CATEGORY;
-            unbxdCore.getResults();
-            // if(Object.keys(urlParams).length) {
-            //     unbxdCore.renderFromUrl();
-            // } else {
-            //     unbxdCore.getResults();
-            // }
+            // unbxdCore.getResults();
+            if(Object.keys(urlParams).length) {
+                unbxdCore.renderFromUrl();
+            } else {
+                unbxdCore.getResults();
+            }
             trackCategory(window.UnbxdAnalyticsConf);
         }
 
