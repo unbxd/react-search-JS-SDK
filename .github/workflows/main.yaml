@@ -9,7 +9,9 @@ on:
 env:
     CODECOV_TOKEN: '${{ secrets.CODECOV_TOKEN }}'
     GITHUB_TOKEN: '${{ secrets.REACT_GITHUB_TOKEN }}'
+    NPM_TOKEN_REACT_SDK: '${{ secrets.NPM_TOKEN_REACT_SDK }}'
     NPM_TOKEN: '${{ secrets.NPM_TOKEN }}'
+    
 defaults:
     run:
         shell: bash
@@ -38,10 +40,11 @@ jobs:
             - name: Run Test
               run: yarn test
 
-    build:
-        name: Build ⚙️
-        runs-on: ubuntu-latest
+    release:
+        name: Release
         needs: test
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        runs-on: ubuntu-latest
         steps:
             - name: Pre-reqs
               uses: actions/checkout@v2
@@ -49,7 +52,7 @@ jobs:
             - name: Setup node
               uses: actions/setup-node@v2
               with:
-                  node-version: 14.17.1
+                  node-version: 15
 
             - name: Check Cache
               uses: actions/cache@v2
@@ -58,56 +61,33 @@ jobs:
                   key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
             - name: Install Dependencies
-              run: yarn install
+              run: yarn install --frozen-lockfile
 
             - name: Run Build
               run: yarn build
 
-            - name: Save Build
-              uses: actions/upload-artifact@v2
+            - name: Extract version
+              id: extract_version
+              uses: Saionaro/extract-package-version@v1.0.6
+
+            - name: Print version
+              run: echo ${{ steps.extract_version.outputs.version }}
+
+            - name: Publish package
+              uses: JS-DevTools/npm-publish@v1
               with:
-                  name: dist
-                  path: ./public/dist
+                token: ${{ secrets.NPM_TOKEN_JS_LIBRARY }}
 
-    publish:
-        name: Publish 🚀
-        runs-on: ubuntu-latest
-        needs: build
-        steps:
-            - name: Pre-reqs
-              uses: actions/checkout@v2
+            - name: Slack Notification
+              uses: rtCamp/action-slack-notify@v2
+              if: always()
+              env:
+                SLACK_WEBHOOK: ${{ secrets.PLATFORM_SLACK_WEBHOOK_URL }}
+                SLACK_USERNAME: "React SDK" 
+                SLACK_MSG_AUTHOR: ${{ github.actor }} 
+                SLACK_CHANNEL: '#ss-builds'
+                SLACK_COLOR: ${{ job.status }}
+                SLACK_ICON: https://github.com/rtCamp.png?size=48
+                SLACK_TITLE: Image
+                SLACK_MESSAGE: ${{ steps.extract_version.outputs.version }}
 
-            - name: Setup node
-              uses: actions/setup-node@v2
-              with:
-                  node-version: 14.17.1
-
-            - name: Check Cache
-              uses: actions/cache@v2
-              with:
-                  path: '**/node_modules'
-                  key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
-            - name: Install Dependencies
-              run: yarn install
-
-            - name: Fetch Build
-              uses: actions/download-artifact@v2
-              with:
-                  name: dist
-                  path: ./public/dist
-
-            - name: Run Semantic Release
-              id: semantic-release-step
-              uses: cycjimmy/semantic-release-action@v2.5.3
-
-            - name: Configure AWS Credentials
-              uses: aws-actions/configure-aws-credentials@v1
-              with:
-                  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                  aws-region: ${{ secrets.AWS_REGION }}
-
-            - name: Run S3 Upload
-              if: steps.semantic-release-step.outputs.new_release_published
-              run: yarn deploy-s3 ${{ steps.semantic-release-step.outputs.new_release_version }}

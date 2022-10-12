@@ -1,6 +1,6 @@
 {
     "name": "@unbxd-ui/react-search-sdk",
-    "version": "1.2.21",
+    "version": "1.2.22",
     "description": "Unbxd React Search JS SDK",
     "main": "public/dist/js/reactSearch.js",
     "files": [
@@ -16,38 +16,10 @@
         "build:tailwind:theme": "postcss public/css/theme/base.scss -o public/css/theme/index.scss",
         "commit": "cz",
         "pre-pack": "yarn build && yarn pack",
-        "semantic-release": "semantic-release",
         "test": "jest && codecov",
         "only-test": "jest",
         "test:watch": "jest --watch",
         "deploy-s3": "node s3Upload.js"
-    },
-    "release": {
-        "branches": [
-            "master",
-            "develop",
-            {
-                "name": "feature-*",
-                "prerelease": true
-            }
-        ],
-        "plugins": [
-            "@semantic-release/commit-analyzer",
-            "@semantic-release/release-notes-generator",
-            "@semantic-release/changelog",
-            "@semantic-release/npm",
-            [
-                "@semantic-release/git",
-                {
-                    "assets": [
-                        "package.json",
-                        "CHANGELOG.md"
-                    ],
-                    "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-                }
-            ],
-            "@semantic-release/github"
-        ]
     },
     "devDependencies": {
         "@babel/core": "^7.12.3",
@@ -65,7 +37,7 @@
         "@storybook/addon-storysource": "6.1.11",
         "@storybook/addons": "6.1.11",
         "@storybook/react": "^6.5.10",
-        "@storybook/storybook-deployer": "^2.8.6",
+        "@storybook/storybook-deployer": "^2.8.12",
         "@testing-library/jest-dom": "^5.11.5",
         "@testing-library/react": "^11.1.2",
         "add-asset-html-webpack-plugin": "^3.1.3",
@@ -121,7 +93,7 @@
     "dependencies": {
         "@babel/plugin-transform-runtime": "^7.12.10",
         "@storybook/theming": "^6.2.9",
-        "@unbxd-ui/unbxd-search-core": "^0.4.20",
+        "@unbxd-ui/unbxd-search-core": "^0.4.21",
         "prop-types": "^15.7.2"
     },
     "keywords": [
