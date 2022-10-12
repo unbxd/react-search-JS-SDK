@@ -123,7 +123,12 @@ class UnbxdSearchWrapper extends Component {
     }
 
     componentDidMount() {
+        /** To set category page in local */
+        // window.UnbxdAnalyticsConf = {};
+        // window.UnbxdAnalyticsConf['page'] = 'itemGroupIds:1800';
+        // window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         const { unbxdCore } = this.state;
+        const urlParams = unbxdCore.getQueryParams() || {};
         const {
             onUrlBack
         } = this.props;
@@ -157,7 +162,12 @@ class UnbxdSearchWrapper extends Component {
                 };
             });
             unbxdCore.options.productType = productTypes.CATEGORY;
-            unbxdCore.getResults();
+            // unbxdCore.getResults();
+            if(Object.keys(urlParams).length) {
+                unbxdCore.renderFromUrl();
+            } else {
+                unbxdCore.getResults();
+            }
             trackCategory(window.UnbxdAnalyticsConf);
         }
 
@@ -223,7 +233,18 @@ class UnbxdSearchWrapper extends Component {
             }
         }  else if (refreshId !== prevProps.refreshId) {
             this.resetSearch();
-            if (onRouteChange(unbxdCore, '', refreshId)) {
+            if (typeof onRouteChange === "function") {
+                if(onRouteChange(unbxdCore, '', refreshId)) {
+                    unbxdCore.options.productType = productType;
+                    const currentQuery =
+                        urlParams[unbxdCore.options.searchQueryParam];
+                    if (productType === productTypes.SEARCH) {
+                        getResults(currentQuery);
+                    } else {
+                        getResults();
+                    }
+                }
+            } else {
                 unbxdCore.options.productType = productType;
                 const currentQuery =
                     urlParams[unbxdCore.options.searchQueryParam];

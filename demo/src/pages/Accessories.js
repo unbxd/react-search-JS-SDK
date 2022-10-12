@@ -21,7 +21,7 @@ const Accessories = () => {
     const { productType, setProductType } = useContext(ProductTypeContext);
     useEffect(() => {
         window.UnbxdAnalyticsConf = {};
-        window.UnbxdAnalyticsConf['page'] = 'categoryPath:cat1730035';
+        window.UnbxdAnalyticsConf['page'] = 'itemGroupIds:185';
         window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         setProductType('CATEGORY');
     }, []);
@@ -37,11 +37,11 @@ const Accessories = () => {
             <div className="UNX-searchResults__container">
                 <div className="UNX-searchFacet__container">
                     <MultilevelFilters />
-                    <FacetApplyClear />
+                    {/* <FacetApplyClear /> */}
                     <RangeFilters />
                     <TextFilters />
                     {/* <CombinedFilters/> */}
-                    <FacetApplyClear />
+                    {/* <FacetApplyClear /> */}
                 </div>
 
                 <div className="UNX-searchResult__container">

@@ -3,10 +3,10 @@ const searchConfigurations = {
     searchEndPoint: 'https://search.unbxd.io/',
     searchQueryParam: 'q',
     browseQueryParam: 'p',
-    defaultFilters: {},
-    pageSize: 10,
+    // defaultFilters: {},
+    // pageSize: 10,
     facetMultiSelect: true,
-    updateUrls: false,
+    updateUrls: true,
     extraParams: {
         version: 'V2'
     },
@@ -14,7 +14,11 @@ const searchConfigurations = {
     facetDepth: 6,
     applyMultipleFilters: false,
     hashMode: true,
-    enableUnbxdAnalytics: true
+    enableUnbxdAnalytics: true,
+    allowExternalUrlParams: true,
+    defaultFilters: null,
+    pageSize: 30,
+    allowExternalUrlParams: true,
 };
 
 export default searchConfigurations;
