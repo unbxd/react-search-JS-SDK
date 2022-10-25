@@ -17,20 +17,23 @@ export const SearchButton = ({ onSearchBoxSubmit }) => {
     );
 };
 
-export const InputComponent = ({
-    query,
-    onSearchBoxChange,
-    onSearchBoxClear
-}) => {
-    return (
-        <input
-            className="UNX-searchbox__input"
-            value={query}
-            onChange={onSearchBoxChange}
-            onClear={onSearchBoxClear}
-        />
-    );
-};
+// export const InputComponent = ({
+//     query,
+//     onSearchBoxChange,
+//     onSearchBoxClear,
+//     lastSearchedQuery,
+//     productType,
+// }) => {
+//     return (
+//         <input
+//             className="UNX-searchbox__input"
+//             value={query}
+//             onChange={onSearchBoxChange}
+//             onClear={onSearchBoxClear}
+//         />
+//     );
+// };
+
 export const SubmitComponent = ({ onSearchBoxSubmit }) => {
     return <div onClick={onSearchBoxSubmit}> Submit</div>;
 };
@@ -48,11 +51,13 @@ const SearchBar = (props) => {
     } = props;
     const [categoryPathLinks, setCategoryPathLinks] = useState(categoryLinks);
     const { enableFilters, setEnableFilters } = useContext(ProductTypeContext);
-    const history = useHistory();
+    // const history = useHistory();
     const handleSubmit = () => {
         if (productType !== 'SEARCH') {
             onProductTypeChange('SEARCH');
-            history.push('/');
+            window.history.pushState({
+                    replace: true
+                },"","/")
         }
         if (!enableFilters) {
             setEnableFilters(true);
@@ -71,10 +76,10 @@ const SearchBar = (props) => {
             return { ...links, isSelected: false };
         });
         setCategoryPathLinks(updatedPathLinks);
-        // window.UnbxdAnalyticsConf = {};
+        window.UnbxdAnalyticsConf = {};
         // window.UnbxdAnalyticsConf['page'] = "itemGroupIds:1800"
-        // window.UnbxdAnalyticsConf['page'] = currentCategoryItem.path;
-        // window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
+        window.UnbxdAnalyticsConf['page'] = currentCategoryItem.path;
+        window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         onProductTypeChange('CATEGORY');
         setRefreshId(refreshId + 1);
     };
@@ -103,7 +108,7 @@ const SearchBar = (props) => {
             />
             <div className="UNX-header__search">
                 <SearchBox
-                    inputComponent={<InputComponent />}
+                    // inputComponent={<InputComponent />}
                     submitComponent={<SearchButton />}
                     placeholder="Search Demo"
                     onSubmit={handleSubmit}

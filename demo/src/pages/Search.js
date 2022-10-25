@@ -18,6 +18,8 @@ import { scrollTop } from '../utils';
 export const getCategoryId = () => {
     if (window.UnbxdAnalyticsConf && window.UnbxdAnalyticsConf['page']) {
         return encodeURIComponent(window.UnbxdAnalyticsConf['page']);
+    } else {
+        return "";
     }
 };
 
@@ -94,6 +96,10 @@ const Search = () => {
         }
     };
 
+    const onUrlChange = (currentUrl, hash) => {
+        
+    }
+
     return (
         <UnbxdSearchWrapper
         siteKey="ss-unbxd-gcp-Gardner-White-STG8241646781056"
@@ -105,6 +111,7 @@ const Search = () => {
             allowExternalUrlParams={true}
             loaderComponent={<LoaderComponent />}
             errorComponent={<ErrorComponent />}
+            onUrlChange={onUrlChange}
             // onRouteChange={handleRouteChange}
             // onUrlBack = {
             //     function() {

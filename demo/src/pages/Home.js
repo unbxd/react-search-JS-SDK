@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useLayoutEffect } from 'react';
 
 import ProductsListing from '../components/ProductsListing';
 import SpellChecker from '../components/SpellChecker';
@@ -20,7 +20,7 @@ import { ProductTypeContext } from '../context';
 const Home = (props) => {
     const { setRefreshId } = props;
     const { productType, setProductType } = useContext(ProductTypeContext);
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (productType === 'CATEGORY') {
             window.UnbxdAnalyticsConf = {};
             setProductType('SEARCH');
