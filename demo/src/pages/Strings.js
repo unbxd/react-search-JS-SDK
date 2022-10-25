@@ -20,7 +20,6 @@ import { ProductTypeContext } from '../context';
 const Strings = () => {
     const { productType, setProductType } = useContext(ProductTypeContext);
     useEffect(() => {
-        debugger;
         window.UnbxdAnalyticsConf = {};
         window.UnbxdAnalyticsConf['page'] = 'itemGroupIds:1800';
         window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';

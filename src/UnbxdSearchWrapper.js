@@ -127,6 +127,7 @@ class UnbxdSearchWrapper extends Component {
         // window.UnbxdAnalyticsConf = {};
         // window.UnbxdAnalyticsConf['page'] = 'itemGroupIds:1800';
         // window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
+        debugger;
         const { unbxdCore } = this.state;
         const urlParams = unbxdCore.getQueryParams() || {};
         const {
@@ -210,11 +211,11 @@ class UnbxdSearchWrapper extends Component {
                 return {
                     ...currentState,
                     categoryId: currentCategoryId,
-                    productType: productTypes.CATEGORY
+                    productType: productTypes.CATEGORY,
                 };
             });
             unbxdCore.options.productType = productTypes.CATEGORY;
-            if (categoryId.length === 0 && Object.keys(urlParams).length) {
+            if (Object.keys(urlParams).length) {
                 renderFromUrl();
             } else {
                 this.resetSearch();
@@ -249,7 +250,16 @@ class UnbxdSearchWrapper extends Component {
                 const currentQuery =
                     urlParams[unbxdCore.options.searchQueryParam];
                 if (productType === productTypes.SEARCH) {
-                    getResults(currentQuery);
+                    if(currentQuery) {
+                        if(Object.keys(urlParams).length > 0) {
+                            renderFromUrl();
+                        } else {
+                            getResults(currentQuery);
+                        }
+                    } else {
+                        window.history.go();
+                    }
+                    
                 } else {
                     getResults();
                 }
