@@ -123,11 +123,6 @@ class UnbxdSearchWrapper extends Component {
     }
 
     componentDidMount() {
-        /** To set category page in local */
-        // window.UnbxdAnalyticsConf = {};
-        // window.UnbxdAnalyticsConf['page'] = 'itemGroupIds:1800';
-        // window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
-        debugger;
         const { unbxdCore } = this.state;
         const urlParams = unbxdCore.getQueryParams() || {};
         const {
@@ -257,6 +252,7 @@ class UnbxdSearchWrapper extends Component {
                             getResults(currentQuery);
                         }
                     } else {
+                        /** Can also be config based inside onUrlChange for more accuracy */
                         window.history.go();
                     }
                     
