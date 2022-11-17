@@ -16,15 +16,19 @@ import ProductViewTypes from '../components/ProductViewTypes';
 import ProductsSize from '../components/ProductsSize';
 import FacetApplyClear from '../components/FacetApplyClear';
 import { ProductTypeContext } from '../context';
+import { useLayoutEffect } from 'react';
 
 const Strings = () => {
     const { productType, setProductType } = useContext(ProductTypeContext);
     useEffect(() => {
+        debugger;
+        if(location.href.indexOf("strings") > 0) {
         window.UnbxdAnalyticsConf = {};
         window.UnbxdAnalyticsConf['page'] = 'itemGroupIds:1800';
         window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         setProductType('CATEGORY');
-    }, []);
+        }
+    });
     return (
         <main className="UNX-search__container">
             <div className="UNX-searchMeta__container">

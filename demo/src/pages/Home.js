@@ -20,7 +20,8 @@ import { ProductTypeContext } from '../context';
 const Home = (props) => {
     const { setRefreshId } = props;
     const { productType, setProductType } = useContext(ProductTypeContext);
-    useLayoutEffect(() => {
+    useEffect(() => {
+        debugger;
         if (productType === 'CATEGORY') {
             window.UnbxdAnalyticsConf = {};
             setProductType('SEARCH');

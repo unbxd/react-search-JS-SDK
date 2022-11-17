@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
+// import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
 //local filepath for js core
-// import UnbxdSearch from '../../search-JS-core/src/index';
+import UnbxdSearch from '../../search-JS-core/src/index';
 // import UnbxdSearch from '../src/core/unbxdSdk';
 
 import { AppContextProvider } from './common/context';
@@ -172,6 +172,19 @@ class UnbxdSearchWrapper extends Component {
         } else {
             const backHandler = onUrlBack ? onUrlBack.bind(this): ()=>{
                 unbxdCore.state.isBack = true;
+                let unbxdParam = unbxdCore.checkIfUnbxdKey();
+            
+                if(!unbxdParam) {
+                    /** Url is redirected via history state manipulation, but needs to be
+                     * reloaded as well
+                     * Use case: Base Home Page
+                     */
+                    history.go();
+                    return;
+                } 
+
+                // unbxdCore.renderFromUrl(unbxdCore.state);
+                debugger;
                 unbxdCore.renderFromUrl(window.location.search.replace('?',''));
             }
             window.addEventListener('popstate', backHandler);
@@ -179,6 +192,7 @@ class UnbxdSearchWrapper extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        debugger;
         const {
             productType,
             onRouteChange,

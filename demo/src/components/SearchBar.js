@@ -6,6 +6,7 @@ import { ProductTypeContext } from '../context';
 import CategoryLinks from './CategoryLinks';
 import MobileMenu from './MobileMenu';
 import { categoryLinks } from '../config';
+import { useEffect } from 'react';
 
 export const SearchButton = ({ onSearchBoxSubmit }) => {
     return (
@@ -43,7 +44,7 @@ export const ClearComponent = ({ onSearchBoxClear }) => {
 
 const SearchBar = (props) => {
     const {
-        onProductTypeChange,
+        setProductType,
         productType,
         handleShow,
         refreshId,
@@ -51,17 +52,24 @@ const SearchBar = (props) => {
     } = props;
     const [categoryPathLinks, setCategoryPathLinks] = useState(categoryLinks);
     const { enableFilters, setEnableFilters } = useContext(ProductTypeContext);
+    // const routeHistory = useHistory();
+
+
     // const history = useHistory();
     const handleSubmit = () => {
+        
         if (productType !== 'SEARCH') {
-            onProductTypeChange('SEARCH');
+            window.UnbxdAnalyticsConf = {};
+            setProductType('SEARCH');
             window.history.pushState({
                     replace: true
                 },"","/")
+            // routeHistory.push({pathname: "/", state: {replace: true});
         }
         if (!enableFilters) {
             setEnableFilters(true);
         }
+        // setRefreshId(refreshId + 1);
         return true;
     };
 
@@ -80,7 +88,7 @@ const SearchBar = (props) => {
         // window.UnbxdAnalyticsConf['page'] = "itemGroupIds:1800"
         window.UnbxdAnalyticsConf['page'] = currentCategoryItem.path;
         window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
-        onProductTypeChange('CATEGORY');
+        setProductType('CATEGORY');
         setRefreshId(refreshId + 1);
     };
 
@@ -98,7 +106,7 @@ const SearchBar = (props) => {
             <CategoryLinks
                 categoryPathLinks={categoryPathLinks}
                 handleCategoryLinkClick={handleCategoryLinkClick}
-                setProductType={onProductTypeChange}
+                setProductType={setProductType}
             />
             <MobileMenu
                 categoryPathLinks={categoryPathLinks}
