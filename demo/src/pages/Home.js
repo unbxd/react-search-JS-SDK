@@ -21,7 +21,6 @@ const Home = (props) => {
     const { setRefreshId } = props;
     const { productType, setProductType } = useContext(ProductTypeContext);
     useEffect(() => {
-        debugger;
         if (productType === 'CATEGORY') {
             window.UnbxdAnalyticsConf = {};
             setProductType('SEARCH');

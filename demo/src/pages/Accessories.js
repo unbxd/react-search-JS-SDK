@@ -16,7 +16,6 @@ import ProductViewTypes from '../components/ProductViewTypes';
 import ProductsSize from '../components/ProductsSize';
 import FacetApplyClear from '../components/FacetApplyClear';
 import { ProductTypeContext } from '../context';
-import { useLayoutEffect } from 'react';
 
 const Accessories = () => {
     const { productType, setProductType } = useContext(ProductTypeContext);

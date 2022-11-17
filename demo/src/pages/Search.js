@@ -14,8 +14,6 @@ import { searchConfigurations } from '../config';
 import MobileModal from '../components/MobileModal';
 import SearchBar from '../components/SearchBar';
 import { scrollTop } from '../utils';
-import { useEffect } from 'react';
-import { useLayoutEffect } from 'react';
 
 export const getCategoryId = () => {
     if (window.UnbxdAnalyticsConf && window.UnbxdAnalyticsConf['page']) {
@@ -97,14 +95,6 @@ const Search = () => {
             return true;
         }
     };
-
-    // const changeProductType = (e) => {
-    //     debugger;
-    // }
-    
-    // useLayoutEffect(() => {
-    //     window.addEventListener("popstate", changeProductType);
-    // }, []);
 
     return (
         <UnbxdSearchWrapper

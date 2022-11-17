@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
+import UnbxdSearch from '@unbxd-ui/unbxd-search-core';
 //local filepath for js core
-import UnbxdSearch from '../../search-JS-core/src/index';
+// import UnbxdSearch from '../../search-JS-core/src/index';
 // import UnbxdSearch from '../src/core/unbxdSdk';
 
 import { AppContextProvider } from './common/context';
@@ -167,6 +167,7 @@ class UnbxdSearchWrapper extends Component {
             trackCategory(window.UnbxdAnalyticsConf);
         }
 
+        /** Remove onurlback, create complete config based routing */
         if (unbxdCore.options.hashMode) {
             window.onhashchange = onUrlBack ? onUrlBack.bind(this)(unbxdCore): unbxdCore.onLocationChange.bind(unbxdCore);
         } else {
@@ -183,8 +184,6 @@ class UnbxdSearchWrapper extends Component {
                     return;
                 } 
 
-                // unbxdCore.renderFromUrl(unbxdCore.state);
-                debugger;
                 unbxdCore.renderFromUrl(window.location.search.replace('?',''));
             }
             window.addEventListener('popstate', backHandler);
@@ -192,7 +191,6 @@ class UnbxdSearchWrapper extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        debugger;
         const {
             productType,
             onRouteChange,

@@ -6,7 +6,6 @@ import { ProductTypeContext } from '../context';
 import CategoryLinks from './CategoryLinks';
 import MobileMenu from './MobileMenu';
 import { categoryLinks } from '../config';
-import { useEffect } from 'react';
 
 export const SearchButton = ({ onSearchBoxSubmit }) => {
     return (
