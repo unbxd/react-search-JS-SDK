@@ -20,11 +20,13 @@ import { ProductTypeContext } from '../context';
 const Strings = () => {
     const { productType, setProductType } = useContext(ProductTypeContext);
     useEffect(() => {
-        window.UnbxdAnalyticsConf = {};
-        window.UnbxdAnalyticsConf['page'] = 'itemGroupIds:1800';
-        window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
-        setProductType('CATEGORY');
-    }, []);
+        if(location.href.indexOf("strings") > 0) {
+            window.UnbxdAnalyticsConf = {};
+            window.UnbxdAnalyticsConf['page'] = 'itemGroupIds:1800';
+            window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
+            setProductType('CATEGORY');
+        }
+    });
     return (
         <main className="UNX-search__container">
             <div className="UNX-searchMeta__container">

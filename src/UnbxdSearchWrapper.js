@@ -123,10 +123,6 @@ class UnbxdSearchWrapper extends Component {
     }
 
     componentDidMount() {
-        /** To set category page in local */
-        // window.UnbxdAnalyticsConf = {};
-        // window.UnbxdAnalyticsConf['page'] = 'itemGroupIds:1800';
-        // window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
         const { unbxdCore } = this.state;
         const urlParams = unbxdCore.getQueryParams() || {};
         const {
@@ -171,11 +167,23 @@ class UnbxdSearchWrapper extends Component {
             trackCategory(window.UnbxdAnalyticsConf);
         }
 
+        /** Remove onurlback, create complete config based routing */
         if (unbxdCore.options.hashMode) {
             window.onhashchange = onUrlBack ? onUrlBack.bind(this)(unbxdCore): unbxdCore.onLocationChange.bind(unbxdCore);
         } else {
             const backHandler = onUrlBack ? onUrlBack.bind(this): ()=>{
                 unbxdCore.state.isBack = true;
+                let unbxdParam = unbxdCore.checkIfUnbxdKey();
+            
+                if(!unbxdParam) {
+                    /** Url is redirected via history state manipulation, but needs to be
+                     * reloaded as well
+                     * Use case: Base Home Page
+                     */
+                    history.go();
+                    return;
+                } 
+
                 unbxdCore.renderFromUrl(window.location.search.replace('?',''));
             }
             window.addEventListener('popstate', backHandler);
@@ -210,11 +218,11 @@ class UnbxdSearchWrapper extends Component {
                 return {
                     ...currentState,
                     categoryId: currentCategoryId,
-                    productType: productTypes.CATEGORY
+                    productType: productTypes.CATEGORY,
                 };
             });
             unbxdCore.options.productType = productTypes.CATEGORY;
-            if (categoryId.length === 0 && Object.keys(urlParams).length) {
+            if (Object.keys(urlParams).length) {
                 renderFromUrl();
             } else {
                 this.resetSearch();
@@ -249,7 +257,17 @@ class UnbxdSearchWrapper extends Component {
                 const currentQuery =
                     urlParams[unbxdCore.options.searchQueryParam];
                 if (productType === productTypes.SEARCH) {
-                    getResults(currentQuery);
+                    if(currentQuery) {
+                        if(Object.keys(urlParams).length > 0) {
+                            renderFromUrl();
+                        } else {
+                            getResults(currentQuery);
+                        }
+                    } else {
+                        /** Can also be config based inside onUrlChange for more accuracy */
+                        window.history.go();
+                    }
+                    
                 } else {
                     getResults();
                 }
