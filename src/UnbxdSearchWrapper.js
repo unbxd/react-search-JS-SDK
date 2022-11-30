@@ -180,7 +180,7 @@ class UnbxdSearchWrapper extends Component {
                      * reloaded as well
                      * Use case: Base Home Page
                      */
-                    history.go();
+                    unbxdCore.options.onNoUnbxdKeyRouting();
                     return;
                 } 
 
@@ -264,8 +264,7 @@ class UnbxdSearchWrapper extends Component {
                             getResults(currentQuery);
                         }
                     } else {
-                        /** Can also be config based inside onUrlChange for more accuracy */
-                        window.history.go();
+                        unbxdCore.options.onNoUnbxdKeyRouting();
                     }
                     
                 } else {
