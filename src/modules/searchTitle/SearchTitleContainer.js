@@ -26,7 +26,8 @@ const SearchTitleContainer = memo((props) => {
             numberOfProducts,
             productType,
             paginationType,
-            formatter
+            formatter,
+            unbxdCore
         };
     };
 

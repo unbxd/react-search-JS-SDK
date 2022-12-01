@@ -12,7 +12,8 @@ const SearchTitleWrapper = (props) => {
         numberOfProducts,
         productType,
         paginationType,
-        formatter
+        formatter,
+        unbxdCore
     } = props;
 
     if (searchQuery.length === 0 && numberOfProducts === 0) {
@@ -30,6 +31,12 @@ const SearchTitleWrapper = (props) => {
     const startProduct =
         paginationType === paginationTypes.FIXED_PAGINATION ? start + 1 : 1;
 
+        let responseObj = unbxdCore.state.responseObj || {};
+        let { redirect = {} } = responseObj;
+        if(Object.keys(redirect).length) {
+            return "";
+        }
+        
     return searchTitleItem ? (
         cloneElement(searchTitleItem, { ...props })
     ) : (
