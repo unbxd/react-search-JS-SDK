@@ -251,9 +251,13 @@ class ProductsWrapper extends React.PureComponent {
             numberOfProducts,
             onZeroResults,
             zeroResultsComponent,
-            priceUnit
+            priceUnit,
+            unbxdCore
         } = this.props;
         const { products, hasMoreResults } = this.state;
+
+        let responseObj = unbxdCore.state.responseObj;
+        let { redirect = {} } = responseObj || {};
 
         //return the prop based Zero results template
         if (
@@ -261,15 +265,20 @@ class ProductsWrapper extends React.PureComponent {
             zeroResultsComponent &&
             unbxdCoreStatus === searchStatus.READY
         ) {
-            return cloneElement(zeroResultsComponent, { query });
+            
+            if(!Object.keys(redirect).length) {
+                return cloneElement(zeroResultsComponent, { query });
+            }
         }
 
         //return the default Zero results template
         if (numberOfProducts === 0 && unbxdCoreStatus === searchStatus.READY) {
-            if (typeof onZeroResults !== 'undefined') {
-                onZeroResults(query);
+            if(!Object.keys(redirect).length) {
+                if (typeof onZeroResults !== 'undefined') {
+                    onZeroResults(query);
+                }
+                return <NoProducts />;
             }
-            return <NoProducts />;
         }
 
         const displayClickNScrollTrigger =
