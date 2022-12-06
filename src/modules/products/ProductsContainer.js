@@ -147,7 +147,8 @@ class ProductsContainer extends React.PureComponent {
             numberOfProducts,
             products,
             start,
-            priceUnit
+            priceUnit,
+            unbxdCore
         };
 
         const helpers = {
