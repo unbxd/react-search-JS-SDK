@@ -118,12 +118,12 @@ class UnbxdSearchWrapper extends Component {
             },
             priceUnit
         };
-
         this.initialResultLoad = true;
     }
 
     componentDidMount() {
         const { unbxdCore } = this.state;
+        unbxdCore.options.onBackFromRedirect(unbxdCore.options.hashMode);
         const urlParams = unbxdCore.getQueryParams() || {};
         const {
             onUrlBack
