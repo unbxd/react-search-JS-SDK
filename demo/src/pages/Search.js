@@ -18,6 +18,8 @@ import { scrollTop } from '../utils';
 export const getCategoryId = () => {
     if (window.UnbxdAnalyticsConf && window.UnbxdAnalyticsConf['page']) {
         return encodeURIComponent(window.UnbxdAnalyticsConf['page']);
+    } else {
+        return "";
     }
 };
 
@@ -117,7 +119,7 @@ const Search = () => {
         >
             <MobileModal showFilters={showFilters} handleClose={handleClose} />
             <SearchBar
-                onProductTypeChange={setProductType}
+                setProductType={setProductType}
                 productType={productType}
                 handleShow={handleShow}
                 refreshId={refreshId}

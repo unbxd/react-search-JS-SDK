@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useLayoutEffect } from 'react';
 
 import ProductsListing from '../components/ProductsListing';
 import SpellChecker from '../components/SpellChecker';
