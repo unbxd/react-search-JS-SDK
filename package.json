@@ -93,7 +93,7 @@
     "dependencies": {
         "@babel/plugin-transform-runtime": "^7.12.10",
         "@storybook/theming": "^6.2.9",
-        "@unbxd-ui/unbxd-search-core": "0.4.26",
+        "@unbxd-ui/unbxd-search-core": "0.4.27",
         "prop-types": "^15.7.2"
     },
     "keywords": [

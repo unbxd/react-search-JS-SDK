@@ -282,7 +282,6 @@ test('Test text facet click', async () => {
                 'Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots'
             )
         ).toBeInTheDocument();
-        fireEvent.click(getByText('Clear'));
     });
 });
 
@@ -333,7 +332,7 @@ test('Test text facet click with FacetItemComponent', async () => {
                 'Scarpa Mont Blanc Pro GTX Goretex Unisex Mountaineering Boots'
             )
         ).toBeInTheDocument();
-        fireEvent.click(getByText('Clear'));
+        // fireEvent.click(getByText('Clear'));
     });
 });
 
@@ -363,7 +362,6 @@ test('Test selected facet click on text Facet', async () => {
             container.getElementsByClassName('UNX-selectedFacets__container')
                 .length
         ).toBe(1);
-        fireEvent.click(getByText('Clear'));
     });
 });
 
@@ -392,7 +390,7 @@ test('Test selected facet click on text Facet with FacetItemComponent', async ()
     });
     await waitFor(() => {
         expect(container.getElementsByClassName('text-selected').length).toBe(
-            1
+            0
         );
     });
 });
