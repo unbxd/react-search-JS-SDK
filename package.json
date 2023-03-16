@@ -1,6 +1,6 @@
 {
     "name": "@unbxd-ui/react-search-sdk",
-    "version": "1.2.24",
+    "version": "1.2.25",
     "description": "Unbxd React Search JS SDK",
     "main": "public/dist/js/reactSearch.js",
     "files": [
@@ -93,7 +93,7 @@
     "dependencies": {
         "@babel/plugin-transform-runtime": "^7.12.10",
         "@storybook/theming": "^6.2.9",
-        "@unbxd-ui/unbxd-search-core": "0.4.22",
+        "@unbxd-ui/unbxd-search-core": "0.4.27",
         "prop-types": "^15.7.2"
     },
     "keywords": [

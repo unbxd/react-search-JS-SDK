@@ -50,6 +50,23 @@ class SearchBoxContainer extends React.PureComponent {
         }
     }
 
+    encodeQueryParam(p = "") {
+        if (typeof p !== "string") return p;
+        p = p.trim()
+        p = p.replace(/\%26/gmi, "&")
+        p = encodeURIComponent(p);
+        p = p.replace(/\%20/gmi, "+")
+        p = p.replace(/\++/gmi, "+")
+        return p;
+    }
+    decodeQueryParam(p = "") {
+        if (typeof p !== "string") return p;
+        p = p.replace(/\+/gmi, " ")
+        p = p.replace(/\s{2,}/gmi, " ");
+        p = decodeURIComponent(p);
+        return p.trim();
+    }
+
     onSearchBoxSubmit(event) {
         event.preventDefault();
         const {
@@ -71,7 +88,7 @@ class SearchBoxContainer extends React.PureComponent {
         if (!query.replace(/\s/g, '').length) {
             return false;
         }
-        const queryString = encodeURIComponent(query);
+        const queryString = query;
         // check for empty string
         // dont call search if the query is empty.
 
@@ -109,7 +126,7 @@ class SearchBoxContainer extends React.PureComponent {
             prevProps.query === query &&
             productType === productTypes.SEARCH
         ) {
-            this.setState({ query: currentQuery });
+            this.setState({ query: this.decodeQueryParam(currentQuery) });
         }
 
         if (
