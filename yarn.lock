@@ -3108,10 +3108,10 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@unbxd-ui/unbxd-search-core@0.4.27":
-  version "0.4.27"
-  resolved "https://registry.yarnpkg.com/@unbxd-ui/unbxd-search-core/-/unbxd-search-core-0.4.27.tgz#d590968356ab6d0e4f12913649502154f8a7c776"
-  integrity sha512-HbY4zUNfGHX1P81164KlWtkO5O8nny2rfkdLM/0u31gBsaVcv2VkExKa+fRMAA+R/JryzkL9/sEijEHn80lhqg==
+"@unbxd-ui/unbxd-search-core@0.4.28":
+  version "0.4.28"
+  resolved "https://registry.yarnpkg.com/@unbxd-ui/unbxd-search-core/-/unbxd-search-core-0.4.28.tgz#98323453106959b31be7662df0a66652e4787ead"
+  integrity sha512-FZKbHqeGXr9l8TB6maTfT4QzqAESSBilCfflpHiWjq8fxF9e/wLHeubdCxwEvx6vZvxZ4KOhs9689+GsxFBjRg==
   dependencies:
     babel-polyfill "^6.26.0"
     babel-runtime "^6.26.0"
