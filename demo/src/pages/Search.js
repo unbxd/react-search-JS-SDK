@@ -106,7 +106,7 @@ const Search = () => {
             searchConfigurations={configs}
             productType={productType}
             refreshId={refreshId}
-            allowExternalUrlParams={true}
+            // allowExternalUrlParams={true}
             loaderComponent={<LoaderComponent />}
             errorComponent={<ErrorComponent />}
             // onRouteChange={handleRouteChange}

@@ -8,14 +8,13 @@ const searchConfigurations = {
     facetMultiSelect: true,
     updateUrls: true,
     extraParams: {
-        version: 'V2'
+        version: 'V2',
     },
     facetMultilevel: true,
     facetDepth: 6,
     applyMultipleFilters: false,
     hashMode: true,
     enableUnbxdAnalytics: true,
-    allowExternalUrlParams: true,
     defaultFilters: null,
     pageSize: 30,
     allowExternalUrlParams: true,
