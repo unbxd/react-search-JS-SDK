@@ -60,12 +60,6 @@ jobs:
                   path: '**/node_modules'
                   key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
-            - name: Install npm
-              run: |
-                npm install npm@8.11.0
-                rm -rf /usr/local/lib/node_modules/npm
-                mv node_modules/npm /usr/local/lib/node_modules/npm
-
             - name: Install Dependencies
               run: yarn install --frozen-lockfile
 
