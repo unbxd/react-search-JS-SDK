@@ -28,9 +28,7 @@ module.exports = {
         filename: 'js/[name].js',
         sourceMapFilename: '[file].map',
         libraryTarget: 'umd',
-        globalObject: 'this',
-        library: '',
-        libraryExport: ''
+        globalObject: 'this'
     },
     optimization: {
         splitChunks: {
@@ -91,7 +89,11 @@ module.exports = {
     resolve: {
         alias: {
             '~': Path.resolve(__dirname, '../src')
-        }
+        },
+        modules: [
+            "node_modules"
+        ],
+        extensions: ['*', '.js', '.jsx', '.css'],
     },
     module: {
         rules: [
