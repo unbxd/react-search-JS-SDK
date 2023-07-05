@@ -1,7 +1,6 @@
 import React from 'react';
-// import Slider from 'rc-slider';
+import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-// Test comment for updating commit
 
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
