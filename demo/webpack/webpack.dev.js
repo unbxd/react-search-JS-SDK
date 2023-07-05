@@ -64,13 +64,10 @@ module.exports = {
     },
     plugins: [htmlPlugin],
     resolve: {
-        extensions: ['*', '.js', '.jsx', '.css'],
+        extensions: ['*', '.js', '.jsx'],
         alias: {
             '~': Path.resolve(__dirname, '../src')
-        },
-        modules: [
-            "node_modules"
-        ]
+        }
     },
     devServer: {
         static: {
