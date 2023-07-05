@@ -51,12 +51,20 @@ module.exports = {
     resolve: {
         alias: {
             '~': Path.resolve(__dirname, '../src')
-        }
+        },
+        modules: [
+            "node_modules"
+        ],
+        extensions: ['*', '.js', '.jsx', '.css'],
     },
     devServer: {
-        contentBase: Path.join(__dirname, '../demo'),
-        port: 7878,
-        watchContentBase: true
+        static: {
+            directory: Path.join(__dirname, '../demo')
+            
+        },
+        port: 7878
+        // static: Path.join(__dirname, '../demo'),
+        
     },
     module: {
         rules: [

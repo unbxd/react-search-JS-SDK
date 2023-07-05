@@ -64,13 +64,19 @@ module.exports = {
     },
     plugins: [htmlPlugin],
     resolve: {
-        extensions: ['*', '.js', '.jsx'],
+        extensions: ['*', '.js', '.jsx', '.css'],
         alias: {
             '~': Path.resolve(__dirname, '../src')
-        }
+        },
+        modules: [
+            "node_modules"
+        ]
     },
     devServer: {
-        contentBase: './dist',
+        static: {
+            directory: './dist',
+        },
+        //contentBase: './dist',
         open: false,
         hot: true,
         port: 6969,
