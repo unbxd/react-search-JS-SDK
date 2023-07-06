@@ -22,7 +22,7 @@ const Strings = () => {
     useEffect(() => {
         if(location.href.indexOf("strings") > 0) {
             window.UnbxdAnalyticsConf = {};
-            window.UnbxdAnalyticsConf['page'] = 'itemGroupIds:1800';
+            window.UnbxdAnalyticsConf['page'] = 'categoryPath:cat3410002';
             window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
             setProductType('CATEGORY');
         }

@@ -133,6 +133,8 @@ Follow this process if you'd like your work considered for inclusion in the proj
 8. [Open a Pull Request](https://help.github.com/articles/using-pull-requests/)
    with a clear title and description.
 
+**IMPORTANT**: Max supported version of @unbxd-ui/unbxd-search-core is 0.4.33
+
 **IMPORTANT**: By submitting a patch, you agree to allow the project owner to license your work under the same license as that used by this project (MIT).
 
 <a name="running-the-app"></a>

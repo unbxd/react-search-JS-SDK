@@ -22,7 +22,7 @@ const Accessories = () => {
     useEffect(() => {
         if(location.href.indexOf("accessories") > 0) {
             window.UnbxdAnalyticsConf = {};
-            window.UnbxdAnalyticsConf['page'] = 'itemGroupIds:185';
+            window.UnbxdAnalyticsConf['page'] = 'categoryPath:cat1910047';
             window.UnbxdAnalyticsConf['page_type'] = 'BOOLEAN';
             setProductType('CATEGORY');
         }
