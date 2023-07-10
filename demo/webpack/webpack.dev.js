@@ -70,7 +70,10 @@ module.exports = {
         }
     },
     devServer: {
-        contentBase: './dist',
+        static: {
+            directory: './dist',
+        },
+        //contentBase: './dist',
         open: false,
         hot: true,
         port: 6969,
