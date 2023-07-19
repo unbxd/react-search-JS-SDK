@@ -46,7 +46,7 @@
         "babel-eslint": "^10.1.0",
         "babel-loader": "^8.0.6",
         "codecov": "^3.8.1",
-        "commitizen": "^4.2.2",
+        "commitizen": "4.3.0",
         "compression-webpack-plugin": "4.0.0",
         "css-loader": "^3.4.2",
         "cz-conventional-changelog": "3.3.0",
@@ -97,13 +97,9 @@
         "glob-parent": "5.1.2",
         "nth-check": "2.0.1",
         "serialize-javascript": "3.1.0",
-        "node-fetch": "2.6.7"
-    },
-    "overrides": {
-        "@storybook/theming": "^6.2.9",
-        "prop-types": "^15.7.2",
-        "parse-url": "8.1.0",
-        "glob-parent": "5.1.2"
+        "node-fetch": "2.6.7",
+        "semver": "5.7.2",
+        "word-wrap": "1.2.4"
     },
     "keywords": [
         "React Search",
