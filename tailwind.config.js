@@ -2,7 +2,7 @@ module.exports = {
     content: ['./demo/','./src/','./demo/public/index.html', './public/css/core/*.scss'
 ],
     target: 'relaxed',
-    prefix: 'tw-',
+    prefix: '',
     important: false,
     separator: ':',
     theme: {

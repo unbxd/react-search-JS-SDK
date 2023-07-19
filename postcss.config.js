@@ -1,15 +1,16 @@
 const tailwindcss = require('tailwindcss');
 const whiteListClasses = require('./src/config/whiteListClasses');
+const purgecss = require('@fullhuman/postcss-purgecss')
 
 module.exports = {
     plugins: [
         tailwindcss('./tailwind.config.js'),
-        require('autoprefixer'),
-        require('@fullhuman/postcss-purgecss')({
-            content: ['./src/**/*.js'],
-            defaultExtractor: (content) =>
-                content.match(/[\w-/:]+(?<!:)/g) || [],
-            whitelist: whiteListClasses
-        })
+        require('autoprefixer')
+        // purgecss({
+        //     content: ["./src/**/*.js", "./demo/src/**/*.js"],
+        //     css: ["./public/css/**/*.css"],
+        //     defaultExtractor: content => content.match(/[\w-./:]+(?<!:)/g) || [],
+        //     safelist: whiteListClasses
+        //   }),
     ]
 };
