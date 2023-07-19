@@ -1,18 +1,19 @@
 module.exports = {
-    content: ['./demo/','./src/','./demo/public/index.html'
+    content: ['./demo/','./src/','./demo/public/index.html', './public/css/core/*.scss'
 ],
     target: 'relaxed',
-    prefix: '',
+    prefix: 'tw-',
     important: false,
     separator: ':',
     theme: {
+        extend: {
         screens: {
             sm: '640px',
             md: '768px',
             lg: '1024px',
             xl: '1280px'
         },
-        extend: {
+        
         colors: {
             transparent: 'transparent',
             current: 'currentColor',
@@ -130,8 +131,8 @@ module.exports = {
                 800: '#97266d',
                 900: '#702459'
             }
-        }
-    },
+        },
+    
         spacing: {
             px: '1px',
             0: '0',
@@ -643,6 +644,7 @@ module.exports = {
             700: '700ms',
             1000: '1000ms'
         }
+    }
     },
     // variants: {
     //     accessibility: ['responsive', 'focus'],
@@ -744,7 +746,7 @@ module.exports = {
     //     transitionDelay: ['responsive']
     // },
     corePlugins: {
-        preflight: false,
+        // preflight: false,
     },
     plugins: []
 };

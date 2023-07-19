@@ -33,7 +33,6 @@ import {
 } from './utils';
 import { cloneElement } from './common/utils';
 import '../public/css/core/index.scss';
-import '../public/css/theme/index.scss';
 
 /**
  * Component to initialize Unbxd Search. UnbxdSearchWrapper also acts as a root component for modules such as Products, Pagination and facets.

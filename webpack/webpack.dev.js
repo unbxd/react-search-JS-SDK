@@ -96,18 +96,18 @@ module.exports = {
                 use: [
                     'style-loader',
                     'css-loader',
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                ident: 'postcss',
-                                plugins: [
-                                    require('tailwindcss'),
-                                    require('autoprefixer')
-                                ]
-                            },
-                        }
-                    },
+                    // {
+                    //     loader: 'postcss-loader',
+                    //     options: {
+                    //         postcssOptions: {
+                    //             ident: 'postcss',
+                    //             plugins: [
+                    //                 require('tailwindcss'),
+                    //                 require('autoprefixer')
+                    //             ]
+                    //         },
+                    //     }
+                    // },
                     {
                         loader: 'sass-loader',
                         options: {

@@ -57,6 +57,18 @@ module.exports = {
                                 includePaths: ['public/css']
                             }
                         }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                ident: 'postcss',
+                                plugins: [
+                                    require('tailwindcss'),
+                                    require('autoprefixer')
+                                ]
+                            },
+                        }
                     }
                 ]
             }
@@ -64,7 +76,10 @@ module.exports = {
     },
     plugins: [htmlPlugin],
     resolve: {
-        extensions: ['*', '.js', '.jsx'],
+        extensions: ['*', '.js', '.jsx', '.scss', '.css'],
+        modules: [
+            "node_modules"
+        ],
         alias: {
             '~': Path.resolve(__dirname, '../src')
         }

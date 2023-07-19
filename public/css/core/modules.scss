@@ -1,12 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* SearchBox Begins*/
 .UNX-searchbox__container {
     display: inline-block;
     position: relative;
 }
 
-.UNX-searchbox__button {
+
+/** .UNX-searchbox__button {
     @apply m-2;
-}
+} **/
+
 
 .UNX-searchbox__clearIcon {
     position: absolute;
@@ -15,9 +21,9 @@
 /* SearchBox Ends*/
 
 /* Products Begins*/
-.UNX-products__list {
+/** .UNX-products__list {
     @apply grid gap-4;
-}
+}*/
 
 .UNX-productCard__container {
     .-details {
@@ -45,14 +51,14 @@
     }
 }
 
-.UNX-swatch__item {
+/** .UNX-swatch__item {
     @apply m-1;
     cursor: pointer;
 
     &.-selected {
         @apply border-2 border-gray-600;
     }
-}
+}*/
 
 /* Products Ends*/
 
