@@ -106,11 +106,6 @@ module.exports = {
                                     require('autoprefixer')
                                 ]
                             },
-                            // ident: 'postcss',
-                            // plugins: [
-                            //     require('tailwindcss'),
-                            //     require('autoprefixer')
-                            // ]
                         }
                     },
                     {
