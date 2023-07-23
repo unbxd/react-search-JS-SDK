@@ -7,5 +7,5 @@ const gridCols = [...Array(13).keys()]
     .slice(1)
     .map((item) => `grid-cols-${item}`);
 whiteListClasses.push(...gridCols);
-
+whiteListClasses.push("body");
 module.exports = whiteListClasses;

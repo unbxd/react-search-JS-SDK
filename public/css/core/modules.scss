@@ -1,12 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* SearchBox Begins*/
 .UNX-searchbox__container {
     display: inline-block;
     position: relative;
 }
 
-.UNX-searchbox__button {
+
+ .UNX-searchbox__button {
     @apply m-2;
-}
+} 
+
 
 .UNX-searchbox__clearIcon {
     position: absolute;

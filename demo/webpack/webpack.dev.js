@@ -64,7 +64,10 @@ module.exports = {
     },
     plugins: [htmlPlugin],
     resolve: {
-        extensions: ['*', '.js', '.jsx'],
+        extensions: ['*', '.js', '.jsx', '.scss', '.css'],
+        modules: [
+            "node_modules"
+        ],
         alias: {
             '~': Path.resolve(__dirname, '../src')
         }
