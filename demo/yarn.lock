@@ -1511,10 +1511,10 @@
   dependencies:
     "@types/node" "*"
 
-"@unbxd-ui/react-search-sdk@^1.2.29":
-  version "1.2.29"
-  resolved "https://registry.yarnpkg.com/@unbxd-ui/react-search-sdk/-/react-search-sdk-1.2.29.tgz#9f80b5d50da0863c6fc417641049e79560f7c05a"
-  integrity sha512-Tt71o4/oU1JS7Vlr5Td2dfIxU4JXWBG4VD3QyY1Sidb8m4IJTT7zYeF/a2VjMePs6iuVpWfERUMOevjXqDuTFg==
+"@unbxd-ui/react-search-sdk@^1.2.30":
+  version "1.2.30"
+  resolved "https://registry.yarnpkg.com/@unbxd-ui/react-search-sdk/-/react-search-sdk-1.2.30.tgz#e1876c4d34007c2c1c68514e3c5d68cf25f65c07"
+  integrity sha512-clyY0SZ42y4GbqWmD77zDVlAnBG5v5/quqDUKgNE8CQeDJdH8OUS0uLfkDxJuNI7ydqdZvqDJWuA75cjoT4THw==
   dependencies:
     "@babel/plugin-transform-runtime" "^7.22.6"
     "@unbxd-ui/unbxd-search-core" "0.4.33"
