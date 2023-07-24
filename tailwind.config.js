@@ -1,5 +1,7 @@
 module.exports = {
-    content: ['./demo/','./src/','./demo/public/index.html', './public/css/core/*.scss'
+    content: ['./demo/public/index.html', './public/css/core/*.scss',
+    './src/**/*.js',
+    './demo/src/**/*.js'
 ],
     target: 'relaxed',
     prefix: '',
